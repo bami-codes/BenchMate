@@ -18,7 +18,7 @@ if hashlib.sha256(pathlib.Path(sys.argv[1]).read_bytes()).hexdigest() != sys.arg
 PY
 tar -xzf "$archive"
 cd ngspice-47
-./configure --prefix="$prefix" --without-x --with-readline=no --disable-xspice --disable-cider --disable-openmp
+./configure --prefix="$prefix" --without-x --with-readline=no --enable-xspice --disable-cider --disable-openmp
 make -j2
 make install
 "$prefix/bin/ngspice" --version
