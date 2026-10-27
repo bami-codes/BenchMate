@@ -11,6 +11,7 @@ import numpy as np
 
 from .engine import diagnose, rank_actions, verify_prediction
 from .physics import Acquisition, ACTION_MENU, confirmation_for, predict
+from .recommendations import NEXT_PROMPT, next_schema, validate_next, recommendation_context
 
 
 PROMPT = """You operate BenchMate, an evidence-driven circuit experiment assistant.
@@ -39,6 +40,7 @@ tau alone or absence of an input branch from output voltage alone.
 Do not end with a plain text answer: finish_report is the recorded final report.
 Tool errors are observations too; correct the request within the fixed budget.
 """
+PROMPT += NEXT_PROMPT
 
 
 def function_tool(name, description, properties=None):
@@ -60,7 +62,7 @@ TOOLS = [
         "candidate": {"type": "string"},
         "current_explanation": {"type": "string"},
         "unresolved": {"type": "string"},
-        "next_observation": {"type": "string"}}),
+        "next_observation": next_schema(ACTION_MENU)}),
 ]
 
 INSTRUCTIONS = {
@@ -89,6 +91,7 @@ def observation_summary(capture):
 class ExperimentSession:
     def __init__(self, candidates, acquire, log):
         self.tools = TOOLS
+        self.menu = ACTION_MENU
         self.candidates = list(candidates)
         self.acquire = acquire
         self.log = log
@@ -129,7 +132,7 @@ class ExperimentSession:
                 "budget": {"exploration_used": 1, "diagnostic_used": self.diagnostic_acquisitions,
                            "diagnostic_remaining": remaining, "confirmation_used": self.confirmation_acquisitions,
                            "confirmation_limit": 1},
-                "verification": self.verification}
+                "verification": self.verification, "instrument_capabilities": recommendation_context()}
 
     def dispatch(self, name, arguments):
         if self.report is not None:
@@ -139,6 +142,8 @@ class ExperimentSession:
             raise ToolRejected("Unknown tool or invalid argument fields")
         for key, spec in schema["properties"].items():
             value = arguments[key]
+            if name == 'finish_report' and key == 'next_observation':
+                continue  # Checked by validate_next before accepting the report.
             if not isinstance(value, str) or len(value) > 1600 or ("enum" in spec and value not in spec["enum"]):
                 raise ToolRejected("Invalid argument value: " + key)
         if name == "inspect_experiment":
@@ -198,11 +203,16 @@ class ExperimentSession:
             raise ToolRejected("Cannot confirm a candidate without a matching successful independent verification")
         if verdict == "abstained" and candidate:
             raise ToolRejected("An abstention must not name a confirmed candidate")
-        if not all(t.strip() for t in (current_explanation, unresolved, next_observation)):
+        if not all(t.strip() for t in (current_explanation, unresolved)):
             raise ToolRejected("All three report fields must explain the result and its scope")
+        try:
+            recommendation = validate_next(next_observation, self.menu)
+        except ValueError as exc:
+            raise ToolRejected(str(exc)) from None
         self.report = {"verdict": verdict, "candidate": candidate,
                        "current_explanation": current_explanation, "unresolved": unresolved,
-                       "next_observation": next_observation}
+                       "next_observation": recommendation['instruction'],
+                       "next_measurement": recommendation}
         self.log.add("agent_report", self.report)
         return {"accepted": True, "evidence_status": self.analysis["status"]}
 

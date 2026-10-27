@@ -47,6 +47,16 @@ if(discovery){
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&document.querySelectorAll('#residual path').length===2"),'Three-model comparison or residuals missing');
  assert(await evaluate("document.querySelector('[data-cathode=REF]')&&document.getElementById('report-actor').textContent==='Spark · max'"),'Netlist or effort badge missing');
  assert(await evaluate("document.querySelectorAll('#story-stages button.reached').length===4"),'Milestones missing');
+ const reportCheck=await evaluate(`(()=>{const events=JSON.parse(document.getElementById('record').textContent).events,r=events.find(e=>e.kind==='agent_report')?.payload,n=r?.next_measurement;return {checked:n?.checked_by==='engine',expected:n?.instruction,text:document.getElementById('next').textContent,status:document.getElementById('next-status').textContent}})()`);
+ assert(reportCheck.checked?reportCheck.text===reportCheck.expected:reportCheck.status.includes('unvalidated'),'Unvalidated model text presented as executable instruction');
+ const hasScaling=await evaluate("JSON.parse(document.getElementById('record').textContent).events.some(e=>e.payload.amplitude_scaling?.checks.length)");
+ if(hasScaling){
+  assert(await evaluate("!document.getElementById('linearity-wrap').hidden&&document.querySelectorAll('#linearity-chart path[data-series]').length===2&&Math.abs(Number(document.getElementById('linearity-chart').dataset.rmsMv)-JSON.parse(document.getElementById('record').textContent).events.find(e=>e.payload.amplitude_scaling?.checks.length).payload.amplitude_scaling.checks[0].channels.out_v.dc_removed_rms_mv)<1e-6"),'Training scaling curves do not match the recorded diagnostic');
+  await evaluate('BenchMateUI.select(0)');
+  assert(await evaluate("document.getElementById('linearity-wrap').hidden"),'Scaling evidence leaked before the assessment');
+  await evaluate(`BenchMateUI.select(${count-1})`);
+ }
+
  await evaluate(`document.getElementById('condition').value=${stages.observation};document.getElementById('condition').dispatchEvent(new Event('change'))`);
  assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!!document.querySelector('#chart path[data-series=baseline]')&&['Frozen RC prediction','Frozen linear prediction'].includes(document.getElementById('baseline-label').textContent)"),'Frozen RC verification prediction missing or mislabeled');
  assert(await evaluate("document.querySelectorAll('#residual path').length===2&&/(RC|Linear) fails; proposal passes/.test(document.getElementById('comparison-note').textContent)"),'Verification comparison missing');
@@ -62,6 +72,7 @@ if(discovery){
  await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
  await evaluate(`BenchMateUI.select(${prediction})`);
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=observed]')&&!document.getElementById('comparison-note').textContent.includes('fails; proposal')"),'Verification outcome leaked before observation');
+ assert(await evaluate("document.getElementById('linearity-wrap').hidden"),'Training inset mixed into reserved verification');
  assert(await evaluate("document.getElementById('expand-report').disabled&&document.getElementById('expand-report').textContent==='Report not recorded yet'"),'Pending report state unclear');
  await evaluate(`BenchMateUI.select(${stages.assessment})`);
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=predicted]')&&document.getElementById('proposal-circuit').hasAttribute('hidden')"),'Initial comparison leaked later proposal');

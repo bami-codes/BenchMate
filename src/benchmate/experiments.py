@@ -20,7 +20,8 @@ def drive_engine(session):
         'candidate':session.analysis['supported_candidates'][0] if verified else '',
         'current_explanation':'Synthetic observations were analyzed within the declared continuous RC families.',
         'unresolved':'Hardware performance and circuits outside the declared families remain unverified.',
-        'next_observation':'Repeat these conditions on the physical board after D2 calibration.'})
+        'next_observation':{'kind':'menu_action','action':session.actions[-1] if session.actions else next(iter(session.menu)),
+                            'requirement':'','reason':'Repeat the diagnostic condition after physical fixture calibration.'}})
     return {**session.summary(),'llm_used':False,'mode':'continuous_engine_only'}
 
 

@@ -13,6 +13,8 @@ from .physics import Acquisition
 from .stimulus import command_template
 from .comparison import best_linear_comparison, frozen_linear_prediction, prediction_separation, verification_comparison
 from .linearity import amplitude_scaling
+from .menu import MenuConfig, measurement_menu, mounting_instruction
+from .recommendations import NEXT_PROMPT, next_schema, validate_next, recommendation_context
 
 
 TRAINING = [Acquisition(),
@@ -51,6 +53,8 @@ parameters already in the evidence. For the next observation, describe one
 understandable change and what it would test in one sentence.
 Next observations must respect REF +/-1V and transitions no larger than 1V.
 """
+DISCOVERY_PROMPT += NEXT_PROMPT + '\nUse measurement_details to read any future menu action. Frequency IDs f0..f5 refer to the configured grid, not literal Hz.\n'
+DISCOVERY_MENU = measurement_menu()
 
 DISCOVERY_TOOLS = [
     function_tool('inspect_residuals','Read training observations, amplitude scaling and initial linear-family checks.'),
@@ -58,7 +62,10 @@ DISCOVERY_TOOLS = [
                   {'elements':{'type':'array','items':ELEMENT_SCHEMA},'rationale':{'type':'string'}}),
     function_tool('verify_proposal','Freeze predictions then acquire two unused verification conditions; no refitting.'),
     deepcopy(next(t for t in TOOLS if t['name']=='finish_report')),
+    function_tool('measurement_details','Inspect a configured future measurement; does not acquire data.',
+                  {'action':{'type':'string','enum':list(DISCOVERY_MENU)}}),
 ]
+next(t for t in DISCOVERY_TOOLS if t['name']=='finish_report')['parameters']['properties']['next_observation'] = next_schema(DISCOVERY_MENU)
 
 
 def trace_features(capture):
@@ -175,6 +182,7 @@ class DiscoverySession:
                     'max_fit_seconds':MAX_FIT_SECONDS,'max_fitted_parameters':4,
                     'acquisition_budget':{'exploration':1,'diagnostic':3,'verification':2},
                     'noise':self.noise.to_dict(),'families':[f.to_dict() for f in self.families],
+                    'menu':MenuConfig().to_dict(),'instrument_capabilities':recommendation_context(),
                     'comparison_scope':'declared_linear_families_v2'})
         self.captures=[]
         for settings in TRAINING:
@@ -199,8 +207,15 @@ class DiscoverySession:
             self.inspected=True
             return {'source':'synthetic','initial_assessment':self.initial,
                     'training':[trace_features(c) for c in self.captures],
-                    'verification_data_visible':False,'remaining_proposals':2-self.proposals}
+                    'verification_data_visible':False,'remaining_proposals':2-self.proposals,
+                    'menu_configuration':MenuConfig().to_dict(),'instrument_capabilities':recommendation_context()}
         if not self.inspected:raise ToolRejected('Inspect observations before proposing')
+        if name=='measurement_details':
+            action=args['action']
+            if not isinstance(action,str) or action not in DISCOVERY_MENU:raise ToolRejected('Choose a configured menu action')
+            settings=DISCOVERY_MENU[action]
+            return {'settings':settings.to_dict(),'instruction':mounting_instruction(settings),
+                    'physical_acquisitions':settings.physical_acquisitions,'execution':'not_scheduled'}
         if name=='propose_netlist':
             if self.verification_used or self.proposals>=2 or self.initial['status']!='all_candidates_inadequate':
                 raise ToolRejected('Proposal budget exhausted or discovery unavailable')
@@ -249,13 +264,16 @@ class DiscoverySession:
                                'comparison_conditions':comparisons,'refitted_on_verification':False}
             self.log.add('verification',self.verification)
             return self.verification
-        if any(not isinstance(v,str) or len(v)>1600 for v in args.values()):raise ToolRejected('Invalid report values')
+        if any(not isinstance(v,str) or len(v)>1600 for k,v in args.items() if k!='next_observation'):raise ToolRejected('Invalid report values')
         if args['verdict'] not in ('verified','abstained'):raise ToolRejected('Invalid report verdict')
         if args['verdict']=='verified' and (args['candidate']!='proposed_netlist' or not self.verification or not self.verification['passed']):
             raise ToolRejected('Cannot confirm without both independent verification checks')
         if args['verdict']=='abstained' and args['candidate']:raise ToolRejected('Abstention cannot confirm a candidate')
-        if not all(args[k].strip() for k in ('current_explanation','unresolved','next_observation')):raise ToolRejected('Three report fields are required')
-        self.report=args;self.log.add('agent_report',args)
+        if not all(args[k].strip() for k in ('current_explanation','unresolved')):raise ToolRejected('Three report fields are required')
+        try:recommendation=validate_next(args['next_observation'],DISCOVERY_MENU)
+        except ValueError as exc:raise ToolRejected(str(exc)) from None
+        self.report={**args,'next_observation':recommendation['instruction'],'next_measurement':recommendation}
+        self.log.add('agent_report',self.report)
         return {'accepted':True}
 
     def summary(self):

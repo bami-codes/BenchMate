@@ -9,6 +9,7 @@ from .noise import NoiseModel, adequacy, channels
 from .physics import Acquisition, confirmation_for
 from .vector import predict_many
 from .stimulus import command_template
+from .recommendations import NEXT_PROMPT, next_schema, recommendation_context
 
 
 CONTINUOUS_PROMPT = """You operate BenchMate on a SYNTHETIC instrument with declared linear
@@ -45,12 +46,14 @@ the API request limit. Temperature is provider default.
 Keep each report field under 45 words. Never invent measured precision or
 detection limits. Recommend only observations within the declared stimulus limits.
 """
+CONTINUOUS_PROMPT += NEXT_PROMPT
 
 
 def continuous_tools(menu):
     from .agent import function_tool
     tools = deepcopy(TOOLS)
     next(t for t in tools if t['name']=='measure')['parameters']['properties']['action']['enum'] = list(menu)
+    next(t for t in tools if t['name']=='finish_report')['parameters']['properties']['next_observation'] = next_schema(menu)
     tools.append(function_tool('measurement_details','Read the full settings of any listed action.',
                                {'action':{'type':'string','enum':list(menu)}}))
     return tools
@@ -139,7 +142,7 @@ class ContinuousSession(ExperimentSession):
                 'ranking_note':'Top five shown; measurement_details exposes every tool-enumerated action.',
                 'budget':{'exploration_used':1,'diagnostic_used':self.diagnostic_acquisitions,
                           'diagnostic_remaining':remaining,'confirmation_used':self.confirmation_acquisitions,'confirmation_limit':1},
-                'verification':self.verification}
+                'verification':self.verification,'instrument_capabilities':recommendation_context()}
 
     def dispatch(self,name,arguments):
         if name=='measurement_details':

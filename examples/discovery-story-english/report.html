@@ -30,6 +30,9 @@ main{max-width:1600px;padding:26px 32px 20px;margin:auto}.session-header{display
 @media(max-width:800px){#story-stages{padding:9px 12px}.report-panel .report-field{padding-top:13px;padding-bottom:13px}#proposal-circuit{height:125px}.comparison-note{font-size:11px}.condition-control{max-width:56%}}
 @media(max-width:480px){.figure-panel>.panel-heading{align-items:flex-start;flex-direction:column;gap:7px}.condition-control{max-width:100%;width:100%}.condition-control select{font-size:12px;min-height:36px}.trace-tabs{gap:4px 14px}.trace-toggle{font-size:11px}#chart{height:220px}.comparison-note{padding:4px 14px 8px}.verification-line{font-size:11px;line-height:1.45;padding:2px 14px 9px}.story-stage{font-size:10px;min-height:38px;padding:3px 2px}button.event{grid-template-columns:33px 80px minmax(0,1fr) 12px;gap:6px}.event .actor-badge{font-size:9px}#report-note{font-size:11px}}
 .report-expand:not(:disabled){color:var(--accent);font-weight:600}.report-expand:disabled{color:var(--secondary);opacity:1;text-decoration:none}
+/* The training scaling inset uses observations, separate from model fits. */
+.diagnostic-plots.has-linearity{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:8px;align-items:center;padding-right:18px}.diagnostic-plots .chart-wrap{min-width:0}.linearity-wrap{min-width:0;padding:8px 0}.linearity-heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.linearity-heading h3{font-size:12px;font-weight:600;color:var(--ink);margin:0}.linearity-heading>span{font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--secondary)}.linearity-legend{display:flex;flex-wrap:wrap;gap:3px 12px;margin-top:4px;font-size:10px;color:var(--secondary)}.linearity-legend>span{display:flex;align-items:center;gap:5px}.linearity-legend i{width:16px;border-top:2px solid var(--observed)}.linearity-legend .scaled-key{border-top:2px dashed var(--drive)}#linearity-chart{display:block;width:100%;height:120px}.next-field #next{display:block;overflow:visible}.next-field #next-status{display:block;font-size:10px;line-height:1.4;color:var(--secondary);margin-top:5px}.next-field #next-status[hidden]{display:none}
+@media(max-width:800px){.diagnostic-plots.has-linearity{grid-template-columns:1fr;padding-right:0;gap:0}.linearity-wrap{margin:0 14px;border-top:1px solid var(--line)}#linearity-chart{height:110px}.linearity-heading h3{font-size:13px}.linearity-legend{font-size:11px}.next-field #next-status{font-size:11px}}
 </style>
 </head>
 <body>
@@ -56,8 +59,15 @@ main{max-width:1600px;padding:26px 32px 20px;margin:auto}.session-header{display
         <button class="trace-toggle drive" data-trace="drive" aria-pressed="false"><span class="line-key"></span>Drive</button>
         <span class="caption" id="plot-source"></span>
       </div>
+      <div class="diagnostic-plots" id="diagnostic-plots">
       <div class="chart-wrap"><svg id="chart" viewBox="0 0 900 284" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">Circuit waveform</title><desc id="chart-description">Recorded observations and predictions in acquisition order.</desc></svg><div class="plot-readout" id="plot-readout" hidden></div></div>
-      <div class="residual-wrap" id="residual-wrap" hidden><svg id="residual" role="img" aria-label="Observed minus model residuals in millivolts, on the same time axis"></svg></div>
+        <section class="linearity-wrap" id="linearity-wrap" aria-labelledby="linearity-title" hidden>
+          <div class="linearity-heading"><h3 id="linearity-title">Does the output scale?</h3><span id="linearity-score"></span></div>
+          <div class="linearity-legend"><span><i class="scaled-key"></i><span id="scaled-label"></span></span><span><i class="large-key"></i><span id="large-label"></span></span></div>
+          <svg id="linearity-chart" role="img" aria-labelledby="linearity-chart-title linearity-chart-description"></svg>
+        </section>
+      </div>
+        <div class="residual-wrap" id="residual-wrap" hidden><svg id="residual" role="img" aria-label="Observed minus model residuals in millivolts, on the same time axis"></svg></div>
       <p id="comparison-note" class="comparison-note"></p>
       <div class="verification-line" id="verification"></div>
       <div class="playback">
@@ -73,14 +83,14 @@ main{max-width:1600px;padding:26px 32px 20px;margin:auto}.session-header{display
       <div class="panel-heading"><h2 id="report-title">The current explanation</h2><span class="actor-badge" id="report-actor">Engine</span></div>
       <div class="report-field"><h3>What the evidence supports</h3><svg id="proposal-circuit" viewBox="0 0 340 116" role="img" aria-label="Spark's proposed circuit, rendered from the recorded netlist" hidden></svg><p id="explanation"></p></div>
       <div class="report-field"><h3>What remains unknown</h3><p id="uncertainty"></p></div>
-      <div class="report-field next-field"><h3>What to measure next</h3><p id="next"></p></div>
+      <div class="report-field next-field"><h3>What to measure next</h3><p id="next"></p><span id="next-status" class="caption" hidden></span></div>
       <button class="button quiet report-expand" id="expand-report" aria-expanded="false">Read original report</button>
       <p id="report-note" class="caption" hidden></p>
     </section>
     <section class="timeline-panel surface" aria-labelledby="timeline-title"><div class="panel-heading"><h2 id="timeline-title">Experiment trail</h2><span class="caption" id="trail-note">Who decided. What changed.</span></div><nav id="story-stages" aria-label="Experiment milestones" hidden></nav><ol id="timeline" aria-label="Experiment actions"></ol></section>
     <section class="mounting-panel surface" aria-labelledby="mount-title"><div class="panel-heading"><h2 id="mount-title">Connections for this step</h2><span class="actor-badge" id="mount-actor">Operator</span></div><div class="mount-body"><svg id="wiring" viewBox="0 0 340 106" role="img" aria-label="Logical connections for drive, circuit, shunt and output load"></svg><p id="instruction"></p><p class="caption" id="mount-note">Logical nodes; physical fixture layout follows D2.</p></div></section>
   </div>
-  <details class="evidence-drawer"><summary><span>Inspect the evidence</span><span class="caption">Netlist · checks · original events</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary><div class="evidence-grid"><section><h2>Recorded proposal or action</h2><p id="evidence-note" class="caption"></p><pre id="evidence"></pre><h2>Original model report</h2><pre id="original-report"></pre><h2>Training amplitude check</h2><p class="caption">A scaling mismatch is a training diagnostic. Matched input, settled states and a calibrated measurement path are required; it does not identify a diode by itself.</p><pre id="linearity-evidence"></pre><h2>Comparison provenance</h2><pre id="comparison-provenance"></pre></section><section><h2>Selected event</h2><pre id="raw"></pre></section></div></details>
+  <details class="evidence-drawer"><summary><span>Inspect the evidence</span><span class="caption">Netlist · checks · original events</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary><div class="evidence-grid"><section><h2>Recorded proposal or action</h2><p id="evidence-note" class="caption"></p><pre id="evidence"></pre><h2>Original model report</h2><pre id="original-report"></pre><h2>Next measurement check</h2><p class="caption">The engine checks settings against the menu. The model’s reason is commentary, not an executable setting or a verified scientific claim. Suggestions are for a future run; D2 hardware calibration is pending.</p><pre id="next-check-evidence"></pre><h2>Training amplitude check</h2><p class="caption">A scaling mismatch is a training diagnostic. Matched input, settled states and a calibrated measurement path are required; it does not identify a diode by itself.</p><pre id="linearity-evidence"></pre><h2>Comparison provenance</h2><pre id="comparison-provenance"></pre></section><section><h2>Selected event</h2><pre id="raw"></pre></section></div></details>
   <footer><span>BenchMate · Measure, predict, verify.</span><span id="integrity"></span></footer>
   <div class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></div>
 </main>
@@ -224,9 +234,7 @@ function readingAid(vm,report){
   if(!structure)return {...report,adapted:false};
   const passed=fit?.sequence>proposed.sequence&&fit.payload.training_passed;
   const explanation=passed?`A diode between OUT and REF explains the flattened ${structure.side} of the wave.`:`The proposal adds a diode between OUT and REF to clip the ${structure.side} of the wave.`;
-  const rawNext=vm.report?.payload.next_observation||'';
-  const next=/probe diode onset/i.test(rawNext)?'Use a smaller wave to check when the diode starts conducting.':/step/i.test(rawNext)&&/limit|clip/i.test(rawNext)?`Use a small voltage step to check whether the ${structure.side} still clips.`:report.next;
-  return {...report,explanation,next,uncertainty:vm.origin==='synthetic'?'Synthetic data only. Real components and other operating conditions remain unverified.':report.uncertainty,actor:actorFor(proposed),adapted:true};
+  return {...report,explanation,uncertainty:vm.origin==='synthetic'?'Synthetic data only. Real components and other operating conditions remain unverified.':report.uncertainty,actor:actorFor(proposed),adapted:true};
 }
 function brief(vm){
   const report=vm.report?.payload;
@@ -270,11 +278,53 @@ function renderChart(series,unit,xLabel,animate){
     node(root,'path',{d,fill:'none',stroke:colors[s.key],'stroke-width':s.key==='observed'?2.5:1.8,'stroke-dasharray':['predicted','baseline'].includes(s.key)?(s.key==='baseline'?'3 4':'7 5'):'none','data-series':s.key,class:animate&&s.key==='observed'?'trace-arrival':''});
   }
 }
+function renderNext(vm, fallback){
+  const recommendation=vm.report?.payload.next_measurement;
+  const checked=recommendation?.checked_by==='engine'&&['menu_checked','unavailable'].includes(recommendation.status);
+  const hasReport=Boolean(vm.report);
+  setText('next',checked?recommendation.instruction:hasReport?'This earlier suggestion was not checked against the fixture menu. Review the original in Evidence.':fallback);
+  $('next-status').hidden=!hasReport;
+  setText('next-status',checked?(recommendation.status==='unavailable'?'Engine · unavailable with this fixture':'Engine · menu checked; future run, D2 pending'):'Legacy suggestion · unvalidated');
+}
+function renderLinearity(vm,plot){
+  const root=$('linearity-chart'),wrap=$('linearity-wrap');root.replaceChildren();
+  wrap.hidden=true;$('diagnostic-plots').classList.remove('has-linearity');
+  if(!plot.training)return;
+  const check=vm.diagnosis?.amplitude_scaling?.checks.find(c=>sameSettings(c.settings_small,plot.settings)||sameSettings(c.settings_large,plot.settings));
+  if(!check)return;
+  const captures=vm.visible.filter(e=>e.kind==='acquisition'),[i,j]=check.training_capture_indices;
+  const small=captures[i]?.payload,large=captures[j]?.payload;
+  if(!sameSettings(small?.settings,check.settings_small)||!sameSettings(large?.settings,check.settings_large))return;
+  const t=large.data.time_s,ts=small.data.time_s;
+  if(!t?.length||t.length!==ts?.length||t.some((x,k)=>Math.abs(x-ts[k])>1e-9))return;
+  const centered=c=>{const y=c.data.out_v.map((v,k)=>v-c.data.ref_v[k]),mean=y.reduce((a,b)=>a+b,0)/y.length;return y.map(v=>v-mean);};
+  const a=centered(small).map(v=>v*check.amplitude_ratio),b=centered(large);
+  if(a.length!==t.length||b.length!==t.length||![...a,...b,...t].every(Number.isFinite))return;
+  const rms=1000*Math.sqrt(a.reduce((sum,v,k)=>sum+(b[k]-v)**2,0)/a.length);
+  if(Math.abs(rms-check.channels.out_v.dc_removed_rms_mv)>1e-6)return;
+  wrap.hidden=false;$('diagnostic-plots').classList.add('has-linearity');
+  const width=root.clientWidth,height=root.clientHeight||84,left=32,right=12,top=9,bottom=18;
+  const limit=Math.max(.01,...a.map(Math.abs),...b.map(Math.abs))*1.08;
+  const X=x=>left+(x-t[0])/(t.at(-1)-t[0]||1)*(width-left-right),Y=y=>top+(1-y/limit)*(height-top-bottom)/2;
+  root.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  node(root,'title',{id:'linearity-chart-title'},'Small-signal output scaled against large-signal output');
+  node(root,'desc',{id:'linearity-chart-description'},`DC means removed. Gray dashed is the ${check.settings_small.amplitude_v} V output multiplied by ${check.amplitude_ratio}. Orange is the ${check.settings_large.amplitude_v} V output. Difference ${rms.toFixed(2)} mV RMS. Training evidence only, not independent verification.`);
+  for(const y of [-1,0,1].map(v=>v*limit/1.08)){node(root,'line',{x1:left,x2:width-right,y1:Y(y),y2:Y(y),stroke:'#dce3dc'});node(root,'text',{x:left-5,y:Y(y)+3,'text-anchor':'end',fill:'#55635e','font-size':9},y.toFixed(1));}
+  for(const [x,label]of [[t[0],'0'],[t.at(-1),t.at(-1).toFixed(1)+' s']])node(root,'text',{x:X(x),y:height-2,'text-anchor':x===t[0]?'start':'end',fill:'#55635e','font-size':9},label);
+  for(const [key,y,color,dash]of [['scaled-small',a,'#7a827e','4 3'],['large',b,'#ca4c31','none']])node(root,'path',{d:t.map((x,k)=>(k?'L':'M')+X(x).toFixed(2)+','+Y(y[k]).toFixed(2)).join(''),fill:'none',stroke:color,'stroke-width':1.6,'stroke-dasharray':dash,'data-series':key});
+  root.dataset.rmsMv=rms;root.dataset.inputStatus=check.status;
+  setText('scaled-label',`${check.settings_small.amplitude_v} V output ×${check.amplitude_ratio}`);
+  setText('large-label',`${check.settings_large.amplitude_v} V output`);
+  setText('linearity-score',rms.toFixed(2)+' mV RMS');
+  setText('linearity-title',check.status==='input_scaling_mismatch'?'Input scaling differs':check.status==='scaling_consistent'?'Output scales with input':'Output stops scaling');
+}
 function renderResidual(series){
   const root=$('residual'),observed=series.find(s=>s.key==='observed'),models=series.filter(s=>['baseline','predicted'].includes(s.key)&&state.trace[s.key]&&s.y?.length===observed?.y?.length&&s.x.every((x,i)=>Math.abs(x-observed.x[i])<1e-9));
   const active=Boolean(observed&&models.length&&state.chartGeometry);
   $('residual-wrap').hidden=!active;root.replaceChildren();if(!active)return;
-  const g=state.chartGeometry,height=60,width=g.width;root.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  const width=root.clientWidth,height=60,left=state.chartGeometry.left,right=state.chartGeometry.right;
+  const xs=observed.x,xmin=Math.min(...xs),xmax=Math.max(...xs),g={width,left,right,X:x=>left+(x-xmin)/(xmax-xmin||1)*(width-left-right)};
+  root.setAttribute('viewBox',`0 0 ${width} ${height}`);
   const rows=models.map(s=>({...s,residual:s.y.map((y,i)=>1000*(observed.y[i]-y))}));
   const limit=Math.max(1,...rows.flatMap(s=>s.residual.map(Math.abs))),Y=v=>39-17*v/limit;
   node(root,'title',{},'Observed minus model. Both residuals use the same millivolt scale.');
@@ -369,11 +419,12 @@ function render(){
   setText('status',statusNames[vm.status]||vm.status);
   $('status-dot').style.background=vm.terminal?.kind==='run_failed'||vm.verification?.payload.passed===false?'var(--error)':vm.verification?.payload.passed?'var(--success)':'var(--warning)';
   setText('actor',vm.provider?vm.provider.model+' · '+vm.provider.reasoning_effort:'Numerical engine');setText('count',vm.used+' acquisition'+(vm.used===1?'':'s'));setText('duration',elapsed(seconds(state.events[state.cursor]))+' elapsed');
-  const report=readingAid(vm,brief(vm));setText('explanation',report.explanation);setText('uncertainty',report.uncertainty);setText('next',report.next);badge($('report-actor'),report.actor);
+  const report=readingAid(vm,brief(vm));setText('explanation',report.explanation);setText('uncertainty',report.uncertainty);renderNext(vm,report.next);badge($('report-actor'),report.actor);
   $('report-note').hidden=!report.adapted;setText('report-note','Plain-language reading aid · '+(vm.report?'original report':'recorded proposal')+' in Evidence.');renderCircuit(vm);
   const condition=$('condition');condition.replaceChildren();
   for(const event of plot.options){const option=document.createElement('option');option.value=event.sequence;option.textContent=conditionName(event.payload.settings)+(event.kind==='acquisition'?' · training':event.kind.includes('prediction_committed')?' · prediction':' · verification');option.selected=event.sequence===focus?.sequence;condition.appendChild(option);}
   if(!plot.options.length){const option=document.createElement('option');option.textContent='Waiting for a capture';condition.appendChild(option);}condition.disabled=plot.options.length<2;
+  renderLinearity(vm,plot);
   renderChart(series,unit,settings?.kind==='dc_pair'?'Drive level (V)':'Time (s)',focus?.sequence!==state.lastFocus&&Boolean(predictionEvent));state.lastFocus=focus?.sequence;
   renderResidual(series);
   setText('plot-title',plot.training&&series.some(s=>s.key==='baseline')?'Compare explanations':'Prediction & observation');
@@ -390,7 +441,7 @@ function render(){
   const scalingCheck=scaling?.checks.find(c=>sameSettings(c.settings_small,settings)||sameSettings(c.settings_large,settings));
   if(plot.training&&scalingCheck&&!plot.reconstructed){
     const text=scalingCheck.status==='output_scaling_mismatch'?`output fails to scale (${scalingCheck.channels.out_v.dc_removed_rms_mv.toFixed(2)} mV RMS)`:scalingCheck.status==='input_scaling_mismatch'?'input scaling differs; output alone is inconclusive':'input and output scaling are consistent';
-    setText('comparison-note','Training amplitude check · '+text+' · assumptions in Evidence.');
+    setText('comparison-note','Training amplitude check · '+text+' · DC means removed; calibrated fixture required.');
   }
   setText('linearity-evidence',scaling?JSON.stringify(scaling,null,2):'No amplitude-scaling diagnostic was recorded at this point.');
   const check=vm.verification?.payload;
@@ -408,7 +459,9 @@ function render(){
   setText('evidence-note',evidence?labels[evidence.kind]:'No proposal or requested action at this point.');
   setText('evidence',evidence?.payload.rendered_fitted_proposal?[evidence.payload.rendered_fitted_proposal,evidence.payload.rendered_fitted_diode||'',JSON.stringify({training_passed:evidence.payload.training_passed,topology_preserved:evidence.payload.generated_topology_sha256===evidence.payload.fitted_topology_sha256},null,2)].join('\n'):evidence?JSON.stringify(evidence.payload,null,2):'—');
   setText('raw',JSON.stringify(state.events[state.cursor],null,2));
-  setText('original-report',vm.report?JSON.stringify(vm.report.payload,null,2):'No report recorded at this point.');
+  const reportCall=vm.report?[...vm.visible].reverse().find(e=>e.kind==='tool_call'&&e.sequence<vm.report.sequence&&e.payload.name==='finish_report'):null;
+  setText('original-report',vm.report?JSON.stringify(reportCall?.payload.arguments||vm.report.payload,null,2):'No report recorded at this point.');
+  setText('next-check-evidence',vm.report?.payload.next_measurement?JSON.stringify(vm.report.payload.next_measurement,null,2):'No fixture-menu check was recorded. Free-text suggestions are not shown as executable instructions.');
   $('expand-report').disabled=!vm.report;
   setText('expand-report',!vm.report?'Report not recorded yet':document.querySelector('.evidence-drawer').open?'Hide original report':'Read original report');
   setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available linear baseline and proposed fit; before a proposal, baseline versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,candidate_families:plot.models.rc.data.candidate_families,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,verification_baseline:plot.baseline?{event_sequence:plot.baseline.event.sequence,reconstructed:plot.baseline.reconstructed,originally_committed:!plot.baseline.reconstructed,separation:plot.baseline.data.separation}:null,verification_comparison:plot.verification?{reconstructed:plot.verification.reconstructed,...plot.verification.data}:null,source_sha256:state.record.source_sha256},null,2));

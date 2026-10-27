@@ -124,7 +124,7 @@ def test_mock_model_proposal_reaches_spice_then_two_untouched_checks(tmp_path,mo
         else:
             verified=json.loads(body['input'][-1]['output']);assert verified['passed']
             name,args='finish_report',{'verdict':'verified','candidate':'proposed_netlist',
-                'current_explanation':'합성 관측에서 생성한 연결을 검증했습니다.','unresolved':'실제 부품은 미검증입니다.','next_observation':'보정 후 재측정합니다.'}
+                'current_explanation':'합성 관측에서 생성한 연결을 검증했습니다.','unresolved':'실제 부품은 미검증입니다.','next_observation':{'kind':'menu_action','action':'sine_f0_a1.0_s0_l0','requirement':'','reason':'Check repeatability of the large-signal output.'}}
         return httpx.Response(200,json={'status':'completed','usage':{},'output':[
             {'type':'function_call','call_id':str(i),'name':name,'arguments':json.dumps(args)}]})
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
@@ -169,3 +169,24 @@ def test_identical_predictions_are_reported_as_weak_discrimination():
     comparison=verification_comparison(capture['data'],capture['data'],capture,NoiseModel())
     assert comparison['discrimination']=='both_pass'
     assert comparison['separation']['out_rms_mv']==0
+
+
+def test_discovery_rejects_free_text_next_step_and_records_missing_equipment(tmp_path):
+    from benchmate.discovery import DiscoverySession
+    from benchmate.agent import ToolRejected
+    from benchmate.records import Recorder
+    calls=[]
+    def acquire(settings):
+        calls.append(settings)
+        return acquire_nonlinear(settings,rng=np.random.default_rng(8))
+    session=DiscoverySession(acquire,Recorder(tmp_path,mode='test'))
+    session.dispatch('inspect_residuals',{})
+    args={'verdict':'abstained','candidate':'','current_explanation':'No proposal tested.',
+          'unresolved':'Synthetic development only.','next_observation':'Move REF to 1.2 V.'}
+    with pytest.raises(ToolRejected,match='next_observation'):session.dispatch('finish_report',args)
+    assert session.report is None and len(calls)==4
+    args['next_observation']={'kind':'unavailable','action':'','requirement':'adjustable_reference',
+                              'reason':'Changing the reference would require different equipment.'}
+    session.dispatch('finish_report',args)
+    assert session.report['next_measurement']['status']=='unavailable'
+    assert 'settings' not in session.report['next_measurement'] and len(calls)==4

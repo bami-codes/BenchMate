@@ -24,7 +24,7 @@ def test_live_protocol_runs_common_continuous_family_with_mocked_model(tmp_path,
             else:
                 assert state=='verified_within_declared_candidates'
                 name,args='finish_report',{'verdict':'verified','candidate':snapshot['analysis']['supported_candidates'][0],
-                    'current_explanation':'합성 연속 후보군에서 검증했습니다.','unresolved':'실물은 미검증입니다.','next_observation':'보정 후 실측합니다.'}
+                    'current_explanation':'합성 연속 후보군에서 검증했습니다.','unresolved':'실물은 미검증입니다.','next_observation':{'kind':'menu_action','action':'shunt_dc_pair','requirement':'','reason':'Repeat the current check after calibration.'}}
         return httpx.Response(200,json={'status':'completed','usage':{},'output':[
             {'type':'function_call','name':name,'call_id':str(i),'arguments':json.dumps(args)}]})
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
@@ -47,3 +47,30 @@ def test_mystery_mode_does_not_switch_to_fault_candidates(tmp_path):
     assert [f['name'] for f in config['families']]==['rc','rc_input_branch','resistor','resistor_input_branch','resistor_output_leak']
     assert result['diagnostic_mode']=='mystery'
     assert result['final_report']['supported_candidates']==['rc']
+
+
+def test_five_common_families_keep_b1_b6_identical_until_shunt_then_separate(tmp_path):
+    import numpy as np
+    from benchmate.continuous_agent import ContinuousSession
+    from benchmate.simulation import FIXTURES,acquire
+    from benchmate.records import Recorder
+    sessions=[]
+    for case in ['b1','b6']:
+        rng=np.random.default_rng(8)
+        session=ContinuousSession(lambda s,model=FIXTURES[case],rng=rng:acquire(model,s,rng=rng),
+                                  Recorder(tmp_path/case,mode='regression'))
+        sessions.append(session)
+        session.dispatch('inspect_experiment',{})
+        assert len(session.families)==5
+        assert session.analysis['status']=='unresolved'
+        assert session.analysis['supported_candidates']==['rc','rc_input_branch']
+    assert sessions[0].snapshot()==sessions[1].snapshot()
+    for session,winner in zip(sessions,['rc','rc_input_branch']):
+        session.dispatch('measure',{'action':'shunt_dc_pair','reason':'Distinguish input leakage by current.'})
+        assert session.analysis['supported_candidates']==[winner]
+        # The DC shunt separates structure; a loaded transient still resolves R/C.
+        session.dispatch('measure',{'action':'step_a0.5_s0_l10000','reason':'Identify R and C after the structural check.'})
+        assert session.analysis['status']=='verification_required'
+        session.dispatch('verify_prediction',{})
+        assert session.verification['passed'] and not session.verification['refitted_on_verification']
+        assert session.analysis['supported_candidates']==[winner]

@@ -19,7 +19,7 @@ def report(candidate="", verdict="abstained"):
     return {"verdict": verdict, "candidate": candidate,
             "current_explanation": "합성 데이터의 선언된 후보 안에서 얻은 결과입니다.",
             "unresolved": "실제 하드웨어와 더 넓은 회로군은 확인하지 않았습니다.",
-            "next_observation": "보드 도착 후 보정된 장비로 재측정합니다."}
+            "next_observation": {"kind":"menu_action","action":"attach_shunt_dc_pair","requirement":"","reason":"Repeat the input-current check after calibration."}}
 
 
 def make_session(tmp_path, case="b6", faulty_confirmation=False):
@@ -40,9 +40,14 @@ def test_same_unloaded_observations_give_same_initial_agent_input(tmp_path):
     a, _ = make_session(tmp_path / "a", "b1")
     b, _ = make_session(tmp_path / "b", "b6")
     assert a.dispatch("inspect_experiment", {}) == b.dispatch("inspect_experiment", {})
-    snapshot = json.dumps(a.snapshot())
-    for hidden in ("fixture", "ground_truth", "seed", "noise_sd_v"):
-        assert hidden not in snapshot
+    snapshot = a.snapshot()
+    def keys(value):
+        if isinstance(value, dict):
+            return set(value).union(*(keys(v) for v in value.values()))
+        if isinstance(value, list):return set().union(*(keys(v) for v in value))
+        return set()
+    assert not keys(snapshot)&{'fixture','fixture_id','ground_truth','seed','noise_sd_v'}
+    assert all('"'+case+'"' not in json.dumps(snapshot) for case in ('b1','b6'))
     tree = ast.parse(Path(agent.__file__).read_text())
     imports = [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]
     assert "simulation" not in imports

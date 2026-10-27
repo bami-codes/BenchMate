@@ -136,9 +136,7 @@ function readingAid(vm,report){
   if(!structure)return {...report,adapted:false};
   const passed=fit?.sequence>proposed.sequence&&fit.payload.training_passed;
   const explanation=passed?`A diode between OUT and REF explains the flattened ${structure.side} of the wave.`:`The proposal adds a diode between OUT and REF to clip the ${structure.side} of the wave.`;
-  const rawNext=vm.report?.payload.next_observation||'';
-  const next=/probe diode onset/i.test(rawNext)?'Use a smaller wave to check when the diode starts conducting.':/step/i.test(rawNext)&&/limit|clip/i.test(rawNext)?`Use a small voltage step to check whether the ${structure.side} still clips.`:report.next;
-  return {...report,explanation,next,uncertainty:vm.origin==='synthetic'?'Synthetic data only. Real components and other operating conditions remain unverified.':report.uncertainty,actor:actorFor(proposed),adapted:true};
+  return {...report,explanation,uncertainty:vm.origin==='synthetic'?'Synthetic data only. Real components and other operating conditions remain unverified.':report.uncertainty,actor:actorFor(proposed),adapted:true};
 }
 function brief(vm){
   const report=vm.report?.payload;
@@ -182,11 +180,53 @@ function renderChart(series,unit,xLabel,animate){
     node(root,'path',{d,fill:'none',stroke:colors[s.key],'stroke-width':s.key==='observed'?2.5:1.8,'stroke-dasharray':['predicted','baseline'].includes(s.key)?(s.key==='baseline'?'3 4':'7 5'):'none','data-series':s.key,class:animate&&s.key==='observed'?'trace-arrival':''});
   }
 }
+function renderNext(vm, fallback){
+  const recommendation=vm.report?.payload.next_measurement;
+  const checked=recommendation?.checked_by==='engine'&&['menu_checked','unavailable'].includes(recommendation.status);
+  const hasReport=Boolean(vm.report);
+  setText('next',checked?recommendation.instruction:hasReport?'This earlier suggestion was not checked against the fixture menu. Review the original in Evidence.':fallback);
+  $('next-status').hidden=!hasReport;
+  setText('next-status',checked?(recommendation.status==='unavailable'?'Engine · unavailable with this fixture':'Engine · menu checked; future run, D2 pending'):'Legacy suggestion · unvalidated');
+}
+function renderLinearity(vm,plot){
+  const root=$('linearity-chart'),wrap=$('linearity-wrap');root.replaceChildren();
+  wrap.hidden=true;$('diagnostic-plots').classList.remove('has-linearity');
+  if(!plot.training)return;
+  const check=vm.diagnosis?.amplitude_scaling?.checks.find(c=>sameSettings(c.settings_small,plot.settings)||sameSettings(c.settings_large,plot.settings));
+  if(!check)return;
+  const captures=vm.visible.filter(e=>e.kind==='acquisition'),[i,j]=check.training_capture_indices;
+  const small=captures[i]?.payload,large=captures[j]?.payload;
+  if(!sameSettings(small?.settings,check.settings_small)||!sameSettings(large?.settings,check.settings_large))return;
+  const t=large.data.time_s,ts=small.data.time_s;
+  if(!t?.length||t.length!==ts?.length||t.some((x,k)=>Math.abs(x-ts[k])>1e-9))return;
+  const centered=c=>{const y=c.data.out_v.map((v,k)=>v-c.data.ref_v[k]),mean=y.reduce((a,b)=>a+b,0)/y.length;return y.map(v=>v-mean);};
+  const a=centered(small).map(v=>v*check.amplitude_ratio),b=centered(large);
+  if(a.length!==t.length||b.length!==t.length||![...a,...b,...t].every(Number.isFinite))return;
+  const rms=1000*Math.sqrt(a.reduce((sum,v,k)=>sum+(b[k]-v)**2,0)/a.length);
+  if(Math.abs(rms-check.channels.out_v.dc_removed_rms_mv)>1e-6)return;
+  wrap.hidden=false;$('diagnostic-plots').classList.add('has-linearity');
+  const width=root.clientWidth,height=root.clientHeight||84,left=32,right=12,top=9,bottom=18;
+  const limit=Math.max(.01,...a.map(Math.abs),...b.map(Math.abs))*1.08;
+  const X=x=>left+(x-t[0])/(t.at(-1)-t[0]||1)*(width-left-right),Y=y=>top+(1-y/limit)*(height-top-bottom)/2;
+  root.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  node(root,'title',{id:'linearity-chart-title'},'Small-signal output scaled against large-signal output');
+  node(root,'desc',{id:'linearity-chart-description'},`DC means removed. Gray dashed is the ${check.settings_small.amplitude_v} V output multiplied by ${check.amplitude_ratio}. Orange is the ${check.settings_large.amplitude_v} V output. Difference ${rms.toFixed(2)} mV RMS. Training evidence only, not independent verification.`);
+  for(const y of [-1,0,1].map(v=>v*limit/1.08)){node(root,'line',{x1:left,x2:width-right,y1:Y(y),y2:Y(y),stroke:'#dce3dc'});node(root,'text',{x:left-5,y:Y(y)+3,'text-anchor':'end',fill:'#55635e','font-size':9},y.toFixed(1));}
+  for(const [x,label]of [[t[0],'0'],[t.at(-1),t.at(-1).toFixed(1)+' s']])node(root,'text',{x:X(x),y:height-2,'text-anchor':x===t[0]?'start':'end',fill:'#55635e','font-size':9},label);
+  for(const [key,y,color,dash]of [['scaled-small',a,'#7a827e','4 3'],['large',b,'#ca4c31','none']])node(root,'path',{d:t.map((x,k)=>(k?'L':'M')+X(x).toFixed(2)+','+Y(y[k]).toFixed(2)).join(''),fill:'none',stroke:color,'stroke-width':1.6,'stroke-dasharray':dash,'data-series':key});
+  root.dataset.rmsMv=rms;root.dataset.inputStatus=check.status;
+  setText('scaled-label',`${check.settings_small.amplitude_v} V output ×${check.amplitude_ratio}`);
+  setText('large-label',`${check.settings_large.amplitude_v} V output`);
+  setText('linearity-score',rms.toFixed(2)+' mV RMS');
+  setText('linearity-title',check.status==='input_scaling_mismatch'?'Input scaling differs':check.status==='scaling_consistent'?'Output scales with input':'Output stops scaling');
+}
 function renderResidual(series){
   const root=$('residual'),observed=series.find(s=>s.key==='observed'),models=series.filter(s=>['baseline','predicted'].includes(s.key)&&state.trace[s.key]&&s.y?.length===observed?.y?.length&&s.x.every((x,i)=>Math.abs(x-observed.x[i])<1e-9));
   const active=Boolean(observed&&models.length&&state.chartGeometry);
   $('residual-wrap').hidden=!active;root.replaceChildren();if(!active)return;
-  const g=state.chartGeometry,height=60,width=g.width;root.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  const width=root.clientWidth,height=60,left=state.chartGeometry.left,right=state.chartGeometry.right;
+  const xs=observed.x,xmin=Math.min(...xs),xmax=Math.max(...xs),g={width,left,right,X:x=>left+(x-xmin)/(xmax-xmin||1)*(width-left-right)};
+  root.setAttribute('viewBox',`0 0 ${width} ${height}`);
   const rows=models.map(s=>({...s,residual:s.y.map((y,i)=>1000*(observed.y[i]-y))}));
   const limit=Math.max(1,...rows.flatMap(s=>s.residual.map(Math.abs))),Y=v=>39-17*v/limit;
   node(root,'title',{},'Observed minus model. Both residuals use the same millivolt scale.');
@@ -281,11 +321,12 @@ function render(){
   setText('status',statusNames[vm.status]||vm.status);
   $('status-dot').style.background=vm.terminal?.kind==='run_failed'||vm.verification?.payload.passed===false?'var(--error)':vm.verification?.payload.passed?'var(--success)':'var(--warning)';
   setText('actor',vm.provider?vm.provider.model+' · '+vm.provider.reasoning_effort:'Numerical engine');setText('count',vm.used+' acquisition'+(vm.used===1?'':'s'));setText('duration',elapsed(seconds(state.events[state.cursor]))+' elapsed');
-  const report=readingAid(vm,brief(vm));setText('explanation',report.explanation);setText('uncertainty',report.uncertainty);setText('next',report.next);badge($('report-actor'),report.actor);
+  const report=readingAid(vm,brief(vm));setText('explanation',report.explanation);setText('uncertainty',report.uncertainty);renderNext(vm,report.next);badge($('report-actor'),report.actor);
   $('report-note').hidden=!report.adapted;setText('report-note','Plain-language reading aid · '+(vm.report?'original report':'recorded proposal')+' in Evidence.');renderCircuit(vm);
   const condition=$('condition');condition.replaceChildren();
   for(const event of plot.options){const option=document.createElement('option');option.value=event.sequence;option.textContent=conditionName(event.payload.settings)+(event.kind==='acquisition'?' · training':event.kind.includes('prediction_committed')?' · prediction':' · verification');option.selected=event.sequence===focus?.sequence;condition.appendChild(option);}
   if(!plot.options.length){const option=document.createElement('option');option.textContent='Waiting for a capture';condition.appendChild(option);}condition.disabled=plot.options.length<2;
+  renderLinearity(vm,plot);
   renderChart(series,unit,settings?.kind==='dc_pair'?'Drive level (V)':'Time (s)',focus?.sequence!==state.lastFocus&&Boolean(predictionEvent));state.lastFocus=focus?.sequence;
   renderResidual(series);
   setText('plot-title',plot.training&&series.some(s=>s.key==='baseline')?'Compare explanations':'Prediction & observation');
@@ -302,7 +343,7 @@ function render(){
   const scalingCheck=scaling?.checks.find(c=>sameSettings(c.settings_small,settings)||sameSettings(c.settings_large,settings));
   if(plot.training&&scalingCheck&&!plot.reconstructed){
     const text=scalingCheck.status==='output_scaling_mismatch'?`output fails to scale (${scalingCheck.channels.out_v.dc_removed_rms_mv.toFixed(2)} mV RMS)`:scalingCheck.status==='input_scaling_mismatch'?'input scaling differs; output alone is inconclusive':'input and output scaling are consistent';
-    setText('comparison-note','Training amplitude check · '+text+' · assumptions in Evidence.');
+    setText('comparison-note','Training amplitude check · '+text+' · DC means removed; calibrated fixture required.');
   }
   setText('linearity-evidence',scaling?JSON.stringify(scaling,null,2):'No amplitude-scaling diagnostic was recorded at this point.');
   const check=vm.verification?.payload;
@@ -320,7 +361,9 @@ function render(){
   setText('evidence-note',evidence?labels[evidence.kind]:'No proposal or requested action at this point.');
   setText('evidence',evidence?.payload.rendered_fitted_proposal?[evidence.payload.rendered_fitted_proposal,evidence.payload.rendered_fitted_diode||'',JSON.stringify({training_passed:evidence.payload.training_passed,topology_preserved:evidence.payload.generated_topology_sha256===evidence.payload.fitted_topology_sha256},null,2)].join('\n'):evidence?JSON.stringify(evidence.payload,null,2):'—');
   setText('raw',JSON.stringify(state.events[state.cursor],null,2));
-  setText('original-report',vm.report?JSON.stringify(vm.report.payload,null,2):'No report recorded at this point.');
+  const reportCall=vm.report?[...vm.visible].reverse().find(e=>e.kind==='tool_call'&&e.sequence<vm.report.sequence&&e.payload.name==='finish_report'):null;
+  setText('original-report',vm.report?JSON.stringify(reportCall?.payload.arguments||vm.report.payload,null,2):'No report recorded at this point.');
+  setText('next-check-evidence',vm.report?.payload.next_measurement?JSON.stringify(vm.report.payload.next_measurement,null,2):'No fixture-menu check was recorded. Free-text suggestions are not shown as executable instructions.');
   $('expand-report').disabled=!vm.report;
   setText('expand-report',!vm.report?'Report not recorded yet':document.querySelector('.evidence-drawer').open?'Hide original report':'Read original report');
   setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available linear baseline and proposed fit; before a proposal, baseline versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,candidate_families:plot.models.rc.data.candidate_families,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,verification_baseline:plot.baseline?{event_sequence:plot.baseline.event.sequence,reconstructed:plot.baseline.reconstructed,originally_committed:!plot.baseline.reconstructed,separation:plot.baseline.data.separation}:null,verification_comparison:plot.verification?{reconstructed:plot.verification.reconstructed,...plot.verification.data}:null,source_sha256:state.record.source_sha256},null,2));
