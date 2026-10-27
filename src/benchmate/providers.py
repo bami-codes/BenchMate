@@ -38,9 +38,12 @@ The outer experiment decides which tool calls may execute. Transport never
 executes model-provided code, retries requests or switches providers.
 """
     def __init__(self, *, prompt, tools, log, effort="medium", env_path=".env",
-                 budget_path=".private/api-budget.json", client=None, max_requests=8):
+                 budget_path=".private/api-budget.json", client=None, max_requests=8,
+                 max_output_tokens=4096, max_payload_bytes=64000):
         if effort not in ("medium", "max") or not 1 <= max_requests <= 8:
             raise ValueError("Unsupported agent reasoning effort or request limit")
+        if max_output_tokens not in (4096,8192) or max_payload_bytes not in (64000,128000):
+            raise ValueError("Unsupported bounded provider payload/output allowance")
         self.keys = load_keys(env_path)
         self.cfg = PROVIDERS["meta"]
         self.key = self.keys[self.cfg["key"]]
@@ -51,19 +54,20 @@ executes model-provided code, retries requests or switches providers.
         self.own = client is None
         self.http = client or httpx.Client(timeout=90.0, follow_redirects=False)
         self.max_requests = max_requests
+        self.max_payload_bytes = max_payload_bytes
         self.requests = 0
         self.usage = []
         self.api_elapsed_s = 0.0
         self.pending_call = None
         self.history = [{"role": "user", "content": prompt}]
         self.base = {"model": self.cfg["model"], "reasoning": {"effort": effort},
-                     "max_output_tokens": 4096, "store": False,
+                     "max_output_tokens": max_output_tokens, "store": False,
                      "include": ["reasoning.encrypted_content"], "tools": tools,
                      "tool_choice": "auto", "parallel_tool_calls": False}
         log.add("provider_configuration", {"provider": "meta", "model": self.cfg["model"],
                 "reasoning_effort": effort, "temperature": "provider_default",
-                "max_http_requests": max_requests, "max_output_tokens_per_request": 4096,
-                "max_payload_bytes": 64000, "tool_choice": "auto",
+                "max_http_requests": max_requests, "max_output_tokens_per_request": max_output_tokens,
+                "max_payload_bytes": max_payload_bytes, "tool_choice": "auto",
                 "billing_note": "$1 local allowance reserved per request; not actual charged cost"})
 
     def sanitize(self, value):
@@ -75,7 +79,7 @@ executes model-provided code, retries requests or switches providers.
         if self.requests >= self.max_requests:
             raise ProviderError("Agent HTTP request budget exhausted")
         payload = {**self.base, "input": self.history}
-        if len(json.dumps(payload).encode()) > 64000:
+        if len(json.dumps(payload).encode()) > self.max_payload_bytes:
             raise ProviderError("Agent payload exceeds the local bound")
         reserve_budget(self.budget_path, "meta", 1.0)
         self.requests += 1
@@ -133,8 +137,9 @@ executes model-provided code, retries requests or switches providers.
 def reserve_budget(path, provider, reserve_usd):
     """Reserve before sending, under an OS lock. Failed/unknown calls remain reserved.
 
-Day-one uses a conservative $1 per HTTP request, max 4k output tokens and a 24k
-byte smoke payload or 64k byte agent payload. Meta's published prices are lower
+Day-one reserves $1 per HTTP request. Smoke/ordinary agents use 4k output tokens
+and 24k/64k byte payloads. Nonlinear discovery allows 8k output and 128k bytes.
+Meta's published prices are lower
 than this reserve. Baseten
 hackathon rates remain unverified: this is a local spending allowance, not a
 guaranteed billing cap. No application can cap calls made outside this process.

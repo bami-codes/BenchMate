@@ -88,6 +88,7 @@ def observation_summary(capture):
 
 class ExperimentSession:
     def __init__(self, candidates, acquire, log):
+        self.tools = TOOLS
         self.candidates = list(candidates)
         self.acquire = acquire
         self.log = log
@@ -133,7 +134,7 @@ class ExperimentSession:
     def dispatch(self, name, arguments):
         if self.report is not None:
             raise ToolRejected("Experiment already finished")
-        schema = next((t["parameters"] for t in TOOLS if t["name"] == name), None)
+        schema = next((t["parameters"] for t in self.tools if t["name"] == name), None)
         if schema is None or not isinstance(arguments, dict) or set(arguments) != set(schema["required"]):
             raise ToolRejected("Unknown tool or invalid argument fields")
         for key, spec in schema["properties"].items():

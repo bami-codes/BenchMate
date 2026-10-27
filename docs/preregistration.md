@@ -59,3 +59,18 @@ Primary: Meta Model API, muse-spark-1.3. Optional secondary: Baseten, exactly me
 
 No formal user recruitment. Show component value, physical connection labels and any jumper removal. Record setup/calibration separately from diagnostic interventions. Optional short non-expert instruction check only after D7 if someone is readily available.
 
+## Development revision — 2026-10-27, before hardware arrival
+
+Reason: replace fixed-value milestones with continuous inference, prevent transient errors being diluted by long settled segments, and exercise the nonlinear/repair pipeline before D2. This revision does not rewrite the initial commitment or constitute the final calibration/evaluation freeze. X1/X2 assemblies remain untouched.
+
+- Mystery priors are independent log-uniform R=4.7–47 kohm, C=0.47–4.7 microfarad, optional IN→REF branch Rp=4.7–47 kohm. Two one-state families are shared across mystery cases. Explicit repair mode declares nominal R=9.5–10.5 kohm/C=0.9–1.1 microfarad, changed R=15–25 kohm or C=1.5–2.5 microfarad. This is still narrower than the final planned grammar.
+- Fit and evidence are separate. Preserve the original R/C prior under tau/R transformation. Gaussian quadrature orders 4, 7, 10 require consecutive log-evidence difference <0.05 for adequate families; unresolved integration cannot confirm.
+- Whole-channel and fixed step regions 0–5/5–20/20–80 ms, or eight sine phase bins, use normalized residual RMS. Development limit=3, sigma=3 mV, rho=0; channel-specific AR(1) values are configurable. These are engineering defaults with no calibrated false-positive interpretation. D2 must measure noise/model error and validate windows against actual timing.
+- Six configurable log frequencies default to 1–100 Hz; the software ceiling is 500 Hz. The 85-condition menu and timing are synthetic development settings, not validated hardware capabilities. A 0.3 V step is reserved for ordinary confirmation.
+- B5 training uses the common 0.5 V step and 1 Hz sines of 0.2/1.0 V. Development verification reserves a 0.35 V step and a 1 Hz, 1.0 V sine with 10 kohm load. Both predictions precede either verification capture. Physical values still freeze at D2. Generated topology is retained; at most two R/C values may be fit, two proposals and 80 training simulator calls per proposal.
+- The first live nonlinear attempt exhausted its 4,096-token output cap before a proposal. A second attempt, explicitly raised to 8,192 tokens/128 KB input per request, completed. Preserve both attempts. This is a development correction, not a fixed-protocol success-rate estimate. Ordinary calls keep the 4,096-token/64 KB limits; all runs retain the eight-request cap.
+- D01 repair adds two explicitly counted post-replacement verification captures after diagnosis. Predict before replacement; do not refit on these observations. Current replacements are simulated and assume the declared nominal replacement value.
+- D2 firmware stores 512 samples with full per-channel completion timestamps. The first 1,000-sample build exceeded the core's reserved RAM budget. Compression/rate targets await measured jitter. Compilation is not hardware verification.
+
+See [inference details](inference.md), [instrument protocol](instrument.md), and [all development attempts](preboard-validation.json).
+

@@ -32,9 +32,10 @@ class Acquisition:
     duration_s: float = 0.3
     sample_period_s: float = 0.0005
     step_at_s: float = 0.02
+    frequency_hz: float | None = None
 
     def __post_init__(self):
-        if self.kind not in ("step", "dc_pair"):
+        if self.kind not in ("step", "dc_pair", "sine"):
             raise ValueError("Unsupported acquisition")
         numeric = [self.shunt_ohm, self.amplitude_v, self.ref_v,
                    self.duration_s, self.sample_period_s, self.step_at_s]
@@ -52,6 +53,13 @@ class Acquisition:
             raise ValueError("A single transition must not exceed 1 V")
         if self.kind == "dc_pair" and self.shunt_ohm == 0:
             raise ValueError("DC current observation requires a shunt")
+        if self.kind == "sine":
+            if self.frequency_hz is None or not math.isfinite(self.frequency_hz) or not 1 <= self.frequency_hz <= 500:
+                raise ValueError("Sine frequency outside development envelope")
+            if self.sample_period_s * self.frequency_hz > 1/20:
+                raise ValueError("Need at least 20 samples per sine cycle")
+        elif self.frequency_hz is not None:
+            raise ValueError("Frequency belongs only to a sine acquisition")
         if not 0 < self.step_at_s < self.duration_s or self.sample_period_s <= 0:
             raise ValueError("Invalid time window")
         if self.duration_s / self.sample_period_s > 10000:
@@ -102,8 +110,8 @@ def predict(model: RCModel, acq: Acquisition, time_s=None, drive_v=None, ref_v=N
                    np.arange(0, acq.duration_s+acq.sample_period_s/2,
                              acq.sample_period_s), dtype=float)
     refs = np.asarray(ref_v if ref_v is not None else np.full(t.shape, acq.ref_v))
-    drives = np.asarray(drive_v if drive_v is not None else
-                       refs+np.where(t < acq.step_at_s, -acq.amplitude_v, acq.amplitude_v))
+    stimulus = acq.amplitude_v*np.sin(2*np.pi*acq.frequency_hz*t) if acq.kind == "sine" else np.where(t < acq.step_at_s, -acq.amplitude_v, acq.amplitude_v)
+    drives = np.asarray(drive_v if drive_v is not None else refs+stimulus)
     if len(t) < 2 or t.shape != refs.shape or t.shape != drives.shape:
         raise ValueError("Mismatched waveform dimensions")
     if not np.all(np.isfinite(t)) or not np.all(np.diff(t)>0):
@@ -112,7 +120,13 @@ def predict(model: RCModel, acq: Acquisition, time_s=None, drive_v=None, ref_v=N
         raise ValueError("Non-finite input waveform")
     u = drives-refs
     x = np.empty_like(u)
-    x[0] = gain*u[0]  # acquisition starts from a settled initial level
+    x[0] = gain*u[0]  # step starts from a settled initial level
+    if acq.kind == "sine":
+        # Steady periodic response to a zero-order-held sampled sinusoid.
+        decay = math.exp(a * acq.sample_period_s)
+        phase = np.exp(-2j*np.pi*acq.frequency_hz*acq.sample_period_s)
+        transfer = gain*(1-decay)*phase/(1-decay*phase)
+        x[0] = acq.amplitude_v * transfer.imag
     for i in range(1,len(t)):
         decay = math.exp(a*(t[i]-t[i-1]))
         x[i] = decay*x[i-1]+gain*(1-decay)*u[i-1]
@@ -134,4 +148,5 @@ ACTION_MENU = {
 
 def confirmation_for(acq: Acquisition):
     # A fresh acquisition at a different amplitude, not a refit of that acquisition.
-    return replace(acq, kind="step", amplitude_v=0.3)
+    return replace(acq, kind="step", amplitude_v=0.3, frequency_hz=None,
+                   duration_s=.3, sample_period_s=.0005, step_at_s=.02)

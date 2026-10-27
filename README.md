@@ -1,105 +1,78 @@
 # BenchMate
 
-BenchMate chooses measurements that distinguish circuit hypotheses, then checks its predictions against observations.
+BenchMate chooses measurements that distinguish circuit hypotheses, commits a prediction, and checks it against a new observation. Built during the Meta Global AI Developer Hackathon, starting October 27, 2026 (Asia/Seoul), as a solo indie project.
 
-This repository starts during the Meta Global AI Developer Hackathon on October 27, 2026 (Asia/Seoul). It is a solo indie project. The target is a low-voltage, low-frequency bench assistant using Muse Spark and an Arduino UNO R4 fixture.
+## Current evidence
 
-## Status
+Implemented: continuous one-state RC inference, live Muse Spark experiment control, model-authored nonlinear netlists executed by ngspice, a synthetic repair sequence and an offline execution viewer. **All diagnosis results so far use synthetic observations. No hardware accuracy, physical repair or holdout generalization has been demonstrated.**
 
-Day-one prototype: four synthetic RC experiments run through ambiguity, action ranking, a new acquisition, a committed prediction and a fresh verification. A live Muse Spark controller now chooses measurement and verification tools on the synthetic instrument and submits a structured report. The engine owns numerical evidence and enforces acquisition limits and confirmation requirements.
+- Parameter fitting and normalized evidence integration are separate. The tau=RC transformation preserves the original R/C prior. Mystery specimens share the same two structure families; schematic repair priors require explicit `--mode repair`.
+- Whole traces and predefined transient/phase regions use common noise whitening. Per-channel AR(1) parameters are supported; current defaults are uncalibrated synthetic assumptions.
+- The 85-condition menu includes six configurable frequencies, 0.2/1 V sines, steps, 4.7k/10k loads and shunt states. The physical frequency limit remains pending D2.
+- Generated element connections and diode orientation reach ngspice unchanged. Only numerical R/C values are refined on training observations. Both reserved predictions precede both verification acquisitions.
+- D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
+- D2 DAC/ADC firmware compiles for UNO R4 WiFi and Minima, with 512-sample raw blocks and actual per-channel read-completion timestamps. It has not been uploaded or physically validated.
 
-No hardware accuracy, successful physical repairs, B5 nonlinear discovery or holdout generalization result has been demonstrated yet. Synthetic data is always labeled as synthetic. The current finite-candidate engine is not the planned continuous Bayesian/model-discovery engine.
+See [latest validation](docs/preboard-validation.json). Both nonlinear attempts are retained: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
 
-## Quick start
+## Run
 
-Python 3.11+ on macOS or Linux:
+Python 3.11+, `uv`, and ngspice for nonlinear work:
 
 ```sh
 uv sync --extra dev
 uv run benchmate doctor
 uv run pytest -q
-uv run benchmate simulate --case b6
-uv run benchmate simulate --case d01-r
-# Replace the path with the run directory printed by simulate:
-uv run benchmate replay runs/YOUR_RUN
-# Included, reviewable synthetic recording:
-uv run benchmate replay examples/b6-synthetic
-```
-
-Other fixtures: `b1`, `d01-c`. Simulator truth lives in `simulation.py`; the diagnosis module receives observations and declared candidate knowledge only. Its decision logic never receives fixture IDs or private holdout files.
-
-The initial unloaded observations leave both candidates unresolved. Numerical prediction separation ranks a shunt DC pair for B1/B6 and a 10 kohm load for D01. A prediction is recorded before independent confirmation data is acquired. DC pairs count as two physical acquisitions; confirmation is one fresh step.
-
-## Live Spark experiment controller
-
-With `MODEL_API_KEY` in the ignored local `.env`:
-
-```sh
+# Engine only, no API calls:
+uv run benchmate simulate --case b6 --r-scale 1.01 --c-scale 1.05
+uv run benchmate simulate --case d01-r --mode repair
+uv run benchmate repair --case d01-c
+# Live Spark, with MODEL_API_KEY in local .env:
 uv run benchmate agent --case b6
-uv run benchmate agent --case d01-r
-# Replay the returned path without spending tokens:
-uv run benchmate replay runs/YOUR_AGENT_RUN
-# Included live-model run on synthetic observations (no API call):
-uv run benchmate replay examples/agent-b6-synthetic
+uv run benchmate agent --case d01-r --mode repair
+uv run benchmate discover
+uv run benchmate repair --case d01-r --live
 ```
 
-Spark receives observations and declared candidates, chooses from ranked actions, requests independent verification and writes a three-part report. It cannot see fixture identity or truth. The model's selected action is executed as requested; it is not silently replaced by the top-ranked action. Invalid calls return tool errors, and a confirmed verdict is accepted only after a matching independent prediction succeeds.
+`--case` selects simulator truth only. The model receives observations and declared knowledge, not specimen identity. Current `--mode` is a user declaration, never selected automatically from the case ID. `discover` defaults to max reasoning; ordinary `agent` defaults to medium. Temperature is the provider default. `repair --live` uses Spark for diagnosis and numerical posterior predictions for repair. All currently use synthetic instruments.
 
-Each run permits one common exploration, at most three diagnostic acquisitions and one confirmation, with at most eight Meta API requests. Default reasoning is `medium`; `--effort max` changes it for the entire run. Temperature remains the provider default. Raw captures, model decisions, tool errors, committed predictions, verification and usage are recorded. Synthetic mounting does not count as a real human intervention.
-
-`simulate` remains engine-only; `agent` calls the live model with synthetic instrument data; `api-smoke` checks connectivity. None is a live hardware experiment. See [controller design and validation](docs/agent.md).
-
-The first live controller check completed all four development cases, one attempt each, using four API requests per case. B1/B6 selected the shunt DC pair; both D01 variants selected the 10 kohm load. All four then passed independent synthetic prediction checks. These are integration checks, not a success-rate estimate. [All four recordings and measured results](docs/agent-validation.json) are included.
-
-## Provider connection
-
-Create `.env` from `.env.example` and enter keys locally. Never commit that file.
+## Review recorded evidence
 
 ```sh
-uv run benchmate api-smoke --provider meta
-uv run benchmate api-smoke --provider meta --effort max
-uv run benchmate api-smoke --provider baseten
+uv run benchmate replay examples/discovery-synthetic
+uv run benchmate view examples/discovery-synthetic --output runs/discovery-report.html
 ```
 
-- Meta: `https://api.meta.ai/v1/responses`, `muse-spark-1.3`, automatic tool selection and stateless encrypted reasoning replay.
-- Baseten: `https://inference.baseten.co/v1/chat/completions`, exactly `meta-models/muse-spark-open-1026`.
-- A smoke test makes at most two HTTP requests and runs a tool that returns **synthetic** observations. There are no automatic retries or provider substitutions. Protocol success is not a diagnosis benchmark.
-- Runs store visible reports, tool calls, usage and latency, not API keys or encrypted reasoning. Failed and incomplete runs are explicit.
-- Local allowance: $1 is reserved per bounded HTTP request, with separate Meta ($120) and Baseten ($80) totals. Reservations are not actual charges. Baseten hackathon pricing remains unverified, so this allowance is not a guaranteed provider billing cap. Usage elsewhere is not covered.
+Open the HTML locally. It contains the report, observed/predicted waveforms, generated netlist, logical instrument connections and event history. Moving backward hides later reports/observations. It makes no API calls and is a read-only recording viewer, not a hardware control UI.
 
-## Hardware bring-up
+JSONL replay/export verifies the hash chain. This is not external attestation or proof against complete record rewriting. `runs/` is ignored; reviewed examples are explicitly exported. Earlier fixed-value milestones remain in historical examples/tests and `workflow.py`/`engine.py`; current CLI diagnosis uses `experiments.py`/`inference.py`.
 
-Install `arduino-cli` and `ngspice`. The wrapper keeps Arduino packages in the ignored project `.arduino` directory:
+## Hardware preparation
 
 ```sh
-sh scripts/arduino.sh core update-index
-sh scripts/arduino.sh core install arduino:renesas_uno
 sh scripts/arduino.sh board list
 sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/bringup
+sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/instrument
 ```
 
-Bring-up firmware supports PING and buffered raw ADC acquisition only; DAC drive is disabled. It records A1–A4 with per-channel read-completion timestamps. It does not provide calibrated voltage or sample-aperture timing. Hardware inference is deliberately unavailable until the D2 fixture calibration exists. See [the Korean day-one guide](docs/day1.md) for upload and capture instructions.
+Start with non-driving raw bring-up. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. Hardware inference remains blocked pending fixture calibration.
 
-## Records and validation
+## Providers and bounds
 
-`runs/` is ignored by default. Each run is an append-only JSONL event chain. Replay checks integrity and displays the stored result without calling a model. A hash chain detects modification against the stored chain, but is not an external timestamp or proof against complete rewriting.
-
-Tests cover closed-form RC behavior, unobservable branches, shunt Ohm's-law values, D01 discrimination, wrong-family rejection, independent verification failure, stimulus constraints, truth separation, corrupted/incomplete records, provider protocols, credential redaction and hardware packet validation. Controller checks also cover premature confirmation, failed verification, acquisition/API budgets and model error recovery. When ngspice is installed, independent operating-point cross-checks also run.
-
-See [the day-one validation record](docs/day1-validation.json) and the included `examples/` recordings. API examples contain live model responses to synthetic observations. They are connectivity evidence, not hardware trials or generalization results.
-
-## Experiment commitments
-
-See [the preregistration](docs/preregistration.md) and [the holdout commitments](docs/holdout-commitments.json). The private assembly files are deliberately excluded from Git. Hashes commit to a configuration; they do not establish a blind test or prove that data was never inspected.
-
-## Built during the hackathon
-
-Developed during the event: the Python circuit model, finite-candidate engine, live Spark controller with a synthetic instrument, JSONL records/replay, provider probes, raw-acquisition firmware and tests. Code was developed with Codex assistance. Muse Spark controls the integrated synthetic experiments; Spark Open is used in the Baseten provider probe. Muse Code has not yet been used.
-
-Reused dependencies/tools: NumPy, SciPy, HTTPX, pySerial, pytest, Arduino CLI, Arduino Renesas UNO R4 core, ngspice and GitHub CLI. Planning documents predate the implementation and are not represented as working software. [Initial experiment protocol](docs/preregistration.md) records the distinction.
+- Meta: `https://api.meta.ai/v1/responses`, `muse-spark-1.3`. Encrypted reasoning is replayed in memory, never logged.
+- Baseten connectivity: `https://inference.baseten.co/v1/chat/completions`, exactly `meta-models/muse-spark-open-1026`. Use `benchmate api-smoke --provider baseten`.
+- Integrated runs allow at most eight requests. Ordinary calls allow 4,096 output tokens / 64 KB JSON; nonlinear discovery allows 8,192 / 128 KB. No automatic retries or silent provider substitutions.
+- $1 is reserved per bounded request from separate Meta ($120) and Baseten ($80) local allowances. Reservations are **not actual charges** and can stop work before credits are spent. External usage and unverified Baseten pricing are separate.
+- Keys stay in `.env`; private assemblies stay in `.private/`. Neither is committed. Raw records omit credentials and hidden reasoning.
 
 ## Scope
 
-Only the declared fixed RC candidates are supported today. Independent Gaussian synthetic noise is a development assumption. Continuous parameter marginalization, calibrated AR(1) likelihood, nonlinear netlist generation/validation, hardware agent integration, fixture calibration and user-facing instruction graphics remain to be implemented. No claim of replacing an oscilloscope or diagnosing arbitrary powered circuits is made.
+The mystery grammar is currently one-state RC with/without an input branch, not the full planned two-stage grammar. Priors, numerical convergence and approximate predictive checks are documented in [inference notes](docs/inference.md). The nonlinear result uses a generic development diode model, not characterized physical 1N4148 parameters. Fair baseline evaluation, physical repeatability and the final ten-run block remain pending.
 
-License: MIT; third-party dependencies retain their own licenses.
+D2 must establish supply/REF, DAC/buffer behavior, offsets/gain, actual channel timing/jitter, noise/model error, current detection, settling and usable frequencies. X2 stays unopened until final pipeline freeze. See [preregistration](docs/preregistration.md) and [holdout commitments](docs/holdout-commitments.json).
+
+## Provenance
+
+Implemented during the event: circuit solvers, inference, tools, provider transport, netlist validation/ngspice harness, synthetic repair, records/viewer, firmware and tests. Developed with Codex assistance. Muse Spark runs in the included agent/discovery recordings; Spark Open has a connectivity recording. Muse Code has not yet been used.
+
+Dependencies/tools: NumPy, SciPy, HTTPX, pySerial, pytest, Arduino CLI/Renesas UNO R4 core, ngspice and GitHub CLI. MIT license; dependencies retain their own licenses.

@@ -1,6 +1,6 @@
 # 1일차 실행 안내
 
-현재 단계는 합성 데이터로 핵심 실험 흐름을 검증하고 실제 보드를 연결할 준비를 한 상태다. 하드웨어 진단 성능, B5 구조 제안, 홀드아웃 성공은 아직 주장하지 않는다.
+현재 단계는 합성 데이터에서 연속 파라미터 추론, Spark의 넷리스트 제안·ngspice 검증, D01 수리 후 재측정까지 확인한 상태다. 실제 보드 성능·물리적 수리·홀드아웃 성공은 아직 검증하지 않았다. 최신 결과는 [검증 기록](preboard-validation.json)에 있다.
 
 ## 실행
 
@@ -12,8 +12,9 @@ uv run benchmate doctor
 uv run pytest -q
 uv run benchmate simulate --case b1
 uv run benchmate simulate --case b6
-uv run benchmate simulate --case d01-r
-uv run benchmate simulate --case d01-c
+uv run benchmate simulate --case d01-r --mode repair
+uv run benchmate simulate --case d01-c --mode repair
+uv run benchmate repair --case d01-r
 ```
 
 출력의 `run` 경로를 그대로 재생한다. 재생은 저장된 결과와 해시 연결을 확인하며 API를 다시 호출하지 않는다.
@@ -36,10 +37,11 @@ uv run benchmate api-smoke --provider baseten
 
 ```sh
 uv run benchmate agent --case b6
-uv run benchmate agent --case d01-r
+uv run benchmate agent --case d01-r --mode repair
+uv run benchmate discover
 ```
 
-에이전트는 관측 확인 → 추가 측정 선택 → 독립 검증 요청 → 세 칸 보고를 수행한다. 확인 전 확정과 예산 초과 요청은 코드가 막는다. 한 실행의 상한은 공통 탐색 1회 + 판정 측정 3회 + 확인 1회, API 요청 8회다. 션트 DC 두 수준은 판정 측정 2회로 센다. 자세한 경계와 실행 기록은 [에이전트 안내](agent.md)에 있다.
+에이전트는 관측 확인 → 추가 측정 선택 → 독립 검증 요청 → 세 칸 보고를 수행한다. 확인 전 확정과 예산 초과 요청은 코드가 막는다. 일반 진단의 상한은 공통 탐색 1회 + 판정 측정 3회 + 확인 1회, API 요청 8회다. 션트 DC 두 수준은 판정 측정 2회로 센다. B5는 학습 3회·검증 2회, 수리 후 확인은 별도 2회로 기록한다. 자세한 경계는 [추론 안내](inference.md)에 있다.
 
 비용 기록의 `reserved_allowance_usd`는 청구 금액이 아니다. 요청마다 보수적인 로컬 허용액을 예약한다. Meta의 실제 토큰 비용은 공식 요금으로 추정할 수 있으나 Baseten 해커톤 요금은 별도 확인이 필요하다. 대시보드 청구액과 다를 수 있고, 다른 프로그램이 사용하는 비용은 여기서 차단할 수 없다.
 
@@ -63,12 +65,14 @@ uv run benchmate capture --port /dev/cu.usbmodem실제포트
 
 LM358과 커패시터까지 도착하면 고정 장치를 조립하고 D2에 전원, 버퍼, 오프셋, 채널 시간차, 지터, 검출 한계를 검증한다. 지금 원시값을 전압으로 환산하거나 하드웨어 확률 판정에 넣지 않는다.
 
-## 다음 구현 순서
+## 보드 전 준비 완료 범위
 
-보드를 기다리는 동안에도 개발을 계속한다. Spark의 합성 실험 제어 루프를 먼저 연결했다. 다음으로 보드 없이 할 수 있는 일은 다음과 같다.
+연속 추론·과도 구간 잔차 판정, 85개 설정 가능 측정 조건, DAC 자극·블록 취득 펌웨어, B5 제안·검증, 합성 D01 수리 흐름을 구현했다. 펌웨어는 WiFi·Minima에서 컴파일했으며 업로드·실측은 하지 않았다. [D2 계측 안내](instrument.md)에 초기 REF 설정과 취득 명령이 있다.
 
-1. 현재 판단·남은 불확실성·다음 측정을 보여주는 실행 화면과 결선 지시. 실제 기록을 읽고 합성/실측/재생을 구분한다.
-2. 생성 넷리스트의 소자·노드·수치 제한 검사와 B5 시뮬레이션. Spark가 만든 연결이 그대로 ngspice에 들어가게 하고, 미사용 조건의 예측을 먼저 기록한다.
-3. D01의 수리 전 예측 → 부품 교체 → 재측정 흐름을 합성 데이터로 완결한다.
+실행 기록 화면은 다음처럼 만든다. 모델의 실제 설명·제안과 관측·사전 예측을 함께 재생한다. 결선은 논리 노드 수준이며, 실제 브레드보드 위치 안내는 픽스처를 조립한 뒤 추가한다.
 
-보드가 도착하면 원시 ADC 확인과 픽스처 보정을 우선한다. 자극·취득 펌웨어, 실제 채널 시각, B1/B6 션트 판별과 D01 부하 측정을 확인한 뒤 같은 제어 루프에 하드웨어를 연결한다. 실측 결과 없이 잡음·검출 한계·배선 성능을 확정하지 않는다. X2 측정은 최종 파이프라인 고정 뒤에 한다.
+```sh
+uv run benchmate view examples/discovery-synthetic --output runs/discovery-report.html
+```
+
+보드가 도착하면 원시 ADC 확인과 픽스처 보정을 우선한다. 자극 품질, 실제 채널 시각·지터, B1/B6 션트 판별과 D01 부하 측정을 확인한 뒤 같은 제어 루프에 하드웨어를 연결한다. 실측 결과 없이 잡음·검출 한계·배선 성능을 확정하지 않는다. X2 측정은 최종 파이프라인 고정 뒤에 한다.

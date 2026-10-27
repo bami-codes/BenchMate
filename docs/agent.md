@@ -1,5 +1,7 @@
 # Spark controller — synthetic instrument
 
+Historical first integration milestone (fixed candidates). The current CLI uses continuous inference and the expanded menu; see [inference notes](inference.md) and [current validation](preboard-validation.json). The records and results below are retained unchanged as historical evidence. Use `--mode repair` for current D01 diagnosis commands.
+
 Implemented October 27, 2026 (Asia/Seoul). This is a live API integration on simulated observations, not a physical bench demonstration, nonlinear discovery result or reliability benchmark.
 
 ## Run

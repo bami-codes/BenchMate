@@ -1,0 +1,553 @@
+{
+  "date_local": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "scope": "Pre-board development evidence only. Synthetic observations, no hardware accuracy, holdout generalization or fixed-protocol reliability estimate.",
+  "attempt_accounting": "All ten listed executions are retained, including the first nonlinear API failure. The nonlinear output cap changed between attempts. Unit-test simulations and earlier fixed-candidate milestones are separate.",
+  "hardware": {
+    "uploaded": false,
+    "measured": false,
+    "firmware": "firmware/instrument/instrument.ino",
+    "sample_capacity": 512,
+    "compile": {
+      "arduino:renesas_uno:unor4wifi": {
+        "passed": true,
+        "flash_bytes": 64420,
+        "static_ram_bytes": 18192
+      },
+      "arduino:renesas_uno:minima": {
+        "passed": true,
+        "flash_bytes": 51888,
+        "static_ram_bytes": 15392
+      }
+    },
+    "initial_build_failure": "1000 samples exceeded core-reserved heap/stack RAM; capacity changed to 512 while retaining full timestamps."
+  },
+  "automated_checks": {
+    "local_pytest": {
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_s": 15.58
+    },
+    "viewer": {
+      "javascript_syntax": "passed",
+      "desktop_width_px": 1440,
+      "narrow_width_px": 500,
+      "interaction_assertions": "passed: no future report at start; committed prediction alone before observation; three curves after verification; slider/play/pause; no horizontal overflow",
+      "browser": "isolated headless Chrome, offline file URL"
+    },
+    "ci": "See GitHub Actions at the commit containing this manifest; no live credentials used."
+  },
+  "executions": [
+    {
+      "record": "examples/continuous-engine-b1-synthetic/events.jsonl",
+      "source_sha256": "cd4f09b1ae083a8697edd4c9d2ad2d51f721fbd0a316e0ba281358cf7904cb64",
+      "original_run_id": "20261027T041545-3ec96b1600",
+      "mode": "continuous_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "b1",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1.05,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "rc",
+        "current_explanation": "선언한 연속 RC 후보군에서 합성 관측을 분석했습니다.",
+        "unresolved": "실물 계측과 후보군 밖 회로는 검증하지 않았습니다.",
+        "next_observation": "D2 보정 후 동일한 조건을 실제 보드에서 측정합니다."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s1000_l0"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 6.125895333010703
+    },
+    {
+      "record": "examples/continuous-engine-b6-synthetic/events.jsonl",
+      "source_sha256": "6d5e82554da55fdf0e4cf2f55e3de2b3cb9ae354e24c9d900ade05f11d5b51f5",
+      "original_run_id": "20261027T041551-28fc6b6f99",
+      "mode": "continuous_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "b6",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1.05,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "rc_input_branch",
+        "current_explanation": "선언한 연속 RC 후보군에서 합성 관측을 분석했습니다.",
+        "unresolved": "실물 계측과 후보군 밖 회로는 검증하지 않았습니다.",
+        "next_observation": "D2 보정 후 동일한 조건을 실제 보드에서 측정합니다."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s1000_l0"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 3.4552233329741284
+    },
+    {
+      "record": "examples/continuous-engine-d01-r-synthetic/events.jsonl",
+      "source_sha256": "aaff787f6f9f0316bb4a55e5b76cf94a8cb6339bae801ab6d0b0e560dbe424e8",
+      "original_run_id": "20261027T041554-ae7cdf9aad",
+      "mode": "continuous_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "d01-r",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1.05,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "r_changed",
+        "current_explanation": "선언한 연속 RC 후보군에서 합성 관측을 분석했습니다.",
+        "unresolved": "실물 계측과 후보군 밖 회로는 검증하지 않았습니다.",
+        "next_observation": "D2 보정 후 동일한 조건을 실제 보드에서 측정합니다."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s0_l4700"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 0.3999473339645192
+    },
+    {
+      "record": "examples/continuous-engine-d01-c-synthetic/events.jsonl",
+      "source_sha256": "12770393e8c58fafed56d2174a99aa164c181afd1299ae5149e6868ddee8a311",
+      "original_run_id": "20261027T041555-ad1a339843",
+      "mode": "continuous_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "d01-c",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1.05,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "c_changed",
+        "current_explanation": "선언한 연속 RC 후보군에서 합성 관측을 분석했습니다.",
+        "unresolved": "실물 계측과 후보군 밖 회로는 검증하지 않았습니다.",
+        "next_observation": "D2 보정 후 동일한 조건을 실제 보드에서 측정합니다."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s0_l4700"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 0.42001883301418275
+    },
+    {
+      "record": "examples/continuous-b6-synthetic/events.jsonl",
+      "source_sha256": "5ad202cce929c2641f99c6bf3ed108d0c861e2ca02048b208847720bd7c04eba",
+      "original_run_id": "20261027T042405-d453661827",
+      "mode": "continuous_live_agent",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "b6",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1.05,
+      "provider_configuration": {
+        "provider": "meta",
+        "model": "muse-spark-1.3",
+        "reasoning_effort": "medium",
+        "temperature": "provider_default",
+        "max_http_requests": 8,
+        "max_output_tokens_per_request": 4096,
+        "max_payload_bytes": 64000,
+        "tool_choice": "auto",
+        "billing_note": "$1 local allowance reserved per request; not actual charged cost"
+      },
+      "source": "synthetic",
+      "llm_used": true,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "rc_input_branch",
+        "current_explanation": "합성 연속 1-상태 RC 가족 내: 무션트では tau만 관측되어 2후보 동률, 1kΩ 션트 스텝에서 rc 탈락(잔차 15σ) 및 rc_input_branch 적합(R≈10.18kΩ, C≈1.04uF, Rp≈10.0kΩ, tau≈10.6ms), 예약 중간진폭 스텝 독립검증 전영역 통과.",
+        "unresolved": "실하드웨어 교정 불확실성 및 선언 외 다상태·비선형 구조 가능성은 미해결, 합성 우도 범위 내 결론.",
+        "next_observation": "선언 가족 외 구조 배제 위해 실기 교정 후 션트·부하 조건 반복 측정으로 재현성 확인."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s1000_l0"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 15.109967958997004,
+      "http_requests": 4,
+      "usage": [
+        {
+          "input_tokens": 3706,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 71,
+          "output_tokens_details": {
+            "reasoning_tokens": 7
+          },
+          "total_tokens": 3777
+        },
+        {
+          "input_tokens": 6147,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 354,
+          "output_tokens_details": {
+            "reasoning_tokens": 218
+          },
+          "total_tokens": 6501
+        },
+        {
+          "input_tokens": 9244,
+          "input_tokens_details": {
+            "cached_tokens": 6129
+          },
+          "output_tokens": 135,
+          "output_tokens_details": {
+            "reasoning_tokens": 67
+          },
+          "total_tokens": 9379
+        },
+        {
+          "input_tokens": 12545,
+          "input_tokens_details": {
+            "cached_tokens": 9201
+          },
+          "output_tokens": 485,
+          "output_tokens_details": {
+            "reasoning_tokens": 217
+          },
+          "total_tokens": 13030
+        }
+      ],
+      "api_elapsed_s": 12.394908457063138,
+      "reserved_allowance_usd": 4.0
+    },
+    {
+      "record": "examples/continuous-d01-r-synthetic/events.jsonl",
+      "source_sha256": "36952b73b63c889682569c5ed2557b24f2fef83d629caa18808983a6359feaf9",
+      "original_run_id": "20261027T042736-4e066935d3",
+      "mode": "continuous_live_agent",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "d01-r",
+      "seed": 1,
+      "r_scale": 1,
+      "c_scale": 1.05,
+      "provider_configuration": {
+        "provider": "meta",
+        "model": "muse-spark-1.3",
+        "reasoning_effort": "medium",
+        "temperature": "provider_default",
+        "max_http_requests": 8,
+        "max_output_tokens_per_request": 4096,
+        "max_payload_bytes": 64000,
+        "tool_choice": "auto",
+        "billing_note": "$1 local allowance reserved per request; not actual charged cost"
+      },
+      "source": "synthetic",
+      "llm_used": true,
+      "agent_report": {
+        "verdict": "verified",
+        "candidate": "r_changed",
+        "current_explanation": "합성 1-상태 RC 선언집합 내에서 무부하에서는 tau≈0.021s만 관측되어 r_changed와 c_changed가 동점이었으나, 4700옴 부하 스텝에서 r_changed만 전구간 적합(최대정규잔차 0.37, 적분수렴)하고 독립 중간진폭 스텝 검증을 전영역 통과함.",
+        "unresolved": "R·C 사후구간의 미세 불확실성과 입력분기 미관측이 남으나 선언된 단일 RC 구조 판별에는 영향 없음.",
+        "next_observation": "동일 합성 범위에서 부하 스텝 반복으로 R≈19995옴·C≈1.05uF 사후구간 정밀화, 필요시 교정된 하드웨어 신뢰도로 재확인."
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "selected_actions": [
+        "step_a0.5_s0_l4700"
+      ],
+      "total_physical_acquisitions": 3,
+      "elapsed_s": 9.276802207925357,
+      "http_requests": 4,
+      "usage": [
+        {
+          "input_tokens": 3706,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 64,
+          "output_tokens_details": {
+            "reasoning_tokens": 7
+          },
+          "total_tokens": 3770
+        },
+        {
+          "input_tokens": 6543,
+          "input_tokens_details": {
+            "cached_tokens": 3697
+          },
+          "output_tokens": 334,
+          "output_tokens_details": {
+            "reasoning_tokens": 195
+          },
+          "total_tokens": 6877
+        },
+        {
+          "input_tokens": 9989,
+          "input_tokens_details": {
+            "cached_tokens": 6513
+          },
+          "output_tokens": 138,
+          "output_tokens_details": {
+            "reasoning_tokens": 73
+          },
+          "total_tokens": 10127
+        },
+        {
+          "input_tokens": 13661,
+          "input_tokens_details": {
+            "cached_tokens": 3697
+          },
+          "output_tokens": 506,
+          "output_tokens_details": {
+            "reasoning_tokens": 233
+          },
+          "total_tokens": 14167
+        }
+      ],
+      "api_elapsed_s": 8.908500000135973,
+      "reserved_allowance_usd": 4.0
+    },
+    {
+      "record": "examples/discovery-attempt1-truncated/events.jsonl",
+      "source_sha256": "30360ea8e3c4d05090541e0fd6822675226edc4574039d10815bddb80a99e89b",
+      "original_run_id": "20261027T043156-da9d01dd6b",
+      "mode": "live_nonlinear_discovery",
+      "terminal_event": "run_failed",
+      "evaluation_only_fixture": "b5-development",
+      "seed": 1,
+      "r_scale": null,
+      "c_scale": null,
+      "provider_configuration": {
+        "provider": "meta",
+        "model": "muse-spark-1.3",
+        "reasoning_effort": "max",
+        "temperature": "provider_default",
+        "max_http_requests": 8,
+        "max_output_tokens_per_request": 4096,
+        "max_payload_bytes": 64000,
+        "tool_choice": "auto",
+        "billing_note": "$1 local allowance reserved per request; not actual charged cost"
+      },
+      "http_requests": 2,
+      "usage": [
+        {
+          "input_tokens": 1301,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 95,
+          "output_tokens_details": {
+            "reasoning_tokens": 32
+          },
+          "total_tokens": 1396
+        },
+        {
+          "input_tokens": 6161,
+          "input_tokens_details": {
+            "cached_tokens": 1265
+          },
+          "output_tokens": 4096,
+          "output_tokens_details": {
+            "reasoning_tokens": 4094
+          },
+          "total_tokens": 10257
+        }
+      ],
+      "api_elapsed_s": 45.041308625019155,
+      "reserved_allowance_usd": 2.0,
+      "error": "Model response did not complete",
+      "failure_detail": "Second response incomplete with 4096 output tokens, including 4094 reasoning tokens; no proposal generated."
+    },
+    {
+      "record": "examples/discovery-synthetic/events.jsonl",
+      "source_sha256": "265a667de53e79f40b140137c78ef93f4f4e3703c8c2d5e8cc23d4bacada0f39",
+      "original_run_id": "20261027T043432-4b684081c5",
+      "mode": "live_nonlinear_discovery",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "b5-development",
+      "seed": 1,
+      "r_scale": null,
+      "c_scale": null,
+      "provider_configuration": {
+        "provider": "meta",
+        "model": "muse-spark-1.3",
+        "reasoning_effort": "max",
+        "temperature": "provider_default",
+        "max_http_requests": 8,
+        "max_output_tokens_per_request": 8192,
+        "max_payload_bytes": 128000,
+        "tool_choice": "auto",
+        "billing_note": "$1 local allowance reserved per request; not actual charged cost"
+      },
+      "source": "synthetic",
+      "llm_used": true,
+      "agent_report": {
+        "candidate": "proposed_netlist",
+        "current_explanation": "합성관측·개발모델 범위에서 IN-OUT 10.02kΩ 저항과 OUT애노드→REF캐소드 generic_diode 클리퍼가 소진폭 추종과 고진폭 양피크 제한(약 2.0~2.1V)을 설명. 학습잔차 0.36, 미사용 2조건 검증 모두 통과.",
+        "next_observation": "다른 REF·진폭·부하/션트 조건에서 클램프 전압 추적과 고주파 과도응답 추가 측정 제안.",
+        "unresolved": "합성·개발용 다이오드(IS=1nA,N=1.8) 범위에 한정. 온도특성, 기생 C, 역방향·장기안정성은 미확인.",
+        "verdict": "verified"
+      },
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 5,
+      "elapsed_s": 41.27762837498449,
+      "http_requests": 4,
+      "usage": [
+        {
+          "input_tokens": 1301,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 72,
+          "output_tokens_details": {
+            "reasoning_tokens": 11
+          },
+          "total_tokens": 1373
+        },
+        {
+          "input_tokens": 6138,
+          "input_tokens_details": {
+            "cached_tokens": 1265
+          },
+          "output_tokens": 2194,
+          "output_tokens_details": {
+            "reasoning_tokens": 1986
+          },
+          "total_tokens": 8332
+        },
+        {
+          "input_tokens": 8503,
+          "input_tokens_details": {
+            "cached_tokens": 1265
+          },
+          "output_tokens": 110,
+          "output_tokens_details": {
+            "reasoning_tokens": 48
+          },
+          "total_tokens": 8613
+        },
+        {
+          "input_tokens": 9847,
+          "input_tokens_details": {
+            "cached_tokens": 8433
+          },
+          "output_tokens": 686,
+          "output_tokens_details": {
+            "reasoning_tokens": 401
+          },
+          "total_tokens": 10533
+        }
+      ],
+      "api_elapsed_s": 38.68814687500708,
+      "reserved_allowance_usd": 4.0,
+      "proposals": 1,
+      "fitted_netlist": [
+        {
+          "a": "IN",
+          "b": "OUT",
+          "kind": "R",
+          "model": "none",
+          "name": "R1",
+          "value": 10023.713234723506
+        },
+        {
+          "a": "OUT",
+          "b": "REF",
+          "kind": "D",
+          "model": "generic_diode",
+          "name": "D1",
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "record": "examples/repair-d01-r-synthetic/events.jsonl",
+      "source_sha256": "27e2faecc99ddcade318cec1d0f91e207543f1e539061b73ddeae2e1c2dacc55",
+      "original_run_id": "20261027T043433-147be5ee55",
+      "mode": "synthetic_repair_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "d01-r",
+      "seed": 1,
+      "r_scale": 1,
+      "c_scale": 1.05,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 5,
+      "repair_success": true,
+      "repair": {
+        "component": "R",
+        "replacement_value": 10000.0,
+        "source": "declared_design",
+        "execution": "simulated",
+        "physical_human_action": false
+      },
+      "status": "repair_verified"
+    },
+    {
+      "record": "examples/repair-d01-c-synthetic/events.jsonl",
+      "source_sha256": "8bc5b7fec30acf93319fbf59da3d3c739d7914597d7bd361f97e844babd7ec18",
+      "original_run_id": "20261027T043434-78c62fee56",
+      "mode": "synthetic_repair_engine_only",
+      "terminal_event": "run_completed",
+      "evaluation_only_fixture": "d01-c",
+      "seed": 1,
+      "r_scale": 1.01,
+      "c_scale": 1,
+      "provider_configuration": null,
+      "source": "synthetic",
+      "llm_used": false,
+      "verification": {
+        "passed": true,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 5,
+      "repair_success": true,
+      "repair": {
+        "component": "C",
+        "replacement_value": 1e-06,
+        "source": "declared_design",
+        "execution": "simulated",
+        "physical_human_action": false
+      },
+      "status": "repair_verified"
+    }
+  ]
+}
