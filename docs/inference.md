@@ -61,3 +61,5 @@ The amplitude-scaling check is independent of a circuit fit but still assumes ma
 ## Periodic proposal state
 
 Capacitive sine netlists use progressively doubled numerical pre-roll on the same sample grid and phase as the capture. All simulated node voltages must change by at most 10 uV on the capture interval; a bounded horizon rejects unresolved settling. This avoids starting a settled observation prediction from a DC initial state, including frequencies with a non-integer number of samples per period. Every actual ngspice invocation counts against the proposal budget. Training-only repeated evaluations may be reused, with counts logged. Independent analytic RC and Shockley-ODE tests check this path; no holdout fixture or real board result is implied.
+
+The initial horizon is 10*sum(R)*sum(C), rounded upward to samples with a four-sample minimum; it is only a starting estimate for the doubled-history check. The earlier one-period minimum caused the capacitive fitting regression to exceed 60 seconds on CI. The revised starting horizon reduces simulation work without extending the fitting budget or changing convergence/observation thresholds.

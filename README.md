@@ -14,9 +14,11 @@ Implemented: continuous one-state RC inference, live Muse Spark experiment contr
 - D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
 - D2 DAC/ADC firmware compiles for UNO R4 WiFi and Minima, with 512-sample raw blocks and actual per-channel read-completion timestamps. It has not been uploaded or physically validated.
 
-See [latest validation](docs/preboard-validation.json). Both nonlinear attempts are retained: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
+See [latest linear-family validation](docs/linear-validation.json): the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Hardware validation is still pending.
 
-The [latest story/UI revision](docs/story-ui-validation.json) adds recorded training comparison curves and an actual live-log/replay check; its new API attempt is retained separately and does not establish reliability. Older logs remain unchanged, with any reconstructed curves labelled explicitly.
+The [earlier pre-board validation](docs/preboard-validation.json) retains both original nonlinear attempts: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
+
+The [earlier story/UI revision](docs/story-ui-validation.json) adds recorded training comparison curves and an actual live-log/replay check; its API attempt is retained separately and does not establish reliability. Older logs remain unchanged, with any reconstructed curves labelled explicitly.
 
 The earlier [structure/UI revision](docs/structure-ui-validation.json) retains two further live executions with mismatched diode truth and neutral English prompts. Both completed. The first report included an unsupported detection-limit statement, so the next prompt explicitly prohibited such claims and shortened the report; the original is preserved. These are evolving development attempts, not a frozen success-rate benchmark.
 
@@ -44,8 +46,8 @@ uv run benchmate repair --case d01-r --live
 ## Review recorded evidence
 
 ```sh
-uv run benchmate replay examples/discovery-story-english
-uv run benchmate view examples/discovery-story-english --output runs/discovery-report.html
+uv run benchmate replay examples/discovery-linear-english
+uv run benchmate view examples/discovery-linear-english --output runs/discovery-report.html
 # Observe new events from a running command in the same workspace:
 uv run benchmate watch runs/YOUR_RUNNING_SESSION --port 8765
 ```

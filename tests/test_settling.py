@@ -40,7 +40,7 @@ def test_periodic_warmup_matches_analytic_rc_even_off_integer_grid(frequency):
 def test_unsettled_or_unsupported_input_cannot_silently_pass(monkeypatch):
     import benchmate.netlist as netlist
     s=Acquisition(kind='sine',frequency_hz=1)
-    monkeypatch.setattr(netlist,'MAX_WARMUP_SECONDS',.5)
+    monkeypatch.setattr(netlist,'MAX_WARMUP_SECONDS',.05)
     with pytest.raises(ValueError,match='settling exceeds'):simulate_netlist(rc_proposal(),command_template(s))
     template=command_template(s);template['data']['drive_v'][4]+=.01
     with pytest.raises(ValueError,match='ideal command'):simulate_netlist(rc_proposal(),template)

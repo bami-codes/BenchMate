@@ -1,0 +1,800 @@
+{
+  "date": "2026-10-27",
+  "scope": "Synthetic development check. No physical measurement, holdout access, unique-topology proof or fixed-protocol reliability estimate.",
+  "record": "examples/discovery-linear-english/events.jsonl",
+  "record_sha256": "f9c1f2135cb2576fc4347a0c79682f6ae2b3c94ef28297c4c97fb18feba3644c",
+  "run_id": "20261027T082024-413d8c1922",
+  "protocol_code_commit": "04360e5bf6378c0bf3a2926174727f3a8431aaf6",
+  "attempt_accounting": "One new actual Meta API run, one proposed topology, four HTTP requests. Previous attempts, including failures, are retained in earlier validation manifests. Synthetic seed 1 is the reused development case, not a new blind trial.",
+  "unchanged_b5": "10 kohm series R and OUT-to-REF diode, no capacitor; independent synthetic truth IS=3 nA, N=1.9 versus initial library IS=1 nA, N=1.8.",
+  "provider": {
+    "provider": "meta",
+    "model": "muse-spark-1.3",
+    "reasoning_effort": "max",
+    "temperature": "provider_default",
+    "max_http_requests": 8,
+    "max_output_tokens_per_request": 8192,
+    "max_payload_bytes": 128000,
+    "tool_choice": "auto",
+    "billing_note": "$1 local allowance reserved per request; not actual charged cost"
+  },
+  "candidate_families": [
+    {
+      "name": "rc",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": [
+        4.7e-07,
+        4.7e-06
+      ],
+      "rp_bounds": null,
+      "output_bounds": null,
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "positive_log_uniform",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm"
+      ]
+    },
+    {
+      "name": "rc_input_branch",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": [
+        4.7e-07,
+        4.7e-06
+      ],
+      "rp_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "output_bounds": null,
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "positive_log_uniform",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm"
+      ]
+    },
+    {
+      "name": "resistor",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": null,
+      "rp_bounds": null,
+      "output_bounds": null,
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "absent_discrete_topology",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm",
+        "output_parallel_ohm"
+      ]
+    },
+    {
+      "name": "resistor_input_branch",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": null,
+      "rp_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "output_bounds": null,
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "absent_discrete_topology",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm",
+        "output_parallel_ohm"
+      ]
+    },
+    {
+      "name": "resistor_output_leak",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": null,
+      "rp_bounds": null,
+      "output_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "absent_discrete_topology",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm",
+        "output_parallel_ohm"
+      ]
+    }
+  ],
+  "comparison": {
+    "family": {
+      "name": "resistor_output_leak",
+      "r_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "c_bounds": null,
+      "rp_bounds": null,
+      "output_bounds": [
+        4700.0,
+        47000.0
+      ],
+      "density": "independent_log_uniform_over_present_components",
+      "capacitance": "absent_discrete_topology",
+      "model_row_columns": [
+        "r_ohm",
+        "c_f",
+        "input_parallel_ohm",
+        "output_parallel_ohm"
+      ]
+    },
+    "parameters": [
+      8863.12133923746,
+      0.0,
+      0.0,
+      34188.25894710033
+    ],
+    "comparison_scope": "declared_linear_families_v2",
+    "candidate_families": [
+      {
+        "name": "rc",
+        "r_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "c_bounds": [
+          4.7e-07,
+          4.7e-06
+        ],
+        "rp_bounds": null,
+        "output_bounds": null,
+        "density": "independent_log_uniform_over_present_components",
+        "capacitance": "positive_log_uniform",
+        "model_row_columns": [
+          "r_ohm",
+          "c_f",
+          "input_parallel_ohm"
+        ]
+      },
+      {
+        "name": "rc_input_branch",
+        "r_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "c_bounds": [
+          4.7e-07,
+          4.7e-06
+        ],
+        "rp_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "output_bounds": null,
+        "density": "independent_log_uniform_over_present_components",
+        "capacitance": "positive_log_uniform",
+        "model_row_columns": [
+          "r_ohm",
+          "c_f",
+          "input_parallel_ohm"
+        ]
+      },
+      {
+        "name": "resistor",
+        "r_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "c_bounds": null,
+        "rp_bounds": null,
+        "output_bounds": null,
+        "density": "independent_log_uniform_over_present_components",
+        "capacitance": "absent_discrete_topology",
+        "model_row_columns": [
+          "r_ohm",
+          "c_f",
+          "input_parallel_ohm",
+          "output_parallel_ohm"
+        ]
+      },
+      {
+        "name": "resistor_input_branch",
+        "r_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "c_bounds": null,
+        "rp_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "output_bounds": null,
+        "density": "independent_log_uniform_over_present_components",
+        "capacitance": "absent_discrete_topology",
+        "model_row_columns": [
+          "r_ohm",
+          "c_f",
+          "input_parallel_ohm",
+          "output_parallel_ohm"
+        ]
+      },
+      {
+        "name": "resistor_output_leak",
+        "r_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "c_bounds": null,
+        "rp_bounds": null,
+        "output_bounds": [
+          4700.0,
+          47000.0
+        ],
+        "density": "independent_log_uniform_over_present_components",
+        "capacitance": "absent_discrete_topology",
+        "model_row_columns": [
+          "r_ohm",
+          "c_f",
+          "input_parallel_ohm",
+          "output_parallel_ohm"
+        ]
+      }
+    ],
+    "selection": "Maximum training likelihood among the declared linear families"
+  },
+  "amplitude_scaling": {
+    "checks": [
+      {
+        "training_capture_indices": [
+          1,
+          2
+        ],
+        "settings_small": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 0.2,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "settings_large": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 1,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "amplitude_ratio": 5.0,
+        "channels": {
+          "in_v": {
+            "dc_removed_rms_mv": 5.142060849987712,
+            "normalized_rms": 0.33614703351498515
+          },
+          "out_v": {
+            "dc_removed_rms_mv": 184.56775684815332,
+            "normalized_rms": 12.065571714727977
+          }
+        },
+        "status": "output_scaling_mismatch",
+        "development_limit": 3.0,
+        "calibrated_false_positive_rate": false,
+        "independent_verification": false,
+        "scope": "Training-only diagnostic. Assumes matched timing, settled states and independent capture noise; DC offsets removed. Input scaling is checked. Output-path nonlinearity is not uniquely a DUT diode; fixture saturation must be excluded by calibration."
+      }
+    ],
+    "topology_fitted": false,
+    "data_role": "training_diagnostic"
+  },
+  "proposal": {
+    "elements": [
+      {
+        "a": "IN",
+        "b": "OUT",
+        "kind": "R",
+        "model": "none",
+        "name": "R1",
+        "value": 10000.0
+      },
+      {
+        "a": "OUT",
+        "b": "REF",
+        "kind": "D",
+        "model": "generic_diode",
+        "name": "D1",
+        "value": 0.0
+      }
+    ],
+    "rationale": "Small sine follows input, large sine clips only high side near 2.08V while low side follows, step high clips near 2.0V, loaded sine divides symmetrically toward REF implying series R about 10k and shunt diode from OUT to REF clipping positive excursions."
+  },
+  "fit": {
+    "elements": [
+      {
+        "a": "IN",
+        "b": "OUT",
+        "kind": "R",
+        "model": "none",
+        "name": "R1",
+        "value": 10001.390265423059
+      },
+      {
+        "a": "OUT",
+        "b": "REF",
+        "kind": "D",
+        "model": "generic_diode",
+        "name": "D1",
+        "value": 0.0
+      }
+    ],
+    "training_passed": true,
+    "optimizer_converged": true,
+    "parameters_identifiable": true,
+    "diode_parameters": {
+      "is_a": 3.0115196339332324e-09,
+      "n": 1.9003865205139163
+    },
+    "fitted_parameter_names": [
+      "R1",
+      "diode_IS",
+      "diode_N"
+    ],
+    "simulator_calls": 128,
+    "simulation_cache_hits": 40,
+    "generated_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+    "fitted_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7"
+  },
+  "verification": {
+    "passed": true,
+    "refitted_on_verification": false,
+    "prediction_event_sequences": [
+      18,
+      19
+    ],
+    "observation_event_sequences": [
+      20,
+      21
+    ],
+    "both_models_committed_before_either_observation": true,
+    "conditions": [
+      {
+        "settings": {
+          "kind": "step",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 0.35,
+          "ref_v": 1.6,
+          "duration_s": 0.3,
+          "sample_period_s": 0.0005,
+          "step_at_s": 0.02,
+          "frequency_hz": null
+        },
+        "baseline": {
+          "out_rms_mv": 50.781526399135146,
+          "out_peak_mv": 73.88357475902119,
+          "worst_normalized_regional_rms": 16.927175466378383
+        },
+        "proposal": {
+          "out_rms_mv": 0.9293521299273421,
+          "out_peak_mv": 3.4810508447848942,
+          "worst_normalized_regional_rms": 0.34529945544959834
+        },
+        "separation": {
+          "out_rms_mv": 50.72042130766712,
+          "out_peak_mv": 72.02557608266625
+        },
+        "discrimination": "proposal_only_passes",
+        "scope": "One best training-fit model among the declared linear topologies; not all possible circuits. RMS separation is descriptive, not a calibrated power estimate."
+      },
+      {
+        "settings": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": 10000,
+          "amplitude_v": 1,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "baseline": {
+          "out_rms_mv": 22.88307864741362,
+          "out_peak_mv": 46.955949724608814,
+          "worst_normalized_regional_rms": 10.24680811406198
+        },
+        "proposal": {
+          "out_rms_mv": 1.0008442977655467,
+          "out_peak_mv": 3.8075939906960787,
+          "worst_normalized_regional_rms": 0.37024363186950093
+        },
+        "separation": {
+          "out_rms_mv": 22.89524699719651,
+          "out_peak_mv": 45.07073204000989
+        },
+        "discrimination": "proposal_only_passes",
+        "scope": "One best training-fit model among the declared linear topologies; not all possible circuits. RMS separation is descriptive, not a calibrated power estimate."
+      }
+    ]
+  },
+  "execution": {
+    "http_requests": 4,
+    "elapsed_s": 65.79921729199123,
+    "api_elapsed_s": 52.49889733211603,
+    "usage": [
+      {
+        "input_tokens": 1422,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 175,
+        "output_tokens_details": {
+          "reasoning_tokens": 114
+        },
+        "total_tokens": 1597
+      },
+      {
+        "input_tokens": 8426,
+        "input_tokens_details": {
+          "cached_tokens": 1393
+        },
+        "output_tokens": 3179,
+        "output_tokens_details": {
+          "reasoning_tokens": 2947
+        },
+        "total_tokens": 11605
+      },
+      {
+        "input_tokens": 11820,
+        "input_tokens_details": {
+          "cached_tokens": 8305
+        },
+        "output_tokens": 121,
+        "output_tokens_details": {
+          "reasoning_tokens": 60
+        },
+        "total_tokens": 11941
+      },
+      {
+        "input_tokens": 16113,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 1312,
+        "output_tokens_details": {
+          "reasoning_tokens": 1123
+        },
+        "total_tokens": 17425
+      }
+    ],
+    "requested_human_actions": 0
+  },
+  "acquisitions": {
+    "training": 4,
+    "reserved_verification": 2,
+    "source": "synthetic",
+    "physical_board_captures": 0
+  },
+  "original_report": {
+    "candidate": "proposed_netlist",
+    "current_explanation": "Synthetic development circuit passes small signals unchanged but caps large positive peaks above reference while letting negative swings pass, matching training fit and both untouched verification checks.",
+    "next_observation": "Run a 0.2V sine centered at 1.2V reference to test whether positive peak limiting follows the reference voltage.",
+    "unresolved": "Synthetic scope only; performance beyond tested amplitudes and loads, other reference voltages, and temperature variation remains unconfirmed.",
+    "verdict": "verified"
+  },
+  "report_review": "The suggested next 0.2 V sine at a shifted reference was not executed or numerically validated. Low amplitude alone is a weak test of the clipping threshold. Preserve the actual model response; do not treat this suggestion as verified experiment selection.",
+  "periodic_state_validation": {
+    "scope": "Analytic RC and independent Shockley-plus-series-resistance ODE tests; the actual Spark B5 proposal had no C and therefore did not exercise this path.",
+    "cases": [
+      "1 Hz analytic RC",
+      "3.7 Hz analytic RC with non-integer sample count per period",
+      "bounded horizon and unsupported-input rejection",
+      "capacitive diode topology fitted on four independent ODE captures, then predicts two reserved conditions"
+    ],
+    "initial_ci_failure": {
+      "url": "https://github.com/bami-codes/BenchMate/actions/runs/40472894474",
+      "result": "109 passed, 1 failed: capacitive ODE fit exhausted the 60-second budget"
+    },
+    "runtime_followup": "Start numerical pre-roll at 10*sum(R)*sum(C) rounded up to samples, minimum four samples, then double and compare all node predictions over the full capture. No threshold or budget increase.",
+    "fit_budget": {
+      "actual_ngspice_invocations": 420,
+      "wall_time_seconds": 60
+    },
+    "warmup_convergence_limit_v": 1e-05,
+    "analytic_waveform_regression_tolerance_v": 5e-05,
+    "targeted_after_followup": {
+      "command": ".venv/bin/python -m pytest tests/test_settling.py -q --durations=5",
+      "passed": 4,
+      "elapsed_s": 33.87,
+      "capacitive_fit_and_verification_test_s": 33.18
+    }
+  },
+  "local_full_suite_before_runtime_followup": {
+    "command": ".venv/bin/python -m pytest -q --basetemp=runs/linear-full-tests",
+    "passed": 110,
+    "elapsed_s": 95.8
+  },
+  "browser": {
+    "target": "examples/discovery-linear-english/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 666.59375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 666.59375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 890.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 912.96875,
+            "bottom": 1437.859375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1459.859375,
+            "bottom": 1840.859375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1862.859375,
+            "bottom": 2099.546875
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "legacy_browser": {
+    "target": "examples/discovery-story-english/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 890.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 912.96875,
+            "bottom": 1416.859375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1438.859375,
+            "bottom": 1819.859375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1841.859375,
+            "bottom": 2078.546875
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "actual_live_log": {
+    "snapshots": [
+      {
+        "count": 11,
+        "status": "Initial models do not fit",
+        "series": [
+          "observed",
+          "baseline"
+        ],
+        "actor": "Engine summary",
+        "baseline": "Best tested linear model",
+        "diagnostic": "Training amplitude check · output fails to scale (184.57 mV RMS) · assumptions in Evidence."
+      },
+      {
+        "count": 14,
+        "status": "Testing a proposed structure",
+        "series": [
+          "observed",
+          "baseline"
+        ],
+        "actor": "Spark · max",
+        "baseline": "Best tested linear model",
+        "diagnostic": "Training amplitude check · output fails to scale (184.57 mV RMS) · assumptions in Evidence."
+      },
+      {
+        "count": 16,
+        "status": "Training fit passed · verification pending",
+        "series": [
+          "observed",
+          "baseline",
+          "predicted"
+        ],
+        "actor": "Spark · max",
+        "baseline": "Best tested linear model",
+        "diagnostic": "Training amplitude check · output fails to scale (184.57 mV RMS) · assumptions in Evidence."
+      },
+      {
+        "count": 24,
+        "status": "Prediction verified · report pending",
+        "series": [
+          "observed",
+          "baseline",
+          "predicted"
+        ],
+        "actor": "Spark · max",
+        "baseline": "Frozen linear prediction",
+        "diagnostic": "OUT RMS: Linear 22.88 mV / Spark 1.00 mV · Linear fails; proposal passes"
+      },
+      {
+        "count": 29,
+        "status": "Prediction verified",
+        "series": [
+          "observed",
+          "baseline",
+          "predicted"
+        ],
+        "actor": "Spark · max",
+        "baseline": "Best tested linear model",
+        "diagnostic": "Training amplitude check · output fails to scale (184.57 mV RMS) · assumptions in Evidence."
+      }
+    ],
+    "source": "Synthetic observations",
+    "label": "Live log",
+    "state": {
+      "cursor": 28,
+      "eventCount": 29,
+      "following": true,
+      "transport": "live_log",
+      "connection": "connected",
+      "integrityFailed": false
+    },
+    "passed": true
+  },
+  "pending": [
+    "D2 physical timing, noise and fixture calibration",
+    "Physical B5 repeated runs",
+    "Final frozen evaluation and untouched X2",
+    "Live board transport in the shared UI"
+  ]
+}

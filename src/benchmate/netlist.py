@@ -181,7 +181,10 @@ def simulate_netlist(elements,template,*,diode=None,before_run=None):
         if not np.allclose(u,ideal,atol=1e-12,rtol=0) or not np.allclose(np.diff(t),settings.sample_period_s,atol=1e-12,rtol=0):
             raise ValueError('Periodic warm-up currently requires the declared ideal command grid')
         rc_bound=sum(e['value'] for e in checked if e['kind']=='R')*sum(e['value'] for e in checked if e['kind']=='C')
-        n=max(1,int(np.ceil(max(1/settings.frequency_hz,5*rc_bound)/settings.sample_period_s)))
+        # Use a circuit-scale initial horizon rather than an entire slow sine
+        # period. The doubled-history comparison below, not this estimate,
+        # decides convergence on every node over the full capture interval.
+        n=max(4,int(np.ceil(10*rc_bound/settings.sample_period_s)))
         previous=run(n)
         while True:
             n*=2;sampled=run(n)
