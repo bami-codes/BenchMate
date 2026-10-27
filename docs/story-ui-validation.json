@@ -1,0 +1,396 @@
+{
+  "date_local": "2026-10-27",
+  "scope": "UI and synthetic development validation. No physical-board, holdout, baseline-superiority or fixed-protocol reliability claim.",
+  "record": "examples/discovery-story-english/events.jsonl",
+  "original_run_id": "20261027T063814-d825d0412e",
+  "source_sha256": "9dbb701a329edb7a0db27d7cd8a4d8e6a87d4c3098f63a63b54345cfba037cb2",
+  "attempt_accounting": "One additional actual Spark API development run. Prior successes, truncated attempt and earlier prompt revisions remain in the earlier manifests. This report does not select away a failed run or claim a success rate.",
+  "provider": {
+    "provider": "meta",
+    "model": "muse-spark-1.3",
+    "reasoning_effort": "max",
+    "http_requests": 4,
+    "usage": [
+      {
+        "input_tokens": 1420,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 72,
+        "output_tokens_details": {
+          "reasoning_tokens": 7
+        },
+        "total_tokens": 1492
+      },
+      {
+        "input_tokens": 7854,
+        "input_tokens_details": {
+          "cached_tokens": 1393
+        },
+        "output_tokens": 3179,
+        "output_tokens_details": {
+          "reasoning_tokens": 2940
+        },
+        "total_tokens": 11033
+      },
+      {
+        "input_tokens": 11246,
+        "input_tokens_details": {
+          "cached_tokens": 7793
+        },
+        "output_tokens": 111,
+        "output_tokens_details": {
+          "reasoning_tokens": 49
+        },
+        "total_tokens": 11357
+      },
+      {
+        "input_tokens": 12590,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 1259,
+        "output_tokens_details": {
+          "reasoning_tokens": 1070
+        },
+        "total_tokens": 13849
+      }
+    ],
+    "api_elapsed_s": 46.72994083398953
+  },
+  "experiment": {
+    "elapsed_s": 63.83748774998821,
+    "acquisitions": 6,
+    "proposals": 1,
+    "verification_passed": true,
+    "prediction_sequences": [
+      18,
+      19
+    ],
+    "observation_sequences": [
+      20,
+      21
+    ],
+    "both_predictions_before_either_observation": true,
+    "verification_refit": false
+  },
+  "recorded_training_comparison": {
+    "initial_event": 6,
+    "rc_selection": "Maximum training likelihood among the declared RC families",
+    "rc_conditions": 4,
+    "proposal_event": 14,
+    "proposal_conditions": 4,
+    "reconstructed": false,
+    "additional_acquisitions": 0,
+    "additional_simulator_calls": 0
+  },
+  "prompt_revision": "Added a plain-English, one-sentence next-observation instruction. Numerical protocol, tool choices and acquisition budget were unchanged.",
+  "historical_comparison": {
+    "record": "examples/discovery-mismatch-english/events.jsonl",
+    "sidecar": "examples/discovery-mismatch-english/comparison.json",
+    "original_events_unchanged": true,
+    "marked_reconstructed": true,
+    "verification_mutation_invariance_test": true
+  },
+  "local_tests": {
+    "passed": 96,
+    "seconds": 47.55,
+    "command": ".venv/bin/python -m pytest -q --basetemp=runs/story-tests"
+  },
+  "browser": {
+    "target": "file:///Users/bami/Documents/metaai/examples/discovery-story-english/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 892.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 892.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 890.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 912.96875,
+            "bottom": 1416.859375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1438.859375,
+            "bottom": 1845.859375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1867.859375,
+            "bottom": 2104.546875
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "repair_browser": {
+    "target": "file:///Users/bami/Documents/metaai/examples/repair-d01-r-synthetic/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 524.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 841.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 524.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 841.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 875.578125
+          },
+          {
+            "name": "report-panel",
+            "top": 897.578125,
+            "bottom": 1252.078125
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1274.078125,
+            "bottom": 1624.078125
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1646.078125,
+            "bottom": 1882.765625
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "actual_live_log": {
+    "snapshots": [
+      {
+        "count": 14,
+        "status": "Testing a proposed structure",
+        "series": [
+          "observed",
+          "baseline"
+        ],
+        "actor": "Spark \u00b7 max"
+      },
+      {
+        "count": 16,
+        "status": "Training fit passed \u00b7 verification pending",
+        "series": [
+          "observed",
+          "baseline",
+          "predicted"
+        ],
+        "actor": "Spark \u00b7 max"
+      },
+      {
+        "count": 19,
+        "status": "Predictions locked \u00b7 awaiting observations",
+        "series": [
+          "predicted"
+        ],
+        "actor": "Spark \u00b7 max"
+      },
+      {
+        "count": 24,
+        "status": "Prediction verified \u00b7 report pending",
+        "series": [
+          "observed",
+          "predicted"
+        ],
+        "actor": "Spark \u00b7 max"
+      },
+      {
+        "count": 29,
+        "status": "Prediction verified",
+        "series": [
+          "observed",
+          "baseline",
+          "predicted"
+        ],
+        "actor": "Spark \u00b7 max"
+      }
+    ],
+    "counts": [
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      14,
+      16,
+      16,
+      16,
+      19,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29,
+      29
+    ],
+    "source": "Synthetic observations",
+    "label": "Live log",
+    "state": {
+      "cursor": 28,
+      "eventCount": 29,
+      "following": true,
+      "transport": "live_log",
+      "connection": "connected",
+      "integrityFailed": false
+    },
+    "passed": true
+  },
+  "ci_status_source": "GitHub Actions Tests workflow for the exact repository commit."
+}

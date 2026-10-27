@@ -21,6 +21,7 @@ English presentation at the Meta Global AI Developer Hackathon. Offline, self-co
 ## Capabilities and Constraints
 
 - The first viewport must show observed and precommitted predicted traces, the three-field report, an action timeline with actor badges, illustrated mounting instructions, and independent data-origin and viewing-mode labels.
+- Explain the change in hypothesis with observed, best-RC and proposed-structure training curves, a shared residual scale and a netlist diagram; keep training fit distinct from reserved verification.
 - Existing event records and their source hashes are immutable evidence. No fabricated model quotes, success claims, precision, latency, confidence or physical operations.
 - Current diagnosis and repair examples are synthetic. Real Muse Spark API calls are distinguishable from engine-only runs. Library mismatch tests are development evidence, not physical diode characterization.
 - English is the interface and new model-report language. Historical original reports remain original data and may be inspected as such.

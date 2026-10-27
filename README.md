@@ -15,7 +15,9 @@ Implemented: continuous one-state RC inference, live Muse Spark experiment contr
 
 See [latest validation](docs/preboard-validation.json). Both nonlinear attempts are retained: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
 
-The subsequent [structure/UI revision](docs/structure-ui-validation.json) retains two further live executions with mismatched diode truth and neutral English prompts. Both completed. The first report included an unsupported detection-limit statement, so the next prompt explicitly prohibited such claims and shortened the report; the original is preserved. These are evolving development attempts, not a frozen success-rate benchmark.
+The [latest story/UI revision](docs/story-ui-validation.json) adds recorded training comparison curves and an actual live-log/replay check; its new API attempt is retained separately and does not establish reliability. Older logs remain unchanged, with any reconstructed curves labelled explicitly.
+
+The earlier [structure/UI revision](docs/structure-ui-validation.json) retains two further live executions with mismatched diode truth and neutral English prompts. Both completed. The first report included an unsupported detection-limit statement, so the next prompt explicitly prohibited such claims and shortened the report; the original is preserved. These are evolving development attempts, not a frozen success-rate benchmark.
 
 ## Run
 
@@ -41,13 +43,13 @@ uv run benchmate repair --case d01-r --live
 ## Review recorded evidence
 
 ```sh
-uv run benchmate replay examples/discovery-mismatch-english
-uv run benchmate view examples/discovery-mismatch-english --output runs/discovery-report.html
+uv run benchmate replay examples/discovery-story-english
+uv run benchmate view examples/discovery-story-english --output runs/discovery-report.html
 # Observe new events from a running command in the same workspace:
 uv run benchmate watch runs/YOUR_RUNNING_SESSION --port 8765
 ```
 
-Open the HTML locally, or visit the loopback URL printed by `watch`. Both use the same event reducer and renderer: precommitted prediction/observed overlay, three-field report, actor-labelled timeline and illustrated connections. Moving backward hides later reports/observations. `watch` follows a verified append-only log and can pause to inspect earlier events; it cannot start an API call or drive hardware. Origin (synthetic/uncalibrated hardware) is separate from viewing mode (replay/live log). Board integration follows D2. See [workspace behavior and QA](docs/viewer.md).
+Open the HTML locally, or visit the loopback URL printed by `watch`. Both use the same event reducer and renderer: observed/best-RC/proposed-structure training comparison, separate precommitted verification, residual strip, netlist schematic, three-field report, effort-labelled timeline and illustrated connections. Moving backward hides later reports/observations. `watch` follows a verified append-only log and can pause to inspect earlier events; it cannot start an API call or drive hardware. Origin (synthetic/uncalibrated hardware) is separate from viewing mode (replay/live log). Board integration follows D2. See [workspace behavior and QA](docs/viewer.md).
 
 JSONL replay/export verifies the hash chain. This is not external attestation or proof against complete record rewriting. `runs/` is ignored; reviewed examples are explicitly exported. Earlier fixed-value milestones remain in historical examples/tests and `workflow.py`/`engine.py`; current CLI diagnosis uses `experiments.py`/`inference.py`.
 

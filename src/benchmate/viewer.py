@@ -15,9 +15,20 @@ def load_record(run, *, live=False):
         # Recorder can be between writes, including within a UTF-8 codepoint.
         raw=raw[:raw.rfind(b'\n')+1]
     events=decode_events(raw,require_terminal=not live,include_hash=True)
-    return {'events':events,'source_sha256':hashlib.sha256(raw).hexdigest(),
+    record={'events':events,'source_sha256':hashlib.sha256(raw).hexdigest(),
             'run_id':path.parent.name,'transport':'live_log' if live else 'replay',
             'integrity':'verified_prefix' if live else 'verified_complete'}
+    sidecar=path.parent/'comparison.json'
+    if sidecar.is_file():
+        comparison=json.loads(sidecar.read_text())
+        if comparison.get('source_sha256')!=record['source_sha256']:
+            raise ValueError('Comparison source does not match the event record')
+        for entry in comparison.get('entries',[]):
+            sequence=entry['event_sequence']
+            if not 0<=sequence<len(events) or events[sequence]['sha256']!=entry['event_sha256']:
+                raise ValueError('Comparison event does not match the event record')
+        record['comparison']=comparison
+    return record
 
 
 def render_viewer(record):

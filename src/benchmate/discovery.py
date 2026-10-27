@@ -44,6 +44,9 @@ are allowed only after BOTH independent checks pass; otherwise abstained with
 empty candidate. Always state synthetic/development scope. No plain-text ending.
 Keep each report field under 45 words. Report only numbers supported by the
 tools; do not invent detection limits, parameter uncertainty or validity ranges.
+Use plain English: explain what the circuit does instead of listing component
+parameters already in the evidence. For the next observation, describe one
+understandable change and what it would test in one sentence.
 Next observations must respect REF +/-1V and transitions no larger than 1V.
 """
 
@@ -123,10 +126,12 @@ def fit_proposal(elements,captures,noise=NoiseModel()):
         identifiable=bool(singular[-1]>1 and condition<1e5)
     else:
         converged=identifiable=True;condition=None
-    gates=[]
+    gates=[];training_predictions=[]
     for capture in captures:
         prediction,_=simulate(capture)
         gates.append(adequacy(prediction,capture,noise))
+        training_predictions.append({'settings':capture['settings'],'time_s':prediction['time_s'],
+                                     'out_v':prediction['out_v']})
     if topology_fingerprint(elements)!=topology_fingerprint(fitted):
         raise RuntimeError('Parameter fitting changed generated topology')
     return fitted,{'training_passed':converged and identifiable and all(g['passed'] for g in gates),
@@ -134,7 +139,7 @@ def fit_proposal(elements,captures,noise=NoiseModel()):
                    'log_parameter_jacobian_condition':condition,'fitted_parameter_names':names,
                    'diode_parameters':dict(diode),'diode_parameter_bounds':DIODE_BOUNDS,
                    'diode_fixed_assumptions':{'rs_ohm':1.,'temperature_c':27.},
-                   'checks':gates,'simulator_calls':calls,
+                   'checks':gates,'simulator_calls':calls,'training_predictions':training_predictions,
                    'initial_generated_simulations':first_metadata,
                    'generated_topology_sha256':topology_fingerprint(elements),
                    'fitted_topology_sha256':topology_fingerprint(fitted),
@@ -166,7 +171,8 @@ class DiscoverySession:
         self.initial={'status':'all_candidates_inadequate' if all(not f['fit_passed'] for _,f in fits) else 'initial_candidates_adequate',
                       'candidates':[{'name':family.name,'fit_passed':fit['fit_passed'],
                           'worst_normalized_residual':max(c['normalized_rms'] for g in fit['checks'] for c in g['checks'])} for family,fit in fits]}
-        log.add('initial_family_assessment',self.initial)
+        from .comparison import best_rc_comparison
+        log.add('initial_family_assessment',{**self.initial,'training_comparison':best_rc_comparison(fits,self.captures)})
 
     def dispatch(self,name,args):
         if self.report is not None:raise ToolRejected('Experiment already finished')

@@ -51,3 +51,42 @@ def test_live_log_rejects_other_origins_and_hosts():
     assert allowed_origin('localhost:8765','http://localhost:8765',8765)
     assert not allowed_origin('attacker.example:8765',None,8765)
     assert not allowed_origin('127.0.0.1:8765','https://attacker.example',8765)
+
+
+def test_comparison_sidecar_is_bound_to_the_unmodified_record(tmp_path):
+    import json
+    log=Recorder(tmp_path,mode='synthetic_test');log.add('run_completed',{})
+    record=load_record(log.path)
+    sidecar={'source_sha256':record['source_sha256'],'entries':[
+        {'event_sequence':0,'event_sha256':record['events'][0]['sha256'],'comparison':{'conditions':[]}}]}
+    file=log.path/'comparison.json';file.write_text(json.dumps(sidecar))
+    assert load_record(log.path)['comparison']==sidecar
+    sidecar['entries'][0]['event_sha256']='wrong';file.write_text(json.dumps(sidecar))
+    with pytest.raises(ValueError,match='Comparison event'):load_record(log.path)
+    sidecar['source_sha256']='wrong';file.write_text(json.dumps(sidecar))
+    with pytest.raises(ValueError,match='Comparison source'):load_record(log.path)
+
+
+def test_reconstructed_training_curves_do_not_use_verification(tmp_path):
+    import copy
+    import json
+    import shutil
+    from pathlib import Path
+    from benchmate.comparison import reconstruct_comparisons
+    from benchmate.records import read_events
+    if shutil.which('ngspice') is None:pytest.skip('ngspice not installed')
+    source=Path(__file__).parents[1]/'examples/discovery-mismatch-english/events.jsonl'
+    original=source.read_bytes();events=read_events(source);comparisons=[]
+    for changed in (False,True):
+        log=Recorder(tmp_path,mode=events[0]['payload']['mode'])
+        for e in events[1:]:
+            payload=copy.deepcopy(e['payload'])
+            if changed and e['kind']=='verification_acquisition':
+                payload['data']['out_v']=[v+.4 for v in payload['data']['out_v']]
+            log.add(e['kind'],payload)
+        raw=log.file.read_bytes();sidecar=json.loads(reconstruct_comparisons(log.path).read_text())
+        assert raw==log.file.read_bytes()
+        assert all(max(e['training_event_sequences'])<e['event_sequence'] for e in sidecar['entries'])
+        comparisons.append([e['comparison'] for e in sidecar['entries']])
+    assert comparisons[0]==comparisons[1]
+    assert source.read_bytes()==original

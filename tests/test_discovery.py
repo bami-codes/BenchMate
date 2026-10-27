@@ -135,6 +135,13 @@ def test_mock_model_proposal_reaches_spice_then_two_untouched_checks(tmp_path,mo
     committed=[i for i,k in enumerate(kinds) if k=='prediction_committed']
     assert len(committed)==2 and max(committed)<kinds.index('verification_acquisition')
     fitted=next(e['payload'] for e in events if e['kind']=='proposal_fit')
+    assessment=next(e['payload'] for e in events if e['kind']=='initial_family_assessment')
+    assert len(assessment['training_comparison']['conditions'])==len(TRAINING)
+    assert len(fitted['training_predictions'])==len(TRAINING)
+    assert all(c['settings']['load_ohm']!=10000 for c in fitted['training_predictions'])
+    # Presentation curves stay out of the model's tool context and measurement budget.
+    inspected=json.loads(requests[1]['input'][-1]['output'])
+    assert 'training_comparison' not in inspected['initial_assessment']
     assert fitted['generated_topology_sha256']==fitted['fitted_topology_sha256']
     assert fitted['diode_parameters']['is_a']!=1e-9
     assert result['total_physical_acquisitions']==6

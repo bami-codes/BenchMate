@@ -24,35 +24,39 @@
   <section class="session-strip" aria-label="Run status"><div><span id="status-dot" class="status-dot"></span><strong id="status">Ready</strong></div><span id="actor"></span><span id="count"></span><span class="mono" id="duration"></span></section>
   <div class="workbench">
     <section class="figure-panel surface" aria-labelledby="plot-title">
-      <div class="panel-heading"><h2 id="plot-title">Prediction & observation</h2><span id="plot-note" class="caption"></span></div>
+      <div class="panel-heading"><h2 id="plot-title">Prediction & observation</h2><label class="condition-control"><span class="sr-only">Displayed condition</span><select id="condition" aria-label="Displayed condition"></select></label></div>
       <div class="trace-tabs" role="group" aria-label="Waveform channels">
         <button class="trace-toggle observed" data-trace="observed" aria-pressed="true"><span class="line-key"></span>Observed OUT</button>
-        <button class="trace-toggle predicted" data-trace="predicted" aria-pressed="true"><span class="line-key dashed"></span>Predicted OUT</button>
+        <button class="trace-toggle baseline" data-trace="baseline" aria-pressed="true"><span class="line-key dashed"></span>Best RC fit</button>
+        <button class="trace-toggle predicted" data-trace="predicted" aria-pressed="true"><span class="line-key dashed"></span><span id="prediction-label">Predicted OUT</span></button>
         <button class="trace-toggle drive" data-trace="drive" aria-pressed="false"><span class="line-key"></span>Drive</button>
         <span class="caption" id="plot-source"></span>
       </div>
       <div class="chart-wrap"><svg id="chart" viewBox="0 0 900 284" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">Circuit waveform</title><desc id="chart-description">Recorded observations and predictions in acquisition order.</desc></svg><div class="plot-readout" id="plot-readout" hidden></div></div>
+      <div class="residual-wrap" id="residual-wrap" hidden><svg id="residual" role="img" aria-label="Observed minus model residuals in millivolts, on the same time axis"></svg></div>
+      <p id="comparison-note" class="comparison-note"></p>
       <div class="verification-line" id="verification"></div>
       <div class="playback">
         <button class="button primary" id="play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 8 6-8 6Z"/></svg><span>Replay run</span></button>
-        <button class="button icon-button" id="previous" aria-label="Previous action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12m8-12-7 6 7 6"/></svg></button>
+        <button class="button icon-button" id="previous" aria-label="Previous action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 4-6 6 6 6"/></svg></button>
         <label class="sr-only" for="cursor">Experiment event</label><input type="range" id="cursor" min="0" value="0" step="1">
-        <button class="button icon-button" id="next-event" aria-label="Next action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M14 4v12M6 4l7 6-7 6"/></svg></button>
+        <button class="button icon-button" id="next-event" aria-label="Next action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 4 6 6-6 6"/></svg></button>
         <output id="position" for="cursor" class="mono caption"></output>
         <button class="button quiet" id="follow" hidden>Follow live</button>
       </div>
     </section>
     <section class="report-panel" aria-labelledby="report-title">
       <div class="panel-heading"><h2 id="report-title">The current explanation</h2><span class="actor-badge" id="report-actor">Engine</span></div>
-      <div class="report-field"><h3>What the evidence supports</h3><p id="explanation"></p></div>
+      <div class="report-field"><h3>What the evidence supports</h3><svg id="proposal-circuit" viewBox="0 0 340 116" role="img" aria-label="Spark's proposed circuit, rendered from the recorded netlist" hidden></svg><p id="explanation"></p></div>
       <div class="report-field"><h3>What remains unknown</h3><p id="uncertainty"></p></div>
       <div class="report-field next-field"><h3>What to measure next</h3><p id="next"></p></div>
-      <button class="button quiet report-expand" id="expand-report" aria-expanded="false">Read full report</button>
+      <button class="button quiet report-expand" id="expand-report" aria-expanded="false">Read original report</button>
+      <p id="report-note" class="caption" hidden></p>
     </section>
-    <section class="timeline-panel surface" aria-labelledby="timeline-title"><div class="panel-heading"><h2 id="timeline-title">Experiment trail</h2><span class="caption" id="trail-note">Who decided. What changed.</span></div><ol id="timeline" aria-label="Experiment actions"></ol></section>
-    <section class="mounting-panel surface" aria-labelledby="mount-title"><div class="panel-heading"><h2 id="mount-title">Connections for this step</h2><span class="actor-badge" id="mount-actor">Operator</span></div><div class="mount-body"><svg id="wiring" viewBox="0 0 340 126" role="img" aria-label="Logical connections for drive, circuit, shunt and output load"></svg><p id="instruction"></p><p class="caption" id="mount-note">Logical nodes; physical fixture layout follows D2.</p></div></section>
+    <section class="timeline-panel surface" aria-labelledby="timeline-title"><div class="panel-heading"><h2 id="timeline-title">Experiment trail</h2><span class="caption" id="trail-note">Who decided. What changed.</span></div><nav id="story-stages" aria-label="Experiment milestones" hidden></nav><ol id="timeline" aria-label="Experiment actions"></ol></section>
+    <section class="mounting-panel surface" aria-labelledby="mount-title"><div class="panel-heading"><h2 id="mount-title">Connections for this step</h2><span class="actor-badge" id="mount-actor">Operator</span></div><div class="mount-body"><svg id="wiring" viewBox="0 0 340 106" role="img" aria-label="Logical connections for drive, circuit, shunt and output load"></svg><p id="instruction"></p><p class="caption" id="mount-note">Logical nodes; physical fixture layout follows D2.</p></div></section>
   </div>
-  <details class="evidence-drawer"><summary><span>Inspect the evidence</span><span class="caption">Netlist · checks · original events</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary><div class="evidence-grid"><section><h2>Recorded proposal or action</h2><p id="evidence-note" class="caption"></p><pre id="evidence"></pre></section><section><h2>Selected event</h2><pre id="raw"></pre></section></div></details>
+  <details class="evidence-drawer"><summary><span>Inspect the evidence</span><span class="caption">Netlist · checks · original events</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg></summary><div class="evidence-grid"><section><h2>Recorded proposal or action</h2><p id="evidence-note" class="caption"></p><pre id="evidence"></pre><h2>Original model report</h2><pre id="original-report"></pre><h2>Comparison provenance</h2><pre id="comparison-provenance"></pre></section><section><h2>Selected event</h2><pre id="raw"></pre></section></div></details>
   <footer><span>BenchMate · Measure, predict, verify.</span><span id="integrity"></span></footer>
   <div class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></div>
 </main>

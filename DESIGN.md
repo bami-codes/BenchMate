@@ -137,7 +137,7 @@ The waveform carries the visual emphasis. Interpretation stays beside evidence; 
 **Key Characteristics:**
 - A large evidence figure with a restrained interpretation column.
 - Dark green actions and shell, off-white ground and white bounded surfaces.
-- Solid orange observations and dashed blue precommitted predictions.
+- Solid orange observations, gray dashed RC fits and blue dashed proposed fits or committed predictions, explicitly distinguished.
 - Flat depth, modest corners and fine dividers.
 - Explicit actors, independent provenance labels and accessible native controls.
 
@@ -156,8 +156,8 @@ The palette combines muted green structure and paper-like neutrals with distinct
 ### Secondary
 
 - **Observed Copper** (`observed`) is the solid acquired output trace.
-- **Prediction Blue** (`predicted`) is the dashed precommitted output trace.
-- **Drive Gray** (`drive`) belongs to the optional input trace.
+- **Prediction Blue** (`predicted`) is the dashed simulated proposal or precommitted output trace; the legend states which.
+- **Drive Gray** (`drive`) belongs to the optional solid input trace and the dashed RC baseline. Shape and labels distinguish them.
 - **Verified Green**, **Pending Ochre** and **Failure Red** (`success`, `warning`, `error`) communicate status beside explicit text or icon shape.
 
 ### Neutral
@@ -184,11 +184,11 @@ At widths up to (480px), the experiment headline becomes (26px) and panel headin
 
 The workspace has a centered maximum width of (1600px). The masthead and main content share horizontal alignment. Default side gutters are (32px); they become (22px) at widths up to (1100px), then (16px) up to (480px). The effective desktop masthead height is (56px), with (20px) of top space before the session heading. The intermediate narrow masthead is (66px), becoming (60px) up to (480px).
 
-Above (800px), the workbench has a flexible figure column and a (340px) interpretation column, with gaps of (20px) vertically and (24px) horizontally. The right column is (300px) at widths up to (1100px), and (380px) from (1600px). The figure sits above the trail; the report sits above the connections. The report uses dividers directly on the page ground rather than another enclosing white card.
+Above (800px), the workbench has a flexible figure column and a (340px) interpretation column, with gaps of (16px) vertically and (24px) horizontally. The right column is (300px) at widths up to (1100px), and (380px) from (1600px). The figure sits above the trail; the report sits above the connections. The report uses dividers directly on the page ground rather than another enclosing white card.
 
 At widths up to (800px), one column preserves the reading order: **figure → report → experiment trail → connections**. The session overview stacks, provenance aligns left, the status strip wraps and the evidence disclosure becomes one column. Connections use a two-column internal layout until (480px), then stack their diagram and instructions.
 
-The effective chart height is (250px) above (800px), (270px) from (481px) through (800px), and (240px) up to (480px). The final desktop override also applies beyond (1600px). The trail scroll area is capped at (174px) on desktop and (300px) on narrower layouts. Panel heading insets are (15px 18px), reducing to (13px 14px) up to (1100px). The source uses several compact steps, not a uniform invented spacing scale.
+The effective chart height is (200px) above (800px), (270px) from (481px) through (800px), and (220px) up to (480px). The final desktop override also applies beyond (1600px). The trail scroll area is capped at (104px) on desktop and (300px) on narrower layouts. Panel heading insets are (15px 18px), reducing to (13px 14px) up to (1100px). The source uses several compact steps, not a uniform invented spacing scale.
 
 ## Elevation & Depth
 
@@ -224,7 +224,7 @@ Observed output uses a solid (2.5px) stroke. Predicted output uses a (1.8px) str
 
 ### Three-field report
 
-The report groups the current explanation, remaining uncertainty and next measurement under one actor label. Fields are separated by fine horizontal rules. Long text wraps; the initial presentation is line-clamped, with a native “Read full report” control exposing `aria-expanded` and revealing the full text in place. Treat this disclosure as a compact-view convenience, not permission to discard evidence.
+The report groups the current explanation, remaining uncertainty and next measurement under one actor label. Fields are separated by fine horizontal rules. Long text wraps; secondary fields may be line-clamped, while the concise explanation remains fully visible. “Read original report” exposes `aria-expanded` and opens the unchanged report in the Evidence disclosure. It does not replace the source text with the reading aid.
 
 ### Experiment trail
 
@@ -254,3 +254,14 @@ The native evidence disclosure expands original events and recorded proposals in
 - **Don't** add simulated instrument casing, decorative metrics or unsupported measurement precision.
 - **Don't** replace the flat paper-like hierarchy with shadows, gradients or ornamental imagery.
 - **Don't** promote compact metadata sizes into defaults for ordinary reading text.
+
+
+## Evidence-story refinement (2026-10-27)
+
+The figure adds a native condition selector and a (60px) residual strip with a shared millivolt scale. The default completed discovery view selects the training condition with the largest separation between the available model fits; reserved verification stays selectable and is never used for that ranking. Training fits are labelled separately from precommitted predictions, and reconstructed historical curves have an explicit caption.
+
+The explanation includes a (100px) SVG of the recorded proposal ((125px) on narrow screens). Diode orientation comes from the netlist; no hidden specimen is available to the renderer. Numerical parameters and unchanged source text live in Evidence. The original-report button opens that disclosure rather than expanding a paraphrase.
+
+A four-stage strip sits above the scrolling timeline and remains visible while its events scroll. Pending actions do not reveal future outcomes. Actor columns accommodate `Spark · max` and `Spark · standard`; standard maps to a recorded medium API effort. Status follows the current event. Simple chevrons replace the ambiguous previous/next glyphs.
+
+Desktop row gaps are (16px), with a compact (94px) mounting SVG. The diagram follows the displayed condition unless a new pending mounting request takes precedence. Its caption distinguishes historical review from a new requested operation. All five required panels remain within 900px at widths 1440 and 1280; mobile keeps the same reading order.

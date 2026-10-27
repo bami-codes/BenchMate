@@ -23,11 +23,11 @@ for(const [width,height,name]of [[1440,900,'desktop'],[1280,900,'laptop'],[390,8
  assert(await evaluate('!!window.BenchMateUI'),'UI not ready');
  const layout=await evaluate(`({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,language:document.documentElement.lang,panels:[...document.querySelectorAll('.figure-panel,.report-panel,.timeline-panel,.mounting-panel')].map(e=>({name:e.className,top:e.getBoundingClientRect().top,bottom:e.getBoundingClientRect().bottom}))})`);
  assert(layout.width===width,'Wrong viewport width');assert(!layout.overflow,'Horizontal overflow');assert(layout.language==='en','Interface language');
- if(width>800)assert(layout.panels.every(p=>p.bottom<=900),'Five required panels do not fit desktop viewport');
- else assert(layout.panels.find(p=>p.name.includes('timeline')).top<layout.panels.find(p=>p.name.includes('mounting')).top,'Mobile story order');
  const bounds=await cdp('Page.getLayoutMetrics');
  const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(bounds.cssContentSize.height),scale:1}});
  await writeFile(output+'/'+name+'.png',Buffer.from(shot.data,'base64'));results.push({name,...layout});
+ if(width>800)assert(layout.panels.every(p=>p.bottom<=900),'Five required panels do not fit desktop viewport: '+JSON.stringify(layout));
+ else assert(layout.panels.find(p=>p.name.includes('timeline')).top<layout.panels.find(p=>p.name.includes('mounting')).top,'Mobile story order');
 }
 await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
 const count=await evaluate('BenchMateUI.getState().eventCount');
@@ -36,10 +36,30 @@ const prediction=await evaluate("JSON.parse(document.getElementById('record').te
 if(prediction>=0){
  await evaluate(`BenchMateUI.select(${prediction})`);
  assert(await evaluate("document.querySelectorAll('#chart path[data-series]').length===1&&document.querySelector('#chart path[data-series=predicted]')!==null"),'Prediction-before-observation missing');
- await writeFile(output+'/prediction-only.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
+ await evaluate('scrollTo(0,0)');await writeFile(output+'/prediction-only.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
 }
 await evaluate(`BenchMateUI.select(${count-1})`);
 assert(await evaluate("!!document.querySelector('#chart path[data-series=observed]')&&!!document.querySelector('#chart path[data-series=predicted]')"),'Overlay missing');
+const discovery=await evaluate("initialRecord.events[0].payload.mode.includes('discovery')");
+if(discovery){
+ assert(await evaluate("document.getElementById('condition').selectedOptions[0].textContent.includes('±1 V · unloaded')"),'Informative training condition not selected');
+ assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&document.querySelectorAll('#residual path').length===2"),'Three-model comparison or residuals missing');
+ assert(await evaluate("document.querySelector('[data-cathode=REF]')&&document.getElementById('report-actor').textContent==='Spark · max'"),'Netlist or effort badge missing');
+ assert(await evaluate("document.querySelectorAll('#story-stages button.reached').length===4"),'Milestones missing');
+ await evaluate("document.getElementById('condition').value=21;document.getElementById('condition').dispatchEvent(new Event('change'))");
+ assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!document.querySelector('#chart path[data-series=baseline]')"),'Training fit mislabeled as verification');
+ await evaluate('BenchMateUI.select(6)');
+ assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=predicted]')&&document.getElementById('proposal-circuit').hasAttribute('hidden')"),'Initial comparison leaked later proposal');
+ await evaluate('scrollTo(0,0)');await writeFile(output+'/initial-models.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
+ await evaluate('BenchMateUI.select(13)');assert(await evaluate("!document.getElementById('proposal-circuit').hasAttribute('hidden')&&!document.querySelector('#chart path[data-series=predicted]')"),'Proposal-before-fit semantics');
+ await evaluate('BenchMateUI.select(14)');
+ assert(await evaluate("document.getElementById('status').textContent==='Training fit passed · verification pending'&&!!document.querySelector('#chart path[data-series=predicted]')"),'Training status or fit curve missing');
+ await evaluate('scrollTo(0,0)');await writeFile(output+'/training-fit.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
+ assert(await evaluate("(()=>{const saved=state.events;state.events=[{sequence:0,kind:'provider_configuration',payload:{reasoning_effort:'medium'}}];const actor=sparkActor(1);state.events=saved;return actor.name==='Spark · standard'&&actor.title.includes('medium');})()"),'Standard badge is not grounded in recorded effort');
+ assert(await evaluate("proposalDescription([{kind:'R',a:'OUT',b:'IN'},{kind:'D',a:'REF',b:'OUT'}]).side==='bottom'"),'Reversed diode interpreted as upper clamp');
+ await evaluate('BenchMateUI.select(0)');assert(await evaluate("!document.getElementById('story-stages').textContent.includes('passed')&&!document.querySelector('#chart path[data-series=baseline]')"),'Future milestone or curve leaked');
+ await evaluate(`BenchMateUI.select(${count-1})`);
+}
 await evaluate("document.querySelector('[data-trace=drive]').click()");assert(await evaluate("!!document.querySelector('#chart path[data-series=drive]')"),'Trace control failed');
 await evaluate("document.querySelector('[data-trace=drive]').click();document.getElementById('expand-report').click()");
 assert(await evaluate("document.getElementById('expand-report').getAttribute('aria-expanded')==='true'"),'Report expansion failed');
@@ -61,6 +81,7 @@ await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',wind
 assert(await evaluate("document.activeElement.matches('#timeline button')"),'Repeated keyboard activation lost focus');
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
 assert(await evaluate("document.activeElement.matches('#timeline button')"),'Tab navigation failed');
+await evaluate(`BenchMateUI.select(${count-1})`);
 assert(await evaluate("Number(getComputedStyle(document.querySelector('[data-trace=drive]')).opacity)===1"),'Inactive actionable text dimmed');
 await evaluate("connectionError('QA: interrupted connection');render()");assert(await evaluate("!document.getElementById('connection-alert').hidden"),'Connection error lost on render');
 await evaluate("BenchMateUI.ingest(JSON.parse(document.getElementById('record').textContent))");assert(await evaluate("document.getElementById('connection-alert').hidden"),'Valid update did not restore connection');
