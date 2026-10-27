@@ -14,7 +14,9 @@ Implemented: continuous one-state RC inference, live Muse Spark experiment contr
 - D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
 - D2 DAC/ADC firmware compiles for UNO R4 WiFi and Minima, with 512-sample raw blocks and actual per-channel read-completion timestamps. It has not been uploaded or physically validated.
 
-See [latest linear-family validation](docs/linear-validation.json): the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Hardware validation is still pending.
+See [latest recommendation/UI validation](docs/recommendation-validation.json): next measurements are constrained to the fixture menu or explicitly unavailable equipment, and the training amplitude check has its own plot. An actual Spark run selected a fixed-REF menu action after inspecting its settings. The five-family B1/B6 regression retains identical initial evidence, separates structure after the shunt, and passes verification after loading. Recommendations are for future runs; D2 hardware calibration is pending.
+
+The [preceding linear-family validation](docs/linear-validation.json) covers: the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Hardware validation is still pending.
 
 The [earlier pre-board validation](docs/preboard-validation.json) retains both original nonlinear attempts: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
 
@@ -46,8 +48,8 @@ uv run benchmate repair --case d01-r --live
 ## Review recorded evidence
 
 ```sh
-uv run benchmate replay examples/discovery-linear-english
-uv run benchmate view examples/discovery-linear-english --output runs/discovery-report.html
+uv run benchmate replay examples/discovery-menu-english
+uv run benchmate view examples/discovery-menu-english --output runs/discovery-report.html
 # Observe new events from a running command in the same workspace:
 uv run benchmate watch runs/YOUR_RUNNING_SESSION --port 8765
 ```

@@ -5,7 +5,7 @@ The workspace is an evidence-review surface for the hackathon demonstration. One
 ## Open a reviewed result
 
 ```sh
-uv run benchmate view examples/discovery-linear-english --output runs/discovery-report.html
+uv run benchmate view examples/discovery-menu-english --output runs/discovery-report.html
 ```
 
 Open the HTML locally. Fonts, interface code and the hash-verified record are embedded; no CDN, external script or API is needed. Replay exposes events in order. Before a verification acquisition, only predictions are visible, with recorded versus reconstructed provenance. Later observations and checks are withheld when navigating backward.
@@ -53,4 +53,4 @@ The user chose a demonstration-first screen and delegated visual direction. Impe
 
 IBM Plex Sans regular and semibold are bundled under OFL. Semantic SVG handles plots and connection diagrams. The desktop figure/report/trail/instructions fit a 1440×900 viewport; 1280 and 390 px widths are checked. Mobile orders figure, report, trail, connections. Visible focus, native range keys, report expansion, reduced motion, failure and unknown-source states are part of QA.
 
-`scripts/check_viewer.mjs` exercises a separately launched isolated Chrome on DevTools port 9337. It records viewport geometry, screenshots, console failures and interaction assertions, including the initial linear comparison, proposal before fitting, three-curve training and verification, prediction-only stages, whole recent timeline rows, source labels and effort badges. Older RC-only records retain their original scope. It does not attach to the user's browser profile. Browser snapshots and developer tool caches remain ignored; the latest results and actual API/live-log trial are in [linear-family validation](linear-validation.json). Earlier checks remain in [verification comparison validation](verification-ui-validation.json) and [story/UI validation](story-ui-validation.json).
+`scripts/check_viewer.mjs` exercises a separately launched isolated Chrome on DevTools port 9337. It records viewport geometry, screenshots, console failures and interaction assertions, including the initial linear comparison, proposal before fitting, three-curve training and verification, prediction-only stages, whole recent timeline rows, source labels and effort badges. Older RC-only records retain their original scope. It does not attach to the user's browser profile. Browser snapshots and developer tool caches remain ignored; the latest results and actual API trial are in [recommendation/UI validation](recommendation-validation.json). The preceding API/live-log trial remains in [linear-family validation](linear-validation.json). Earlier checks remain in [verification comparison validation](verification-ui-validation.json) and [story/UI validation](story-ui-validation.json).

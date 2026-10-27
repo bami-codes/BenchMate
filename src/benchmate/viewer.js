@@ -362,7 +362,9 @@ function render(){
   setText('evidence',evidence?.payload.rendered_fitted_proposal?[evidence.payload.rendered_fitted_proposal,evidence.payload.rendered_fitted_diode||'',JSON.stringify({training_passed:evidence.payload.training_passed,topology_preserved:evidence.payload.generated_topology_sha256===evidence.payload.fitted_topology_sha256},null,2)].join('\n'):evidence?JSON.stringify(evidence.payload,null,2):'—');
   setText('raw',JSON.stringify(state.events[state.cursor],null,2));
   const reportCall=vm.report?[...vm.visible].reverse().find(e=>e.kind==='tool_call'&&e.sequence<vm.report.sequence&&e.payload.name==='finish_report'):null;
-  setText('original-report',vm.report?JSON.stringify(reportCall?.payload.arguments||vm.report.payload,null,2):'No report recorded at this point.');
+  let originalReport=reportCall?.payload.arguments||vm.report?.payload;
+  if(typeof originalReport==='string'){try{originalReport=JSON.parse(originalReport);}catch{/* Preserve an unparseable historical argument verbatim. */}}
+  setText('original-report',vm.report?JSON.stringify(originalReport,null,2):'No report recorded at this point.');
   setText('next-check-evidence',vm.report?.payload.next_measurement?JSON.stringify(vm.report.payload.next_measurement,null,2):'No fixture-menu check was recorded. Free-text suggestions are not shown as executable instructions.');
   $('expand-report').disabled=!vm.report;
   setText('expand-report',!vm.report?'Report not recorded yet':document.querySelector('.evidence-drawer').open?'Hide original report':'Read original report');

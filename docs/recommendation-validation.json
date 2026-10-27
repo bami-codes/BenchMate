@@ -1,0 +1,603 @@
+{
+  "date": "2026-10-27",
+  "scope": "Synthetic development and UI validation, not hardware, holdout, unique-topology or frozen reliability evidence.",
+  "record": "examples/discovery-menu-english/events.jsonl",
+  "record_sha256": "7b966ac5374e3c5618ab04ea9b19c99b15d37fbca51679e111fa9821c694ca38",
+  "run_id": "20261027T092228-4425c385ec",
+  "protocol_code_commit": "906eaf826fe90d3c83ba1c576f04e81c6848083e",
+  "attempt_accounting": "One new actual Meta API run, seven HTTP requests including three menu-detail lookups, one proposed topology, six synthetic acquisitions. No retry or extra acquisition for the suggested future action. Earlier successes, failures and unvalidated suggestions remain in previous raw records. Seed 1 is the reused development case.",
+  "protocol_change": "finish_report selects an enumerated menu action or declared missing capability. The engine generates instructions from canonical settings; model rationale does not supply executable settings. Applies to fixed, continuous and discovery sessions.",
+  "future_recommendation": {
+    "action": "sine_f5_a0.2_s0_l0",
+    "kind": "menu_action",
+    "reason": "Use higher frequency to test for hidden capacitance causing extra loss.",
+    "requirement": "",
+    "checked_by": "engine",
+    "execution": "not_scheduled",
+    "hardware_calibrated": false,
+    "status": "menu_checked",
+    "settings": {
+      "kind": "sine",
+      "shunt_ohm": 0,
+      "load_ohm": null,
+      "amplitude_v": 0.2,
+      "ref_v": 1.6,
+      "duration_s": 0.02,
+      "sample_period_s": 0.0002,
+      "step_at_s": 0.001,
+      "frequency_hz": 100.0
+    },
+    "physical_acquisitions_if_run": 1,
+    "instruction": "100 Hz sine, ±0.2 V at fixed REF (~1.6 V), with no load and the 0 Ω jumper.",
+    "connections": "DRIVE–IN: 0 Ω jumper. OUT–REF: remove load. Confirm connections and wait for settling."
+  },
+  "original_finish_arguments": {
+    "candidate": "proposed_netlist",
+    "current_explanation": "Synthetic development tests show a pass-through link that limits high voltages near the fixed reference while low signals pass unchanged. Training and two frozen verification checks passed.",
+    "next_observation": {
+      "action": "sine_f5_a0.2_s0_l0",
+      "kind": "menu_action",
+      "reason": "Use higher frequency to test for hidden capacitance causing extra loss.",
+      "requirement": ""
+    },
+    "unresolved": "Synthetic scope only with fixed reference and limited grid. Behavior beyond tested amplitudes, loads, and temperature remains unproven and needs calibrated hardware.",
+    "verdict": "verified"
+  },
+  "measurement_detail_calls": [
+    {
+      "action": "sine_f0_a1.0_s0_l4700"
+    },
+    {
+      "action": "sine_f0_a1.0_s1000_l0"
+    },
+    {
+      "action": "sine_f5_a0.2_s0_l0"
+    }
+  ],
+  "capability_scope": "Fixed REF nominal 1.6 V. Grid is provisional synthetic configuration pending D2 physical calibration. Menu compliance does not prove scientific usefulness. Missing capability requirements are explicit and never scheduled.",
+  "fit": {
+    "training_passed": true,
+    "simulator_calls": 128,
+    "simulation_cache_hits": 40,
+    "generated_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+    "fitted_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7"
+  },
+  "verification": {
+    "passed": true,
+    "refitted_on_verification": false,
+    "prediction_sequences": [
+      24,
+      25
+    ],
+    "observation_sequences": [
+      26,
+      27
+    ],
+    "conditions": [
+      {
+        "settings": {
+          "kind": "step",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 0.35,
+          "ref_v": 1.6,
+          "duration_s": 0.3,
+          "sample_period_s": 0.0005,
+          "step_at_s": 0.02,
+          "frequency_hz": null
+        },
+        "baseline_out_rms_mv": 50.781526399135146,
+        "proposal_out_rms_mv": 0.9293521299273421,
+        "discrimination": "proposal_only_passes"
+      },
+      {
+        "settings": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": 10000,
+          "amplitude_v": 1,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "baseline_out_rms_mv": 22.88307864741362,
+        "proposal_out_rms_mv": 1.0008442977655467,
+        "discrimination": "proposal_only_passes"
+      }
+    ]
+  },
+  "amplitude_scaling": {
+    "checks": [
+      {
+        "training_capture_indices": [
+          1,
+          2
+        ],
+        "settings_small": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 0.2,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "settings_large": {
+          "kind": "sine",
+          "shunt_ohm": 0.0,
+          "load_ohm": null,
+          "amplitude_v": 1,
+          "ref_v": 1.6,
+          "duration_s": 2,
+          "sample_period_s": 0.002,
+          "step_at_s": 0.02,
+          "frequency_hz": 1
+        },
+        "amplitude_ratio": 5.0,
+        "channels": {
+          "in_v": {
+            "dc_removed_rms_mv": 5.142060849987712,
+            "normalized_rms": 0.33614703351498515
+          },
+          "out_v": {
+            "dc_removed_rms_mv": 184.56775684815332,
+            "normalized_rms": 12.065571714727977
+          }
+        },
+        "status": "output_scaling_mismatch",
+        "development_limit": 3.0,
+        "calibrated_false_positive_rate": false,
+        "independent_verification": false,
+        "scope": "Training-only diagnostic. Assumes matched timing, settled states and independent capture noise; DC offsets removed. Input scaling is checked. Output-path nonlinearity is not uniquely a DUT diode; fixture saturation must be excluded by calibration."
+      }
+    ],
+    "topology_fitted": false,
+    "data_role": "training_diagnostic"
+  },
+  "inset_scope": "Plots use only the matching visible training captures. Remove each OUT-minus-REF mean, multiply the small trace by the recorded amplitude ratio, then compare to the centered large trace. Plotted RMS must agree with the recorded diagnostic within 1e-6 mV. Hidden before assessment and during reserved verification. Input mismatch does not attribute nonlinearity to DUT.",
+  "execution": {
+    "http_requests": 7,
+    "elapsed_s": 67.85955912503414,
+    "api_elapsed_s": 54.138655623886734,
+    "usage": [
+      {
+        "input_tokens": 4237,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 7
+        },
+        "total_tokens": 4303
+      },
+      {
+        "input_tokens": 11364,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 2698,
+        "output_tokens_details": {
+          "reasoning_tokens": 2634
+        },
+        "total_tokens": 14062
+      },
+      {
+        "input_tokens": 14222,
+        "input_tokens_details": {
+          "cached_tokens": 4209
+        },
+        "output_tokens": 123,
+        "output_tokens_details": {
+          "reasoning_tokens": 35
+        },
+        "total_tokens": 14345
+      },
+      {
+        "input_tokens": 14501,
+        "input_tokens_details": {
+          "cached_tokens": 11249
+        },
+        "output_tokens": 1455,
+        "output_tokens_details": {
+          "reasoning_tokens": 1239
+        },
+        "total_tokens": 15956
+      },
+      {
+        "input_tokens": 16171,
+        "input_tokens_details": {
+          "cached_tokens": 14449
+        },
+        "output_tokens": 116,
+        "output_tokens_details": {
+          "reasoning_tokens": 56
+        },
+        "total_tokens": 16287
+      },
+      {
+        "input_tokens": 20459,
+        "input_tokens_details": {
+          "cached_tokens": 16113
+        },
+        "output_tokens": 1036,
+        "output_tokens_details": {
+          "reasoning_tokens": 973
+        },
+        "total_tokens": 21495
+      },
+      {
+        "input_tokens": 21650,
+        "input_tokens_details": {
+          "cached_tokens": 113
+        },
+        "output_tokens": 1261,
+        "output_tokens_details": {
+          "reasoning_tokens": 1047
+        },
+        "total_tokens": 22911
+      }
+    ]
+  },
+  "acquisitions": {
+    "training": 4,
+    "reserved_verification": 2,
+    "future_action_executed": false,
+    "physical_board_captures": 0
+  },
+  "b1_b6_regression": {
+    "test": "tests/test_continuous_agent.py::test_five_common_families_keep_b1_b6_identical_until_shunt_then_separate",
+    "identical_initial_snapshots": true,
+    "sequence": [
+      "common unloaded step",
+      "1 kohm shunt DC pair",
+      "10 kohm loaded step",
+      "reserved prediction/observation without refit"
+    ],
+    "results": {
+      "b1": {
+        "candidates": 5,
+        "diagnoses": [
+          {
+            "status": "unresolved",
+            "supported_candidates": [
+              "rc",
+              "rc_input_branch"
+            ]
+          },
+          {
+            "status": "unresolved",
+            "supported_candidates": [
+              "rc"
+            ]
+          },
+          {
+            "status": "verification_required",
+            "supported_candidates": [
+              "rc"
+            ]
+          }
+        ],
+        "verification_passed": true,
+        "refitted_on_verification": false,
+        "worst_verification_normalized_rms": 0.3658949241417608
+      },
+      "b6": {
+        "candidates": 5,
+        "diagnoses": [
+          {
+            "status": "unresolved",
+            "supported_candidates": [
+              "rc",
+              "rc_input_branch"
+            ]
+          },
+          {
+            "status": "unresolved",
+            "supported_candidates": [
+              "rc_input_branch"
+            ]
+          },
+          {
+            "status": "verification_required",
+            "supported_candidates": [
+              "rc_input_branch"
+            ]
+          }
+        ],
+        "verification_passed": true,
+        "refitted_on_verification": false,
+        "worst_verification_normalized_rms": 0.3658949241417608
+      }
+    },
+    "interpretation": "The shunt separates structure, not R and C. The subsequent loaded transient identifies parameters before independent verification."
+  },
+  "checks": {
+    "local_full_suite": {
+      "passed": 124,
+      "elapsed_s": 86.9
+    },
+    "additional_discovery_guard": {
+      "passed": 1
+    },
+    "code_ci": {
+      "url": "https://github.com/bami-codes/BenchMate/actions/runs/40480214244",
+      "passed": 125,
+      "elapsed_s": 93.39
+    },
+    "guards": "Reject free text, unknown actions, custom ref/settings fields, malformed values and conflicting action/requirement branches. Permit correction without another acquisition. Explicitly record unavailable reference capability.",
+    "browser": {
+      "target": "examples/discovery-menu-english/report.html",
+      "results": [
+        {
+          "name": "desktop",
+          "width": 1440,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 666.09375
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 688.09375,
+              "bottom": 884.59375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 688.09375,
+              "bottom": 898.28125
+            }
+          ]
+        },
+        {
+          "name": "laptop",
+          "width": 1280,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 666.09375
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 688.09375,
+              "bottom": 884.59375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 688.09375,
+              "bottom": 898.28125
+            }
+          ]
+        },
+        {
+          "name": "mobile",
+          "width": 390,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 302.1875,
+              "bottom": 1057.96875
+            },
+            {
+              "name": "report-panel",
+              "top": 1079.96875,
+              "bottom": 1604.25
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 1626.25,
+              "bottom": 2007.25
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 2029.25,
+              "bottom": 2265.9375
+            }
+          ]
+        }
+      ],
+      "interactions": "passed",
+      "errors": []
+    },
+    "legacy_browser": {
+      "target": "examples/discovery-linear-english/report.html",
+      "results": [
+        {
+          "name": "desktop",
+          "width": 1440,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 666.09375
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 688.09375,
+              "bottom": 884.59375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 688.09375,
+              "bottom": 898.28125
+            }
+          ]
+        },
+        {
+          "name": "laptop",
+          "width": 1280,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 666.09375
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 688.09375,
+              "bottom": 884.59375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 688.09375,
+              "bottom": 898.28125
+            }
+          ]
+        },
+        {
+          "name": "mobile",
+          "width": 390,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 302.1875,
+              "bottom": 1057.96875
+            },
+            {
+              "name": "report-panel",
+              "top": 1079.96875,
+              "bottom": 1604.25
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 1626.25,
+              "bottom": 2007.25
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 2029.25,
+              "bottom": 2265.9375
+            }
+          ]
+        }
+      ],
+      "interactions": "passed",
+      "errors": []
+    },
+    "unavailable_ui_fixture": {
+      "ui_fixture_only": true,
+      "results": [
+        {
+          "width": 1440,
+          "overflow": false,
+          "next": "Unavailable with this fixture: requires an adjustable, calibrated reference source; the fixture REF is fixed near 1.6 V.",
+          "status": "Engine · unavailable with this fixture",
+          "clipped": false,
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "bottom": 685.59375
+            },
+            {
+              "name": "timeline-panel surface",
+              "bottom": 898.09375
+            },
+            {
+              "name": "mounting-panel surface",
+              "bottom": 911.78125
+            }
+          ]
+        },
+        {
+          "width": 1280,
+          "overflow": false,
+          "next": "Unavailable with this fixture: requires an adjustable, calibrated reference source; the fixture REF is fixed near 1.6 V.",
+          "status": "Engine · unavailable with this fixture",
+          "clipped": false,
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "bottom": 672.09375
+            },
+            {
+              "name": "report-panel",
+              "bottom": 685.59375
+            },
+            {
+              "name": "timeline-panel surface",
+              "bottom": 898.09375
+            },
+            {
+              "name": "mounting-panel surface",
+              "bottom": 911.78125
+            }
+          ]
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "next": "Unavailable with this fixture: requires an adjustable, calibrated reference source; the fixture REF is fixed near 1.6 V.",
+          "status": "Engine · unavailable with this fixture",
+          "clipped": false,
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "bottom": 1057.96875
+            },
+            {
+              "name": "report-panel",
+              "bottom": 1625.25
+            },
+            {
+              "name": "timeline-panel surface",
+              "bottom": 2028.25
+            },
+            {
+              "name": "mounting-panel surface",
+              "bottom": 2286.9375
+            }
+          ]
+        }
+      ],
+      "errors": []
+    }
+  },
+  "historical_policy": "Old raw events remain byte-identical; regenerated HTML labels historical suggestions unvalidated. Original model finish arguments and the separate engine check are inspectable.",
+  "pending": [
+    "D2 physical timing, noise, bandwidth and reference calibration",
+    "Physical B5 and D01 repeated runs",
+    "Frozen evaluation and untouched X2"
+  ]
+}
