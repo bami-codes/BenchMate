@@ -5,6 +5,7 @@ Node names/orientation are preserved. Bounded diode parameters can be fitted
 on training observations; they are not characterized physical 1N4148 parameters.
 """
 import hashlib
+from functools import lru_cache
 import json
 import re
 import shutil
@@ -17,6 +18,15 @@ from .physics import Acquisition
 NODES = ('IN','OUT','REF','N1','N2')
 DIODE_INITIAL = {'is_a':1e-9, 'n':1.8}
 DIODE_BOUNDS = {'is_a':(1e-10,1e-7), 'n':(1.,2.5)}
+
+
+@lru_cache(maxsize=4)
+def ngspice_version(executable):
+    result=subprocess.run([executable,'--version'],capture_output=True,text=True,timeout=5)
+    match=re.search(r'\bngspice-(\d+)\b',result.stdout)
+    if result.returncode or not match or int(match[1])<47:
+        raise RuntimeError('ngspice 47 or newer is required: older PWL breakpoint handling can change the commanded stimulus')
+    return int(match[1])
 
 
 def diode_parameters(parameters=None):
@@ -98,6 +108,7 @@ def render_proposal(elements):
 def simulate_netlist(elements,template,*,diode=None):
     executable=shutil.which('ngspice')
     if not executable:raise RuntimeError('ngspice is required for proposal simulation')
+    version=ngspice_version(executable)
     checked=validate_netlist(elements)
     diode=diode_parameters(diode)
     settings=Acquisition(**template['settings'])
@@ -119,11 +130,11 @@ def simulate_netlist(elements,template,*,diode=None):
     lines.append('+ )')
     if settings.shunt_ohm:lines.append(f'RfixtureShunt drive in {settings.shunt_ohm:.12g}')
     if settings.load_ohm:lines.append(f'RfixtureLoad out 0 {settings.load_ohm:.12g}')
-    # Fit derivatives must resolve nanoampere diode currents consistently across
-    # ngspice versions; electrical adequacy thresholds are much larger than these
-    # solver tolerances and are deliberately not used as numerical tolerances.
+    # Version 47 fixes PWL corner selection near an existing breakpoint. Also
+    # keep both ends of each 10 ns transition on non-XSPICE builds, whose default
+    # minbreak is maxstep*5e-5. Solver tolerances are separate from adequacy.
     lines.extend([render_proposal(checked),render_diode(diode),'.temp 27',
-                  '.options reltol=1e-7 abstol=1e-14 vntol=1e-8'])
+                  '.options reltol=1e-7 abstol=1e-14 vntol=1e-8 minbreak=1e-12'])
     internal=sorted({e[k].lower() for e in checked for k in ('a','b') if e[k] in ('N1','N2')})
     vectors=['v(in)','v(out)',*[f'v({n})' for n in internal],'i(Vdrive)']
     dt=float(np.min(np.diff(t)))/4
@@ -151,6 +162,7 @@ def simulate_netlist(elements,template,*,diode=None):
     return prediction,{'rendered_proposal':render_proposal(checked),
                        'topology_sha256':topology_fingerprint(checked),
                        'harness_sha256':hashlib.sha256(netlist.encode()).hexdigest(),
-                       'simulator':'ngspice','peak_source_current_a':float(np.max(np.abs(raw[:,-1]))),
+                       'simulator':'ngspice','simulator_version':version,
+                       'peak_source_current_a':float(np.max(np.abs(raw[:,-1]))),
                        'diode_parameters':diode,'diode_fixed_assumptions':{'rs_ohm':1.,'temperature_c':27.},
                        'physical_part_calibrated':False}

@@ -457,6 +457,121 @@
       "seconds": 35.33
     },
     "historical_records": "Preserved unchanged; the two recorded API executions predate the numerical tolerance revision.",
-    "ci_status_source": "GitHub Actions Tests workflow for the exact repository commit; this static manifest does not predict a future CI result."
+    "ci_status_source": "GitHub Actions Tests workflow for the exact repository commit; this static manifest does not predict a future CI result.",
+    "tolerances_only_ci": {
+      "url": "https://github.com/bami-codes/BenchMate/actions/runs/40458510472",
+      "passed": 90,
+      "failed": 1,
+      "is_a": 3.1873078565404914e-09,
+      "conclusion": "Tighter electrical solver tolerances did not resolve the failure."
+    },
+    "cause": "ngspice 42 missed PWL source corners near an existing breakpoint; the fitted circuit compensated for an incorrect input waveform. Reproduced with a separate non-XSPICE 42 build.",
+    "reproduction": [
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": false,
+        "kind": "step",
+        "amp": 0.5,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 3.035767193182437e-10,
+          "out_v": 9.289644586907286e-08
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": false,
+        "kind": "sine",
+        "amp": 0.2,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 0.002512700308661797,
+          "out_v": 0.002510907150945485
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": false,
+        "kind": "sine",
+        "amp": 1,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 0.012563501543356503,
+          "out_v": 0.01255538521477928
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": false,
+        "kind": "sine",
+        "amp": 1,
+        "load": 4700,
+        "max_absolute_error_v": {
+          "in_v": 0.012563501543356503,
+          "out_v": 0.003535132537988872
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": true,
+        "kind": "step",
+        "amp": 0.5,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 0.0,
+          "out_v": 9.289644187226997e-08
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": true,
+        "kind": "sine",
+        "amp": 0.2,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 0.002512700308661797,
+          "out_v": 0.0025108132042288567
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": true,
+        "kind": "sine",
+        "amp": 1,
+        "load": null,
+        "max_absolute_error_v": {
+          "in_v": 0.01256350154330943,
+          "out_v": 0.012553024345404618
+        }
+      },
+      {
+        "ngspice": 42,
+        "xspice": false,
+        "explicit_minbreak": true,
+        "kind": "sine",
+        "amp": 1,
+        "load": 4700,
+        "max_absolute_error_v": {
+          "in_v": 0.01256350154330943,
+          "out_v": 0.0035350800881197575
+        }
+      }
+    ],
+    "resolution": "Require ngspice 47+, log simulator version, pin the CI source archive to SHA-256 894e649651f1838a14095e5a5439e7d3aa63e87ede14d283173fda4fcdef675f, and explicitly set minbreak=1e-12 s. Reject older/unknown versions before simulation. Keep all recovery and adequacy thresholds unchanged.",
+    "regression": "Assert both source and output agreement to independent noiseless truth within 1 microvolt before fitting; reject version 42 and unknown version output.",
+    "source_reference": "https://github.com/imr/ngspice/blob/ngspice-47/src/spicelib/devices/vsrc/vsrcacct.c",
+    "final_local_check": {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 94,
+      "seconds": 48.79,
+      "ngspice": 47
+    }
   }
 }

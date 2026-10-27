@@ -4,12 +4,23 @@ permissions:
   contents: read
 jobs:
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - uses: actions/cache@v4
+        id: spice
+        with:
+          path: .tools/ngspice-47
+          key: ngspice-47-ubuntu24-x64-894e649651f1-v1
+      - if: steps.spice.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential bison flex
+          sh scripts/build-ngspice.sh
+      - run: echo "$GITHUB_WORKSPACE/.tools/ngspice-47/bin" >> "$GITHUB_PATH"
+      - run: ngspice --version
       - run: python -m pip install -e '.[dev]'
       - run: python -m pytest -q

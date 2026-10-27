@@ -19,7 +19,7 @@ The subsequent [structure/UI revision](docs/structure-ui-validation.json) retain
 
 ## Run
 
-Python 3.11+, `uv`, and ngspice for nonlinear work:
+Python 3.11+, `uv`, and **ngspice 47+** for nonlinear work. Earlier versions are rejected because the 42 build reproduced a PWL input-waveform error; CI builds checksum-pinned version 47 with `sh scripts/build-ngspice.sh`. This installs into `.tools/ngspice-47/bin` (add that directory to PATH), without replacing system tools.
 
 ```sh
 uv sync --extra dev

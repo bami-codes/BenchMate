@@ -37,6 +37,19 @@ def test_render_preserves_generated_orientation_and_values():
     assert topology_fingerprint(p)!=topology_fingerprint(proposal())
 
 
+@pytest.mark.parametrize('version',[42,None,47])
+def test_simulator_rejects_unsupported_or_unknown_version(monkeypatch,version):
+    import subprocess
+    from benchmate.netlist import ngspice_version
+    executable=f'/test/ngspice-{version}'
+    output=f'** ngspice-{version} : Circuit level simulation program' if version else 'unknown simulator'
+    monkeypatch.setattr(subprocess,'run',lambda *a,**kw:subprocess.CompletedProcess(a,0,output,''))
+    if version==47:assert ngspice_version(executable)==47
+    else:
+        with pytest.raises(RuntimeError,match='ngspice 47'):ngspice_version(executable)
+    ngspice_version.cache_clear()
+
+
 @pytest.mark.skipif(shutil.which('ngspice') is None,reason='ngspice not installed')
 def test_generated_topology_is_executed_and_wrong_direction_fails():
     observation=acquire_nonlinear(Acquisition(kind='sine',frequency_hz=1,amplitude_v=1,duration_s=2,sample_period_s=.002),rng=np.random.default_rng(3),noise_sd_v=0)
@@ -44,6 +57,10 @@ def test_generated_topology_is_executed_and_wrong_direction_fails():
     assert not adequacy(predicted,observation)['passed']  # Deliberate library mismatch.
     matched,_=simulate_netlist(p,observation,diode={'is_a':3e-9,'n':1.9})
     assert adequacy(matched,observation)['passed']
+    # Check the harness independently of parameter fitting: close PWL edges
+    # must not silently turn into a different stimulus on non-XSPICE builds.
+    np.testing.assert_allclose(matched['in_v'],observation['data']['drive_v'],atol=1e-6,rtol=0)
+    np.testing.assert_allclose(matched['out_v'],observation['data']['out_v'],atol=1e-6,rtol=0)
     p[1]['a'],p[1]['b']=p[1]['b'],p[1]['a']
     wrong,_=simulate_netlist(p,observation)
     assert not adequacy(wrong,observation)['passed']
