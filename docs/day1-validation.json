@@ -1,0 +1,186 @@
+{
+  "recorded_at": "2026-10-27T02:36:29.264410+00:00",
+  "status": "day-one prototype; no hardware accuracy or generalization evaluated",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 31,
+    "includes": "three independent ngspice operating-point checks"
+  },
+  "firmware_compile": [
+    {
+      "fqbn": "arduino:renesas_uno:unor4wifi",
+      "core_version": "1.6.0",
+      "passed": true,
+      "flash_bytes": 53032,
+      "static_ram_bytes": 8312
+    },
+    {
+      "fqbn": "arduino:renesas_uno:minima",
+      "core_version": "1.6.0",
+      "passed": true,
+      "flash_bytes": 40208,
+      "static_ram_bytes": 5512
+    }
+  ],
+  "hardware_uploaded": false,
+  "hardware_calibrated": false,
+  "synthetic_cases": [
+    {
+      "case": "b1",
+      "initial": "unresolved",
+      "action": "attach_shunt_dc_pair",
+      "candidate": "rc",
+      "verification_passed": true
+    },
+    {
+      "case": "b6",
+      "initial": "unresolved",
+      "action": "attach_shunt_dc_pair",
+      "candidate": "rc_input_branch",
+      "verification_passed": true
+    },
+    {
+      "case": "d01-r",
+      "initial": "unresolved",
+      "action": "attach_10k_load",
+      "candidate": "r_changed",
+      "verification_passed": true
+    },
+    {
+      "case": "d01-c",
+      "initial": "unresolved",
+      "action": "attach_10k_load",
+      "candidate": "c_changed",
+      "verification_passed": true
+    }
+  ],
+  "live_api_probes": [
+    {
+      "provider": "meta",
+      "model": "muse-spark-1.3",
+      "passed": true,
+      "source": "live_api_with_synthetic_tool",
+      "tool_round_trips": 1,
+      "http_requests": 2,
+      "usage": [
+        {
+          "input_tokens": 607,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 130,
+          "output_tokens_details": {
+            "reasoning_tokens": 74
+          },
+          "total_tokens": 737
+        },
+        {
+          "input_tokens": 865,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 715,
+          "output_tokens_details": {
+            "reasoning_tokens": 490
+          },
+          "total_tokens": 1580
+        }
+      ],
+      "elapsed_s": 5.967860499978997,
+      "recording": "examples/api-meta-medium/events.jsonl",
+      "reasoning_effort": "medium",
+      "estimated_token_cost_usd": 0.00518265,
+      "pricing_source": "https://dev.meta.ai/models/muse-spark",
+      "cost_note": "Estimate from returned usage and published rates, not a billing receipt. Reasoning tokens are already included in output_tokens."
+    },
+    {
+      "provider": "meta",
+      "model": "muse-spark-1.3",
+      "passed": true,
+      "source": "live_api_with_synthetic_tool",
+      "tool_round_trips": 1,
+      "http_requests": 2,
+      "usage": [
+        {
+          "input_tokens": 607,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 128,
+          "output_tokens_details": {
+            "reasoning_tokens": 68
+          },
+          "total_tokens": 735
+        },
+        {
+          "input_tokens": 863,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 901,
+          "output_tokens_details": {
+            "reasoning_tokens": 682
+          },
+          "total_tokens": 1764
+        }
+      ],
+      "elapsed_s": 10.437911582994275,
+      "recording": "examples/api-meta-max/events.jsonl",
+      "reasoning_effort": "max",
+      "estimated_token_cost_usd": 0.00596215,
+      "pricing_source": "https://dev.meta.ai/models/muse-spark",
+      "cost_note": "Estimate from returned usage and published rates, not a billing receipt. Reasoning tokens are already included in output_tokens."
+    },
+    {
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "passed": true,
+      "source": "live_api_with_synthetic_tool",
+      "tool_round_trips": 1,
+      "http_requests": 2,
+      "usage": [
+        {
+          "prompt_tokens": 695,
+          "completion_tokens": 149,
+          "total_tokens": 844,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 99,
+            "audio_tokens": 0,
+            "reasoning_tokens": 90,
+            "rejected_prediction_tokens": 251
+          }
+        },
+        {
+          "prompt_tokens": 947,
+          "completion_tokens": 762,
+          "total_tokens": 1709,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 768
+          },
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 508,
+            "audio_tokens": 0,
+            "reasoning_tokens": 543,
+            "rejected_prediction_tokens": 1270
+          }
+        }
+      ],
+      "elapsed_s": 5.024551542010158,
+      "recording": "examples/api-baseten/events.jsonl",
+      "reasoning_effort": "provider_default",
+      "cost_note": "Token usage recorded; hackathon-specific billing rates not verified."
+    }
+  ],
+  "holdout_hashes_verified": true,
+  "limitations": [
+    "Fixed named candidate development checks, not continuous Bayesian inference.",
+    "Independent synthetic noise; hardware likelihood uncalibrated.",
+    "API probes return a synthetic tool observation; no integrated autonomous hardware loop yet.",
+    "X1 and X2 have not been measured."
+  ]
+}
