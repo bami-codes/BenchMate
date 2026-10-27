@@ -5,8 +5,8 @@ import serial
 from .records import Recorder
 
 
-def validate_capture(data):
-    if data.get("protocol")!="benchmate-bringup-v1" or data.get("type")!="capture":
+def validate_capture(data, *, protocol="benchmate-bringup-v1"):
+    if data.get("protocol")!=protocol or data.get("type")!="capture":
         raise ValueError("Unexpected firmware protocol")
     if data.get("source")!="hardware_uncalibrated" or data.get("adc_bits")!=14:
         raise ValueError("Unexpected capture provenance")

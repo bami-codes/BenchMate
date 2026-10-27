@@ -12,11 +12,12 @@ Implemented: continuous one-state RC inference, live Muse Spark experiment contr
 - Generated element connections and diode orientation reach ngspice unchanged. Numerical R/C values and bounded diode IS/N are fitted on training observations. Synthetic truth now differs from the starting diode library. Both reserved predictions precede both verification acquisitions.
 - Capacitive sine proposals use checked numerical pre-roll to match settled observations. Actual ngspice invocations, including settling checks, consume the proposal budget; repeated training evaluations can be reused. Training amplitude scaling is reported separately from independent verification and does not localize nonlinearity to a diode by itself.
 - D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
+- A bare-board UNO R4 WiFi [five-point DC loopback check](docs/dac-loopback.md) now has real raw ADC records and separate operator DMM readings: nominal 0.6–2.6 V produced displays of 0.59–0.60, 1.09, 1.59, 2.09 and 2.59 V. This checks basic output/input response; it is not converter calibration or circuit diagnosis. The initial USB and probe-contact observations are retained.
 - D2 DAC/ADC firmware compiles for UNO R4 WiFi and Minima, with 512-sample raw blocks and actual per-channel read-completion timestamps. It has not been uploaded or physically validated.
 
 See [latest recommendation/UI validation](docs/recommendation-validation.json): next measurements are constrained to the fixture menu or explicitly unavailable equipment, and the training amplitude check has its own plot. An actual Spark run selected a fixed-REF menu action after inspecting its settings. The five-family B1/B6 regression retains identical initial evidence, separates structure after the shunt, and passes verification after loading. Recommendations are for future runs; D2 hardware calibration is pending.
 
-The [preceding linear-family validation](docs/linear-validation.json) covers: the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Hardware validation is still pending.
+The [preceding linear-family validation](docs/linear-validation.json) covers: the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Hardware circuit validation is still pending.
 
 The [earlier pre-board validation](docs/preboard-validation.json) retains both original nonlinear attempts: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
 
@@ -63,10 +64,11 @@ JSONL replay/export verifies the hash chain. This is not external attestation or
 ```sh
 sh scripts/arduino.sh board list
 sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/bringup
+sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/dac_loopback
 sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/instrument
 ```
 
-Start with non-driving raw bring-up. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. Hardware inference remains blocked pending fixture calibration.
+Start with non-driving raw bring-up. The optional [bare-board DC loopback](docs/dac-loopback.md) holds one A0 output at a time for raw ADC acquisition and a manual DMM reading, before the LM358 fixture is built. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. Hardware inference remains blocked pending fixture calibration.
 
 ## Providers and bounds
 

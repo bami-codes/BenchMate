@@ -4,7 +4,7 @@
 
 ## 첫 연결
 
-외부 회로 없이 `firmware/bringup`으로 보드 인식과 원시 ADC를 확인한다. LM358 픽스처를 조립하고 전원·REF를 실측한 다음 `firmware/instrument`를 사용한다.
+외부 회로 없이 `firmware/bringup`으로 보드 인식과 원시 ADC를 확인한다. LM358 도착 전에는 [부하 저항 없는 DC 루프백](dac-loopback.md)으로 A0 출력과 ADC의 기본 응답을 확인할 수 있다. 이후 LM358 픽스처를 조립하고 전원·REF를 실측한 다음 `firmware/instrument`를 사용한다.
 
 ```sh
 sh scripts/arduino.sh board list

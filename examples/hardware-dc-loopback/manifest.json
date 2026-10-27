@@ -1,0 +1,212 @@
+{
+  "schema": "benchmate-dc-loopback-evidence-v1",
+  "recorded_date_local": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "source": "hardware_uncalibrated",
+  "scope": "Five held DC points with four raw ADC channels and separate operator DMM reports. Not circuit diagnosis or independent converter calibration.",
+  "wiring": "A0 common feed -> four separate 1 kohm resistors -> A1/A2/A3/A4; no external load resistor, buffer, or DUT.",
+  "instrument": {
+    "board": "UNO R4 WiFi compatible board",
+    "adc_bits": 14,
+    "dac_bits": 12,
+    "dmm": "ANENG DM950",
+    "dmm_range": "DC 20V",
+    "dmm_display_resolution_v": 0.01,
+    "dmm_accuracy_verified": false
+  },
+  "source_files_sha256": {
+    "firmware/dac_loopback/dac_loopback.ino": "05ef15400c2e50162d0dc2b45973068ba27236250464545db671c448f5670f6a",
+    "src/benchmate/dac_loopback.py": "560eed8dfcf9e736c41c1d9ea01a8f95a06d79cba2bca093b2dff034aca1c8c6",
+    "src/benchmate/hardware.py": "5363da1433ec44e13c1dde6aa65a6a72f0c4de607549485bc08f220bed91e078"
+  },
+  "points": [
+    {
+      "nominal_level_mv": 600,
+      "dac_code": 501,
+      "raw_record": {
+        "path": "points/600/events.jsonl",
+        "source_run": "runs/hardware-dac-loopback/20261027T142358-cf2ad60e87/events.jsonl",
+        "sha256": "1719b888c7e63cedf8677b4b5cc8c25865eb431d7d5268846537ea757485994b"
+      },
+      "samples_per_channel": 64,
+      "adc_means_counts": {
+        "A1": 2002,
+        "A2": 1999.78125,
+        "A3": 2004.703125,
+        "A4": 2000.453125
+      },
+      "operator_display_v": null,
+      "operator_display_range_v": [
+        0.59,
+        0.6
+      ],
+      "operator_record_paths": [
+        "operator/20261027T143246-bbadeb92bc/events.jsonl",
+        "operator/20261027T143618-d0bdaacc95/events.jsonl"
+      ],
+      "usb_port_phase": "original",
+      "initial_intermittent_zero_report": true,
+      "zero_display_recurred_with_fixed_probes": false
+    },
+    {
+      "nominal_level_mv": 1100,
+      "dac_code": 919,
+      "raw_record": {
+        "path": "points/1100/events.jsonl",
+        "source_run": "runs/hardware-dac-loopback/20261027T144112-a331b30889/events.jsonl",
+        "sha256": "42b6f281f8c008613f10611b614b0857b34041d774ebdabfc41fd605f86682f3"
+      },
+      "samples_per_channel": 64,
+      "adc_means_counts": {
+        "A1": 3673.515625,
+        "A2": 3670.6875,
+        "A3": 3674.15625,
+        "A4": 3670.328125
+      },
+      "operator_display_v": 1.09,
+      "operator_display_range_v": null,
+      "operator_record_paths": [
+        "operator/20261027T144741-136b7aa0e8/events.jsonl"
+      ],
+      "usb_port_phase": "alternate"
+    },
+    {
+      "nominal_level_mv": 1600,
+      "dac_code": 1337,
+      "raw_record": {
+        "path": "points/1600/events.jsonl",
+        "source_run": "runs/hardware-dac-loopback/20261027T144743-0205e94b53/events.jsonl",
+        "sha256": "ba5ae96f9a5f1678ccc1d439d901472b045faa84d8a2424d1eee2e1c54038f22"
+      },
+      "samples_per_channel": 64,
+      "adc_means_counts": {
+        "A1": 5343.875,
+        "A2": 5343.53125,
+        "A3": 5344.625,
+        "A4": 5341.6875
+      },
+      "operator_display_v": 1.59,
+      "operator_display_range_v": null,
+      "operator_record_paths": [
+        "operator/20261027T144936-aac5519fa3/events.jsonl"
+      ],
+      "usb_port_phase": "alternate"
+    },
+    {
+      "nominal_level_mv": 2100,
+      "dac_code": 1755,
+      "raw_record": {
+        "path": "points/2100/events.jsonl",
+        "source_run": "runs/hardware-dac-loopback/20261027T144939-15cbe7d176/events.jsonl",
+        "sha256": "cd2e3dcb7e1722a09b9ce3d346bda383e14acee7eb8336b95319c2406373324d"
+      },
+      "samples_per_channel": 64,
+      "adc_means_counts": {
+        "A1": 7015.828125,
+        "A2": 7015.46875,
+        "A3": 7016.890625,
+        "A4": 7012.953125
+      },
+      "operator_display_v": 2.09,
+      "operator_display_range_v": null,
+      "operator_record_paths": [
+        "operator/20261027T145122-b435b54906/events.jsonl"
+      ],
+      "usb_port_phase": "alternate"
+    },
+    {
+      "nominal_level_mv": 2600,
+      "dac_code": 2173,
+      "raw_record": {
+        "path": "points/2600/events.jsonl",
+        "source_run": "runs/hardware-dac-loopback/20261027T145130-61e0ee84ab/events.jsonl",
+        "sha256": "515510a59e07328615d2a724b2e2fe7a19b535881a30c03dac60dbd48a84c1e7"
+      },
+      "samples_per_channel": 64,
+      "adc_means_counts": {
+        "A1": 8686.078125,
+        "A2": 8685.34375,
+        "A3": 8687.046875,
+        "A4": 8682.703125
+      },
+      "operator_display_v": 2.59,
+      "operator_display_range_v": null,
+      "operator_record_paths": [
+        "operator/20261027T145508-c32730eda4/events.jsonl"
+      ],
+      "usb_port_phase": "alternate"
+    }
+  ],
+  "operator_records": [
+    {
+      "path": "operator/20261027T143246-bbadeb92bc/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T143246-bbadeb92bc/events.jsonl",
+      "sha256": "b36af10d1243bf0482951ef297d49a5cb44e9766d59a38c651d14e3721d5ca5d"
+    },
+    {
+      "path": "operator/20261027T143618-d0bdaacc95/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T143618-d0bdaacc95/events.jsonl",
+      "sha256": "a924f94ae71dbbe99267fa52bbe0f81ed3fcaa427f882a1067492ab1194f0394"
+    },
+    {
+      "path": "operator/20261027T144741-136b7aa0e8/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T144741-136b7aa0e8/events.jsonl",
+      "sha256": "c7793babdc7ca6bb934e9f797ebe1c98cdb7956a345ebc0b099683ebf0c6414a"
+    },
+    {
+      "path": "operator/20261027T144936-aac5519fa3/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T144936-aac5519fa3/events.jsonl",
+      "sha256": "0738483747ee059615dbff97b210ec612e5897ed4c8e6e31f27259c96bc3ba0b"
+    },
+    {
+      "path": "operator/20261027T145122-b435b54906/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T145122-b435b54906/events.jsonl",
+      "sha256": "c4eae7696a365e026570f03d3f77e2b712071d9f66cdb6f0ab5e5d3d2d3fa83c"
+    },
+    {
+      "path": "operator/20261027T145508-c32730eda4/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-operator/20261027T145508-c32730eda4/events.jsonl",
+      "sha256": "d8ece87ddfd4b81ee5b7d357f286ea2fb8551d8a873b4f558c7610dd47a445a3"
+    }
+  ],
+  "usb_records": [
+    {
+      "path": "usb/preflight-not-enumerated/events.jsonl",
+      "source_run": "runs/hardware-dac-loopback-preflight/20261027T142219-2bf3e71852/events.jsonl",
+      "sha256": "b27d07278be495805b3fbb67175ae8fd7278e2f55b4b75b4ab30e85f24673764"
+    },
+    {
+      "path": "usb/alternate-port-ping-check/events.jsonl",
+      "source_run": "runs/hardware-usb-link/20261027T144008-206bf315cb/events.jsonl",
+      "sha256": "664115e954d6f9131bb01a6b6d9b3eae0fd45be0885ceaa4f57c018da57f67aa"
+    }
+  ],
+  "limitations": [
+    "DAC and ADC share reference dependencies; loopback errors can cancel.",
+    "DMM observations followed raw blocks and were not synchronized with ADC sampling.",
+    "The nominal 4.90 V supply conversion came from an earlier reading; supply was not remeasured after changing USB ports.",
+    "The 600 mV point used the original USB port; higher points used another direct Mac port.",
+    "Fixed-probe follow-up reduced the reported zero-display issue; the original report is retained.",
+    "USB reconnection and port change occurred together, so the root cause of the earlier USB losses is unresolved.",
+    "No LM358 fixture, A5 path, waveform quality, settling, separate converter linearity, noise model, current sensitivity, or holdout validation."
+  ],
+  "validation": {
+    "targeted_tests_passed": 28,
+    "test_command": ".venv/bin/python -m pytest tests/test_dac_loopback.py tests/test_hardware.py tests/test_instrument.py -q",
+    "firmware_fqbn": "arduino:renesas_uno:unor4wifi",
+    "firmware_compile_flash_bytes": 56200,
+    "firmware_compile_static_ram_bytes": 8324,
+    "firmware_uploaded": true
+  },
+  "shutdown": {
+    "last_commanded_dac_code": 2173,
+    "instruction_given": "Unplug USB before rewiring or storing.",
+    "physical_disconnection_observed": false
+  },
+  "usb_check": {
+    "ping_open_close_cycles": 3,
+    "elapsed_s": 25.113,
+    "result": "No observed loss within this short check; later 1100\u20132600 mV handshakes also succeeded.",
+    "long_term_stability_established": false
+  }
+}
