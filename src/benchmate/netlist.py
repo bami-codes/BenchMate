@@ -119,7 +119,11 @@ def simulate_netlist(elements,template,*,diode=None):
     lines.append('+ )')
     if settings.shunt_ohm:lines.append(f'RfixtureShunt drive in {settings.shunt_ohm:.12g}')
     if settings.load_ohm:lines.append(f'RfixtureLoad out 0 {settings.load_ohm:.12g}')
-    lines.extend([render_proposal(checked),render_diode(diode),'.temp 27','.options reltol=1e-5 abstol=1e-12'])
+    # Fit derivatives must resolve nanoampere diode currents consistently across
+    # ngspice versions; electrical adequacy thresholds are much larger than these
+    # solver tolerances and are deliberately not used as numerical tolerances.
+    lines.extend([render_proposal(checked),render_diode(diode),'.temp 27',
+                  '.options reltol=1e-7 abstol=1e-14 vntol=1e-8'])
     internal=sorted({e[k].lower() for e in checked for k in ('a','b') if e[k] in ('N1','N2')})
     vectors=['v(in)','v(out)',*[f'v({n})' for n in internal],'i(Vdrive)']
     dt=float(np.min(np.diff(t)))/4

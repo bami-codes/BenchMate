@@ -423,7 +423,7 @@
         "step_at_s": 0.02,
         "frequency_hz": null
       },
-      "instruction": "Replace the DRIVE–IN jumper with a 1 kΩ shunt. Leave OUT–REF unloaded.",
+      "instruction": "Replace the DRIVE\u2013IN jumper with a 1 k\u03a9 shunt. Leave OUT\u2013REF unloaded.",
       "title": "Requested connections",
       "passed": true
     },
@@ -442,5 +442,21 @@
     "Final holdout success",
     "Baseline superiority",
     "Temperature/parasitic-capacitance generalization"
-  ]
+  ],
+  "numerical_followup": {
+    "reason": "Initial Linux CI passed 90 tests and failed one noiseless IS recovery assertion: 3.1873095261842646e-9 A versus 3e-9 A with a 6% relative limit. Observation adequacy passed, but this assertion stopped the remaining checks in that test.",
+    "initial_ci": "https://github.com/bami-codes/BenchMate/actions/runs/40457818397",
+    "versions": {
+      "macos_ngspice": 47,
+      "linux_ngspice": 42
+    },
+    "change": "Tighten simulator reltol to 1e-7, abstol to 1e-14 A and explicitly set vntol=1e-8 V; keep parameter recovery limits and observation adequacy unchanged.",
+    "local_targeted_check": {
+      "command": ".venv/bin/python -m pytest tests/test_discovery.py -q",
+      "passed": 16,
+      "seconds": 35.33
+    },
+    "historical_records": "Preserved unchanged; the two recorded API executions predate the numerical tolerance revision.",
+    "ci_status_source": "GitHub Actions Tests workflow for the exact repository commit; this static manifest does not predict a future CI result."
+  }
 }
