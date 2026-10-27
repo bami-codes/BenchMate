@@ -1,0 +1,17 @@
+{
+  "format_version": 1,
+  "created_at": "2026-10-27T02:17:41.454509+00:00",
+  "claim": "Configuration commitment only; not independent blinding. No measurements have been made.",
+  "files": [
+    {
+      "id": "X1",
+      "sha256": "4c67e8141cb27bd4c549d954be2c68200a6d991f97e1100e148c148017a0f010",
+      "private_path": ".private/holdouts/X1.json"
+    },
+    {
+      "id": "X2",
+      "sha256": "1df28d2ad2595b888c3410c2416f7d5351fcaba6bd0f5f791d5614efbe213636",
+      "private_path": ".private/holdouts/X2.json"
+    }
+  ]
+}
