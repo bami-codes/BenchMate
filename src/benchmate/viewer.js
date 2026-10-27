@@ -71,7 +71,7 @@ function reduce(events,cursor){
 }
 function comparisonFor(event,key){
   if(!event)return null;
-  if(event.payload[key])return {data:key==='training_predictions'?{conditions:event.payload[key]}:event.payload[key],reconstructed:false,event};
+  if(event.payload[key])return {data:['training_predictions','comparison_conditions'].includes(key)?{conditions:event.payload[key]}:event.payload[key],reconstructed:false,event};
   const entry=state.record.comparison?.entries?.find(e=>e.event_sequence===event.sequence&&e.event_sha256===event.sha256);
   return entry?{data:entry.comparison,reconstructed:true,event}:null;
 }
@@ -116,8 +116,12 @@ function plotFor(vm){
       if(c)series.push({key,x:c.time_s,y:c.out_v});
     }
   }
+  const baseline=predictionEvent?comparisonFor(predictionEvent,'baseline_comparison'):null;
+  if(baseline){const d=baseline.data.prediction;series.push({key:'baseline',x:d.time_s,y:d.out_v});}
+  const verification=vm.verification?.kind==='verification'?comparisonFor(vm.verification,'comparison_conditions'):null;
+  const metric=predictionEvent?verification?.data.conditions.find(c=>sameSettings(c.settings,settings)):null;
   const training=focus?.kind==='acquisition',reconstructed=training&&[models.rc,models.spark].some(m=>m?.reconstructed);
-  return {focus,settings,series,predictionEvent,unit,training,reconstructed,models,options};
+  return {focus,settings,series,predictionEvent,unit,training,reconstructed,models,options,baseline,verification,metric};
 }
 function proposalDescription(elements){
   if(!Array.isArray(elements)||elements.length!==2)return null;
@@ -158,7 +162,7 @@ function brief(vm){
 function renderChart(series,unit,xLabel,animate){
   const root=$('chart');root.replaceChildren();const width=Math.max(240,root.clientWidth),height=root.clientHeight||270;
   root.setAttribute('viewBox',`0 0 ${width} ${height}`);
-  node(root,'title',{id:'chart-title'},'Prediction and observation');node(root,'desc',{id:'chart-description'},'Orange is observed output. Gray dashed is the best RC training fit. Blue dashed is the simulated Spark structure or a precommitted prediction, as labelled. All use the same axes.');
+  node(root,'title',{id:'chart-title'},'Prediction and observation');node(root,'desc',{id:'chart-description'},'Orange is observed output. Gray dashed is the training-frozen RC model. Blue dashed is the simulated Spark structure or a precommitted prediction, as labelled. All use the same axes.');
   const valid=series.filter(s=>s.x?.length&&s.x.length===s.y?.length&&[...s.x,...s.y].every(Number.isFinite));
   state.chartSeries=valid;
   if(!valid.length){node(root,'text',{x:width/2,y:height/2,'text-anchor':'middle',fill:'#55635e','font-size':13},'No waveform at this point in the run.');state.chartGeometry=null;return;}
@@ -237,18 +241,27 @@ function wiring(settings,hardware){
   badge($('mount-actor'),{name:hardware?'Operator':'Operator · simulated',kind:'operator'});
 }
 function renderTimeline(vm){
-  const root=$('timeline'),focused=root.contains(document.activeElement)?document.activeElement.closest('button')?.dataset.index:null;root.replaceChildren();
+  const root=$('timeline'),previousScroll=root.scrollTop,focused=root.contains(document.activeElement)?document.activeElement.closest('button')?.dataset.index:null;root.replaceChildren();
   state.milestones=state.events.map((e,i)=>labels[e.kind]?i:-1).filter(i=>i>=0);
-  for(const i of state.milestones){const e=state.events[i],future=i>state.cursor,li=document.createElement('li'),button=document.createElement('button');
-    button.className='event'+(i===state.cursor?' active':'')+(future?' future':'');button.dataset.index=i;
-    if(i===state.cursor)button.setAttribute('aria-current','step');
-    const time=document.createElement('span');time.className='time';time.textContent=future?'—':elapsed(seconds(e));
-    const actor=document.createElement('span');badge(actor,future?{name:'Pending',kind:''}:actorFor(e));
-    const label=document.createElement('span');label.className='event-label';label.textContent=future?'Later action':labels[e.kind];
+  const known=state.milestones.filter(i=>i<=state.cursor),current=known.at(-1);
+  for(const i of known){const e=state.events[i],li=document.createElement('li'),button=document.createElement('button');
+    button.className='event'+(i===current?' active':'');button.dataset.index=i;
+    if(i===current)button.setAttribute('aria-current','step');
+    const time=document.createElement('span');time.className='time';time.textContent=elapsed(seconds(e));
+    const actor=document.createElement('span');badge(actor,actorFor(e));
+    const label=document.createElement('span');label.className='event-label';label.textContent=labels[e.kind];
     button.append(time,actor,label);const arrow=document.createElementNS(NS,'svg');arrow.setAttribute('viewBox','0 0 20 20');arrow.setAttribute('aria-hidden','true');node(arrow,'path',{d:'M5 10h9m-4-4 4 4-4 4'});button.appendChild(arrow);
     button.onclick=()=>select(i,true);li.appendChild(button);root.appendChild(li);
   }
-  if(state.lastCursor!==state.cursor){const active=root.querySelector('[aria-current=step]');if(active)root.scrollTop+=active.getBoundingClientRect().bottom-root.getBoundingClientRect().bottom+10;}
+  // Fit a whole number of recent rows, including wrapped mobile labels. The
+  // latest known action stays current even at an unlabelled API/tool event.
+  const style=getComputedStyle(root),limit=parseFloat(style.maxHeight),padding=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom);
+  let height=padding;
+  for(const row of [...root.children].reverse()){const h=row.getBoundingClientRect().height;if(height>padding&&height+h>limit)break;height+=h;}
+  root.style.height=Math.ceil(height)+'px';
+  const resized=state.timelineWidth!==root.clientWidth;
+  root.scrollTop=state.lastCursor!==state.cursor||resized?root.scrollHeight-root.clientHeight:previousScroll;
+  state.timelineWidth=root.clientWidth;
   state.lastCursor=state.cursor;
   if(focused!==null)root.querySelector(`[data-index="${focused}"]`)?.focus({preventScroll:true});
 }
@@ -275,10 +288,13 @@ function render(){
   renderResidual(series);
   setText('plot-title',plot.training&&series.some(s=>s.key==='baseline')?'Compare explanations':'Prediction & observation');
   setText('prediction-label',plot.training?'Spark structure · fit':'Committed prediction');
+  setText('baseline-label',plot.training?'Best RC fit':'Frozen RC prediction');
   document.querySelector('[data-trace=predicted]').title=plot.training?"Engine simulation of Spark's structure, fitted to training observations.":'Numerical prediction recorded before the matching verification observation.';
   for(const button of document.querySelectorAll('[data-trace]'))button.disabled=!series.some(s=>s.key===button.dataset.trace);
   setText('plot-source',focus?.kind.includes('prediction_committed')?'Prediction only':predictionEvent?'Reserved verification':'Training comparison');
-  setText('comparison-note',plot.reconstructed?'Reconstructed training fits · computed after this run; not precommitted predictions.':plot.training&&series.some(s=>s.key==='baseline'||s.key==='predicted')?'Training fits · engine simulations; independent verification is a separate check.':predictionEvent?'Prediction recorded before the matching verification observation.':'Observed waveform · no model comparison recorded yet.');
+  const outcomes={proposal_only_passes:'RC fails; proposal passes',both_pass:'Both pass · weak discrimination',neither_passes:'Neither model passes',baseline_only_passes:'Only RC passes'};
+  const metric=plot.metric;
+  setText('comparison-note',metric?(plot.baseline.reconstructed?'RC reconstructed · ':'')+`OUT RMS: RC ${metric.baseline.out_rms_mv.toFixed(2)} mV / Spark ${metric.proposal.out_rms_mv.toFixed(2)} mV · `+outcomes[metric.discrimination]:plot.baseline?.reconstructed?'RC reconstructed from frozen training fit; Spark prediction recorded before observation.':plot.baseline?'Both models frozen on training data; predictions recorded before observations.':plot.reconstructed?'Reconstructed training fits · computed after this run; not precommitted predictions.':plot.training&&series.some(s=>s.key==='baseline'||s.key==='predicted')?'Training fits · engine simulations; independent verification is a separate check.':predictionEvent?'Prediction recorded before the matching verification observation.':'Observed waveform · no model comparison recorded yet.');
   const check=vm.verification?.payload;
   const proof=$('verification');proof.replaceChildren();proof.classList.toggle('failed',check?.passed===false);
   if(check){const icon=document.createElementNS(NS,'svg');icon.setAttribute('viewBox','0 0 20 20');icon.setAttribute('aria-hidden','true');node(icon,'path',{d:check.passed?'m4 10 4 4 8-9':'m5 5 10 10M15 5 5 15'});proof.append(icon);}
@@ -296,7 +312,8 @@ function render(){
   setText('raw',JSON.stringify(state.events[state.cursor],null,2));
   setText('original-report',vm.report?JSON.stringify(vm.report.payload,null,2):'No report recorded at this point.');
   $('expand-report').disabled=!vm.report;
-  setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available RC and proposed fit; before a proposal, RC versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,source_sha256:state.record.source_sha256},null,2));
+  setText('expand-report',!vm.report?'Report not recorded yet':document.querySelector('.evidence-drawer').open?'Hide original report':'Read original report');
+  setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available RC and proposed fit; before a proposal, RC versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,verification_baseline:plot.baseline?{event_sequence:plot.baseline.event.sequence,reconstructed:plot.baseline.reconstructed,originally_committed:!plot.baseline.reconstructed,separation:plot.baseline.data.separation}:null,verification_comparison:plot.verification?{reconstructed:plot.verification.reconstructed,...plot.verification.data}:null,source_sha256:state.record.source_sha256},null,2));
   $('cursor').max=state.events.length-1;$('cursor').value=state.cursor;setText('position',(state.cursor+1)+' / '+state.events.length);
   $('previous').disabled=state.cursor<=0;$('next-event').disabled=state.cursor>=state.events.length-1;$('play').disabled=state.events.length<2;
   $('follow').hidden=!live;$('follow').disabled=state.following;
@@ -308,7 +325,7 @@ function milestone(direction){const available=state.milestones.filter(i=>directi
 $('previous').onclick=()=>milestone(-1);$('next-event').onclick=()=>milestone(1);$('cursor').oninput=e=>select(Number(e.target.value));
 $('condition').onchange=e=>{state.condition=Number(e.target.value);render();};
 $('expand-report').onclick=()=>{const drawer=document.querySelector('.evidence-drawer');drawer.open=!drawer.open;if(drawer.open){$('original-report').setAttribute('tabindex','-1');$('original-report').focus();}};
-document.querySelector('.evidence-drawer').ontoggle=e=>{$('expand-report').setAttribute('aria-expanded',String(e.target.open));setText('expand-report',e.target.open?'Hide original report':'Read original report');};
+document.querySelector('.evidence-drawer').ontoggle=e=>{$('expand-report').setAttribute('aria-expanded',String(e.target.open));setText('expand-report',$('expand-report').disabled?'Report not recorded yet':e.target.open?'Hide original report':'Read original report');};
 $('play').onclick=()=>{if(state.timer){stop();return;}state.following=false;state.condition=null;state.cursor=0;render();$('play').querySelector('span').textContent='Pause';$('play').setAttribute('aria-label','Pause replay');state.timer=setInterval(()=>{if(state.cursor>=state.events.length-1){stop();return;}state.cursor++;render();},950);};
 $('follow').onclick=()=>{stop();state.condition=null;state.following=true;state.cursor=state.events.length-1;render();};
 for(const button of document.querySelectorAll('[data-trace]'))button.onclick=()=>{const key=button.dataset.trace;state.trace[key]=!state.trace[key];button.setAttribute('aria-pressed',state.trace[key]);render();};

@@ -76,7 +76,7 @@ def test_reconstructed_training_curves_do_not_use_verification(tmp_path):
     from benchmate.records import read_events
     if shutil.which('ngspice') is None:pytest.skip('ngspice not installed')
     source=Path(__file__).parents[1]/'examples/discovery-mismatch-english/events.jsonl'
-    original=source.read_bytes();events=read_events(source);comparisons=[]
+    original=source.read_bytes();events=read_events(source);comparisons=[];diagnostics=[]
     for changed in (False,True):
         log=Recorder(tmp_path,mode=events[0]['payload']['mode'])
         for e in events[1:]:
@@ -87,6 +87,10 @@ def test_reconstructed_training_curves_do_not_use_verification(tmp_path):
         raw=log.file.read_bytes();sidecar=json.loads(reconstruct_comparisons(log.path).read_text())
         assert raw==log.file.read_bytes()
         assert all(max(e['training_event_sequences'])<e['event_sequence'] for e in sidecar['entries'])
-        comparisons.append([e['comparison'] for e in sidecar['entries']])
+        comparisons.append([e['comparison'] for e in sidecar['entries'] if e['kind']!='verification'])
+        diagnostics.append([e['comparison'] for e in sidecar['entries'] if e['kind']=='verification'])
     assert comparisons[0]==comparisons[1]
+    assert diagnostics[0]!=diagnostics[1]  # Only post-observation scoring can change.
+    assert all(c['discrimination']=='proposal_only_passes' for c in diagnostics[0][0]['conditions'])
+    assert all(not c['proposal']['adequacy']['passed'] for c in diagnostics[1][0]['conditions'])
     assert source.read_bytes()==original

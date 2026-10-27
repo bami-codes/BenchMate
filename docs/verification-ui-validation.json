@@ -1,0 +1,762 @@
+{
+  "date_local": "2026-10-27",
+  "scope": "Synthetic development comparison of one training-frozen best RC under declared priors. No physical or holdout result, topology uniqueness or calibrated power claim.",
+  "source_record": "examples/discovery-story-english/events.jsonl",
+  "source_sha256": "9dbb701a329edb7a0db27d7cd8a4d8e6a87d4c3098f63a63b54345cfba037cb2",
+  "historical_rc_provenance": "Reconstructed after the run from recorded training parameters and ideal commands; not an original pre-observation commitment.",
+  "new_run_protocol": "Both RC and proposal predictions for both reserved conditions are committed before either observation. No verification refit or added acquisition.",
+  "additional_real_api_requests": 0,
+  "additional_physical_acquisitions": 0,
+  "conditions": [
+    {
+      "settings": {
+        "kind": "step",
+        "shunt_ohm": 0.0,
+        "load_ohm": null,
+        "amplitude_v": 0.35,
+        "ref_v": 1.6,
+        "duration_s": 0.3,
+        "sample_period_s": 0.0005,
+        "step_at_s": 0.02,
+        "frequency_hz": null
+      },
+      "baseline": {
+        "out_rms_mv": 63.54532691620535,
+        "out_peak_mv": 676.3192187214444,
+        "worst_normalized_regional_rms": 148.12663107843085,
+        "adequacy": {
+          "passed": false,
+          "checks": [
+            {
+              "channel": "in_v",
+              "region": "full",
+              "samples": 601,
+              "normalized_rms": 0.34529945522792144,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0_0.005s",
+              "samples": 10,
+              "normalized_rms": 0.3204106097037817,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0.005_0.02s",
+              "samples": 30,
+              "normalized_rms": 0.3057240295616987,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0.02_0.08s",
+              "samples": 120,
+              "normalized_rms": 0.3237555291451422,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "full",
+              "samples": 601,
+              "normalized_rms": 21.18177563873511,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0_0.005s",
+              "samples": 10,
+              "normalized_rms": 148.12663107843085,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0.005_0.02s",
+              "samples": 30,
+              "normalized_rms": 25.502437511041474,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0.02_0.08s",
+              "samples": 120,
+              "normalized_rms": 7.566545917285485,
+              "passed": false
+            }
+          ],
+          "regional_limit": 3.0,
+          "calibrated_false_positive_rate": false,
+          "predictive_uncertainty": "none"
+        }
+      },
+      "proposal": {
+        "out_rms_mv": 0.9293521299273421,
+        "out_peak_mv": 3.4810508447848942,
+        "worst_normalized_regional_rms": 0.34529945544959834,
+        "adequacy": {
+          "passed": true,
+          "checks": [
+            {
+              "channel": "in_v",
+              "region": "full",
+              "samples": 601,
+              "normalized_rms": 0.34529945544959834,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0_0.005s",
+              "samples": 10,
+              "normalized_rms": 0.3204106240614506,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0.005_0.02s",
+              "samples": 30,
+              "normalized_rms": 0.3057240295616987,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "transient_0.02_0.08s",
+              "samples": 120,
+              "normalized_rms": 0.3237555291451422,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "full",
+              "samples": 601,
+              "normalized_rms": 0.309784043309114,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0_0.005s",
+              "samples": 10,
+              "normalized_rms": 0.31314920650457223,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0.005_0.02s",
+              "samples": 30,
+              "normalized_rms": 0.33541551670764846,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "transient_0.02_0.08s",
+              "samples": 120,
+              "normalized_rms": 0.32097977754081036,
+              "passed": true
+            }
+          ],
+          "regional_limit": 3.0,
+          "calibrated_false_positive_rate": false,
+          "predictive_uncertainty": "none"
+        }
+      },
+      "separation": {
+        "out_rms_mv": 63.515892468503836,
+        "out_peak_mv": 676.7921324095452
+      },
+      "discrimination": "proposal_only_passes",
+      "refitted_on_verification": false
+    },
+    {
+      "settings": {
+        "kind": "sine",
+        "shunt_ohm": 0.0,
+        "load_ohm": 10000,
+        "amplitude_v": 1,
+        "ref_v": 1.6,
+        "duration_s": 2,
+        "sample_period_s": 0.002,
+        "step_at_s": 0.02,
+        "frequency_hz": 1
+      },
+      "baseline": {
+        "out_rms_mv": 36.821514078624574,
+        "out_peak_mv": 95.09137366859343,
+        "worst_normalized_regional_rms": 24.415698827649077,
+        "adequacy": {
+          "passed": false,
+          "checks": [
+            {
+              "channel": "in_v",
+              "region": "full",
+              "samples": 1001,
+              "normalized_rms": 0.34757026326501983,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_0",
+              "samples": 127,
+              "normalized_rms": 0.34762522078415586,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_1",
+              "samples": 124,
+              "normalized_rms": 0.3581635525682264,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_2",
+              "samples": 126,
+              "normalized_rms": 0.3275608929181377,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_3",
+              "samples": 124,
+              "normalized_rms": 0.32440455176031435,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_4",
+              "samples": 126,
+              "normalized_rms": 0.3651023513316456,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_5",
+              "samples": 124,
+              "normalized_rms": 0.3499936276168037,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_6",
+              "samples": 126,
+              "normalized_rms": 0.3553072828933844,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_7",
+              "samples": 124,
+              "normalized_rms": 0.35024422668636135,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "full",
+              "samples": 1001,
+              "normalized_rms": 12.27383802620819,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_0",
+              "samples": 127,
+              "normalized_rms": 2.620115003939483,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_1",
+              "samples": 124,
+              "normalized_rms": 22.109279750691183,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_2",
+              "samples": 126,
+              "normalized_rms": 24.415698827649077,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_3",
+              "samples": 124,
+              "normalized_rms": 6.338520970063881,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_4",
+              "samples": 126,
+              "normalized_rms": 2.0681473002148736,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_5",
+              "samples": 124,
+              "normalized_rms": 3.183742420506704,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_6",
+              "samples": 126,
+              "normalized_rms": 5.69180748028007,
+              "passed": false
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_7",
+              "samples": 124,
+              "normalized_rms": 5.190351225743811,
+              "passed": false
+            }
+          ],
+          "regional_limit": 3.0,
+          "calibrated_false_positive_rate": false,
+          "predictive_uncertainty": "none"
+        }
+      },
+      "proposal": {
+        "out_rms_mv": 1.0008442977655467,
+        "out_peak_mv": 3.8075939906960787,
+        "worst_normalized_regional_rms": 0.37024363186950093,
+        "adequacy": {
+          "passed": true,
+          "checks": [
+            {
+              "channel": "in_v",
+              "region": "full",
+              "samples": 1001,
+              "normalized_rms": 0.3475702633045477,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_0",
+              "samples": 127,
+              "normalized_rms": 0.34762521965306303,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_1",
+              "samples": 124,
+              "normalized_rms": 0.3581635534926055,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_2",
+              "samples": 126,
+              "normalized_rms": 0.32756089246718906,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_3",
+              "samples": 124,
+              "normalized_rms": 0.3244045492074093,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_4",
+              "samples": 126,
+              "normalized_rms": 0.3651023522982075,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_5",
+              "samples": 124,
+              "normalized_rms": 0.3499936310294143,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_6",
+              "samples": 126,
+              "normalized_rms": 0.3553072818636808,
+              "passed": true
+            },
+            {
+              "channel": "in_v",
+              "region": "phase_bin_7",
+              "samples": 124,
+              "normalized_rms": 0.3502442266280912,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "full",
+              "samples": 1001,
+              "normalized_rms": 0.3336147659218489,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_0",
+              "samples": 127,
+              "normalized_rms": 0.3326450105958697,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_1",
+              "samples": 124,
+              "normalized_rms": 0.3450417422965968,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_2",
+              "samples": 126,
+              "normalized_rms": 0.30488707744653115,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_3",
+              "samples": 124,
+              "normalized_rms": 0.3371821022739801,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_4",
+              "samples": 126,
+              "normalized_rms": 0.3211932414378353,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_5",
+              "samples": 124,
+              "normalized_rms": 0.3319840641780081,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_6",
+              "samples": 126,
+              "normalized_rms": 0.32270022273798027,
+              "passed": true
+            },
+            {
+              "channel": "out_v",
+              "region": "phase_bin_7",
+              "samples": 124,
+              "normalized_rms": 0.37024363186950093,
+              "passed": true
+            }
+          ],
+          "regional_limit": 3.0,
+          "calibrated_false_positive_rate": false,
+          "predictive_uncertainty": "none"
+        }
+      },
+      "separation": {
+        "out_rms_mv": 36.82887165925392,
+        "out_peak_mv": 93.53743047420826
+      },
+      "discrimination": "proposal_only_passes",
+      "refitted_on_verification": false
+    }
+  ],
+  "decision": "Keep the current development conditions; frozen RC fails both. Reassess physical discrimination using D2-calibrated fixture/noise before final evaluation freeze.",
+  "local_tests": {
+    "passed": 97,
+    "seconds": 57.24,
+    "command": ".venv/bin/python -m pytest -q --basetemp=runs/verification-tests"
+  },
+  "browser": {
+    "target": "file:///Users/bami/Documents/metaai/examples/discovery-story-english/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 890.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 912.96875,
+            "bottom": 1416.859375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1438.859375,
+            "bottom": 1819.859375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1841.859375,
+            "bottom": 2078.546875
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "repair_browser": {
+    "target": "file:///Users/bami/Documents/metaai/examples/repair-d01-r-synthetic/report.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 524.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 833.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 524.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 833.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 875.578125
+          },
+          {
+            "name": "report-panel",
+            "top": 897.578125,
+            "bottom": 1252.078125
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1274.078125,
+            "bottom": 1598.078125
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1620.078125,
+            "bottom": 1856.765625
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "inline_record_browser": {
+    "target": "file:///Users/bami/Documents/metaai/runs/verification-inline.html",
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 647.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 890.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 912.96875,
+            "bottom": 1416.859375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1438.859375,
+            "bottom": 1819.859375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1841.859375,
+            "bottom": 2078.546875
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "timeline_checks": {
+    "widths": [
+      1440,
+      390
+    ],
+    "zero_based_cursors": [
+      8,
+      14,
+      22,
+      28
+    ],
+    "past_actions_only": true,
+    "current_visible": true,
+    "no_partially_clipped_rows_after_auto_scroll": true
+  },
+  "mutation_test": "Changing verification outputs leaves all training curves and frozen predictions identical; only residual checks change.",
+  "ci_status_source": "GitHub Actions Tests workflow for the exact repository commit."
+}

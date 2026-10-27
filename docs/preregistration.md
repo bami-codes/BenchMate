@@ -84,3 +84,9 @@ Use neutral structure-discovery wording and English reports. New reports must no
 
 The English UI uses one renderer for immutable replay and read-only live logs. It shows independent source/mode labels and actor identities; it does not imply a live physical board. No holdout assembly or observation was accessed for this revision.
 
+## Frozen-RC verification comparison — 2026-10-27, before D2
+
+Reason: expose whether reserved conditions distinguish the proposed structure from the best training-fit RC. New runs commit both models' predictions for both reserved conditions before either observation. Record per-model OUT RMS/peak error, existing regional adequacy checks, and prediction RMS/peak separation. If both pass, flag weak discrimination. The proposal's acceptance criteria, parameter priors, conditions and six-capture budget are unchanged. Baseline diagnostics are added to the verification tool result; no extra fitting or simulation of the proposal is introduced.
+
+Older event chains remain byte-for-byte unchanged. Their frozen RC counterfactuals and residual checks are explicitly post-run reconstructions in hash-bound sidecars. The current development record rejects the frozen RC on both reserved conditions; this is not proof of unique topology or calibrated physical discrimination. Physical conditions still freeze at D2, without tuning to final evaluation outcomes. No new real API run or holdout access was needed for this comparison.
+

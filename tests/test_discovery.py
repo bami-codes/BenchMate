@@ -148,4 +148,21 @@ def test_mock_model_proposal_reaches_spice_then_two_untouched_checks(tmp_path,mo
     predictions=[e['payload'] for e in events if e['kind']=='prediction_committed']
     assert all(p['diode_parameters']==fitted['diode_parameters'] for p in predictions)
     assert all(p['input_provenance'].startswith('ideal_command') for p in predictions)
+    assert all(p['baseline_comparison']['parameters']==assessment['training_comparison']['parameters'] for p in predictions)
+    assert all(p['baseline_comparison']['training_frozen'] for p in predictions)
+    comparisons=result['verification']['comparison_conditions']
+    assert len(comparisons)==2
+    assert all(c['discrimination']=='proposal_only_passes' and not c['refitted_on_verification'] for c in comparisons)
+    assert all(c['baseline']['out_rms_mv']>30 and c['proposal']['out_rms_mv']<2 for c in comparisons)
     assert 'test-discovery-secret' not in (path/'events.jsonl').read_text()
+
+
+def test_identical_predictions_are_reported_as_weak_discrimination():
+    from benchmate.comparison import verification_comparison
+    from benchmate.noise import NoiseModel
+    from benchmate.physics import RCModel
+    from benchmate.simulation import acquire
+    capture=acquire(RCModel(10000,1e-6),Acquisition(),rng=np.random.default_rng(3),noise_sd_v=0)
+    comparison=verification_comparison(capture['data'],capture['data'],capture,NoiseModel())
+    assert comparison['discrimination']=='both_pass'
+    assert comparison['separation']['out_rms_mv']==0

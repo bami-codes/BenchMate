@@ -228,7 +228,7 @@ The report groups the current explanation, remaining uncertainty and next measur
 
 ### Experiment trail
 
-Each action is a full-width native button with elapsed time, actor, event label and an SVG arrow. The current item uses the pale green tint, a semibold label and `aria-current="step"`. Future actions are intentionally generic, with a pending actor and no revealed conclusion. Hover uses a subdued neutral green surface. Keyboard focus is retained across renderer updates; selected action announcements use a polite live region.
+Each known action is a full-width native button with elapsed time, actor, event label and an SVG arrow. The latest action at or before the cursor uses the pale green tint, a semibold label and `aria-current="step"`, including when the cursor is on an API event. The scroll viewport fits whole recent rows; earlier rows remain available by scrolling. Future intents appear only in the four-stage strip. Hover uses a subdued neutral green surface. Keyboard focus is retained across renderer updates; selected action announcements use a polite live region.
 
 ### Connections and evidence disclosure
 
@@ -265,3 +265,5 @@ The explanation includes a (100px) SVG of the recorded proposal ((125px) on narr
 A four-stage strip sits above the scrolling timeline and remains visible while its events scroll. Pending actions do not reveal future outcomes. Actor columns accommodate `Spark · max` and `Spark · standard`; standard maps to a recorded medium API effort. Status follows the current event. Simple chevrons replace the ambiguous previous/next glyphs.
 
 Desktop row gaps are (16px), with a compact (94px) mounting SVG. The diagram follows the displayed condition unless a new pending mounting request takes precedence. Its caption distinguishes historical review from a new requested operation. All five required panels remain within 900px at widths 1440 and 1280; mobile keeps the same reading order.
+
+Reserved discovery conditions also show the frozen RC prediction and both residuals. The existing caption carries OUT RMS errors and the comparison outcome, keeping the first viewport compact. Old RC counterfactuals are visibly labelled reconstructed; exact separation and regional checks remain in Evidence. The original-report action uses Bench Green when available and a readable, non-underlined “Report not recorded yet” state beforehand.

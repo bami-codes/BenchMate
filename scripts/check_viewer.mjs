@@ -10,7 +10,7 @@ let id=0;const pending=new Map(),errors=[],eventWaiters=new Map();
 socket.addEventListener('message',event=>{const data=JSON.parse(event.data);if(eventWaiters.has(data.method)){eventWaiters.get(data.method)(data);eventWaiters.delete(data.method);}if(data.method==='Runtime.exceptionThrown')errors.push(data.params.exceptionDetails.text);if(data.id){const item=pending.get(data.id);pending.delete(data.id);data.error?item.reject(Error(data.error.message)):item.resolve(data.result);}});
 function cdp(method,params={}){return new Promise((resolve,reject)=>{const key=++id;pending.set(key,{resolve,reject});socket.send(JSON.stringify({id:key,method,params}));});}
 function waitEvent(method){return new Promise(resolve=>eventWaiters.set(method,resolve));}
-async function evaluate(expression){const r=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(r.exceptionDetails.text);return r.result.value;}
+async function evaluate(expression){const r=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(r.exceptionDetails.exception?.description||r.exceptionDetails.text);return r.result.value;}
 function assert(condition,message){if(!condition)throw Error(message);}
 await cdp('Page.enable');await cdp('Runtime.enable');
 await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
@@ -35,7 +35,7 @@ await evaluate('BenchMateUI.select(0)');assert(await evaluate("document.getEleme
 const prediction=await evaluate("JSON.parse(document.getElementById('record').textContent).events.findIndex(e=>e.kind==='prediction_committed')");
 if(prediction>=0){
  await evaluate(`BenchMateUI.select(${prediction})`);
- assert(await evaluate("document.querySelectorAll('#chart path[data-series]').length===1&&document.querySelector('#chart path[data-series=predicted]')!==null"),'Prediction-before-observation missing');
+ assert(await evaluate("!document.querySelector('#chart path[data-series=observed]')&&document.querySelector('#chart path[data-series=predicted]')!==null"),'Prediction-before-observation missing');
  await evaluate('scrollTo(0,0)');await writeFile(output+'/prediction-only.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
 }
 await evaluate(`BenchMateUI.select(${count-1})`);
@@ -47,7 +47,21 @@ if(discovery){
  assert(await evaluate("document.querySelector('[data-cathode=REF]')&&document.getElementById('report-actor').textContent==='Spark · max'"),'Netlist or effort badge missing');
  assert(await evaluate("document.querySelectorAll('#story-stages button.reached').length===4"),'Milestones missing');
  await evaluate("document.getElementById('condition').value=21;document.getElementById('condition').dispatchEvent(new Event('change'))");
- assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!document.querySelector('#chart path[data-series=baseline]')"),'Training fit mislabeled as verification');
+ assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!!document.querySelector('#chart path[data-series=baseline]')&&document.getElementById('baseline-label').textContent==='Frozen RC prediction'"),'Frozen RC verification prediction missing or mislabeled');
+ assert(await evaluate("document.querySelectorAll('#residual path').length===2&&document.getElementById('comparison-note').textContent.includes('RC fails; proposal passes')"),'Verification comparison missing');
+ await evaluate('scrollTo(0,0)');await writeFile(output+'/verification.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
+ for(const width of [1440,390]){
+  await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<500});
+  for(const index of [8,14,22,count-1]){
+   await evaluate(`BenchMateUI.select(${index})`);
+   const trail=await evaluate(`(()=>{const root=document.getElementById('timeline'),bounds=root.getBoundingClientRect(),rows=[...root.querySelectorAll('button')].map(e=>({top:e.getBoundingClientRect().top,bottom:e.getBoundingClientRect().bottom,current:e.hasAttribute('aria-current')})),shown=rows.filter(r=>r.bottom>bounds.top+5.5&&r.top<bounds.bottom-5.5);return {pending:root.textContent.includes('Pending'),currentVisible:shown.some(r=>r.current),partial:shown.some(r=>r.top<bounds.top-1||r.bottom>bounds.bottom+1),width:${width},index:${index}}})()`);
+   assert(!trail.pending&&trail.currentVisible&&!trail.partial,'Timeline latest whole rows: '+JSON.stringify(trail));
+  }
+ }
+ await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
+ await evaluate('BenchMateUI.select(18)');
+ assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=observed]')&&!document.getElementById('comparison-note').textContent.includes('RC fails')"),'Verification outcome leaked before observation');
+ assert(await evaluate("document.getElementById('expand-report').disabled&&document.getElementById('expand-report').textContent==='Report not recorded yet'"),'Pending report state unclear');
  await evaluate('BenchMateUI.select(6)');
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=predicted]')&&document.getElementById('proposal-circuit').hasAttribute('hidden')"),'Initial comparison leaked later proposal');
  await evaluate('scrollTo(0,0)');await writeFile(output+'/initial-models.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
@@ -75,12 +89,12 @@ await evaluate(`BenchMateUI.select(${count-1})`);
 // Review fixes: condition identity, origin, focus, and persistent error states.
 assert(await evaluate("!sameSettings({kind:'step',ref_v:1.6},{kind:'step',ref_v:1.2})"),'REF mismatch matched');
 assert(await evaluate("BenchMateUI.reduce([{kind:'run_started',payload:{mode:'unknown'}},{kind:'acquisition',payload:{source:'unrecognized'}}],1).origin==='unknown'"),'Unknown origin misclassified');
-await evaluate("document.querySelector('#timeline button').focus();document.activeElement.click()");
+await evaluate("document.querySelector('#timeline li:last-child button').focus();document.activeElement.click()");
 assert(await evaluate("document.activeElement.matches('#timeline button')"),'Timeline selection lost focus');
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
 assert(await evaluate("document.activeElement.matches('#timeline button')"),'Repeated keyboard activation lost focus');
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});
-assert(await evaluate("document.activeElement.matches('#timeline button')"),'Tab navigation failed');
+assert(await evaluate("document.activeElement.matches('summary')"),'Tab navigation from the last timeline event failed');
 await evaluate(`BenchMateUI.select(${count-1})`);
 assert(await evaluate("Number(getComputedStyle(document.querySelector('[data-trace=drive]')).opacity)===1"),'Inactive actionable text dimmed');
 await evaluate("connectionError('QA: interrupted connection');render()");assert(await evaluate("!document.getElementById('connection-alert').hidden"),'Connection error lost on render');

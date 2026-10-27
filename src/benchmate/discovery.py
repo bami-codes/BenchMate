@@ -11,6 +11,7 @@ from .netlist import ELEMENT_SCHEMA,validate_netlist,simulate_netlist,topology_f
 from .noise import NoiseModel,adequacy,whitened_vector
 from .physics import Acquisition
 from .stimulus import command_template
+from .comparison import best_rc_comparison, frozen_rc_prediction, prediction_separation, verification_comparison
 
 
 TRAINING = [Acquisition(),
@@ -171,8 +172,8 @@ class DiscoverySession:
         self.initial={'status':'all_candidates_inadequate' if all(not f['fit_passed'] for _,f in fits) else 'initial_candidates_adequate',
                       'candidates':[{'name':family.name,'fit_passed':fit['fit_passed'],
                           'worst_normalized_residual':max(c['normalized_rms'] for g in fit['checks'] for c in g['checks'])} for family,fit in fits]}
-        from .comparison import best_rc_comparison
-        log.add('initial_family_assessment',{**self.initial,'training_comparison':best_rc_comparison(fits,self.captures)})
+        self.rc_comparison=best_rc_comparison(fits,self.captures)
+        log.add('initial_family_assessment',{**self.initial,'training_comparison':self.rc_comparison})
 
     def dispatch(self,name,args):
         if self.report is not None:raise ToolRejected('Experiment already finished')
@@ -209,20 +210,27 @@ class DiscoverySession:
             if self.verification_used or not self.fit_result or not self.fit_result['training_passed']:
                 raise ToolRejected('Verification needs a fitted adequate proposal and unused verification budget')
             self.verification_used=True
-            predictions=[]
+            predictions=[];baselines=[]
             for settings in VERIFICATION:
                 template=command_template(settings)
                 prediction,meta=simulate_netlist(self.fitted,template,diode=self.fit_result['diode_parameters'])
                 predictions.append(prediction)
-                self.log.add('prediction_committed',{'elements':self.fitted,'settings':settings.to_dict(),'prediction':prediction,'input_provenance':template['input_provenance'],**meta})
-            checks=[]
-            for settings,prediction in zip(VERIFICATION,predictions):
+                baseline=frozen_rc_prediction(self.rc_comparison,settings.to_dict());baselines.append(baseline)
+                comparison={'prediction':baseline,'parameters':self.rc_comparison['parameters'],
+                            'family':self.rc_comparison['family'],'training_frozen':True,
+                            'separation':prediction_separation(baseline,prediction)}
+                self.log.add('prediction_committed',{'elements':self.fitted,'settings':settings.to_dict(),'prediction':prediction,
+                    'baseline_comparison':comparison,'input_provenance':template['input_provenance'],**meta})
+            checks=[];comparisons=[]
+            for settings,prediction,baseline in zip(VERIFICATION,predictions,baselines):
                 capture=self.acquire(settings)
                 if capture.get('source')!='synthetic' or capture.get('settings')!=settings.to_dict():
                     raise ValueError('Mismatched verification provenance')
                 self.log.add('verification_acquisition',capture)
                 checks.append(adequacy(prediction,capture,self.noise))
-            self.verification={'passed':all(c['passed'] for c in checks),'conditions':checks,'refitted_on_verification':False}
+                comparisons.append(verification_comparison(baseline,prediction,capture,self.noise))
+            self.verification={'passed':all(c['passed'] for c in checks),'conditions':checks,
+                               'comparison_conditions':comparisons,'refitted_on_verification':False}
             self.log.add('verification',self.verification)
             return self.verification
         if any(not isinstance(v,str) or len(v)>1600 for v in args.values()):raise ToolRejected('Invalid report values')
