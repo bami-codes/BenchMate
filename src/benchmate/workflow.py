@@ -55,3 +55,43 @@ def run_synthetic(case, *, seed=1, output="runs", noise_sd_v=0.001):
              "budget_note":"DC pairs count as two acquisitions. Confirmation is one fresh step. Common exploration is included in the total."}
     log.add("run_completed",summary)
     return log.path,summary
+
+
+def run_agent(case, *, seed=1, output="runs", effort="medium", env_path=".env",
+              budget_path=".private/api-budget.json", client=None, max_requests=8):
+    """Simulator owns truth; the model/controller only receive experiment tools."""
+    from .agent import ExperimentSession, PROMPT, TOOLS, drive_agent
+    from .providers import MetaToolSession, ProviderError
+    from .config import load_keys, redact
+    if case not in FIXTURES:
+        raise ValueError("Unknown development fixture")
+    truth = FIXTURES[case]
+    task = "input-branch" if case in ("b1", "b6") else "rc-fault"
+    rng = np.random.default_rng(seed)
+    log = Recorder(output, mode="live_agent_with_synthetic_instrument")
+    log.add("declared_knowledge", {"task": task, "seed": seed, "source": "synthetic",
+                                  "candidate_names": [c.name for c in candidate_set(task)], "llm_used": True})
+    model = None
+    session = None
+    try:
+        model = MetaToolSession(prompt=PROMPT, tools=TOOLS, log=log, effort=effort,
+                                env_path=env_path, budget_path=budget_path, client=client,
+                                max_requests=max_requests)
+        session = ExperimentSession(candidate_set(task), lambda settings: acquire(truth, settings, rng=rng), log)
+        result = drive_agent(session, model)
+        summary = {**result, **model.metadata()}
+        log.add("run_completed", model.sanitize(summary))
+        return log.path, model.sanitize(summary)
+    except Exception as exc:
+        safe = str(exc) if isinstance(exc, ProviderError) else "Agent execution failed: " + type(exc).__name__
+        failure = {"error": safe, "source": "synthetic", "llm_used": True}
+        if session is not None:
+            failure["partial_result"] = session.summary()
+        if model is not None:
+            failure.update(model.metadata())
+        failure = redact(failure, load_keys(env_path))
+        log.add("run_failed", failure)
+        raise ProviderError(failure["error"] + f"; record: {log.path}") from None
+    finally:
+        if model is not None:
+            model.close()

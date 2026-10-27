@@ -1,0 +1,298 @@
+{
+  "recorded_at": "2026-10-27T11:57:42.753919+09:00",
+  "scope": "Four known synthetic development cases, one live API attempt each; not hardware or final reliability evaluation.",
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "medium",
+  "temperature": "provider_default",
+  "seed": 1,
+  "tests": {
+    "passed": 45,
+    "command": ".venv/bin/python -m pytest -q",
+    "includes_ngspice_checks": true
+  },
+  "live_attempts": 4,
+  "live_failures": 0,
+  "total_http_requests": 16,
+  "raw_recordings_include_all_attempts": true,
+  "results": [
+    {
+      "case": "b1",
+      "attempt": 1,
+      "source": "synthetic",
+      "initial_status": "unresolved",
+      "selected_actions": [
+        "attach_shunt_dc_pair"
+      ],
+      "verdict": "verified",
+      "candidate": "rc",
+      "verification": {
+        "passed": true,
+        "rms_error_v": 0.0010138274747552526,
+        "threshold_v": 0.015,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 4,
+      "http_requests": 4,
+      "elapsed_s": 7.633212500018999,
+      "usage": [
+        {
+          "input_tokens": 1116,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 63,
+          "output_tokens_details": {
+            "reasoning_tokens": 7
+          },
+          "total_tokens": 1179
+        },
+        {
+          "input_tokens": 1957,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 427,
+          "output_tokens_details": {
+            "reasoning_tokens": 206
+          },
+          "total_tokens": 2384
+        },
+        {
+          "input_tokens": 3337,
+          "input_tokens_details": {
+            "cached_tokens": 1905
+          },
+          "output_tokens": 89,
+          "output_tokens_details": {
+            "reasoning_tokens": 27
+          },
+          "total_tokens": 3426
+        },
+        {
+          "input_tokens": 4419,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 442,
+          "output_tokens_details": {
+            "reasoning_tokens": 147
+          },
+          "total_tokens": 4861
+        }
+      ],
+      "recording": "examples/agent-b1-synthetic/events.jsonl",
+      "recording_sha256": "52a0fbef0eb59f9de22fc04d6b056d6cbb488dfa919c8e023b0534c5875e5264"
+    },
+    {
+      "case": "b6",
+      "attempt": 1,
+      "source": "synthetic",
+      "initial_status": "unresolved",
+      "selected_actions": [
+        "attach_shunt_dc_pair"
+      ],
+      "verdict": "verified",
+      "candidate": "rc_input_branch",
+      "verification": {
+        "passed": true,
+        "rms_error_v": 0.0010138274747552526,
+        "threshold_v": 0.015,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 4,
+      "http_requests": 4,
+      "elapsed_s": 11.01720733300317,
+      "usage": [
+        {
+          "input_tokens": 1116,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 71,
+          "output_tokens_details": {
+            "reasoning_tokens": 10
+          },
+          "total_tokens": 1187
+        },
+        {
+          "input_tokens": 1965,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 411,
+          "output_tokens_details": {
+            "reasoning_tokens": 211
+          },
+          "total_tokens": 2376
+        },
+        {
+          "input_tokens": 3332,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 112,
+          "output_tokens_details": {
+            "reasoning_tokens": 48
+          },
+          "total_tokens": 3444
+        },
+        {
+          "input_tokens": 4440,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 386,
+          "output_tokens_details": {
+            "reasoning_tokens": 104
+          },
+          "total_tokens": 4826
+        }
+      ],
+      "recording": "examples/agent-b6-synthetic/events.jsonl",
+      "recording_sha256": "a831da9e7024936be4b5c43fad88c05b8c38657b73ba0f85a2c9e7a88ca2a8a7"
+    },
+    {
+      "case": "d01-r",
+      "attempt": 1,
+      "source": "synthetic",
+      "initial_status": "unresolved",
+      "selected_actions": [
+        "attach_10k_load"
+      ],
+      "verdict": "verified",
+      "candidate": "r_changed",
+      "verification": {
+        "passed": true,
+        "rms_error_v": 0.00099361404309102,
+        "threshold_v": 0.015,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 3,
+      "http_requests": 4,
+      "elapsed_s": 10.083135500084609,
+      "usage": [
+        {
+          "input_tokens": 1116,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 69,
+          "output_tokens_details": {
+            "reasoning_tokens": 10
+          },
+          "total_tokens": 1185
+        },
+        {
+          "input_tokens": 1985,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 355,
+          "output_tokens_details": {
+            "reasoning_tokens": 173
+          },
+          "total_tokens": 2340
+        },
+        {
+          "input_tokens": 3322,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 101,
+          "output_tokens_details": {
+            "reasoning_tokens": 44
+          },
+          "total_tokens": 3423
+        },
+        {
+          "input_tokens": 4444,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 505,
+          "output_tokens_details": {
+            "reasoning_tokens": 211
+          },
+          "total_tokens": 4949
+        }
+      ],
+      "recording": "examples/agent-d01-r-synthetic/events.jsonl",
+      "recording_sha256": "43ca82de2ab081b653e23f9f68848ec1757121012013d125ea6dc585302ad07a"
+    },
+    {
+      "case": "d01-c",
+      "attempt": 1,
+      "source": "synthetic",
+      "initial_status": "unresolved",
+      "selected_actions": [
+        "attach_10k_load"
+      ],
+      "verdict": "verified",
+      "candidate": "c_changed",
+      "verification": {
+        "passed": true,
+        "rms_error_v": 0.00099361404309102,
+        "threshold_v": 0.015,
+        "refitted_on_verification": false
+      },
+      "total_physical_acquisitions": 3,
+      "http_requests": 4,
+      "elapsed_s": 5.911761292023584,
+      "usage": [
+        {
+          "input_tokens": 1116,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 68,
+          "output_tokens_details": {
+            "reasoning_tokens": 10
+          },
+          "total_tokens": 1184
+        },
+        {
+          "input_tokens": 1984,
+          "input_tokens_details": {
+            "cached_tokens": 1137
+          },
+          "output_tokens": 422,
+          "output_tokens_details": {
+            "reasoning_tokens": 238
+          },
+          "total_tokens": 2406
+        },
+        {
+          "input_tokens": 3389,
+          "input_tokens_details": {
+            "cached_tokens": 1009
+          },
+          "output_tokens": 101,
+          "output_tokens_details": {
+            "reasoning_tokens": 38
+          },
+          "total_tokens": 3490
+        },
+        {
+          "input_tokens": 4512,
+          "input_tokens_details": {
+            "cached_tokens": 3313
+          },
+          "output_tokens": 445,
+          "output_tokens_details": {
+            "reasoning_tokens": 149
+          },
+          "total_tokens": 4957
+        }
+      ],
+      "recording": "examples/agent-d01-c-synthetic/events.jsonl",
+      "recording_sha256": "a634fc12dadca212172144acf3aa44de357d3b98d1df955a61fbe9b60d986e85"
+    }
+  ],
+  "limitations": [
+    "Fixed declared candidates, independent synthetic noise.",
+    "No physical instrument or actual human mounting tested.",
+    "No nonlinear discovery, repair sequence or final ten-run evaluation.",
+    "X1 and X2 not accessed or measured."
+  ]
+}

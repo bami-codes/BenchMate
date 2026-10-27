@@ -1,4 +1,4 @@
-"""Bounded live tool-call smoke test. This is not the autonomous bench agent.
+"""Bounded provider transport for smoke tests and the synthetic bench agent.
 
 The Meta endpoint currently only accepts tool_choice=auto. Use explicit tool
 instructions, validate real calls, and report failure if none is returned.
@@ -31,11 +31,111 @@ OBSERVATION={"source":"synthetic","instrument":"ideal_voltage_drive","load_ohm":
 class ProviderError(RuntimeError): pass
 
 
+class MetaToolSession:
+    """Stateful in memory, stateless at the endpoint. Never log hidden reasoning.
+
+The outer experiment decides which tool calls may execute. Transport never
+executes model-provided code, retries requests or switches providers.
+"""
+    def __init__(self, *, prompt, tools, log, effort="medium", env_path=".env",
+                 budget_path=".private/api-budget.json", client=None, max_requests=8):
+        if effort not in ("medium", "max") or not 1 <= max_requests <= 8:
+            raise ValueError("Unsupported agent reasoning effort or request limit")
+        self.keys = load_keys(env_path)
+        self.cfg = PROVIDERS["meta"]
+        self.key = self.keys[self.cfg["key"]]
+        if not self.key:
+            raise ProviderError("Set MODEL_API_KEY in the local ignored .env file")
+        self.log = log
+        self.budget_path = budget_path
+        self.own = client is None
+        self.http = client or httpx.Client(timeout=90.0, follow_redirects=False)
+        self.max_requests = max_requests
+        self.requests = 0
+        self.usage = []
+        self.api_elapsed_s = 0.0
+        self.pending_call = None
+        self.history = [{"role": "user", "content": prompt}]
+        self.base = {"model": self.cfg["model"], "reasoning": {"effort": effort},
+                     "max_output_tokens": 4096, "store": False,
+                     "include": ["reasoning.encrypted_content"], "tools": tools,
+                     "tool_choice": "auto", "parallel_tool_calls": False}
+        log.add("provider_configuration", {"provider": "meta", "model": self.cfg["model"],
+                "reasoning_effort": effort, "temperature": "provider_default",
+                "max_http_requests": max_requests, "max_output_tokens_per_request": 4096,
+                "max_payload_bytes": 64000, "tool_choice": "auto",
+                "billing_note": "$1 local allowance reserved per request; not actual charged cost"})
+
+    def sanitize(self, value):
+        return redact(value, self.keys)
+
+    def next_call(self):
+        if self.pending_call is not None:
+            raise ProviderError("Previous tool call has no result")
+        if self.requests >= self.max_requests:
+            raise ProviderError("Agent HTTP request budget exhausted")
+        payload = {**self.base, "input": self.history}
+        if len(json.dumps(payload).encode()) > 64000:
+            raise ProviderError("Agent payload exceeds the local bound")
+        reserve_budget(self.budget_path, "meta", 1.0)
+        self.requests += 1
+        begin = time.monotonic()
+        try:
+            response = self.http.post(self.cfg["url"], json=payload,
+                                      headers={"Authorization": "Bearer " + self.key})
+        except httpx.HTTPError as exc:
+            raise ProviderError("Provider network failure: " + type(exc).__name__) from None
+        finally:
+            self.api_elapsed_s += time.monotonic() - begin
+        if response.status_code >= 400:
+            raise ProviderError(f"meta returned HTTP {response.status_code}; check account/model access")
+        try:
+            body = response.json()
+            usage = body.get("usage", {})
+            self.usage.append(usage)
+            self.log.add("api_response", self.sanitize({"provider": "meta", "response_id": body.get("id"),
+                         "usage": usage, "elapsed_s": time.monotonic() - begin,
+                         "status": body.get("status")}))
+            if body.get("status") not in (None, "completed"):
+                raise ProviderError("Model response did not complete")
+            output = body["output"]
+            calls = [item for item in output if item.get("type") == "function_call"]
+            if len(calls) != 1:
+                raise ProviderError("Agent must return exactly one tool call per turn")
+            call = calls[0]
+            if not all(isinstance(call.get(k), str) and call[k] for k in ("call_id", "name", "arguments")):
+                raise ProviderError("Invalid provider tool-call envelope")
+            # Preserve opaque reasoning only in memory, including all output items.
+            self.history.extend(output)
+            self.pending_call = call["call_id"]
+            return {k: call[k] for k in ("call_id", "name", "arguments")}
+        except (KeyError, TypeError, ValueError, AttributeError):
+            raise ProviderError("Invalid provider response protocol") from None
+
+    def submit_result(self, call_id, result):
+        if call_id != self.pending_call:
+            raise ProviderError("Tool result does not match the outstanding call")
+        self.history.append({"type": "function_call_output", "call_id": call_id,
+                             "output": json.dumps(result, ensure_ascii=False, allow_nan=False)})
+        self.pending_call = None
+
+    def metadata(self):
+        return {"provider": "meta", "model": self.cfg["model"],
+                "reasoning_effort": self.base["reasoning"]["effort"],
+                "http_requests": self.requests, "usage": self.usage,
+                "api_elapsed_s": self.api_elapsed_s, "reserved_allowance_usd": float(self.requests)}
+
+    def close(self):
+        if self.own:
+            self.http.close()
+
+
 def reserve_budget(path, provider, reserve_usd):
     """Reserve before sending, under an OS lock. Failed/unknown calls remain reserved.
 
 Day-one uses a conservative $1 per HTTP request, max 4k output tokens and a 24k
-byte JSON payload. Meta's published prices are lower than this reserve. Baseten
+byte smoke payload or 64k byte agent payload. Meta's published prices are lower
+than this reserve. Baseten
 hackathon rates remain unverified: this is a local spending allowance, not a
 guaranteed billing cap. No application can cap calls made outside this process.
 """

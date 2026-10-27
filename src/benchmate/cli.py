@@ -25,6 +25,11 @@ def main():
     api.add_argument("--provider",choices=["meta","baseten"],default="meta")
     api.add_argument("--effort",choices=["medium","max"],default="medium")
     api.add_argument("--output",default="runs")
+    agent=sub.add_parser("agent",help="Live Muse Spark chooses tools on a synthetic circuit; at most 8 API requests")
+    agent.add_argument("--case",required=True,choices=["b1","b6","d01-r","d01-c"])
+    agent.add_argument("--seed",type=int,default=1)
+    agent.add_argument("--effort",choices=["medium","max"],default="medium")
+    agent.add_argument("--output",default="runs")
     hardware=sub.add_parser("capture",help="Acquire uncalibrated raw counts from bring-up firmware")
     hardware.add_argument("--port",required=True)
     hardware.add_argument("--output",default="runs")
@@ -46,6 +51,10 @@ def main():
         elif args.command=="api-smoke":
             from .providers import smoke
             path,result=smoke(args.provider,effort=args.effort,output=args.output)
+            show({"run":str(path),**result})
+        elif args.command=="agent":
+            from .workflow import run_agent
+            path,result=run_agent(args.case,seed=args.seed,effort=args.effort,output=args.output)
             show({"run":str(path),**result})
         elif args.command=="capture":
             from .hardware import capture_raw
