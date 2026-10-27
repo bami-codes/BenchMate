@@ -17,4 +17,7 @@ runs/
 .DS_Store
 BenchMate_plan*.md
 BenchMate_plan*.pdf
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
 

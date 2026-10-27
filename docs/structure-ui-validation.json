@@ -1,0 +1,446 @@
+{
+  "date_local": "2026-10-27",
+  "scope": "Pre-D2 development revision. No hardware accuracy, independent holdout or frozen-protocol reliability claim.",
+  "attempt_accounting": "Both mismatched-diode live attempts retained. Prior matched-library success and truncated failure remain in preboard-validation.json. Prompts changed between attempts; do not treat this as a fixed-protocol success rate.",
+  "stimulus": "Circuit-independent ideal commanded waveform; physical actuator and timing calibration pending.",
+  "truth_for_evaluation_only": {
+    "resistance_ohm": 10000,
+    "diode_is_a": 3e-09,
+    "diode_n": 1.9,
+    "rs_ohm": 1,
+    "temperature_c": 27,
+    "seed": 1
+  },
+  "library_start": {
+    "diode_is_a": 1e-09,
+    "diode_n": 1.8
+  },
+  "fit_bounds": {
+    "diode_is_a": [
+      1e-10,
+      1e-07
+    ],
+    "diode_n": [
+      1,
+      2.5
+    ],
+    "max_fitted_parameters": 4,
+    "max_simulator_calls": 420,
+    "max_fit_seconds": 60
+  },
+  "measurement_budget": {
+    "exploration": 1,
+    "diagnostic": 3,
+    "verification": 2,
+    "total": 6,
+    "training_load_ohm": 4700,
+    "verification_load_ohm": 10000
+  },
+  "executions": [
+    {
+      "record": "examples/discovery-mismatch-first/events.jsonl",
+      "source_sha256": "0c9332afe00e21a4487087f00574a590727309bba923604a27be830ce5712e57",
+      "original_run_id": "20261027T051404-d1fbcf22aa",
+      "source": "synthetic",
+      "terminal_event": "run_completed",
+      "prompt_revision": "neutral_english_mismatch",
+      "model": "muse-spark-1.3",
+      "reasoning_effort": "max",
+      "http_requests": 4,
+      "elapsed_s": 76.5909601659514,
+      "usage": [
+        {
+          "input_tokens": 1332,
+          "input_tokens_details": {
+            "cached_tokens": 881
+          },
+          "output_tokens": 102,
+          "output_tokens_details": {
+            "reasoning_tokens": 40
+          },
+          "total_tokens": 1434
+        },
+        {
+          "input_tokens": 7796,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 4503,
+          "output_tokens_details": {
+            "reasoning_tokens": 4227
+          },
+          "total_tokens": 12299
+        },
+        {
+          "input_tokens": 12511,
+          "input_tokens_details": {
+            "cached_tokens": 7793
+          },
+          "output_tokens": 160,
+          "output_tokens_details": {
+            "reasoning_tokens": 95
+          },
+          "total_tokens": 12671
+        },
+        {
+          "input_tokens": 13903,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 738,
+          "output_tokens_details": {
+            "reasoning_tokens": 353
+          },
+          "total_tokens": 14641
+        }
+      ],
+      "reserved_allowance_usd": 4.0,
+      "proposals": 1,
+      "generated_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+      "fitted_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+      "fitted_parameters": {
+        "is_a": 3.01152212817249e-09,
+        "n": 1.9003866727702419
+      },
+      "fitted_netlist": [
+        {
+          "a": "IN",
+          "b": "OUT",
+          "kind": "R",
+          "model": "none",
+          "name": "R1",
+          "value": 10001.390240263561
+        },
+        {
+          "a": "OUT",
+          "b": "REF",
+          "kind": "D",
+          "model": "generic_diode",
+          "name": "D1",
+          "value": 0
+        }
+      ],
+      "simulator_calls": 168,
+      "total_acquisitions": 6,
+      "verification_passed": true,
+      "prediction_sequences": [
+        18,
+        19
+      ],
+      "verification_acquisition_sequences": [
+        20,
+        21
+      ],
+      "report_wording_note": "Original free text included an unsupported capacitance detection-limit claim. Preserved; subsequent prompt corrected."
+    },
+    {
+      "record": "examples/discovery-mismatch-english/events.jsonl",
+      "source_sha256": "92da47744a097f0e62edbe7bee3a703c051139984d1b17d787a2a6117fbed3fb",
+      "original_run_id": "20261027T053711-68f8adb98d",
+      "source": "synthetic",
+      "terminal_event": "run_completed",
+      "prompt_revision": "neutral_english_mismatch_concise_supported_claims",
+      "model": "muse-spark-1.3",
+      "reasoning_effort": "max",
+      "http_requests": 4,
+      "elapsed_s": 54.53189183305949,
+      "usage": [
+        {
+          "input_tokens": 1379,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 67,
+          "output_tokens_details": {
+            "reasoning_tokens": 7
+          },
+          "total_tokens": 1446
+        },
+        {
+          "input_tokens": 7808,
+          "input_tokens_details": {
+            "cached_tokens": 1265
+          },
+          "output_tokens": 2563,
+          "output_tokens_details": {
+            "reasoning_tokens": 2296
+          },
+          "total_tokens": 10371
+        },
+        {
+          "input_tokens": 10585,
+          "input_tokens_details": {
+            "cached_tokens": 113
+          },
+          "output_tokens": 113,
+          "output_tokens_details": {
+            "reasoning_tokens": 54
+          },
+          "total_tokens": 10698
+        },
+        {
+          "input_tokens": 11930,
+          "input_tokens_details": {
+            "cached_tokens": 7793
+          },
+          "output_tokens": 735,
+          "output_tokens_details": {
+            "reasoning_tokens": 496
+          },
+          "total_tokens": 12665
+        }
+      ],
+      "reserved_allowance_usd": 4.0,
+      "proposals": 1,
+      "generated_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+      "fitted_topology_sha256": "ea467d2f30f0b67ca0106844458bfb563dba621250be0b3f180b682afab73bb7",
+      "fitted_parameters": {
+        "is_a": 3.01152212817249e-09,
+        "n": 1.9003866727702419
+      },
+      "fitted_netlist": [
+        {
+          "a": "IN",
+          "b": "OUT",
+          "kind": "R",
+          "model": "none",
+          "name": "R1",
+          "value": 10001.390240263561
+        },
+        {
+          "a": "OUT",
+          "b": "REF",
+          "kind": "D",
+          "model": "generic_diode",
+          "name": "D1",
+          "value": 0.0
+        }
+      ],
+      "simulator_calls": 168,
+      "total_acquisitions": 6,
+      "verification_passed": true,
+      "prediction_sequences": [
+        18,
+        19
+      ],
+      "verification_acquisition_sequences": [
+        20,
+        21
+      ],
+      "report_wording_note": "English reports constrained to concise, tool-supported claims; original text preserved."
+    }
+  ],
+  "checks": {
+    "pytest": {
+      "passed": 91,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_s": 51.2
+    },
+    "unit_coverage": [
+      "Initial diode mismatch fails before fitting",
+      "R=12k truth and different IS/N fit on training only",
+      "Frozen predictions pass both unused conditions",
+      "Out-of-bounds/code-bearing diode parameters rejected",
+      "Neutral prompt and answer-free stimulus template",
+      "Hash prefix partial writes and corruption",
+      "Same renderer for replay/live; loopback origin restrictions"
+    ],
+    "browser": {
+      "results": [
+        {
+          "name": "desktop",
+          "width": 1440,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 630.59375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 612.125
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 650.59375,
+              "bottom": 880.09375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 650.59375,
+              "bottom": 880.78125
+            }
+          ]
+        },
+        {
+          "name": "laptop",
+          "width": 1280,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 202.09375,
+              "bottom": 630.59375
+            },
+            {
+              "name": "report-panel",
+              "top": 202.09375,
+              "bottom": 612.125
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 650.59375,
+              "bottom": 880.09375
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 650.59375,
+              "bottom": 880.78125
+            }
+          ]
+        },
+        {
+          "name": "mobile",
+          "width": 390,
+          "overflow": false,
+          "language": "en",
+          "panels": [
+            {
+              "name": "figure-panel surface",
+              "top": 302.1875,
+              "bottom": 725.1875
+            },
+            {
+              "name": "report-panel",
+              "top": 747.1875,
+              "bottom": 1207.53125
+            },
+            {
+              "name": "timeline-panel surface",
+              "top": 1229.53125,
+              "bottom": 1579.53125
+            },
+            {
+              "name": "mounting-panel surface",
+              "top": 1601.53125,
+              "bottom": 1838.21875
+            }
+          ]
+        }
+      ],
+      "interactions": "passed",
+      "errors": []
+    },
+    "live_append": {
+      "counts": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        16,
+        16,
+        16,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29
+      ],
+      "source": "Synthetic observations",
+      "label": "Live log",
+      "state": {
+        "cursor": 28,
+        "eventCount": 29,
+        "following": true,
+        "transport": "live_log"
+      },
+      "passed": true
+    },
+    "mounting_interval": {
+      "index": 5,
+      "requested": {
+        "kind": "step",
+        "shunt_ohm": 1000,
+        "load_ohm": null,
+        "amplitude_v": 0.5,
+        "ref_v": 1.6,
+        "duration_s": 0.3,
+        "sample_period_s": 0.0005,
+        "step_at_s": 0.02,
+        "frequency_hz": null
+      },
+      "plotted": {
+        "kind": "step",
+        "shunt_ohm": 0,
+        "load_ohm": null,
+        "amplitude_v": 0.5,
+        "ref_v": 1.6,
+        "duration_s": 0.3,
+        "sample_period_s": 0.0005,
+        "step_at_s": 0.02,
+        "frequency_hz": null
+      },
+      "instruction": "Replace the DRIVE–IN jumper with a 1 kΩ shunt. Leave OUT–REF unloaded.",
+      "title": "Requested connections",
+      "passed": true
+    },
+    "review": {
+      "initial": "fix",
+      "material_findings": 7,
+      "verdict": "ship",
+      "scope": "Seven listed fixes scored resolved; no introduced regressions identified in the recaptures.",
+      "no_image_comp": true
+    },
+    "detector": "One static flat-type false positive because the HTML template inlines its CSS at export. Actual h1/body sizes are 28/14 px."
+  },
+  "not_demonstrated": [
+    "Physical 1N4148 model accuracy",
+    "Hardware live control",
+    "Final holdout success",
+    "Baseline superiority",
+    "Temperature/parasitic-capacitance generalization"
+  ]
+}

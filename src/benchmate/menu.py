@@ -40,6 +40,6 @@ def measurement_menu(config=MenuConfig()):
 
 
 def mounting_instruction(settings):
-    series = "1 kΩ 션트" if settings.shunt_ohm else "0 Ω 점퍼"
-    load = "제거" if settings.load_ohm is None else f"{settings.load_ohm:g} Ω 연결"
-    return f"DRIVE–IN: {series}. OUT–REF: 부하 {load}. 장착 후 정착을 확인합니다."
+    series = "1 kΩ shunt" if settings.shunt_ohm else "0 Ω jumper"
+    load = "remove load" if settings.load_ohm is None else f"connect {settings.load_ohm:g} Ω load"
+    return f"DRIVE–IN: {series}. OUT–REF: {load}. Confirm connections and wait for settling."

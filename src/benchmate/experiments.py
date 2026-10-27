@@ -18,9 +18,9 @@ def drive_engine(session):
     verified=session.analysis['status']=='verified_within_declared_candidates'
     session.dispatch('finish_report',{'verdict':'verified' if verified else 'abstained',
         'candidate':session.analysis['supported_candidates'][0] if verified else '',
-        'current_explanation':'선언한 연속 RC 후보군에서 합성 관측을 분석했습니다.',
-        'unresolved':'실물 계측과 후보군 밖 회로는 검증하지 않았습니다.',
-        'next_observation':'D2 보정 후 동일한 조건을 실제 보드에서 측정합니다.'})
+        'current_explanation':'Synthetic observations were analyzed within the declared continuous RC families.',
+        'unresolved':'Hardware performance and circuits outside the declared families remain unverified.',
+        'next_observation':'Repeat these conditions on the physical board after D2 calibration.'})
     return {**session.summary(),'llm_used':False,'mode':'continuous_engine_only'}
 
 

@@ -160,7 +160,7 @@ class ExperimentSession:
         settings = ACTION_MENU[action]
         if self.diagnostic_acquisitions + settings.physical_acquisitions > 3:
             raise ToolRejected("Diagnostic acquisition budget exhausted; report remaining ambiguity")
-        self.log.add("instrument_request", {"action": action, "reason": reason,
+        self.log.add("instrument_request", {"action": action, "reason": reason, "settings": settings.to_dict(),
                      "instruction": INSTRUCTIONS[action], "execution": "simulated",
                      "physical_human_action": False, "selected_by": "muse_spark"})
         self.diagnostic_acquisitions += settings.physical_acquisitions

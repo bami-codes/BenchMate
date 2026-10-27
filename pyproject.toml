@@ -19,7 +19,7 @@ benchmate = "benchmate.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-benchmate = ["*.html"]
+benchmate = ["*.html", "*.css", "*.js", "assets/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

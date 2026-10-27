@@ -15,7 +15,7 @@ parameter inference. No physical hardware is connected. You never receive the
 specimen ID, hidden values or answer. First call inspect_experiment. Read the
 current candidate support, identifiability, numerical evidence and ranked menu.
 Select measure(action, reason) to resolve structure or remaining parameter
-ambiguity. Explain the choice briefly in Korean. Frequency names f0..f5 refer
+ambiguity. Explain the choice briefly in English. Frequency names f0..f5 refer
 to the configured grid, not literal Hz. Call measurement_details if needed.
 
 The budget is 1 common exploration, 3 diagnostic acquisitions, 1 independent
@@ -33,12 +33,14 @@ No verification data is refitted. Conditional model probability alone is not
 confirmation. If all candidates fail or numerical integration is unresolved,
 report abstention rather than claiming a unique circuit.
 
-Finish using finish_report, with three concise Korean fields:
+Finish using finish_report, with three concise English fields:
 current_explanation, unresolved, next_observation. Verdict verified requires
 matching independent verification and the supported candidate name. Otherwise
 use abstained with an empty candidate. State the synthetic and declared-family
 scope. Never finish only with plain text. Tool errors may be corrected within
 the API request limit. Temperature is provider default.
+Keep each report field under 45 words. Never invent measured precision or
+detection limits. Recommend only observations within the declared stimulus limits.
 """
 
 
@@ -155,6 +157,7 @@ class ContinuousSession(ExperimentSession):
         if self.diagnostic_acquisitions+settings.physical_acquisitions>3:
             raise ToolRejected('Diagnostic acquisition budget exhausted')
         self.log.add('instrument_request',{'action':action,'reason':reason,'instruction':mounting_instruction(settings),
+                     'settings':settings.to_dict(),
                      'execution':'simulated','physical_human_action':False,'selected_by':'controller'})
         self.simulated_mountings += int(settings.shunt_ohm!=self.last_settings.shunt_ohm)+int(settings.load_ohm!=self.last_settings.load_ohm)
         self.diagnostic_acquisitions += settings.physical_acquisitions

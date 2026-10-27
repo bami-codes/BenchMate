@@ -1,8 +1,8 @@
 """Validated passive proposals, rendered into a fixed ngspice harness.
 
 The model supplies topology and values only, never SPICE directives or code.
-Node names/orientation are preserved. Development diode parameters are shared
-library assumptions, not characterized physical 1N4148 parameters.
+Node names/orientation are preserved. Bounded diode parameters can be fitted
+on training observations; they are not characterized physical 1N4148 parameters.
 """
 import hashlib
 import json
@@ -15,7 +15,24 @@ import numpy as np
 from .physics import Acquisition
 
 NODES = ('IN','OUT','REF','N1','N2')
-DIODE_MODEL = '.model BM_DIODE D(IS=1e-9 N=1.8 RS=1 TNOM=27)'
+DIODE_INITIAL = {'is_a':1e-9, 'n':1.8}
+DIODE_BOUNDS = {'is_a':(1e-10,1e-7), 'n':(1.,2.5)}
+
+
+def diode_parameters(parameters=None):
+    p = dict(DIODE_INITIAL if parameters is None else parameters)
+    if set(p) != set(DIODE_INITIAL):
+        raise ValueError('Only bounded IS and N diode parameters are accepted')
+    for key,value in p.items():
+        lo,hi=DIODE_BOUNDS[key]
+        if type(value) not in (float,int) or not np.isfinite(value) or not lo<=value<=hi:
+            raise ValueError('Diode parameter outside development bounds')
+    return p
+
+
+def render_diode(parameters=None):
+    p=diode_parameters(parameters)
+    return f".model BM_DIODE D(IS={p['is_a']:.12g} N={p['n']:.12g} RS=1 TNOM=27)"
 ELEMENT_SCHEMA = {'type':'object','properties':{
     'name':{'type':'string'},'kind':{'type':'string','enum':['R','C','D']},
     'a':{'type':'string','enum':list(NODES)},'b':{'type':'string','enum':list(NODES)},
@@ -50,7 +67,7 @@ def validate_netlist(elements):
         if kind=='C' and (e['model']!='none' or not 1e-9<=value<=10e-6):
             raise ValueError('Capacitor outside 1n–10u development range')
         if kind=='D' and (e['model']!='generic_diode' or value!=0):
-            raise ValueError('Use the fixed development diode library; value=0')
+            raise ValueError('Use the bounded development diode family; value=0')
         graph[a].add(b);graph[b].add(a);used|={a,b}
     reached={'IN'}
     while True:
@@ -78,10 +95,11 @@ def render_proposal(elements):
     return '\n'.join(lines)
 
 
-def simulate_netlist(elements,template):
+def simulate_netlist(elements,template,*,diode=None):
     executable=shutil.which('ngspice')
     if not executable:raise RuntimeError('ngspice is required for proposal simulation')
     checked=validate_netlist(elements)
+    diode=diode_parameters(diode)
     settings=Acquisition(**template['settings'])
     if settings.kind=='dc_pair':raise ValueError('Proposal runner currently supports step/sine traces')
     data=template['data'];t=np.asarray(data['time_s']);ref=np.asarray(data['ref_v'])
@@ -101,7 +119,7 @@ def simulate_netlist(elements,template):
     lines.append('+ )')
     if settings.shunt_ohm:lines.append(f'RfixtureShunt drive in {settings.shunt_ohm:.12g}')
     if settings.load_ohm:lines.append(f'RfixtureLoad out 0 {settings.load_ohm:.12g}')
-    lines.extend([render_proposal(checked),DIODE_MODEL,'.temp 27','.options reltol=1e-5 abstol=1e-12'])
+    lines.extend([render_proposal(checked),render_diode(diode),'.temp 27','.options reltol=1e-5 abstol=1e-12'])
     internal=sorted({e[k].lower() for e in checked for k in ('a','b') if e[k] in ('N1','N2')})
     vectors=['v(in)','v(out)',*[f'v({n})' for n in internal],'i(Vdrive)']
     dt=float(np.min(np.diff(t)))/4
@@ -130,4 +148,5 @@ def simulate_netlist(elements,template):
                        'topology_sha256':topology_fingerprint(checked),
                        'harness_sha256':hashlib.sha256(netlist.encode()).hexdigest(),
                        'simulator':'ngspice','peak_source_current_a':float(np.max(np.abs(raw[:,-1]))),
+                       'diode_parameters':diode,'diode_fixed_assumptions':{'rs_ohm':1.,'temperature_c':27.},
                        'physical_part_calibrated':False}

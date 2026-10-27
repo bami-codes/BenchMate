@@ -74,3 +74,13 @@ Reason: replace fixed-value milestones with continuous inference, prevent transi
 
 See [inference details](inference.md), [instrument protocol](instrument.md), and [all development attempts](preboard-validation.json).
 
+## Structure and UI revision — 2026-10-27, before D2
+
+Reason: the previous simulator and proposal library shared diode parameters, so successful prediction did not test parameter mismatch. Truth now uses IS=3 nA/N=1.9; the library starts at 1 nA/1.8 and permits training-only IS=0.1–100 nA/N=1–2.5. RS=1 Ω and 27°C stay fixed. R/C plus shared IS/N is limited to four values, 420 simulator calls and 60 seconds per proposal (individual call timeout 15 seconds); two proposals per run. Require a locally informative log-parameter Jacobian, minimum singular value >1 and condition number <1e5, in addition to optimizer convergence and regional checks. This does not assert physical part calibration.
+
+Add the allowed 4.7 kohm, 1 Hz/1 V loaded sine to training to distinguish R from IS. The 10 kohm load and intermediate-amplitude step remain unused verification conditions. Report all six captures (1 exploration + 3 diagnostic + 2 verification). Freeze both circuit and diode parameters and both command-based predictions before observing verification data. Prior records and their five-capture protocol remain unchanged.
+
+Use neutral structure-discovery wording and English reports. New reports must not invent detection limits or uncertainty that the tools did not report. Keep both live revision attempts: the first completed but its free text asserted an unmeasured capacitance detection limit; the second used the tightened reporting instruction. Report-wording quality is separate from numerical prediction verification.
+
+The English UI uses one renderer for immutable replay and read-only live logs. It shows independent source/mode labels and actor identities; it does not imply a live physical board. No holdout assembly or observation was accessed for this revision.
+

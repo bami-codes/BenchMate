@@ -1,5 +1,6 @@
 from benchmate.records import Recorder
 from benchmate.viewer import export_viewer
+from benchmate.viewer import load_record,render_viewer
 import pytest
 
 
@@ -19,3 +20,34 @@ def test_viewer_escapes_model_content_and_preserves_record(tmp_path):
 def test_viewer_refuses_incomplete_record(tmp_path):
     log=Recorder(tmp_path,mode='synthetic_test')
     with pytest.raises(ValueError,match='incomplete'):export_viewer(log.path)
+
+
+def test_live_prefix_ignores_partial_write_but_never_accepts_corrupt_event(tmp_path):
+    log=Recorder(tmp_path,mode='continuous_live_agent')
+    prefix=load_record(log.path,live=True)
+    assert prefix['transport']=='live_log' and len(prefix['events'])==1
+    complete=log.file.read_bytes()
+    log.file.write_bytes(complete+b'{"unfinished":"\xe2')
+    assert load_record(log.path,live=True)==prefix
+    log.file.write_bytes(complete.replace(b'run_started',b'run_changed'))
+    with pytest.raises(ValueError,match='integrity'):load_record(log.path,live=True)
+
+
+def test_replay_and_live_embed_the_same_renderer_and_separate_transport(tmp_path):
+    log=Recorder(tmp_path,mode='synthetic_test');log.add('run_completed',{'source':'synthetic'})
+    replay=render_viewer(load_record(log.path));live=render_viewer(load_record(log.path,live=True))
+    for html in [replay,live]:
+        assert 'lang="en"' in html and 'window.BenchMateUI=' in html
+        assert 'Connections for this step' in html and 'Experiment trail' in html
+        assert 'data:font/woff2;base64,' in html and '/*FONT_' not in html
+        assert 'SIL OPEN FONT LICENSE' in html
+    assert "connect-src 'none'" in replay and "connect-src 'self'" in live
+    assert '"transport": "replay"' in replay and '"transport": "live_log"' in live
+
+
+def test_live_log_rejects_other_origins_and_hosts():
+    from benchmate.live_viewer import allowed_origin
+    assert allowed_origin('127.0.0.1:8765',None,8765)
+    assert allowed_origin('localhost:8765','http://localhost:8765',8765)
+    assert not allowed_origin('attacker.example:8765',None,8765)
+    assert not allowed_origin('127.0.0.1:8765','https://attacker.example',8765)

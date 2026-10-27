@@ -65,6 +65,9 @@ def main():
     view=sub.add_parser("view",help="Export a self-contained evidence viewer; no API calls")
     view.add_argument("path")
     view.add_argument("--output")
+    watch=sub.add_parser("watch",help="Read-only live log viewer on loopback; uses the same UI as replay")
+    watch.add_argument("path")
+    watch.add_argument("--port",type=int,default=8765)
     args=parser.parse_args()
     try:
         if args.command=="doctor":
@@ -112,6 +115,9 @@ def main():
         elif args.command=="view":
             from .viewer import export_viewer
             show({'report':str(export_viewer(args.path,args.output)),'api_calls':0})
+        elif args.command=="watch":
+            from .live_viewer import serve_viewer
+            serve_viewer(args.path,args.port)
     except (ValueError,RuntimeError,OSError) as exc:
         print(f"benchmate: {exc}",file=sys.stderr)
         return 1

@@ -30,16 +30,20 @@ class Recorder:
         self.sequence+=1
 
 
-def read_events(path):
-    path=Path(path)
-    if path.is_dir(): path=path/"events.jsonl"
+def decode_events(raw, *, require_terminal=True, include_hash=False):
     events=[]; previous="0"*64
-    for line in path.read_text().splitlines():
+    for line in raw.decode('utf-8').splitlines():
         event=json.loads(line)
         digest=event.pop("sha256")
         if event["sequence"] != len(events) or event["previous_sha256"] != previous or hashlib.sha256(canonical(event)).hexdigest()!=digest:
             raise ValueError("Run integrity check failed")
-        events.append(event);previous=digest
-    if not events or events[-1]["kind"] not in ("run_completed","run_failed"):
+        events.append({**event,'sha256':digest} if include_hash else event);previous=digest
+    if require_terminal and (not events or events[-1]["kind"] not in ("run_completed","run_failed")):
         raise ValueError("Run is incomplete; no terminal event")
     return events
+
+
+def read_events(path):
+    path=Path(path)
+    if path.is_dir(): path=path/"events.jsonl"
+    return decode_events(path.read_bytes())

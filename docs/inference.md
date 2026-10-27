@@ -32,11 +32,15 @@ Ranking is a posterior predictive separation/spread proxy with the same whitenin
 
 ## Nonlinear proposals
 
-The validator accepts 1–6 bounded R/C/D elements, rejects code/directives and disconnected nodes, and preserves connections/orientation. A fixed ngspice harness checks simulated voltage/current bounds. At most two R/C values are fitted, 80 simulations per proposal, and two proposals per run.
+The validator accepts 1–6 bounded R/C/D elements, rejects code/directives and disconnected nodes, and preserves connections/orientation. A fixed ngspice harness checks simulated voltage/current bounds. At most two R/C values plus shared diode IS/N are fitted (four values total), with 420 simulator calls and 60 seconds per proposal and two proposals per run. The timer is checked before each call; an in-flight simulator call has its own 15-second timeout.
 
-The generic diode is IS=1 nA, N=1.8, RS=1 Ω at 27°C; this is not a characterized physical 1N4148. Synthetic truth uses an independent Shockley root solver. Reversing a proposed diode changes the simulation and fails the matching test.
+The diode library **starts** at IS=1 nA, N=1.8; training may fit IS within 0.1–100 nA and N within 1–2.5. RS=1 Ω and temperature=27°C remain fixed. All proposed diodes currently share these parameters. Synthetic truth uses an independent Shockley root solver with IS=3 nA, N=1.9, deliberately different from the initial library. Reversing a proposed diode changes the simulation and fails the matching test. Bounded IS/N adaptation addresses parameter mismatch, not arbitrary model error or physical 1N4148 accuracy.
 
-Training: common step plus two 1 Hz sinusoids at 0.2/1 V. Reserved development checks: an unused ±0.35 V step and a 1 V sine with 10 kΩ load. Both predictions precede both verification observations. D2 will freeze the physical conditions separately.
+Training: common step, two unloaded 1 Hz sinusoids at 0.2/1 V, and a 1 V sine with **4.7 kΩ** load. The load separates R from IS, which nearly compensate under unloaded voltage observations. Total budget is one exploration + three diagnostic captures + two verifications = six. Training passes only with optimizer convergence, regional adequacy, and a local log-parameter Jacobian having minimum singular value >1 and condition number <1e5. These are development identifiability checks, not globally calibrated uncertainty bounds.
+
+Reserved development checks remain an unused ±0.35 V step and a 1 V sine with **10 kΩ** load. Both predictions and fitted diode parameters are recorded before either verification observation; no refitting is allowed. Predictions use a circuit-independent commanded waveform, not an RCModel output template. The ideal command must be replaced by a calibrated actuator/timing model for hardware. D2 will freeze the physical conditions separately.
+
+The structure-discovery prompt asks for explanations from observations and reported fit checks, without identifying the hidden circuit as nonlinear or directing attention to two-amplitude patterns. The allowed R/C/D grammar and starting library are declared prior information. The training schedule is fixed by this development protocol; do not claim Spark selected those four conditions.
 
 The first live max-reasoning attempt hit 4,096 output tokens before proposing. The next explicitly used 8,192 and passed both checks. Both remain evidence; neither is final evaluation or a holdout result.
 

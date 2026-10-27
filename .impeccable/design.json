@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T05:51:24.785100Z",
+  "title": "Design System: BenchMate",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Paper Ground"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Figure White"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Charcoal Green"
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Slate Green"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Soft Rule"
+      },
+      "shell": {
+        "role": "primary",
+        "displayName": "Forest Shell"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Bench Green"
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Deep Bench Green"
+      },
+      "tint": {
+        "role": "primary",
+        "displayName": "Pale Green Tint"
+      },
+      "observed": {
+        "role": "secondary",
+        "displayName": "Observed Copper"
+      },
+      "predicted": {
+        "role": "secondary",
+        "displayName": "Prediction Blue"
+      },
+      "drive": {
+        "role": "secondary",
+        "displayName": "Drive Gray"
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Verified Green"
+      },
+      "warning": {
+        "role": "secondary",
+        "displayName": "Pending Ochre"
+      },
+      "error": {
+        "role": "secondary",
+        "displayName": "Failure Red"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Experiment headline",
+        "purpose": "The experiment title, with a smaller narrow-screen size."
+      },
+      "title": {
+        "displayName": "Panel title",
+        "purpose": "Figure, report, trail and connection headings."
+      },
+      "body": {
+        "displayName": "Interface body",
+        "purpose": "Default regular sans-serif prose."
+      },
+      "explanation": {
+        "displayName": "Current explanation",
+        "purpose": "The leading report paragraph; final selector retains this size on narrow screens."
+      },
+      "label": {
+        "displayName": "Control and field label",
+        "purpose": "Semibold action labels and report field headings."
+      },
+      "caption": {
+        "displayName": "Supporting caption",
+        "purpose": "Supporting text; local compact metadata variants are not body defaults."
+      },
+      "code": {
+        "displayName": "Recorded evidence",
+        "purpose": "Original event JSON and netlist text."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "control-background",
+        "value": "background 150ms ease-out",
+        "purpose": "Background-only button hover transitions."
+      },
+      {
+        "name": "trace-arrival",
+        "value": "trace-arrive 700ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Reveal a newly observed trace with clip-path from inset(0 100% 0 0) to inset(0)."
+      },
+      {
+        "name": "replay-event-interval",
+        "value": "950ms",
+        "purpose": "Explicitly started replay advances one event per interval."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation:none!important;transition:none!important;scroll-behavior:auto!important",
+        "purpose": "Applied to all elements and pseudo-elements under prefers-reduced-motion:reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-phone-max",
+        "value": "480px"
+      },
+      {
+        "name": "single-column-max",
+        "value": "800px"
+      },
+      {
+        "name": "compact-desktop-min",
+        "value": "801px"
+      },
+      {
+        "name": "compact-columns-max",
+        "value": "1100px"
+      },
+      {
+        "name": "wide-column-min",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Replay action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The explicit action that advances recorded experiment events.",
+      "html": "<button class=\"ds-replay\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"m7 4 8 6-8 6Z\"/></svg><span>Replay run</span></button>",
+      "css": ".ds-replay{border:1px solid var(--line,#dce3dc);border-radius:5px;background:var(--surface,#fff);color:var(--ink,#1c2b27);min-height:36px;padding:7px 12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font:600 12px/1.5 var(--font,Plex,Arial,sans-serif);cursor:pointer;transition:background 150ms ease-out;background:var(--accent,#1f6954);border-color:var(--accent,#1f6954);color:var(--surface,#fff)}.ds-replay:hover:not(:disabled){background:var(--accent-hover,#164c3e)}.ds-replay:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-replay:disabled{cursor:default;opacity:.45}@media(max-width:800px){.ds-replay{min-height:40px}}@media(prefers-reduced-motion:reduce){.ds-replay{transition:none}}.ds-replay svg{width:14px;height:14px;fill:currentColor;stroke:none;flex:none}"
+    },
+    {
+      "name": "Playback step action",
+      "kind": "button",
+      "refersTo": "button-standard",
+      "description": "An icon action with an explicit accessible name; transparent within playback.",
+      "html": "<button class=\"ds-step\" aria-label=\"Next action\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M14 4v12M6 4l7 6-7 6\"/></svg></button>",
+      "css": ".ds-step{border:1px solid var(--line,#dce3dc);border-radius:5px;background:var(--surface,#fff);color:var(--ink,#1c2b27);min-height:36px;padding:7px 12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font:600 12px/1.5 var(--font,Plex,Arial,sans-serif);cursor:pointer;transition:background 150ms ease-out;width:32px;padding:4px;background:transparent;border:0}.ds-step:hover:not(:disabled){background:var(--tint,#eaf1eb)}.ds-step:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-step:disabled{cursor:default;opacity:.45}@media(max-width:800px){.ds-step{min-height:40px}}@media(prefers-reduced-motion:reduce){.ds-step{transition:none}}.ds-step svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;flex:none}@media(max-width:480px){.ds-step{width:26px}}"
+    },
+    {
+      "name": "Quiet action",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "The secondary action shown when a live log can be followed.",
+      "html": "<button class=\"ds-quiet\">Follow live</button>",
+      "css": ".ds-quiet{border:1px solid var(--line,#dce3dc);border-radius:5px;background:var(--surface,#fff);color:var(--ink,#1c2b27);min-height:36px;padding:7px 12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font:600 12px/1.5 var(--font,Plex,Arial,sans-serif);cursor:pointer;transition:background 150ms ease-out;background:transparent;border-color:transparent}.ds-quiet:hover:not(:disabled){background:var(--tint,#eaf1eb)}.ds-quiet:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-quiet:disabled{cursor:default;opacity:.45}@media(max-width:800px){.ds-quiet{min-height:40px}}@media(prefers-reduced-motion:reduce){.ds-quiet{transition:none}}"
+    },
+    {
+      "name": "Inverse header action",
+      "kind": "button",
+      "refersTo": "button-inverse",
+      "description": "Export action on the dark shell; the frame reproduces its actual context.",
+      "html": "<div class=\"ds-shell\"><button class=\"ds-export\">Export record <svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M10 3v9m-3-3 3 3 3-3M4 13v4h12v-4\"/></svg></button></div>",
+      "css": ".ds-export{border:1px solid var(--line,#dce3dc);border-radius:5px;background:var(--surface,#fff);color:var(--ink,#1c2b27);min-height:36px;padding:7px 12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font:600 12px/1.5 var(--font,Plex,Arial,sans-serif);cursor:pointer;transition:background 150ms ease-out;background:transparent;color:#e8f1eb;border-color:#527265}.ds-export:hover:not(:disabled){background:#294f43}.ds-export:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-export:disabled{cursor:default;opacity:.45}@media(max-width:800px){.ds-export{min-height:40px}}@media(prefers-reduced-motion:reduce){.ds-export{transition:none}}.ds-shell{background:var(--shell,#183d35);padding:16px;display:flex;justify-content:flex-end}.ds-export:focus-visible{outline-color:#c2e4d1}.ds-export svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;flex:none}@media(max-width:480px){.ds-export{font-size:11px;padding:6px 8px;gap:5px}}"
+    },
+    {
+      "name": "Event scrubber",
+      "kind": "input",
+      "refersTo": "range",
+      "description": "Native range input; event-index limits come from the record.",
+      "html": "<input class=\"ds-range\" type=\"range\" aria-label=\"Experiment event\" min=\"0\" max=\"1\" value=\"0\" step=\"1\">",
+      "css": ".ds-range{min-width:45px;height:24px;accent-color:var(--accent,#1f6954);cursor:pointer;font:inherit}.ds-range:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}"
+    },
+    {
+      "name": "Independent provenance badges",
+      "kind": "chip",
+      "refersTo": "provenance-badge",
+      "description": "Origin and viewing mode remain separate written labels.",
+      "html": "<div class=\"ds-provenance\"><span class=\"ds-badge ds-source\">Source pending</span><span class=\"ds-badge\">Replay</span></div>",
+      "css": ".ds-provenance{display:flex;gap:7px;flex-wrap:wrap}.ds-badge{display:inline-flex;align-items:center;min-height:25px;padding:3px 8px;border:1px solid var(--line,#dce3dc);border-radius:4px;background:var(--surface,#fff);color:var(--ink,#1c2b27);font:600 11px/1.5 var(--font,Plex,Arial,sans-serif);white-space:nowrap}.ds-source{border-color:#dfc7a4;background:#fff6e7;color:#895118}"
+    },
+    {
+      "name": "Actor badges",
+      "kind": "chip",
+      "refersTo": "actor-badge",
+      "description": "Written actor identity with a muted category tint.",
+      "html": "<div class=\"ds-actors\"><span class=\"ds-actor ds-spark\">Spark</span><span class=\"ds-actor ds-engine\">Engine</span><span class=\"ds-actor ds-operator\">Operator</span></div>",
+      "css": ".ds-actors{display:flex;gap:8px;flex-wrap:wrap}.ds-actor{display:inline-flex;align-items:center;border:1px solid #d7e1d9;border-radius:4px;min-height:21px;padding:1px 6px;color:#496157;font:600 10px/1.5 var(--font,Plex,Arial,sans-serif);white-space:nowrap}.ds-spark{color:#254f80;background:#edf3fa;border-color:#c9d9ec}.ds-operator{color:#805323;background:#fcf3e7;border-color:#e7d5bb}.ds-engine{background:#f0f3ee}"
+    },
+    {
+      "name": "Evidence surface",
+      "kind": "card",
+      "refersTo": "surface",
+      "description": "The shared white frame and heading treatment of the figure and trail.",
+      "html": "<section class=\"ds-surface\"><div class=\"ds-heading\"><h2 class=\"ds-title\">Prediction &amp; observation</h2></div></section>",
+      "css": ".ds-surface{background:var(--surface,#fff);border:1px solid var(--line,#dce3dc);border-radius:var(--radius,8px);overflow:hidden;min-width:0;color:var(--ink,#1c2b27)}.ds-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px}.ds-title{margin:0;font:600 15px/1.5 var(--font,Plex,Arial,sans-serif);letter-spacing:-.01em}@media(max-width:1100px){.ds-heading{padding:13px 14px}}@media(max-width:480px){.ds-heading{gap:7px}.ds-title{font-size:14px}}"
+    },
+    {
+      "name": "Waveform channel controls",
+      "kind": "custom",
+      "refersTo": "trace-toggle",
+      "description": "Native pressed-state buttons distinguish solid observation, dashed prediction and optional drive.",
+      "html": "<div class=\"ds-traces\" role=\"group\" aria-label=\"Waveform channels\"><button class=\"ds-trace\" aria-pressed=\"true\"><span class=\"ds-line\"></span>Observed OUT</button><button class=\"ds-trace ds-predicted\" aria-pressed=\"true\"><span class=\"ds-line\"></span>Predicted OUT</button><button class=\"ds-trace ds-drive\" aria-pressed=\"false\"><span class=\"ds-line\"></span>Drive</button></div>",
+      "css": ".ds-traces{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.ds-trace{padding:3px 0;border:0;background:transparent;font:400 11px/1.5 var(--font,Plex,Arial,sans-serif);color:var(--secondary,#55635e);display:flex;align-items:center;gap:6px;min-height:28px;cursor:pointer}.ds-trace:hover{color:var(--ink,#1c2b27)}.ds-trace:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-line{display:inline-block;width:16px;height:3px;background:var(--observed,#bb4c27)}.ds-predicted .ds-line{background:transparent;border-top:2px dashed var(--predicted,#315e91)}.ds-drive .ds-line{background:var(--drive,#7a827e)}.ds-trace[aria-pressed=false] .ds-line{opacity:.4;background:transparent;border:1px solid currentColor}@media(max-width:800px){.ds-trace{min-height:36px}}@media(max-width:480px){.ds-trace{font-size:10px}.ds-traces{gap:12px}}"
+    },
+    {
+      "name": "Experiment trail navigation",
+      "kind": "nav",
+      "refersTo": "trail-event",
+      "description": "An action row aligns elapsed time, responsible actor and event; current state uses tint and weight.",
+      "html": "<ol class=\"ds-trail\" aria-label=\"Experiment actions\"><li><button class=\"ds-event\" aria-current=\"step\"><span class=\"ds-time\">—</span><span class=\"ds-trail-actor\">Engine</span><span class=\"ds-event-label\">Prediction committed</span><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M5 10h9m-4-4 4 4-4 4\"/></svg></button></li></ol>",
+      "css": ".ds-trail{margin:0;padding:5px 8px;list-style:none;max-height:174px;overflow:auto;scrollbar-color:#b9c6bd transparent;scrollbar-width:thin}.ds-event{display:grid;grid-template-columns:48px 64px minmax(0,1fr) 18px;align-items:center;gap:12px;width:100%;border:0;border-radius:5px;text-align:left;background:none;padding:9px 10px;color:var(--ink,#1c2b27);min-height:43px;cursor:pointer;font:400 14px/1.5 var(--font,Plex,Arial,sans-serif)}.ds-event:hover{background:#f0f4ee}.ds-event[aria-current=step]{background:var(--tint,#eaf1eb)}.ds-event[aria-current=step] .ds-event-label{font-weight:600}.ds-event:focus-visible{outline:2px solid var(--accent,#1f6954);outline-offset:4px}.ds-time{font:10px var(--mono,ui-monospace,SFMono-Regular,Consolas,monospace);color:var(--secondary,#55635e)}.ds-event-label{font-size:12px;overflow-wrap:anywhere}.ds-trail-actor{justify-self:start;display:inline-flex;align-items:center;border:1px solid #d7e1d9;border-radius:4px;min-height:21px;padding:1px 6px;color:#496157;background:#f0f3ee;font-size:10px;white-space:nowrap;font-weight:600}.ds-event svg{width:15px;height:15px;stroke:var(--accent,#1f6954);fill:none;stroke-width:1.5}@media(max-width:800px){.ds-trail{max-height:300px}.ds-event{min-height:44px}}@media(max-width:480px){.ds-event{grid-template-columns:37px 55px minmax(0,1fr) 12px;gap:8px;padding:9px 7px}.ds-event-label{font-size:11px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Scientific Poster",
+    "overview": "BenchMate uses the clarity of a well-typeset scientific poster: a dominant data figure, aligned captions, a concise interpretation column and a traceable methods sequence. Warm off-white ground, white figures and a dark green masthead give a compact working surface a calm, deliberate character. The interface is in English and supports operating and reviewing an experiment.\n\nThe waveform carries the visual emphasis. Interpretation stays beside evidence; actor labels and provenance stay readable without becoming decorative metrics. The world is built with typography, rules and inline vector diagrams, with embedded fonts and no external runtime assets needed by an exported report.",
+    "keyCharacteristics": [
+      "A large evidence figure with a restrained interpretation column.",
+      "Dark green actions and shell, off-white ground and white bounded surfaces.",
+      "Solid orange observations and dashed blue precommitted predictions.",
+      "Flat depth, modest corners and fine dividers.",
+      "Explicit actors, independent provenance labels and accessible native controls."
+    ],
+    "rules": [
+      {
+        "name": "The Independent Provenance Rule.",
+        "body": "Keep data origin and viewing mode as separate labels. Live transport never supplies a physical or calibrated status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Surface Rule.",
+        "body": "Use tone, borders and spacing to separate information; keep controls and evidence surfaces flat at rest and on hover.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Evidence Order Rule.",
+        "body": "Show only conclusions supported by the selected event prefix, and preserve the distinction between prediction before acquisition and observation after it.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** keep the waveform visually dominant and the explanation adjacent to its evidence.",
+      "**Do** preserve solid observed and dashed predicted traces, with text labels for both.",
+      "**Do** show the responsible actor and keep source origin separate from replay or live transport.",
+      "**Do** retain native keyboard controls, visible focus, accessible labels and reduced-motion support.",
+      "**Do** preserve the narrow-screen order: figure, report, trail, connections.",
+      "**Do** keep full reports, original events and source hashes accessible through disclosure."
+    ],
+    "donts": [
+      "**Don't** infer calibrated hardware from a live connection, an animation or a successful software check.",
+      "**Don't** reveal future conclusions or attribute an engine summary to the model without evidence.",
+      "**Don't** add simulated instrument casing, decorative metrics or unsupported measurement precision.",
+      "**Don't** replace the flat paper-like hierarchy with shadows, gradients or ornamental imagery.",
+      "**Don't** promote compact metadata sizes into defaults for ordinary reading text."
+    ]
+  }
+}
