@@ -48,6 +48,7 @@ def main():
     instrument.add_argument("--kind",choices=["hold","step","sine"],default="step")
     instrument.add_argument("--samples",type=int,default=512)
     instrument.add_argument("--arm-only",action="store_true",help="Establish REF with DUT disconnected; capture is a separate command")
+    instrument.add_argument("--boot-id",help="Boot ID returned by --arm-only; required for capture")
     instrument.add_argument("--period-us",type=int,default=500)
     instrument.add_argument("--amplitude-v",type=float,default=.5)
     instrument.add_argument("--frequency-hz",type=float)
@@ -100,7 +101,7 @@ def main():
             show({"run":str(path),**result})
         elif args.command=="instrument":
             from .instrument import InstrumentConfig,acquire_block
-            path,result=acquire_block(args.port,InstrumentConfig(args.vref_v,args.ref_v),output=args.output,arm_only=args.arm_only,
+            path,result=acquire_block(args.port,InstrumentConfig(args.vref_v,args.ref_v),output=args.output,arm_only=args.arm_only,expected_boot_id=args.boot_id,
                 kind=args.kind,samples=args.samples,period_us=args.period_us,amplitude_v=args.amplitude_v,
                 frequency_hz=args.frequency_hz,hold_v=args.hold_v)
             show({"run":str(path),**result})

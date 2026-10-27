@@ -1,0 +1,111 @@
+{
+  "schema": "benchmate-dc-response-review-v1",
+  "analysis_date": "2026-10-28",
+  "measurement_date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "source_manifest": "../examples/hardware-dc-loopback/manifest.json",
+  "source_manifest_sha256": "77800e41fbf99c2e6f9a5a3d68d694f4cbecc61180db8ca59247ac822e193a3b",
+  "method": "Unweighted ordinary least squares with intercept: one 64-sample mean per channel at each of five DAC codes. Residuals are in-sample; no held-out response points.",
+  "nominal_levels_mv": [
+    600,
+    1100,
+    1600,
+    2100,
+    2600
+  ],
+  "channels": {
+    "A1": {
+      "slope_adc_counts_per_dac_code": 3.9977197966507174,
+      "intercept_adc_counts": -0.6919931220130803,
+      "max_absolute_residual_of_fitted_means_counts": 0.5218750000040018,
+      "sample_sd_counts_by_point": [
+        5.237229365663817,
+        3.7963733215827706,
+        5.8918830363717944,
+        3.2832170030153183,
+        2.8245223644541366
+      ],
+      "iid_standard_error_counts_by_point_assumption_only": [
+        0.6546536707079771,
+        0.47454666519784633,
+        0.7364853795464743,
+        0.4104021253769148,
+        0.3530652955567671
+      ]
+    },
+    "A2": {
+      "slope_adc_counts_per_dac_code": 3.999020633971293,
+      "intercept_adc_counts": -3.7280876196222104,
+      "max_absolute_residual_of_fitted_means_counts": 0.9156250000023647,
+      "sample_sd_counts_by_point": [
+        5.238649862412297,
+        3.812573184309291,
+        7.7274377157498755,
+        3.4317321740319002,
+        2.7787101609793994
+      ],
+      "iid_standard_error_counts_by_point_assumption_only": [
+        0.6548312328015371,
+        0.47657164803866137,
+        0.9659297144687344,
+        0.42896652175398753,
+        0.3473387701224249
+      ]
+    },
+    "A3": {
+      "slope_adc_counts_per_dac_code": 3.996990879186604,
+      "intercept_adc_counts": 1.5075695275078744,
+      "max_absolute_residual_of_fitted_means_counts": 0.8593749999972715,
+      "sample_sd_counts_by_point": [
+        4.555407348537682,
+        3.247557079425546,
+        2.11944886516837,
+        2.8680903856603717,
+        2.7741990836195507
+      ],
+      "iid_standard_error_counts_by_point_assumption_only": [
+        0.5694259185672103,
+        0.40594463492819327,
+        0.26493110814604626,
+        0.35851129820754646,
+        0.34677488545244384
+      ]
+    },
+    "A4": {
+      "slope_adc_counts_per_dac_code": 3.996919856459331,
+      "intercept_adc_counts": -2.2568480861271105,
+      "max_absolute_residual_of_fitted_means_counts": 0.6156250000012733,
+      "sample_sd_counts_by_point": [
+        4.696941549629388,
+        2.690693469945313,
+        1.7627089541790095,
+        1.8553199997809815,
+        1.9974562195969026
+      ],
+      "iid_standard_error_counts_by_point_assumption_only": [
+        0.5871176937036735,
+        0.3363366837431641,
+        0.2203386192723762,
+        0.2319149999726227,
+        0.24968202744961282
+      ]
+    }
+  },
+  "interpretation": "Five coarse DC means lie close to an affine combined DAC/ADC response. This does not isolate either converter or validate waveform/noise behavior.",
+  "limits": [
+    "The sample-mean standard error shown is conditional on independent, stationary samples. Correlation, drift, systematic error and model discrepancy are not removed by dividing by sqrt(64).",
+    "The original 0.6 V point and later points used different Mac USB ports; this is not a controlled transfer calibration.",
+    "DMM display resolution is 0.01 V, not independently verified accuracy; a fitted rail voltage is not a separate supply measurement.",
+    "Five fitted means cannot establish all-code INL/DNL or sub-millivolt absolute accuracy.",
+    "B5 residual contrasts cited from the current demo are synthetic and do not establish physical noise margins.",
+    "The LM358/A5 path, dynamic channel effects, usable frequency range, noise covariance and actual B5 repeatability remain unmeasured."
+  ],
+  "previous_test_result": {
+    "commit": "191aff7e2acb0be09d7be22b323faa747e404b5b",
+    "environment": "GitHub Actions Ubuntu with ngspice 47",
+    "passed": 140,
+    "skipped": 0,
+    "seconds": 96.23,
+    "url": "https://github.com/bami-codes/BenchMate/actions/runs/40526624365"
+  }
+}

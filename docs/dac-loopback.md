@@ -40,6 +40,25 @@ Preparation checks: the sketch compiles for UNO R4 WiFi; 28 targeted loopback,
 bringup and instrument tests pass. Earlier GND and 3.29 V bringup captures are
 separate checks. Full fixture calibration and circuit diagnosis remain pending.
 
+## Review of the five means — 2026-10-28
+
+The [recalculation](dc-response-analysis.json) fits one line with an intercept to
+the five means of each channel. Slopes are 3.9977, 3.9990, 3.9970 and 3.9969 ADC
+counts per DAC code. Maximum in-sample residuals are 0.522, 0.916, 0.859 and 0.616
+counts. This is encouraging coarse combined-response evidence, not held-out
+validation, separate converter linearity, or sub-millivolt absolute accuracy.
+
+Single-sample standard deviations range from 1.76 to 7.73 counts across these short
+blocks. Dividing by sqrt(64) gives a mean standard error only under independent,
+stationary noise; covariance, drift and systematic errors can invalidate that
+estimate. A waveform cannot simply be averaged over time without losing its shape.
+The B5 residual contrast in the existing demo uses synthetic observations. Physical
+noise margin still needs the LM358 paths, dynamic sampling and repeated real circuits.
+
+The previous [GitHub CI run](https://github.com/bami-codes/BenchMate/actions/runs/40526624365)
+actually reported **140 passed, zero skipped** with ngspice installed. A different
+environment reporting 129 passed and 11 skipped has not run those 11 checks.
+
 ## Wiring, with USB disconnected
 
 - Remove the common feed from GND (or any other supply rail) before connecting it to A0.

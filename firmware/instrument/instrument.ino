@@ -2,6 +2,7 @@
 // Raw DAC codes, raw ADC counts, actual read-completion timestamps.
 #include <Arduino.h>
 #include <math.h>
+#include "boot_identity.h"
 
 // Full per-sample timing is retained in D2 mode. 512 fits both boards including
 // the core's reserved heap/stack; a later compressed mode needs measured jitter.
@@ -17,9 +18,20 @@ uint16_t lineSize = 0;
 bool overflowed = false, armed = false;
 uint16_t currentCode=0, refCode=0, minCode=0, maxCode=0, maxJump=0;
 uint16_t settleMs=1200, stableDelta=20, clipLow=16, clipHigh=16367;
+char bootId[33]={0};
+bool bootIdReady=false;
+
+void beginResponse(const char *type) {
+  Serial.print("{\"protocol\":\"benchmate-instrument-v2\",\"type\":\"");Serial.print(type);
+  Serial.print("\",\"boot_id\":");
+  if (bootIdReady) {Serial.print('"');Serial.print(bootId);Serial.print('"');}
+  else Serial.print("null");
+  Serial.print(",\"boot_id_ready\":");Serial.print(bootIdReady?"true":"false");
+  Serial.print(",\"uptime_ms\":");Serial.print((uint32_t)millis());
+}
 
 void error(const char *message) {
-  Serial.print("{\"type\":\"error\",\"message\":\""); Serial.print(message); Serial.println("\"}");
+  beginResponse("error");Serial.print(",\"message\":\""); Serial.print(message); Serial.println("\"}");
 }
 
 void writeCode(uint16_t code) { analogWrite(A0,code); currentCode=code; }
@@ -71,7 +83,8 @@ bool moveSettled(uint16_t target) {
 }
 
 void ping() {
-  Serial.print("{\"protocol\":\"benchmate-instrument-v1\",\"type\":\"pong\",\"adc_bits\":14,\"dac_bits\":12,\"calibrated\":false,\"max_samples\":512,\"armed\":");
+  beginResponse("pong");
+  Serial.print(",\"adc_bits\":14,\"dac_bits\":12,\"calibrated\":false,\"max_samples\":512,\"armed\":");
   Serial.print(armed?"true":"false");Serial.print(",\"ref_code\":");Serial.print(refCode);
   Serial.print(",\"max_jump_code\":");Serial.print(maxJump);Serial.println("}");
 }
@@ -138,7 +151,8 @@ void capture(const char *kind,uint32_t count,uint32_t period,uint32_t amplitude,
   uint8_t minState=255;
   for (uint8_t c=0;c<16;c++) minState=min(minState,(uint8_t)R_ADC0->ADSSTR[c]);
   minState=min(minState,(uint8_t)R_ADC0->ADSSTRL);
-  Serial.print("{\"protocol\":\"benchmate-instrument-v1\",\"type\":\"capture\",\"source\":\"hardware_uncalibrated\",\"adc_bits\":14,\"dac_bits\":12,\"channels\":[\"A1\",\"A2\",\"A3\",\"A4\"],\"timestamp_semantics\":\"analogRead_completion_us\",\"kind\":\"");
+  beginResponse("capture");
+  Serial.print(",\"source\":\"hardware_uncalibrated\",\"adc_bits\":14,\"dac_bits\":12,\"channels\":[\"A1\",\"A2\",\"A3\",\"A4\"],\"timestamp_semantics\":\"analogRead_completion_us\",\"kind\":\"");
   Serial.print(kind);Serial.print("\",\"requested_samples\":");Serial.print(count);
   Serial.print(",\"period_us\":");Serial.print(period);
   Serial.print(",\"amplitude_or_hold_code\":");Serial.print(amplitude);
@@ -165,10 +179,14 @@ void command() {
   while (token && n<11) {tokens[n++]=token;token=strtok(nullptr," ");}
   if (token||!n) {error("invalid command");return;}
   if (!strcmp(tokens[0],"PING")&&n==1) {ping();return;}
-  if (!strcmp(tokens[0],"STOP")&&n==1) {park();Serial.println("{\"type\":\"parked\"}");return;}
-  if (!strcmp(tokens[0],"ARM")&&n==9) {
+  if ((!strcmp(tokens[0],"ARM")||!strcmp(tokens[0],"CAPTURE")||!strcmp(tokens[0],"STOP")) &&
+      (n<2||!bootIdReady||strcmp(tokens[1],bootId))) {
+    error("boot identity mismatch or unavailable; output not changed");return;
+  }
+  if (!strcmp(tokens[0],"STOP")&&n==2) {park();beginResponse("parked");Serial.println("}");return;}
+  if (!strcmp(tokens[0],"ARM")&&n==10) {
     uint32_t v[8];
-    for (uint8_t i=0;i<8;i++) if (!number(tokens[i+1],v[i])) {error("invalid ARM number");return;}
+    for (uint8_t i=0;i<8;i++) if (!number(tokens[i+2],v[i])) {error("invalid ARM number");return;}
     if (v[1]>=v[0]||v[0]>=v[2]||v[2]>4095||v[3]<1||v[3]>1023||
         v[0]-v[1]>v[3]||v[2]-v[0]>v[3]||v[4]<50||v[4]>5000||v[5]<1||v[5]>1000||v[6]>=v[7]||v[7]>=16384) {
       error("invalid ARM limits");return;
@@ -177,18 +195,19 @@ void command() {
     refCode=v[0];minCode=v[1];maxCode=v[2];maxJump=v[3];settleMs=v[4];stableDelta=v[5];clipLow=v[6];clipHigh=v[7];
     if (!armed) {writeCode(0);armed=true;}
     // Initial ramp is performed before attaching a DUT. No settling claim here.
-    park();Serial.println("{\"type\":\"armed\",\"calibrated\":false}");return;
+    park();beginResponse("armed");Serial.println(",\"calibrated\":false}");return;
   }
-  if (!strcmp(tokens[0],"CAPTURE")&&n==6) {
+  if (!strcmp(tokens[0],"CAPTURE")&&n==7) {
     uint32_t v[4];
-    for (uint8_t i=0;i<4;i++) if (!number(tokens[i+2],v[i])) {error("invalid capture number");return;}
-    capture(tokens[1],v[0],v[1],v[2],v[3]);return;
+    for (uint8_t i=0;i<4;i++) if (!number(tokens[i+3],v[i])) {error("invalid capture number");return;}
+    capture(tokens[2],v[0],v[1],v[2],v[3]);return;
   }
   error("unknown command");
 }
 
 void setup() {
   Serial.begin(115200);analogReadResolution(14);analogWriteResolution(12);
+  bootIdReady=makeBootIdentity(bootId);
   for (uint8_t c=0;c<NCH;c++) analogRead(PINS[c]);
   // RA4M1 sampling state registers, based on the installed Renesas core header.
   // Report readback in every packet so D2 can detect an overridden setting.
@@ -204,7 +223,8 @@ void loop() {
       line[lineSize]='\0';if (overflowed) error("command too long");else command();
       lineSize=0;overflowed=false;
     } else if (!overflowed) {
-      if (lineSize<sizeof(line)-1) line[lineSize++]=ch;else overflowed=true;
+      if (ch=='\0') overflowed=true;
+      else if (lineSize<sizeof(line)-1) line[lineSize++]=ch;else overflowed=true;
     }
   }
 }

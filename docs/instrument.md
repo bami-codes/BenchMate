@@ -1,6 +1,6 @@
 # D2 계측 준비
 
-보드 도착 전 작성·컴파일한 펌웨어다. 실제 출력·속도·정착·채널 시간차는 아직 검증하지 않았다. 하드웨어 원시값은 진단 엔진에 넣지 않는다.
+계측 전용 `instrument` 펌웨어는 아직 업로드·실측하지 않았다. 2026-10-28에 부팅 연속성 검사를 추가한 v2를 WiFi와 Minima용으로 컴파일했다. 앞서 실측한 기본 ADC·DC 루프백 펌웨어와 구분한다. 실제 픽스처 출력·속도·정착·채널 시간차는 아직 검증하지 않았고, 하드웨어 원시값은 진단 엔진에 넣지 않는다.
 
 ## 첫 연결
 
@@ -22,15 +22,27 @@ Minima에서는 FQBN 끝을 `minima`로 바꾼다.
 uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --arm-only
 ```
 
-출력을 확인한 뒤 DUT를 연결하고 취득한다. 보드가 리셋됐거나 설정이 다르면 취득은 재무장하지 않고 실패한다. 다시 DUT를 빼고 REF부터 설정한다.
+결과의 `boot_id`를 보관한다. 출력을 확인한 뒤 DUT를 연결하고, 그 ID를 `--boot-id`로 전달해 취득한다. 보드가 리셋됐거나 설정이 다르면 취득은 재무장하지 않고 실패한다. 다시 DUT를 빼고 REF부터 설정한다. 아래 `실제부팅ID`는 `--arm-only`가 반환한 32자리 소문자 16진수로 바꾼다.
 
 ```sh
-uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --kind hold --hold-v 1.6
-uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --kind step --amplitude-v 0.5 --samples 512 --period-us 500
-uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --kind sine --amplitude-v 0.2 --frequency-hz 1 --samples 512 --period-us 4000
+uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --boot-id 실제부팅ID --kind hold --hold-v 1.6
+uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --boot-id 실제부팅ID --kind step --amplitude-v 0.5 --samples 512 --period-us 500
+uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --boot-id 실제부팅ID --kind sine --amplitude-v 0.2 --frequency-hz 1 --samples 512 --period-us 4000
 ```
 
 명령 전압은 입력한 공급값으로 환산한 DAC 설정값이다. 보정된 실측 전압이 아니므로 A3·A4의 실제 파형을 확인해야 한다.
+
+## 재시작·통신 단절 시 데이터 처리
+
+- 프로토콜은 `benchmate-instrument-v2`다. PING·ARM·CAPTURE·STOP·오류 응답에 모두 `boot_id`, `boot_id_ready`, `uptime_ms`를 넣는다. 기존 v1 응답은 부팅 연속성을 검증할 수 없어 거절한다. 이전 DC 루프백 기록과 펌웨어는 그대로 유지한다.
+- 부팅 ID는 RA4M1 하드웨어 난수 128비트로 생성한다. [Renesas 코어 1.6.0에서 사용하는 초기화·난수 함수](https://github.com/arduino/ArduinoCore-renesas/blob/1.6.0/cores/arduino/WMath.cpp)를 쓰되 두 반환 상태를 모두 확인한다. 실패하면 ID는 `null`이고 출력 명령을 허용하지 않는다. 장치 일련번호·`millis()`·고정 시드 난수를 ID로 대신 쓰지 않는다. 난수 ID의 충돌 확률은 0이 아니며 인증 수단도 아니다.
+- ARM·CAPTURE·STOP에는 대상 부팅 ID를 넣는다. 보드가 PING 직후 재시작되어도 이전 ID의 명령을 출력 변경 전에 거절한다. 호스트는 ARM 때 받은 ID를 별도 CAPTURE 호출에도 요구한다.
+- 응답마다 같은 ID와 정상 진행하는 uptime인지 확인한다. 짧은 취득 구간에서 uint32 `millis()`의 정상 순환은 허용하고 역행은 거절한다. 취득 응답을 받은 뒤 마지막 PING까지 같은 부팅이어야 `run_completed`를 기록한다.
+- ID 변경·누락, 잘린 응답, 타임아웃, 연결 끊김, 잘못된 블록은 `instrument_run_invalidated`와 `run_failed`로 남긴다. 승인 샘플은 0이고 자동 재무장·재시도는 하지 않는다. 받은 원시 블록이나 잘린 응답은 보존한다. 부팅 변화가 확인되지 않은 단절을 임의로 '재시작'이라고 진단하지 않는다.
+
+소프트웨어에서는 재시작 전·중·후와 부분 응답을 주입했고, 실제 스케치의 파서를 가짜 IO 환경에서도 실행해 이전 ID 명령이 출력을 바꾸지 않는 것을 확인했다. 하드웨어 난수의 실제 동작과 RESET·USB 분리 검사는 **D2에 DUT를 뺀 상태에서** 해야 한다. 같은 케이블과 마지막 측정에 성공한 맥 포트를 유지하고, 바꾸면 기록한다.
+
+D2 확인 순서: PING ID 확인 → RESET 한 번 → 새 ID 확인 → 이전 ID ARM/CAPTURE가 거절되는지 확인 → 새 ID로 다시 명시적 ARM. 이후 취득 중 RESET/USB 분리를 시험해 성공 결과가 생기지 않고 실패 기록이 남는지 확인한다. 이 검사를 아직 실제 보드에서 수행했다고 주장하지 않는다.
 
 ## 구현된 경계와 남은 확인
 
@@ -45,7 +57,7 @@ uv run benchmate instrument --port 실제포트 --vref-v 4.7 --ref-v 1.6 --kind 
 
 D2에서는 지터·채널 시각을 가정하지 않고 전부 기록한다. 1,000샘플은 코어 예약 힙/스택까지 포함하면 링크에 실패해 512샘플로 제한했다. 실측 후 압축 시각 표현과 긴 블록을 별도로 검토한다.
 
-컴파일 결과: WiFi flash 64,420 B / static RAM 18,192 B; Minima flash 51,888 B / static RAM 15,392 B. 업로드·실측은 하지 않았다. 현재 코어의 `analogRead`와 긴 샘플 시간을 포함한 실제 속도는 D2에서 확인한다. 5 kHz 취득이나 500 Hz 신호 대역을 달성했다고 주장하지 않는다.
+v2 컴파일 결과: WiFi flash 69,236 B / static RAM 18,356 B; Minima flash 65,748 B / static RAM 15,920 B. 업로드·실측은 하지 않았다. 현재 코어의 `analogRead`와 긴 샘플 시간을 포함한 실제 속도는 D2에서 확인한다. 5 kHz 취득이나 500 Hz 신호 대역을 달성했다고 주장하지 않는다.
 
 D2에서 전원·REF, DAC/A3 범위·왜곡, 풀다운, A1–A5 오프셋·기울기, aperture·지터, 채널별 σ·ρ·모델 오차, 전류 검출 한계, 정착 기준, 주파수 상한·여섯 주파수와 검증 조건을 고정한다. 보정된 픽스처 모델이 연결되기 전까지 하드웨어 추론은 차단한다.
 
