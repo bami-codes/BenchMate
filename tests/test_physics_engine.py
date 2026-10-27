@@ -95,4 +95,3 @@ def test_diagnosis_does_not_import_truth_fixtures():
         if isinstance(node,ast.ImportFrom):
             assert node.module not in ("simulation","workflow")
     assert "FIXTURES" not in source and ".private" not in source
-

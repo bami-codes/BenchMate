@@ -20,4 +20,3 @@ def test_invalid_captures_are_rejected(change):
     elif change=="source": data["source"]="calibrated"
     else: data["channels"].reverse()
     with pytest.raises(ValueError): validate_capture(data)
-

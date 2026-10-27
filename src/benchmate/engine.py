@@ -95,4 +95,3 @@ def verify_prediction(prediction: dict, capture: dict, *, sigma_v=0.003):
     rms=float(np.sqrt(np.mean(r*r)))
     return {"passed":rms <= 5*sigma_v,"rms_error_v":rms,"threshold_v":5*sigma_v,
             "refitted_on_verification":False}
-

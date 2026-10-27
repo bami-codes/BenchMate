@@ -49,4 +49,3 @@ def capture_raw(port, *, output="runs"):
     except Exception as exc:
         log.add("run_failed",{"error":type(exc).__name__,"source":"hardware_uncalibrated"})
         raise RuntimeError(f"Board capture failed ({type(exc).__name__}); record: {log.path}") from None
-

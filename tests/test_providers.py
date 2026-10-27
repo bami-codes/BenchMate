@@ -78,4 +78,3 @@ def test_budget_reservation_fails_closed(tmp_path):
     with pytest.raises(ProviderError,match="allowance"):
         reserve_budget(file,"meta",1)
     assert json.loads(file.read_text())["reserved_usd"]["meta"]==120
-

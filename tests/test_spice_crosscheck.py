@@ -20,4 +20,3 @@ def test_dc_shunt_against_ngspice_operating_point(tmp_path,parallel,drive):
     expected=predict(RCModel(10000,1e-6,parallel),Acquisition(kind="dc_pair",shunt_ohm=1000,amplitude_v=1))
     index=1 if drive>0 else 0
     np.testing.assert_allclose(actual[-2:],np.array([expected["in_v"][index],expected["out_v"][index]])-1.6,atol=1e-9)
-

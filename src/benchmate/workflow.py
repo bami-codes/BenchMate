@@ -55,4 +55,3 @@ def run_synthetic(case, *, seed=1, output="runs", noise_sd_v=0.001):
              "budget_note":"DC pairs count as two acquisitions. Confirmation is one fresh step. Common exploration is included in the total."}
     log.add("run_completed",summary)
     return log.path,summary
-

@@ -30,4 +30,3 @@ def redact(value, keys):
     if isinstance(value,list): return [redact(x,keys) for x in value]
     if isinstance(value,dict): return {k:redact(v,keys) for k,v in value.items()}
     return value
-

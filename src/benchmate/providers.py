@@ -144,4 +144,3 @@ def smoke(provider, *, effort="medium", output="runs", env_path=".env", client=N
         raise ProviderError(redact(safe,keys)+f"; record: {log.path}") from None
     finally:
         if own: http.close()
-

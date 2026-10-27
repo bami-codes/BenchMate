@@ -32,4 +32,3 @@ def test_missing_terminal_event_is_incomplete(tmp_path):
     path,_=run_synthetic("b1",output=tmp_path)
     file=path/"events.jsonl";file.write_text("\n".join(file.read_text().splitlines()[:-1])+"\n")
     with pytest.raises(ValueError,match="incomplete"): read_events(path)
-

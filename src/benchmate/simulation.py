@@ -24,4 +24,3 @@ def acquire(model: RCModel, acq: Acquisition, *, rng, noise_sd_v=0.001):
     return {"schema_version":1,"source":"synthetic","settings":asdict(acq),
             "physical_acquisitions":acq.physical_acquisitions,
             "synthetic_noise_sd_v":noise_sd_v,"data":data}
-

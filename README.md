@@ -82,4 +82,3 @@ Reused dependencies/tools: NumPy, SciPy, HTTPX, pySerial, pytest, Arduino CLI, A
 Only the declared fixed RC candidates are supported today. Independent Gaussian synthetic noise is a development assumption. Continuous parameter marginalization, calibrated AR(1) likelihood, nonlinear netlist generation/validation, the live agent controller, fixture calibration and user-facing instruction graphics remain to be implemented. No claim of replacing an oscilloscope or diagnosing arbitrary powered circuits is made.
 
 License: MIT; third-party dependencies retain their own licenses.
-

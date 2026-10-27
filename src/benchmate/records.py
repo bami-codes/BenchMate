@@ -43,4 +43,3 @@ def read_events(path):
     if not events or events[-1]["kind"] not in ("run_completed","run_failed"):
         raise ValueError("Run is incomplete; no terminal event")
     return events
-

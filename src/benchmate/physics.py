@@ -135,4 +135,3 @@ ACTION_MENU = {
 def confirmation_for(acq: Acquisition):
     # A fresh acquisition at a different amplitude, not a refit of that acquisition.
     return replace(acq, kind="step", amplitude_v=0.3)
-
