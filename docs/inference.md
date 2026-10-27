@@ -4,7 +4,7 @@ This revision prepares for component variation. It does not declare physical acc
 
 ## Priors, fit and evidence
 
-Mystery mode always uses RC and RC plus an input-parallel resistor. Independent log-uniform priors: R 4.7–47 kΩ, C 0.47–4.7 µF, optional Rp 4.7–47 kΩ. This is a limited one-state grammar.
+Mystery mode shares five topologies across all specimens: RC, RC plus an input-parallel resistor, resistor only, resistor plus an input parallel resistor, and resistor plus an output parallel resistor. Independent log-uniform priors: present resistors 4.7–47 kΩ, present capacitors 0.47–4.7 µF. Absent capacitors have a separate discrete family mass, not a log-C prior endpoint. This remains a limited grammar, not all linear circuits.
 
 Explicit repair mode uses schematic alternatives: nominal R 9.5–10.5 kΩ/C 0.9–1.1 µF; changed R 15–25 kΩ with nominal C; changed C 1.5–2.5 µF with nominal R. These are declared development priors, not secretly selected specimen information or measured component tolerances.
 
@@ -49,3 +49,15 @@ The structure-discovery prompt asks for explanations from observations and repor
 The first live max-reasoning attempt hit 4,096 output tokens before proposing. The next explicitly used 8,192 and passed both checks. Both remain evidence; neither is final evaluation or a holdout result.
 
 Implementation references: [SciPy least squares](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html), [Gauss–Legendre quadrature](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.roots_legendre.html), [ngspice manual](https://ngspice.sourceforge.io/docs/ngspice-manual.pdf).
+
+## Discrete zero-capacitance candidates
+
+Mystery mode has five shared topologies: the two original capacitive families, R only, R with an input parallel resistor, and R with an output parallel resistor. A missing capacitor is represented exactly by C=0 and an algebraic conductance solve. It has its own family prior mass; it is not approximated by a tiny positive C or included in a log-C integral. Positive component bounds and the conditional nature of all claims are logged. Repair families retain their explicit schematic priors.
+
+For a resistor under ideal unloaded drive, R is not identified. With one output load, a two-resistor output-leak circuit may identify only a gain combination. Conditional quadrature concentrates samples along this likelihood ridge without changing the independent component priors. Predictions use command templates for both capacitive and algebraic families. No candidate is chosen from a specimen label.
+
+The amplitude-scaling check is independent of a circuit fit but still assumes matching acquisition conditions, settled states and a linear calibrated measurement path. It removes DC offsets, checks the actual input channel, and reports output mismatch against the recorded development noise. It cannot distinguish DUT nonlinearity from output-buffer saturation and cannot replace the reserved verification conditions.
+
+## Periodic proposal state
+
+Capacitive sine netlists use progressively doubled numerical pre-roll on the same sample grid and phase as the capture. All simulated node voltages must change by at most 10 uV on the capture interval; a bounded horizon rejects unresolved settling. This avoids starting a settled observation prediction from a DC initial state, including frequencies with a non-integer number of samples per period. Every actual ngspice invocation counts against the proposal budget. Training-only repeated evaluations may be reused, with counts logged. Independent analytic RC and Shockley-ODE tests check this path; no holdout fixture or real board result is implied.

@@ -80,6 +80,7 @@ function comparisons(vm){
   return {rc:comparisonFor(last(vm.visible,['initial_family_assessment']),'training_comparison'),
     spark:(!proposed||fitted?.sequence>proposed.sequence)?comparisonFor(fitted,'training_predictions'):null};
 }
+function expandedLinear(vm){return comparisonFor(last(vm.visible,['initial_family_assessment']),'training_comparison')?.data.comparison_scope==='declared_linear_families_v2';}
 function conditionName(settings){
   if(!settings)return 'Raw capture';
   return (settings.kind==='sine'?settings.frequency_hz+' Hz sine':settings.kind==='dc_pair'?'DC pair':'Step')+' · ±'+settings.amplitude_v+' V · '+(settings.load_ohm?settings.load_ohm/1000+' kΩ':'unloaded');
@@ -121,7 +122,7 @@ function plotFor(vm){
   const verification=vm.verification?.kind==='verification'?comparisonFor(vm.verification,'comparison_conditions'):null;
   const metric=predictionEvent?verification?.data.conditions.find(c=>sameSettings(c.settings,settings)):null;
   const training=focus?.kind==='acquisition',reconstructed=training&&[models.rc,models.spark].some(m=>m?.reconstructed);
-  return {focus,settings,series,predictionEvent,unit,training,reconstructed,models,options,baseline,verification,metric};
+  return {focus,settings,series,predictionEvent,unit,training,reconstructed,models,options,baseline,verification,metric,expanded:expandedLinear(vm)};
 }
 function proposalDescription(elements){
   if(!Array.isArray(elements)||elements.length!==2)return null;
@@ -150,7 +151,7 @@ function brief(vm){
   const fitted=last(vm.visible,['proposal_fit']);
   const proposed=last(vm.visible,['netlist_proposed']);
   const requested=last(vm.visible,['instrument_request']);
-  let explanation=vm.diagnosis?.status==='all_candidates_inadequate'?'The initial RC families do not explain these observations. A different structure is needed.':vm.diagnosis?.status==='unresolved'?'The available observations support more than one explanation. Another measurement is needed.':'Review the observation before selecting the next experiment.';
+  let explanation=vm.diagnosis?.status==='all_candidates_inadequate'?`The tested ${expandedLinear(vm)?'linear':'RC'} families do not explain these observations. A different structure is needed.`:vm.diagnosis?.status==='unresolved'?'The available observations support more than one explanation. Another measurement is needed.':'Review the observation before selecting the next experiment.';
   if(proposed)explanation='A new circuit structure has been proposed. Its exact connections are being tested against the training observations.';
   if(fitted)explanation=fitted.payload.training_passed?'The proposed connections explain the training observations. They still need an independent prediction check.':'The proposal did not pass the training checks. It cannot be confirmed.';
   if(verification)explanation=verification.passed?'The new observations matched the predictions committed before acquisition, within the declared development checks.':'The new observations did not match the committed predictions. The explanation remains unconfirmed.';
@@ -162,7 +163,7 @@ function brief(vm){
 function renderChart(series,unit,xLabel,animate){
   const root=$('chart');root.replaceChildren();const width=Math.max(240,root.clientWidth),height=root.clientHeight||270;
   root.setAttribute('viewBox',`0 0 ${width} ${height}`);
-  node(root,'title',{id:'chart-title'},'Prediction and observation');node(root,'desc',{id:'chart-description'},'Orange is observed output. Gray dashed is the training-frozen RC model. Blue dashed is the simulated Spark structure or a precommitted prediction, as labelled. All use the same axes.');
+  node(root,'title',{id:'chart-title'},'Prediction and observation');node(root,'desc',{id:'chart-description'},'Orange is observed output. Gray dashed is the selected linear model, frozen on training data. Blue dashed is the simulated Spark structure or a precommitted prediction, as labelled. All use the same axes.');
   const valid=series.filter(s=>s.x?.length&&s.x.length===s.y?.length&&[...s.x,...s.y].every(Number.isFinite));
   state.chartSeries=valid;
   if(!valid.length){node(root,'text',{x:width/2,y:height/2,'text-anchor':'middle',fill:'#55635e','font-size':13},'No waveform at this point in the run.');state.chartGeometry=null;return;}
@@ -219,7 +220,8 @@ function renderStages(vm){
   const root=$('story-stages'),focused=root.contains(document.activeElement)?document.activeElement.dataset.stage:null;
   root.hidden=!vm.mode.includes('discovery');root.replaceChildren();if(root.hidden)return;
   const assessment=last(vm.visible,['initial_family_assessment']),proposal=last(vm.visible,['netlist_proposed']),prediction=last(vm.visible,['prediction_committed']),verification=vm.verification;
-  const stages=[['Initial check',assessment,assessment?.payload.status==='all_candidates_inadequate'?'RC models fail':'RC models checked'],['Propose structure',proposal,'Structure proposed'],['Lock predictions',prediction,'Predictions locked'],['Check predictions',verification,verification?.payload.passed?'Verification passed':'Verification failed']];
+  const familyLabel=expandedLinear(vm)?'Linear':'RC';
+  const stages=[['Initial check',assessment,assessment?.payload.status==='all_candidates_inadequate'?familyLabel+' models fail':familyLabel+' models checked'],['Propose structure',proposal,'Structure proposed'],['Lock predictions',prediction,'Predictions locked'],['Check predictions',verification,verification?.payload.passed?'Verification passed':'Verification failed']];
   const active=stages.findLastIndex(s=>Boolean(s[1]));
   stages.forEach(([pending,event,done],i)=>{const b=document.createElement('button');b.dataset.stage=i;b.disabled=!event;b.className='story-stage'+(event?' reached':'')+(i===active?' current':'');b.textContent=event?done:pending;b.setAttribute('aria-label',(event?'Go to: ':'Pending: ')+b.textContent);if(i===active)b.setAttribute('aria-current','step');b.onclick=()=>select(event.sequence,true);root.appendChild(b);});
   if(focused!==null)root.querySelector(`[data-stage="${focused}"]`)?.focus({preventScroll:true});
@@ -288,13 +290,21 @@ function render(){
   renderResidual(series);
   setText('plot-title',plot.training&&series.some(s=>s.key==='baseline')?'Compare explanations':'Prediction & observation');
   setText('prediction-label',plot.training?'Spark structure · fit':'Committed prediction');
-  setText('baseline-label',plot.training?'Best RC fit':'Frozen RC prediction');
+  setText('baseline-label',plot.expanded?(plot.training?'Best tested linear model':'Frozen linear prediction'):(plot.training?'Best RC fit':'Frozen RC prediction'));
   document.querySelector('[data-trace=predicted]').title=plot.training?"Engine simulation of Spark's structure, fitted to training observations.":'Numerical prediction recorded before the matching verification observation.';
   for(const button of document.querySelectorAll('[data-trace]'))button.disabled=!series.some(s=>s.key===button.dataset.trace);
   setText('plot-source',focus?.kind.includes('prediction_committed')?'Prediction only':predictionEvent?'Reserved verification':'Training comparison');
-  const outcomes={proposal_only_passes:'RC fails; proposal passes',both_pass:'Both pass · weak discrimination',neither_passes:'Neither model passes',baseline_only_passes:'Only RC passes'};
+  const baselineName=plot.expanded?'Linear':'RC';
+  const outcomes={proposal_only_passes:baselineName+' fails; proposal passes',both_pass:'Both pass · weak discrimination',neither_passes:'Neither model passes',baseline_only_passes:'Only '+baselineName+' passes'};
   const metric=plot.metric;
-  setText('comparison-note',metric?(plot.baseline.reconstructed?'RC reconstructed · ':'')+`OUT RMS: RC ${metric.baseline.out_rms_mv.toFixed(2)} mV / Spark ${metric.proposal.out_rms_mv.toFixed(2)} mV · `+outcomes[metric.discrimination]:plot.baseline?.reconstructed?'RC reconstructed from frozen training fit; Spark prediction recorded before observation.':plot.baseline?'Both models frozen on training data; predictions recorded before observations.':plot.reconstructed?'Reconstructed training fits · computed after this run; not precommitted predictions.':plot.training&&series.some(s=>s.key==='baseline'||s.key==='predicted')?'Training fits · engine simulations; independent verification is a separate check.':predictionEvent?'Prediction recorded before the matching verification observation.':'Observed waveform · no model comparison recorded yet.');
+  setText('comparison-note',metric?(plot.baseline.reconstructed?baselineName+' reconstructed · ':'')+`OUT RMS: ${baselineName} ${metric.baseline.out_rms_mv.toFixed(2)} mV / Spark ${metric.proposal.out_rms_mv.toFixed(2)} mV · `+outcomes[metric.discrimination]:plot.baseline?.reconstructed?baselineName+' reconstructed from frozen training fit; Spark prediction recorded before observation.':plot.baseline?'Both models frozen on training data; predictions recorded before observations.':plot.reconstructed?'Reconstructed training fits · computed after this run; not precommitted predictions.':plot.training&&series.some(s=>s.key==='baseline'||s.key==='predicted')?'Training fits · engine simulations; independent verification is a separate check.':predictionEvent?'Prediction recorded before the matching verification observation.':'Observed waveform · no model comparison recorded yet.');
+  const scaling=vm.diagnosis?.amplitude_scaling;
+  const scalingCheck=scaling?.checks.find(c=>sameSettings(c.settings_small,settings)||sameSettings(c.settings_large,settings));
+  if(plot.training&&scalingCheck&&!plot.reconstructed){
+    const text=scalingCheck.status==='output_scaling_mismatch'?`output fails to scale (${scalingCheck.channels.out_v.dc_removed_rms_mv.toFixed(2)} mV RMS)`:scalingCheck.status==='input_scaling_mismatch'?'input scaling differs; output alone is inconclusive':'input and output scaling are consistent';
+    setText('comparison-note','Training amplitude check · '+text+' · assumptions in Evidence.');
+  }
+  setText('linearity-evidence',scaling?JSON.stringify(scaling,null,2):'No amplitude-scaling diagnostic was recorded at this point.');
   const check=vm.verification?.payload;
   const proof=$('verification');proof.replaceChildren();proof.classList.toggle('failed',check?.passed===false);
   if(check){const icon=document.createElementNS(NS,'svg');icon.setAttribute('viewBox','0 0 20 20');icon.setAttribute('aria-hidden','true');node(icon,'path',{d:check.passed?'m4 10 4 4 8-9':'m5 5 10 10M15 5 5 15'});proof.append(icon);}
@@ -313,7 +323,7 @@ function render(){
   setText('original-report',vm.report?JSON.stringify(vm.report.payload,null,2):'No report recorded at this point.');
   $('expand-report').disabled=!vm.report;
   setText('expand-report',!vm.report?'Report not recorded yet':document.querySelector('.evidence-drawer').open?'Hide original report':'Read original report');
-  setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available RC and proposed fit; before a proposal, RC versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,verification_baseline:plot.baseline?{event_sequence:plot.baseline.event.sequence,reconstructed:plot.baseline.reconstructed,originally_committed:!plot.baseline.reconstructed,separation:plot.baseline.data.separation}:null,verification_comparison:plot.verification?{reconstructed:plot.verification.reconstructed,...plot.verification.data}:null,source_sha256:state.record.source_sha256},null,2));
+  setText('comparison-provenance',JSON.stringify({note:$('comparison-note').textContent,selection:'Default training view maximizes RMS separation between the available linear baseline and proposed fit; before a proposal, baseline versus observation. Verification observations never select or fit a training model.',initial:plot.models.rc?{event_sequence:plot.models.rc.event.sequence,reconstructed:plot.models.rc.reconstructed,family:plot.models.rc.data.family,candidate_families:plot.models.rc.data.candidate_families,parameters:plot.models.rc.data.parameters}:null,proposal:plot.models.spark?{event_sequence:plot.models.spark.event.sequence,reconstructed:plot.models.spark.reconstructed}:null,verification_baseline:plot.baseline?{event_sequence:plot.baseline.event.sequence,reconstructed:plot.baseline.reconstructed,originally_committed:!plot.baseline.reconstructed,separation:plot.baseline.data.separation}:null,verification_comparison:plot.verification?{reconstructed:plot.verification.reconstructed,...plot.verification.data}:null,source_sha256:state.record.source_sha256},null,2));
   $('cursor').max=state.events.length-1;$('cursor').value=state.cursor;setText('position',(state.cursor+1)+' / '+state.events.length);
   $('previous').disabled=state.cursor<=0;$('next-event').disabled=state.cursor>=state.events.length-1;$('play').disabled=state.events.length<2;
   $('follow').hidden=!live;$('follow').disabled=state.following;

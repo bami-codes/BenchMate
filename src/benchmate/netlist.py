@@ -18,6 +18,9 @@ from .physics import Acquisition
 NODES = ('IN','OUT','REF','N1','N2')
 DIODE_INITIAL = {'is_a':1e-9, 'n':1.8}
 DIODE_BOUNDS = {'is_a':(1e-10,1e-7), 'n':(1.,2.5)}
+SETTLING_TOLERANCE_V=1e-5
+MAX_WARMUP_SECONDS=32.
+MAX_STIMULUS_POINTS=50000
 
 
 @lru_cache(maxsize=4)
@@ -105,7 +108,7 @@ def render_proposal(elements):
     return '\n'.join(lines)
 
 
-def simulate_netlist(elements,template,*,diode=None):
+def simulate_netlist(elements,template,*,diode=None,before_run=None):
     executable=shutil.which('ngspice')
     if not executable:raise RuntimeError('ngspice is required for proposal simulation')
     version=ngspice_version(executable)
@@ -119,50 +122,83 @@ def simulate_netlist(elements,template,*,diode=None):
         raise ValueError('Invalid input waveform')
     if t[0]!=0 or np.max(np.abs(u))>1.000001 or t[-1]>5:
         raise ValueError('Proposal stimulus outside development limits')
-    # PWL with an epsilon just before each update represents the recorded ZOH.
-    points=[(0.,u[0])]
-    for i in range(1,len(t)):
-        epsilon=min(1e-8,(t[i]-t[i-1])*1e-3)
-        points.extend([(t[i]-epsilon,u[i-1]),(t[i],u[i])])
     source='drive' if settings.shunt_ohm else 'in'
-    lines=['BenchMate generated proposal — fixed harness',f'Vdrive {source} 0 PWL(']
-    lines.extend(f'+ {time:.12g} {value:.12g}' for time,value in points)
-    lines.append('+ )')
-    if settings.shunt_ohm:lines.append(f'RfixtureShunt drive in {settings.shunt_ohm:.12g}')
-    if settings.load_ohm:lines.append(f'RfixtureLoad out 0 {settings.load_ohm:.12g}')
-    # Version 47 fixes PWL corner selection near an existing breakpoint. Also
-    # keep both ends of each 10 ns transition on non-XSPICE builds, whose default
-    # minbreak is maxstep*5e-5. Solver tolerances are separate from adequacy.
-    lines.extend([render_proposal(checked),render_diode(diode),'.temp 27',
-                  '.options reltol=1e-7 abstol=1e-14 vntol=1e-8 minbreak=1e-12'])
     internal=sorted({e[k].lower() for e in checked for k in ('a','b') if e[k] in ('N1','N2')})
     vectors=['v(in)','v(out)',*[f'v({n})' for n in internal],'i(Vdrive)']
     dt=float(np.min(np.diff(t)))/4
-    lines.extend([f'.tran {dt:.12g} {t[-1]:.12g} 0 {dt:.12g}',
+    invocations=[]
+
+    def run(warmup_samples):
+        warmup=warmup_samples*settings.sample_period_s
+        if warmup>MAX_WARMUP_SECONDS or warmup_samples+len(t)>MAX_STIMULUS_POINTS:
+            raise ValueError('Periodic settling exceeds bounded simulator horizon')
+        # Extend the SAME sampling grid backward; even non-integer samples per
+        # period retain phase and ZOH history at capture t=0. Never use OUT.
+        pre_t=np.arange(-warmup_samples,0)*settings.sample_period_s
+        times=np.concatenate([pre_t,t])+warmup
+        values=np.concatenate([settings.amplitude_v*np.sin(2*np.pi*settings.frequency_hz*pre_t),u]) if warmup_samples else u
+        points=[(0.,values[0])]
+        for i in range(1,len(times)):
+            epsilon=min(1e-8,(times[i]-times[i-1])*1e-3)
+            points.extend([(times[i]-epsilon,values[i-1]),(times[i],values[i])])
+        lines=['BenchMate generated proposal — fixed harness',f'Vdrive {source} 0 PWL(']
+        lines.extend(f'+ {time:.12g} {value:.12g}' for time,value in points)
+        lines.append('+ )')
+        if settings.shunt_ohm:lines.append(f'RfixtureShunt drive in {settings.shunt_ohm:.12g}')
+        if settings.load_ohm:lines.append(f'RfixtureLoad out 0 {settings.load_ohm:.12g}')
+        lines.extend([render_proposal(checked),render_diode(diode),'.temp 27',
+                      '.options reltol=1e-7 abstol=1e-14 vntol=1e-8 minbreak=1e-12'])
+        lines.extend([f'.tran {dt:.12g} {times[-1]:.12g} 0 {dt:.12g}',
                   '.control','set wr_singlescale','set numdgt=15','run',
                   'wrdata output.dat '+' '.join(vectors),'quit','.endc','.end'])
-    netlist='\n'.join(lines)+'\n'
-    with tempfile.TemporaryDirectory(prefix='benchmate-spice-') as directory:
-        path=Path(directory);(path/'proposal.cir').write_text(netlist)
-        completed=subprocess.run([executable,'-b','proposal.cir'],cwd=path,capture_output=True,text=True,timeout=15)
-        table=path/'output.dat'
-        if completed.returncode or not table.exists():
-            raise ValueError('ngspice rejected the proposed topology or failed to converge')
-        raw=np.loadtxt(table)
-    if raw.ndim!=2 or raw.shape[1]!=len(vectors)+1 or not np.all(np.isfinite(raw)):
-        raise ValueError('Invalid simulator output')
-    if np.max(np.abs(raw[:,-1]))>.01 or np.max(np.abs(raw[:,1:-1]))>1.05:
-        raise ValueError('Proposed circuit exceeds development current/voltage limits')
-    if raw[0,0]>t[0]+1e-12 or raw[-1,0]<t[-1]-1e-9:
-        raise ValueError('Incomplete simulator time span')
-    # Step transitions are compared at the post-update sample for algebraic nodes.
-    sample_times=np.minimum(t+1e-10,t[-1])
-    prediction={**data,'in_v':(ref+np.interp(sample_times,raw[:,0],raw[:,1])).tolist(),
-                'out_v':(ref+np.interp(sample_times,raw[:,0],raw[:,2])).tolist()}
+        netlist='\n'.join(lines)+'\n'
+        if before_run is not None:before_run()
+        with tempfile.TemporaryDirectory(prefix='benchmate-spice-') as directory:
+            path=Path(directory);(path/'proposal.cir').write_text(netlist)
+            completed=subprocess.run([executable,'-b','proposal.cir'],cwd=path,capture_output=True,text=True,timeout=15)
+            table=path/'output.dat'
+            if completed.returncode or not table.exists():
+                raise ValueError('ngspice rejected the proposed topology or failed to converge')
+            raw=np.loadtxt(table)
+        if raw.ndim!=2 or raw.shape[1]!=len(vectors)+1 or not np.all(np.isfinite(raw)):
+            raise ValueError('Invalid simulator output')
+        peak=float(np.max(np.abs(raw[:,-1])))
+        if peak>.01 or np.max(np.abs(raw[:,1:-1]))>1.05:
+            raise ValueError('Proposed circuit exceeds development current/voltage limits')
+        if raw[0,0]>1e-12 or raw[-1,0]<times[-1]-1e-9:
+            raise ValueError('Incomplete simulator time span')
+        sample_times=np.minimum(t+warmup+1e-10,times[-1])
+        sampled=np.column_stack([np.interp(sample_times,raw[:,0],raw[:,i]) for i in range(1,len(vectors))])
+        invocations.append({'warmup_s':warmup,'stimulus_points':len(times),
+                            'harness_sha256':hashlib.sha256(netlist.encode()).hexdigest(),'peak_source_current_a':peak})
+        return sampled
+
+    dynamic_sine=settings.kind=='sine' and any(e['kind']=='C' for e in checked)
+    settling={'method':'dc_operating_point' if settings.kind=='step' else 'memoryless_no_capacitor',
+              'numerical_pre_roll_only':True}
+    if dynamic_sine:
+        ideal=settings.amplitude_v*np.sin(2*np.pi*settings.frequency_hz*t)
+        if not np.allclose(u,ideal,atol=1e-12,rtol=0) or not np.allclose(np.diff(t),settings.sample_period_s,atol=1e-12,rtol=0):
+            raise ValueError('Periodic warm-up currently requires the declared ideal command grid')
+        rc_bound=sum(e['value'] for e in checked if e['kind']=='R')*sum(e['value'] for e in checked if e['kind']=='C')
+        n=max(1,int(np.ceil(max(1/settings.frequency_hz,5*rc_bound)/settings.sample_period_s)))
+        previous=run(n)
+        while True:
+            n*=2;sampled=run(n)
+            difference=float(np.max(np.abs(sampled-previous)))
+            if difference<=SETTLING_TOLERANCE_V:break
+            previous=sampled
+        settling.update(method='doubled_pre_roll_same_capture_grid',converged=True,
+                        max_node_difference_v=difference,tolerance_v=SETTLING_TOLERANCE_V,
+                        warmup_s=n*settings.sample_period_s,
+                        scope='Numerical convergence of all recorded node voltages; not physical settling calibration.')
+    else:sampled=run(0)
+    prediction={**data,'in_v':(ref+sampled[:,0]).tolist(),'out_v':(ref+sampled[:,1]).tolist()}
     return prediction,{'rendered_proposal':render_proposal(checked),
                        'topology_sha256':topology_fingerprint(checked),
-                       'harness_sha256':hashlib.sha256(netlist.encode()).hexdigest(),
+                       'harness_sha256':invocations[-1]['harness_sha256'],
+                       'initial_state':settling,'simulator_invocations':invocations,
                        'simulator':'ngspice','simulator_version':version,
-                       'peak_source_current_a':float(np.max(np.abs(raw[:,-1]))),
+                       'peak_source_current_a':max(r['peak_source_current_a'] for r in invocations),
                        'diode_parameters':diode,'diode_fixed_assumptions':{'rs_ohm':1.,'temperature_c':27.},
                        'physical_part_calibrated':False}

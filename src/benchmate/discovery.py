@@ -11,7 +11,8 @@ from .netlist import ELEMENT_SCHEMA,validate_netlist,simulate_netlist,topology_f
 from .noise import NoiseModel,adequacy,whitened_vector
 from .physics import Acquisition
 from .stimulus import command_template
-from .comparison import best_rc_comparison, frozen_rc_prediction, prediction_separation, verification_comparison
+from .comparison import best_linear_comparison, frozen_linear_prediction, prediction_separation, verification_comparison
+from .linearity import amplitude_scaling
 
 
 TRAINING = [Acquisition(),
@@ -52,7 +53,7 @@ Next observations must respect REF +/-1V and transitions no larger than 1V.
 """
 
 DISCOVERY_TOOLS = [
-    function_tool('inspect_residuals','Read training observations and failed initial RC fit checks.'),
+    function_tool('inspect_residuals','Read training observations, amplitude scaling and initial linear-family checks.'),
     function_tool('propose_netlist','Propose the actual passive netlist to simulate; topology will not be replaced.',
                   {'elements':{'type':'array','items':ELEMENT_SCHEMA},'rationale':{'type':'string'}}),
     function_tool('verify_proposal','Freeze predictions then acquire two unused verification conditions; no refitting.'),
@@ -83,7 +84,7 @@ def fit_proposal(elements,captures,noise=NoiseModel()):
     initial=[elements[i]['value'] for i in active]
     if has_diode:
         initial+=list(DIODE_INITIAL.values());bounds+=list(DIODE_BOUNDS.values())
-    calls=0;first_metadata=[];began=time.monotonic();diode=dict(DIODE_INITIAL)
+    calls=0;cache_hits=0;cache={};first_metadata=[];began=time.monotonic();diode=dict(DIODE_INITIAL)
 
     def decode(log_values):
         for i,value in zip(active,np.exp(log_values[:len(active)])):
@@ -91,12 +92,23 @@ def fit_proposal(elements,captures,noise=NoiseModel()):
         if has_diode:
             diode.update(zip(DIODE_INITIAL,map(float,np.exp(log_values[-2:]))))
 
-    def simulate(capture):
+    def consume_run():
         nonlocal calls
         if calls>=MAX_SIMULATOR_CALLS or time.monotonic()-began>MAX_FIT_SECONDS:
             raise ValueError('Proposal simulator budget exhausted')
         calls+=1
-        return simulate_netlist(fitted,capture,diode=diode)
+
+    def simulate(capture):
+        nonlocal cache_hits
+        if time.monotonic()-began>MAX_FIT_SECONDS:raise ValueError('Proposal simulator budget exhausted')
+        key=(id(capture),tuple(e['value'] for e in fitted),tuple(diode.values()))
+        if key in cache:
+            cache_hits+=1
+            prediction,meta=cache[key]
+            return prediction,{**meta,'reused_within_proposal':True}
+        result=simulate_netlist(fitted,capture,diode=diode,before_run=consume_run)
+        cache[key]=result
+        return result
 
     def evaluate(log_values,record_initial=False):
         decode(log_values)
@@ -140,7 +152,7 @@ def fit_proposal(elements,captures,noise=NoiseModel()):
                    'log_parameter_jacobian_condition':condition,'fitted_parameter_names':names,
                    'diode_parameters':dict(diode),'diode_parameter_bounds':DIODE_BOUNDS,
                    'diode_fixed_assumptions':{'rs_ohm':1.,'temperature_c':27.},
-                   'checks':gates,'simulator_calls':calls,'training_predictions':training_predictions,
+                   'checks':gates,'simulator_calls':calls,'simulation_cache_hits':cache_hits,'training_predictions':training_predictions,
                    'initial_generated_simulations':first_metadata,
                    'generated_topology_sha256':topology_fingerprint(elements),
                    'fitted_topology_sha256':topology_fingerprint(fitted),
@@ -155,25 +167,28 @@ class DiscoverySession:
         self.start=time.monotonic();self.noise=NoiseModel()
         self.report=self.fitted=self.fit_result=self.verification=None
         self.proposals=0;self.inspected=False;self.verification_used=False
+        self.families=families_for('mystery')
         log.add('discovery_configuration',{'training':[a.to_dict() for a in TRAINING],
                     'verification':[a.to_dict() for a in VERIFICATION],
                     'verification_status':'development_conditions_pending_D2_freeze',
                     'max_proposals':2,'max_simulator_calls_per_proposal':MAX_SIMULATOR_CALLS,
                     'max_fit_seconds':MAX_FIT_SECONDS,'max_fitted_parameters':4,
                     'acquisition_budget':{'exploration':1,'diagnostic':3,'verification':2},
-                    'noise':self.noise.to_dict()})
+                    'noise':self.noise.to_dict(),'families':[f.to_dict() for f in self.families],
+                    'comparison_scope':'declared_linear_families_v2'})
         self.captures=[]
         for settings in TRAINING:
             capture=acquire(settings)
             if capture.get('source')!='synthetic' or capture.get('settings')!=settings.to_dict():
                 raise ValueError('Discovery requires matching synthetic observations')
             self.captures.append(capture);log.add('acquisition',capture)
-        fits=[(family,fit_family(family,self.captures,self.noise)) for family in families_for('mystery')]
+        fits=[(family,fit_family(family,self.captures,self.noise)) for family in self.families]
         self.initial={'status':'all_candidates_inadequate' if all(not f['fit_passed'] for _,f in fits) else 'initial_candidates_adequate',
                       'candidates':[{'name':family.name,'fit_passed':fit['fit_passed'],
                           'worst_normalized_residual':max(c['normalized_rms'] for g in fit['checks'] for c in g['checks'])} for family,fit in fits]}
-        self.rc_comparison=best_rc_comparison(fits,self.captures)
-        log.add('initial_family_assessment',{**self.initial,'training_comparison':self.rc_comparison})
+        self.initial['amplitude_scaling']=amplitude_scaling(self.captures,self.noise)
+        self.linear_comparison=best_linear_comparison(fits,self.captures)
+        log.add('initial_family_assessment',{**self.initial,'training_comparison':self.linear_comparison})
 
     def dispatch(self,name,args):
         if self.report is not None:raise ToolRejected('Experiment already finished')
@@ -215,9 +230,10 @@ class DiscoverySession:
                 template=command_template(settings)
                 prediction,meta=simulate_netlist(self.fitted,template,diode=self.fit_result['diode_parameters'])
                 predictions.append(prediction)
-                baseline=frozen_rc_prediction(self.rc_comparison,settings.to_dict());baselines.append(baseline)
-                comparison={'prediction':baseline,'parameters':self.rc_comparison['parameters'],
-                            'family':self.rc_comparison['family'],'training_frozen':True,
+                baseline=frozen_linear_prediction(self.linear_comparison,settings.to_dict());baselines.append(baseline)
+                comparison={'prediction':baseline,'parameters':self.linear_comparison['parameters'],
+                            'family':self.linear_comparison['family'],'training_frozen':True,
+                            'comparison_scope':self.linear_comparison['comparison_scope'],
                             'separation':prediction_separation(baseline,prediction)}
                 self.log.add('prediction_committed',{'elements':self.fitted,'settings':settings.to_dict(),'prediction':prediction,
                     'baseline_comparison':comparison,'input_provenance':template['input_provenance'],**meta})

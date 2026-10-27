@@ -41,32 +41,34 @@ if(prediction>=0){
 await evaluate(`BenchMateUI.select(${count-1})`);
 assert(await evaluate("!!document.querySelector('#chart path[data-series=observed]')&&!!document.querySelector('#chart path[data-series=predicted]')"),'Overlay missing');
 const discovery=await evaluate("initialRecord.events[0].payload.mode.includes('discovery')");
+const stages=discovery?await evaluate("(()=>{const e=initialRecord.events,find=k=>e.findIndex(x=>x.kind===k);return {assessment:find('initial_family_assessment'),proposal:find('netlist_proposed'),fit:find('proposal_fit'),check:find('verification'),observation:e.findLastIndex(x=>x.kind==='verification_acquisition'),expanded:e[find('initial_family_assessment')].payload.training_comparison?.comparison_scope==='declared_linear_families_v2'}})()"):null;
 if(discovery){
  assert(await evaluate("document.getElementById('condition').selectedOptions[0].textContent.includes('±1 V · unloaded')"),'Informative training condition not selected');
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&document.querySelectorAll('#residual path').length===2"),'Three-model comparison or residuals missing');
  assert(await evaluate("document.querySelector('[data-cathode=REF]')&&document.getElementById('report-actor').textContent==='Spark · max'"),'Netlist or effort badge missing');
  assert(await evaluate("document.querySelectorAll('#story-stages button.reached').length===4"),'Milestones missing');
- await evaluate("document.getElementById('condition').value=21;document.getElementById('condition').dispatchEvent(new Event('change'))");
- assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!!document.querySelector('#chart path[data-series=baseline]')&&document.getElementById('baseline-label').textContent==='Frozen RC prediction'"),'Frozen RC verification prediction missing or mislabeled');
- assert(await evaluate("document.querySelectorAll('#residual path').length===2&&document.getElementById('comparison-note').textContent.includes('RC fails; proposal passes')"),'Verification comparison missing');
+ await evaluate(`document.getElementById('condition').value=${stages.observation};document.getElementById('condition').dispatchEvent(new Event('change'))`);
+ assert(await evaluate("document.getElementById('plot-source').textContent==='Reserved verification'&&!!document.querySelector('#chart path[data-series=baseline]')&&['Frozen RC prediction','Frozen linear prediction'].includes(document.getElementById('baseline-label').textContent)"),'Frozen RC verification prediction missing or mislabeled');
+ assert(await evaluate("document.querySelectorAll('#residual path').length===2&&/(RC|Linear) fails; proposal passes/.test(document.getElementById('comparison-note').textContent)"),'Verification comparison missing');
  await evaluate('scrollTo(0,0)');await writeFile(output+'/verification.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
  for(const width of [1440,390]){
   await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<500});
-  for(const index of [8,14,22,count-1]){
+  for(const index of [8,stages.fit,stages.check,count-1]){
    await evaluate(`BenchMateUI.select(${index})`);
    const trail=await evaluate(`(()=>{const root=document.getElementById('timeline'),bounds=root.getBoundingClientRect(),rows=[...root.querySelectorAll('button')].map(e=>({top:e.getBoundingClientRect().top,bottom:e.getBoundingClientRect().bottom,current:e.hasAttribute('aria-current')})),shown=rows.filter(r=>r.bottom>bounds.top+5.5&&r.top<bounds.bottom-5.5);return {pending:root.textContent.includes('Pending'),currentVisible:shown.some(r=>r.current),partial:shown.some(r=>r.top<bounds.top-1||r.bottom>bounds.bottom+1),width:${width},index:${index}}})()`);
    assert(!trail.pending&&trail.currentVisible&&!trail.partial,'Timeline latest whole rows: '+JSON.stringify(trail));
   }
  }
  await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
- await evaluate('BenchMateUI.select(18)');
- assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=observed]')&&!document.getElementById('comparison-note').textContent.includes('RC fails')"),'Verification outcome leaked before observation');
+ await evaluate(`BenchMateUI.select(${prediction})`);
+ assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=observed]')&&!document.getElementById('comparison-note').textContent.includes('fails; proposal')"),'Verification outcome leaked before observation');
  assert(await evaluate("document.getElementById('expand-report').disabled&&document.getElementById('expand-report').textContent==='Report not recorded yet'"),'Pending report state unclear');
- await evaluate('BenchMateUI.select(6)');
+ await evaluate(`BenchMateUI.select(${stages.assessment})`);
  assert(await evaluate("!!document.querySelector('#chart path[data-series=baseline]')&&!document.querySelector('#chart path[data-series=predicted]')&&document.getElementById('proposal-circuit').hasAttribute('hidden')"),'Initial comparison leaked later proposal');
+ if(stages.expanded)assert(await evaluate("document.getElementById('baseline-label').textContent==='Best tested linear model'&&document.getElementById('comparison-note').textContent.includes('Training amplitude check')&&document.getElementById('linearity-evidence').textContent.includes('training_diagnostic')"),'Expanded baseline or scaling diagnostic missing');
  await evaluate('scrollTo(0,0)');await writeFile(output+'/initial-models.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
- await evaluate('BenchMateUI.select(13)');assert(await evaluate("!document.getElementById('proposal-circuit').hasAttribute('hidden')&&!document.querySelector('#chart path[data-series=predicted]')"),'Proposal-before-fit semantics');
- await evaluate('BenchMateUI.select(14)');
+ await evaluate(`BenchMateUI.select(${stages.proposal})`);assert(await evaluate("!document.getElementById('proposal-circuit').hasAttribute('hidden')&&!document.querySelector('#chart path[data-series=predicted]')"),'Proposal-before-fit semantics');
+ await evaluate(`BenchMateUI.select(${stages.fit})`);
  assert(await evaluate("document.getElementById('status').textContent==='Training fit passed · verification pending'&&!!document.querySelector('#chart path[data-series=predicted]')"),'Training status or fit curve missing');
  await evaluate('scrollTo(0,0)');await writeFile(output+'/training-fit.png',Buffer.from((await cdp('Page.captureScreenshot',{format:'png'})).data,'base64'));
  assert(await evaluate("(()=>{const saved=state.events;state.events=[{sequence:0,kind:'provider_configuration',payload:{reasoning_effort:'medium'}}];const actor=sparkActor(1);state.events=saved;return actor.name==='Spark · standard'&&actor.title.includes('medium');})()"),'Standard badge is not grounded in recorded effort');

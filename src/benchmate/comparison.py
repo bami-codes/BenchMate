@@ -17,15 +17,17 @@ from .vector import predict_many
 from .records import decode_events
 
 
-def best_rc_comparison(fits, captures):
+def best_linear_comparison(fits, captures,*,legacy_rc=False):
     family,fit=max(fits,key=lambda pair:pair[1]['log_likelihood'])
     return {'family':family.to_dict(),'parameters':fit['model'].tolist(),
-            'selection':'Maximum training likelihood among the declared RC families',
+            'comparison_scope':'legacy_rc_families' if legacy_rc else 'declared_linear_families_v2',
+            'candidate_families':[f.to_dict() for f,_ in fits],
+            'selection':'Maximum training likelihood among the declared '+('RC' if legacy_rc else 'linear')+' families',
             'conditions':[{'settings':c['settings'],'time_s':c['data']['time_s'],
                 'out_v':predict_many(fit['model'],c)['out_v'][0].tolist()} for c in captures]}
 
 
-def frozen_rc_prediction(comparison, settings):
+def frozen_linear_prediction(comparison, settings):
     """Evaluate training-frozen parameters on commands, without any observations."""
     template=command_template(Acquisition(**settings))
     values=predict_many(np.asarray(comparison['parameters']),template)
@@ -53,7 +55,7 @@ def verification_comparison(baseline, proposal, capture, noise):
             'discrimination':{(False,True):'proposal_only_passes',(True,True):'both_pass',
                               (False,False):'neither_passes',(True,False):'baseline_only_passes'}[passed],
             'refitted_on_verification':False,
-            'scope':'One best training-fit RC under declared priors; not all possible circuits. RMS separation is descriptive, not a calibrated power estimate.'}
+            'scope':'One best training-fit model among the declared linear topologies; not all possible circuits. RMS separation is descriptive, not a calibrated power estimate.'}
 
 
 def reconstruct_comparisons(run):
@@ -73,8 +75,13 @@ def reconstruct_comparisons(run):
         if kind=='initial_family_assessment':
             rc=p.get('training_comparison')
             if rc is not None:continue
-            fits=[(family,fit_family(family,captures,noise)) for family in families_for('mystery')]
-            comparison=rc=best_rc_comparison(fits,captures)
+            # Old records predate the C=0 expansion. Never substitute a newer
+            # candidate grammar into their original assessment or agent story.
+            config=next(e['payload'] for e in events[:i] if e['kind']=='discovery_configuration')
+            from .inference import Family
+            families=[Family(**{k:v for k,v in f.items() if k in ('name','r_bounds','c_bounds','rp_bounds','output_bounds')}) for f in config['families']] if 'families' in config else [f for f in families_for('mystery') if f.c_bounds is not None]
+            fits=[(family,fit_family(family,captures,noise)) for family in families]
+            comparison=rc=best_linear_comparison(fits,captures,legacy_rc='families' not in config)
         elif kind=='proposal_fit':
             if 'training_predictions' in p:continue
             conditions=[]
@@ -87,8 +94,9 @@ def reconstruct_comparisons(run):
         elif kind=='prediction_committed':
             if rc is None or noise is None:continue
             comparison=p.get('baseline_comparison') or {
-                'prediction':frozen_rc_prediction(rc,p['settings']),
+                'prediction':frozen_linear_prediction(rc,p['settings']),
                 'parameters':rc['parameters'],'family':rc['family'],
+                'comparison_scope':rc.get('comparison_scope','legacy_rc_families'),
                 'training_frozen':True}
             baseline_predictions[event['sequence']]=comparison['prediction']
             if 'baseline_comparison' in p:continue

@@ -68,8 +68,8 @@ def test_common_unloaded_family_preserves_branch_ambiguity_and_tau_only():
     assert a['status'] == 'unresolved'
     assert a['supported_candidates'] == ['rc','rc_input_branch']
     probs = [c['conditional_probability'] for c in a['candidates']]
-    assert probs == pytest.approx([.5,.5],abs=1e-8)
-    for candidate in a['candidates']:
+    assert probs == pytest.approx([.5,.5,0,0,0],abs=1e-8)
+    for candidate in a['candidates'][:2]:
         assert not candidate['identifiability']['r_c_separately_observed']
         tau = candidate['posterior_intervals_2_5_50_97_5_percent']['tau_s']
         assert tau[0] < .010815 < tau[-1]

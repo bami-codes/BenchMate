@@ -1,6 +1,8 @@
 """Vectorized one-state predictions for numerical integration.
 
-Rows are R, C, Rp (Rp=0 means absent). The observed DRIVE/REF are the inputs.
+Rows are R, C, Rp, optional Rout (parallel values of 0 mean absent).
+C=0 is an algebraic resistor circuit, not a tiny-capacitance approximation.
+The observed DRIVE/REF are the inputs.
 Fast step/sine paths are only used when those inputs match the declared waveform.
 """
 import numpy as np
@@ -9,20 +11,23 @@ from .physics import Acquisition
 
 def predict_many(models, capture):
     models = np.atleast_2d(np.asarray(models, dtype=float))
-    if models.shape[1] != 3 or not np.all(np.isfinite(models)) or np.any(models[:, :2] <= 0) or np.any(models[:, 2] < 0):
+    if models.shape[1] not in (3,4) or not np.all(np.isfinite(models)) or np.any(models[:, 0] <= 0) or np.any(models[:, 1:] < 0):
         raise ValueError("Invalid model rows")
     acq = Acquisition(**capture["settings"])
     data = capture["data"]
-    r, c, rp = models.T
+    r, c, rp = models[:,:3].T
+    rout=models[:,3] if models.shape[1]==4 else np.zeros(len(models))
     gp = np.divide(1, rp, out=np.zeros_like(rp), where=rp > 0)
-    gl = 0 if acq.load_ohm is None else 1/acq.load_ohm
+    gl = np.divide(1,rout,out=np.zeros_like(rout),where=rout>0)+(0 if acq.load_ohm is None else 1/acq.load_ohm)
     if acq.shunt_ohm:
         gs = 1/acq.shunt_ohm
         denom = gs + 1/r + gp
         ku, kx = gs/denom, (1/r)/denom
     else:
         ku, kx = np.ones_like(r), np.zeros_like(r)
-    a, b = (kx-1)/(r*c)-gl/c, ku/(r*c)
+    # Safe placeholder for algebraic rows; their exact node solution replaces x.
+    dynamic=c>0;safe_c=np.where(dynamic,c,1.)
+    a, b = (kx-1)/(r*safe_c)-gl/safe_c, ku/(r*safe_c)
     gain = -b/a
     drive = np.asarray(data["drive_v"], dtype=float)
     ref = np.asarray(data["ref_v"], dtype=float)
@@ -59,6 +64,11 @@ def predict_many(models, capture):
                 decay = np.exp(a*dt)
                 x[:, i] = decay*x[:, i-1] + gain*(1-decay)*u[i-1]
     vin = ku[:, None]*u + kx[:, None]*x
+    if np.any(~dynamic):
+        divider=1+r[~dynamic]*gl[~dynamic]
+        input_gain=1/(1+acq.shunt_ohm*(gp[~dynamic]+gl[~dynamic]/divider))
+        vin[~dynamic]=input_gain[:,None]*u
+        x[~dynamic]=vin[~dynamic]/divider[:,None]
     result = {"in_v": ref+vin, "out_v": ref+x}
     if acq.kind == "dc_pair":
         result["shunt_drop_v"] = u-vin

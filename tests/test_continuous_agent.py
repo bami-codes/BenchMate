@@ -44,6 +44,6 @@ def test_mystery_mode_does_not_switch_to_fault_candidates(tmp_path):
     path,result=run_experiment('d01-r',mode='mystery',output=tmp_path)
     events=read_events(path)
     config=next(e['payload'] for e in events if e['kind']=='inference_configuration')
-    assert [f['name'] for f in config['families']]==['rc','rc_input_branch']
+    assert [f['name'] for f in config['families']]==['rc','rc_input_branch','resistor','resistor_input_branch','resistor_output_leak']
     assert result['diagnostic_mode']=='mystery'
     assert result['final_report']['supported_candidates']==['rc']

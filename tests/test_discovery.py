@@ -153,7 +153,10 @@ def test_mock_model_proposal_reaches_spice_then_two_untouched_checks(tmp_path,mo
     comparisons=result['verification']['comparison_conditions']
     assert len(comparisons)==2
     assert all(c['discrimination']=='proposal_only_passes' and not c['refitted_on_verification'] for c in comparisons)
-    assert all(c['baseline']['out_rms_mv']>30 and c['proposal']['out_rms_mv']<2 for c in comparisons)
+    assert assessment['training_comparison']['family']['name']=='resistor_output_leak'
+    assert assessment['training_comparison']['parameters'][1]==0
+    assert len(assessment['candidates'])==5
+    assert all(c['proposal']['out_rms_mv']<2 for c in comparisons)
     assert 'test-discovery-secret' not in (path/'events.jsonl').read_text()
 
 

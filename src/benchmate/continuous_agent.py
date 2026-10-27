@@ -6,11 +6,12 @@ from .agent import ExperimentSession, ToolRejected, TOOLS, observation_summary
 from .inference import infer, families_for, mean_prediction
 from .menu import MenuConfig, measurement_menu, mounting_instruction
 from .noise import NoiseModel, adequacy, channels
-from .physics import Acquisition, RCModel, predict, confirmation_for
+from .physics import Acquisition, confirmation_for
 from .vector import predict_many
+from .stimulus import command_template
 
 
-CONTINUOUS_PROMPT = """You operate BenchMate on a SYNTHETIC instrument with continuous RC
+CONTINUOUS_PROMPT = """You operate BenchMate on a SYNTHETIC instrument with declared linear
 parameter inference. No physical hardware is connected. You never receive the
 specimen ID, hidden values or answer. First call inspect_experiment. Read the
 current candidate support, identifiability, numerical evidence and ranked menu.
@@ -24,8 +25,10 @@ item costs 1. Mounting changes and stabilization are simulated, not performed
 by a human. The same mystery priors apply to every specimen. Repair mode priors
 are declared schematic knowledge and must not be confused with mystery mode.
 
-Without loading or transient shunt observations, only tau=RC is separately
-observed; prior-driven R/C intervals are not identification. Continue measuring
+For capacitive families without loading or transient shunt observations, only
+tau=RC is separately observed. Resistor-only and linear leakage families explicitly
+have no capacitor; unobservable resistance remains prior uncertainty.
+Prior-driven intervals are not identification. Continue measuring
 when one structure fits but parameters remain unresolved. Only when the engine
 reports verification_required call verify_prediction. It freezes a posterior
 prediction before collecting a fresh, reserved intermediate-amplitude step.
@@ -65,8 +68,7 @@ def rank_measurements(posteriors, menu, last_settings, noise):
     rows = [representative_rows(p) for p in live]
     ranked = []
     for name, settings in menu.items():
-        base = predict(RCModel(10000,1e-6),settings)
-        template = {'settings':settings.to_dict(),'data':base}
+        template=command_template(settings)
         predictions = [predict_many(r,template) for r in rows]
         means, variances = [], []
         for predicted in predictions:

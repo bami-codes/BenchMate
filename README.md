@@ -6,10 +6,11 @@ BenchMate chooses measurements that distinguish circuit hypotheses, commits a pr
 
 Implemented: continuous one-state RC inference, live Muse Spark experiment control, model-authored netlists executed by ngspice, a synthetic repair sequence, and an English experiment workspace shared by replay and live logs. **All diagnosis results so far use synthetic observations. No hardware accuracy, physical repair or holdout generalization has been demonstrated.**
 
-- Parameter fitting and normalized evidence integration are separate. The tau=RC transformation preserves the original R/C prior. Mystery specimens share the same two structure families; schematic repair priors require explicit `--mode repair`.
+- Parameter fitting and normalized evidence integration are separate. The tau=RC transformation preserves the original R/C prior. Mystery specimens share five linear topologies: two RC families plus resistor-only, input-leak and output-leak configurations with discrete C=0. Schematic repair priors require explicit `--mode repair`.
 - Whole traces and predefined transient/phase regions use common noise whitening. Per-channel AR(1) parameters are supported; current defaults are uncalibrated synthetic assumptions.
 - The 85-condition menu includes six configurable frequencies, 0.2/1 V sines, steps, 4.7k/10k loads and shunt states. The physical frequency limit remains pending D2.
 - Generated element connections and diode orientation reach ngspice unchanged. Numerical R/C values and bounded diode IS/N are fitted on training observations. Synthetic truth now differs from the starting diode library. Both reserved predictions precede both verification acquisitions.
+- Capacitive sine proposals use checked numerical pre-roll to match settled observations. Actual ngspice invocations, including settling checks, consume the proposal budget; repeated training evaluations can be reused. Training amplitude scaling is reported separately from independent verification and does not localize nonlinearity to a diode by itself.
 - D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
 - D2 DAC/ADC firmware compiles for UNO R4 WiFi and Minima, with 512-sample raw blocks and actual per-channel read-completion timestamps. It has not been uploaded or physically validated.
 
