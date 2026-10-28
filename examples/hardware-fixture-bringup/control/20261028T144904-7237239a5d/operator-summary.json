@@ -1,0 +1,16 @@
+{
+  "source": "operator_report",
+  "saved_at_utc": "2026-10-28T14:52:49.247989+00:00",
+  "raw_user_report": "4.88 2.58 2.58(2.59 가끔 흔들려 둘다)",
+  "supply_v": 4.88,
+  "driver_input_B13_v_usual": 2.58,
+  "driver_output_A11_v_usual": 2.58,
+  "driver_input_B13_v_occasional": 2.59,
+  "driver_output_A11_v_occasional": 2.59,
+  "meter_mode": "DC 20V per instruction",
+  "ground_reference": "upper-left blue Arduino GND rail",
+  "target_nominal_mv": 2600,
+  "dac_code": 2173,
+  "reported_display_variation_v": 0.01,
+  "scope": "Two separately probed nodes each occasionally display 2.59 V; simultaneity and input-output offset below the displayed increment are not established. DMM resolution is not calibrated accuracy or a noise measurement. Saved time is not physical contact time."
+}

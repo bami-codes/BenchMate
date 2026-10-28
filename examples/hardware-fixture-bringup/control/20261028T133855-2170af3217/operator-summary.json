@@ -1,0 +1,18 @@
+{
+  "source": "operator_report",
+  "reported_date_kst": "2026-10-28",
+  "raw_user_report": "4.88V/0.59V/0.59V",
+  "control_record_terminal_sha256": "5f61ffd655a589bde16e0eb3504aba182efb518d0f21ec9db69c875b44dc6b69",
+  "meter_mode": "DC 20 V per measurement instruction",
+  "ground_reference": "upper-left blue rail (Arduino GND)",
+  "cable_configuration": "spare data cable; same Mac port per operator confirmation",
+  "nominal_level_mv": 600,
+  "dac_code": 501,
+  "supply_v": 4.88,
+  "driver_input_B13_v": 0.59,
+  "driver_output_A11_v": 0.59,
+  "driver_pull_down_ohm_displayed": 999,
+  "simultaneous_measurement": false,
+  "calibration_performed": false,
+  "scope": "Initial DC follower check; equal displays do not establish zero offset or AC performance"
+}

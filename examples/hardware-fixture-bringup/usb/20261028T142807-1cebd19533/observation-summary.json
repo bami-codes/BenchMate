@@ -1,0 +1,51 @@
+{
+  "analyzed_at_utc": "2026-10-28T14:38:45.335979+00:00",
+  "hash_chain_verified": true,
+  "terminal": {
+    "sequence": 655,
+    "timestamp": "2026-10-28T14:38:14.420407+00:00",
+    "kind": "run_completed",
+    "payload": {
+      "ordinary_probing_window_passed": true,
+      "usb_samples_present": 601,
+      "max_sample_gap_s": 1.005009958986193,
+      "max_observed_cpu_busy_percent": 30.64516129032258,
+      "memory_read_errors": 0,
+      "post_window_pong_verified": true,
+      "output_remains_driven": true,
+      "cause_identified": false
+    },
+    "previous_sha256": "757842f7b59347119ab6b60be0c0e364406d332123f6e46fce2fe0b118e09ca7"
+  },
+  "samples": 601,
+  "all_samples_present": true,
+  "max_sample_gap_s": 1.005009958986193,
+  "weighted_mean_cpu_busy_percent": 7.016825763395802,
+  "memory_samples": 41,
+  "swap_page_deltas": {
+    "Swapins": 0,
+    "Swapouts": 0
+  },
+  "target_kernel_transaction_error_lines": 0,
+  "target_kernel_device_termination_lines": 0,
+  "window_events": [
+    {
+      "timestamp": "2026-10-28T14:28:10.443767+00:00",
+      "kind": "ordinary_probing_window_started",
+      "payload": {
+        "duration_s": 600,
+        "serial_port_closed": true
+      }
+    },
+    {
+      "timestamp": "2026-10-28T14:38:10.452765+00:00",
+      "kind": "ordinary_probing_window_completed",
+      "payload": {
+        "duration_s": 600.0068928749533,
+        "usb_samples_present": 601
+      }
+    }
+  ],
+  "operator_report_file": "operator-summary.json",
+  "interpretation": "Both the preceding hands-off window and this ordinary-probing window passed once. Handling-related loss was not reproduced; root cause remains undetermined. Current firmware has no boot ID."
+}

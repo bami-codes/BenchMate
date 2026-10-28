@@ -1,0 +1,4 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-28 23:28:10.434 E  kernel[0:1095511] (IOUSBHostFamily) AppleUSBXHCIPipe: IOUSBHostPipe::abortGated: device 1 (UNO WiFi R4 CMSIS-DAP@03100000) endpoint 0x84: aborting 16 requests
+2026-10-28 23:38:12.464 E  kernel[0:1095511] (IOUSBHostFamily) AppleUSBXHCIPipe: IOUSBHostPipe::abortGated: device 1 (UNO WiFi R4 CMSIS-DAP@03100000) endpoint 0x84: aborting 16 requests
+2026-10-28 23:38:12.470 Df log[14601:1096bf1] [com.apple.log:] log run noninteractively, parent: 14392 (python3.11), args: '/usr/bin/log' 'show' '--style' 'compact' '--info' '--start' '2026-10-28 23:28:10' '--predicate' 'eventMessage CONTAINS[c] "UNO WiFi R4" OR eventMessage CONTAINS[c] "68EE8F6B2D68"'

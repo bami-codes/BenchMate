@@ -1,0 +1,9 @@
+{
+  "verified_at_utc": "2026-10-28T16:12:43.295323+00:00",
+  "original_copied_event_chains": 10,
+  "total_event_chains_including_new_operator_record": 11,
+  "verified_events": 1431,
+  "byte_identical_source_copies": 32,
+  "archived_python_sources_syntax_valid": true,
+  "scope": "No firmware/runtime change, hardware action or API call performed for this export. Source identity and event chains checked; physical installation remains operator-reported."
+}

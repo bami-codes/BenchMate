@@ -1,0 +1,4 @@
+2026-10-28 22:28:02.363 E  kernel[0:655] (IOUSBHostFamily) AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO WiFi R4 CMSIS-DAP@03100000) endpoint 0x83: status 0xe00002ed (transaction error): 0 bytes transferred
+2026-10-28 22:28:02.965 Df kernel[0:e10e79] (IOUSBHostFamily) usb-drd3-port-hs@03100000: AppleUSBHostPort::terminateDevice: destroying 0x2341/1002/0100 (UNO WiFi R4 CMSIS-DAP): reset API call
+2026-10-28 22:41:41.904 E  kernel[0:655] (IOUSBHostFamily) AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO WiFi R4 CMSIS-DAP@03100000) endpoint 0x83: status 0xe00002ed (transaction error): 0 bytes transferred
+2026-10-28 22:41:42.504 Df kernel[0:e10e79] (IOUSBHostFamily) usb-drd3-port-hs@03100000: AppleUSBHostPort::terminateDevice: destroying 0x2341/1002/0100 (UNO WiFi R4 CMSIS-DAP): reset API call

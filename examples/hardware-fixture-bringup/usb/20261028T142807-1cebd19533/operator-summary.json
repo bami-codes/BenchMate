@@ -1,0 +1,16 @@
+{
+  "source": "operator_report",
+  "saved_at_utc": "2026-10-28T14:33:34.890247+00:00",
+  "raw_user_report": "4.88 0.59 0.59 그대로야",
+  "supply_v": 4.88,
+  "driver_input_B13_v": 0.59,
+  "driver_output_A11_v": 0.59,
+  "meter_mode": "DC 20 V per instruction",
+  "ground_reference": "upper-left blue rail",
+  "nominal_level_mv": 600,
+  "dac_code": 501,
+  "reported_during_observation": true,
+  "transient_voltage_excursion_reported": false,
+  "exact_physical_contact_start_end_times_known": false,
+  "scope": "Requested ordinary measurements were reported; save time is not a physical contact timestamp. Operator then instructed to leave probes untouched for remaining observation."
+}

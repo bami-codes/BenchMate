@@ -1,0 +1,171 @@
+{
+  "exported_at_utc": "2026-10-28T16:11:20.864812+00:00",
+  "exported_date_asia_seoul": "2026-10-29",
+  "source_copy_policy": "Selected files are byte-for-byte copies; historical pending states are preserved. Later operator reports are separate. Kernel key-events file is an explicitly selected excerpt.",
+  "original_event_chains": 10,
+  "new_session_report": "operator/20261028T161120-f28223fb79",
+  "copies": [
+    {
+      "source": "runs/hardware-fixture-dc/20261028T132515-ae1ebd18bc/events.jsonl",
+      "published": "control/20261028T132515-ae1ebd18bc/events.jsonl",
+      "sha256": "58ecacd5d2b58c3106d74a41eb7a2659bf1e7bb6b37d5872af1477b0d7b99ca6"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T132604-d3154d67e3/events.jsonl",
+      "published": "control/20261028T132604-d3154d67e3/events.jsonl",
+      "sha256": "2e009bf43ab5c1e005c3c7d76ff36e799588eac0b482bdd65c5a4bb6381d1840"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T132604-d3154d67e3/operator-summary.json",
+      "published": "control/20261028T132604-d3154d67e3/operator-summary.json",
+      "sha256": "0c6b2a92141179de3b1649829f6ea61c0f03aaf55a81bd097342fcf41223c2bb"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T133159-dc0ed7a315/events.jsonl",
+      "published": "control/20261028T133159-dc0ed7a315/events.jsonl",
+      "sha256": "69ee4e7a40cd449e6c342c059c45418cf0128947ad9927f1e226751cb3032ca2"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T133159-dc0ed7a315/operator-summary.json",
+      "published": "control/20261028T133159-dc0ed7a315/operator-summary.json",
+      "sha256": "619775f814dada530ca835467cfbfea987476be7ab2097cb3a7a5ec95cdfe41f"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T133855-2170af3217/events.jsonl",
+      "published": "control/20261028T133855-2170af3217/events.jsonl",
+      "sha256": "0c0fc487dc2c88c9c9e4f36aba22a5b5120629ed2e886402ac9ca1139c09b4a2"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T133855-2170af3217/operator-summary.json",
+      "published": "control/20261028T133855-2170af3217/operator-summary.json",
+      "sha256": "beea137b8e547d98bc270d9cb663be75979b9a49110291ec63ced502ccf1d978"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T134922-751c0c274d/events.jsonl",
+      "published": "control/20261028T134922-751c0c274d/events.jsonl",
+      "sha256": "7c2589ad29213ae7c51326af32dc260f1d3abbf65e836fb02da5e8fa0882d601"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144003-6173753885/events.jsonl",
+      "published": "control/20261028T144003-6173753885/events.jsonl",
+      "sha256": "d355d77d8f18554658b03ceae9bceefe80ed36c15be1da237946284a8b9a97f5"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144003-6173753885/operator-summary.json",
+      "published": "control/20261028T144003-6173753885/operator-summary.json",
+      "sha256": "f44c0641e58d9b69a975405cc1b7b377db3cb98efd1bd5f82d0236c852646bd2"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144003-6173753885/controller-source.py",
+      "published": "control/20261028T144003-6173753885/controller-source.py",
+      "sha256": "66ac35e2778a52e5c867b3fd1d32781e28605b5635a778053faf281bfd86ee97"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144904-7237239a5d/events.jsonl",
+      "published": "control/20261028T144904-7237239a5d/events.jsonl",
+      "sha256": "21649d6d7ba00c8b1ab310dc846647107bac83a4a977238f01baf42b098cdb4c"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144904-7237239a5d/operator-summary.json",
+      "published": "control/20261028T144904-7237239a5d/operator-summary.json",
+      "sha256": "4e9b66db92a184789996b71f51e46b30e74c76d15e6cc6059a4bc4b940311859"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T144904-7237239a5d/controller-source.py",
+      "published": "control/20261028T144904-7237239a5d/controller-source.py",
+      "sha256": "66ac35e2778a52e5c867b3fd1d32781e28605b5635a778053faf281bfd86ee97"
+    },
+    {
+      "source": "runs/hardware-fixture-dc/20261028T145341-1421b0dcfc/events.jsonl",
+      "published": "control/20261028T145341-1421b0dcfc/events.jsonl",
+      "sha256": "166c36bcbd7e88b378313ebd1d334620dfa8777341cb00a6e19af2fc370cd150"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/events.jsonl",
+      "published": "usb/20261028T141232-5e47c051c9/events.jsonl",
+      "sha256": "5eb3eb4067b180ff7b97fc9b4525b4c4663c2800e879e73347b824a0e84a426b"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/operator-summary.json",
+      "published": "usb/20261028T141232-5e47c051c9/operator-summary.json",
+      "sha256": "98ba0ebb164e3c19dffd09319acd18bd4e53761a882fa9235f2ae10895addd41"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/observation-summary.json",
+      "published": "usb/20261028T141232-5e47c051c9/observation-summary.json",
+      "sha256": "3f24d317ca917d597518153a5efd700d1e1d436a23e3b8e7aa00e4edd1f5eeef"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/observer-source.py",
+      "published": "usb/20261028T141232-5e47c051c9/observer-source.py",
+      "sha256": "7b7a37394a1ae49edd95c1660c775d6a57922c6b5b9a8ac9b6aa119fd56efc3b"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/observer-source.json",
+      "published": "usb/20261028T141232-5e47c051c9/observer-source.json",
+      "sha256": "88341b060528502f95407389c8401e0574f9e11baefe0901ddd8917aaab0d5dc"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T141232-5e47c051c9/usb-kernel.log",
+      "published": "usb/20261028T141232-5e47c051c9/usb-kernel.log",
+      "sha256": "31356d93c0aad268602063a05c4019a46038ff2847c1f853d8f1304bb6e8a04b"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/events.jsonl",
+      "published": "usb/20261028T142807-1cebd19533/events.jsonl",
+      "sha256": "5bb11897fd9fbc671b361d43dfb7e8d1b602719a91cc5cbb97f6ea8d9dee3a95"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/operator-summary.json",
+      "published": "usb/20261028T142807-1cebd19533/operator-summary.json",
+      "sha256": "9958d02eac467a75ddc40211309493c79486b321a81b5d69b5eeeb3c30452e9e"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/operator-instruction.json",
+      "published": "usb/20261028T142807-1cebd19533/operator-instruction.json",
+      "sha256": "86960115f3258dbfe38809c2a38c8dec74c62f4fb4a828bd498cf1390939386d"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/observation-summary.json",
+      "published": "usb/20261028T142807-1cebd19533/observation-summary.json",
+      "sha256": "57558c29ad463d82a20b1e26a595f7e48216f19019e33e829a8a298a266b5227"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/observer-source.py",
+      "published": "usb/20261028T142807-1cebd19533/observer-source.py",
+      "sha256": "a12c71834e9c51300475bb264529e00c91d4b1d9ee105699e10edd7e0cf75ba6"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/observer-source.json",
+      "published": "usb/20261028T142807-1cebd19533/observer-source.json",
+      "sha256": "9fd48be4a7ee7555312826bbe6a9e728836ac81fccb68a7ff85d79ffe94cc028"
+    },
+    {
+      "source": "runs/hardware-usb-review/20261028T142807-1cebd19533/usb-kernel.log",
+      "published": "usb/20261028T142807-1cebd19533/usb-kernel.log",
+      "sha256": "e70f15ce28687a273bf7f4117be8e70252b7cb376db253defe504119d7019130"
+    },
+    {
+      "source": "runs/hardware-usb-review/usb-key-events-2026-10-28.txt",
+      "published": "usb/usb-key-events-2026-10-28.txt",
+      "sha256": "6275393bf392f634d6cb61806074f3864bb8387f9448e9321bb5fbc86f697815",
+      "scope": "Selected relevant kernel lines, not the complete historical host log"
+    },
+    {
+      "source": "runs/hardware-fixture-design/u2-a1-a4/connectivity-check.py",
+      "published": "wiring-design/connectivity-check.py",
+      "sha256": "b63e4d4a4feb136c0adf98c4c6a5cdf1f6068eb44829a063e31bb14fc76dee34"
+    },
+    {
+      "source": "runs/hardware-fixture-design/u2-a1-a4/proposed-wiring-table.md",
+      "published": "wiring-design/proposed-wiring-table.md",
+      "sha256": "6f74daa3a80cbd0a880ad694192cdc949da36c75337d9c7f20c042577cdbbe79"
+    },
+    {
+      "source": "runs/hardware-fixture-design/u2-a1-a4/check-result.json",
+      "published": "wiring-design/check-result.json",
+      "sha256": "922434329af90e2cca68c57fca31e81d3b3b019178597ffbbf225a960dbd47eb"
+    }
+  ],
+  "scope": "Gross DC checks and USB observations; not calibration, hardware diagnosis, a general reliability estimate or external attestation. Local host-process diagnostics and private source documents are not included."
+}

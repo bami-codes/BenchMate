@@ -1,0 +1,645 @@
+# D2 physical assembly — coordinate record
+
+Latest status, 2026-10-29 Asia/Seoul: U1 REF and driver gross DC checks
+are recorded; two ten-minute USB windows passed after earlier disconnects.
+The operator reports U2/A1–A4 assembly and the requested continuity checks
+complete. New resistor measurements, a photo review, powered U2/ADC checks,
+instrument-v2 upload/reset checks and D2 calibration remain pending.
+This document is chronological; earlier pending instructions below are
+historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
+and [current wiring table](fixture-wiring-table.md).
+
+## Board orientation and observed state
+
+2026-10-28 (Asia/Seoul). The operator supplied a photograph of the empty
+830-hole breadboard and five ICs marked LM358N, with ST logos visible.
+Markings are identification evidence, not an authenticity test.
+
+- Keep the photograph's orientation: A is at the upper left. Rows A–E
+  are above the central trench; F–J are below it.
+- Use the upper edge's column numbers, increasing from left to right,
+  for BOTH halves. Ignore the reversed numbers printed on the lower edge.
+- For example, E10 and F10 are opposite each other across the trench.
+- The operator reports a continuity check: power rails are split near
+  column 30. Do not treat left and right sections as connected.
+- Upper and lower rails are also separate unless explicitly bridged.
+- At the initial setup confirmation, USB was unplugged and the previous
+  A0 → four individual 1 kΩ → A1–A4 loopback was still assembled.
+- All ordered parts have been received and unpacked, per operator report.
+
+## U1 placement — visually checked, not powered
+
+Place U1, one LM358N, across the central trench at columns 10–13.
+The package marking faces upward and the semicircular notch faces LEFT.
+This puts pin 1 at the lower-left corner, F10.
+
+| Breadboard position | IC pin | Function |
+| --- | --- | --- |
+| E10 | 8 | Positive supply |
+| E11 | 7 | Amplifier 2 output |
+| E12 | 6 | Amplifier 2 inverting input |
+| E13 | 5 | Amplifier 2 non-inverting input |
+| F10 | 1 | Amplifier 1 output |
+| F11 | 2 | Amplifier 1 inverting input |
+| F12 | 3 | Amplifier 1 non-inverting input |
+| F13 | 4 | Negative supply / board 0 V |
+
+Reference: [ST LM358 datasheet, package pin connections, top view](https://www.st.com/resource/en/datasheet/lm358.pdf).
+
+The operator supplied IMG_8850.heic on 2026-10-28. Inspection of the full
+image and a crop shows the notch facing left and the pins at E10–E13 and
+F10–F13, consistent with the requested placement. No other components or
+wires are visible on this breadboard. This is a visual placement check,
+not a contact-continuity or powered functional test.
+
+Do not record an installation, powered check, REF measurement or calibration
+as complete until the operator supplies the corresponding evidence.
+
+## Divider resistors — operator readings and placement photo received
+
+Keep USB disconnected. Check three separate 10 kΩ resistors with the
+multimeter before installation (20 kΩ resistance range; record displayed
+values). Install only these three parts:
+
+| Part | Nominal value | First lead | Second lead | Operator DMM reading |
+| --- | --- | --- | --- | --- |
+| R_DIV_TOP_A | 10 kΩ | A3 | A6 | approximately 9.95 kΩ |
+| R_DIV_TOP_B | 10 kΩ | B6 | B9 | approximately 9.97 kΩ |
+| R_DIV_BOTTOM | 10 kΩ | C9 | C16 | approximately 9.98 kΩ |
+
+2026-10-28: The operator reports slight fluctuation of the final displayed
+digit, tidied/reinserted the leads, and confirmed the coordinates. The
+attached placement photo is consistent with these endpoints. No meter
+accuracy or resistance uncertainty has been established from this report.
+The nominal divider ratio using these readings is 9.98 / 29.90 = 0.333779.
+At an assumed 4.90 V supply (the earlier rail reading), this predicts
+1.6355 V at the unloaded tap, before amplifier input loading. This is a
+calculation, not a new voltage measurement or completed REF calibration.
+
+Within the upper terminal strip, each column's A–E holes are connected.
+The resulting chain is column 3 → 10 kΩ → column 6 → 10 kΩ → column 9
+→ 10 kΩ → column 16. Column 3 is the positive-supply end; column 16 is
+the board-GND end; column 9 is the unbuffered divider tap. The subsequent
+jumpers connect these nodes to the unpowered rails and amplifier input.
+The divider resistor endpoints avoid U1's columns 10–13.
+Resistor orientation is interchangeable. Keep exposed leads clear of other
+conductors.
+
+## Six jumpers — operator reports installation and continuity checks
+
+Keep USB disconnected and leave Arduino disconnected from the new fixture.
+Use only the UPPER LEFT power-rail sections. Rail hole numbers below mean
+actual holes counted from the far left within that color's row; all selected
+holes are in the first group of five, well before the central rail split.
+
+| Jumper | First end | Second end | Purpose |
+| --- | --- | --- | --- |
+| 1 | B3 | Upper-left red rail, hole 3 | Divider positive supply |
+| 2 | A10 | Upper-left red rail, hole 5 | U1 pin 8 positive supply |
+| 3 | A16 | Upper-left blue rail, hole 3 | Divider board-0-V return |
+| 4 | J13 | Upper-left blue rail, hole 5 | U1 pin 4 negative supply / board 0 V |
+| 5 | D9 | H12 | Divider tap to U1 pin 3 (non-inverting input) |
+| 6 | G10 | G11 | U1 pin 1 output to pin 2 (negative feedback) |
+
+2026-10-28: The operator reports all six jumpers installed, with jumper 6
+gray. Reported continuity results: no beep between supply rails, beep from
+red rail to U1 pin 8, and beep from blue rail to U1 pin 4. These are operator
+reports, not a new photograph or host-acquired measurement. No numerical
+rail resistance was supplied; a silent continuity buzzer alone does not
+establish the complete circuit's readiness for power.
+
+One probe-access jumper was added to each rail; their hole positions were
+not specified. Do not assume rail hole 1 remains vacant. Leave the exposed
+probe-access ends separated. Arduino is not yet requested to be connected
+to the new fixture. Rail blue is Arduino GND (0 V), not buffered REF.
+
+## Pull-down and amplifier 2 termination — installation reported
+
+Keep USB disconnected. Measure a separate 1 kΩ resistor out of circuit
+and record the meter reading, then make these four connections:
+
+| Item | First end | Second end | Purpose |
+| --- | --- | --- | --- |
+| 1 kΩ resistor | I10 | I16 | REF output pull-down resistor |
+| Insulated jumper | H16 | H13 | Pull-down return to U1 pin 4 / board 0 V |
+| Insulated jumper | B11 | B12 | Amplifier 2 output (pin 7) to inverting input (pin 6) |
+| Temporary insulated jumper | A9 | A13 | Divider tap to amplifier 2 non-inverting input (pin 5) |
+
+I10 is the same lower-strip node as F10 (REF output). I16 connects to H16;
+H13 is the same lower-strip node as F13 (board 0 V). This avoids occupied
+H12 and J13. Amplifier 2 is temporarily a follower of the divider voltage;
+remove the A9–A13 jumper before connecting a DAC signal to its input.
+
+2026-10-28: The operator reports the separate pull-down resistor reading
+as 1.001 kΩ on the 2 kΩ range, and 1.00 on the 20 kΩ range. Retain the
+1.001 kΩ displayed value without implying that display resolution is meter
+accuracy. The operator also reports the capacitor marking as `104J100`
+(0.1 µF, ±5%, 100 V), consistent with the ordered film bypass capacitor.
+This identifies its nominal rating; capacitance was not reported measured.
+The operator subsequently reports all four connections complete and supplies
+two photographs of the assembled circuit. Visible component locations are
+consistent with the intended arrangement; some insertion points are hidden
+by jumper housings and the capacitor. This does not substitute for the
+pre-power electrical checks below.
+
+## Supply bypass capacitor — installation reported and photos received
+
+After the pull-down and amplifier 2 connections, with USB still disconnected,
+place the 0.1 µF film capacitor between D10 and G13. D10 shares the upper
+strip's column 10 with U1 pin 8 (+supply); G13 shares the lower strip's
+column 13 with U1 pin 4 (board 0 V). The part is nonpolarized. This is a
+supply bypass, not a capacitor from REF output to board GND.
+
+The leads must clear the IC and other exposed conductors. Do not force
+the lead spacing or pull at the capacitor body to span the trench. If the
+part cannot reach comfortably, obtain a photo and choose an adjacent
+mounting position with a short connection instead. Request a full wiring
+photo and confirmation of the preceding four connections before power.
+The operator reports completion and supplies two photographs showing the
+marked film capacitor across the IC, consistent with the requested supply
+bypass route. The lower exposed lead passes close to the lower IC pins;
+clearance/contact cannot be established conclusively from the photos.
+Request an unpowered visual clearance check without forcing or pulling the
+leads. No Arduino supply connection or USB power-on has been requested yet.
+
+## Final unpowered continuity checks — operator confirms completion
+
+Keep USB disconnected. The earlier supply checks preceded installation of
+the capacitor and pull-down. Request these four checks on the assembled
+circuit, using the upper printed column numbers for both terminal strips:
+
+| Probe pair | Expected observation | Purpose |
+| --- | --- | --- |
+| Upper-left red rail to upper-left blue rail | No sustained beep; a brief charging indication is possible | Check for a newly introduced supply short |
+| J10 to J11 | Beep / direct connection | REF amplifier negative feedback |
+| A11 to A12 | Beep / direct connection | Amplifier 2 negative feedback |
+| G16 to upper-left blue rail | Beep / direct connection | Pull-down return to board 0 V |
+
+All listed terminal holes are unused in the connection plan. In addition,
+have the operator verify that the exposed capacitor leads do not touch any
+unintended IC pin or other exposed conductor. Do not infer that supply-rail
+silence proves every possible wiring error absent. Record the reported
+results before proceeding to Arduino 5 V/GND connections and first DC
+voltage measurements.
+
+2026-10-28: In response to the four checks and the capacitor-lead clearance
+check, the operator replied that all were checked. Record this as operator
+confirmation of the requested pass conditions, not numerical resistance
+measurements or an independently observed clearance test.
+
+## First powered REF DC check — operator readings received
+
+With USB still unplugged, remove the previous loopback connections from
+the Arduino headers (A0 and A1–A4, and any remaining old test jumpers).
+The new fixture is to connect to Arduino through ONLY these two wires:
+
+| Arduino pin label | Destination |
+| --- | --- |
+| 5V | Vacant hole in the upper-left red rail, first group of five |
+| GND | Vacant hole in the upper-left blue rail, first group of five |
+
+Existing probe-access jumpers may occupy some rail holes; use vacant holes
+without displacing the fixture connections. Leave analog pins disconnected
+from the fixture for this initial DC check. With power still off, add
+separate probe-access jumpers at J12 (divider tap, U1 pin 3) and J10
+(buffered REF output, U1 pin 1). Keep their exposed ends separated.
+
+Change the meter from continuity/resistance to DC 20 V before applying
+power. Black lead stays in COM and red in VΩ. Use the previously stable
+USB cable and Mac port to supply the board. No serial command, firmware
+upload, or DAC stimulus is needed for this check.
+
+With the black probe on the upper-left blue rail, request these readings:
+
+| Red probe location | Expected DC behavior |
+| --- | --- |
+| Upper-left red rail | Supply voltage; previously 4.90 V, remeasure now |
+| J12 probe-access jumper | Approximately 0.333779 times the measured supply |
+| J10 probe-access jumper | Close to J12 voltage (approximately 1.64 V if supply is 4.90 V) |
+
+If REF differs from the divider reading by more than 0.10 V, disconnect
+USB and report the readings for diagnosis. This is only an initial gross
+DC fault check, not a calibrated offset limit or a D2 acceptance threshold.
+2026-10-28: The operator reports the requested readings in order:
+
+| Location | Reported DC voltage |
+| --- | --- |
+| Upper-left red rail relative to blue | 4.88 V |
+| J12, divider input to REF amplifier | 1.62 V |
+| J10, buffered REF output | 1.62 V |
+
+At the measured 4.88 V supply, the earlier resistor readings predict an
+unloaded divider voltage of 1.62884 V. The approximately 8.8 mV difference
+from the displayed divider reading is within one 0.01 V display increment;
+neither the DMM accuracy nor resistance uncertainties have been calibrated.
+The identical 1.62 V displays do not establish a zero amplifier offset.
+The REF output is already loaded by the reported 1.001 kΩ pull-down, so
+its inferred DC pull-down current is approximately 1.62 mA. This is an
+initial DC follower check only, not evidence of dynamic stability, output
+sink behavior, full signal-range operation, or completed D2 calibration.
+No DAC stimulus or host ADC capture was used for this check. The latest
+reported measurements imply the fixture was powered; unplug USB before
+the following wiring changes.
+
+## Configure amplifier 2 as DAC driver — operator reports completion
+
+First unplug USB. Leave the REF amplifier, its 1.001 kΩ resistor, supply
+bypass capacitor and existing power-rail wiring intact. Measure a DIFFERENT
+nominal 1 kΩ resistor out of circuit on the 2 kΩ meter range, then:
+
+| Action / part | Endpoints | Purpose |
+| --- | --- | --- |
+| Remove the entire temporary jumper | A9–A13 | Separate the divider from the driver input before attaching DAC |
+| Insulated jumper | Arduino A0 → A13 | DAC to U1 pin 5, amplifier 2 non-inverting input |
+| New 1 kΩ resistor | D11–D16 | Driver output (pin 7) pull-down to board 0 V |
+| Probe-access jumper | B13 | Driver input / actual A0 voltage |
+| Probe-access jumper | A11 | Driver output voltage |
+
+D16 is already on the upper-strip board-GND node through A16. D11 and
+A11 share the output node with E11 (pin 7). Retain B11–B12 negative
+feedback. B13 and A13 share the input node with E13 (pin 5). The exposed
+probe-access ends must remain separated. No DUT or ADC input is connected
+to the new fixture at this stage. The driver pull-down starts at 1 kΩ;
+the planned comparison with 2.2 kΩ remains pending.
+
+2026-10-28: The operator reports the new resistor as 0.999 on the 2 kΩ
+range (0.999 kΩ), 1.00 on the 20 kΩ range, and reports the wiring step
+complete. No new wiring photograph accompanied that report. Treat the
+connection confirmation as an operator report, not a visual inspection.
+The host did not enumerate a USB serial device at the initial check after
+this report, consistent with the instruction to leave USB unplugged; that
+alone cannot distinguish an unplugged board from a USB enumeration fault.
+
+Do not start a DAC command until USB reconnection is confirmed. The
+currently installed dac_loopback sketch leaves A0 high impedance on boot;
+it does NOT guarantee a defined driver output before a HOLD command.
+Any initial driver tests must therefore remain DUT-free. No sweep,
+firmware upload, power-on, or DAC stimulus is requested in this wiring step.
+
+The subsequent request is to set the meter to DC 20 V and reconnect USB
+using the previously stable cable and Mac port, then report completion.
+After that report, first verify the firmware with PING, request only
+HOLD 600, and verify the reported held state. Do NOT call the bare-board
+acquire_point helper: it requests CAPTURE of A1–A4, which are disconnected
+in this fixture stage. This step is a DMM-only driver DC check; keep its
+records separate from the earlier DAC-to-ADC loopback measurements.
+
+## First driver DC point — DMM pair received; later USB absence observed
+
+2026-10-28: The operator confirmed USB reconnection. The host enumerated
+the UNO R4 WiFi serial device and verified the installed
+`benchmate-dac-loopback-v1` protocol. Initial PING reported DAC disabled
+with code 0. The host issued only `HOLD 600` (12-bit DAC code 501), then
+verified two PING responses at that same state, separated by 5 seconds.
+No ADC CAPTURE command was sent. The DAC remains driven after serial close.
+
+- Successful control record:
+  `runs/hardware-fixture-dc/20261028T132604-d3154d67e3/events.jsonl`.
+- An earlier host-sandbox attempt could not open the serial device and
+  issued no HOLD. It is retained separately at
+  `runs/hardware-fixture-dc/20261028T132515-ae1ebd18bc/events.jsonl`.
+  This was an OS permission failure, not evidence of a USB disconnect.
+- The installed firmware has no boot ID. These short state checks do not
+  validate the pending instrument-v2 reset-detection mechanism.
+
+The operator reports B13 = 0.59 V and A11 = 0.59 V relative to the
+upper-left blue rail. The separate operator record is
+`runs/hardware-fixture-dc/20261028T132604-d3154d67e3/operator-summary.json`.
+This is a DMM DC follower observation under the 0.999 kΩ pull-down; equal
+displays do not establish zero offset. The control event chain is unchanged.
+
+Before any next-level command, the board was absent from the host USB
+device tree and both normal and elevated serial-device inventories. Four
+additional inventories over approximately 15 seconds also found no USB
+serial board. No 1.6 V HOLD command was sent. Observation record:
+`runs/hardware-fixture-dc/20261028T133159-dc0ed7a315/events.jsonl`.
+
+While the host could not see USB, the operator reported no cable/USB
+manipulation after the measurement, power LED still on, and B13 still
+0.59 V. Power/A0 persistence and USB absence are recorded separately; do
+not infer a whole-board reset, a proven cable fault, or uninterrupted
+communication during the manual readings. The firmware has no boot ID.
+
+The operator then confirmed replacing only the USB cable with a spare
+data cable, retaining the Mac port and fixture wiring as instructed.
+This also power-cycled the board, so subsequent recovery would not by
+itself isolate the cable as the cause. The board re-enumerated with the
+same USB identity. Both operator reports are retained at
+`runs/hardware-fixture-dc/20261028T133159-dc0ed7a315/operator-summary.json`.
+The next check repeats the FIRST 600 mV nominal point after open/close
+tests, before advancing to a new level.
+
+## Spare-cable first-point repeat — DMM received; USB absence recurred
+
+Control record: `runs/hardware-fixture-dc/20261028T133855-2170af3217/events.jsonl`.
+Over 40.037 seconds, three open/PING/close cycles reported the initial DAC
+disabled state and retained USB enumeration. The host then issued only
+`HOLD 600` (code 501), checked its state, closed serial, observed USB
+presence during a 15-second idle interval, reopened and verified the same
+held state, and checked USB presence again 5 seconds after closing.
+No ADC capture or 1.6 V command was issued. Output remains driven.
+
+This is a short successful check with the spare cable, not proof of a
+permanent fix or identification of the failed component. The requested
+manual readings are now supply (upper-left red rail), B13 input and A11
+output, all relative to the blue rail, because changing the cable may
+also change supply voltage.
+
+The operator reports supply = 4.88 V, B13 = 0.59 V, A11 = 0.59 V.
+These readings are stored separately in that run's `operator-summary.json`.
+Before a 1.6 V command, the board was again absent from both normal and
+elevated serial-device inventories and from the USB device tree. No
+`HOLD 1600` was sent. The short 40-second check did not establish sustained
+USB reliability. A read-only inspection of host power/sleep records did
+not find a sleep/wake event matching this loss; no power settings were
+changed and the failure cause remains undetermined.
+
+## Next requested comparison — spare board, USB only
+
+The parts list identifies the spare as an R4 Minima compatible board.
+The operator was asked to unplug USB from the original R4 WiFi while
+leaving its 5 V/GND/A0 fixture wiring attached. The spare is to have NO
+jumpers or external circuit, and to connect by USB only using the same
+Mac port and spare cable. Identification and a minimal bring-up PING test
+come before transferring the fixture or issuing any DAC command.
+
+Connection of the spare has not yet been confirmed. Its model must be
+checked from enumeration/operator confirmation before upload. The
+bring-up sketch is being compiled for `arduino:renesas_uno:minima`;
+compilation is not evidence of upload or physical operation. Any later
+board change requires new supply/REF and ADC/DAC checks; original-board
+measurements must not be presented as calibration of the spare board.
+
+## Review before spare-board comparison — kernel USB evidence
+
+The operator requested a review of existing connection, reboot and host-load
+evidence before proceeding with the spare, noting a concurrent local
+research workload. The spare-board step is held during this review; no
+spare-board connection or upload has been confirmed. Its bring-up compile
+completed (40,208 B flash, 5,512 B static RAM), but it has not been uploaded.
+
+Read-only macOS unified-log inspection found the following events on
+2026-10-28, Asia/Seoul:
+
+| Time | Recorded event for UNO WiFi R4 CMSIS-DAP |
+| --- | --- |
+| 22:28:02.363 | USB transaction errors begin (0xe00002ed) |
+| 22:28:02.965 | Host terminates the USB device; log labels this `reset API call` |
+| 22:41:41.904 | USB transaction errors recur with the spare cable |
+| 22:41:42.504 | Host again terminates the USB device |
+
+The host USB-reset label does not establish a reset of the RA4M1 MCU.
+These errors/device-removal events are more specific than a Python
+response timeout. They do not identify which board component, cable,
+host controller/driver, power transient or other condition caused them.
+The separate 22:25:15 sandbox serial-open denial was an OS permission
+failure resolved before any HOLD; do not conflate it with these removals.
+
+The running `dac_loopback-v1` sketch has no boot ID or uptime field.
+Those fields exist in instrument v2, which has not been uploaded. Thus
+there is no before/after boot-ID evidence for these incidents. A lit power
+LED and the operator's persistent 0.59 V A0 reading are useful evidence,
+but do not rule out a transient or a fault confined to the USB bridge.
+
+No historical CPU-percentage or swap-rate series was collected at the
+incident times. A CURRENT sample at 22:55:48–22:55:58 showed 84.92% CPU
+idle on its second sample, 2,173.19 MiB swap used, and zero additional
+swap-in or swap-out pages during the 10-second observation. These numbers
+cannot be backdated to the incidents. The targeted historical log query
+returned idle-exit memory-management events, but no explicit `memory
+pressure` matches; that absence is not proof of no earlier memory pressure.
+
+Review artifacts (local/ignored, including restricted host diagnostics):
+`runs/hardware-usb-review/review-2026-10-28.json` and
+`runs/hardware-usb-review/usb-key-events-2026-10-28.txt`.
+No research process, OS setting, board output or installed firmware was
+changed during this review. The original board's current USB device
+remains absent; no 1.6 V command has been sent.
+
+## Hands-off comparison before a board change — 10-minute window completed
+
+The operator proposed testing the original fixture without touching it,
+then comparing ordinary DMM probing under the same conditions. The operator
+confirmed the original R4 WiFi was reconnected with its 5 V/GND/A0 fixture
+wiring unchanged and hands removed. The spare board remains untested.
+
+Record: `runs/hardware-usb-review/20261028T141232-5e47c051c9`.
+The 600-second observation window began at 23:12:35 Asia/Seoul on
+2026-10-28, with planned end 23:22:35. Before the window, the host verified
+the old firmware, issued only `HOLD 600` and checked code 501, then CLOSED
+the serial port. No periodic PING is sent during the window, preserving
+the serial-idle condition of the earlier manual readings. Cached USB
+enumeration and CPU tick deltas are sampled approximately once per second;
+VM counters and swap usage are sampled every 15 seconds. Sample gaps are
+recorded so host scheduling delays are distinguishable from an observed
+absent USB device. No process or OS power setting is changed.
+
+The operator was asked to leave the board, cable, breadboard and probes
+untouched until the end signal. This is an operator-controlled condition,
+not something independently observed by the software. Existing firmware
+is retained for this comparison; its missing boot ID remains a limitation.
+Any USB disappearance ends the run without automatic reconnect/rearm and
+triggers capture of matching kernel USB logs. The observer source is
+copied into the run directory separately from the live event chain.
+
+A passing interval would not prove a handling-related cause, and failure
+without handling would not by itself prove a defective board. Ordinary
+probing needs a monitored comparison with operator-reported start/end
+markers; software receipt times are not exact physical contact timestamps.
+The earlier host-load hypothesis also remains unproven, rather than
+categorically ruled out. Do not describe the earlier USB removals as
+automatic reconnection: recovery was only observed after manual USB
+reconnection.
+
+The requested window completed at 23:22:35. All 601 approximately one-second
+enumeration samples found the expected board; the maximum observed sample
+gap was 1.009975 seconds. A post-window PING verified the same code 501
+held state. There was no automatic reconnect or rearm. Source, event chain,
+matching USB kernel log and `observation-summary.json` are retained in the
+run directory. The operator subsequently confirmed no physical handling
+throughout the full interval and readiness for a monitored ordinary-probing
+comparison. This confirmation is saved separately in `operator-summary.json`;
+the earlier analysis file retains its then-pending confirmation status.
+The observation does not establish handling as the cause of previous loss.
+
+## Ordinary-probing comparison — 10-minute window completed
+
+Record: `runs/hardware-usb-review/20261028T142807-1cebd19533`.
+The window ran from 23:28:10 to 23:38:10 Asia/Seoul on 2026-10-28.
+The original board, spare data cable, Mac port, fixture and firmware were
+retained. No USB reconnection or reset was requested between the two
+phases. Before starting, PING verified the retained nominal 600 mV/code 501
+state; the same HOLD was issued and verified, then serial was closed.
+The observer used the same approximately one-second enumeration/CPU and
+15-second VM sampling, with no periodic serial PING during the window.
+
+After recording started, the operator was instructed to probe normally:
+DC 20 V, black at the upper-left blue GND rail, red at the supply rail,
+B13 DAC input and A11 driver output. Deliberate cable movement and
+USB/RESET manipulation were excluded. The reported readings remained
+4.88 V / 0.59 V / 0.59 V. No transient excursion was reported. The operator
+was then asked to leave the probes and fixture untouched for the remainder.
+Instruction and report sidecars are saved; their timestamps are not exact
+physical contact start/end times, and handling was not independently observed.
+
+All 601 samples found the expected USB device. The maximum sampling gap
+was 1.005010 seconds, weighted mean CPU busy was 7.02%, and the 41 VM
+samples showed zero swap-in/out page increments. The matching USB kernel
+log contained no transaction-error or device-termination lines. A final
+PING verified code 501 without rearming. The event hash chain was checked;
+source, kernel log and analysis are retained alongside the operator report.
+
+Both conditions passed once. A handling-related disconnect was NOT
+reproduced, and neither the original fault's cause nor its resolution is
+established. The old firmware still provides no boot ID. Resume the
+supervised driver DC check while preserving this limitation; do not claim
+that either the spare cable or the original board is now proven reliable.
+
+## Second driver DC point — nominal 1.6 V, DMM readings received
+
+After both ten-minute windows completed, the host resumed the driver check
+without a wiring, firmware, cable or board change. Record:
+`runs/hardware-fixture-dc/20261028T144003-6173753885`.
+The initial PING had to match the retained nominal 600 mV/code 501 state;
+only then was `HOLD 1600` sent. The old firmware ramps in bounded code
+increments. The holding response and subsequent PING verified code 1337.
+All 16 approximately one-second USB observations over 15 seconds found
+the board with serial closed; reopening and PING verified the held state.
+No ADC capture, reset, firmware upload or automatic recovery occurred.
+The event hash chain was checked and controller source is saved in the run.
+
+The operator reported `4.88 1.59 1.59`, interpreted in the established
+supply / B13 DAC input / A11 driver output order. The raw report and
+interpretation are retained in `operator-summary.json`. The measurement
+reference is the upper-left blue Arduino GND rail, with the DMM on DC 20 V.
+Both input and output display 1.59 V; this is a gross DC tracking check at
+the meter's 0.01 V display resolution, not evidence of zero offset.
+No transient excursion was mentioned. The nominal setting is not a
+measured voltage or a calibration result. The brief post-command
+observation does not establish long-term stability.
+
+## Third driver DC point — nominal 2.6 V, DMM readings received
+
+Record: `runs/hardware-fixture-dc/20261028T144904-7237239a5d`.
+With the same physical setup, the host verified the retained nominal
+1600 mV/code 1337 state before issuing `HOLD 2600`. The response and PING
+verified code 2173. All 16 USB enumeration samples over the subsequent
+15 seconds found the expected board while serial was closed. Reopening
+and PING verified the same held state. The event hash chain was checked.
+No ADC capture, reset, firmware change or automatic recovery occurred.
+
+The operator reported `4.88 2.58 2.58(2.59 가끔 흔들려 둘다)`: supply
+4.88 V; B13 input and A11 output each usually 2.58 V, occasionally 2.59 V.
+The raw report and interpretation are saved in `operator-summary.json`.
+Both nodes were probed relative to the upper-left blue Arduino GND rail,
+using DC 20 V. The 0.01 V display changes are not a sampled noise estimate;
+the two readings were separate and their fluctuations are not established
+as simultaneous. Matching displays do not establish zero buffer offset.
+
+A subsequent PING-only check found the expected USB device and retained
+nominal 2600 mV/code 2173 state, with no capture or output command:
+`runs/hardware-fixture-dc/20261028T145341-1421b0dcfc`. The event hash chain
+was checked. This establishes a response at that check time, not uninterrupted
+enumeration throughout the interval since the preceding command.
+
+The three initial driver points are now recorded under the 0.999 kΩ
+pull-down: input/output displays of 0.59/0.59, 1.59/1.59 and
+2.58–2.59/2.58–2.59 V. This completes the gross DC follower check only.
+Dynamic waveform quality, loaded source/sink behavior, the 2.2 kΩ
+comparison and quantitative ADC/buffer calibration remain pending.
+
+## U2 measurement buffers — unpowered placement requested, not confirmed
+
+Next, unplug USB before any component placement or resistance measurement.
+Leave U1 and its existing wiring intact. The latest PING showed A0 still
+driven; do not treat serial closure as removing power. No further output
+command or firmware upload is requested for this placement step.
+
+Place a second LM358N across the central trench at columns 20–23, marking
+up and notch LEFT, using the upper printed column numbers on both halves.
+This follows the same top-view pin orientation as U1, checked against
+[ST's package pin connections, page 4](https://www.st.com/resource/en/datasheet/lm358.pdf).
+
+| Hole | U2 pin | Intended role |
+| --- | --- | --- |
+| E20 | 8 | Positive supply |
+| E21 | 7 | Auxiliary measurement-buffer output |
+| E22 | 6 | Auxiliary buffer inverting input |
+| E23 | 5 | Auxiliary buffer non-inverting input |
+| F20 | 1 | OUT measurement-buffer output |
+| F21 | 2 | OUT buffer inverting input |
+| F22 | 3 | OUT buffer non-inverting input |
+| F23 | 4 | Board GND |
+
+For this step, request only IC placement and a photo, plus preparation of
+two additional 10 kΩ resistors measured separately out of circuit on the
+20 kΩ range, and one additional 104J100 0.1 µF capacitor. Do not connect
+U2 supplies, signal jumpers or ADC inputs yet. Do not reconnect USB until
+the later wiring and unpowered checks are complete. Installation, values,
+placement photo and USB disconnection are all pending operator confirmation.
+
+## Expanded U2 / ADC wiring instruction — requested, not installed
+
+The operator requested all remaining connections in one hole-coordinate
+table, including U2 supplies, feedback, pull-downs, bypass, jumpers and
+Arduino A1–A4. The complete current instruction is
+[U2 and A1–A4 wiring table](fixture-wiring-table.md). This supersedes the
+prior placement-only limit for the next unpowered assembly step; it does
+not record any of those new connections as installed or authorize a host
+stimulus before the operator confirms wiring and power-on readiness.
+
+The initial configuration uses a removable B28–B35 shunt bypass and
+C35–C30 IN-to-OUT calibration jumper, with the auxiliary non-inverting
+input parked at REF through B50–B23. A5 is not connected or acquired.
+Reserved future DUT terminals are A35=IN, B30=OUT, C50=RET/REF.
+Before a DUT is attached remove C35–C30; change the other removable
+jumpers only for their explicitly labeled later functions.
+
+A connectivity calculation using the confirmed U1 hole assignments found
+no occupied-hole conflicts, supply short, shorted follower outputs,
+bypassed ADC series resistor, or hidden bypass around the removable
+shunt. Removing the calibration jumper separates IN and OUT. This is a
+design check only; actual placement, resistance readings, unpowered
+continuity checks, photo and USB disconnection remain unconfirmed.
+
+## Session close — operator confirms assembly and continuity, values pending
+
+On 2026-10-29 Asia/Seoul the operator reports completing the full U2 and
+A1–A4 table and all requested continuity checks, but not the resistor
+measurements, and asks to stop for the night. This supersedes the pending
+installation/continuity status in the preceding instructions. It is an
+operator report, not a new photo, measured resistor values or powered
+host verification. No subsequent serial command or firmware upload is
+performed during this record-publication step. USB disconnection for
+overnight storage is instructed, not independently verified.
+
+Next session: keep USB disconnected; confirm the two new 10 kΩ and four
+ADC-series 1 kΩ resistor values, obtain an assembly photo, and check the
+recorded connections. An in-circuit reading can include parallel paths;
+lift one lead when necessary and restore its exact table position before
+rechecking. Then perform U2 DC and protected ADC checks, upload/validate
+instrument v2 and continue calibration. The current four-channel firmware
+does not acquire A5. No D01/B5 hardware diagnosis has yet been demonstrated.
+
+The [reviewed public bundle](../examples/hardware-fixture-bringup/README.md)
+preserves ten original control/USB event chains, their operator sidecars,
+available controller/observer sources and selected USB kernel evidence.
+Local logs are not automatically published: unrelated host-process
+diagnostics, credentials, holdout originals, private coursework PDFs and
+unreviewed images are excluded. A separately timestamped session report
+records the latest operator confirmation without backdating it or
+rewriting older `pending` events.
+
+## Standing conventions (current)
+
+- The intended supply rails are the UPPER LEFT red section for +5 V and
+  UPPER LEFT blue section for Arduino GND (0 V). The operator reports the
+  fixture-side jumpers installed and has supplied the first powered DC
+  readings after the requested Arduino 5 V/GND wiring step.
+- REF is a separate buffered reference near one third of the measured
+  supply; it is NOT the Arduino GND rail.
+- Configure both halves of each powered LM358 deliberately; the auxiliary
+  input is parked at REF by the current table.
+- The old loopback must remain isolated. A1–A4 are now reported connected
+  through their own series resistors per the new table; A5 is unconnected.
+- Keep USB unplugged during wiring, resistance or continuity checks.

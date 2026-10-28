@@ -1,0 +1,26 @@
+{
+  "source": "recorded_host_observation",
+  "window_started_utc": "2026-10-28T14:12:35.059034+00:00",
+  "window_ended_utc": "2026-10-28T14:22:35.076686+00:00",
+  "operator_no_touch_report_at_start": true,
+  "operator_full_interval_confirmation": "pending",
+  "firmware": "benchmate-dac-loopback-v1",
+  "boot_id_available": false,
+  "nominal_level_mv": 600,
+  "dac_code": 501,
+  "serial_port_closed_during_window": true,
+  "observation_samples": 601,
+  "usb_absent_samples": 0,
+  "max_sample_gap_s": 1.0099741249578074,
+  "mean_cpu_busy_percent": 5.190200606414041,
+  "max_cpu_busy_percent_excluding_initial_partial_interval": 29.14572864321608,
+  "memory_samples": 41,
+  "swap_page_deltas_over_window": {
+    "Swapins": 0,
+    "Swapouts": 0
+  },
+  "usb_transaction_error_lines": 0,
+  "usb_termination_lines": 0,
+  "post_window_pong_verified": true,
+  "scope": "No USB disappearance observed in this requested hands-off interval; no causal conclusion about handling, board, or host load."
+}

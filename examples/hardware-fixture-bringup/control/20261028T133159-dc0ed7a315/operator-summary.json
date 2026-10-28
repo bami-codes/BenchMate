@@ -1,0 +1,17 @@
+{
+  "source": "operator_report",
+  "reported_date_kst": "2026-10-28",
+  "during_usb_absence": {
+    "usb_or_cable_touched_since_measurement": false,
+    "power_led_on": true,
+    "B13_v": 0.59
+  },
+  "interpretation": "Power and A0 DC display persisted while USB device was absent; physical cause not identified",
+  "next_intervention": {
+    "spare_data_cable_connected": true,
+    "mac_port_unchanged_per_instruction": true,
+    "fixture_wiring_unchanged_per_instruction": true,
+    "usb_power_cycle_occurred": true
+  },
+  "cable_fault_proven": false
+}

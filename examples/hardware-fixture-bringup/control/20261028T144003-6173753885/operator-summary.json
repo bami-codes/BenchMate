@@ -1,0 +1,15 @@
+{
+  "source": "operator_report",
+  "saved_at_utc": "2026-10-28T14:49:01.504136+00:00",
+  "raw_user_report": "4.88 1.59 1.59",
+  "interpreted_order": "supply / B13 DAC input / A11 driver output, consistent with prior three-reading reports",
+  "supply_v": 4.88,
+  "driver_input_B13_v": 1.59,
+  "driver_output_A11_v": 1.59,
+  "meter_mode": "DC 20V per instruction",
+  "ground_reference": "upper-left blue Arduino GND rail",
+  "target_nominal_mv": 1600,
+  "dac_code": 1337,
+  "transient_excursion": "not mentioned",
+  "scope": "Operator DMM readings with 0.01 V displayed resolution; matching displays do not establish zero offset or calibrated accuracy. Saved time is not physical contact time."
+}

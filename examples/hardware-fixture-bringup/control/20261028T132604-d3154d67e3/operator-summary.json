@@ -1,0 +1,16 @@
+{
+  "source": "operator_report",
+  "reported_date_kst": "2026-10-28",
+  "raw_user_report": "둘다 0.59V",
+  "control_record_terminal_sha256": "db088413a1b01368acda3de1181a4bf1821301a6b1b6d5f9b87ee9ed1f7899fb",
+  "meter_mode": "DC 20 V per measurement instruction",
+  "ground_reference": "upper-left blue rail (Arduino GND)",
+  "nominal_level_mv": 600,
+  "dac_code": 501,
+  "driver_input_B13_v": 0.59,
+  "driver_output_A11_v": 0.59,
+  "driver_pull_down_ohm_displayed": 999,
+  "simultaneous_measurement": false,
+  "calibration_performed": false,
+  "scope": "Two equal DMM displays; does not establish zero offset or AC performance"
+}
