@@ -40,10 +40,15 @@ confirmed the output parked at REF code 1359. No firmware was changed.
 
 After those captures the operator reported USB disconnected, plus an
 additional isolated 9.99 kohm resistor and 0.998 microfarad capacitor.
-The resistor is assigned to a removable OUT–REF load; installation and
-continuity are requested in the [guide](../../../docs/b1-assembly.md),
-not yet confirmed. No loaded observation exists in these records. The
-capacitor is set aside for later D01 preparation, not connected.
+The resistor is installed as a removable OUT–REF load at D55–D60, with
+E30–A55 for OUT and C23–A60 for REF. The operator confirms continuity
+from the OUT load lead to U2 pin 3 and from its REF lead to D50. Fresh
+powered supply/REF readings are pending; no loaded observation exists in
+these records. **This REF feed depends on jumper 14 (B50–B23).** Before
+removing 14 for the auxiliary probe, the load return must be moved to a
+confirmed direct REF contact with USB off, and its continuity rechecked.
+See the [guide](../../../docs/b1-assembly.md). The capacitor remains set
+aside for later D01 preparation, not connected.
 
 The operator reports a separate 170-hole board with R1 between B3–B8
 and C1 between D8–D13, and confirms the empty-board strip checks.

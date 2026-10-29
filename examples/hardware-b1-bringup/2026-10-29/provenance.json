@@ -146,6 +146,21 @@
       "source": "runs/hardware-b1-load-preparation/20261029T120945-2570ff52f9/reference-calculations.json",
       "published": "load-preparation/reference-calculations.json",
       "sha256": "74bf935753637260112d223309f037db93b3443f183997e9456a45ab887e359e"
+    },
+    {
+      "source": "runs/hardware-b1-load-confirmed/20261029T122424-19773c5e0e/events.jsonl",
+      "published": "load-confirmed/events.jsonl",
+      "sha256": "a40500351add444080dc0a5efc99ee2332204635b763da1ce85f71df10378c8f"
+    },
+    {
+      "source": "runs/hardware-b1-load-confirmed/20261029T122424-19773c5e0e/assembly-guide.md",
+      "published": "load-confirmed/assembly-guide.md",
+      "sha256": "6f53b520c2534efbf578bd64af2a2d89cd19f571e176c9661ba2d1bc22bd036e"
+    },
+    {
+      "source": "runs/hardware-b1-load-confirmed/20261029T122424-19773c5e0e/fixture-wiring-table.md",
+      "published": "load-confirmed/fixture-wiring-table.md",
+      "sha256": "a6a9d07aec32e15c793f2cd3db4b46ee4458c4d59fb059e0f0683f46fe3065c4"
     }
   ],
   "records": [
@@ -343,7 +358,20 @@
         "load_installation_confirmation_pending": true,
         "USB_should_remain_disconnected": true
       }
+    },
+    {
+      "folder": "load-confirmed",
+      "source": "runs/hardware-b1-load-confirmed/20261029T122424-19773c5e0e",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "load_installation_operator_confirmed": true,
+        "dependency_documented": true,
+        "fresh_power_report_pending": true,
+        "loaded_observation_acquired": false
+      }
     }
   ],
-  "updated_at_utc": "2026-10-29T12:09:45.146012+00:00"
+  "updated_at_utc": "2026-10-29T12:24:24.323061+00:00"
 }

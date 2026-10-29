@@ -20,8 +20,10 @@ See the [evidence](../examples/hardware-b1-bringup/2026-10-29/README.md).
 Next setup: the operator reports USB disconnected and an additional
 isolated resistor of 9.99 kohm and capacitor of 0.998 microfarad. The
 resistor is assigned to the removable output load below. The capacitor
-is set aside for D01 preparation, not installed. Loaded wiring is requested,
-not yet confirmed; no loaded capture has been made.
+is set aside for D01 preparation, not installed. The operator now confirms
+load installation and continuity from its OUT end to U2 pin 3 and from its
+REF end to D50. Fresh powered supply/REF readings are requested; no loaded
+capture has been made. The load's REF feed depends on jumper 14.
 
 ## Coordinates used here
 
@@ -147,7 +149,7 @@ These two blocks do not establish a general sample-rate or frequency limit.
 A4 and remaining D2 checks are still incomplete. The result is first
 RC-response verification, not a confirmed mystery diagnosis or repair.
 
-## Requested removable load — USB remains disconnected
+## Confirmed removable load — powered check pending
 
 Use vacant upper-half columns 55 and 60 on the **large 830-hole board**.
 Keep the mini-board components and all existing fixture leads unchanged.
@@ -161,7 +163,18 @@ connects OUT to buffered REF, electrically parallel with B1's capacitor.
 | Insulated jumper | C23 | A60 | REF to load |
 
 E30 shares the OUT strip with D30 and A30. C23 shares the REF strip with
-B23, which remains connected to B50 by jumper 14. Upper columns 55/60
+B23, which remains connected to B50 by jumper 14.
+
+**Jumper 14 dependency:** keep B50–B23 installed while this load uses
+C23–A60. Before removing jumper 14 to use the auxiliary probe, disconnect
+USB and move the C23 end of the load's REF lead to a confirmed direct REF
+distribution contact. Verify continuity from the D60 load lead to D50
+again and record the new contact before powering up. Merely removing
+jumper 14 disconnects the load from REF; C23 is then the auxiliary-input
+node, not a valid load return. No such rerouting is requested or reported
+in the present step.
+
+Upper columns 55/60
 are terminal strips, not the split power rails. Keep exposed resistor
 leads clear of adjacent nodes. If a specified contact is obstructed, stop
 before moving existing leads and record the chosen alternative.
@@ -170,8 +183,10 @@ With USB still disconnected, check continuity from the D55 resistor lead
 to U2's actual pin 3 (F22), and from the D60 resistor lead to the D50 REF
 jumper. The 9.99 kohm load itself should not be expected to give a direct
 continuity tone between its ends. Do not reinterpret a loaded, in-circuit
-resistance as the previously isolated component reading. Await installation
-and continuity confirmation before requesting USB reconnection.
+resistance as the previously isolated component reading. The operator
+reported both continuity tones with USB disconnected. Reconnection with
+jumper 14 retained and fresh supply/REF readings are now requested;
+no DAC command is sent until those readings are reported.
 
 For this known B1 and two reported equal 9.99 kohm resistors, the ideal
 loaded small-signal gain is 0.5 relative to REF. The component-reference
