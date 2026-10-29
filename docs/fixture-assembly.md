@@ -60,9 +60,11 @@ new unarmed boot; explicit ARM then established code 1368. The subsequent
 B13/A11/D50-labelled report is 1.62/3.4/1.64 V: the operator clarified
 that the first two readings were directly at U1 pins 5/7 because the probe
 posts had been removed the previous night. USB disconnection and LED-off
-are now confirmed, with B12-to-D11 continuity reported. Actual pin 6-to-7
-contact remains to be checked. Physical recovery or chip damage is not
-established. No midpoint ADC capture or
+are now confirmed, with B12-to-D11 continuity reported. The subsequent
+actual metal pin 6-to-7 check also beeps. Same-cable/port USB reconnection
+and fresh supply/REF readings are requested before any new DAC command;
+no wiring or IC change is requested. Physical recovery or chip damage is
+not established. No midpoint ADC capture or
 higher target was commanded. Calibration and reliability remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
@@ -1350,6 +1352,19 @@ unpowered continuity check directly between U1 metal pins 6 (E12) and 7
 (E11), avoiding contact between the probe tips, or a report that access is
 too difficult. No wires or ICs are to be moved; USB remains disconnected.
 No hardware command was sent. See `minima-driver-contact-clarification/`.
+
+## Direct feedback-pin check passed; power reapplication requested
+
+The operator answered `삐 소리 났어` to the unpowered continuity request
+between actual U1 metal pins 6 (E12) and 7 (E11). This completes the
+requested direct feedback-contact check; no numeric resistance was given.
+It does not establish powered operation or a latched/damaged IC.
+With wiring and chips unchanged, the next request is DC 20 V mode,
+same-cable/port USB reconnection, then fresh supply (existing divider
+resistor A3-side lead) and REF (D50) readings relative to the retained
+blue-rail GND post. The red +5 V post stays removed. No DAC command is
+sent until this report and a new boot/status check. Reconnection and
+new voltage readings are pending. See `minima-driver-pin-feedback/`.
 
 ## Standing conventions (current)
 

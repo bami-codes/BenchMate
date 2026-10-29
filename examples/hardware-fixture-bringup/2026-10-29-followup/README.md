@@ -28,7 +28,9 @@ new-boot responses and explicit REF ARM. The subsequent B13/A11/D50 report
 is 1.62/3.4/1.64 V: the driver does not follow the DAC input. The operator
 clarified that 1.62/3.4 V were measured directly at U1 pins 5/7 because
 the B13/A11 posts were already removed. USB-off and LED-off are confirmed,
-and B12-to-D11 continuity is reported; actual pin 6-to-7 contact is pending.
+and B12-to-D11 continuity is reported. The actual metal pin 6-to-7 check
+also beeps. USB reconnection and fresh supply/REF readings are requested
+with wiring and chips unchanged, before any new DAC command.
 Physical recovery is not established. No midpoint ADC capture or higher
 voltage was commanded.
 
@@ -65,6 +67,7 @@ voltage was commanded.
 | `minima-contact-reset-recovery/`, `minima-contact-recovery-arm/` | Confirmed single RESET, two new-boot unarmed PINGs, explicit REF ARM and postcheck pass; physical output verification pending |
 | `minima-driver-voltage-mismatch/` | Later B13/A11/D50 report 1.62/3.4/1.64 V; physical recovery not established, USB-off requested before contact checks, no hardware commands |
 | `minima-driver-contact-clarification/` | Prior readings were directly at U1 pins 5/7, B13/A11 posts removed; USB-off confirmed, B12↔D11 beep reported, direct pin 6↔7 check requested |
+| `minima-driver-pin-feedback/` | Actual U1 metal pins 6↔7 beep unpowered; unchanged-wiring power reapplication and fresh supply/REF readings requested; no hardware commands |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -91,7 +94,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Forty-five chains contain 558 events.
+hashes and event-chain terminal states. Forty-six chains contain 563 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -232,3 +235,8 @@ as U1 pins 5/7, not B13/A11 probe posts, which the operator had removed
 the previous night. USB-off and LED-off are confirmed. B12-to-D11 beeps,
 but actual pin 6-to-7 continuity is still requested. No new powered reading,
 hardware command or chip-fault conclusion follows from this clarification.
+
+The requested direct pin 6-to-7 check subsequently beeps. With wiring and
+ICs unchanged, same-cable/port USB reconnection and DC 20 V supply/REF
+readings are now requested. Powered output recovery remains unverified;
+there is no new DAC command or capture in this record.

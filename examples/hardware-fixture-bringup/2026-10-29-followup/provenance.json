@@ -620,6 +620,16 @@
       "source": "runs/hardware-minima-contact-clarification/20261029T070759-af02817dbc/controller-source.py",
       "published": "minima-driver-contact-clarification/controller-source.py",
       "sha256": "cc3ee832dfbf3cc620a4e8b7450dea9b67e2962d38b793895300c88a9a22a411"
+    },
+    {
+      "source": "runs/hardware-minima-pin-feedback/20261029T071318-5fec08ea86/events.jsonl",
+      "published": "minima-driver-pin-feedback/events.jsonl",
+      "sha256": "ceb4d9afe523656bdf3c4debb4ae229a4e54f1fcd1ad22e6201a8375a45e4e96"
+    },
+    {
+      "source": "runs/hardware-minima-pin-feedback/20261029T071318-5fec08ea86/controller-source.py",
+      "published": "minima-driver-pin-feedback/controller-source.py",
+      "sha256": "bb534b00dda8de1c8a8064cceef121cb3e6149dae242366c9b7a5769c6ab954a"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1365,7 +1375,19 @@
         "fault_cause_established": false,
         "awaiting": "Actual U1 pin 6 to pin 7 continuity result"
       }
+    },
+    {
+      "folder": "minima-driver-pin-feedback",
+      "source": "runs/hardware-minima-pin-feedback/20261029T071318-5fec08ea86",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "operator_continuity_recorded": true,
+        "hardware_IO_performed": false,
+        "calibration_performed": false,
+        "awaiting": "USB reconnect confirmation and fresh supply/REF displays"
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T07:09:03.941764+00:00"
+  "last_appended_at_utc": "2026-10-29T07:14:05.416300+00:00"
 }
