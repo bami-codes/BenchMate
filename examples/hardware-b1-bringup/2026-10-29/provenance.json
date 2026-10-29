@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-10-29T11:13:49.990227+00:00",
+  "scope": "Parts and assembly evidence; fixture connection and hardware capture not yet confirmed",
+  "copies": [
+    {
+      "source": "runs/hardware-b1-assembly/20261029T105421-715fe30508/events.jsonl",
+      "published": "parts-and-layout/events.jsonl",
+      "sha256": "b743dd29eccc4e139444325e1435d7bccf72dccdfe0400e78ed7448e7e2efcb4"
+    },
+    {
+      "source": "runs/hardware-b1-assembly-confirmed/20261029T111235-ab1ad3e3de/events.jsonl",
+      "published": "assembly-confirmed/events.jsonl",
+      "sha256": "3b295b629d672d32203d54240cc4305b8d99f75c38d98b07195ddc02ea47f32a"
+    },
+    {
+      "source": "runs/hardware-b1-assembly-confirmed/20261029T111235-ab1ad3e3de/assembly-guide.md",
+      "published": "assembly-confirmed/assembly-guide.md",
+      "sha256": "66641bb00fceb3f8afe668df277caccb93c56f88eb15e30c13e4f808d47f1da3"
+    }
+  ],
+  "records": [
+    {
+      "folder": "parts-and-layout",
+      "source": "runs/hardware-b1-assembly/20261029T105421-715fe30508",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "parts_preparation_confirmed": true,
+        "mini_board_assembly_confirmed": false,
+        "awaiting": "mini-board topology precheck, assembly and isolated in-board R/C readings; USB remains disconnected"
+      }
+    },
+    {
+      "folder": "assembly-confirmed",
+      "source": "runs/hardware-b1-assembly-confirmed/20261029T111235-ab1ad3e3de",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "fixture_connection_report_pending": true,
+        "USB_should_remain_disconnected": true,
+        "guide_sha256": "66641bb00fceb3f8afe668df277caccb93c56f88eb15e30c13e4f808d47f1da3"
+      }
+    }
+  ]
+}
