@@ -1,0 +1,140 @@
+{
+  "models": {
+    "no_input_branch": {
+      "RMS_mV": 5.5875717895128325,
+      "mean_residual_mV": -5.065113023921933,
+      "max_abs_residual_mV": 22.50844740625513,
+      "regions": [
+        {
+          "name": "pre_step",
+          "samples": 51,
+          "RMS_mV": 4.031245939386821,
+          "max_abs_mV": 12.553158682170551
+        },
+        {
+          "name": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 4.356860862783403,
+          "max_abs_mV": 9.679676565770068
+        },
+        {
+          "name": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 5.952821844434921,
+          "max_abs_mV": 22.50844740625513
+        },
+        {
+          "name": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 5.55570470043734,
+          "max_abs_mV": 10.467242484810901
+        },
+        {
+          "name": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 5.821122338484621,
+          "max_abs_mV": 11.584905071061913
+        }
+      ],
+      "checks": {
+        "whole_RMS": true,
+        "all_regional_RMS": true,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": true,
+      "refitted_samples": 0
+    },
+    "input_branch": {
+      "RMS_mV": 5.5875717895128325,
+      "mean_residual_mV": -5.065113023921933,
+      "max_abs_residual_mV": 22.50844740625513,
+      "regions": [
+        {
+          "name": "pre_step",
+          "samples": 51,
+          "RMS_mV": 4.031245939386821,
+          "max_abs_mV": 12.553158682170551
+        },
+        {
+          "name": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 4.356860862783403,
+          "max_abs_mV": 9.679676565770068
+        },
+        {
+          "name": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 5.952821844434921,
+          "max_abs_mV": 22.50844740625513
+        },
+        {
+          "name": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 5.55570470043734,
+          "max_abs_mV": 10.467242484810901
+        },
+        {
+          "name": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 5.821122338484621,
+          "max_abs_mV": 11.584905071061913
+        }
+      ],
+      "checks": {
+        "whole_RMS": true,
+        "all_regional_RMS": true,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": true,
+      "refitted_samples": 0
+    }
+  },
+  "max_time_error_us": 3.0000000000030003,
+  "max_DAC_code_error": 0,
+  "current_evidence": {
+    "scope": "Two declared branch alternatives; engineering thresholds, not calibrated confidence.",
+    "drive_excursion_v": 0.3985798858297238,
+    "observed_drop_contrast_v": -0.0005468380609218774,
+    "normalized_drop_contrast": -0.0013719660232816928,
+    "low_drop_mean_v": 0.00018724933645929007,
+    "high_drop_mean_v": -0.0003595887244625873,
+    "low_path_sample_SD_mV": 2.0829928724289375,
+    "high_path_sample_SD_mV": 1.4644048369050968,
+    "low_samples": 51,
+    "high_samples": 100,
+    "trimmed_samples": 0,
+    "two_levels_in_one_step_block": true,
+    "independent_DC_blocks": 0,
+    "shunt_ohm": 0.0,
+    "branch_ohm": 9990.0,
+    "absolute_error_limit_mV": 9.0,
+    "scores": {
+      "no_input_branch": {
+        "predicted_contrast_v": 0.0,
+        "residual_mV": -0.5468380609218774,
+        "passed": true
+      },
+      "input_branch": {
+        "predicted_contrast_v": 0.0,
+        "residual_mV": -0.5468380609218774,
+        "passed": true
+      }
+    },
+    "supported_alternatives": [
+      "no_input_branch",
+      "input_branch"
+    ]
+  },
+  "electrical_guards": {
+    "raw_not_at_rails": true,
+    "A4_envelope": true,
+    "A4_block_mean_stability": true,
+    "signal_envelope": true
+  },
+  "frame_interval_us_range": [
+    497,
+    503
+  ]
+}

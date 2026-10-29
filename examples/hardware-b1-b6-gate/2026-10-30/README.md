@@ -28,6 +28,6 @@ confirmation. The per-condition status below supersedes this initial preparation
 | Condition | OUT RMS | A3−A1 level contrast | Supported alternatives |
 |---|---:|---:|---|
 | [b1_bypass](b1_bypass/README.md) | 5.952 mV | 0.029 mV | no_input_branch, input_branch |
-| b6_bypass | Pending | Pending | Pending |
+| [b6_bypass](b6_bypass/README.md) | 5.588 mV | -0.547 mV | no_input_branch, input_branch |
 | b6_shunt | Pending | Pending | Pending |
 | b1_shunt | Pending | Pending | Pending |

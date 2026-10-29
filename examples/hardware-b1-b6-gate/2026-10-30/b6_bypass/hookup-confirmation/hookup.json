@@ -1,0 +1,16 @@
+{
+  "condition_id": "b6_bypass",
+  "verbatim": "USB 분리 / IN 분기 연결(A55–C35) / IN 삐 / REF 삐 / 추가 확인: D55↔F22(OUT) 무음",
+  "USB_disconnected": true,
+  "IN_branch_A55_C35_installed": true,
+  "OUT_lead_E30_A55_absent_per_instruction": true,
+  "D55_to_A35_IN_continuity": "beep",
+  "D60_to_D50_REF_continuity": "beep",
+  "D55_to_F22_OUT_continuity": "silent",
+  "branch_resistor_ohm": 9990,
+  "jumper_11_retained": true,
+  "jumper_14_retained": true,
+  "996_ohm_shunt_not_installed": true,
+  "original_RC_retained_per_instruction": true,
+  "USB_reconnection_pending": true
+}

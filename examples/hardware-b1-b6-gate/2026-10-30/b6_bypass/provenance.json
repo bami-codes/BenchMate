@@ -1,0 +1,92 @@
+[
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/capture-controller.py",
+    "copy": "condition/capture-controller.py",
+    "sha256": "6ca4adadb6058a98c2451de6999a2e703d04c2e3c5ec73467e47243b08d93c2b"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/common-plan.json",
+    "copy": "condition/common-plan.json",
+    "sha256": "fc4c5a98e92839b4d305f129c6732c17c4fd4c181665633c7399ba4ff8466747"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/condition.json",
+    "copy": "condition/condition.json",
+    "sha256": "86c88715779e046feee0ea2dc9e40646dccceeecab6e65db153487c98fea3aa7"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/controller-source.py",
+    "copy": "condition/controller-source.py",
+    "sha256": "060cc2ffc475c8c5bf5903a056896b3dfe781fe933b1725f905b77b3e4e1d5a6"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/events.jsonl",
+    "copy": "condition/events.jsonl",
+    "sha256": "aa43260f11ed0691add0f491b0013979467bbf4a19ae83e3b67c9aa3b015dc3e"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T163032-ad5cc12939/provisional-calibration.json",
+    "copy": "condition/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/baseline.json",
+    "copy": "capture/baseline.json",
+    "sha256": "8ee6836e0a9235eba62395926af0200e00c5f024beccfd8d07354ec50416d005"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/branch-evaluator.py",
+    "copy": "capture/branch-evaluator.py",
+    "sha256": "9cc7516154972d7c3460998be65c3465a9481f64641fdbd98e3794db2d075c77"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/controller-source.py",
+    "copy": "capture/controller-source.py",
+    "sha256": "6ca4adadb6058a98c2451de6999a2e703d04c2e3c5ec73467e47243b08d93c2b"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/events.jsonl",
+    "copy": "capture/events.jsonl",
+    "sha256": "da082c8153a4925c82b656c5444529d26958394beb2106c24d1a8b86d3659143"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/host-instrument.py",
+    "copy": "capture/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/measured-input-predictor.py",
+    "copy": "capture/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/prediction.json",
+    "copy": "capture/prediction.json",
+    "sha256": "86c88715779e046feee0ea2dc9e40646dccceeecab6e65db153487c98fea3aa7"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/provisional-calibration.json",
+    "copy": "capture/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/result.json",
+    "copy": "capture/result.json",
+    "sha256": "7ffbf23d8860279213d890fc1e5805c5543dba73065c24ae7fb4f18df43caa22"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T163040-38c69af1b2/step-comparison.json",
+    "copy": "capture/step-comparison.json",
+    "sha256": "b7bfbda90647604bdebe66dac9a10cda03d95aa73ace0ba25f3d3bb5e3b5985a"
+  },
+  {
+    "source": "runs/hardware-b1-b6-hookup-confirmed/20261029T162636-a0e953c3a5/events.jsonl",
+    "copy": "hookup-confirmation/events.jsonl",
+    "sha256": "35fa381a02cd58b4678d500ffc943e25a5b4827aff5c8f6f2a994b12e201fc84"
+  },
+  {
+    "source": "runs/hardware-b1-b6-hookup-confirmed/20261029T162636-a0e953c3a5/hookup.json",
+    "copy": "hookup-confirmation/hookup.json",
+    "sha256": "7553b8c17d4cfb15a015ca2ecbf6f3b2955081e5ce1a2b82a52194074e3bc056"
+  }
+]
