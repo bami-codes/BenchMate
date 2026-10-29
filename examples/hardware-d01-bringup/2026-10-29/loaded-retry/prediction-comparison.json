@@ -1,0 +1,108 @@
+{
+  "prediction_sha256": "5374b9886adcf688cff82c47a58e66c38d0d2f1aab5d205ab2484cb41497cf33",
+  "model_scores": {
+    "nominal_R_changed_C": {
+      "RMS_mV": 5.646763700388845,
+      "mean_residual_mV": -5.2513206709756295,
+      "max_absolute_residual_mV": 28.391428490813333,
+      "regions": [
+        {
+          "region": "pre_step",
+          "samples": 51,
+          "RMS_mV": 4.479694315825117,
+          "max_abs_mV": 7.092351710825007
+        },
+        {
+          "region": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 6.03241475014654,
+          "max_abs_mV": 7.210918154167301
+        },
+        {
+          "region": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 5.865855590230818,
+          "max_abs_mV": 9.328568067135556
+        },
+        {
+          "region": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 5.46053596449256,
+          "max_abs_mV": 9.647299534714326
+        },
+        {
+          "region": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 5.857643504299687,
+          "max_abs_mV": 28.391428490813333
+        }
+      ],
+      "checks": {
+        "prediction_timing": true,
+        "DAC_codes_match": true,
+        "whole_trace_RMS": true,
+        "all_regional_RMS": true
+      },
+      "engineering_check_passed": true,
+      "loaded_samples_used_for_refit": 0
+    },
+    "changed_R_nominal_C": {
+      "RMS_mV": 27.637801215865068,
+      "mean_residual_mV": 15.94184310021507,
+      "max_absolute_residual_mV": 51.23759379989434,
+      "regions": [
+        {
+          "region": "pre_step",
+          "samples": 51,
+          "RMS_mV": 39.33457078633653,
+          "max_abs_mV": 42.484529007464246
+        },
+        {
+          "region": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 38.62494125350119,
+          "max_abs_mV": 41.86750436975628
+        },
+        {
+          "region": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 16.30971970369528,
+          "max_abs_mV": 31.057343032242724
+        },
+        {
+          "region": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 23.70462167407632,
+          "max_abs_mV": 29.157614406926548
+        },
+        {
+          "region": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 27.148809379748204,
+          "max_abs_mV": 51.23759379989434
+        }
+      ],
+      "checks": {
+        "prediction_timing": true,
+        "DAC_codes_match": true,
+        "whole_trace_RMS": false,
+        "all_regional_RMS": false
+      },
+      "engineering_check_passed": false,
+      "loaded_samples_used_for_refit": 0
+    }
+  },
+  "max_prediction_time_error_us": 3.0000000000030003,
+  "max_DAC_code_difference": 0,
+  "timing_checks": {
+    "prediction_timing": true,
+    "DAC_codes_match": true
+  },
+  "specimen_component_truth_used_in_prediction": false,
+  "scope": "Representative conditional predictions only; no full-family posterior or calibrated confidence",
+  "passing_representative_points": [
+    "nominal_R_changed_C"
+  ],
+  "full_D2_accepted": false,
+  "blind_diagnosis_performed": false
+}

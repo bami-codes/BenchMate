@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T12:41:15.067879+00:00",
-  "scope": "D01 unloaded response, conditional load predictions and confirmed load hookup; fresh loaded power report, loaded capture and repair pending",
+  "scope": "D01 unloaded plus two loaded attempts: first voltage checks failed, second C representative passed after new DMM REF report; all forecasts precede captures. A4/path DMM bracket and physical repair pending.",
   "copies": [
     {
       "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/events.jsonl",
@@ -111,6 +111,236 @@
       "source": "runs/hardware-d01-load-confirmed/20261029T134809-e1c0f5f6ef/assembly-guide.md",
       "published": "load-confirmed/assembly-guide.md",
       "sha256": "cd0d08afdbfc22cf849a5524cc37fd8ec042e7a774209f654a53c51df8295022"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07/events.jsonl",
+      "published": "loaded-prediction/events.jsonl",
+      "sha256": "298b8b19b779be816a29e63e38d8c2138d956996debdad7d5e333894f6665703"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07/controller-source.py",
+      "published": "loaded-prediction/controller-source.py",
+      "sha256": "45ae7b16b4c5a96ed97c4df47f7b25e4ed30bd70e1afd5f1cf2029a35a0c5f8f"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07/conditional-feature-predictions.json",
+      "published": "loaded-prediction/conditional-feature-predictions.json",
+      "sha256": "edb8452712992def68494bcff7f1507aa2f18ade0c4817db1c10ed5560e103ba"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07/provisional-calibration.json",
+      "published": "loaded-prediction/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07/prediction.json",
+      "published": "loaded-prediction/prediction.json",
+      "sha256": "050bc8c76e3428275603bf819dc0de20fe78b0f5a8e224015a3c402baf2aaf8f"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/events.jsonl",
+      "published": "loaded-step/events.jsonl",
+      "sha256": "c5bbaef955b8c24f4db00b3aa41b144c39c2e2a8fdcf9a70b14c294beb807c8d"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/controller-source.py",
+      "published": "loaded-step/controller-source.py",
+      "sha256": "f96d054840f00bba9197955aed8ed7db461edb61caaa2526c054c53c7c66d162"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/host-instrument.py",
+      "published": "loaded-step/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/provisional-calibration.json",
+      "published": "loaded-step/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/assembly-guide.md",
+      "published": "loaded-step/assembly-guide.md",
+      "sha256": "cd0d08afdbfc22cf849a5524cc37fd8ec042e7a774209f654a53c51df8295022"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/prediction.json",
+      "published": "loaded-step/prediction.json",
+      "sha256": "050bc8c76e3428275603bf819dc0de20fe78b0f5a8e224015a3c402baf2aaf8f"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/prediction-comparison.json",
+      "published": "loaded-step/prediction-comparison.json",
+      "sha256": "ac27c0e8333e5c3e5480dd77fca9e7d067088c7aca9ceefbda3aa53d5712d357"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e/capture-summary.json",
+      "published": "loaded-step/capture-summary.json",
+      "sha256": "5c8265d6fc00405be61ca1623498d5ba0315008687c0c072ae63c5ee0a0c7449"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0/events.jsonl",
+      "published": "loaded-analysis/events.jsonl",
+      "sha256": "c0e62ee336bf0b81b21fee032316b87425a82b76c6f97038a950939e4cd1879a"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0/controller-source.py",
+      "published": "loaded-analysis/controller-source.py",
+      "sha256": "a01d3dd16652c5c04ec76587033b211056f05546507637242dbbd9ce36ba8575"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0/analysis.json",
+      "published": "loaded-analysis/analysis.json",
+      "sha256": "7dcd3d7f5dd7481892d71f298fb8669cf0e0314721a6fdee890567c380717032"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0/loaded-comparison.png",
+      "published": "loaded-analysis/loaded-comparison.png",
+      "sha256": "1d83d78e1ae1c4900e0d159c85c5b5ecc34fc25cf8331b182449aaa33810efd8"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0/loaded-comparison.svg",
+      "published": "loaded-analysis/loaded-comparison.svg",
+      "sha256": "c788b67bd60b68c4339cf437f92438473471dd7d93f899d505db57d7933be475"
+    },
+    {
+      "source": "runs/hardware-reference-tracking-review/20261029T135829-b8a483f40c/events.jsonl",
+      "published": "reference-tracking-review/events.jsonl",
+      "sha256": "2a40a3c57ce4dbf0371583fa08bd21a9f2e78be72c2acea07ab96b78b08accd5"
+    },
+    {
+      "source": "runs/hardware-reference-tracking-review/20261029T135829-b8a483f40c/controller-source.py",
+      "published": "reference-tracking-review/controller-source.py",
+      "sha256": "3d91b24f127a9d82907ab17fc3d9c2e1e03232d53166b0ddce75c5a77476be11"
+    },
+    {
+      "source": "runs/hardware-reference-tracking-review/20261029T135829-b8a483f40c/review.json",
+      "published": "reference-tracking-review/review.json",
+      "sha256": "0cdc8aca3108ff7054ccb8984c3aad15cd2a50bbf15d7cae033f054f6761a1cc"
+    },
+    {
+      "source": "runs/hardware-d01-reference-recheck-request/20261029T140100-4e6e01b808/events.jsonl",
+      "published": "reference-recheck-request/events.jsonl",
+      "sha256": "098aa3a0a31278b18e5b0ca37df52dc2c1d64365acae9f6ff5fe6b5898e175e4"
+    },
+    {
+      "source": "runs/hardware-d01-reference-recheck-request/20261029T140100-4e6e01b808/reference-tracking.md",
+      "published": "reference-recheck-request/reference-tracking.md",
+      "sha256": "64667bf5d6d25a3922e9456841173e8eeb37f4c5503547bb78d73b109dd35dd8"
+    },
+    {
+      "source": "runs/hardware-d01-reference-recheck/20261029T140511-b5b1cdcec9/events.jsonl",
+      "published": "reference-recheck/events.jsonl",
+      "sha256": "32c135f1160ba52cd5143fcd41fcd3a526185fb40f4e05933646112452afdc89"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778/events.jsonl",
+      "published": "loaded-retry-prediction/events.jsonl",
+      "sha256": "bbbe42d0edd9b853aba42e45d1ab5a1801ee4e48748848fb643a01fe225b9fce"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778/controller-source.py",
+      "published": "loaded-retry-prediction/controller-source.py",
+      "sha256": "1e27e20b58aa898c4750153c98e12148b497eaa28978f2eb1b848786f69b2f37"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778/conditional-feature-predictions.json",
+      "published": "loaded-retry-prediction/conditional-feature-predictions.json",
+      "sha256": "edb8452712992def68494bcff7f1507aa2f18ade0c4817db1c10ed5560e103ba"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778/provisional-calibration.json",
+      "published": "loaded-retry-prediction/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778/prediction.json",
+      "published": "loaded-retry-prediction/prediction.json",
+      "sha256": "5374b9886adcf688cff82c47a58e66c38d0d2f1aab5d205ab2484cb41497cf33"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/events.jsonl",
+      "published": "loaded-retry/events.jsonl",
+      "sha256": "5ef70bc9fc5cc1d94329dee2d6310dd589de8b26259bf6025ef2e6b877b66808"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/controller-source.py",
+      "published": "loaded-retry/controller-source.py",
+      "sha256": "e3c84a735f5527aa965a309c8fcb13d852ab26bfc06544afdf44a0e4fcc07fbf"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/host-instrument.py",
+      "published": "loaded-retry/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/provisional-calibration.json",
+      "published": "loaded-retry/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/assembly-guide.md",
+      "published": "loaded-retry/assembly-guide.md",
+      "sha256": "99501f673c798d26b0fa7667730ffe7109d2aa4d2660e18e94553617b5faf961"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/prediction.json",
+      "published": "loaded-retry/prediction.json",
+      "sha256": "5374b9886adcf688cff82c47a58e66c38d0d2f1aab5d205ab2484cb41497cf33"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/prediction-comparison.json",
+      "published": "loaded-retry/prediction-comparison.json",
+      "sha256": "45ebe44d1bbeeebd9eb0f90e0f81a2e406f001c50de44daf5a8a5f026255c1ba"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06/capture-summary.json",
+      "published": "loaded-retry/capture-summary.json",
+      "sha256": "12a30ef03365bae617cc48e91f5819b6a8de6d00b7a3437e9cdd1da2c0c3641d"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c/events.jsonl",
+      "published": "loaded-retry-analysis/events.jsonl",
+      "sha256": "25702635793c4b7b35006d25c91108eb5e1d2da65810226e80e7e80915504237"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c/controller-source.py",
+      "published": "loaded-retry-analysis/controller-source.py",
+      "sha256": "4ef3e0a359991f9418c3798967fb3f8663b342327ddad3e48044c76acd19b7ac"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c/analysis.json",
+      "published": "loaded-retry-analysis/analysis.json",
+      "sha256": "4c59fb685a7fba1feade0f24b22e5fd7af8b97724b4565c18c77e2f57fbbdd82"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c/loaded-comparison.png",
+      "published": "loaded-retry-analysis/loaded-comparison.png",
+      "sha256": "3de88761b86112f5da47a529d350475fcecb010d0e751c6cf5d9a7d509625950"
+    },
+    {
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c/loaded-comparison.svg",
+      "published": "loaded-retry-analysis/loaded-comparison.svg",
+      "sha256": "02a9b24810d128bae049080a553400ca85be20b8027b1bdbd5e523bdddea0add"
+    },
+    {
+      "source": "runs/hardware-d01-reference-alignment/20261029T140917-1a090ad9f2/events.jsonl",
+      "published": "reference-alignment-before-DMM/events.jsonl",
+      "sha256": "20cc757022b567f4d690ba8bf89d3c95996b9ed08d0232401e1a5db52b332835"
+    },
+    {
+      "source": "runs/hardware-d01-reference-alignment/20261029T140917-1a090ad9f2/controller-source.py",
+      "published": "reference-alignment-before-DMM/controller-source.py",
+      "sha256": "40649200fb0bc8b305ba96253317bf766ec0de25951a1fc01a4c890efc2e26cc"
+    },
+    {
+      "source": "runs/hardware-d01-reference-alignment/20261029T140917-1a090ad9f2/summary.json",
+      "published": "reference-alignment-before-DMM/summary.json",
+      "sha256": "9a524f6886bb0ff689a09d6d188be6d9edf065bcaffb995cd8cad65f7538a6c2"
+    },
+    {
+      "source": "runs/hardware-d01-alignment-DMM-request/20261029T141332-ff013c147c/events.jsonl",
+      "published": "alignment-DMM-request/events.jsonl",
+      "sha256": "4a87d2d94b6e586c6b32117d47c1f9bf95b1d58be5ace827e75df0fc9645f693"
     }
   ],
   "records": [
@@ -291,7 +521,560 @@
         "D01_loaded_capture_performed": false,
         "fresh_power_report_pending": true
       }
+    },
+    {
+      "folder": "loaded-prediction",
+      "source": "runs/hardware-d01-loaded-prediction/20261029T135136-1ab8be2f07",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_ADC_pending": true,
+        "prediction_sha256": "050bc8c76e3428275603bf819dc0de20fe78b0f5a8e224015a3c402baf2aaf8f"
+      }
+    },
+    {
+      "folder": "loaded-step",
+      "source": "runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e",
+      "events": 23,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+        "configuration": {
+          "vref_v": 4.89,
+          "ref_v": 1.649,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "REF_guard": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 1998,
+          "frame_interval_us_max": 2003,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5511.419921875,
+              "min_counts": 5438,
+              "max_counts": 5543,
+              "nominal_mean_v": 1.6450493449288133
+            },
+            "A2": {
+              "mean_counts": 5556.5703125,
+              "min_counts": 5488,
+              "max_counts": 5618,
+              "nominal_mean_v": 1.6585258394753706
+            },
+            "A3": {
+              "mean_counts": 5513.888671875,
+              "min_counts": 5448,
+              "max_counts": 5576,
+              "nominal_mean_v": 1.6457862177543032
+            },
+            "A4": {
+              "mean_counts": 5618.951171875,
+              "min_counts": 5598,
+              "max_counts": 5669,
+              "nominal_mean_v": 1.6771452866061618
+            }
+          }
+        },
+        "step": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 497,
+          "frame_interval_us_max": 503,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 6048.416015625,
+              "min_counts": 4820,
+              "max_counts": 6261,
+              "nominal_mean_v": 1.805332009791018
+            },
+            "A2": {
+              "mean_counts": 5793.533203125,
+              "min_counts": 5202,
+              "max_counts": 5918,
+              "nominal_mean_v": 1.7292545543112525
+            },
+            "A3": {
+              "mean_counts": 6050.36328125,
+              "min_counts": 4836,
+              "max_counts": 6257,
+              "nominal_mean_v": 1.8059132298915033
+            },
+            "A4": {
+              "mean_counts": 5628.783203125,
+              "min_counts": 5579,
+              "max_counts": 5693,
+              "nominal_mean_v": 1.680079952589956
+            }
+          }
+        },
+        "output_parked_ref_code": 1381,
+        "response_analysis_pending": true,
+        "frozen_prediction_comparison": {
+          "prediction_sha256": "050bc8c76e3428275603bf819dc0de20fe78b0f5a8e224015a3c402baf2aaf8f",
+          "model_scores": {
+            "nominal_R_changed_C": {
+              "RMS_mV": 8.436643568175999,
+              "mean_residual_mV": 8.159737801492417,
+              "max_absolute_residual_mV": 17.456891293178067,
+              "regions": [
+                {
+                  "region": "pre_step",
+                  "samples": 51,
+                  "RMS_mV": 6.8068940550916315,
+                  "max_abs_mV": 13.07999262344084
+                },
+                {
+                  "region": "0_to_5ms",
+                  "samples": 10,
+                  "RMS_mV": 10.2814520106274,
+                  "max_abs_mV": 12.207838206788946
+                },
+                {
+                  "region": "5_to_20ms",
+                  "samples": 30,
+                  "RMS_mV": 9.32910651339953,
+                  "max_abs_mV": 13.060249317217387
+                },
+                {
+                  "region": "20_to_80ms",
+                  "samples": 120,
+                  "RMS_mV": 8.5249221179114,
+                  "max_abs_mV": 14.488644561991615
+                },
+                {
+                  "region": "after_80ms",
+                  "samples": 301,
+                  "RMS_mV": 8.488924111819854,
+                  "max_abs_mV": 17.456891293178067
+                }
+              ],
+              "checks": {
+                "prediction_timing": true,
+                "DAC_codes_match": true,
+                "whole_trace_RMS": true,
+                "all_regional_RMS": false
+              },
+              "engineering_check_passed": false,
+              "loaded_samples_used_for_refit": 0
+            },
+            "changed_R_nominal_C": {
+              "RMS_mV": 37.429224632661374,
+              "mean_residual_mV": 29.408004131298632,
+              "max_absolute_residual_mV": 49.9688749308207,
+              "regions": [
+                {
+                  "region": "pre_step",
+                  "samples": 51,
+                  "RMS_mV": 28.785871975346296,
+                  "max_abs_mV": 32.40804927992791
+                },
+                {
+                  "region": "0_to_5ms",
+                  "samples": 10,
+                  "RMS_mV": 22.451017113792812,
+                  "max_abs_mV": 26.668501896214725
+                },
+                {
+                  "region": "5_to_20ms",
+                  "samples": 30,
+                  "RMS_mV": 10.93044204235708,
+                  "max_abs_mV": 18.737609557165193
+                },
+                {
+                  "region": "20_to_80ms",
+                  "samples": 120,
+                  "RMS_mV": 37.06961194391425,
+                  "max_abs_mV": 43.10443326012003
+                },
+                {
+                  "region": "after_80ms",
+                  "samples": 301,
+                  "RMS_mV": 40.81810346578254,
+                  "max_abs_mV": 49.9688749308207
+                }
+              ],
+              "checks": {
+                "prediction_timing": true,
+                "DAC_codes_match": true,
+                "whole_trace_RMS": false,
+                "all_regional_RMS": false
+              },
+              "engineering_check_passed": false,
+              "loaded_samples_used_for_refit": 0
+            }
+          },
+          "max_prediction_time_error_us": 3.0000000000030003,
+          "max_DAC_code_difference": 0,
+          "timing_checks": {
+            "prediction_timing": true,
+            "DAC_codes_match": true
+          },
+          "specimen_component_truth_used_in_prediction": false,
+          "scope": "Representative conditional predictions only; no full-family posterior or calibrated confidence",
+          "passing_representative_points": [],
+          "full_D2_accepted": false,
+          "blind_diagnosis_performed": false
+        },
+        "full_D2_accepted": false,
+        "hardware_diagnosis_performed": false,
+        "serial_connection_closed": true
+      }
+    },
+    {
+      "folder": "loaded-analysis",
+      "source": "runs/hardware-d01-loaded-analysis/20261029T135552-b8d53dd5c0",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "frozen_validation_passed": false,
+        "repair_requested": false,
+        "artifact_sha256": {
+          "analysis.json": "7dcd3d7f5dd7481892d71f298fb8669cf0e0314721a6fdee890567c380717032",
+          "loaded-comparison.png": "1d83d78e1ae1c4900e0d159c85c5b5ecc34fc25cf8331b182449aaa33810efd8",
+          "loaded-comparison.svg": "c788b67bd60b68c4339cf437f92438473471dd7d93f899d505db57d7933be475"
+        }
+      }
+    },
+    {
+      "folder": "reference-tracking-review",
+      "source": "runs/hardware-reference-tracking-review/20261029T135829-b8a483f40c",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "automatic_A4_control_enabled": false,
+        "DMM_followup_pending_after_failed_prediction": true
+      }
+    },
+    {
+      "folder": "reference-recheck-request",
+      "source": "runs/hardware-d01-reference-recheck-request/20261029T140100-4e6e01b808",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "DMM_reply_pending": true,
+        "automatic_A4_control_enabled": false,
+        "repair_requested": false
+      }
+    },
+    {
+      "folder": "reference-recheck",
+      "source": "runs/hardware-d01-reference-recheck/20261029T140511-b5b1cdcec9",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "retry_pending": true
+      }
+    },
+    {
+      "folder": "loaded-retry-prediction",
+      "source": "runs/hardware-d01-loaded-prediction/20261029T140511-cd5939d778",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_ADC_pending": true,
+        "prediction_sha256": "5374b9886adcf688cff82c47a58e66c38d0d2f1aab5d205ab2484cb41497cf33"
+      }
+    },
+    {
+      "folder": "loaded-retry",
+      "source": "runs/hardware-d01-loaded-step-retry/20261029T140554-4e082f6c06",
+      "events": 24,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+        "configuration": {
+          "vref_v": 4.89,
+          "ref_v": 1.635,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "REF_guard": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 1998,
+          "frame_interval_us_max": 2003,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5463.98828125,
+              "min_counts": 5375,
+              "max_counts": 5547,
+              "nominal_mean_v": 1.630891942581487
+            },
+            "A2": {
+              "mean_counts": 5469.181640625,
+              "min_counts": 5392,
+              "max_counts": 5547,
+              "nominal_mean_v": 1.63244205717245
+            },
+            "A3": {
+              "mean_counts": 5466.603515625,
+              "min_counts": 5386,
+              "max_counts": 5511,
+              "nominal_mean_v": 1.6316725380825399
+            },
+            "A4": {
+              "mean_counts": 5488.322265625,
+              "min_counts": 5432,
+              "max_counts": 5554,
+              "nominal_mean_v": 1.6381551534460264
+            }
+          }
+        },
+        "step": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 497,
+          "frame_interval_us_max": 503,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5999.697265625,
+              "min_counts": 4773,
+              "max_counts": 6217,
+              "nominal_mean_v": 1.7907904308677438
+            },
+            "A2": {
+              "mean_counts": 5701.1796875,
+              "min_counts": 5121,
+              "max_counts": 5875,
+              "nominal_mean_v": 1.7016888647912467
+            },
+            "A3": {
+              "mean_counts": 6001.462890625,
+              "min_counts": 4787,
+              "max_counts": 6212,
+              "nominal_mean_v": 1.791317434850531
+            },
+            "A4": {
+              "mean_counts": 5489.51953125,
+              "min_counts": 5436,
+              "max_counts": 5547,
+              "nominal_mean_v": 1.6385125134476286
+            }
+          }
+        },
+        "output_parked_ref_code": 1369,
+        "response_analysis_pending": true,
+        "frozen_prediction_comparison": {
+          "prediction_sha256": "5374b9886adcf688cff82c47a58e66c38d0d2f1aab5d205ab2484cb41497cf33",
+          "model_scores": {
+            "nominal_R_changed_C": {
+              "RMS_mV": 5.646763700388845,
+              "mean_residual_mV": -5.2513206709756295,
+              "max_absolute_residual_mV": 28.391428490813333,
+              "regions": [
+                {
+                  "region": "pre_step",
+                  "samples": 51,
+                  "RMS_mV": 4.479694315825117,
+                  "max_abs_mV": 7.092351710825007
+                },
+                {
+                  "region": "0_to_5ms",
+                  "samples": 10,
+                  "RMS_mV": 6.03241475014654,
+                  "max_abs_mV": 7.210918154167301
+                },
+                {
+                  "region": "5_to_20ms",
+                  "samples": 30,
+                  "RMS_mV": 5.865855590230818,
+                  "max_abs_mV": 9.328568067135556
+                },
+                {
+                  "region": "20_to_80ms",
+                  "samples": 120,
+                  "RMS_mV": 5.46053596449256,
+                  "max_abs_mV": 9.647299534714326
+                },
+                {
+                  "region": "after_80ms",
+                  "samples": 301,
+                  "RMS_mV": 5.857643504299687,
+                  "max_abs_mV": 28.391428490813333
+                }
+              ],
+              "checks": {
+                "prediction_timing": true,
+                "DAC_codes_match": true,
+                "whole_trace_RMS": true,
+                "all_regional_RMS": true
+              },
+              "engineering_check_passed": true,
+              "loaded_samples_used_for_refit": 0
+            },
+            "changed_R_nominal_C": {
+              "RMS_mV": 27.637801215865068,
+              "mean_residual_mV": 15.94184310021507,
+              "max_absolute_residual_mV": 51.23759379989434,
+              "regions": [
+                {
+                  "region": "pre_step",
+                  "samples": 51,
+                  "RMS_mV": 39.33457078633653,
+                  "max_abs_mV": 42.484529007464246
+                },
+                {
+                  "region": "0_to_5ms",
+                  "samples": 10,
+                  "RMS_mV": 38.62494125350119,
+                  "max_abs_mV": 41.86750436975628
+                },
+                {
+                  "region": "5_to_20ms",
+                  "samples": 30,
+                  "RMS_mV": 16.30971970369528,
+                  "max_abs_mV": 31.057343032242724
+                },
+                {
+                  "region": "20_to_80ms",
+                  "samples": 120,
+                  "RMS_mV": 23.70462167407632,
+                  "max_abs_mV": 29.157614406926548
+                },
+                {
+                  "region": "after_80ms",
+                  "samples": 301,
+                  "RMS_mV": 27.148809379748204,
+                  "max_abs_mV": 51.23759379989434
+                }
+              ],
+              "checks": {
+                "prediction_timing": true,
+                "DAC_codes_match": true,
+                "whole_trace_RMS": false,
+                "all_regional_RMS": false
+              },
+              "engineering_check_passed": false,
+              "loaded_samples_used_for_refit": 0
+            }
+          },
+          "max_prediction_time_error_us": 3.0000000000030003,
+          "max_DAC_code_difference": 0,
+          "timing_checks": {
+            "prediction_timing": true,
+            "DAC_codes_match": true
+          },
+          "specimen_component_truth_used_in_prediction": false,
+          "scope": "Representative conditional predictions only; no full-family posterior or calibrated confidence",
+          "passing_representative_points": [
+            "nominal_R_changed_C"
+          ],
+          "full_D2_accepted": false,
+          "blind_diagnosis_performed": false
+        },
+        "full_D2_accepted": false,
+        "hardware_diagnosis_performed": false,
+        "serial_connection_closed": true
+      }
+    },
+    {
+      "folder": "loaded-retry-analysis",
+      "source": "runs/hardware-d01-loaded-retry-analysis/20261029T141019-fbd1053a4c",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "frozen_validation_passed": true,
+        "repair_requested": false,
+        "artifact_sha256": {
+          "analysis.json": "4c59fb685a7fba1feade0f24b22e5fd7af8b97724b4565c18c77e2f57fbbdd82",
+          "loaded-comparison.png": "3de88761b86112f5da47a529d350475fcecb010d0e751c6cf5d9a7d509625950",
+          "loaded-comparison.svg": "02a9b24810d128bae049080a553400ca85be20b8027b1bdbd5e523bdddea0add"
+        }
+      }
+    },
+    {
+      "folder": "reference-alignment-before-DMM",
+      "source": "runs/hardware-d01-reference-alignment/20261029T140917-1a090ad9f2",
+      "events": 9,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "mean_counts": {
+          "A1": 5463.935546875,
+          "A2": 5469.337890625,
+          "A3": 5466.142578125,
+          "A4": 5488.283203125
+        },
+        "nominal_volts": {
+          "A1": 1.6308762024182841,
+          "A2": 1.6324886946930506,
+          "A3": 1.631534957396768,
+          "A4": 1.6381434940658761
+        },
+        "overruns": 0,
+        "held_ref_code": 1369,
+        "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+        "DMM_report_pending": true,
+        "calibration_changed": false
+      }
+    },
+    {
+      "folder": "alignment-DMM-request",
+      "source": "runs/hardware-d01-alignment-DMM-request/20261029T141332-ff013c147c",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "DMM_pending": true,
+        "calibration_changed": false
+      }
     }
   ],
-  "updated_at_utc": "2026-10-29T13:48:09.734165+00:00"
+  "updated_at_utc": "2026-10-29T14:13:32.810054+00:00"
 }

@@ -1,20 +1,32 @@
 # D01 controlled capacitor-value fault — assembly confirmed
 
-Status, 2026-10-29 Asia/Seoul: the operator confirms USB disconnected,
-the output-load jumper removed, the extra capacitor installed and both
-column-8 and column-13 continuity checks passed. This is an operator report,
-not independent visual inspection. After USB reconnection the operator reports supply 4.88 V / REF 1.635 V;
-a fresh boot and REF guard then passed, followed by the first unloaded
-step. All 512 frames were retained, with 497–503 us intervals and no
-overruns. The output returned to REF code 1372 on the same boot. The
-effective time-constant fit is 20.3227 ms, with 2.003 mV training-fit RMS;
-R versus C remains unresolved.
-B1 has passed an unloaded step/sine engineering check and a frozen loaded
-step prediction check. The controlled capacitor-value fault uses the spare
-capacitor reported as 0.998 uF.
-No loaded D01 observation, individual-component diagnosis or repair has
-occurred. OUT-load reconnection and both continuity checks are now confirmed
-with USB disconnected. Fresh loaded-configuration supply/REF is pending.
+Status, 2026-10-29 Asia/Seoul: **two D01 loaded development attempts are
+retained**. The first used reported REF 1.649 V: C-point whole RMS 8.44 mV
+but early-region checks failed; R-point RMS 37.43 mV. The operator then
+reported D50 REF / D45 DRIVE / C9 divider = 1.635 / 1.645 / 1.635 V.
+Whether the earlier value was misread or REF changed remains unresolved.
+Lowering REF at fixed IN lowers the prediction; it does not itself explain
+away the first positive residual.
+
+At the user's request a second pair of voltage predictions was saved
+before any new ADC. The latest supply estimate 4.89 V was retained (not
+remeasured), REF changed to 1.635 V, and the same boot/output 1381 was
+verified before explicitly changing the park code to **1369**. On this
+new capture the C-change representative passed whole and every regional
+check: **5.65 mV RMS**. R-change failed at **27.64 mV RMS**. No calibration,
+model parameter, phase or offset was refit for either score. This is a
+second development attempt, not a first-attempt or holdout success.
+
+The separate repeat fit gives gain 0.49579, tau 10.239 ms and conditional
+R 10.159 kohm / C 2.033 uF. The loaded observations favor increased C
+within the declared RC alternatives. No Spark diagnosis, physical repair,
+full-family posterior or full D2 acceptance is claimed.
+
+Same boot `a09aa39f4755ba059967f31ac9221cd3`, REF code 1369 remains held.
+Extra C, OUT load, jumper 11 and jumper 14 are unchanged. A no-output-change
+ADC snapshot has been saved, and REF/DRIVE/OUT/REF DMM readings are requested
+to check A4 and path alignment before repair validation. No extra part or
+wiring change is requested. [Records](../examples/hardware-d01-bringup/2026-10-29/README.md).
 
 ## Coordinates and parts
 
@@ -153,7 +165,7 @@ holdout circuits. The first small step uses the previously exercised
 +/-0.2 V command, 512 frames and a 500 us target interval. No individual
 R/C fault conclusion follows from this first observation.
 
-## First unloaded result and next intervention
+## First unloaded result and subsequent intervention
 
 The unconstrained exponential fit reads the waveform and provisional
 calibration only. It uses neither the measured specimen R/C values nor the
@@ -169,12 +181,24 @@ load. The illustrative C-change point predicts gain **0.49975**, tau
 **6.6976 ms**. Repair-prior ranges conditioned on this point tau give gain
 0.48755–0.51257 versus 0.30672–0.35096. These are conditional model ranges,
 not posterior probabilities or noise/calibration confidence intervals.
-The full voltage forecast and engineering checks will be frozen after
-fresh supply/REF readings and before any loaded ADC data.
+The full voltage forecasts and engineering checks were subsequently frozen
+after fresh supply/REF readings and before any loaded ADC data. Their
+failed checks are retained separately from this conditional feature forecast.
 
 Next requested wiring: USB off; reconnect **large E30–A55 only**, retain
 the added capacitor and all other wiring, including jumper 14. Check
 D55 load lead to U2 actual pin 3 (F22), and D60 load lead to D50. Report
 both results and leave USB disconnected. The operator now reports "USB 분리 / 부하 점퍼 재연결 / OUT 삐 / REF 삐".
-Fresh supply/REF has been requested before any loaded acquisition. See the
+Fresh supply/REF of 4.89/1.649 V was reported; loaded acquisition and the
+failed voltage checks followed as summarized above. See the
 [raw records and graph](../examples/hardware-d01-bringup/2026-10-29/README.md).
+
+## Meter-free centering proposal
+
+The [ADC reference-tracking review](reference-tracking.md) distinguishes
+shared-reference ratio control from validated physical centering. Raw A4
+is not substituted for this run's REF. Four existing sequential comparisons
+show raw A4 estimates 18.4–28.1 mV above the DMM reports; drift and A4
+calibration remain confounded. No automatic-control or calibration change
+has been made. The failed run remains available even if a future control
+revision improves a newly acquired observation.

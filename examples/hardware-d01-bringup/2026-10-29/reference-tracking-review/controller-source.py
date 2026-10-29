@@ -1,0 +1,16 @@
+"""Offline review of ADC-referenced control; no output or calibration change."""
+from pathlib import Path
+import json,hashlib
+import numpy as np
+from benchmate.records import Recorder,read_events
+sources=[Path('examples/hardware-b1-bringup/2026-10-29/first-step'),Path('examples/hardware-b1-bringup/2026-10-29/loaded-step'),Path('examples/hardware-d01-bringup/2026-10-29/unloaded-step'),Path('runs/hardware-d01-loaded-step/20261029T135226-9d6e39c67e')]
+rows=[]
+for source in sources:
+ e=read_events(source);assert e[-1]['kind']=='run_completed'
+ config=e[-1]['payload']['configuration'];b=next(x['payload'] for x in e if x['kind']=='hold_raw_capture');samples=np.asarray(b['rows']);mean=float(samples[:,5].mean());supply=config['vref_v'];ref=config['ref_v'];raw_v=mean*supply/16383
+ raw_code=round(mean*4095/16383);configured=e[-1]['payload']['output_parked_ref_code']
+ rows.append({'source_record':str(source),'events_sha256':hashlib.sha256((source/'events.jsonl').read_bytes()).hexdigest(),'boot_id':b['boot_id'],'supply_DMM_v':supply,'REF_DMM_v':ref,'A4_mean_count':mean,'A4_nominal_v':raw_v,'nominal_minus_DMM_mV':1000*(raw_v-ref),'ideal_raw_A4_DAC_code':raw_code,'DMM_based_configured_code':configured,'code_difference':raw_code-configured,'DMM_ADC_not_simultaneous':True,'difference_not_a_pure_ADC_offset_measurement':True})
+result={'scope':'Existing-record audit only; no automatic centering enabled','formula_ideal':'DAC_code = round(ADC_REF_count * 4095/16383), assuming common reference and ideal zero-offset converters','records':rows,'decision':'Do not substitute raw A4 codes for the current DMM-derived configuration; validate cross-channel/end-to-end offset and drift first','potential_benefit':'Shared-reference ratio control can reduce repeated absolute-voltage readings after validation','conditions':['ADC A4 and DAC/driver gain-offset alignment must be calibrated and independently checked near REF.','Freeze calibration and controller settings before each scored capture.','Within a verified session use automatic REF/path checks; do not require a DMM for every waveform.','A new boot, changed fixture, failed guard, stale reference estimate or operation near absolute-voltage limits requires explicit validation or an external reading.','Dimensionless gain and time constant are insensitive to common static voltage scale only under linear, stable conditions and correct channel calibration.','B5 diode behavior and absolute 0.2/1.0 V stimulus requirements still depend on voltage and center.','No ADC/DAC/firmware settings changed as part of this audit.'],'official_board_reference':'https://docs.arduino.cc/hardware/uno-r4-minima/','full_D2_accepted':False}
+log=Recorder('runs/hardware-reference-tracking-review',mode='offline_shared_reference_control_feasibility_audit')
+(log.path/'controller-source.py').write_bytes(Path(__file__).read_bytes());(log.path/'review.json').write_text(json.dumps(result,indent=2)+'\n');log.add('existing_records_audit',result);log.add('run_completed',{'hardware_IO':False,'automatic_A4_control_enabled':False,'DMM_followup_pending_after_failed_prediction':True})
+print(json.dumps({'record':str(log.path),'observed_differences':[{k:v for k,v in r.items() if k in ['REF_DMM_v','A4_nominal_v','nominal_minus_DMM_mV','code_difference']} for r in rows]}))
