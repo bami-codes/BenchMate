@@ -10,9 +10,13 @@ identification succeeded. Its first upload failed at the DFU transition;
 after operator-confirmed double RESET, bring-up upload and a 60-second
 USB-only observation passed. Instrument v2 then uploaded successfully:
 four PINGs reported one valid boot ID and advancing uptime, with output
-unarmed. Fixture transfer to Minima has been requested, not confirmed.
-Isolated component values, a photo review, ADC checks, physical reset/stale-ID
-checks and D2 calibration remain pending.
+unarmed. The operator then confirmed the seven-lead transfer and supply
+4.88 V / REF 1.62 V. An initial identity check stopped because the old
+boot ID and uptime continued. After an explicitly reported single RESET,
+the ID changed and stale ARM/CAPTURE commands were rejected. New-ID ARM
+now holds code 1359 (nominal 1.62 V); 31/31 USB samples over 30 seconds
+and the final reopened PING passed. DMM output readings, ADC checks,
+interrupted-acquisition testing and D2 calibration remain pending.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -819,6 +823,40 @@ This transfer and replacement-board voltage readings are pending. No DAC
 drive is authorized by a mere USB reconnection; explicit ARM follows
 identity and operator voltage checks. Earlier WiFi calibration is not
 applied to Minima.
+
+## Minima fixture transfer, single RESET and stale-ID rejection
+
+The operator reported “7개 이동 완료 / 4.88V / 1.62V”, following the
+seven-lead transfer instruction. The first check received the previous
+boot ID `822b338fda3756061f3e46605a879dc0` and uptime 309,620 ms.
+No new boot was established. That attempt stopped before any ARM or
+CAPTURE command; the recorded output state was unarmed. This is not
+classified as a USB loss or a defective RNG. The exact transfer/power
+sequence is not independently known.
+
+After the operator explicitly reported “Minima RESET 한 번 완료”, PING
+returned ID `f17b838790daf6d542844f859c0c3d32` and uptime 22,926 ms.
+The host rejected this response when checked against the old ID. On the
+board, well-formed ARM and HOLD-CAPTURE commands addressed to the old ID
+both returned the boot-identity-mismatch error; fresh PINGs after each
+still showed `armed:false`, `ref_code:0`. No samples were accepted.
+This is a physical single-RESET/stale-command test, not an acquisition
+interruption test or a verified full USB power-cycle experiment.
+
+Only then was an ARM command sent with the new ID and the reported
+4.88 V supply / 1.62 V REF. The reference code is 1359 and maximum
+per-update change is 839 codes. The nominal voltage is a command
+conversion, not a calibrated physical measurement. After ARM, 31/31
+USB-presence samples over 30 seconds with serial closed and the reopened
+PING confirmed the same ID and armed configuration. The output remains
+at the requested reference code; no valid ADC capture has been requested.
+
+The operator has been asked for D35/D40/D45/D50 voltages relative to
+Arduino GND, with wiring unchanged. Those DMM reports are pending.
+Long-duration fixture stability, calibration and interrupted acquisition
+remain untested. Both the stopped initial identity check and the
+successful RESET/ARM record are retained in the October 29 follow-up
+bundle as `minima-transfer-precheck/` and `minima-reset-arm/`.
 
 ## Standing conventions (current)
 

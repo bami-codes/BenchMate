@@ -105,6 +105,26 @@
       "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/minima-instrument-compile.log",
       "published": "minima-instrument/minima-instrument-compile.log",
       "sha256": "4508fee7e787d4c3a53400581c5c9e0205e2e560bd969573b45fc0220f682f38"
+    },
+    {
+      "source": "runs/hardware-minima-fixture/20261029T013449-0891abd9ba/events.jsonl",
+      "published": "minima-transfer-precheck/events.jsonl",
+      "sha256": "bddd4d1dea378f634d51032707f9561d84be9db18858bfda5365cc90246d6ba1"
+    },
+    {
+      "source": "runs/hardware-minima-fixture/20261029T013449-0891abd9ba/controller-source.py",
+      "published": "minima-transfer-precheck/controller-source.py",
+      "sha256": "de3a84ade0b3e0ebfd41fbba498d641aa97ddcadc7046367733c0dbba8299f45"
+    },
+    {
+      "source": "runs/hardware-minima-fixture/20261029T013558-074fdc0481/events.jsonl",
+      "published": "minima-reset-arm/events.jsonl",
+      "sha256": "edf72b89bd1b116b62d2f7560610bba74a9bc190a99c0472a2673e9cf07b1b5a"
+    },
+    {
+      "source": "runs/hardware-minima-fixture/20261029T013558-074fdc0481/controller-source.py",
+      "published": "minima-reset-arm/controller-source.py",
+      "sha256": "5c4871ee77fc77237cb0308737e12e18b02a43601238b2ac4a5b59ba548a404b"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -199,6 +219,46 @@
         "physical_reset_test_performed": false,
         "same_fixture_test_performed": false
       }
+    },
+    {
+      "folder": "minima-transfer-precheck",
+      "source": "runs/hardware-minima-fixture/20261029T013449-0891abd9ba",
+      "events": 8,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Expected new boot ID after reported power cycle",
+        "accepted_samples": 0,
+        "automatic_retry_or_rearm": false,
+        "output_may_be_driven": false
+      }
+    },
+    {
+      "folder": "minima-reset-arm",
+      "source": "runs/hardware-minima-fixture/20261029T013558-074fdc0481",
+      "events": 61,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "f17b838790daf6d542844f859c0c3d32",
+        "prior_boot_id": "822b338fda3756061f3e46605a879dc0",
+        "boot_ID_changed_after_operator_RESET": true,
+        "host_old_boot_rejected": true,
+        "firmware_stale_ARM_rejected": true,
+        "firmware_stale_CAPTURE_rejected": true,
+        "armed": true,
+        "ref_code": 1359,
+        "nominal_DAC_target_v": 1.62,
+        "conversion_supply_v": 4.88,
+        "max_jump_code": 839,
+        "closed_port_USB_samples_present": 31,
+        "post_reopen_state_verified": true,
+        "ADC_capture_accepted": false,
+        "accepted_samples": 0,
+        "calibration_performed": false,
+        "output_remains_driven": true,
+        "DMM_output_check_pending": true,
+        "physical_acquisition_interruption_test_performed": false
+      }
     }
-  ]
+  ],
+  "last_appended_at_utc": "2026-10-29T01:37:17.531690+00:00"
 }
