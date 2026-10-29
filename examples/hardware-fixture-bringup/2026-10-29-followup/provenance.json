@@ -650,6 +650,81 @@
       "source": "runs/hardware-minima-capture/20261029T072057-b0a17efa44/events.jsonl",
       "published": "minima-driver-power-reapplication-arm/events.jsonl",
       "sha256": "19f5b5320f0efe3ad5b63939bf22e1abf077be7c593cf8faf2c1d0351858bc5d"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-driver-low/20261029T073343-007202a5ac/events.jsonl",
+      "published": "minima-recovered-midpoint-low-attempt/events.jsonl",
+      "sha256": "3bf99b9b0fc6642a8faa75a6973ff93a161685a1e8f711e02b8d05adb1e41b13"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-driver-low/20261029T073343-007202a5ac/controller-source.py",
+      "published": "minima-recovered-midpoint-low-attempt/controller-source.py",
+      "sha256": "199fca05d85484fda7efdaeb97941f719f7462b012b1d435f7c0babe3eb7d475"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-driver-low/20261029T073343-007202a5ac/host-instrument.py",
+      "published": "minima-recovered-midpoint-low-attempt/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-usb-review/20261029T074435-6c6278cce1/events.jsonl",
+      "published": "minima-recovered-usb-review/events.jsonl",
+      "sha256": "abc5c26943f05c32b4ed0ed567c6e83d880f050cc3d520aae9973aa69c467e1c"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-usb-review/20261029T074435-6c6278cce1/controller-source.py",
+      "published": "minima-recovered-usb-review/controller-source.py",
+      "sha256": "28830ca98a534dbc073a706ec794ad13107610a98447a52ede498ececd6f4677"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-usb-review/20261029T074435-6c6278cce1/minima-kernel-review.json",
+      "published": "minima-recovered-usb-review/minima-kernel-review.json",
+      "sha256": "4282933fc238a1d61974a5e6ff004854528a43e9850dd55b731fb8578bb0fbd9"
+    },
+    {
+      "source": "runs/hardware-minima-recovered-usb-review/20261029T074435-6c6278cce1/prepared-watch-source.py",
+      "published": "minima-recovered-usb-review/prepared-watch-source.py",
+      "sha256": "8efcf3fcd8f89201995403ad5272af966677d00fefd8f8ee3b95c1fde334f6d8"
+    },
+    {
+      "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03/events.jsonl",
+      "published": "minima-persistent-ref-watch/events.jsonl",
+      "sha256": "454f98ae47bc0bf4a838b36d58a02a25b558a9ff8000671a7740a4c160f22e78"
+    },
+    {
+      "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03/controller-source.py",
+      "published": "minima-persistent-ref-watch/controller-source.py",
+      "sha256": "8efcf3fcd8f89201995403ad5272af966677d00fefd8f8ee3b95c1fde334f6d8"
+    },
+    {
+      "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03/host-instrument.py",
+      "published": "minima-persistent-ref-watch/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-post-watch-ref/20261029T075621-ea420daf7b/events.jsonl",
+      "published": "minima-post-watch-ref/events.jsonl",
+      "sha256": "cb899868262a343098d3e58e53d107f41c08f74933958800ff1a1eb79fcdaf79"
+    },
+    {
+      "source": "runs/hardware-minima-post-watch-ref/20261029T075621-ea420daf7b/controller-source.py",
+      "published": "minima-post-watch-ref/controller-source.py",
+      "sha256": "0e6d0a077e3c6bb9fee5b587a0cd7540e8004af47d759c500f17712895428fcc"
+    },
+    {
+      "source": "runs/hardware-minima-post-watch-ref/20261029T075621-ea420daf7b/host-instrument.py",
+      "published": "minima-post-watch-ref/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-dc-hold/20261029T075621-6cb376c517/events.jsonl",
+      "published": "minima-post-watch-ref-held/events.jsonl",
+      "sha256": "c5cf8d17b2812aeb13f8809acfcf92fc5bd7cffc7ba408c2b800564e9c9b2b5e"
+    },
+    {
+      "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03/minima-kernel-review.json",
+      "published": "minima-persistent-ref-watch/minima-kernel-review.json",
+      "sha256": "8cf7b49621b662d65000f89c9d0ca5d3208ad1e8adac4e27010d47e428c05c59"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1440,7 +1515,80 @@
         "uptime_ms_start": 236907,
         "uptime_ms_end": 239312
       }
+    },
+    {
+      "folder": "minima-recovered-midpoint-low-attempt",
+      "source": "runs/hardware-minima-recovered-driver-low/20261029T073343-007202a5ac",
+      "events": 7,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Incomplete PING before low-point command",
+        "automatic_retry_or_rearm": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-recovered-usb-review",
+      "source": "runs/hardware-minima-recovered-usb-review/20261029T074435-6c6278cce1",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "evidence_and_preparation_recorded": true,
+        "calibration_still_incomplete": true,
+        "fault_cause_established": false,
+        "awaiting": "Operator single RESET confirmation before persistent-connection test"
+      }
+    },
+    {
+      "folder": "minima-persistent-ref-watch",
+      "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03",
+      "events": 308,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "duration_seconds": 600.011,
+        "successful_PINGs": 300,
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "held_code_at_final_check": 1365,
+        "output_remains_driven": true,
+        "serial_connection_now_closed": true,
+        "ADC_capture_requested": false,
+        "calibration_performed": false,
+        "fault_cause_established": false
+      }
+    },
+    {
+      "folder": "minima-post-watch-ref",
+      "source": "runs/hardware-minima-post-watch-ref/20261029T075621-ea420daf7b",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "DC_hold_record": "runs/hardware-minima-dc-hold/20261029T075621-6cb376c517",
+        "held_code": 1365,
+        "nominal_target_v": 1.62,
+        "DMM_readings_pending": true,
+        "ADC_block_acquired": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-post-watch-ref-held",
+      "source": "runs/hardware-minima-dc-hold/20261029T075621-6cb376c517",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 690771,
+        "uptime_ms_end": 692015,
+        "held_code": 1365,
+        "nominal_target_v": 1.62,
+        "output_remains_driven": true,
+        "accepted_samples": 0,
+        "calibration_performed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T07:22:54.993522+00:00"
+  "last_appended_at_utc": "2026-10-29T07:59:43.275843+00:00"
 }

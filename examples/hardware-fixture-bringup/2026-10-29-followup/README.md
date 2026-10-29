@@ -31,9 +31,14 @@ the B13/A11 posts were already removed. USB-off and LED-off are confirmed,
 and B12-to-D11 continuity is reported. The actual metal pin 6-to-7 check
 also beeps. The subsequent USB reconnection report gives supply/REF
 4.86/1.62 V. A new unarmed boot and explicit REF ARM at code 1365 pass;
-actual U1 pin 5/6/7 and D50 voltages are pending, with wiring unchanged.
-Physical recovery is not established. No midpoint ADC capture or higher
-voltage was commanded.
+actual U1 pin 5/6/7 and D50 voltages then all read 1.62 V, with wiring
+unchanged. The next low-point attempt failed at its initial PING, before
+any low-level command. USB transaction errors are recorded separately.
+After a confirmed single RESET, the 16:45:59–16:55:59 KST continuous-open
+REF/PING comparison passed 300 checks in 600.011 s. Its Minima-only kernel
+query returned no messages. A same-level DC check passed; PING-only
+monitoring continues during the pending precise DMM readings. Operator
+no-touch confirmation, the USB cause and multi-point calibration remain open.
 
 | Record | Observed result |
 | --- | --- |
@@ -70,6 +75,10 @@ voltage was commanded.
 | `minima-driver-contact-clarification/` | Prior readings were directly at U1 pins 5/7, B13/A11 posts removed; USB-off confirmed, B12↔D11 beep reported, direct pin 6↔7 check requested |
 | `minima-driver-pin-feedback/` | Actual U1 metal pins 6↔7 beep unpowered; unchanged-wiring power reapplication and fresh supply/REF readings requested; no hardware commands |
 | `minima-driver-power-reapplication/`, `minima-driver-power-reapplication-arm/` | Reconnect and 4.86/1.62 V supply/REF report, new unarmed boot, explicit code 1365 ARM and postcheck pass; physical driver output still pending |
+| `minima-recovered-midpoint-low-attempt/` | U1 pins 5/6/7 and D50 all 1.62 V reported; low-point attempt fails at PING, no DC command sent |
+| `minima-recovered-usb-review/` | Selected Minima USB errors, port/filtered power-log review and prepared continuous-connection comparison; cause not established |
+| `minima-persistent-ref-watch/` | 600.011 s, 300 same-boot/same-code PINGs pass on one connection; post-run named-device kernel query has zero messages |
+| `minima-post-watch-ref/`, `minima-post-watch-ref-held/` | Same-boot 1.62 V DC settling and code postcheck pass; precise operator DMM values pending |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -96,7 +105,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Forty-eight chains contain 578 events.
+hashes and event-chain terminal states. Fifty-three chains contain 910 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -248,3 +257,24 @@ New boot `b4ab5f3bf78ec9374ac381996885027b` was unarmed; explicit REF ARM
 and its postcheck then confirmed code 1365. No ADC block or firmware change
 was made. Actual U1 pins 5/6/7 and D50 readings are pending, so this is
 command verification rather than established physical driver recovery.
+
+The next report gives U1 pins 5/6/7 and D50 all at 1.62 V, showing midpoint
+follower agreement at display resolution. The following low-point attempt
+receives no initial PING response and sends no DC command. Minima remains
+listed; selected kernel logs show endpoint 0x81 transaction errors from
+16:27:41 KST. The queried window contains no named loss/enumeration messages,
+and a filtered power-log query returns no matching Sleep/Wake events.
+The cause remains open; the raw full kernel log stays local.
+
+After confirmed single RESET, a new boot and explicit REF ARM start the
+600-second single-open/PING comparison at 16:45:59 KST. It is in progress;
+only completed evidence is exported in this manifest. No firmware or
+wiring change is part of the comparison.
+
+That comparison subsequently completed in 600.011 s with 300 successful
+PINGs, unchanged boot and REF code. Its post-run Minima-only kernel query
+returned zero messages; the summary/hash is an added sidecar. Operator
+no-touch confirmation is still pending. Same-boot DC at the same 1.62 V
+target then passed settling and postcheck. PING-only monitoring now keeps
+that level under observation while precise U1 pin 5/D35/D40/D45/D50 DMM
+readings are requested. This live monitor is not exported while incomplete.

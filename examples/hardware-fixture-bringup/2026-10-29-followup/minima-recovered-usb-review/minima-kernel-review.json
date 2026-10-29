@@ -1,0 +1,26 @@
+{
+  "query_KST": "2026-10-29 16:20:00–16:35:00",
+  "raw_sha256": "c6943fe91d1b6cca8b26dc7af7972a649d9b0c0294253b1a244e129c683cae62",
+  "messages": 9190,
+  "loss_count": 0,
+  "enumeration_count": 0,
+  "transaction_error_count": 9180,
+  "excerpts": [
+    {
+      "timestamp": "2026-10-29 16:27:41.650093+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 16:27:41.698061+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 16:34:59.935812+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 16:34:59.983819+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    }
+  ]
+}

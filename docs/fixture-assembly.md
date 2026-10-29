@@ -63,10 +63,20 @@ posts had been removed the previous night. USB disconnection and LED-off
 are now confirmed, with B12-to-D11 continuity reported. The subsequent
 actual metal pin 6-to-7 check also beeps. USB reconnection is now confirmed,
 with fresh supply/REF 4.86/1.62 V. A new unarmed boot was verified, followed
-by explicit ARM at code 1365 and a matching postcheck. Actual U1 pin 5/6/7
-and D50 voltages are pending. No wiring or IC change was requested.
-Physical recovery or chip damage is not established. No midpoint ADC capture or
-higher target was commanded. Calibration and reliability remain unresolved.
+by explicit ARM at code 1365 and a matching postcheck. The operator then
+reported actual U1 pins 5/6/7 and D50 all at 1.62 V: midpoint follower
+agreement recovered at display resolution. The next low-point attempt
+failed at its initial PING; no low command was sent. Kernel logs show
+repeated USB transaction errors from 16:27:41 KST, without named loss or
+enumeration messages in the queried window. Following a confirmed single
+RESET, a ten-minute single-connection REF/PING comparison ran from
+16:45:59 to 16:55:59 KST: 300 PINGs passed with the same boot and code.
+The named-device kernel query for that window returned no messages.
+Same-boot REF DC settling and postcheck subsequently passed. A separate
+PING-only monitor now observes that level while precise U1 pin 5 / D35 /
+D40 / D45 / D50 DMM readings are requested. No-touch confirmation for the
+ten-minute window is pending. Firmware and wiring are unchanged; the
+fault cause and multi-point calibration remain open.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1391,6 +1401,70 @@ Physical driver recovery and the cause of the earlier 3.4 V remain
 unestablished. Exact controller/host snapshots and the separate ARM record
 are in `minima-driver-power-reapplication/` and
 `minima-driver-power-reapplication-arm/`.
+
+## Physical midpoint recovery; subsequent USB failure before low command
+
+The operator reported `4개 다 1.62V` for actual U1 pins 5/6/7 and D50 on
+the instructed DC 20 V range. This establishes follower agreement at the
+displayed resolution after power reapplication; it does not prove a latch
+mechanism, precise offset accuracy, or performance across the full range.
+
+Before changing to a low target, the controller sent only PING. No bytes
+arrived within five seconds. No DC, ARM or capture command followed, so
+the attempted 0.62 V setting was not issued. The Minima port remained
+listed at 16:34:52 KST. A kernel query limited to named Minima messages
+over 16:20:00–16:35:00 found 9,180 transaction errors on endpoint 0x81,
+first at 16:27:41.650. It contained no named connection-loss or enumeration
+messages. The filtered pmset review found no matching Sleep/Wake events
+in the same window. Neither review establishes a unique host, firmware,
+cable, board or probing cause. Selected kernel excerpts and a hash of
+the raw local log are retained; the full log is not published.
+
+See `minima-recovered-midpoint-low-attempt/` for the physical recovery
+report and failed status check, and `minima-recovered-usb-review/` for
+the review and prepared comparison controller. No firmware change or
+automatic recovery was made. The prior software state cannot by itself
+establish current physical voltage after the failed PING.
+
+## Single-connection comparison started after confirmed RESET
+
+The operator confirmed `RESET 한 번 완료, 손 뗐음`. New unarmed boot
+`e522aadc799575eae297808f4df573c8` was verified, then explicit REF ARM
+set code 1365 using the latest 4.86/1.62 V supply/REF report. The controller
+keeps one serial connection open and checks PING every two seconds for
+600 seconds, holding the same DAC code. Its first checked held state was
+16:45:59.503 KST; nominal end is 16:55:59 KST. No ADC block, firmware or
+wiring change is part of this comparison, and any error stops the run
+without retry or re-arm. The operator was instructed to avoid touching
+the board, cable and probes; completion and final no-touch confirmation
+are pending. Continuous-open plus periodic traffic differs from the
+previous closed-port wait; success would not isolate a single cause.
+
+## Continuous-connection result and same-level DC preparation
+
+The comparison completed in 600.011 s with 300 successful PINGs, one boot
+`e522aadc799575eae297808f4df573c8` and code 1365 throughout. The port closed
+after the final check. The Minima-only kernel query for 16:45:59–16:55:59
+KST returned no messages. Its summary/hash is a post-run sidecar, not a
+change to the event chain. Final operator no-touch confirmation is pending.
+Success under continuous-open/periodic-traffic conditions does not prove
+a unique cause for earlier failures or general long-duration stability.
+
+The host then explicitly requested DC at the same 1.62 V target on that
+boot; firmware settling and held-code postcheck passed. No ARM, firmware
+upload or ADC block was added. See `minima-persistent-ref-watch/`,
+`minima-post-watch-ref/` and `minima-post-watch-ref-held/`.
+
+A PING-only monitor now checks the completed DC record's boot/code/limits
+without output changes or retry. Its source supports a STOP-file request
+and a 30-minute maximum. It must close before another serial controller
+opens. Current live record:
+`runs/hardware-minima-held-level-watch/20261029T075643-17798d7400`.
+Incomplete records are not exported. The pending DC 2 V readings are
+actual U1 pin 5 (E13), D35, D40, D45 and D50, relative to the retained
+blue-rail GND. An overrange display requires DC 20 V and reporting that
+range change. These DMM readings and a matched ADC block are pending;
+the prior coarse readings are not silently used as calibration anchors.
 
 ## Standing conventions (current)
 

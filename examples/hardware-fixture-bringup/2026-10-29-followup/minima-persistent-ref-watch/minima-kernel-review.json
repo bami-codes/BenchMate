@@ -1,0 +1,9 @@
+{
+  "query_window_KST": "2026-10-29 16:45:59\u201316:55:59",
+  "raw_log_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "Minima_named_messages": 0,
+  "transaction_errors": 0,
+  "connection_loss_messages": 0,
+  "enumeration_messages": 0,
+  "limits": "Named-device log query only; not proof of all USB error absence or a unique cause."
+}
