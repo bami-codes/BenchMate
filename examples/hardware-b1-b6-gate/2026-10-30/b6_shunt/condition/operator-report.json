@@ -1,0 +1,6 @@
+{
+  "condition_id": "b6_shunt",
+  "preparation_verbatim": "USB 분리 / 11번 점퍼 제거 / 996Ω B28–B35 설치 / 나머지 유지",
+  "USB_connected": true,
+  "connection_verbatim": "B6 션트 USB 연결 완료"
+}

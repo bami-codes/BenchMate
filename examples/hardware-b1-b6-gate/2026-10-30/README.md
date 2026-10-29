@@ -29,5 +29,5 @@ confirmation. The per-condition status below supersedes this initial preparation
 |---|---:|---:|---|
 | [b1_bypass](b1_bypass/README.md) | 5.952 mV | 0.029 mV | no_input_branch, input_branch |
 | [b6_bypass](b6_bypass/README.md) | 5.588 mV | -0.547 mV | no_input_branch, input_branch |
-| b6_shunt | Pending | Pending | Pending |
+| [b6_shunt](b6_shunt/README.md) | 4.907 mV | 35.814 mV | input_branch |
 | b1_shunt | Pending | Pending | Pending |

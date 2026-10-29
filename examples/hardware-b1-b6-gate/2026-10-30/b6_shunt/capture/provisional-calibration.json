@@ -1,0 +1,193 @@
+{
+  "status": "provisional_DC_coefficients_not_full_D2_acceptance",
+  "instrument_serial": "3612211F36323632E4B233334B572F52",
+  "nominal_supply_conversion_v": 4.88,
+  "fixture": "100.8 kohm B13\u2013E16; A4 direct REF jumper; shunt bypass and IN\u2013OUT bridge; no DUT",
+  "reference_values_v_low_mid_high": [
+    0.641,
+    1.624,
+    2.591
+  ],
+  "fit": "Unweighted affine least squares on three block means; no uncertainty weights inferred",
+  "formula": "volts = gain_v_per_count * raw_count + offset_v",
+  "channels": {
+    "A1": {
+      "gain_v_per_count": 0.00029770606213346435,
+      "offset_v": -0.0035431630320740715,
+      "mean_counts_low_mid_high": [
+        2166.70703125,
+        5463.57421875,
+        8716.814453125
+      ],
+      "fit_residual_mV_low_mid_high": [
+        0.49865503825252677,
+        -1.0039971940927206,
+        0.5053421558369742
+      ],
+      "max_abs_fit_residual_mV": 1.0039971940927206,
+      "midpoint_error_using_endpoints_only_mV": -1.5060180608919005,
+      "noise_diagnostics": [
+        {
+          "point": "pulldown-low",
+          "sample_sd_mV": 2.2210468100660488,
+          "lag1_least_squares_rho_descriptive": -0.11468691863809971,
+          "max_absolute_deviation_mV": 17.179733030850297,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-mid",
+          "sample_sd_mV": 2.3697915636509057,
+          "lag1_least_squares_rho_descriptive": -0.053895170202493126,
+          "max_absolute_deviation_mV": 18.331018193007196,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-high-recovery",
+          "sample_sd_mV": 2.1946247137305903,
+          "lag1_least_squares_rho_descriptive": 0.0749412978667768,
+          "max_absolute_deviation_mV": 22.57042229264572,
+          "samples_trimmed": 0
+        }
+      ],
+      "scope": "Common fixture signal to ADC path"
+    },
+    "A2": {
+      "gain_v_per_count": 0.000297947310037795,
+      "offset_v": -0.004926592079053962,
+      "mean_counts_low_mid_high": [
+        2169.31640625,
+        5464.35546875,
+        8714.1171875
+      ],
+      "fit_residual_mV_low_mid_high": [
+        0.4153957839899691,
+        -0.8365790746773794,
+        0.421183290686411
+      ],
+      "max_abs_fit_residual_mV": 0.8365790746773794,
+      "midpoint_error_using_endpoints_only_mV": -1.2548886311831708,
+      "noise_diagnostics": [
+        {
+          "point": "pulldown-low",
+          "sample_sd_mV": 1.580481683846314,
+          "lag1_least_squares_rho_descriptive": -0.05640598847638077,
+          "max_absolute_deviation_mV": 11.118322862465057,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-mid",
+          "sample_sd_mV": 1.782394646863375,
+          "lag1_least_squares_rho_descriptive": 0.05671609799247395,
+          "max_absolute_deviation_mV": 16.790960319981618,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-high-recovery",
+          "sample_sd_mV": 2.341108828449651,
+          "lag1_least_squares_rho_descriptive": 0.010284381460807105,
+          "max_absolute_deviation_mV": 19.927554072137088,
+          "samples_trimmed": 0
+        }
+      ],
+      "scope": "Input-to-buffer-to-ADC path referred to OUT"
+    },
+    "A3": {
+      "gain_v_per_count": 0.00029786409635682227,
+      "offset_v": -0.005277527042215355,
+      "mean_counts_low_mid_high": [
+        2171.439453125,
+        5466.37890625,
+        8718.072265625
+      ],
+      "fit_residual_mV_low_mid_high": [
+        0.5163234564150576,
+        -1.039513788064772,
+        0.5231903316493813
+      ],
+      "max_abs_fit_residual_mV": 1.039513788064772,
+      "midpoint_error_using_endpoints_only_mV": -1.5592933628809647,
+      "noise_diagnostics": [
+        {
+          "point": "pulldown-low",
+          "sample_sd_mV": 2.0358849406099133,
+          "lag1_least_squares_rho_descriptive": -0.03558022702889966,
+          "max_absolute_deviation_mV": 15.917694414880778,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-mid",
+          "sample_sd_mV": 2.1439029514399337,
+          "lag1_least_squares_rho_descriptive": 0.09228995791198462,
+          "max_absolute_deviation_mV": 15.899659674672106,
+          "samples_trimmed": 0
+        },
+        {
+          "point": "pulldown-high-recovery",
+          "sample_sd_mV": 0.9229664530921613,
+          "lag1_least_squares_rho_descriptive": 0.02079946107627224,
+          "max_absolute_deviation_mV": 9.255312322149933,
+          "samples_trimmed": 0
+        }
+      ],
+      "scope": "Common fixture signal to ADC path"
+    }
+  },
+  "A4_fixed_REF_only": {
+    "gain_v_per_count_assumed": 0.0002978697430263078,
+    "candidate_offset_v": -0.01060480185253021,
+    "required_offsets_mV_low_mid_high": [
+      -15.172331837880915,
+      -8.347074711591462,
+      -8.294999008118253
+    ],
+    "candidate_offset_residual_mV_low_mid_high": [
+      4.5675299853507045,
+      -2.257727140938748,
+      -2.3098028444119567
+    ],
+    "max_abs_candidate_residual_mV": 4.5675299853507045,
+    "gain_calibrated": false,
+    "do_not_extrapolate_outside_REF_neighborhood": true
+  },
+  "DAC_to_driver_path": {
+    "gain_v_per_code": 0.0011912073844059542,
+    "offset_v": -0.007728482175596495,
+    "codes_low_mid_high": [
+      545,
+      1369,
+      2182
+    ],
+    "max_abs_fit_residual_mV": 0.9655729238453592,
+    "applied_to_firmware_or_stimulus_limits": false
+  },
+  "reset_boundary": {
+    "low_mid_boot": "019190dbdf4f80d8a5ae9f53a7f3368a",
+    "high_boot": "58d7c1c8418e4792edb4628854a46bb1",
+    "manual_RESET_with_USB_and_wiring_retained": true,
+    "same_REF_code_mean_count_change": {
+      "A1": 0.04296875,
+      "A2": -0.765625,
+      "A3": 0.193359375,
+      "A4": -3.484375
+    },
+    "new_physical_midpoint_DMM_not_supplied": true,
+    "scope": "Explicitly combine unchanged-fixture points across a reset for provisional fit; not a single-boot run."
+  },
+  "validation": {
+    "independent_condition_test_completed": false,
+    "dynamic_fixture_test_completed": false,
+    "full_D2_calibration_accepted": false,
+    "hardware_inference_enabled": false
+  },
+  "limits": [
+    "DMM accuracy is unknown; 1 mV display increments are not a 1 mV accuracy claim.",
+    "High D45 combines REF and differential displays with shared reference error and unknown drift.",
+    "DMM and ADC are sequential; supplied values have no exact measurement timestamps.",
+    "Three fitted points and the endpoint midpoint diagnostic are not independent validation.",
+    "A2 includes its buffer, so these coefficients are not ADC-only calibration.",
+    "A4 is observed only near fixed REF; its gain is not calibrated and variation is retained.",
+    "Descriptive lag-1 coefficients do not establish an adequate AR(1) noise model.",
+    "Raw tails are retained; no samples were trimmed and no SD/sqrt(N) accuracy claim is made.",
+    "USB reliability and the physical cause of earlier failures remain unestablished."
+  ]
+}
