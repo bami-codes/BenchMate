@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T11:13:49.990227+00:00",
-  "scope": "Parts, assembly and unpowered fixture hookup confirmed by operator; fresh powered checks and hardware capture pending",
+  "scope": "Operator-confirmed passive B1 assembly, real step capture, exploratory tau fit and pre-observation frozen sine forecast checked against a new hardware capture; no blind diagnosis or full calibration",
   "copies": [
     {
       "source": "runs/hardware-b1-assembly/20261029T105421-715fe30508/events.jsonl",
@@ -26,6 +26,111 @@
       "source": "runs/hardware-b1-hookup-confirmed/20261029T113257-3b922abe0d/assembly-guide.md",
       "published": "hookup-confirmed/assembly-guide.md",
       "sha256": "f822c9d1cd4195cca470b76180576991bf2416c53bef1d7169ffcfc70db468fd"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/events.jsonl",
+      "published": "first-step/events.jsonl",
+      "sha256": "62ffcb42c752c1d75d7e2ce453e2d8f655194a61a418322e06ae713b4c86ee09"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/controller-source.py",
+      "published": "first-step/controller-source.py",
+      "sha256": "6f4d7453db228e966b6b1d1d47c3c18b4c2faa42d36c06776147f1bdbe83a733"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/host-instrument.py",
+      "published": "first-step/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/provisional-calibration.json",
+      "published": "first-step/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/assembly-guide.md",
+      "published": "first-step/assembly-guide.md",
+      "sha256": "f822c9d1cd4195cca470b76180576991bf2416c53bef1d7169ffcfc70db468fd"
+    },
+    {
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d/capture-summary.json",
+      "published": "first-step/capture-summary.json",
+      "sha256": "255688c362b3932db360b73c8bdaa3ee0e0ff9a3d5dc4d21238e615ae0075008"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/events.jsonl",
+      "published": "step-analysis/events.jsonl",
+      "sha256": "8798aa2a4174ed945182516ed8e6520b2847ba25b65c023e40bca597433cd28d"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/controller-source.py",
+      "published": "step-analysis/controller-source.py",
+      "sha256": "e39a73fe737cd1bd236cca2198b577b3527e7b0a05d7fc1cfb000078a216b1e4"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/analysis.json",
+      "published": "step-analysis/analysis.json",
+      "sha256": "4833ee8d6e8720ddc0b92713ff61a30fadbd22a06cc0ab0135f66f10ad9230b6"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/frozen-sine-prediction.json",
+      "published": "step-analysis/frozen-sine-prediction.json",
+      "sha256": "a996aa9e26ff8e41c98d17003c7b5bc3225c0651834e8ea526786e9ef27cb176"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/first-step.png",
+      "published": "step-analysis/first-step.png",
+      "sha256": "abc1de4d7e5075de47d4512dfb1eeee5a18daf070b853ae5984d2538caa7d088"
+    },
+    {
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634/first-step.svg",
+      "published": "step-analysis/first-step.svg",
+      "sha256": "6f07ea5a1d8c2b497cb46b7bcdce9bdeb182462737a4ba355e2e49255c8c097c"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/events.jsonl",
+      "published": "sine-check/events.jsonl",
+      "sha256": "83202edc8890d2475e15faa77df09b9a795a688740a11d52a87265c4f2aa4890"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/controller-source.py",
+      "published": "sine-check/controller-source.py",
+      "sha256": "a58952607e26e84277939a52a31cecb4e7a4ea37dc9b6fc2374ab6da5520d3ad"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/host-instrument.py",
+      "published": "sine-check/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/frozen-sine-prediction.json",
+      "published": "sine-check/frozen-sine-prediction.json",
+      "sha256": "a996aa9e26ff8e41c98d17003c7b5bc3225c0651834e8ea526786e9ef27cb176"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/provisional-calibration.json",
+      "published": "sine-check/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817/analysis.json",
+      "published": "sine-check/analysis.json",
+      "sha256": "8293d0c3f43f7b5dde5f45f847f48f03a0ec8cca1f8fce4848ac1687dcaa68dd"
+    },
+    {
+      "source": "runs/hardware-b1-verification-figure/20261029T114800-4470698c3f/events.jsonl",
+      "published": "verification-figure/events.jsonl",
+      "sha256": "bcb9c8368b7ed6f5033d018df94d63169e493b1ab5d52fe4632368b1a5a0342f"
+    },
+    {
+      "source": "runs/hardware-b1-verification-figure/20261029T114800-4470698c3f/frozen-sine-check.png",
+      "published": "verification-figure/frozen-sine-check.png",
+      "sha256": "c8571417780053c6d71a0a36da987666520d806b35360cdc09b7cb09c0fba16c"
+    },
+    {
+      "source": "runs/hardware-b1-verification-figure/20261029T114800-4470698c3f/frozen-sine-check.svg",
+      "published": "verification-figure/frozen-sine-check.svg",
+      "sha256": "59c2e3eff25a050c535f8316d54783c48d7c39c39d29f6c6aaf660aa5085221a"
     }
   ],
   "records": [
@@ -64,7 +169,154 @@
         "fresh_power_report_pending": true,
         "guide_sha256": "f822c9d1cd4195cca470b76180576991bf2416c53bef1d7169ffcfc70db468fd"
       }
+    },
+    {
+      "folder": "first-step",
+      "source": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d",
+      "events": 21,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "83af0e480fe8ae23aac6df290aebdfbc",
+        "configuration": {
+          "vref_v": 4.88,
+          "ref_v": 1.62,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "REF_guard": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 1998,
+          "frame_interval_us_max": 2003,
+          "channel_read_completion_offset_us_min": [
+            52,
+            104,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5423.453125,
+              "min_counts": 5340,
+              "max_counts": 5457,
+              "nominal_mean_v": 1.6154825886589759
+            },
+            "A2": {
+              "mean_counts": 5418.078125,
+              "min_counts": 5344,
+              "max_counts": 5452,
+              "nominal_mean_v": 1.6138815387902092
+            },
+            "A3": {
+              "mean_counts": 5427.3359375,
+              "min_counts": 5404,
+              "max_counts": 5493,
+              "nominal_mean_v": 1.6166391610205704
+            },
+            "A4": {
+              "mean_counts": 5523.908203125,
+              "min_counts": 5504,
+              "max_counts": 5548,
+              "nominal_mean_v": 1.6454051169657573
+            }
+          }
+        },
+        "step": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 497,
+          "frame_interval_us_max": 503,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5958.517578125,
+              "min_counts": 4745,
+              "max_counts": 6177,
+              "nominal_mean_v": 1.7748620998138314
+            },
+            "A2": {
+              "mean_counts": 5882.505859375,
+              "min_counts": 4713,
+              "max_counts": 6100,
+              "nominal_mean_v": 1.752220508682781
+            },
+            "A3": {
+              "mean_counts": 5961.3515625,
+              "min_counts": 4747,
+              "max_counts": 6169,
+              "nominal_mean_v": 1.7757062580113532
+            },
+            "A4": {
+              "mean_counts": 5526.42578125,
+              "min_counts": 5504,
+              "max_counts": 5575,
+              "nominal_mean_v": 1.6461550273148995
+            }
+          }
+        },
+        "output_parked_ref_code": 1359,
+        "response_analysis_pending": true,
+        "full_D2_accepted": false,
+        "hardware_diagnosis_performed": false,
+        "serial_connection_closed": true
+      }
+    },
+    {
+      "folder": "step-analysis",
+      "source": "runs/hardware-b1-step-analysis/20261029T114450-975a52b634",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "offline_analysis_only": true,
+        "hardware_IO": false,
+        "sine_prediction_frozen": true,
+        "sine_observation_pending": true,
+        "analysis_sha256": "4833ee8d6e8720ddc0b92713ff61a30fadbd22a06cc0ab0135f66f10ad9230b6"
+      }
+    },
+    {
+      "folder": "sine-check",
+      "source": "runs/hardware-b1-frozen-sine-check/20261029T114551-5d3cb2e817",
+      "events": 11,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "raw_capture_valid": true,
+        "engineering_check_passed": true,
+        "validation_refit": false,
+        "output_parked_ref_code": 1359,
+        "full_D2_accepted": false
+      }
+    },
+    {
+      "folder": "verification-figure",
+      "source": "runs/hardware-b1-verification-figure/20261029T114800-4470698c3f",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "artifact_sha256": {
+          "frozen-sine-check.svg": "59c2e3eff25a050c535f8316d54783c48d7c39c39d29f6c6aaf660aa5085221a",
+          "frozen-sine-check.png": "c8571417780053c6d71a0a36da987666520d806b35360cdc09b7cb09c0fba16c"
+        }
+      }
     }
   ],
-  "updated_at_utc": "2026-10-29T11:32:57.665443+00:00"
+  "updated_at_utc": "2026-10-29T11:51:26.293280+00:00"
 }

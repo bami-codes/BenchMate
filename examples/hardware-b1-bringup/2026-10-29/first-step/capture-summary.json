@@ -1,0 +1,101 @@
+{
+  "boot_id": "83af0e480fe8ae23aac6df290aebdfbc",
+  "configuration": {
+    "vref_v": 4.88,
+    "ref_v": 1.62,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "REF_guard": {
+    "samples": 512,
+    "overruns": 0,
+    "frame_interval_us_min": 1998,
+    "frame_interval_us_max": 2003,
+    "channel_read_completion_offset_us_min": [
+      52,
+      104,
+      157,
+      215
+    ],
+    "channel_read_completion_offset_us_max": [
+      53,
+      105,
+      158,
+      216
+    ],
+    "channels": {
+      "A1": {
+        "mean_counts": 5423.453125,
+        "min_counts": 5340,
+        "max_counts": 5457,
+        "nominal_mean_v": 1.6154825886589759
+      },
+      "A2": {
+        "mean_counts": 5418.078125,
+        "min_counts": 5344,
+        "max_counts": 5452,
+        "nominal_mean_v": 1.6138815387902092
+      },
+      "A3": {
+        "mean_counts": 5427.3359375,
+        "min_counts": 5404,
+        "max_counts": 5493,
+        "nominal_mean_v": 1.6166391610205704
+      },
+      "A4": {
+        "mean_counts": 5523.908203125,
+        "min_counts": 5504,
+        "max_counts": 5548,
+        "nominal_mean_v": 1.6454051169657573
+      }
+    }
+  },
+  "step": {
+    "samples": 512,
+    "overruns": 0,
+    "frame_interval_us_min": 497,
+    "frame_interval_us_max": 503,
+    "channel_read_completion_offset_us_min": [
+      52,
+      105,
+      157,
+      215
+    ],
+    "channel_read_completion_offset_us_max": [
+      53,
+      105,
+      158,
+      216
+    ],
+    "channels": {
+      "A1": {
+        "mean_counts": 5958.517578125,
+        "min_counts": 4745,
+        "max_counts": 6177,
+        "nominal_mean_v": 1.7748620998138314
+      },
+      "A2": {
+        "mean_counts": 5882.505859375,
+        "min_counts": 4713,
+        "max_counts": 6100,
+        "nominal_mean_v": 1.752220508682781
+      },
+      "A3": {
+        "mean_counts": 5961.3515625,
+        "min_counts": 4747,
+        "max_counts": 6169,
+        "nominal_mean_v": 1.7757062580113532
+      },
+      "A4": {
+        "mean_counts": 5526.42578125,
+        "min_counts": 5504,
+        "max_counts": 5575,
+        "nominal_mean_v": 1.6461550273148995
+      }
+    }
+  },
+  "output_parked_ref_code": 1359,
+  "response_analysis_pending": true,
+  "full_D2_accepted": false,
+  "hardware_diagnosis_performed": false
+}

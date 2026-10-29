@@ -8,8 +8,14 @@ assembly, A3–A8 resistance 9.99 kohm and A8–A13 capacitance 0.984 microfarad
 The operator now confirms jumper 15 removal and the three instrument
 connections below, made with USB disconnected. IN, OUT and RET continuity
 are reported; OUT was checked from U2's actual pin 3, and RET–GND gave
-no continuity tone. USB reconnection and fresh supply/REF readings are
-the next step; no hardware command has been issued for this hookup.
+no continuity tone. After USB reconnection the reported supply/REF were
+4.88/1.62 V. A fresh boot, REF guards and a 512-frame small-step capture
+passed. The fitted effective time constant is 10.11 ms; the component-reading
+reference is 9.83 ms. A 5 Hz sine forecast saved before its capture passed
+the declared engineering RMS checks without parameter refitting (4.93 mV
+overall RMS, +3.96 mV mean difference). The last postcheck confirmed REF
+code 1359. This is not full D2 acceptance or separate R/C identification.
+See the [evidence](../examples/hardware-b1-bringup/2026-10-29/README.md).
 
 ## Coordinates used here
 
@@ -106,10 +112,10 @@ remains in force. These are operator reports, not an independent visual
 inspection. Do not interpret in-circuit resistance as a new isolated
 component measurement.
 
-Next, reconnect Minima USB with the same cable and Mac port. With the
+Completed first-power check: reconnect Minima USB with the same cable and Mac port. With the
 meter black probe on the existing large-board GND contact, measure the
 large-board A3 divider-resistor lead (supply, DC 20 V), then D50 (REF,
-DC 2 V). No DAC command is sent until these fresh readings are reported.
+DC 2 V). These readings were reported before the DAC command.
 
 ## Limited first-power scope for this passive B1
 
@@ -126,9 +132,11 @@ stimulus still requires a verified fresh boot, declared limits, settled
 REF and the usual capture checks. Do not generalize this exception to
 unknown, active, externally powered or holdout circuits.
 
-The first intended waveform is a small +/-0.2 V step around the configured
-REF, a 0.4 V transition within the one-volt jump rule. A proposed 500 us
-frame interval and 512-frame block must pass actual timing checks before
-use; this is not a claim that this sample rate has already been validated.
+The first waveform was a small +/-0.2 V step around the configured
+REF, a 0.4 V transition within the one-volt jump rule. The proposed 500 us
+frame interval and 512-frame block passed this acquisition's timing checks
+(497–503 us observed frame intervals, no overruns). A subsequent 5 Hz
+sine used 2 ms frames (1991–2011 us observed intervals, no overruns).
+These two blocks do not establish a general sample-rate or frequency limit.
 A4 and remaining D2 checks are still incomplete. The result is first
 RC-response verification, not a confirmed mystery diagnosis or repair.

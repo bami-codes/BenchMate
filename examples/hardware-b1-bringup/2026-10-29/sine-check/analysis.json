@@ -1,0 +1,69 @@
+{
+  "boot_id": "83af0e480fe8ae23aac6df290aebdfbc",
+  "samples": 512,
+  "overruns": 0,
+  "frame_interval_us_min": 1991,
+  "frame_interval_us_max": 2011,
+  "RMS_prediction_residual_mV": 4.931175571497489,
+  "mean_prediction_residual_mV": 3.9597430327722396,
+  "max_abs_prediction_residual_mV": 21.976304604686135,
+  "phase_bin_residuals": [
+    {
+      "bin": 0,
+      "samples": 77,
+      "RMS_mV": 5.218925520093512
+    },
+    {
+      "bin": 1,
+      "samples": 60,
+      "RMS_mV": 6.238129638900855
+    },
+    {
+      "bin": 2,
+      "samples": 65,
+      "RMS_mV": 5.528341346428636
+    },
+    {
+      "bin": 3,
+      "samples": 60,
+      "RMS_mV": 4.4046877530249855
+    },
+    {
+      "bin": 4,
+      "samples": 65,
+      "RMS_mV": 4.852322391241578
+    },
+    {
+      "bin": 5,
+      "samples": 60,
+      "RMS_mV": 4.025043784076274
+    },
+    {
+      "bin": 6,
+      "samples": 65,
+      "RMS_mV": 4.197998803991011
+    },
+    {
+      "bin": 7,
+      "samples": 60,
+      "RMS_mV": 4.507936059397134
+    }
+  ],
+  "max_prediction_time_error_us": 14.000000000069512,
+  "max_DAC_code_difference": 0,
+  "checks": {
+    "all_sample_RMS": true,
+    "all_phase_bins_RMS": true,
+    "nominal_prediction_timing": true,
+    "nominal_DAC_codes": true,
+    "signal_envelope": true,
+    "REF_envelope": true
+  },
+  "engineering_check_passed": true,
+  "prediction_sha256": "a996aa9e26ff8e41c98d17003c7b5bc3225c0651834e8ea526786e9ef27cb176",
+  "validation_samples_used_for_refit": 0,
+  "output_parked_ref_code": 1359,
+  "full_D2_accepted": false,
+  "scope": "Frozen-parameter B1 engineering check on a new waveform; not formal evaluation or full D2 acceptance",
+  "calibrated_statistical_significance_claimed": false
+}

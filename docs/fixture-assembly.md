@@ -1,6 +1,15 @@
 # D2 physical assembly — coordinate record
 
-Latest status, 2026-10-29 Asia/Seoul: the measured 100.8 kohm input
+Latest status: B1 is connected with jumper 15 removed, 11/14 retained,
+and green A35→mini A3, blue D30→mini A8, gray C50→mini A13. The operator
+reported supply/REF 4.88/1.62 V. A fresh-boot REF guard and 512-frame
+step passed; fitted effective tau is 10.11 ms. A sine prediction frozen
+before a new capture passed engineering RMS checks without refitting
+(4.93 mV RMS, +3.96 mV mean residual). Last postcheck: REF code 1359.
+See [B1 evidence](../examples/hardware-b1-bringup/2026-10-29/README.md).
+Full D2 acceptance and hardware diagnosis remain incomplete.
+
+Previous calibration milestone, 2026-10-29 Asia/Seoul: the measured 100.8 kohm input
 pull-down is installed at B13–E16. Three DC path-reference points are
 0.641/1.624/2.591 V, with 512-frame blocks and no overruns. A high-point
 PING failure remains rejected; after a confirmed single RESET, that point

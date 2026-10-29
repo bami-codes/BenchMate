@@ -1,0 +1,75 @@
+{
+  "source_record": "runs/hardware-b1-first-step/20261029T113934-a5eb22cf7d",
+  "raw_events_sha256": "62ffcb42c752c1d75d7e2ce453e2d8f655194a61a418322e06ae713b4c86ee09",
+  "method": "Unweighted variable-projection exponential step fit: offset, amplitude and log(tau); no sample trimming",
+  "post_capture_exploratory_analysis": true,
+  "tau_search_bounds_s": [
+    0.0001,
+    0.5
+  ],
+  "step_origin": "Recorded DAC-write-completion frame at commanded transition; A2 read-completion time used",
+  "primary_fit": {
+    "tau_s": 0.010113176931324328,
+    "low_output_v": 1.4078123320192084,
+    "high_output_v": 1.802942852465797,
+    "fit_RMS_mV": 1.495897794647817,
+    "fitted_samples": 512
+  },
+  "first_50ms_plus_prestep_sensitivity_fit": {
+    "tau_s": 0.01014991919404983,
+    "low_output_v": 1.4078483190259026,
+    "high_output_v": 1.8034523869950987,
+    "fit_RMS_mV": 1.9210358260981577,
+    "fitted_samples": 151
+  },
+  "residual_regions": {
+    "pre_step": {
+      "samples": 51,
+      "RMS_mV": 2.5306124805048102,
+      "max_abs_mV": 8.513251890134743
+    },
+    "0_to_5ms": {
+      "samples": 10,
+      "RMS_mV": 1.5310812330941552,
+      "max_abs_mV": 2.464260385573791
+    },
+    "5_to_20ms": {
+      "samples": 30,
+      "RMS_mV": 1.4939524097549306,
+      "max_abs_mV": 7.1254135183851375
+    },
+    "20_to_80ms": {
+      "samples": 120,
+      "RMS_mV": 1.3199280886919398,
+      "max_abs_mV": 6.491143167271618
+    },
+    "0_to_50ms": {
+      "samples": 100,
+      "RMS_mV": 1.5430536000958284,
+      "max_abs_mV": 7.1254135183851375
+    },
+    "after_80ms": {
+      "samples": 301,
+      "RMS_mV": 1.3139167210291558,
+      "max_abs_mV": 9.609152965652124
+    }
+  },
+  "component_reference_comparison": {
+    "reported_R_ohm": 9990,
+    "reported_C_f": 9.84e-07,
+    "RC_reference_s": 0.00983016,
+    "tau_difference_percent": 2.8790673938606126,
+    "component_truth_used_by_fit": false,
+    "meter_accuracy_known": false
+  },
+  "identified": "Effective unloaded time constant only; R and C are not separately identified",
+  "full_D2_accepted": false,
+  "blind_diagnosis_or_repair_verification": false,
+  "limits": [
+    "A1-A3 affine calibration is provisional; A2 includes its buffer.",
+    "Per-channel read-completion timestamps are not calibrated ADC sample apertures.",
+    "Fitted residual is training fit, not independent validation or an accuracy certificate.",
+    "Supply/reference drift, finite fixture response and meter uncertainty remain.",
+    "No individual R/C conclusion or calibrated confidence interval is asserted."
+  ]
+}
