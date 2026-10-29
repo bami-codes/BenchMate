@@ -725,6 +725,56 @@
       "source": "runs/hardware-minima-persistent-ref-watch/20261029T074555-8bd9f7ba03/minima-kernel-review.json",
       "published": "minima-persistent-ref-watch/minima-kernel-review.json",
       "sha256": "8cf7b49621b662d65000f89c9d0ca5d3208ad1e8adac4e27010d47e428c05c59"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T081856-cf2bede4cc/events.jsonl",
+      "published": "minima-dc-recovery-mid-point/events.jsonl",
+      "sha256": "333c20e3d9056c25364b9d416cc68df1feced084c13c5dcdf828276e7836cd0a"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T081856-cf2bede4cc/controller-source.py",
+      "published": "minima-dc-recovery-mid-point/controller-source.py",
+      "sha256": "ac67c6602154c1d158c6c5600bd9df728b641e7e0d1b6e3532eb8ee9c8284ad1"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T081856-cf2bede4cc/host-instrument.py",
+      "published": "minima-dc-recovery-mid-point/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T081856-cf2bede4cc/analysis.json",
+      "published": "minima-dc-recovery-mid-point/analysis.json",
+      "sha256": "a4d3870c7883ca051bcafcc8228ac2158ae1c48bfba2531b1c4d837111021087"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T081856-a68bff9646/events.jsonl",
+      "published": "minima-dc-recovery-mid-block/events.jsonl",
+      "sha256": "c802863b7e6eec666cf1bddb8260b2c89d0a6f3d8ee1cd31d58671f291a7059a"
+    },
+    {
+      "source": "runs/hardware-minima-dc-hold/20261029T081901-ed0cbd1437/events.jsonl",
+      "published": "minima-dc-recovery-low-held/events.jsonl",
+      "sha256": "e9df35f4fbb3cf4cea5a77458627ea595ddc9ab0e8e8ae940c4f1482d9aa236c"
+    },
+    {
+      "source": "runs/hardware-minima-held-level-watch/20261029T075643-17798d7400/events.jsonl",
+      "published": "minima-midpoint-held-watch/events.jsonl",
+      "sha256": "9657f6a67fda3d9485815b27736b0cd8881bd22b58609842b3a90b77eeda610c"
+    },
+    {
+      "source": "runs/hardware-minima-held-level-watch/20261029T075643-17798d7400/controller-source.py",
+      "published": "minima-midpoint-held-watch/controller-source.py",
+      "sha256": "fbd8bce8105c9a16896a79d350d6864624c6b38e7d0e6a7d26355d85d90728a9"
+    },
+    {
+      "source": "runs/hardware-minima-held-level-watch/20261029T075643-17798d7400/host-instrument.py",
+      "published": "minima-midpoint-held-watch/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-held-level-watch/20261029T075643-17798d7400/STOP",
+      "published": "minima-midpoint-held-watch/STOP",
+      "sha256": "1481f87aa4051c9c0da103dc3f849badfe326e5ceb7ce8fedb426906cf00ab8b"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1588,7 +1638,88 @@
         "accepted_samples": 0,
         "calibration_performed": false
       }
+    },
+    {
+      "folder": "minima-dc-recovery-mid-point",
+      "source": "runs/hardware-minima-dc-point/20261029T081856-cf2bede4cc",
+      "events": 8,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "capture_record": "runs/hardware-minima-capture/20261029T081856-a68bff9646",
+        "accepted_frames": 512,
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "next_hold_record": "runs/hardware-minima-dc-hold/20261029T081901-ed0cbd1437",
+        "next_hold_result": {
+          "source": "hardware_uncalibrated",
+          "boot_id": "e522aadc799575eae297808f4df573c8",
+          "boot_continuity_checked": true,
+          "uptime_ms_start": 2050811,
+          "uptime_ms_end": 2053434,
+          "held_code": 548,
+          "nominal_target_v": 0.65,
+          "output_remains_driven": true,
+          "accepted_samples": 0,
+          "calibration_performed": false
+        },
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-dc-recovery-mid-block",
+      "source": "runs/hardware-minima-capture/20261029T081856-a68bff9646",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1998,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1365,
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 2045828,
+        "uptime_ms_end": 2048800
+      }
+    },
+    {
+      "folder": "minima-dc-recovery-low-held",
+      "source": "runs/hardware-minima-dc-hold/20261029T081901-ed0cbd1437",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 2050811,
+        "uptime_ms_end": 2053434,
+        "held_code": 548,
+        "nominal_target_v": 0.65,
+        "output_remains_driven": true,
+        "accepted_samples": 0,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-midpoint-held-watch",
+      "source": "runs/hardware-minima-held-level-watch/20261029T075643-17798d7400",
+      "events": 654,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "e522aadc799575eae297808f4df573c8",
+        "held_code_at_final_check": 1365,
+        "successful_PINGs": 650,
+        "duration_seconds": 1305.5968834999949,
+        "stop_reason": "explicit_host_stop_after_final_successful_PING",
+        "serial_connection_now_closed": true,
+        "output_remains_driven": true,
+        "ADC_capture_requested": false,
+        "calibration_performed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T07:59:43.275843+00:00"
+  "last_appended_at_utc": "2026-10-29T08:22:04.532167+00:00"
 }

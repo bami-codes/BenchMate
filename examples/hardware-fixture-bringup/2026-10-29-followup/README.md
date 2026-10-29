@@ -36,9 +36,12 @@ unchanged. The next low-point attempt failed at its initial PING, before
 any low-level command. USB transaction errors are recorded separately.
 After a confirmed single RESET, the 16:45:59–16:55:59 KST continuous-open
 REF/PING comparison passed 300 checks in 600.011 s. Its Minima-only kernel
-query returned no messages. A same-level DC check passed; PING-only
-monitoring continues during the pending precise DMM readings. Operator
-no-touch confirmation, the USB cause and multi-point calibration remain open.
+query returned no messages. Operator no-touch confirmation is now recorded.
+A same-level DC check passed; the following DMM readings are U1 pin 5 /
+D35 / D40 / D45 / D50 = 1.620/1.620/1.619/1.620/1.628 V. The held-level
+watch closed after 650 checks, then a same-boot 512-frame midpoint block
+passed. A new 0.65 V low hold is under PING-only monitoring pending DMM.
+The USB cause and multi-point calibration remain open.
 
 | Record | Observed result |
 | --- | --- |
@@ -79,6 +82,8 @@ no-touch confirmation, the USB cause and multi-point calibration remain open.
 | `minima-recovered-usb-review/` | Selected Minima USB errors, port/filtered power-log review and prepared continuous-connection comparison; cause not established |
 | `minima-persistent-ref-watch/` | 600.011 s, 300 same-boot/same-code PINGs pass on one connection; post-run named-device kernel query has zero messages |
 | `minima-post-watch-ref/`, `minima-post-watch-ref-held/` | Same-boot 1.62 V DC settling and code postcheck pass; precise operator DMM values pending |
+| `minima-midpoint-held-watch/` | Separate PING-only connection passes 650 checks over 1305.597 s, closes explicitly before capture; includes operator DMM probing |
+| `minima-dc-recovery-mid-point/`, `minima-dc-recovery-mid-block/`, `minima-dc-recovery-low-held/` | Precise midpoint DMM plus 512-frame raw block pass; same-boot interior low target 0.65 V/code 548 held for the next report |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -105,7 +110,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Fifty-three chains contain 910 events.
+hashes and event-chain terminal states. Fifty-seven chains contain 1,584 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -278,3 +283,14 @@ no-touch confirmation is still pending. Same-boot DC at the same 1.62 V
 target then passed settling and postcheck. PING-only monitoring now keeps
 that level under observation while precise U1 pin 5/D35/D40/D45/D50 DMM
 readings are requested. This live monitor is not exported while incomplete.
+
+The operator subsequently confirms the ten-minute no-touch condition and
+reports U1 pin 5 / D35 / D40 / D45 / D50 at
+1.620/1.620/1.619/1.620/1.628 V on DC 2 V. The held-level watch completes
+650 checks over 1305.597 s and closes explicitly. A matched same-boot
+512-frame block passes timing/identity/ADC-state checks; all samples,
+including deviations up to about 19 mV from the channel mean, are retained.
+No fitting or accuracy claim follows from one point. The next target is
+0.65 V, inside the envelope with margin against the measured 1.628 V REF.
+Its code 548 hold passes; a new PING-only monitor is active for the next
+DMM report and remains unexported while incomplete.

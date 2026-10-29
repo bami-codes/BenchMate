@@ -72,11 +72,14 @@ enumeration messages in the queried window. Following a confirmed single
 RESET, a ten-minute single-connection REF/PING comparison ran from
 16:45:59 to 16:55:59 KST: 300 PINGs passed with the same boot and code.
 The named-device kernel query for that window returned no messages.
-Same-boot REF DC settling and postcheck subsequently passed. A separate
-PING-only monitor now observes that level while precise U1 pin 5 / D35 /
-D40 / D45 / D50 DMM readings are requested. No-touch confirmation for the
-ten-minute window is pending. Firmware and wiring are unchanged; the
-fault cause and multi-point calibration remain open.
+Same-boot REF DC settling and postcheck subsequently passed. The operator
+confirmed no touching during the ten-minute window and reported precise
+U1 pin 5 / D35 / D40 / D45 / D50 values of
+1.620/1.620/1.619/1.620/1.628 V. The separate held-level monitor completed
+650 checks over 1305.597 s and closed before a same-boot 512-frame midpoint
+capture, which passed. A subsequent 0.65 V DC hold (code 548) passed;
+PING-only monitoring is active during its pending DMM report. Firmware
+and wiring are unchanged; the fault cause and multi-point calibration remain open.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1465,6 +1468,44 @@ actual U1 pin 5 (E13), D35, D40, D45 and D50, relative to the retained
 blue-rail GND. An overrange display requires DC 20 V and reporting that
 range change. These DMM readings and a matched ADC block are pending;
 the prior coarse readings are not silently used as calibration anchors.
+
+## Precise midpoint paired with ADC; interior low point held
+
+The operator confirmed `10분 동안 손대지 않았어` for the earlier
+16:45:59–16:55:59 comparison. The new sequential DC 2 V report is
+`1.620V / 1.620V / 1.619V / 1.620V / 1.628V`, ordered actual U1 pin 5,
+D35, D40, D45, D50. Display resolution is 1 mV; meter accuracy has not
+been established. Only D35/D40/D45/D50 are paired with A1/A2/A3/A4;
+the extra pin 5 reading documents the DAC input separately.
+
+The intervening PING-only monitor completed 650 checks over 1305.597 s,
+maintaining boot `e522aadc799575eae297808f4df573c8` and code 1365. An
+explicit STOP file closed it after a final successful PING before capture.
+This is a separate connection from the earlier ten-minute test, and its
+interval includes operator DMM probing, not a claimed no-touch condition.
+
+One 512-frame HOLD block then passed same-boot, active ADC-state and timing
+checks: intervals 1998–2003 us, no overruns. A1/A2/A3/A4 means are
+5447.0293/5448.8535/5450.0371/5488.9746 counts, with sample SDs
+7.8200/4.3434/7.5653/7.0103 counts. Using the earlier 4.86 V supply display
+gives nominal SDs 1.29–2.32 mV; rare deviations remain, up to about 19 mV
+from the channel mean. All samples are retained, with no trimming or
+per-channel calibration fit. DMM and ADC were sequential, not simultaneous.
+
+The next DC command on the same boot held code 548, target 0.65 V.
+This interior calibration point replaces the previously proposed 0.62 V
+low target now that REF reads 1.628 V, leaving margin inside REF minus
+1 V and moving less than 1 V from the held midpoint. It is not a new
+claim about calibrated range. No old-boot low point is combined into this
+series. Exact records are `minima-midpoint-held-watch/`,
+`minima-dc-recovery-mid-point/`, `minima-dc-recovery-mid-block/` and
+`minima-dc-recovery-low-held/`.
+
+A new PING-only monitor keeps the low level under observation at
+`runs/hardware-minima-held-level-watch/20261029T081953-070229121d`.
+It remains incomplete and unexported. The pending low-point DMM instruction
+uses the same five contacts and DC 2 V range; D50 remains fixed REF.
+Output and firmware stay unchanged while the operator reads the values.
 
 ## Standing conventions (current)
 
