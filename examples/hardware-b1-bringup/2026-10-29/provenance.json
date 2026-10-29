@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T11:13:49.990227+00:00",
-  "scope": "Operator-confirmed passive B1 assembly, real step capture, exploratory tau fit and pre-observation frozen sine forecast checked against a new hardware capture; no blind diagnosis or full calibration",
+  "scope": "Known passive B1 with unloaded and loaded physical waveforms, predictions frozen before new observations, separate conditional RC estimates; no automated hardware diagnosis or full D2 calibration",
   "copies": [
     {
       "source": "runs/hardware-b1-assembly/20261029T105421-715fe30508/events.jsonl",
@@ -161,6 +161,91 @@
       "source": "runs/hardware-b1-load-confirmed/20261029T122424-19773c5e0e/fixture-wiring-table.md",
       "published": "load-confirmed/fixture-wiring-table.md",
       "sha256": "a6a9d07aec32e15c793f2cd3db4b46ee4458c4d59fb059e0f0683f46fe3065c4"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-prediction/20261029T122903-49389477e9/events.jsonl",
+      "published": "loaded-prediction/events.jsonl",
+      "sha256": "13614287bebcf48b86815ecfc3dc2140dbb708f2e17d19ccea0228c40a471f0d"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-prediction/20261029T122903-49389477e9/controller-source.py",
+      "published": "loaded-prediction/controller-source.py",
+      "sha256": "cbf8d03789f9782c4d9bab8b74af37e637e9940951506914c6b34d58262babf9"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-prediction/20261029T122903-49389477e9/provisional-calibration.json",
+      "published": "loaded-prediction/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-prediction/20261029T122903-49389477e9/prediction.json",
+      "published": "loaded-prediction/prediction.json",
+      "sha256": "010c4c6a3e6441d09e0d0c23b1f1e4d1a47840dbb97fef6d965e78aed8c48e10"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/events.jsonl",
+      "published": "loaded-step/events.jsonl",
+      "sha256": "488f927fbe155d8ee151d1ce4544ba14e240bc6c7286a596b276c48498f94441"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/controller-source.py",
+      "published": "loaded-step/controller-source.py",
+      "sha256": "df47db560da2489eb29398ddb66ea8e454c4d81cb76d647acbe8ab7f846f2739"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/host-instrument.py",
+      "published": "loaded-step/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/provisional-calibration.json",
+      "published": "loaded-step/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/assembly-guide.md",
+      "published": "loaded-step/assembly-guide.md",
+      "sha256": "6f53b520c2534efbf578bd64af2a2d89cd19f571e176c9661ba2d1bc22bd036e"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/prediction.json",
+      "published": "loaded-step/prediction.json",
+      "sha256": "010c4c6a3e6441d09e0d0c23b1f1e4d1a47840dbb97fef6d965e78aed8c48e10"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/prediction-comparison.json",
+      "published": "loaded-step/prediction-comparison.json",
+      "sha256": "f44f14187bacb3220316895d16bd73128b8a8e10e54241fa6384977b196edae2"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e/capture-summary.json",
+      "published": "loaded-step/capture-summary.json",
+      "sha256": "f5dbcc1d963f191d47d65efd313b7b2d9afaef957a5085e728e3a551c74c5150"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f/events.jsonl",
+      "published": "loaded-analysis/events.jsonl",
+      "sha256": "2eb35f2d054d9cbf17db68018142832ac2f1282296b9c550fb1685c696f31cc9"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f/controller-source.py",
+      "published": "loaded-analysis/controller-source.py",
+      "sha256": "774e1886aef2c963325c0923ac117cbb2947ac1c07793d24f87c81da783d4b25"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f/analysis.json",
+      "published": "loaded-analysis/analysis.json",
+      "sha256": "3614ed91d8c580b279c7962a5e92a455fe4a3cc5ab80104d2ebfd6ebdda21795"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f/loaded-step.png",
+      "published": "loaded-analysis/loaded-step.png",
+      "sha256": "b267d354137070888d4ad57c41ff213a2a460bd7982db407293b2faa2620e111"
+    },
+    {
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f/loaded-step.svg",
+      "published": "loaded-analysis/loaded-step.svg",
+      "sha256": "46250ce4cd67dd6d1917cae77930724af1fff9c7ca393d4d92547f7d302f87f9"
     }
   ],
   "records": [
@@ -371,7 +456,195 @@
         "fresh_power_report_pending": true,
         "loaded_observation_acquired": false
       }
+    },
+    {
+      "folder": "loaded-prediction",
+      "source": "runs/hardware-b1-loaded-prediction/20261029T122903-49389477e9",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_ADC_observation_pending": true,
+        "prediction_sha256": "010c4c6a3e6441d09e0d0c23b1f1e4d1a47840dbb97fef6d965e78aed8c48e10"
+      }
+    },
+    {
+      "folder": "loaded-step",
+      "source": "runs/hardware-b1-loaded-step/20261029T123058-a10873a74e",
+      "events": 23,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "62718b65a2204d5c576563ddd04ed7f0",
+        "configuration": {
+          "vref_v": 4.87,
+          "ref_v": 1.627,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "REF_guard": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 1998,
+          "frame_interval_us_max": 2003,
+          "channel_read_completion_offset_us_min": [
+            52,
+            104,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5459.96484375,
+              "min_counts": 5369,
+              "max_counts": 5549,
+              "nominal_mean_v": 1.6230256234549536
+            },
+            "A2": {
+              "mean_counts": 5479.021484375,
+              "min_counts": 5447,
+              "max_counts": 5558,
+              "nominal_mean_v": 1.6286903881405268
+            },
+            "A3": {
+              "mean_counts": 5462.49609375,
+              "min_counts": 5382,
+              "max_counts": 5541,
+              "nominal_mean_v": 1.6237780611952939
+            },
+            "A4": {
+              "mean_counts": 5537.19140625,
+              "min_counts": 5515,
+              "max_counts": 5593,
+              "nominal_mean_v": 1.6459819415514558
+            }
+          }
+        },
+        "step": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 497,
+          "frame_interval_us_max": 503,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5998.20703125,
+              "min_counts": 4756,
+              "max_counts": 6211,
+              "nominal_mean_v": 1.7830231485190442
+            },
+            "A2": {
+              "mean_counts": 5726.25,
+              "min_counts": 5119,
+              "max_counts": 5880,
+              "nominal_mean_v": 1.7021813770371728
+            },
+            "A3": {
+              "mean_counts": 6000.71484375,
+              "min_counts": 4757,
+              "max_counts": 6206,
+              "nominal_mean_v": 1.7837686192432707
+            },
+            "A4": {
+              "mean_counts": 5537.029296875,
+              "min_counts": 5494,
+              "max_counts": 5583,
+              "nominal_mean_v": 1.645933753023332
+            }
+          }
+        },
+        "output_parked_ref_code": 1368,
+        "response_analysis_pending": true,
+        "frozen_prediction_comparison": {
+          "prediction_sha256": "010c4c6a3e6441d09e0d0c23b1f1e4d1a47840dbb97fef6d965e78aed8c48e10",
+          "RMS_mV": 2.2223398792135076,
+          "mean_residual_mV": -0.9490536492407224,
+          "max_absolute_residual_mV": 20.815322475789657,
+          "regions": [
+            {
+              "region": "pre_step",
+              "samples": 51,
+              "RMS_mV": 2.705715589917936,
+              "max_abs_mV": 9.418974026611515
+            },
+            {
+              "region": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 2.4234568357472375,
+              "max_abs_mV": 4.510624064465674
+            },
+            {
+              "region": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 1.9255899706632975,
+              "max_abs_mV": 6.231680118327088
+            },
+            {
+              "region": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 2.1227760424478728,
+              "max_abs_mV": 9.510280799807758
+            },
+            {
+              "region": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 2.190728998297721,
+              "max_abs_mV": 20.815322475789657
+            }
+          ],
+          "max_prediction_time_error_us": 3.0000000000030003,
+          "max_DAC_code_difference": 0,
+          "checks": {
+            "whole_trace_RMS": true,
+            "all_regional_RMS": true,
+            "prediction_timing": true,
+            "DAC_codes_match": true
+          },
+          "engineering_check_passed": true,
+          "loaded_samples_used_for_refit": 0,
+          "truth_resistance_used_in_prediction": true,
+          "full_D2_accepted": false,
+          "blind_diagnosis_performed": false
+        },
+        "full_D2_accepted": false,
+        "hardware_diagnosis_performed": false,
+        "serial_connection_closed": true
+      }
+    },
+    {
+      "folder": "loaded-analysis",
+      "source": "runs/hardware-b1-loaded-analysis/20261029T123516-8b3ec7452f",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "frozen_prediction_score_changed": false,
+        "conditional_R_ohm": 10049.411970957932,
+        "conditional_C_f": 1.0166201144277328e-06,
+        "full_D2_accepted": false,
+        "artifact_sha256": {
+          "analysis.json": "3614ed91d8c580b279c7962a5e92a455fe4a3cc5ab80104d2ebfd6ebdda21795",
+          "loaded-step.png": "b267d354137070888d4ad57c41ff213a2a460bd7982db407293b2faa2620e111",
+          "loaded-step.svg": "46250ce4cd67dd6d1917cae77930724af1fff9c7ca393d4d92547f7d302f87f9"
+        }
+      }
     }
   ],
-  "updated_at_utc": "2026-10-29T12:24:24.323061+00:00"
+  "updated_at_utc": "2026-10-29T12:41:15.035084+00:00"
 }

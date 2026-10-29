@@ -1,6 +1,14 @@
 # D2 physical assembly — coordinate record
 
-Latest status: B1 is connected with jumper 15 removed, 11/14 retained,
+Latest load check: after the operator reported 4.87 V supply and 1.627 V
+REF, the known-B1 loaded forecast was frozen before ADC acquisition.
+The 9.99 kohm OUT–REF load passed with 2.222 mV prediction RMS. A separate
+conditional RC fit gives gain 0.49852 and tau 5.093 ms. Last postcheck:
+same boot, REF code 1368. The [D01 preparation](d01-assembly.md) is now
+requested with USB off, not confirmed. Existing load wiring and its
+jumper 14 dependency remain the last operator-confirmed state.
+
+Previous unloaded milestone: B1 is connected with jumper 15 removed, 11/14 retained,
 and green A35→mini A3, blue D30→mini A8, gray C50→mini A13. The operator
 reported supply/REF 4.88/1.62 V. A fresh-boot REF guard and 512-frame
 step passed; fitted effective tau is 10.11 ms. A sine prediction frozen

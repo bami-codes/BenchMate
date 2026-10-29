@@ -1,0 +1,152 @@
+{
+  "boot_id": "62718b65a2204d5c576563ddd04ed7f0",
+  "configuration": {
+    "vref_v": 4.87,
+    "ref_v": 1.627,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "REF_guard": {
+    "samples": 512,
+    "overruns": 0,
+    "frame_interval_us_min": 1998,
+    "frame_interval_us_max": 2003,
+    "channel_read_completion_offset_us_min": [
+      52,
+      104,
+      157,
+      215
+    ],
+    "channel_read_completion_offset_us_max": [
+      53,
+      105,
+      158,
+      216
+    ],
+    "channels": {
+      "A1": {
+        "mean_counts": 5459.96484375,
+        "min_counts": 5369,
+        "max_counts": 5549,
+        "nominal_mean_v": 1.6230256234549536
+      },
+      "A2": {
+        "mean_counts": 5479.021484375,
+        "min_counts": 5447,
+        "max_counts": 5558,
+        "nominal_mean_v": 1.6286903881405268
+      },
+      "A3": {
+        "mean_counts": 5462.49609375,
+        "min_counts": 5382,
+        "max_counts": 5541,
+        "nominal_mean_v": 1.6237780611952939
+      },
+      "A4": {
+        "mean_counts": 5537.19140625,
+        "min_counts": 5515,
+        "max_counts": 5593,
+        "nominal_mean_v": 1.6459819415514558
+      }
+    }
+  },
+  "step": {
+    "samples": 512,
+    "overruns": 0,
+    "frame_interval_us_min": 497,
+    "frame_interval_us_max": 503,
+    "channel_read_completion_offset_us_min": [
+      52,
+      105,
+      157,
+      215
+    ],
+    "channel_read_completion_offset_us_max": [
+      53,
+      105,
+      158,
+      216
+    ],
+    "channels": {
+      "A1": {
+        "mean_counts": 5998.20703125,
+        "min_counts": 4756,
+        "max_counts": 6211,
+        "nominal_mean_v": 1.7830231485190442
+      },
+      "A2": {
+        "mean_counts": 5726.25,
+        "min_counts": 5119,
+        "max_counts": 5880,
+        "nominal_mean_v": 1.7021813770371728
+      },
+      "A3": {
+        "mean_counts": 6000.71484375,
+        "min_counts": 4757,
+        "max_counts": 6206,
+        "nominal_mean_v": 1.7837686192432707
+      },
+      "A4": {
+        "mean_counts": 5537.029296875,
+        "min_counts": 5494,
+        "max_counts": 5583,
+        "nominal_mean_v": 1.645933753023332
+      }
+    }
+  },
+  "output_parked_ref_code": 1368,
+  "response_analysis_pending": true,
+  "frozen_prediction_comparison": {
+    "prediction_sha256": "010c4c6a3e6441d09e0d0c23b1f1e4d1a47840dbb97fef6d965e78aed8c48e10",
+    "RMS_mV": 2.2223398792135076,
+    "mean_residual_mV": -0.9490536492407224,
+    "max_absolute_residual_mV": 20.815322475789657,
+    "regions": [
+      {
+        "region": "pre_step",
+        "samples": 51,
+        "RMS_mV": 2.705715589917936,
+        "max_abs_mV": 9.418974026611515
+      },
+      {
+        "region": "0_to_5ms",
+        "samples": 10,
+        "RMS_mV": 2.4234568357472375,
+        "max_abs_mV": 4.510624064465674
+      },
+      {
+        "region": "5_to_20ms",
+        "samples": 30,
+        "RMS_mV": 1.9255899706632975,
+        "max_abs_mV": 6.231680118327088
+      },
+      {
+        "region": "20_to_80ms",
+        "samples": 120,
+        "RMS_mV": 2.1227760424478728,
+        "max_abs_mV": 9.510280799807758
+      },
+      {
+        "region": "after_80ms",
+        "samples": 301,
+        "RMS_mV": 2.190728998297721,
+        "max_abs_mV": 20.815322475789657
+      }
+    ],
+    "max_prediction_time_error_us": 3.0000000000030003,
+    "max_DAC_code_difference": 0,
+    "checks": {
+      "whole_trace_RMS": true,
+      "all_regional_RMS": true,
+      "prediction_timing": true,
+      "DAC_codes_match": true
+    },
+    "engineering_check_passed": true,
+    "loaded_samples_used_for_refit": 0,
+    "truth_resistance_used_in_prediction": true,
+    "full_D2_accepted": false,
+    "blind_diagnosis_performed": false
+  },
+  "full_D2_accepted": false,
+  "hardware_diagnosis_performed": false
+}

@@ -1,4 +1,33 @@
-# B1 physical response and frozen prediction — October 29, 2026
+# B1 physical responses and frozen predictions — October 29, 2026
+
+The subsequently added 9.99 kohm OUT–REF load also passed its separately
+frozen step forecast: **2.222 mV RMS**, mean −0.949 mV, maximum absolute
+residual 20.815 mV. All five predeclared time regions have RMS ≤2.706 mV
+against a 9 mV engineering allowance. No parameter, offset or timing
+refit changed that forecast score. The 512-frame block has no overruns,
+497–503 us frame intervals and a matching final boot check.
+
+![Loaded B1 prediction and observation](loaded-analysis/loaded-step.png)
+
+A separate post-observation RC fit gives a gain of 0.49852 and tau of
+5.093 ms. Using the measured input step and known load alone, **conditional
+on the one-state RC topology**, these imply R≈10.049 kohm and C≈1.017 uF.
+This fit does not use the known B1 R/C values, but has no calibrated
+uncertainty interval or topology-selection claim. In contrast, the
+pre-observation loaded forecast explicitly used the known B1 resistance
+and the prior unloaded tau; it is a known-specimen engineering check.
+
+[Loaded forecast](loaded-prediction/prediction.json), [unchanged forecast score](loaded-step/prediction-comparison.json),
+and [separate descriptive analysis](loaded-analysis/analysis.json) retain
+the distinction. The new operator supply/REF report was 4.87/1.627 V.
+Before loaded ADC acquisition, the DAC slope and affine ADC maps were
+scaled using the reported 4.87/4.88 supply ratio; the DAC offset was retained.
+This explicit approximation is not a new calibration fit, and the original
+profile remains unchanged. Read-completion timing and DMM uncertainty
+remain limitations. The final output was parked at REF code 1368.
+
+After this result, USB-off preparation of the added-capacitor D01 variant
+was requested. Its installation is pending; see the [D01 guide](../../../docs/d01-assembly.md).
 
 A known passive RC now has a real step capture and a separately acquired
 5 Hz sine check. The step-derived parameters and the entire sine prediction
@@ -43,8 +72,8 @@ additional isolated 9.99 kohm resistor and 0.998 microfarad capacitor.
 The resistor is installed as a removable OUT–REF load at D55–D60, with
 E30–A55 for OUT and C23–A60 for REF. The operator confirms continuity
 from the OUT load lead to U2 pin 3 and from its REF lead to D50. Fresh
-powered supply/REF readings are pending; no loaded observation exists in
-these records. **This REF feed depends on jumper 14 (B50–B23).** Before
+powered supply/REF readings were 4.87/1.627 V, followed by the loaded
+capture above. **This REF feed depends on jumper 14 (B50–B23).** Before
 removing 14 for the auxiliary probe, the load return must be moved to a
 confirmed direct REF contact with USB off, and its continuity rechecked.
 See the [guide](../../../docs/b1-assembly.md). The capacitor remains set

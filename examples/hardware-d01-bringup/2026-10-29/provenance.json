@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-10-29T12:41:15.067879+00:00",
+  "scope": "Preparation request only; no confirmed D01 assembly, capture or diagnosis",
+  "copies": [
+    {
+      "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/events.jsonl",
+      "published": "assembly-request/events.jsonl",
+      "sha256": "3b304d536efcd6b0ed324f6b60b544da7aa69a4c68aad6acdde5fe1f6449ce6d"
+    },
+    {
+      "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/assembly-guide.md",
+      "published": "assembly-request/assembly-guide.md",
+      "sha256": "440f3d6b86b365d21d6adb0a349260b6346ff61c11d5e54c700f4176150ec810"
+    }
+  ],
+  "records": [
+    {
+      "folder": "assembly-request",
+      "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "D01_assembly_confirmation_pending": true,
+        "D01_diagnosis_performed": false
+      }
+    }
+  ]
+}

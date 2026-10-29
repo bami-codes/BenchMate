@@ -22,8 +22,12 @@ isolated resistor of 9.99 kohm and capacitor of 0.998 microfarad. The
 resistor is assigned to the removable output load below. The capacitor
 is set aside for D01 preparation, not installed. The operator now confirms
 load installation and continuity from its OUT end to U2 pin 3 and from its
-REF end to D50. Fresh powered supply/REF readings are requested; no loaded
-capture has been made. The load's REF feed depends on jumper 14.
+REF end to D50. Fresh supply/REF were 4.87/1.627 V. The loaded step forecast
+was saved before any loaded ADC block and passed with 2.222 mV RMS;
+separate descriptive gain/tau were 0.49852 and 5.093 ms. Final postcheck:
+same boot, REF code 1368. The load's REF feed depends on jumper 14.
+USB-off preparation of the [D01 capacitor variant](d01-assembly.md) is now
+requested, not confirmed; no D01 observation exists yet.
 
 ## Coordinates used here
 
@@ -149,7 +153,7 @@ These two blocks do not establish a general sample-rate or frequency limit.
 A4 and remaining D2 checks are still incomplete. The result is first
 RC-response verification, not a confirmed mystery diagnosis or repair.
 
-## Confirmed removable load — powered check pending
+## Confirmed removable load — first powered check complete
 
 Use vacant upper-half columns 55 and 60 on the **large 830-hole board**.
 Keep the mini-board components and all existing fixture leads unchanged.
@@ -185,17 +189,18 @@ jumper. The 9.99 kohm load itself should not be expected to give a direct
 continuity tone between its ends. Do not reinterpret a loaded, in-circuit
 resistance as the previously isolated component reading. The operator
 reported both continuity tones with USB disconnected. Reconnection with
-jumper 14 retained and fresh supply/REF readings are now requested;
-no DAC command is sent until those readings are reported.
+jumper 14 retained and the fresh supply/REF report preceded the loaded
+prediction freeze, new-boot REF guard and step capture.
 
 For this known B1 and two reported equal 9.99 kohm resistors, the ideal
 loaded small-signal gain is 0.5 relative to REF. The component-reference
 time constant is (R || Rload)*C = 4.91508 ms. Scaling the previously fitted
 effective unloaded tau by the same divider factor instead gives 5.05659 ms.
-These are separate reference calculations, not measured loaded values or
-R/C identification. A full voltage prediction must be saved before a loaded
-capture, with fresh supply/REF and new-boot checks. This known-specimen
-engineering comparison must not be presented as blind diagnosis.
+These are separate reference calculations. The later descriptive loaded
+fit gave tau=5.093 ms and gain=0.49852. The full voltage forecast was saved
+before loaded acquisition and scored without refitting. This known-specimen
+engineering comparison must not be presented as blind diagnosis; the
+separate conditional R/C estimate assumes the RC topology.
 
 The spare 0.998 microfarad capacitor is not part of this load check. Its
 parallel sum with B1's reported 0.984 microfarad would be 1.982 microfarad
