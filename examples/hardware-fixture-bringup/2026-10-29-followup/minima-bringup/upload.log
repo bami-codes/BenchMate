@@ -1,0 +1,50 @@
+dfu-util 0.11-arduino4
+
+Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+Copyright 2010-2021 Tormod Volden and Stefan Schmidt
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Opening DFU capable USB device...
+Device ID 2341:0369
+Device DFU version 0101
+Claiming USB DFU Interface...
+Setting Alternate Interface #0 ...
+Determining device status...
+DFU state(2) = dfuIDLE, status(0) = No error condition is present
+DFU mode device DFU version 0101
+Device returned transfer size 64
+Copying data from PC to DFU device
+
+Download	[                         ]   0%            0 bytes
+Download	[=                        ]   4%         1664 bytes
+Download	[==                       ]   8%         3264 bytes
+Download	[===                      ]  12%         4864 bytes
+Download	[====                     ]  16%         6464 bytes
+Download	[=====                    ]  20%         8064 bytes
+Download	[======                   ]  24%         9728 bytes
+Download	[=======                  ]  28%        11328 bytes
+Download	[========                 ]  32%        12928 bytes
+Download	[=========                ]  36%        14528 bytes
+Download	[==========               ]  40%        16128 bytes
+Download	[===========              ]  44%        17728 bytes
+Download	[============             ]  48%        19392 bytes
+Download	[=============            ]  52%        20992 bytes
+Download	[==============           ]  56%        22592 bytes
+Download	[===============          ]  60%        24192 bytes
+Download	[================         ]  64%        25792 bytes
+Download	[================         ]  65%        26432 bytes
+Download	[=================        ]  68%        27392 bytes
+Download	[==================       ]  72%        29056 bytes
+Download	[===================      ]  76%        30656 bytes
+Download	[====================     ]  80%        32256 bytes
+Download	[=====================    ]  84%        33856 bytes
+Download	[======================   ]  88%        35456 bytes
+Download	[=======================  ]  92%        37120 bytes
+Download	[======================== ]  96%        38720 bytes
+Download	[=========================] 100%        40216 bytes
+Download done.
+DFU state(7) = dfuMANIFEST, status(0) = No error condition is present
+DFU state(2) = dfuIDLE, status(0) = No error condition is present
+Done!
+New upload port:  (default)

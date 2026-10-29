@@ -3,9 +3,16 @@
 Latest status, 2026-10-29 Asia/Seoul: U1 REF and driver gross DC checks
 are recorded; two ten-minute USB windows passed after earlier disconnects.
 The operator reports U2/A1–A4 assembly and the requested continuity checks
-complete. Six in-circuit resistor readings have since been reported with
-USB disconnected; isolated component values, a photo review, powered
-U2/ADC checks, instrument-v2 upload/reset checks and D2 calibration remain pending.
+complete. Six in-circuit resistor readings and midpoint U2 DMM readings
+have since been reported. USB removal recurred before the first fixture
+ADC capture; zero ADC samples were acquired. Spare Minima USB-only
+identification succeeded. Its first upload failed at the DFU transition;
+after operator-confirmed double RESET, bring-up upload and a 60-second
+USB-only observation passed. Instrument v2 then uploaded successfully:
+four PINGs reported one valid boot ID and advancing uptime, with output
+unarmed. Fixture transfer to Minima has been requested, not confirmed.
+Isolated component values, a photo review, ADC checks, physical reset/stale-ID
+checks and D2 calibration remain pending.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -655,6 +662,163 @@ nominal but may include other circuit paths; they are not certified
 individual resistor values, tolerance measurements or calibrated model
 parameters. No hardware command or powered acquisition was performed
 during this update. Photo review and powered U2/ADC checks remain pending.
+
+## Additional continuity report and staged power-check instruction
+
+On 2026-10-29 the user forwarded four additional checks described as
+performed the preceding night: IN (column 35 upper resistor leg) to GND
+silent; REF (column 50 upper leg) to GND silent; drive (column 45) to IN
+beep; IN to U2 pin 3 beep. These are forwarded operator observations, not
+host measurements. Buzzer silence does not prove isolation, and the set
+does not independently establish the IC's physical orientation.
+
+The next limited power check no longer requires a photograph: overlapping
+wires may obscure hole placement, while the reported continuity checks
+plus explicit operator inspection can support staged power verification.
+The operator is instructed, with USB still disconnected, to verify U2
+at E20–E23/F20–F23, marking up and notch LEFT, and capacitor-lead clearance.
+Then retain jumpers 11/14/15, leave the DUT disconnected, set the DMM to
+DC 20 V, and reconnect using the same cable/port. Request supply and J10
+REF voltages relative to the upper-left blue GND rail. Orientation and
+power-on completion are pending the operator's reply.
+
+No DAC command, ADC capture or firmware upload was issued for this
+instruction. The installed old loopback sketch leaves A0 high impedance
+at boot, so an uncommanded drive/OUT voltage must not be interpreted as
+a failed follower or a guaranteed 0 V output. Photo review remains useful
+but is no longer an absolute prerequisite for this supply/REF check.
+Quantitative resistor calibration remains separate from this step.
+
+## U2 first power-on — orientation, supply and REF reported
+
+The operator replied `확인했어 / 4.88V / 1.62V` to the staged power-check
+instruction: orientation and capacitor-lead clearance checked, supply
+4.88 V and buffered REF at J10 1.62 V, with the DMM on DC 20 V relative
+to Arduino GND. These are operator reports; no assembly photo has been
+supplied. They confirm supply/REF displays after the new wiring, not the
+two U2 follower outputs or ADC performance.
+
+The next authorized action is a single nominal 1.6 V hold, with no DUT,
+the calibration bridge/shunt bypass retained, and A1–A4 connected through
+their four series resistors. The new control helper records this changed
+wiring and requires a fresh disabled DAC state before issuing HOLD. It
+does not reuse the earlier helper's "no ADC leads" configuration, does
+not capture ADC data, and does not upload new firmware. The old firmware
+still lacks a boot ID. The auxiliary buffer input stays parked at REF.
+
+Control record `runs/hardware-fixture-buffer/20261029T011147-9f245763af`
+completed: fresh disabled state verified, `HOLD 1600` acknowledged at
+code 1337, all 16 enumeration samples over 15 seconds present, and a
+post-reopen PING verified the retained state. The event hash chain was
+checked. This is a short command check, not proof of long-term USB
+stability. A0 remains driven for the requested DMM readings: D35 (IN),
+D40 (OUT-buffer output), D45 (driver), D50 (REF), and D21 (auxiliary
+buffer output). The last location is the column-21 end of the upper
+10 kΩ pull-down, not its column-27 ground end. All five readings are
+relative to Arduino GND and are pending the operator's report.
+
+## Midpoint DMM received; USB loss prevents first fixture ADC capture
+
+The operator reports D35 / D40 / D45 / D50 / D21 as
+`1.59 / 1.59 / 1.59 / 1.62~1.63 / 1.62~1.63` V. The first three are
+IN, OUT-buffer output and driver; the last two are REF and the auxiliary
+buffer output. These sequential DMM readings support gross follower
+operation at this point, not zero offset, simultaneous tracking or
+calibrated accuracy. The sidecar `operator-summary.json` in
+`runs/hardware-fixture-buffer/20261029T011147-9f245763af` retains them.
+
+Before the intended raw ADC capture, both normal and elevated serial
+inventories and the elevated IOUSB tree lacked the original board.
+The elevated check was at 10:16:52 Asia/Seoul on 2026-10-29. No serial
+open, CAPTURE, HOLD or firmware upload followed the absence. Zero fixture
+ADC samples were acquired. Kernel logs show transaction errors beginning
+10:12:55.460 and device termination at 10:12:56.056, after the earlier
+15-second post-HOLD check. This recurrence does not negate the two
+previous passing ten-minute windows, but does prevent claiming a fix.
+Probe-contact times and physical cause remain undetermined; the old
+firmware supplies no boot-ID evidence.
+
+The next instruction is to unplug only USB from the original WiFi board,
+leaving its seven 5V/GND/A0/A1–A4 fixture leads attached, and connect the
+spare Minima with USB ONLY on the same cable and Mac port. No fixture
+transfer or spare upload has occurred. Identification/basic communication
+comes first; any later reliability comparison must use the actual fixture
+and ordinary measurement conditions, and replacement-board calibration
+must be performed anew. A USB-only pass would not establish a board fault
+or full fixture stability.
+
+## Spare Minima identified; first upload fails before communication checks
+
+The operator confirmed the spare is connected by USB only, leaving the
+seven fixture leads on the unpowered original WiFi board. Host enumeration
+and Arduino CLI both identify UNO R4 Minima (`arduino:renesas_uno:minima`),
+VID/PID 2341:0069, serial `3612211F36323632E4B233334B572F52`, application
+port `/dev/cu.usbmodem3101`. This is USB identification, not an authenticity
+test or evidence that the original board is faulty.
+
+The non-driving bring-up sketch was recompiled for Minima: 40,208 bytes
+flash and 5,512 bytes static RAM. One upload attempt is retained in
+`runs/hardware-minima-bringup/20261029T012150-1077040f71`, with source,
+binary hash and full upload log. The tool reached the runtime DFU detach
+request, then reported `Lost device after RESET?` (dfu-util exit 74,
+Arduino CLI return code 1). The run stopped without retry. No successful
+flash, PING cycle, idle interval or ADC/DAC test is claimed.
+
+Afterward, the serial inventory and CLI target list were empty; IOUSB
+showed a `Santiago DFU` entry marked `!registered, !matched`, but an
+elevated `dfu-util --list` listed no accessible target. A tree label alone
+does not prove a usable bootloader connection. This upload-time event
+must not be conflated with the original WiFi's idle USB losses.
+
+The operator is asked to keep the spare USB-only and double-press RESET
+to request manual bootloader mode, then report completion and any L LED
+behavior. This is based on Arduino's documented bootloader-entry/reset
+procedure, not a bootloader erase/reflash. Confirmation is pending.
+Before any subsequent attempt, inspect the current device mode/identity.
+No fixture transfer has occurred; calibration cannot be reused across boards.
+
+References: [Arduino reset procedure](https://support.arduino.cc/hc/en-us/articles/5779192727068-Reset-your-board)
+and the local Renesas 1.6.0 Minima board definition (application 2341:0069,
+bootloader 2341:0369, native DFU, no 1200-baud touch).
+
+## Minima manual bootloader recovery and USB-only instrument v2 check
+
+2026-10-29: The operator replied “했어” to the double-RESET instruction;
+L LED behavior was not reported. `dfu-util` then found the expected
+2341:0369 target with the previously identified serial number, including
+its two alternate flash interfaces. The next bring-up upload succeeded.
+Three open/PING/close cycles passed, followed by 61/61 USB-present samples
+over 60 seconds with serial closed and a successful final PING. The failed
+first upload remains in the record; there was no automatic recovery loop.
+
+The existing instrument-v2 firmware was freshly compiled for Minima
+(65,748 flash bytes; 15,920 static RAM bytes) and uploaded successfully
+from application mode. Four PINGs over three open/close cycles plus the
+post-observation check reported a valid hardware-generated boot ID,
+`822b338fda3756061f3e46605a879dc0`, with uptime advancing from 3,447 to
+42,509 ms. The 30-second serial-closed interval contained 31/31 successful
+USB-presence samples. All PINGs reported `armed:false`. No ARM, CAPTURE
+or STOP commands were sent, and no ADC block was acquired. The firmware
+performs initial ADC reads during setup; these are not recorded measurement
+blocks or calibration results.
+
+This establishes basic USB-only operation and boot-ID generation on this
+spare. A physical reset/power-cycle ID-change test, stale-ID command
+rejection, interrupted acquisition and same-fixture operation remain
+untested. The original WiFi USB fault remains unexplained.
+
+Reviewed original bytes, firmware/controller snapshots, failed/successful
+upload logs and hashes are in the [October 29 follow-up bundle](../examples/hardware-fixture-bringup/2026-10-29-followup/README.md).
+
+Next physical instruction: unplug USB from both boards, move only the
+seven board-side fixture connections to the matching printed Minima pin
+names (5V, GND, A0, A1, A2, A3, A4), keeping breadboard ends and calibration
+jumpers 11/14/15 unchanged. No DUT. Reconnect only Minima using the same
+cable/Mac port and report supply and J10 REF relative to Arduino GND.
+This transfer and replacement-board voltage readings are pending. No DAC
+drive is authorized by a mere USB reconnection; explicit ARM follows
+identity and operator voltage checks. Earlier WiFi calibration is not
+applied to Minima.
 
 ## Standing conventions (current)
 

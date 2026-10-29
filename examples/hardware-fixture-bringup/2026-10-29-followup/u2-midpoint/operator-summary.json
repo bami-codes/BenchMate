@@ -1,0 +1,34 @@
+{
+  "source": "operator_DMM_report",
+  "saved_at_utc": "2026-10-29T01:17:24.150493+00:00",
+  "raw_user_report": "1.59 / 1.59 / 1.59 / 1.62~1.63 / 1.62~1.63",
+  "nominal_level_mv": 1600,
+  "dac_code": 1337,
+  "meter_mode": "DC 20 V per instruction",
+  "ground_reference": "upper-left blue Arduino GND rail",
+  "readings": {
+    "D35_IN_v": [
+      1.59,
+      1.59
+    ],
+    "D40_OUT_buffer_v": [
+      1.59,
+      1.59
+    ],
+    "D45_driver_v": [
+      1.59,
+      1.59
+    ],
+    "D50_REF_v": [
+      1.62,
+      1.63
+    ],
+    "D21_aux_buffer_v": [
+      1.62,
+      1.63
+    ]
+  },
+  "simultaneous_measurements": false,
+  "calibration_performed": false,
+  "scope": "Gross midpoint follower observations at 0.01 V display resolution. USB absence was found before planned ADC acquisition; no raw ADC samples were acquired."
+}

@@ -4,6 +4,11 @@ Real hardware preparation on a UNO R4 WiFi compatible board, followed by
 an operator assembly report after midnight (Asia/Seoul). **This is not
 completed calibration, a physical circuit diagnosis or a repair result.**
 
+The [October 29 follow-up](2026-10-29-followup/README.md) adds U2 midpoint
+DMM readings, another WiFi USB loss before ADC capture, and successful
+USB-only bring-up/instrument-v2 PING checks on the spare Minima. The
+earlier observations below retain their original scope and chronology.
+
 The [assembly history](../../docs/fixture-assembly.md) and
 [complete hole-coordinate table](../../docs/fixture-wiring-table.md) describe
 the fixture. The [export provenance](export-provenance.json) identifies
@@ -46,9 +51,10 @@ not mean the USB device was present; inspect its payload.
 The selected kernel lines in `usb/usb-key-events-2026-10-28.txt` show
 transaction errors and host device removal at approximately 22:28 and
 22:41. The latter occurred after changing the cable. `reset API call` is
-a host USB log label, not proof that the RA4M1 rebooted. The installed
-`dac_loopback-v1` firmware lacks a boot ID; instrument v2 has not yet been
-uploaded. The spare board was not tested.
+a host USB log label, not proof that the RA4M1 rebooted. The original WiFi
+`dac_loopback-v1` firmware lacks a boot ID. At the end of that October 28
+session, instrument v2 had not been uploaded and the spare was untested;
+the October 29 follow-up above records subsequent spare-board checks.
 
 After manual reconnection, two 600-second observation windows passed:
 

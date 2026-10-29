@@ -1,0 +1,204 @@
+{
+  "exported_at_utc": "2026-10-29T01:30:44.889366+00:00",
+  "copies": [
+    {
+      "source": "runs/hardware-fixture-continuity/20261029T005848-0b6182d790/events.jsonl",
+      "published": "continuity/events.jsonl",
+      "sha256": "93a7c00885aea405190bfd630e4ed3856e764130faa70b2e98c5a411c8adc7b9"
+    },
+    {
+      "source": "runs/hardware-fixture-buffer/20261029T011147-9f245763af/events.jsonl",
+      "published": "u2-midpoint/events.jsonl",
+      "sha256": "da5f9f5a95be3353898b709bf495a9846e9c29b940c2d1ac904bc7c11b212841"
+    },
+    {
+      "source": "runs/hardware-fixture-buffer/20261029T011147-9f245763af/operator-summary.json",
+      "published": "u2-midpoint/operator-summary.json",
+      "sha256": "418d13f8bd9c89deae6bb448cca7e6cd170f4e60f3a7cacfb5d89ce97bc349e0"
+    },
+    {
+      "source": "runs/hardware-fixture-buffer/20261029T011147-9f245763af/controller-source.py",
+      "published": "u2-midpoint/controller-source.py",
+      "sha256": "0e04312236e08b10ef17691909cbfe3ac15c1c66a485ecc45205ea4333450866"
+    },
+    {
+      "source": "runs/hardware-fixture-buffer/20261029T011802-5282638210/events.jsonl",
+      "published": "wifi-usb-loss/events.jsonl",
+      "sha256": "2df5c3dd9247251b62291a0cc3ad6db20fc3cd81bb7714452860ca0806ab315d"
+    },
+    {
+      "source": "runs/hardware-fixture-buffer/20261029T011802-5282638210/usb-kernel.log",
+      "published": "wifi-usb-loss/usb-kernel.log",
+      "sha256": "8038f5fa86b9afb4ac92f3c9e152cf8c1f262232064f68809f68a1c2ec5af9a5"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71/events.jsonl",
+      "published": "minima-upload-failed/events.jsonl",
+      "sha256": "ef58462ef31e3c357018ff8470b7be7b6517f13b24c97434dd2432589333c5f3"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71/upload.log",
+      "published": "minima-upload-failed/upload.log",
+      "sha256": "614bd799903980c8df958e442e113154e61d1fb41aabce402ed51e2cc2a8cf3e"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71/controller-source.py",
+      "published": "minima-upload-failed/controller-source.py",
+      "sha256": "6a35c6079891784a98ac0dad1fdf6b46613f7e2f96f640af83ca0ff5c9c09e87"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71/bringup.ino",
+      "published": "minima-upload-failed/bringup.ino",
+      "sha256": "ff39fb76fe690ab513c159c42bd78c754352c85ee9d8ab2e261ad0b8a51a2221"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71/followup-observations.json",
+      "published": "minima-upload-failed/followup-observations.json",
+      "sha256": "174e2716f49adc5893b165ffd09a22fc8f4d05bcc228de8880c2a0010410c1db"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012532-61b44473f0/events.jsonl",
+      "published": "minima-bringup/events.jsonl",
+      "sha256": "da01947f74568631d3e943733566c8d12e9c45164c987487bd0e93c393100b0c"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012532-61b44473f0/upload.log",
+      "published": "minima-bringup/upload.log",
+      "sha256": "11c8b2b41555153c6a6f96964dcf1093d81f8567c66814989aa42224b51ed8e8"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012532-61b44473f0/controller-source.py",
+      "published": "minima-bringup/controller-source.py",
+      "sha256": "93e25433a1321da0943051e4220161fad88daaa28b43fdbe6815f2abaae94d01"
+    },
+    {
+      "source": "runs/hardware-minima-bringup/20261029T012532-61b44473f0/bringup.ino",
+      "published": "minima-bringup/bringup.ino",
+      "sha256": "ff39fb76fe690ab513c159c42bd78c754352c85ee9d8ab2e261ad0b8a51a2221"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/events.jsonl",
+      "published": "minima-instrument/events.jsonl",
+      "sha256": "b7ba80c1cd20ebd2a93fbbdca7db7456048fb9b37317e0c6abe81682dc30e6ff"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/upload.log",
+      "published": "minima-instrument/upload.log",
+      "sha256": "3a386c7bd45cb71ffe0e472b2affd9bd22993fd240ca558d831bd110f1e1b711"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/controller-source.py",
+      "published": "minima-instrument/controller-source.py",
+      "sha256": "422e14d2181f62c44c4d3070bf348cc582f1c43be5dba04cf8ca46ebae3f3d53"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/instrument.ino",
+      "published": "minima-instrument/instrument.ino",
+      "sha256": "03a30aa66d7bd3567b7d94a705c70ecb6af9a107254e950c4f333e61c817a4d5"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/boot_identity.h",
+      "published": "minima-instrument/boot_identity.h",
+      "sha256": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8"
+    },
+    {
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1/minima-instrument-compile.log",
+      "published": "minima-instrument/minima-instrument-compile.log",
+      "sha256": "4508fee7e787d4c3a53400581c5c9e0205e2e560bd969573b45fc0220f682f38"
+    }
+  ],
+  "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
+  "records": [
+    {
+      "folder": "continuity",
+      "source": "runs/hardware-fixture-continuity/20261029T005848-0b6182d790",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "record_only": true,
+        "hardware_command_sent": false,
+        "waiting_for": "Operator orientation and supply/REF report before any controlled output or ADC capture."
+      }
+    },
+    {
+      "folder": "u2-midpoint",
+      "source": "runs/hardware-fixture-buffer/20261029T011147-9f245763af",
+      "events": 28,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "nominal_level_mv": 1600,
+        "dac_code": 1337,
+        "post_reopen_state_verified": true,
+        "output_remains_driven": true,
+        "DMM_buffer_readings_pending": true,
+        "adc_capture_performed": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "wifi-usb-loss",
+      "source": "runs/hardware-fixture-buffer/20261029T011802-5282638210",
+      "events": 6,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "reason": "Expected board absent before intended ADC capture",
+        "accepted_samples": 0,
+        "serial_command_sent": false,
+        "output_state": "Last held 1.6 V setting may persist until USB unplugged; not remotely verified now",
+        "physical_cause": "undetermined",
+        "automatic_reconnect_or_rearm": false
+      }
+    },
+    {
+      "folder": "minima-upload-failed",
+      "source": "runs/hardware-minima-bringup/20261029T012150-1077040f71",
+      "events": 5,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Upload failed; not retried",
+        "upload_started": true,
+        "automatic_recovery": false,
+        "DAC_drive_requested": false
+      }
+    },
+    {
+      "folder": "minima-bringup",
+      "source": "runs/hardware-minima-bringup/20261029T012532-61b44473f0",
+      "events": 79,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "port": "/dev/cu.usbmodem3101",
+        "upload_completed": true,
+        "open_close_cycles_passed": 3,
+        "closed_port_USB_samples_present": 61,
+        "final_PING_verified": true,
+        "DAC_drive_requested": false,
+        "ADC_capture_requested": false,
+        "same_fixture_test_performed": false,
+        "cause_identified": false
+      }
+    },
+    {
+      "folder": "minima-instrument",
+      "source": "runs/hardware-minima-instrument/20261029T012934-be3da2d8a1",
+      "events": 50,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "upload_completed": true,
+        "port": "/dev/cu.usbmodem3101",
+        "boot_id": "822b338fda3756061f3e46605a879dc0",
+        "boot_id_ready": true,
+        "PINGs_verified": 4,
+        "uptime_ms_first": 3447,
+        "uptime_ms_last": 42509,
+        "closed_port_USB_samples_present": 31,
+        "same_boot_across_port_cycles": true,
+        "armed": false,
+        "output_commands_requested": false,
+        "ADC_capture_requested": false,
+        "physical_reset_test_performed": false,
+        "same_fixture_test_performed": false
+      }
+    }
+  ]
+}

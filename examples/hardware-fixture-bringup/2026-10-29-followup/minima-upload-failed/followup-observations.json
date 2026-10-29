@@ -1,0 +1,25 @@
+{
+  "recorded_at_utc": "2026-10-29T01:23:58.771465+00:00",
+  "source": "Host observations after failed upload",
+  "runtime_identification_before_upload": {
+    "product": "UNO R4 Minima",
+    "port": "/dev/cu.usbmodem3101",
+    "vid": 9025,
+    "pid": 105,
+    "serial_number": "3612211F36323632E4B233334B572F52",
+    "fqbn": "arduino:renesas_uno:minima"
+  },
+  "upload_failure": "dfu-util Lost device after RESET?, exit 74; arduino-cli returncode 1",
+  "after_failure": {
+    "serial_ports": [],
+    "IOUSB_tree_label": "Santiago DFU",
+    "IOUSB_tree_registration_flags": "!registered, !matched",
+    "dfu_util_list_found_devices": false,
+    "arduino_cli_found_target_port": false
+  },
+  "interpretation": "Automatic runtime-to-bootloader transition did not complete an upload; tree entry alone does not establish accessible DFU mode. Basic PING test not reached. Not evidence identifying the original WiFi fault.",
+  "next_instruction": "Keep spare USB-only; double-press RESET to request bootloader mode, report completion/LED behavior. No fixture transfer.",
+  "operator_reset_confirmation": "pending",
+  "flash_retry_after_failure": false,
+  "bootloader_reflash": false
+}
