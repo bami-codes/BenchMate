@@ -38,6 +38,13 @@ the final evaluation block. Holdout specimens were not accessed.
 The same boot was verified throughout both acquisitions. The final PING
 confirmed the output parked at REF code 1359. No firmware was changed.
 
+After those captures the operator reported USB disconnected, plus an
+additional isolated 9.99 kohm resistor and 0.998 microfarad capacitor.
+The resistor is assigned to a removable OUT–REF load; installation and
+continuity are requested in the [guide](../../../docs/b1-assembly.md),
+not yet confirmed. No loaded observation exists in these records. The
+capacitor is set aside for later D01 preparation, not connected.
+
 The operator reports a separate 170-hole board with R1 between B3–B8
 and C1 between D8–D13, and confirms the empty-board strip checks.
 The isolated assembled board reads 9.99 kohm from A3–A8 and 0.984

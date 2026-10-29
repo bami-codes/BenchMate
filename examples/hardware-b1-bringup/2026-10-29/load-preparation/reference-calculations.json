@@ -1,0 +1,13 @@
+{
+  "known_specimen_R_reported_ohm": 9990.0,
+  "load_R_reported_ohm": 9990.0,
+  "loaded_gain_relative_to_REF": 0.5,
+  "component_reference_loaded_tau_s": 0.0049150800000000005,
+  "effective_unloaded_tau_scaled_by_divider_s": 0.005056588465662164,
+  "spare_C_not_installed_f": 9.98e-07,
+  "future_parallel_C_if_installed_f": 1.982e-06,
+  "truth_used_in_these_reference_calculations": true,
+  "blind_diagnosis": false,
+  "loaded_observation_acquired": false,
+  "full_voltage_prediction_not_yet_frozen": true
+}

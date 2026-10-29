@@ -17,6 +17,12 @@ overall RMS, +3.96 mV mean difference). The last postcheck confirmed REF
 code 1359. This is not full D2 acceptance or separate R/C identification.
 See the [evidence](../examples/hardware-b1-bringup/2026-10-29/README.md).
 
+Next setup: the operator reports USB disconnected and an additional
+isolated resistor of 9.99 kohm and capacitor of 0.998 microfarad. The
+resistor is assigned to the removable output load below. The capacitor
+is set aside for D01 preparation, not installed. Loaded wiring is requested,
+not yet confirmed; no loaded capture has been made.
+
 ## Coordinates used here
 
 This guide defines coordinates on the **small board**, not the existing
@@ -140,3 +146,42 @@ sine used 2 ms frames (1991–2011 us observed intervals, no overruns).
 These two blocks do not establish a general sample-rate or frequency limit.
 A4 and remaining D2 checks are still incomplete. The result is first
 RC-response verification, not a confirmed mystery diagnosis or repair.
+
+## Requested removable load — USB remains disconnected
+
+Use vacant upper-half columns 55 and 60 on the **large 830-hole board**.
+Keep the mini-board components and all existing fixture leads unchanged.
+Jumper 15 remains absent; 11 and 14 remain installed. The new resistor
+connects OUT to buffered REF, electrically parallel with B1's capacitor.
+
+| Added item | First contact, large board | Second contact, large board | Role |
+|---|---|---|---|
+| Nominal 10 kohm resistor, isolated report 9.99 kohm | D55 | D60 | Removable output load |
+| Insulated jumper | E30 | A55 | OUT to load |
+| Insulated jumper | C23 | A60 | REF to load |
+
+E30 shares the OUT strip with D30 and A30. C23 shares the REF strip with
+B23, which remains connected to B50 by jumper 14. Upper columns 55/60
+are terminal strips, not the split power rails. Keep exposed resistor
+leads clear of adjacent nodes. If a specified contact is obstructed, stop
+before moving existing leads and record the chosen alternative.
+
+With USB still disconnected, check continuity from the D55 resistor lead
+to U2's actual pin 3 (F22), and from the D60 resistor lead to the D50 REF
+jumper. The 9.99 kohm load itself should not be expected to give a direct
+continuity tone between its ends. Do not reinterpret a loaded, in-circuit
+resistance as the previously isolated component reading. Await installation
+and continuity confirmation before requesting USB reconnection.
+
+For this known B1 and two reported equal 9.99 kohm resistors, the ideal
+loaded small-signal gain is 0.5 relative to REF. The component-reference
+time constant is (R || Rload)*C = 4.91508 ms. Scaling the previously fitted
+effective unloaded tau by the same divider factor instead gives 5.05659 ms.
+These are separate reference calculations, not measured loaded values or
+R/C identification. A full voltage prediction must be saved before a loaded
+capture, with fresh supply/REF and new-boot checks. This known-specimen
+engineering comparison must not be presented as blind diagnosis.
+
+The spare 0.998 microfarad capacitor is not part of this load check. Its
+parallel sum with B1's reported 0.984 microfarad would be 1.982 microfarad
+for a later D01 preparation; no such modification has been reported.
