@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T12:41:15.067879+00:00",
-  "scope": "Confirmed D01 assembly, first unloaded response, observation-only tau fit and pre-observation conditional load predictions; load hookup and repair pending",
+  "scope": "D01 unloaded response, conditional load predictions and confirmed load hookup; fresh loaded power report, loaded capture and repair pending",
   "copies": [
     {
       "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/events.jsonl",
@@ -101,6 +101,16 @@
       "source": "runs/hardware-d01-load-request/20261029T134430-b8840c5aa7/assembly-guide.md",
       "published": "load-request/assembly-guide.md",
       "sha256": "b139213d2209ccc1c2eedabed953ce0a7c617a79721ebf5a679e5e4528eae705"
+    },
+    {
+      "source": "runs/hardware-d01-load-confirmed/20261029T134809-e1c0f5f6ef/events.jsonl",
+      "published": "load-confirmed/events.jsonl",
+      "sha256": "7294ed3587ea3bccc9beb83413e64bd413f6547fd43e2c5a07be5080a427e9e8"
+    },
+    {
+      "source": "runs/hardware-d01-load-confirmed/20261029T134809-e1c0f5f6ef/assembly-guide.md",
+      "published": "load-confirmed/assembly-guide.md",
+      "sha256": "cd0d08afdbfc22cf849a5524cc37fd8ec042e7a774209f654a53c51df8295022"
     }
   ],
   "records": [
@@ -269,7 +279,19 @@
         "loaded_hookup_confirmation_pending": true,
         "D01_loaded_observation": false
       }
+    },
+    {
+      "folder": "load-confirmed",
+      "source": "runs/hardware-d01-load-confirmed/20261029T134809-e1c0f5f6ef",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_hookup_confirmed": true,
+        "D01_loaded_capture_performed": false,
+        "fresh_power_report_pending": true
+      }
     }
   ],
-  "updated_at_utc": "2026-10-29T13:44:30.494058+00:00"
+  "updated_at_utc": "2026-10-29T13:48:09.734165+00:00"
 }

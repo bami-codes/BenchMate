@@ -24,7 +24,8 @@ conditioned on a point tau; they are not calibrated uncertainty or
 posterior probabilities. Full voltage forecasts remain pending fresh
 supply/REF and must precede loaded capture.
 
-OUT-load reconnection is requested but not yet confirmed. No physical
+OUT-load reconnection and OUT/REF continuity are now confirmed with USB
+disconnected; fresh supply/REF readings are pending. No physical
 D01 repair has occurred. The [guide](../../../docs/d01-assembly.md) fixes
 the next order: D01 discrimination and repair check, then restored B1
 versus B6 before and after the same measured shunt. The B1/B6 physical

@@ -13,7 +13,8 @@ B1 has passed an unloaded step/sine engineering check and a frozen loaded
 step prediction check. The controlled capacitor-value fault uses the spare
 capacitor reported as 0.998 uF.
 No loaded D01 observation, individual-component diagnosis or repair has
-occurred. The next OUT-load reconnection is requested, not yet confirmed.
+occurred. OUT-load reconnection and both continuity checks are now confirmed
+with USB disconnected. Fresh loaded-configuration supply/REF is pending.
 
 ## Coordinates and parts
 
@@ -174,6 +175,6 @@ fresh supply/REF readings and before any loaded ADC data.
 Next requested wiring: USB off; reconnect **large E30–A55 only**, retain
 the added capacitor and all other wiring, including jumper 14. Check
 D55 load lead to U2 actual pin 3 (F22), and D60 load lead to D50. Report
-both results and leave USB disconnected. This reconnection is pending;
-D55's OUT end is last confirmed floating. See the
+both results and leave USB disconnected. The operator now reports "USB 분리 / 부하 점퍼 재연결 / OUT 삐 / REF 삐".
+Fresh supply/REF has been requested before any loaded acquisition. See the
 [raw records and graph](../examples/hardware-d01-bringup/2026-10-29/README.md).
