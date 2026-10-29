@@ -20,14 +20,17 @@ See the [evidence](../examples/hardware-b1-bringup/2026-10-29/README.md).
 Next setup: the operator reports USB disconnected and an additional
 isolated resistor of 9.99 kohm and capacitor of 0.998 microfarad. The
 resistor is assigned to the removable output load below. The capacitor
-is set aside for D01 preparation, not installed. The operator now confirms
+was set aside during the B1 load check. The operator confirmed
 load installation and continuity from its OUT end to U2 pin 3 and from its
 REF end to D50. Fresh supply/REF were 4.87/1.627 V. The loaded step forecast
 was saved before any loaded ADC block and passed with 2.222 mV RMS;
 separate descriptive gain/tau were 0.49852 and 5.093 ms. Final postcheck:
 same boot, REF code 1368. The load's REF feed depends on jumper 14.
 USB-off preparation of the [D01 capacitor variant](d01-assembly.md) is now
-requested, not confirmed; no D01 observation exists yet.
+confirmed: E30–A55 removed, extra C installed, both parallel-node continuity
+checks passed. Fresh power/REF are 4.88/1.635 V. The first D01 unloaded step
+now gives a descriptive tau of 20.32 ms; R versus C is still unresolved. B1/B6 shunt comparison follows the D01 repair check and B1
+restoration, as specified in that guide.
 
 ## Coordinates used here
 
@@ -35,7 +38,8 @@ This guide defines coordinates on the **small board**, not the existing
 830-hole instrument board. Place the center trench horizontally. In the
 upper half, call the five rows A–E from top to bottom and the seventeen
 columns 1–17 from left to right. Printed labels in another orientation
-do not redefine these coordinates. The lower half is unused.
+do not redefine these coordinates. The baseline B1 uses only the upper
+half; the later D01 addition uses the lower half as described separately.
 
 The layout assumes each five-hole upper column is internally connected,
 with different columns isolated. Before inserting parts, check A3–E3
@@ -204,4 +208,5 @@ separate conditional R/C estimate assumes the RC topology.
 
 The spare 0.998 microfarad capacitor is not part of this load check. Its
 parallel sum with B1's reported 0.984 microfarad would be 1.982 microfarad
-for a later D01 preparation; no such modification has been reported.
+for the later D01 preparation. That addition is now reported installed,
+with the OUT-load lead removed; it was absent during all B1 checks above.

@@ -1,0 +1,82 @@
+{
+  "source_record": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72",
+  "raw_events_sha256": "8bfaeb0093203e81e4cba6d76d74e8f38ae300c74105ca4319e110606d5286a0",
+  "method": "Unweighted variable-projection exponential fit: offset, amplitude and log(tau); all 512 samples; no trimming",
+  "post_capture_training_fit": true,
+  "tau_search_bounds_s": [
+    0.0001,
+    0.5
+  ],
+  "step_origin": "Recorded DAC-write-completion frame; per-channel ADC read-completion timestamps",
+  "primary_fit": {
+    "tau_s": 0.020322684358240996,
+    "low_output_v": 1.4250201038566148,
+    "high_output_v": 1.8182719976105042,
+    "fit_RMS_mV": 2.0031428722623916,
+    "fitted_samples": 512
+  },
+  "first_50ms_plus_prestep_sensitivity_fit": {
+    "tau_s": 0.02029641537222268,
+    "low_output_v": 1.4250350871686452,
+    "high_output_v": 1.8178397775472996,
+    "fit_RMS_mV": 2.352647816114256,
+    "fitted_samples": 151
+  },
+  "residual_regions": {
+    "pre_step": {
+      "samples": 51,
+      "RMS_mV": 3.2081742718916053,
+      "max_abs_mV": 18.97107277812826
+    },
+    "0_to_5ms": {
+      "samples": 10,
+      "RMS_mV": 0.7488086250780629,
+      "max_abs_mV": 1.306386879942334
+    },
+    "5_to_20ms": {
+      "samples": 30,
+      "RMS_mV": 1.7533518779037123,
+      "max_abs_mV": 5.8902080787228694
+    },
+    "20_to_80ms": {
+      "samples": 120,
+      "RMS_mV": 2.046304969188346,
+      "max_abs_mV": 11.401753649767254
+    },
+    "after_80ms": {
+      "samples": 301,
+      "RMS_mV": 1.7570097470450583,
+      "max_abs_mV": 8.008551041033707
+    }
+  },
+  "identified": "Unloaded effective time constant only; R versus C remains unresolved",
+  "declared_design": {
+    "R_ohm": 10000,
+    "C_f": 1e-06
+  },
+  "illustrative_equal_tau_alternatives": [
+    {
+      "assumption": "nominal R retained",
+      "R_ohm": 10000,
+      "C_f": 2.0322684358240995e-06
+    },
+    {
+      "assumption": "nominal C retained",
+      "R_ohm": 20322.684358240997,
+      "C_f": 1e-06
+    }
+  ],
+  "alternatives_are_not_separate_parameter_estimates": true,
+  "component_truth_used_by_fit": false,
+  "assembly_files_read": false,
+  "new_data_independent_prediction_check": false,
+  "full_D2_accepted": false,
+  "hardware_automated_diagnosis_performed": false,
+  "limits": [
+    "Provisional path calibration; A2 includes its buffer.",
+    "Read-completion times are not calibrated sample apertures.",
+    "No calibrated confidence, individual component conclusion, or unique topology identification.",
+    "Finite driver/buffer response and supply drift remain.",
+    "The fitting residual is not an independent verification score."
+  ]
+}

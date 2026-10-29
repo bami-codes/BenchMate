@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T12:41:15.067879+00:00",
-  "scope": "Preparation request only; no confirmed D01 assembly, capture or diagnosis",
+  "scope": "Confirmed D01 assembly, first unloaded response, observation-only tau fit and pre-observation conditional load predictions; load hookup and repair pending",
   "copies": [
     {
       "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/events.jsonl",
@@ -11,6 +11,96 @@
       "source": "runs/hardware-d01-assembly-request/20261029T124115-7bcce961b7/assembly-guide.md",
       "published": "assembly-request/assembly-guide.md",
       "sha256": "440f3d6b86b365d21d6adb0a349260b6346ff61c11d5e54c700f4176150ec810"
+    },
+    {
+      "source": "runs/hardware-d01-assembly-confirmed/20261029T133812-892895783e/events.jsonl",
+      "published": "assembly-confirmed/events.jsonl",
+      "sha256": "b0ef8908d6cccba75eff666df6361a0ee1dab5fdd0a5adfc0e65cb1add72a555"
+    },
+    {
+      "source": "runs/hardware-d01-assembly-confirmed/20261029T133812-892895783e/assembly-guide.md",
+      "published": "assembly-confirmed/assembly-guide.md",
+      "sha256": "90459121f32d2c14bfcb6b94c48447a0e5daa4e380ab75f85eb9688548a46a67"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/events.jsonl",
+      "published": "unloaded-step/events.jsonl",
+      "sha256": "8bfaeb0093203e81e4cba6d76d74e8f38ae300c74105ca4319e110606d5286a0"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/controller-source.py",
+      "published": "unloaded-step/controller-source.py",
+      "sha256": "fdf446c815f9dfe3bb3699e4ff63a4e82eb6bfcd47699b47eb0edb5c2e050653"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/host-instrument.py",
+      "published": "unloaded-step/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/provisional-calibration.json",
+      "published": "unloaded-step/provisional-calibration.json",
+      "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/assembly-guide.md",
+      "published": "unloaded-step/assembly-guide.md",
+      "sha256": "90459121f32d2c14bfcb6b94c48447a0e5daa4e380ab75f85eb9688548a46a67"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72/capture-summary.json",
+      "published": "unloaded-step/capture-summary.json",
+      "sha256": "89578ed59785119d3f6dc190a51cacc84c715e3652e0c10ffb131bead68ed712"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3/events.jsonl",
+      "published": "unloaded-analysis/events.jsonl",
+      "sha256": "3daebfb3119792a1cfb28a6cced39c191979ac0da2f34635f5872dc54158c9f1"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3/controller-source.py",
+      "published": "unloaded-analysis/controller-source.py",
+      "sha256": "3ab73d92bd5e6261eb082cddb34289db33fb7f1a9a139a5e4a692b2ec0ec0531"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3/analysis.json",
+      "published": "unloaded-analysis/analysis.json",
+      "sha256": "5082b99cc6f5ff47c963bdb6a998dff98fb86a58b7dd59721421c2d5557a1e1c"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3/unloaded-step.png",
+      "published": "unloaded-analysis/unloaded-step.png",
+      "sha256": "53de2fb25ad2bac5c26d9069de3a70fa8b998ac83fb4252f75664711df3f6c9d"
+    },
+    {
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3/unloaded-step.svg",
+      "published": "unloaded-analysis/unloaded-step.svg",
+      "sha256": "2cce6952424ccfa21decb95bf927162def9c7ae1a5eac7f267b31334b6ea2f75"
+    },
+    {
+      "source": "runs/hardware-d01-load-alternatives/20261029T134226-b7628cbcaa/events.jsonl",
+      "published": "load-alternatives/events.jsonl",
+      "sha256": "1cf10420658a22e19685f48bd9c57e62824033a5b16a02d94e3918d7c1d92239"
+    },
+    {
+      "source": "runs/hardware-d01-load-alternatives/20261029T134226-b7628cbcaa/controller-source.py",
+      "published": "load-alternatives/controller-source.py",
+      "sha256": "a13090006db138994481a7eaf835ee57688164372466a4084885130f28c28716"
+    },
+    {
+      "source": "runs/hardware-d01-load-alternatives/20261029T134226-b7628cbcaa/predictions.json",
+      "published": "load-alternatives/predictions.json",
+      "sha256": "edb8452712992def68494bcff7f1507aa2f18ade0c4817db1c10ed5560e103ba"
+    },
+    {
+      "source": "runs/hardware-d01-load-request/20261029T134430-b8840c5aa7/events.jsonl",
+      "published": "load-request/events.jsonl",
+      "sha256": "2d08768b3fb9ce115aef8800401df8e0d642faeca46ef428a4785b44d23971ea"
+    },
+    {
+      "source": "runs/hardware-d01-load-request/20261029T134430-b8840c5aa7/assembly-guide.md",
+      "published": "load-request/assembly-guide.md",
+      "sha256": "b139213d2209ccc1c2eedabed953ce0a7c617a79721ebf5a679e5e4528eae705"
     }
   ],
   "records": [
@@ -24,6 +114,162 @@
         "D01_assembly_confirmation_pending": true,
         "D01_diagnosis_performed": false
       }
+    },
+    {
+      "folder": "assembly-confirmed",
+      "source": "runs/hardware-d01-assembly-confirmed/20261029T133812-892895783e",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "assembly_confirmed": true,
+        "fresh_power_report_received": true,
+        "D01_capture_performed": false,
+        "D01_diagnosis_performed": false
+      }
+    },
+    {
+      "folder": "unloaded-step",
+      "source": "runs/hardware-d01-unloaded-step/20261029T133852-ab118d1f72",
+      "events": 21,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "5f2b1912d680b2402b63a7e10e9f8e91",
+        "configuration": {
+          "vref_v": 4.88,
+          "ref_v": 1.635,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "REF_guard": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 1998,
+          "frame_interval_us_max": 2003,
+          "channel_read_completion_offset_us_min": [
+            52,
+            104,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 5475.80078125,
+              "min_counts": 5396,
+              "max_counts": 5551,
+              "nominal_mean_v": 1.6310753715741928
+            },
+            "A2": {
+              "mean_counts": 5470.599609375,
+              "min_counts": 5441,
+              "max_counts": 5506,
+              "nominal_mean_v": 1.6295260998443508
+            },
+            "A3": {
+              "mean_counts": 5478.859375,
+              "min_counts": 5427,
+              "max_counts": 5545,
+              "nominal_mean_v": 1.6319864341085273
+            },
+            "A4": {
+              "mean_counts": 5550.810546875,
+              "min_counts": 5531,
+              "max_counts": 5596,
+              "nominal_mean_v": 1.6534185111853752
+            }
+          }
+        },
+        "step": {
+          "samples": 512,
+          "overruns": 0,
+          "frame_interval_us_min": 497,
+          "frame_interval_us_max": 503,
+          "channel_read_completion_offset_us_min": [
+            52,
+            105,
+            157,
+            215
+          ],
+          "channel_read_completion_offset_us_max": [
+            53,
+            105,
+            158,
+            216
+          ],
+          "channels": {
+            "A1": {
+              "mean_counts": 6010.875,
+              "min_counts": 4723,
+              "max_counts": 6219,
+              "nominal_mean_v": 1.7904577916132576
+            },
+            "A2": {
+              "mean_counts": 5882.19921875,
+              "min_counts": 4786,
+              "max_counts": 6146,
+              "nominal_mean_v": 1.7521291697186108
+            },
+            "A3": {
+              "mean_counts": 6012.73046875,
+              "min_counts": 4741,
+              "max_counts": 6211,
+              "nominal_mean_v": 1.7910104796130135
+            },
+            "A4": {
+              "mean_counts": 5555.607421875,
+              "min_counts": 5532,
+              "max_counts": 5605,
+              "nominal_mean_v": 1.6548473551089544
+            }
+          }
+        },
+        "output_parked_ref_code": 1372,
+        "response_analysis_pending": true,
+        "full_D2_accepted": false,
+        "hardware_diagnosis_performed": false,
+        "serial_connection_closed": true
+      }
+    },
+    {
+      "folder": "unloaded-analysis",
+      "source": "runs/hardware-d01-unloaded-analysis/20261029T134032-a9f66c03d3",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "unloaded_R_C_unresolved": true,
+        "analysis_sha256": "5082b99cc6f5ff47c963bdb6a998dff98fb86a58b7dd59721421c2d5557a1e1c",
+        "independent_verification": false
+      }
+    },
+    {
+      "folder": "load-alternatives",
+      "source": "runs/hardware-d01-load-alternatives/20261029T134226-b7628cbcaa",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_observation_pending": true,
+        "voltage_forecast_pending": true
+      }
+    },
+    {
+      "folder": "load-request",
+      "source": "runs/hardware-d01-load-request/20261029T134430-b8840c5aa7",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "loaded_hookup_confirmation_pending": true,
+        "D01_loaded_observation": false
+      }
     }
-  ]
+  ],
+  "updated_at_utc": "2026-10-29T13:44:30.494058+00:00"
 }
