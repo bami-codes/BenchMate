@@ -1,0 +1,7 @@
+{
+  "condition_id": "b1_shunt",
+  "preparation_verbatim": "N 분기 제거(D55↔A35 무음 확인) / 996Ω·나머지 유지 / B1 션트 USB 연결 완료",
+  "USB_connected": true,
+  "connection_verbatim": "N 분기 제거(D55↔A35 무음 확인) / 996Ω·나머지 유지 / B1 션트 USB 연결 완료",
+  "operator_reply_interpretation": "Reply to explicit USB-off removal/reconnect instruction; leading N is interpreted as IN from the referenced branch and continuity contacts. Verbatim reply retained."
+}

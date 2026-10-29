@@ -1,0 +1,22 @@
+[
+  {
+    "source": "runs/hardware-b1-b6-gate-summary/20261029T170536-fd3c872dc4/controller-source.py",
+    "copy": "controller-source.py",
+    "sha256": "dcb8f7bf2f30a62145e549c07b3ba6c3107e866df877a03832c084d383fbc22c"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-summary/20261029T170536-fd3c872dc4/events.jsonl",
+    "copy": "events.jsonl",
+    "sha256": "62b0d7c5ed8f553404fef1f23c7493d03c6b8b47ebcecebb1be0ac76e7a30ac5"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-summary/20261029T170536-fd3c872dc4/four-condition-gate.png",
+    "copy": "four-condition-gate.png",
+    "sha256": "fb9f5637d75d79ffafdc9c43efdf787fe4ca8efdb5d29a78ac4a27da48088bb8"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-summary/20261029T170536-fd3c872dc4/result.json",
+    "copy": "result.json",
+    "sha256": "807275133121328b477bb74abfc435772182249fb2d3a7cad52326cdf15db357"
+  }
+]
