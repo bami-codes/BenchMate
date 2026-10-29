@@ -1,6 +1,6 @@
 {
   "created_at_utc": "2026-10-29T11:13:49.990227+00:00",
-  "scope": "Parts and assembly evidence; fixture connection and hardware capture not yet confirmed",
+  "scope": "Parts, assembly and unpowered fixture hookup confirmed by operator; fresh powered checks and hardware capture pending",
   "copies": [
     {
       "source": "runs/hardware-b1-assembly/20261029T105421-715fe30508/events.jsonl",
@@ -16,6 +16,16 @@
       "source": "runs/hardware-b1-assembly-confirmed/20261029T111235-ab1ad3e3de/assembly-guide.md",
       "published": "assembly-confirmed/assembly-guide.md",
       "sha256": "66641bb00fceb3f8afe668df277caccb93c56f88eb15e30c13e4f808d47f1da3"
+    },
+    {
+      "source": "runs/hardware-b1-hookup-confirmed/20261029T113257-3b922abe0d/events.jsonl",
+      "published": "hookup-confirmed/events.jsonl",
+      "sha256": "30ea571d126884f38972d5097122d9913fd3f25c27a0c423117dc413fdd3d6bc"
+    },
+    {
+      "source": "runs/hardware-b1-hookup-confirmed/20261029T113257-3b922abe0d/assembly-guide.md",
+      "published": "hookup-confirmed/assembly-guide.md",
+      "sha256": "f822c9d1cd4195cca470b76180576991bf2416c53bef1d7169ffcfc70db468fd"
     }
   ],
   "records": [
@@ -42,6 +52,19 @@
         "USB_should_remain_disconnected": true,
         "guide_sha256": "66641bb00fceb3f8afe668df277caccb93c56f88eb15e30c13e4f808d47f1da3"
       }
+    },
+    {
+      "folder": "hookup-confirmed",
+      "source": "runs/hardware-b1-hookup-confirmed/20261029T113257-3b922abe0d",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_IO": false,
+        "fixture_hookup_operator_confirmed": true,
+        "fresh_power_report_pending": true,
+        "guide_sha256": "f822c9d1cd4195cca470b76180576991bf2416c53bef1d7169ffcfc70db468fd"
+      }
     }
-  ]
+  ],
+  "updated_at_utc": "2026-10-29T11:32:57.665443+00:00"
 }

@@ -5,9 +5,11 @@ white 170-hole board ready, resistor measured outside the circuit at
 9.99 kohm, and a 105J100 film capacitor measured at 0.984 microfarad.
 The operator subsequently confirms the empty-board topology checks,
 assembly, A3–A8 resistance 9.99 kohm and A8–A13 capacitance 0.984 microfarad.
-USB remains disconnected. Instrument connection is now requested below;
-it has not yet been reported complete. No hardware commands have been
-issued for this assembly step.
+The operator now confirms jumper 15 removal and the three instrument
+connections below, made with USB disconnected. IN, OUT and RET continuity
+are reported; OUT was checked from U2's actual pin 3, and RET–GND gave
+no continuity tone. USB reconnection and fresh supply/REF readings are
+the next step; no hardware command has been issued for this hookup.
 
 ## Coordinates used here
 
@@ -48,8 +50,7 @@ IN (A3) ---- R1 ---- OUT (A8)
 ```
 
 No extra jumper is needed between B8 and D8: both are in upper column 8.
-Label the three contacts IN, OUT and RET. No loose probe posts or
-instrument leads need to be installed yet.
+Label the three contacts IN, OUT and RET. No loose probe posts are needed.
 
 After assembly, while this small board is still isolated:
 
@@ -58,8 +59,9 @@ After assembly, while this small board is still isolated:
 2. Measure A8–A13 capacitance on the appropriate microfarad range;
    expect approximately the isolated 0.984 microfarad report.
 
-Report both displayed readings and whether the parts fit without
-touching another node. Do not reconnect USB or connect the instrument yet.
+Both readings and the strip checks were reported before the fixture
+connection below. Do not repeat resistance/capacitance measurements
+while the instrument is powered.
 
 ## Reference values and scope
 
@@ -70,18 +72,23 @@ is not established. Keep component truth in assembly/evaluation records;
 do not feed the specimen name or component readings into a blind
 mystery-diagnosis candidate selection.
 
-## Requested fixture connection after confirmed mini-board assembly
+## Confirmed fixture connection after mini-board assembly
 
 Keep USB disconnected. Remove **only the C35–C30 calibration jumper
 (item 15)** from the large 830-hole instrument board. Keep the B28–B35
 shunt bypass (item 11), B50–B23 auxiliary-input park (item 14), input
 pull-down and all other fixture wiring in place.
 
-| Signal | Large 830-hole fixture | Small 170-hole B1 board |
-|---|---|---|
-| IN | A35 | A3 |
-| OUT | B30 | A8 |
-| RET / REF | C50 | A13 |
+| Signal | Lead color | Large 830-hole fixture | Small 170-hole B1 board |
+|---|---|---|---|
+| IN | Green | A35 | A3 |
+| OUT | Blue | D30 | A8 |
+| RET / REF | Gray | C50 | A13 |
+
+The original request used B30 for OUT. The operator used D30 because
+B30 was obstructed by a U-shaped jumper. B30 and D30 share the same
+upper five-hole strip; U2 pin 3 to the mini-board OUT continuity was
+also reported. Historical records retain the original B30 request.
 
 These are three insulated jumper leads. RET goes to buffered REF, never
 to the blue GND rail or to 5 V. No loose power-rail probe post is added.
@@ -93,9 +100,16 @@ using the vacant contacts on the same strips:
 2. Large C30 to small E8: continuity.
 3. Large E50 to small E13: continuity.
 
-Confirm jumper 15 removal and the three continuity results. Do not
-reconnect USB until that connection report is received. Do not interpret
-in-circuit resistance as a new isolated component measurement.
+Jumper 15 removal and all three connections are now reported complete;
+RET–GND also gave no tone. The instruction to retain items 11 and 14
+remains in force. These are operator reports, not an independent visual
+inspection. Do not interpret in-circuit resistance as a new isolated
+component measurement.
+
+Next, reconnect Minima USB with the same cable and Mac port. With the
+meter black probe on the existing large-board GND contact, measure the
+large-board A3 divider-resistor lead (supply, DC 20 V), then D50 (REF,
+DC 2 V). No DAC command is sent until these fresh readings are reported.
 
 ## Limited first-power scope for this passive B1
 
