@@ -41,8 +41,10 @@ of the preceding block with 4.89 V gives A3/A4 about 1.63634/1.63543 V;
 this is a sequential comparison, not an accuracy claim. A DC-hold firmware
 addition passed 71 targeted tests and both board compiles, then was uploaded
 after confirmed manual DFU. The new boot passed initial checks, was explicitly
-armed at code 1368, and now holds low-point code 531 for a pending DMM report.
-No ADC block at that low point has yet been acquired. Calibration and the
+armed at code 1368 and held low-point code 531. The reported low-point
+D35/D40/D45/D50 displays are 0.629/0.628/0.629/1.633 V; the following
+512-frame block passed. The same boot now holds midpoint code 1368 for
+another DMM report. Calibration and the
 cause of the earlier unresponsiveness remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
@@ -1164,6 +1166,30 @@ does not calibrate A4's gain across a range.
 The offline comparison, preparation, upload, explicit ARM and first held
 point are retained separately in the October 29 bundle. Prior failures,
 pending-at-the-time instructions and raw capture records are unchanged.
+
+## First low-point report and accepted raw block
+
+The DC 2 V displays at D35/D40/D45/D50 were reported as
+`0.629V / 0.628V / 0.629V / 1.633V`. With the same boot ID, the initial
+PING still reported held code 531. A 512-frame HOLD capture passed the
+complete-block, timing, used-ADC-register and boot-continuity checks.
+Intervals were 1998–2003 us, with zero overruns. No samples were trimmed.
+
+| Channel | Mean raw counts | DMM display | Nominal ADC value using 4.89 V |
+| --- | --- | --- | --- |
+| A1 | 2110.25 | 0.629 V | 0.62987 V |
+| A2 | 2112.81 | 0.628 V | 0.63063 V |
+| A3 | 2114.90 | 0.629 V | 0.63125 V |
+| A4, fixed REF | 5478.31 | 1.633 V | 1.63517 V |
+
+Within-block SDs span approximately 1.40–2.85 mV and larger tails remain.
+These are sequential comparisons, not calibrated error bounds. After the
+capture returned to REF, a separate DC command and post-PING verified
+midpoint code 1368 with the same boot. Fresh midpoint DMM readings are
+pending; this new-boot sweep does not reuse a previous boot's midpoint.
+The low-point report, source snapshots, raw block and next held level are
+retained separately in `minima-dc-low-point/`, `minima-dc-low-block/` and
+`minima-dc-mid-held/`. No three-point fit or A4 gain calibration is complete.
 
 ## Standing conventions (current)
 

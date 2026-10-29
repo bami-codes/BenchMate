@@ -13,8 +13,8 @@ a new boot answered PING, and explicit re-arm plus one additional midpoint
 block passed. This does not identify the earlier communication fault.
 Fresh supply/D45/D50 displays are 4.89/1.636/1.633 V. A separate offline
 comparison uses that later supply. Tested DC-hold firmware has subsequently
-been uploaded and the first low level set; DMM readings and a raw block at
-that low level are still pending.
+been uploaded. The first low-level DMM report and a following 512-frame
+block are complete; the same boot now holds the midpoint for a fresh report.
 
 | Record | Observed result |
 | --- | --- |
@@ -41,6 +41,7 @@ that low level are still pending.
 | `dc-hold-host-endpoints/` | DC and CAPTURE HOLD share endpoint rounding and integer code limits; 71 tests pass, no additional firmware change or hardware IO |
 | `minima-dc-upload/` | Confirmed manual DFU, successful upload, four unarmed PINGs with DC support, 30-second presence check passed |
 | `minima-dc-arm/`, `minima-dc-low-held/`, `minima-dc-low-setup/` | New boot explicitly armed at code 1368, persistent low level verified at code 531; no low-point ADC block yet |
+| `minima-dc-low-point/`, `minima-dc-low-block/`, `minima-dc-mid-held/` | Low-point DMM report and 512-frame raw block completed; same-boot midpoint held for the next DMM report |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -67,7 +68,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Thirty-four chains contain 484 events.
+hashes and event-chain terminal states. Thirty-seven chains contain 504 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -157,3 +158,12 @@ and acknowledged the first low level at code 531. The requested target is
 0.633 V; physical DMM values remain pending. A4 is still fixed REF, so this
 step alone cannot establish its gain over the stimulus range. There has
 been no low-point ADC block, multi-point fit or hardware diagnosis yet.
+
+The subsequent low-point DMM report is 0.629/0.628/0.629/1.633 V at
+D35/D40/D45/D50. One same-boot 512-frame block passed, with initial held
+code 531, used ADC states all 255, intervals 1998–2003 us and zero overruns.
+Raw means are 2110.25/2112.81/2114.90/5478.31 counts. No outliers were
+removed; SDs and full descriptive statistics are in the point analysis.
+A separate DC command then confirmed midpoint code 1368 on the same boot.
+Fresh midpoint displays are pending. A multi-point fit and A4 gain
+calibration are still incomplete.

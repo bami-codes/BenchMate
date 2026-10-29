@@ -1,0 +1,74 @@
+{
+  "point": "low",
+  "raw_capture_record": "runs/hardware-minima-capture/20261029T061026-e8ec518281",
+  "samples_per_channel": 512,
+  "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+  "held_code_before_capture": 531,
+  "channels": {
+    "A1": {
+      "mean_counts": 2110.25,
+      "std_counts": 5.970573633308881,
+      "min_counts": 2050,
+      "max_counts": 2140,
+      "nominal_mean_v": 0.6298676982237685,
+      "DMM_v": 0.629,
+      "sequential_nominal_ADC_minus_DMM_mV": 0.8676982237685316,
+      "nominal_std_mV": 1.7820976052542528,
+      "max_abs_deviation_counts": 60.25
+    },
+    "A2": {
+      "mean_counts": 2112.814453125,
+      "std_counts": 9.542506926793203,
+      "min_counts": 2047,
+      "max_counts": 2166,
+      "nominal_mean_v": 0.6306331365306262,
+      "DMM_v": 0.628,
+      "sequential_nominal_ADC_minus_DMM_mV": 2.6331365306262455,
+      "nominal_std_mV": 2.8482487256313718,
+      "max_abs_deviation_counts": 65.814453125
+    },
+    "A3": {
+      "mean_counts": 2114.896484375,
+      "std_counts": 4.682798114771597,
+      "min_counts": 2088,
+      "max_counts": 2133,
+      "nominal_mean_v": 0.6312545814926295,
+      "DMM_v": 0.629,
+      "sequential_nominal_ADC_minus_DMM_mV": 2.2545814926294705,
+      "nominal_std_mV": 1.3977221986957886,
+      "max_abs_deviation_counts": 26.896484375
+    },
+    "A4": {
+      "mean_counts": 5478.306640625,
+      "std_counts": 6.386270961545238,
+      "min_counts": 5445,
+      "max_counts": 5509,
+      "nominal_mean_v": 1.6351656883755263,
+      "DMM_v": 1.633,
+      "sequential_nominal_ADC_minus_DMM_mV": 2.165688375526331,
+      "nominal_std_mV": 1.906174998593433,
+      "max_abs_deviation_counts": 33.306640625
+    }
+  },
+  "frame_interval_us_min": 1998,
+  "frame_interval_us_max": 2003,
+  "overruns": 0,
+  "ADC_states_before": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "ADC_states_after": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "limits": [
+    "Sequential DMM report then ADC; not simultaneous, DMM accuracy not established.",
+    "Nominal volts use the earlier 4.89 V supply display, not an independently frozen gain.",
+    "A4 is fixed REF; no A4 multi-point gain calibration.",
+    "No trimming or calibration acceptance from this block."
+  ]
+}

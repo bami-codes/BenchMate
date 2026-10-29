@@ -495,6 +495,36 @@
       "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f/tests.log",
       "published": "dc-hold-host-endpoints/tests.log",
       "sha256": "6894e52c0f9cf5eb237835761f054f661e2dcb6adc7a4ddbddebb2ea615e3b20"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T061026-1bca5bb8ac/events.jsonl",
+      "published": "minima-dc-low-point/events.jsonl",
+      "sha256": "e43a1d9a3975f1cb68609e7ca31d4dbdb93314f9a9a7246d0eaec156bd8e3068"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T061026-1bca5bb8ac/controller-source.py",
+      "published": "minima-dc-low-point/controller-source.py",
+      "sha256": "32cd48e2e9f994d03b125759382f6421dcbe64c5a54a24ae6da71ce33012c5bf"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T061026-1bca5bb8ac/host-instrument.py",
+      "published": "minima-dc-low-point/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-dc-point/20261029T061026-1bca5bb8ac/analysis.json",
+      "published": "minima-dc-low-point/analysis.json",
+      "sha256": "4567045ea034cd7711c8f9b07b49b07510f9ce267c08f796d68f42787d4c64b0"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T061026-e8ec518281/events.jsonl",
+      "published": "minima-dc-low-block/events.jsonl",
+      "sha256": "fafe0d011b72f4011d1614aed90b8adfb5772be583c090ee3fa3ebcd9f8e4336"
+    },
+    {
+      "source": "runs/hardware-minima-dc-hold/20261029T061032-da350f724b/events.jsonl",
+      "published": "minima-dc-mid-held/events.jsonl",
+      "sha256": "7515acccbdab9d66e8617b2ddfa172bf75462757ddc6cc2293c4c280deb375b5"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1062,7 +1092,71 @@
         "firmware_changed": false,
         "hardware_IO_performed": false
       }
+    },
+    {
+      "folder": "minima-dc-low-point",
+      "source": "runs/hardware-minima-dc-point/20261029T061026-1bca5bb8ac",
+      "events": 8,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "capture_record": "runs/hardware-minima-capture/20261029T061026-e8ec518281",
+        "accepted_frames": 512,
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "next_hold_record": "runs/hardware-minima-dc-hold/20261029T061032-da350f724b",
+        "next_hold_result": {
+          "source": "hardware_uncalibrated",
+          "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+          "boot_continuity_checked": true,
+          "uptime_ms_start": 447155,
+          "uptime_ms_end": 448380,
+          "held_code": 1368,
+          "nominal_target_v": 1.633,
+          "output_remains_driven": true,
+          "accepted_samples": 0,
+          "calibration_performed": false
+        },
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-dc-low-block",
+      "source": "runs/hardware-minima-capture/20261029T061026-e8ec518281",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1998,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1368,
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 440955,
+        "uptime_ms_end": 445145
+      }
+    },
+    {
+      "folder": "minima-dc-mid-held",
+      "source": "runs/hardware-minima-dc-hold/20261029T061032-da350f724b",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 447155,
+        "uptime_ms_end": 448380,
+        "held_code": 1368,
+        "nominal_target_v": 1.633,
+        "output_remains_driven": true,
+        "accepted_samples": 0,
+        "calibration_performed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T06:07:33.133801+00:00"
+  "last_appended_at_utc": "2026-10-29T06:11:44.375381+00:00"
 }
