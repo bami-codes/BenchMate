@@ -43,9 +43,22 @@ addition passed 71 targeted tests and both board compiles, then was uploaded
 after confirmed manual DFU. The new boot passed initial checks, was explicitly
 armed at code 1368 and held low-point code 531. The reported low-point
 D35/D40/D45/D50 displays are 0.629/0.628/0.629/1.633 V; the following
-512-frame block passed. The same boot now holds midpoint code 1368 for
-another DMM report. Calibration and the
-cause of the earlier unresponsiveness remain unresolved.
+512-frame block passed. The following midpoint was last acknowledged at
+code 1368, but the operator then reported D35/D40/D45 at 3.28 V. A PING-only
+check received no response. Kernel logs establish a Minima USB loss at
+15:14:47 KST and re-enumeration at 15:14:49. The operator reports the red
+and blue rail probe posts touched during probing and no deliberate USB or
+RESET operation. The voltage sweep is stopped. USB unplug, removal of only
+the two added probe posts, and an unpowered rail-continuity check have been
+requested. The operator has now confirmed USB disconnection, removal of
+the added probe posts and no persistent rail-continuity tone. The operator
+later clarified that only the red +5 V post was removed and the original
+blue GND post remains; the requested J27 relocation was not performed.
+Fresh power/REF displays are 4.88/1.63 V. PING after reconnect was still
+unanswered. An operator-confirmed single RESET restored responses with a
+new unarmed boot; explicit ARM then established code 1368. DAC/driver/REF
+DMM verification is pending. No midpoint ADC capture or higher target was
+commanded. Calibration and long-duration reliability remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1190,6 +1203,109 @@ pending; this new-boot sweep does not reuse a previous boot's midpoint.
 The low-point report, source snapshots, raw block and next held level are
 retained separately in `minima-dc-low-point/`, `minima-dc-low-block/` and
 `minima-dc-mid-held/`. No three-point fit or A4 gain calibration is complete.
+
+## Midpoint anomaly and reported power-rail probe contact
+
+The operator reported `35/40/45가 3.28V로 포화됐어`, instead of the expected
+midpoint near 1.63 V. D50 and the actual DMM range were not supplied. The
+preceding instruction was DC 2 V; the reported value is retained without
+inventing a range or treating "saturation" as an established diagnosis.
+The calibration sequence stopped before a midpoint capture or high-level
+command. The last acknowledged code 1368 is a historical software state,
+not confirmation of the current physical voltage.
+
+At 15:19:43 KST the controller sent only one PING. Zero bytes arrived in
+five seconds, although the Minima serial identity was listed before and
+after. A later kernel-log review of 15:09:00–15:20:30 KST found:
+
+- 15:14:47.964: Minima `hardware connection lost`.
+- 15:14:49.340: the same product/VID/PID was enumerated again.
+- Repeated device transaction errors followed, including during the failed
+  PING window. Port-list snapshots therefore did not establish uninterrupted
+  USB presence.
+
+The operator then stated that the red and blue rail probe posts touched
+while probing, and separately reported `USB·RESET 모두 건드리지 않았어`.
+The posts belong to +5 V and Arduino GND, so contact can short the supply.
+This is a plausible explanation for the disturbance, but contact time and
+duration were not supplied. A main-MCU restart, DAC state, permanent damage
+or a cause for all earlier communication faults is not established.
+
+The powered voltage-reading request was withdrawn. The next instruction
+is to unplug USB, wait for the power LED to go out, remove only the two
+extra rail probe posts, then check for persistent continuity between the
+unpowered red and blue rails. Arduino 5 V/GND supply leads and fixture
+wiring stay installed. USB must remain disconnected pending the result.
+Completion has not yet been reported. Before powered measurements resume,
+the probe arrangement must prevent the bare +5 V and GND ends from touching.
+
+No further output command, ADC capture, firmware upload or automatic
+recovery was performed. The prior low-point block is retained separately;
+the 3.28 V report is not accepted as a calibration point. Exact operator
+reports and the failed PING are in `minima-midpoint-anomaly/` and
+`minima-probe-contact/`. Only selected Minima-specific timestamp/message
+excerpts and the full local log's hash are published, not the broad kernel
+log or unrelated device messages.
+
+## Confirmed power-off check and revised probe access request
+
+After an initially ambiguous `해결했어`, the operator explicitly confirmed
+`USB 분리·기둥 제거 완료, 지속 통전음 없음`. This records USB disconnected,
+the two added rail probe posts removed, and no persistent tone between the
+unpowered supply rails. A brief initial tone versus silence from the start
+was not distinguished. This check does not establish that every component
+is undamaged or that powered operation has recovered.
+
+The next requested arrangement has only one added ground probe, at J27
+(bottom J row, column 27 using the top numbering). The recorded wiring
+graph shows J27 is unoccupied and connected through H27/H23/J23 to Arduino
+GND. The operator must verify J27-to-blue-rail continuity with USB off.
+Power voltage is then read by touching the existing A3-side lead of the
+first divider resistor, which is connected to +5 V; no second part is
+inserted into occupied A3 and no loose +5 V probe post is added. REF is
+read at existing J10. The black probe stays at the secured J27 ground
+contact. The meter switches to DC 20 V before USB is reconnected.
+
+The coordinate check is a design check, not confirmation of installation.
+The single ground-probe placement, continuity and fresh power/REF values
+are pending. No ARM, capture, reset or upload is performed while waiting.
+After reconnecting, the boot identity and output state must be established
+again; the old midpoint setting must not be assumed to survive.
+See `minima-unpowered-check/` for the clarification and coordinate-check
+provenance. Prior anomaly records remain unchanged.
+
+## Actual probe arrangement and recovery after single RESET
+
+The operator clarified `파랑 레일 기둥은 그대로 사용중이라 괜찮아.
+빨강 레일 기둥 제거 완료 / 4.88V / 1.63V`. The actual arrangement retains
+the original blue-rail GND probe and removes only the red +5 V probe post.
+J27 was proposed, not installed; the earlier generic report of removing
+both posts is superseded by this specific clarification. Fresh supply/REF
+displays are 4.88/1.63 V on the instructed DC 20 V range.
+
+A new status check found the expected Minima USB identity but received
+no PING response within five seconds. No ARM or capture followed that
+failed attempt. USB/power restoration therefore had not by itself
+established communication recovery.
+
+The operator subsequently confirmed `RESET 한 번 완료`, with USB and
+wiring retained. Two reopened PING checks returned a new boot ID
+`c7992fcbd2cba35e53aa1b2d805b84e4`, unarmed state, current/ref codes zero,
+DC capability and all four active ADC states at 255. Only after these
+checks did an explicit ARM use the fresh 4.88 V supply conversion and
+1.63 V target. Its post-PING confirmed code 1368 and the same boot.
+No firmware was changed or uploaded, and no ADC block or higher voltage
+was requested. This verifies short-term communication and command state,
+not physical output accuracy or complete recovery from damage.
+
+The next requested check is B13 (DAC/input), A11 (driver output), D50
+(REF), on DC 20 V relative to the retained original blue-rail GND post.
+The red +5 V post stays absent. Those physical voltage results are pending;
+the original three-point sweep remains incomplete and is not silently
+continued across the power interruption. Both the failed reconnect check
+and the successful post-RESET check are retained in
+`minima-contact-power-recovery-failed/`, `minima-contact-reset-recovery/`
+and `minima-contact-recovery-arm/`.
 
 ## Standing conventions (current)
 

@@ -1,0 +1,43 @@
+{
+  "query_window_local": "2026-10-29 15:09:00–15:20:30 Asia/Seoul",
+  "source_raw_log_sha256": "fe5016ebc6e89e147d398c1fbb5b18f7078810af31c95c13bf625e7ce6824c96",
+  "source_raw_log_bytes": 10768859,
+  "kernel_query_completed": true,
+  "all_USB_kernel_messages": 8055,
+  "Minima_named_messages": 6916,
+  "Minima_connection_loss_count": 1,
+  "Minima_enumeration_count": 1,
+  "Minima_transaction_error_count": 6902,
+  "excerpts": [
+    {
+      "timestamp": "2026-10-29 15:14:47.964766+0900",
+      "message": "usb-drd3-port-hs@03100000: AppleUSBHostPort::terminateDevice: destroying 0x2341/0069/0100 (UNO R4 Minima): hardware connection lost"
+    },
+    {
+      "timestamp": "2026-10-29 15:14:47.968175+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 15:14:49.340157+0900",
+      "message": "usb-drd3-port-hs@03100000: AppleUSBHostPort::enumerateDeviceComplete_block_invoke: enumerated 0x2341/0069/0100 (UNO R4 Minima / 1) at 12 Mbps"
+    },
+    {
+      "timestamp": "2026-10-29 15:15:01.046083+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 15:20:29.940351+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 15:20:29.988329+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    }
+  ],
+  "limits": [
+    "Selected exact timestamp/message excerpts only; broader kernel log is local and not published.",
+    "Port-list snapshots at PING time did not establish uninterrupted USB presence.",
+    "Enumeration loss/reappearance does not establish MCU reset, DAC register state or permanent hardware damage.",
+    "Rail contact time was not supplied; causal linkage is plausible but not conclusively timed."
+  ]
+}

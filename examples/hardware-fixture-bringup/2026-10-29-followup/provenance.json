@@ -525,6 +525,81 @@
       "source": "runs/hardware-minima-dc-hold/20261029T061032-da350f724b/events.jsonl",
       "published": "minima-dc-mid-held/events.jsonl",
       "sha256": "7515acccbdab9d66e8617b2ddfa172bf75462757ddc6cc2293c4c280deb375b5"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint-anomaly/20261029T061941-524c4d4bcd/events.jsonl",
+      "published": "minima-midpoint-anomaly/events.jsonl",
+      "sha256": "51bbd7bb1753820bc3b914ad2d9c6466512420fddd62869a5aef41426be128c4"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint-anomaly/20261029T061941-524c4d4bcd/controller-source.py",
+      "published": "minima-midpoint-anomaly/controller-source.py",
+      "sha256": "67108e863c59499bdc5a32aebc6c6015eba05f97d094b8c74d4aebcb3baaaab2"
+    },
+    {
+      "source": "runs/hardware-minima-probe-contact/20261029T062606-a828c23369/events.jsonl",
+      "published": "minima-probe-contact/events.jsonl",
+      "sha256": "a92e24a1095bad954815beb3a8c0b2f42a0decd941e376583771158653c36f1e"
+    },
+    {
+      "source": "runs/hardware-minima-probe-contact/20261029T062606-a828c23369/controller-source.py",
+      "published": "minima-probe-contact/controller-source.py",
+      "sha256": "57ad5a394ba24f32f568b83536b31932e257ed93d9d4b4e6f6607ad7ea05f1b3"
+    },
+    {
+      "source": "runs/hardware-minima-probe-contact/20261029T062606-a828c23369/usb-review.json",
+      "published": "minima-probe-contact/usb-review.json",
+      "sha256": "01adb917357cac087b4ee32306a7d81d2a7510bcef9bc7c41b281d5ee3d5259f"
+    },
+    {
+      "source": "runs/hardware-minima-unpowered-check/20261029T063310-328e6e0d2f/events.jsonl",
+      "published": "minima-unpowered-check/events.jsonl",
+      "sha256": "164ced1313e6b20c69b4ebe7f9fcd4e4be3c851aca5b79bf0ba07db2d8a92422"
+    },
+    {
+      "source": "runs/hardware-minima-unpowered-check/20261029T063310-328e6e0d2f/controller-source.py",
+      "published": "minima-unpowered-check/controller-source.py",
+      "sha256": "62780b2933119a47509da78ad43cad60dd31f7a067b7d05fd7af6684d929be65"
+    },
+    {
+      "source": "runs/hardware-minima-unpowered-check/20261029T063310-328e6e0d2f/probe-access-design.json",
+      "published": "minima-unpowered-check/probe-access-design.json",
+      "sha256": "c3d16c087221bc45eaacf8b799c71c3e743496baeb5d8d045b6010f442d17673"
+    },
+    {
+      "source": "runs/hardware-minima-probe-recovery/20261029T064309-92065c17ff/events.jsonl",
+      "published": "minima-contact-power-recovery-failed/events.jsonl",
+      "sha256": "64ad01a04dbfbcc8287b69f96796b47df7a92170bd8c9127a21f679a47b88c6f"
+    },
+    {
+      "source": "runs/hardware-minima-probe-recovery/20261029T064309-92065c17ff/controller-source.py",
+      "published": "minima-contact-power-recovery-failed/controller-source.py",
+      "sha256": "441edbbd95f49992fe2f55d0d7981ccd1ef4a1e3664e224829d82984ad8ac93c"
+    },
+    {
+      "source": "runs/hardware-minima-probe-recovery/20261029T064309-92065c17ff/host-instrument.py",
+      "published": "minima-contact-power-recovery-failed/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-probe-reset-recovery/20261029T064625-11722ff724/events.jsonl",
+      "published": "minima-contact-reset-recovery/events.jsonl",
+      "sha256": "c65caedb53ac28d291b09ad1b8ba430ee73ec753333970f4154c789290c390d7"
+    },
+    {
+      "source": "runs/hardware-minima-probe-reset-recovery/20261029T064625-11722ff724/controller-source.py",
+      "published": "minima-contact-reset-recovery/controller-source.py",
+      "sha256": "59ee9ae3c73185d0b67b77550213d517053325892a9f56dc1b39ef6837e5594a"
+    },
+    {
+      "source": "runs/hardware-minima-probe-reset-recovery/20261029T064625-11722ff724/host-instrument.py",
+      "published": "minima-contact-reset-recovery/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T064629-4e3c8ef02b/events.jsonl",
+      "published": "minima-contact-recovery-arm/events.jsonl",
+      "sha256": "215cf2ca4923333ebd36d3d793f1bb16e36d6113d2d6ab81dd709378b9a5f1fb"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1156,7 +1231,92 @@
         "accepted_samples": 0,
         "calibration_performed": false
       }
+    },
+    {
+      "folder": "minima-midpoint-anomaly",
+      "source": "runs/hardware-minima-midpoint-anomaly/20261029T061941-524c4d4bcd",
+      "events": 9,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "No PING response within 5 seconds",
+        "stimulus_command_sent": false,
+        "ADC_capture_requested": false,
+        "automatic_retry_or_rearm": false,
+        "anomaly_unresolved": true
+      }
+    },
+    {
+      "folder": "minima-probe-contact",
+      "source": "runs/hardware-minima-probe-contact/20261029T062606-a828c23369",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "recording_complete": true,
+        "calibration_sweep_stopped": true,
+        "midpoint_not_accepted_for_calibration": true,
+        "high_point_not_commanded": true,
+        "hardware_IO_performed": false,
+        "cause_scope": "Operator rail contact can explain a supply disturbance; MCU restart, current DAC output and damage remain unestablished.",
+        "awaiting": "USB-off confirmation and rail-continuity report"
+      }
+    },
+    {
+      "folder": "minima-unpowered-check",
+      "source": "runs/hardware-minima-unpowered-check/20261029T063310-328e6e0d2f",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "operator_USB_off_and_no_persistent_tone_recorded": true,
+        "powered_recovery_not_yet_verified": true,
+        "hardware_IO_performed": false,
+        "calibration_sweep_still_stopped": true
+      }
+    },
+    {
+      "folder": "minima-contact-power-recovery-failed",
+      "source": "runs/hardware-minima-probe-recovery/20261029T064309-92065c17ff",
+      "events": 7,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Incomplete PING",
+        "automatic_retry_or_rearm": false,
+        "ADC_capture_requested": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-contact-reset-recovery",
+      "source": "runs/hardware-minima-probe-reset-recovery/20261029T064625-11722ff724",
+      "events": 13,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "c7992fcbd2cba35e53aa1b2d805b84e4",
+        "new_boot_verified": true,
+        "ARM_record": "runs/hardware-minima-capture/20261029T064629-4e3c8ef02b",
+        "held_code": 1368,
+        "nominal_target_v": 1.63,
+        "ADC_capture_requested": false,
+        "driver_and_DAC_DMM_recovery_pending": true,
+        "calibration_performed": false,
+        "sweep_not_resumed": true
+      }
+    },
+    {
+      "folder": "minima-contact-recovery-arm",
+      "source": "runs/hardware-minima-capture/20261029T064629-4e3c8ef02b",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "reference_established": true,
+        "diagnosis_performed": false,
+        "instruction": "Check REF, attach the test circuit, then capture with --boot-id set to this boot_id.",
+        "boot_id": "c7992fcbd2cba35e53aa1b2d805b84e4",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 40757,
+        "uptime_ms_end": 43163
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T06:11:44.375381+00:00"
+  "last_appended_at_utc": "2026-10-29T06:48:02.460333+00:00"
 }

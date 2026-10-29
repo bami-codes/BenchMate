@@ -14,7 +14,18 @@ block passed. This does not identify the earlier communication fault.
 Fresh supply/D45/D50 displays are 4.89/1.636/1.633 V. A separate offline
 comparison uses that later supply. Tested DC-hold firmware has subsequently
 been uploaded. The first low-level DMM report and a following 512-frame
-block are complete; the same boot now holds the midpoint for a fresh report.
+block are complete; the same boot then held the midpoint for a fresh report.
+
+**Latest: the midpoint voltage sweep is stopped.** The operator reported
+D35/D40/D45 at 3.28 V and then reported contact between the +5 V and GND
+probe posts. A PING-only check failed; kernel logs show USB loss and
+re-enumeration between the last good response and this check. USB disconnection
+and absence of a persistent unpowered continuity tone are operator-confirmed.
+The operator clarified that the blue GND post remains and only the red
++5 V post was removed; J27 was not installed. Power/REF read 4.88/1.63 V.
+The first reconnect PING failed; a confirmed single RESET then restored
+new-boot responses and explicit REF ARM. Physical DAC/driver voltages are
+pending. No midpoint ADC capture or higher voltage was commanded.
 
 | Record | Observed result |
 | --- | --- |
@@ -42,6 +53,11 @@ block are complete; the same boot now holds the midpoint for a fresh report.
 | `minima-dc-upload/` | Confirmed manual DFU, successful upload, four unarmed PINGs with DC support, 30-second presence check passed |
 | `minima-dc-arm/`, `minima-dc-low-held/`, `minima-dc-low-setup/` | New boot explicitly armed at code 1368, persistent low level verified at code 531; no low-point ADC block yet |
 | `minima-dc-low-point/`, `minima-dc-low-block/`, `minima-dc-mid-held/` | Low-point DMM report and 512-frame raw block completed; same-boot midpoint held for the next DMM report |
+| `minima-midpoint-anomaly/` | Operator reports 3.28 V at D35/D40/D45; sequence stopped, PING-only check receives no bytes |
+| `minima-probe-contact/` | Operator reports rail-probe contact and no USB/RESET action; selected kernel excerpts establish USB loss/re-enumeration; unpowered checks requested |
+| `minima-unpowered-check/` | Operator confirms USB off, added probe posts removed, no persistent rail tone; single J27 ground access and fresh power/REF readings requested |
+| `minima-contact-power-recovery-failed/` | Operator clarifies retained blue GND post, removed red +5 V post and 4.88/1.63 V supply/REF; PING still fails, no output command |
+| `minima-contact-reset-recovery/`, `minima-contact-recovery-arm/` | Confirmed single RESET, two new-boot unarmed PINGs, explicit REF ARM and postcheck pass; physical output verification pending |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -68,7 +84,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Thirty-seven chains contain 504 events.
+hashes and event-chain terminal states. Forty-three chains contain 548 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -167,3 +183,33 @@ removed; SDs and full descriptive statistics are in the point analysis.
 A separate DC command then confirmed midpoint code 1368 on the same boot.
 Fresh midpoint displays are pending. A multi-point fit and A4 gain
 calibration are still incomplete.
+
+The later 3.28 V report supersedes the assumption that the acknowledged
+midpoint remained physically held. PING at 15:19:43 KST received no bytes;
+port snapshots were present, but kernel logs show Minima connection loss
+at 15:14:47 and re-enumeration at 15:14:49. The reported +5 V/GND probe
+contact is consistent with a supply disturbance; its timing/duration and
+the board's reset or damage state are not established. No causal conclusion
+is extended to earlier faults. Only selected device-specific kernel
+excerpts are public. USB removal, removal of the two added probe posts,
+and an unpowered rail-continuity check are pending; powered probing and
+the sweep do not resume until the physical state is checked.
+
+The operator subsequently confirmed USB disconnected, both extra probe
+posts removed and no persistent unpowered rail-continuity tone. Component
+health is not established by that check. The next requested arrangement
+uses one secured ground probe at J27, validated against the wiring graph
+and requiring an operator unpowered continuity check. The existing
+divider's A3-side lead serves as the +5 V measurement contact, without an
+extra loose +5 V post; J10 remains the REF contact. Placement and new DC
+20 V power/REF readings are pending, before any output re-arm.
+
+The next operator report clarified the actual arrangement: retain the
+original blue GND probe post and remove only the red +5 V post. J27 was
+not used. Supply/REF read 4.88/1.63 V, but the reconnect PING still received
+no bytes. After a separately confirmed single RESET, two PINGs verified
+new boot `c7992fcbd2cba35e53aa1b2d805b84e4`, unarmed state and the expected
+ADC settings. An explicit ARM then confirmed code 1368 using 4.88 V / 1.63 V.
+B13/A11/D50 DMM readings are pending. This is staged recovery, not a
+completed calibration, proof of no damage, or a diagnosis of every earlier
+USB fault. No firmware change or midpoint/high-point capture was made.

@@ -1,0 +1,9 @@
+{
+  "scope": "Design-coordinate check only; physical placement pending",
+  "source_sha256": "f0e42103591f3f0651f9bda9a31af465d8226116b88179a69646d32cd59bf501",
+  "single_added_probe": "J27, ground, unoccupied in recorded wiring",
+  "power_reading": "Touch existing A3 side of first divider resistor; do not insert another part into occupied A3",
+  "REF_reading": "Existing J10 probe",
+  "no_free_plus5V_probe_post": true,
+  "requires_unpowered_J27_to_ground_continuity_check_before_power": true
+}
