@@ -73,7 +73,7 @@ confirmation is pending; its later operator sidecar supplies that reply.
 Available command-controller source snapshots are archived in `control/`.
 Reviewing the JSON records requires no hardware connection or API call.
 
-## Session-close state and next work
+## Session-close state (before the subsequent resistance report)
 
 The operator reports completing U2, its resistors/capacitor/jumpers and
 the protected A1–A4 connections, plus all requested continuity checks.
@@ -84,11 +84,28 @@ calibrated performance. USB removal overnight was instructed, not
 independently observed. No further hardware commands were issued while
 preparing this commit.
 
-Next: unpowered resistor checks and photo review, U2 DC/protected ADC
+At that point the next work was unpowered resistor checks and photo review, U2 DC/protected ADC
 verification, instrument-v2 boot-ID/reset checks, then actual timing,
 noise, offsets/gains, pull-down comparison and D2 limits. The current
 firmware acquires A1–A4 only; A5 is unconnected. Hardware D01/B5 and final
 holdout evaluation remain pending.
+
+## Subsequent resistance report, October 29
+
+The operator later reported series-resistor displays of 0.996, 0.996,
+0.999 and 0.994 kΩ at columns 35, 40, 45 and 50, respectively, and 9.98 kΩ
+for each 10 kΩ pull-down. They explicitly confirmed USB was disconnected
+but the resistors remained installed. These are **in-circuit readings**,
+not isolated component measurements; other paths may affect the readings.
+Do not use them as calibrated individual resistance values or claim a
+verified tolerance from them. The meter range was not specified anew.
+
+The new [operator record](operator/20261029T005333-1caa781976/events.jsonl)
+and its [copy provenance](operator/20261029T005333-1caa781976/provenance.json)
+retain the readings and clarification. Earlier event chains and the
+original export verification remain unchanged. No serial, stimulus or
+firmware action was performed for this update. Photo review, isolated
+values where required, and powered U2/ADC verification are still pending.
 
 `wiring-design/` retains the proposed table and the connectivity calculation
 used before the assembly report. It checks occupied holes, supplies,

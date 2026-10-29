@@ -3,8 +3,9 @@
 Latest status, 2026-10-29 Asia/Seoul: U1 REF and driver gross DC checks
 are recorded; two ten-minute USB windows passed after earlier disconnects.
 The operator reports U2/A1–A4 assembly and the requested continuity checks
-complete. New resistor measurements, a photo review, powered U2/ADC checks,
-instrument-v2 upload/reset checks and D2 calibration remain pending.
+complete. Six in-circuit resistor readings have since been reported with
+USB disconnected; isolated component values, a photo review, powered
+U2/ADC checks, instrument-v2 upload/reset checks and D2 calibration remain pending.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -629,6 +630,31 @@ diagnostics, credentials, holdout originals, private coursework PDFs and
 unreviewed images are excluded. A separately timestamped session report
 records the latest operator confirmation without backdating it or
 rewriting older `pending` events.
+
+## Follow-up resistance readings — in circuit, USB disconnected
+
+On 2026-10-29 the operator supplied the following displays and explicitly
+confirmed that USB was unplugged but all resistors remained installed.
+Units are interpreted as kΩ from the established wiring context; no new
+meter range or photograph was supplied.
+
+| Location | Role | Nominal | Operator display |
+| --- | --- | --- | --- |
+| D35–G35 | A1 series | 1 kΩ | 0.996 kΩ |
+| D40–G40 | A2 series | 1 kΩ | 0.996 kΩ |
+| D45–G45 | A3 series | 1 kΩ | 0.999 kΩ |
+| D50–G50 | A4 series | 1 kΩ | 0.994 kΩ |
+| I20–I27 | OUT buffer pull-down | 10 kΩ | 9.98 kΩ |
+| D21–D27 | Auxiliary buffer pull-down | 10 kΩ | 9.98 kΩ |
+
+The reports and clarification are retained in the new operator record
+`examples/hardware-fixture-bringup/operator/20261029T005333-1caa781976`,
+copied unchanged from `runs/hardware-fixture-resistors/20261029T005333-1caa781976`.
+The earlier session-close record is unchanged. These numbers are near
+nominal but may include other circuit paths; they are not certified
+individual resistor values, tolerance measurements or calibrated model
+parameters. No hardware command or powered acquisition was performed
+during this update. Photo review and powered U2/ADC checks remain pending.
 
 ## Standing conventions (current)
 
