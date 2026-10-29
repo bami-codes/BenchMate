@@ -1,13 +1,15 @@
 # U2 midpoint and spare Minima bring-up — October 29, 2026
 
-**Hardware preparation, not completed calibration or circuit diagnosis.**
+**Provisional DC path calibration and one sine check; full D2 acceptance and circuit diagnosis remain incomplete.**
 
 **Current:** measured 100.8 kohm input pull-down installed at B13–E16.
-Operator startup supply/REF/input/driver readings are
-4.88/1.631/0.003/0.002 V. The first PING fails without output commands;
-confirmed single RESET then restores a new unarmed boot. REF code 1369
-and a 512-frame raw midpoint block pass. Fresh DMM readings for that
-driven midpoint remain pending; no calibration fit or USB cure is claimed.
+Three DC references, 0.641/1.624/2.591 V, now have complete ADC blocks.
+The high-point failure, manual RESET and fresh measurement are retained;
+the provisional fit explicitly spans that reset, with unchanged fixture.
+A1–A3 maximum fitted-point residual is 1.040 mV, not absolute accuracy.
+A subsequent 5 Hz, nominal 0.2 V sine check passes without refitting.
+The last post-PING confirms return to REF code 1369. A4 gain, full-band
+checks and USB reliability remain unestablished.
 
 The following paragraphs retain the chronological history.
 The operator subsequently confirmed transfer of the seven fixture leads
@@ -107,6 +109,13 @@ failure; a single RESET is requested. The USB cause and calibration remain open.
 | `minima-input-pulldown/` | Isolated 100.8 kohm value, C13 obstruction and confirmed B13–E16 installation recorded |
 | `minima-pulldown-startup-failed/` | Startup voltages retained; first PING receives no bytes, no ARM or CAPTURE sent |
 | `minima-pulldown-reset-startup/` | Manual single RESET, new unarmed boot, explicit REF and one 512-frame midpoint block pass; fresh driven-point DMM pending |
+| `minima-dc-pulldown-mid-point/`, `minima-dc-pulldown-mid-block/`, `minima-dc-pulldown-low-held/` | Fresh midpoint DMM and 512-frame block pass; common-input path calibration defined before low/high reports; low code 545 held |
+| `minima-dc-pulldown-low-point/`, `minima-dc-pulldown-low-block/`, `minima-dc-pulldown-high-held/` | D45/D50=0.641/1.629 V and same-boot 512-frame block pass; unmeasured node voltages remain null; high code 2182 held |
+| `minima-dc-pulldown-high-failed/`, `minima-dc-pulldown-high-handshake-failed/` | First high report derives 2.590 V; initial PING fails before CAPTURE/REF-return, no pair accepted |
+| `minima-high-recovery/` | Manual single RESET; new unarmed boot; REF and high blocks saved before fresh DMM; high held at code 2182 |
+| `minima-dc-pulldown-high-recovery-point/`, `minima-dc-pulldown-high-recovery-block/`, `minima-dc-pulldown-return-ref-held/` | Fresh 1.627/0.964/1.627 V report derives 2.591 V; post-DMM block passes and REF hold is confirmed |
+| `minima-three-point-analysis/` | Offline provisional A1–A3 affine map, DAC-to-driver fit, A4 offset diagnostic and explicit reset boundary; no hardware IO or inference |
+| `minima-loopback-sine-check/`, `minima-loopback-sine-block/` | Frozen-map 5 Hz/0.2 V check passes relative path gates; 512 raw frames retained, ends at REF |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -133,7 +142,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Sixty-eight chains contain 2,161 events.
+hashes and event-chain terminal states. Eighty-three chains contain 2,270 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -365,3 +374,52 @@ Nominal means for A1/A2/A3/A4 are 1.62739/1.62760/1.62839/1.64421 V.
 All samples, including larger deviations, remain. The startup input/REF
 DMM report is not a driven midpoint calibration pair. Fresh B13 and four
 measurement-node DMM readings are requested without changing output.
+
+Those midpoint readings are subsequently reported on DC 2 V as
+B13/D35/D40/D45/D50 = 1.624/1.624/1.623/1.624/1.631 V. A subsequent
+512-frame midpoint block passes; the first startup block is retained
+separately. Before the low/high readings, the calibration reference is
+defined as D45 on the common signal node with the shunt bypass and
+IN–OUT bridge installed. A1/A3 and the entire U2-buffer-plus-A2 path
+therefore use D45 as their target input voltage. D40's measured midpoint
+voltage is a separate diagnostic, not the A2 end-to-end calibration target.
+
+The low D45/D50 report is 0.641/1.629 V; D35/D40 are unmeasured and remain
+null. Its 512-frame block passes on the same boot, with no overruns and
+1998–2003 us intervals. After capture parks at REF, high code 2182 is
+set for nominal 2.60 V. Only D45 and D50 are requested at the high point:
+DC 2 V readings of REF before, D45 minus REF, and REF after. No point
+from the older fixture/boot is silently combined into this series. A4
+remains a fixed-REF observation, not a multi-point gain calibration.
+
+The first high report was 1.626/0.964/1.626 V with slight, unquantified
+display fluctuation, deriving D45=2.590 V. Its later acquisition attempt
+failed at initial PING and sent no CAPTURE or REF-return command. After
+confirmed single RESET with wiring and USB retained, a new initial boot
+passed a REF block and a high block, then held high again for a fresh
+report. The new report is 1.627/0.964/1.627 V, deriving 2.591 V. A further
+high block and REF return pass on that new boot. The failed report is
+not silently reused as its calibration anchor.
+
+The provisional affine maps use the three D45 references with all raw
+samples retained. A2 is calibrated end-to-end to its OUT input. Maximum
+fitted-point residuals are A1 1.004 mV, A2 0.837 mV and A3 1.040 mV.
+Endpoint-only interpolation misses the midpoint by about 1.25–1.56 mV;
+this is an internal consistency diagnostic, not an independent holdout.
+The unchanged REF code's A1/A2/A3 mean count changes across RESET are
+0.043/−0.766/0.193, but the physical midpoint was not remeasured after
+that reset. The boundary and this limitation are explicit in the fit.
+A4's candidate constant offset leaves a maximum 4.568 mV residual with
+its gain assumed nominal; it is not a multi-point A4 calibration.
+
+A subsequent single 5 Hz, nominal 0.2 V sine check uses the frozen maps
+and each channel's read-completion times. A1/A2 RMS differences from a
+sinusoid fitted to A3 are 1.366/1.653 mV, with amplitude ratios
+1.000298/1.000362. Predeclared relative-consistency gates pass. The
+0.264/0.130 degree fitted phase differences include sampled DAC hold and
+timestamp effects; they are not isolated op-amp delays or calibrated
+apertures. This verifies one relative small-signal condition, not
+independent absolute voltage accuracy or full-band performance. A4,
+noise-model adequacy and hardware-inference acceptance remain pending.
+The final post-PING confirms REF code 1369; no additional hardware or
+output command follows this check in these records.

@@ -1,0 +1,91 @@
+{
+  "point": "pulldown-low",
+  "raw_capture_record": "runs/hardware-minima-capture/20261029T093232-d783518fc8",
+  "samples_per_channel": 512,
+  "boot_id": "019190dbdf4f80d8a5ae9f53a7f3368a",
+  "held_code_before_capture": 545,
+  "channels": {
+    "A1": {
+      "mean_counts": 2166.70703125,
+      "std_counts": 7.460536054083897,
+      "min_counts": 2109,
+      "max_counts": 2211,
+      "nominal_mean_v": 0.6453964666117317,
+      "DMM_v": null,
+      "DMM_at_this_node_reported": false,
+      "sequential_nominal_ADC_minus_DMM_mV": null,
+      "end_to_end_reference_v": 0.641,
+      "reference_contact": "D45 common signal",
+      "sequential_nominal_ADC_minus_path_reference_mV": 4.396466611731653,
+      "nominal_std_mV": 2.2222679572684743,
+      "max_abs_deviation_counts": 57.70703125
+    },
+    "A2": {
+      "mean_counts": 2169.31640625,
+      "std_counts": 5.304567722547425,
+      "min_counts": 2132,
+      "max_counts": 2204,
+      "nominal_mean_v": 0.6461737204724409,
+      "DMM_v": null,
+      "DMM_at_this_node_reported": false,
+      "sequential_nominal_ADC_minus_DMM_mV": null,
+      "end_to_end_reference_v": 0.641,
+      "reference_contact": "D45 common signal",
+      "sequential_nominal_ADC_minus_path_reference_mV": 5.1737204724409125,
+      "nominal_std_mV": 1.5800702243808482,
+      "max_abs_deviation_counts": 37.31640625
+    },
+    "A3": {
+      "mean_counts": 2171.439453125,
+      "std_counts": 6.834945753821388,
+      "min_counts": 2118,
+      "max_counts": 2208,
+      "nominal_mean_v": 0.64680611189953,
+      "DMM_v": 0.641,
+      "DMM_at_this_node_reported": true,
+      "sequential_nominal_ADC_minus_DMM_mV": 5.806111899529953,
+      "end_to_end_reference_v": 0.641,
+      "reference_contact": "D45 common signal",
+      "sequential_nominal_ADC_minus_path_reference_mV": 5.806111899529953,
+      "nominal_std_mV": 2.03592353528953,
+      "max_abs_deviation_counts": 53.439453125
+    },
+    "A4": {
+      "mean_counts": 5519.76953125,
+      "std_counts": 4.375435049658138,
+      "min_counts": 5492,
+      "max_counts": 5545,
+      "nominal_mean_v": 1.6441723318378807,
+      "DMM_v": 1.629,
+      "DMM_at_this_node_reported": true,
+      "sequential_nominal_ADC_minus_DMM_mV": 15.172331837880693,
+      "end_to_end_reference_v": 1.629,
+      "reference_contact": "D50 fixed REF",
+      "sequential_nominal_ADC_minus_path_reference_mV": 15.172331837880693,
+      "nominal_std_mV": 1.3033097138699696,
+      "max_abs_deviation_counts": 27.76953125
+    }
+  },
+  "frame_interval_us_min": 1998,
+  "frame_interval_us_max": 2003,
+  "overruns": 0,
+  "ADC_states_before": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "ADC_states_after": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "limits": [
+    "Sequential DMM report then ADC; not simultaneous, DMM accuracy not established.",
+    "Nominal volts use the recorded 4.88 V supply display, not an independently frozen gain.",
+    "A4 is fixed REF; no A4 multi-point gain calibration.",
+    "No trimming or calibration acceptance from this block.",
+    "D45 is the common calibration input with bypass/IN\u2013OUT bridge installed. A2 refers to the buffer-plus-ADC path, not a measured D40 voltage when DMM_v is null."
+  ]
+}

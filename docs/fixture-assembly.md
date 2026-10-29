@@ -1,15 +1,16 @@
 # D2 physical assembly — coordinate record
 
-Latest status, 2026-10-29 Asia/Seoul: the operator installed the measured
-100.8 kohm input pull-down at B13–E16, using B13 because the divider
-resistor obstructs C13. Reconnected supply/REF/input/driver readings are
-4.88/1.631/0.003/0.002 V before DAC setup. The first PING failed without
-ARM or CAPTURE. After confirmed single RESET, new unarmed boot
-`019190dbdf4f80d8a5ae9f53a7f3368a` passed REF setup at code 1369 and one
-512-frame midpoint capture. Timing and provisional gross-voltage guards
-passed; calibration and USB reliability remain unestablished. Fresh
-B13/D35/D40/D45/D50 DC 2 V readings are requested while output stays at
-the same code. No additional ten-minute monitoring prerequisite.
+Latest status, 2026-10-29 Asia/Seoul: the measured 100.8 kohm input
+pull-down is installed at B13–E16. Three DC path-reference points are
+0.641/1.624/2.591 V, with 512-frame blocks and no overruns. A high-point
+PING failure remains rejected; after a confirmed single RESET, that point
+was newly measured on boot `58d7c1c8418e4792edb4628854a46bb1`. The reset
+boundary is explicit in the provisional fit. A1–A3 maximum fit residual
+is 1.040 mV, not an absolute accuracy claim. A subsequent 5 Hz, nominal
+0.2 V sine consistency check passes with the frozen provisional map.
+The last post-PING confirms REF code 1369. Full D2 acceptance, A4 gain
+calibration, broader frequency checks and USB reliability remain open.
+No more DMM readings are currently requested for this three-point series.
 
 Chronological assembly history: U1 REF and driver gross DC checks
 are recorded; two ten-minute USB windows passed after earlier disconnects.

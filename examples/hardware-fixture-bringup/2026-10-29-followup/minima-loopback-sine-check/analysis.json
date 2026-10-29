@@ -1,0 +1,52 @@
+{
+  "capture_record": "runs/hardware-minima-capture/20261029T103205-cd3dad55d3",
+  "boot_id": "58d7c1c8418e4792edb4628854a46bb1",
+  "channels": {
+    "A1": {
+      "fitted_amplitude_v": 0.19897395613793678,
+      "fitted_phase_rad": -0.0013439076545962427,
+      "fitted_offset_v": 1.6231695635157655,
+      "own_sine_fit_RMS_mV": 1.167318576489566,
+      "max_abs_own_fit_residual_mV": 8.529025912999755
+    },
+    "A2": {
+      "fitted_amplitude_v": 0.19898672722718436,
+      "fitted_phase_rad": -0.0036659082053041455,
+      "fitted_offset_v": 1.6230669812585607,
+      "own_sine_fit_RMS_mV": 1.6116264396733473,
+      "max_abs_own_fit_residual_mV": 16.452117954483647
+    },
+    "A3": {
+      "fitted_amplitude_v": 0.19891471498885135,
+      "fitted_phase_rad": -0.0059429544252575526,
+      "fitted_offset_v": 1.6229140140190033,
+      "own_sine_fit_RMS_mV": 1.5640325968072817,
+      "max_abs_own_fit_residual_mV": 15.209926829714338
+    }
+  },
+  "comparisons": {
+    "A1": {
+      "RMS_vs_fitted_driver_mV": 1.3660747446393546,
+      "fitted_amplitude_ratio": 1.0002978218533944,
+      "relative_phase_deg": 0.2635059697421668,
+      "pass": true
+    },
+    "A2": {
+      "RMS_vs_fitted_driver_mV": 1.6526298549828902,
+      "fitted_amplitude_ratio": 1.0003620256969779,
+      "relative_phase_deg": 0.13046513815955355,
+      "pass": true
+    }
+  },
+  "all_checks_pass": true,
+  "overruns": 0,
+  "samples_per_channel": 512,
+  "parked_ref_code": 1369,
+  "profile_changed": false,
+  "limits": [
+    "Read-completion timestamps, not calibrated sample apertures.",
+    "Reference sinusoid is fitted to driver data from this block; this is a relative path consistency test, not an independent absolute-voltage reference.",
+    "A4 and full-frequency-band validation remain incomplete.",
+    "All samples retained; RMS checks do not certify a Gaussian or AR(1) noise model."
+  ]
+}

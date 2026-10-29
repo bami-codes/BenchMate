@@ -1,0 +1,54 @@
+{
+  "boot_id": "58d7c1c8418e4792edb4628854a46bb1",
+  "captured_code": 2182,
+  "configuration": {
+    "vref_v": 4.88,
+    "ref_v": 1.631,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "samples": 512,
+  "channels": {
+    "A1": {
+      "mean_counts": 8716.9140625,
+      "std_counts": 7.224688422239013,
+      "min_counts": 8645,
+      "max_counts": 8749,
+      "nominal_mean_v": 2.5965049517792838
+    },
+    "A2": {
+      "mean_counts": 8714.935546875,
+      "std_counts": 7.886036738070502,
+      "min_counts": 8646,
+      "max_counts": 8773,
+      "nominal_mean_v": 2.595915611838495
+    },
+    "A3": {
+      "mean_counts": 8717.939453125,
+      "std_counts": 4.296069073592542,
+      "min_counts": 8685,
+      "max_counts": 8744,
+      "nominal_mean_v": 2.596810384621248
+    },
+    "A4": {
+      "mean_counts": 5503.587890625,
+      "std_counts": 4.276190149589947,
+      "min_counts": 5478,
+      "max_counts": 5528,
+      "nominal_mean_v": 1.6393523107031722
+    }
+  },
+  "gross_checks": {
+    "raw_not_at_rails": true,
+    "means_near_targets_100mV": true,
+    "all_samples_near_targets_150mV": true,
+    "signal_channel_mean_spread_50mV": true
+  },
+  "frame_interval_us_min": 1998,
+  "frame_interval_us_max": 2003,
+  "overruns": 0,
+  "fresh_high_DMM_pending": true,
+  "calibration_performed": false,
+  "all_samples_retained": true,
+  "prior_high_DMM_not_used_as_this_block_reference": true
+}
