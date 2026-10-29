@@ -8,7 +8,9 @@ now confirmed; three raw midpoint blocks passed acquisition integrity
 checks. A later capture attempt failed before CAPTURE because the initial
 PING received no bytes. A separate PING-only check also failed while the
 serial device remained listed. Calibration and long-duration stability
-remain incomplete.
+remain incomplete. The operator subsequently confirmed USB reconnection;
+a new boot answered PING, and explicit re-arm plus one additional midpoint
+block passed. This does not identify the earlier communication fault.
 
 | Record | Observed result |
 | --- | --- |
@@ -28,6 +30,8 @@ remain incomplete.
 | `valid-midpoint-block-2/`, `valid-midpoint-block-3/`, `midpoint-repeat-analysis/` | Two additional same-condition blocks investigate larger deviations, all raw samples retained |
 | `precise-midpoint-attempt/`, `precise-midpoint-handshake-failed/` | DC 2 V operator readings retained; new attempt stopped at initial PING, no CAPTURE sent and zero accepted samples |
 | `minima-handshake-review/` | Separate PING-only diagnostic also received zero bytes; Minima remained enumerated before/after, no output commands |
+| `minima-sda-check/` | D50/SDA both 1.633 V reported; PING answered with new boot ID and unarmed state |
+| `minima-reconnected-midpoint/`, `minima-reconnected-arm/`, `minima-reconnected-block/` | Operator USB reconnection confirmed; explicit new-ID ARM and one 512-frame block passed, raw data and source snapshots retained |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -54,7 +58,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Twenty-three chains contain 376 events.
+hashes and event-chain terminal states. Twenty-seven chains contain 405 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -112,3 +116,19 @@ header labelled SDA (the A4 signal) to distinguish a possible lead/contact
 drop from the earlier uncalibrated ADC discrepancy. No reset, stimulus or
 firmware change is made during that check. Its result, multi-point
 calibration and physical interruption during acquisition remain pending.
+
+The operator later reported D50/SDA = 1.633/1.633 V and confirmed USB
+reconnection. Exact reconnection time and measurement order relative to
+reconnection were not supplied. At 14:46 KST a PING returned a new boot ID,
+397490 ms uptime and unarmed state. An explicit new-ID ARM at code 1373
+then preceded a single 512-frame HOLD block. The same boot ID, timing and
+used-register checks passed; frame intervals were 1999–2003 us with zero
+overruns. A1/A2/A3/A4 raw means are 5482.87/5477.43/5482.25/5479.18 counts.
+Nominal within-block SDs span 1.39–2.08 mV; larger tails remain untrimmed.
+
+The earlier positive A4-to-A3 difference is not reproduced: A4 is about
+3.07 counts below A3 in this block. Its cause is not established, and no
+cross-boot calibration correction is applied. Nominal volts still use
+the older 4.86 V supply reading. Fresh supply/D45/D50 displays are now
+requested with output, wiring and USB unchanged. The prior failed runs
+remain failed, and this brief success is not a long-duration stability test.

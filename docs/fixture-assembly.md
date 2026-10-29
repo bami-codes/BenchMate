@@ -32,7 +32,12 @@ A fresh capture attempt received no initial PING response, so no CAPTURE
 command was sent and zero samples were accepted. A separate PING-only
 check also received no response while the Minima serial identity remained
 listed. Current boot continuity/output state cannot be confirmed over
-serial. Calibration remains incomplete.
+serial in that failed check. The operator later reported D50/SDA both
+1.633 V and confirmed USB reconnection. A subsequent PING returned a new
+boot ID and unarmed state. Explicit re-arm and one new 512-frame block
+passed; A4's earlier positive channel difference was not reproduced.
+Fresh supply/D45/D50 displays are requested. Calibration and the cause of
+the earlier unresponsiveness remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1054,6 +1059,57 @@ are retained in `precise-midpoint-attempt/`,
 `precise-midpoint-handshake-failed/` and `minima-handshake-review/` in the
 October 29 public follow-up bundle. No firmware or wiring changed during
 these software checks.
+
+## Operator USB reconnection and a new-boot midpoint block
+
+The operator subsequently reported `D50 1.633V, SDA 1.633V` on DC 2 V,
+relative to the same Arduino GND rail. At the displayed precision this
+does not show a breadboard-to-board lead/contact voltage drop. The two
+contacts were measured sequentially; no resistance bound or ADC offset
+is inferred. Both readings also differ from the earlier 1.629 V display,
+so they are not substituted into the earlier capture records.
+
+At 14:46 KST a PING-only status check returned boot ID
+`00577aec01ebd2245c7d99edcd14432b`, uptime 397490 ms, `armed:false` and
+all four used ADC sampling states at 255. No output or reset command was
+sent during that check. The user then confirmed `USB를 다시 연결했어`.
+The exact reconnection time and whether DMM readings preceded/followed it
+were not supplied. This report is consistent with the new boot; it does
+not establish the cause of the earlier enumerated-but-unresponsive state.
+The new session is not a continuation of the old boot's measurements.
+
+With the existing no-DUT calibration wiring, an explicit new-ID ARM at
+code 1373 was followed by one 512-frame HOLD block at 2000 us requested
+intervals. Both operations and their post-PING checks passed. The uploaded
+firmware source is unchanged. The conversion retains the earlier 4.86 V
+supply value, pending a fresh DMM reading after reconnection.
+
+| Channel | Mean raw counts | Nominal mean using earlier 4.86 V | Within-block SD |
+| --- | --- | --- | --- |
+| A1 | 5482.87 | 1.62649 V | 1.39 mV |
+| A2 | 5477.43 | 1.62487 V | 2.08 mV |
+| A3 | 5482.25 | 1.62630 V | 1.63 mV |
+| A4 | 5479.18 | 1.62539 V | 1.45 mV |
+
+Frame intervals were 1999–2003 us, with zero overruns and ADC state 255
+on all four used channels before/after. The same new boot ID was verified
+through both operations. All raw samples are retained; the largest
+within-block deviation was approximately 17.33 mV on A2. No Gaussian
+noise model, outlier removal or accuracy claim is applied.
+
+A4 is approximately 3.07 counts below A3 in this block, whereas it was
+about 40–45 counts above A3 in the previous boot's three blocks. The
+previous difference was not reproduced, but its cause is unestablished.
+The DMM readings and acquisitions were not simultaneous and do not
+support a cross-boot offset correction. The output is now parked at code
+1373. Next requested check: supply on DC 20 V, then D45 and D50 on DC 2 V,
+with USB, RESET and wiring unchanged. No multi-point calibration or
+long-duration reliability claim follows from this short successful block.
+
+See `minima-sda-check/`, `minima-reconnected-midpoint/`,
+`minima-reconnected-arm/` and `minima-reconnected-block/` in the October 29
+public evidence bundle for exact sources and raw records. Earlier failed
+records remain unchanged.
 
 ## Standing conventions (current)
 

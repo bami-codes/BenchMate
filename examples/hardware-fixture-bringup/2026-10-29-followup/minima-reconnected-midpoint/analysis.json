@@ -1,0 +1,63 @@
+{
+  "source": "hardware_uncalibrated",
+  "raw_capture_record": "runs/hardware-minima-capture/20261029T054821-4327661a62",
+  "accepted_frames": 512,
+  "channels": {
+    "A1": {
+      "mean_counts": 5482.87109375,
+      "std_counts": 4.677776117774715,
+      "nominal_mean_v": 1.6264880373329063,
+      "nominal_std_mV": 1.3876574456683828,
+      "nominal_max_deviation_mV": 10.717602659769273,
+      "min_counts": 5463,
+      "max_counts": 5519
+    },
+    "A2": {
+      "mean_counts": 5477.42578125,
+      "std_counts": 7.000863755417456,
+      "nominal_mean_v": 1.6248726910135507,
+      "nominal_std_mV": 2.076798989887618,
+      "nominal_max_deviation_mV": 17.3319475599707,
+      "min_counts": 5419,
+      "max_counts": 5527
+    },
+    "A3": {
+      "mean_counts": 5482.24609375,
+      "std_counts": 5.50022098604259,
+      "nominal_mean_v": 1.6263026317295368,
+      "nominal_std_mV": 1.6316348649311476,
+      "nominal_max_deviation_mV": 16.092047587438202,
+      "min_counts": 5428,
+      "max_counts": 5515
+    },
+    "A4": {
+      "mean_counts": 5479.177734375,
+      "std_counts": 4.882739713253971,
+      "nominal_mean_v": 1.6253924060954954,
+      "nominal_std_mV": 1.448459684210114,
+      "nominal_max_deviation_mV": 9.842140576359641,
+      "min_counts": 5446,
+      "max_counts": 5507
+    }
+  },
+  "frame_interval_us_min": 1999,
+  "frame_interval_us_max": 2003,
+  "overruns": 0,
+  "ADC_states_before": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "ADC_states_after": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "limits": [
+    "Conversion uses earlier 4.86 V supply, not freshly measured.",
+    "DMM and ADC were not simultaneous; no ADC error or fit is calculated.",
+    "No trimming; this block does not establish long-duration communication reliability."
+  ]
+}

@@ -330,6 +330,51 @@
       "source": "runs/hardware-minima-handshake-review/20261029T023304-3dc8e37813/controller-source.py",
       "published": "minima-handshake-review/controller-source.py",
       "sha256": "aeaeb46e33f319c5b5b79aca4ec78617732297b53c8b6de0dae88890078e361b"
+    },
+    {
+      "source": "runs/hardware-minima-sda-check/20261029T054628-fcf7911b05/events.jsonl",
+      "published": "minima-sda-check/events.jsonl",
+      "sha256": "8676fd04c62fa7bf2c8ccadb1a85dfcec6727d0658715b27c6780b6244b82027"
+    },
+    {
+      "source": "runs/hardware-minima-sda-check/20261029T054628-fcf7911b05/controller-source.py",
+      "published": "minima-sda-check/controller-source.py",
+      "sha256": "fd92176ec12ee57c56bc1b45237d6061b85947107a282ece5dfebb629ee24397"
+    },
+    {
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3/events.jsonl",
+      "published": "minima-reconnected-midpoint/events.jsonl",
+      "sha256": "07be4294abac9587ae6d26a8c15f7bb2b3f86c2c05c13ad531ad28a1599f8908"
+    },
+    {
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3/controller-source.py",
+      "published": "minima-reconnected-midpoint/controller-source.py",
+      "sha256": "587a1fb13c5a51b087194b1a93e0e4be60195a9dcde8bc640d3ff426117273d0"
+    },
+    {
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3/host-instrument.py",
+      "published": "minima-reconnected-midpoint/host-instrument.py",
+      "sha256": "0db9569118b2a2469576bc84fad8ad277552a50073d8352e6486fa4e2a050eb2"
+    },
+    {
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3/instrument.ino",
+      "published": "minima-reconnected-midpoint/instrument.ino",
+      "sha256": "023b81285c55ac078be1ca201022006fbf2b6e68cfecd988620c6ecf652de44d"
+    },
+    {
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3/analysis.json",
+      "published": "minima-reconnected-midpoint/analysis.json",
+      "sha256": "3de1864655e9bee38024dd3f698c04eb4a3a013d7ebbb0b19fb0d195dbd7a21b"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T054817-a4725bb28a/events.jsonl",
+      "published": "minima-reconnected-arm/events.jsonl",
+      "sha256": "b333f28f0c8d342e9f3e70e27e6dcafca8cd08f037cd86c0f4fdc71dcbdee54e"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T054821-4327661a62/events.jsonl",
+      "published": "minima-reconnected-block/events.jsonl",
+      "sha256": "971cff2ebc52fb6a3a5b70e60010fe534539b663a02b35387276baf7012fc83d"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -694,7 +739,95 @@
         "stimulus_command_sent": false,
         "automatic_retry": false
       }
+    },
+    {
+      "folder": "minima-sda-check",
+      "source": "runs/hardware-minima-sda-check/20261029T054628-fcf7911b05",
+      "events": 9,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "response": {
+          "protocol": "benchmate-instrument-v2",
+          "type": "pong",
+          "boot_id": "00577aec01ebd2245c7d99edcd14432b",
+          "boot_id_ready": true,
+          "uptime_ms": 397490,
+          "adc_bits": 14,
+          "dac_bits": 12,
+          "calibrated": false,
+          "max_samples": 512,
+          "armed": false,
+          "ref_code": 0,
+          "max_jump_code": 0,
+          "adc_sample_state_channels": [
+            0,
+            1,
+            2,
+            21
+          ],
+          "adc_sample_states_readback": [
+            255,
+            255,
+            255,
+            255
+          ]
+        },
+        "same_as_previous_boot": false,
+        "stimulus_command_sent": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-reconnected-midpoint",
+      "source": "runs/hardware-minima-reconnected-midpoint/20261029T054817-d018cd80f3",
+      "events": 8,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "arm_record": "runs/hardware-minima-capture/20261029T054817-a4725bb28a",
+        "capture_record": "runs/hardware-minima-capture/20261029T054821-4327661a62",
+        "boot_id": "00577aec01ebd2245c7d99edcd14432b",
+        "accepted_frames": 512,
+        "parked_ref_code": 1373,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-reconnected-arm",
+      "source": "runs/hardware-minima-capture/20261029T054817-a4725bb28a",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "reference_established": true,
+        "diagnosis_performed": false,
+        "instruction": "Check REF, attach the test circuit, then capture with --boot-id set to this boot_id.",
+        "boot_id": "00577aec01ebd2245c7d99edcd14432b",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 505968,
+        "uptime_ms_end": 508374
+      }
+    },
+    {
+      "folder": "minima-reconnected-block",
+      "source": "runs/hardware-minima-capture/20261029T054821-4327661a62",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1999,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1373,
+        "boot_id": "00577aec01ebd2245c7d99edcd14432b",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 510385,
+        "uptime_ms_end": 513361
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T02:33:56.258050+00:00"
+  "last_appended_at_utc": "2026-10-29T05:49:47.755104+00:00"
 }
