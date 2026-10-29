@@ -16,6 +16,7 @@ below retain the initial unsuccessful identity check as well as the pass.
 | `minima-transfer-precheck/` | Transfer reported, but old ID and continuing uptime did not establish a new boot; stopped before output commands |
 | `minima-midpoint-attempt/` | Operator midpoint 1.61/1.61/1.61/1.62 V; one requested capture failed validation |
 | `minima-midpoint-rejected/` | 512 raw frames retained, zero accepted samples; old host and firmware snapshots match recorded hashes |
+| `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
 
@@ -41,7 +42,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Eleven chains contain 258 events.
+hashes and event-chain terminal states. Twelve chains contain 264 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -60,7 +61,12 @@ retroactively accepted.
 A4 also differs physically: D50 on the REF side is 1.62 V while G50 on
 the ADC side is 2.15 V per a separate DMM report. A roughly 5.1 kohm path
 toward +5 V is one hypothesis, not yet a confirmed component or wiring
-cause. Next requested check: USB off, verify/remove only the A4 board-side
-wire, measure board A4-to-5V resistance in both polarities, leave unplugged.
-No bypass or hardware modification has been requested. Physical interruption
-during acquisition and D2 calibration remain pending.
+cause. The subsequent board resistance report is 5.19–5.20 kohm both ways with
+external A4 disconnected, supporting that model without identifying a
+specific physical component. Next requested revision: USB off, replace
+only D50–G50's 1 kohm with a short jumper, reconnect H50 to A4, confirm
+continuity and recheck supply/D50/G50. The remaining series resistors and
+REF pull-down stay installed. This exception is for internal buffered REF
+only; its measured noise/load behavior still requires verification. The
+original and revised connectivity checks are retained separately.
+Physical completion, firmware upload and D2 calibration remain pending.

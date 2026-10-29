@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checks": [
+    "no occupied-hole collisions",
+    "DUT terminals free",
+    "supply and GND distinct",
+    "both U2 feedbacks correct",
+    "pull-down returns correct",
+    "A1-A3 each behind separate 1k; A4 direct to buffered REF",
+    "driver/REF/measurement-buffer outputs not hard-tied",
+    "calibration bridge removable",
+    "shunt position has no bypass after jumper removal",
+    "aux park removable"
+  ],
+  "additional_resistors": {
+    "10k": 2,
+    "1k": 3
+  },
+  "additional_capacitors": {
+    "0.1uF": 1
+  },
+  "additional_jumpers": 19,
+  "scope": "Revised connectivity design only. A4 has no series protection and is restricted to this internally buffered REF; DMM/noise/load checks pending."
+}

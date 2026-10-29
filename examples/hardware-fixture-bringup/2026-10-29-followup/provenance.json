@@ -165,6 +165,21 @@
       "source": "runs/wifi-adc-check-compile.log",
       "published": "adc-readback-fix/wifi-adc-check-compile.log",
       "sha256": "7fc92f86156a9de6cc4579c0a14f63d162856df71e55c601607da0272832f04c"
+    },
+    {
+      "source": "runs/hardware-minima-a4-resistance/20261029T020213-340d5541f1/events.jsonl",
+      "published": "minima-a4-resistance/events.jsonl",
+      "sha256": "7540c456d9bf5a5de69e3c2543fabbcd9267f12296ef526db10dcf624b3f9180"
+    },
+    {
+      "source": "runs/hardware-minima-a4-resistance/20261029T020213-340d5541f1/connectivity-check.py",
+      "published": "minima-a4-resistance/connectivity-check.py",
+      "sha256": "f0e42103591f3f0651f9bda9a31af465d8226116b88179a69646d32cd59bf501"
+    },
+    {
+      "source": "runs/hardware-minima-a4-resistance/20261029T020213-340d5541f1/connectivity-result.json",
+      "published": "minima-a4-resistance/connectivity-result.json",
+      "sha256": "7459818e326f419272f55bf495d55a62c4618f9564533313a55f3d0a8bbe34c3"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -331,7 +346,19 @@
         "ADC_samples_accepted": 0,
         "root_cause_confirmed": false
       }
+    },
+    {
+      "folder": "minima-a4-resistance",
+      "source": "runs/hardware-minima-a4-resistance/20261029T020213-340d5541f1",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "record_only": true,
+        "hardware_commands_sent": false,
+        "operator_revision_confirmation": "pending",
+        "ADC_samples_accepted": 0
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T01:48:50.570362+00:00"
+  "last_appended_at_utc": "2026-10-29T02:03:30.149536+00:00"
 }

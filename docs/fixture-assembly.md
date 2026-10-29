@@ -20,8 +20,10 @@ and the final reopened PING passed. DMM D35/D40/D45/D50 readings were
 by the ADC-state check; zero samples were accepted. A used-register-only
 software fix is compiled/tested, not uploaded. D50/G50 DMM readings of
 1.62/2.15 V also establish a reported physical A4-series-resistor voltage
-difference. The operator is asked to power off and isolate the A4 board
-connection for a resistance check. Calibration remains incomplete.
+difference. The isolated external A4 connection check reported board
+A4-to-5V resistance 5.19–5.20 kohm in both probe polarities. Replacing only
+D50–G50 with a short jumper for fixed buffered REF sensing is requested;
+completion and new supply/REF readings are pending. Calibration remains incomplete.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -908,6 +910,38 @@ retained in `minima-midpoint-attempt/`, `minima-midpoint-rejected/` and
 and host source hashes match the actual acquisition; new code does not
 replace the source associated with that failed record.
 
+## A4 board resistance report and fixed-REF sense revision
+
+The operator reported A4 pin location confirmed and A4-to-5V resistance
+5.19–5.20 kohm in both probe polarities (20 kohm range), following the
+instruction to unplug USB and remove only the external A4 board-side lead.
+This is a board in-circuit measurement, not identification of a particular
+SMD resistor. Together with D50/G50=1.62/2.15 V, it strongly supports a
+pull-up-like path. A 5.195 kohm pull-up and the earlier 0.994 kohm series
+reading predict about 2.14 V on A4, consistent with the coarse DMM result.
+
+The revised fixture replaces only D50–G50's series resistor with a short
+jumper, then reconnects H50 to A4. A1–A3 series resistors and both existing
+U1 pull-downs remain. This direct connection is restricted to sensing the
+internal buffered REF; it is not an external-input protection policy.
+At the previous 4.88/1.62 V readings, the inferred board path contributes
+about 0.63 mA into REF. Its existing 1.001 kohm pull-down draws about
+1.62 mA, leaving roughly 0.99 mA net source demand on the REF buffer at
+idle with no DUT. These are design estimates, not dynamic-load verification.
+
+The operator is asked to keep USB disconnected during replacement, check
+D50–G50 continuity, reconnect A4, then reconnect USB and report supply,
+D50 and G50 against Arduino GND. Confirmation is pending. The corrected
+ADC-readback firmware remains compiled but not uploaded. After wiring
+confirmation, recheck active-channel registers and REF DC/noise behavior;
+no completed calibration is claimed.
+
+The revised [connectivity checker](../examples/hardware-fixture-bringup/wiring-design/connectivity-check-a4-direct.py)
+passes hole-occupancy, supply separation, three remaining series paths,
+A4-to-buffered-REF continuity, output separation and removable calibration/
+shunt connections. The original four-resistor checker remains historical.
+This is a design check, not proof of physical assembly or stability.
+
 ## Standing conventions (current)
 
 - The intended supply rails are the UPPER LEFT red section for +5 V and
@@ -918,6 +952,8 @@ replace the source associated with that failed record.
   supply; it is NOT the Arduino GND rail.
 - Configure both halves of each powered LM358 deliberately; the auxiliary
   input is parked at REF by the current table.
-- The old loopback must remain isolated. A1–A4 are now reported connected
-  through their own series resistors per the new table; A5 is unconnected.
+- The old loopback must remain isolated. A1–A3 retain their series
+  resistors. A4 fixed-REF sensing is being revised to a direct short jumper
+  at D50–G50 after the measured pull-up-like board path; completion pending.
+  A5 is unconnected.
 - Keep USB unplugged during wiring, resistance or continuity checks.
