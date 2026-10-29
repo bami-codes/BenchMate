@@ -99,6 +99,7 @@ void ping() {
   Serial.print(",\"adc_bits\":14,\"dac_bits\":12,\"calibrated\":false,\"max_samples\":512,\"armed\":");
   Serial.print(armed?"true":"false");Serial.print(",\"ref_code\":");Serial.print(refCode);
   Serial.print(",\"max_jump_code\":");Serial.print(maxJump);
+  Serial.print(",\"dc_hold_supported\":true,\"current_code\":");Serial.print(currentCode);
   uint8_t states[NCH];
   for (uint8_t c=0;c<NCH;c++) states[c]=adcSampleState(ADC_CHANNELS[c]);
   Serial.print(",\"adc_sample_state_channels\":");printAdcStates(ADC_CHANNELS);
@@ -203,11 +204,22 @@ void command() {
   while (token && n<11) {tokens[n++]=token;token=strtok(nullptr," ");}
   if (token||!n) {error("invalid command");return;}
   if (!strcmp(tokens[0],"PING")&&n==1) {ping();return;}
-  if ((!strcmp(tokens[0],"ARM")||!strcmp(tokens[0],"CAPTURE")||!strcmp(tokens[0],"STOP")) &&
+  if ((!strcmp(tokens[0],"ARM")||!strcmp(tokens[0],"CAPTURE")||!strcmp(tokens[0],"STOP")||!strcmp(tokens[0],"DC")) &&
       (n<2||!bootIdReady||strcmp(tokens[1],bootId))) {
     error("boot identity mismatch or unavailable; output not changed");return;
   }
   if (!strcmp(tokens[0],"STOP")&&n==2) {park();beginResponse("parked");Serial.println("}");return;}
+  // Calibration-only persistent level for a human DMM reading. CAPTURE keeps
+  // its existing behavior: return to REF after acquisition, including HOLD.
+  if (!strcmp(tokens[0],"DC")&&n==3) {
+    uint32_t target;
+    if (!armed||!number(tokens[2],target)||target<minCode||target>maxCode) {
+      error("invalid DC level or instrument not armed");return;
+    }
+    if (!moveSettled(target)) {park();error("DC settling failed or cancelled; parked at REF");return;}
+    beginResponse("dc_held");Serial.print(",\"held_code\":");Serial.print(currentCode);
+    Serial.println(",\"calibrated\":false}");return;
+  }
   if (!strcmp(tokens[0],"ARM")&&n==10) {
     uint32_t v[8];
     for (uint8_t i=0;i<8;i++) if (!number(tokens[i+2],v[i])) {error("invalid ARM number");return;}

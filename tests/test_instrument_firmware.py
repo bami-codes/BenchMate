@@ -30,6 +30,10 @@ def test_real_firmware_parser_guards_drive_commands_and_envelopes_every_response
         guard=BootContinuity()
         for packet in packets:guard.check(packet)
         assert {'pong','error','armed','capture','parked'} <= {p['type'] for p in packets}
+        assert [p['held_code'] for p in packets if p['type']=='dc_held']==[2265,523]
+        assert all(p['dc_hold_supported'] is True for p in packets if p['type']=='pong')
+        assert any(p['type']=='pong' and p['current_code']==2265 for p in packets)
+        assert sum('DC settling failed' in p.get('message','') for p in packets)==2
         packet=next(p for p in packets if p['type']=='capture')
         assert validate_block(packet,expected_command=f'CAPTURE {guard.boot_id} HOLD 16 500 1394 0\n'.encode()) is packet
     else:

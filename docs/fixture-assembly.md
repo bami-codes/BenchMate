@@ -36,8 +36,14 @@ serial in that failed check. The operator later reported D50/SDA both
 1.633 V and confirmed USB reconnection. A subsequent PING returned a new
 boot ID and unarmed state. Explicit re-arm and one new 512-frame block
 passed; A4's earlier positive channel difference was not reproduced.
-Fresh supply/D45/D50 displays are requested. Calibration and the cause of
-the earlier unresponsiveness remain unresolved.
+Fresh supply/D45/D50 displays are 4.89/1.636/1.633 V. Offline re-scaling
+of the preceding block with 4.89 V gives A3/A4 about 1.63634/1.63543 V;
+this is a sequential comparison, not an accuracy claim. A DC-hold firmware
+addition passed 71 targeted tests and both board compiles, then was uploaded
+after confirmed manual DFU. The new boot passed initial checks, was explicitly
+armed at code 1368, and now holds low-point code 531 for a pending DMM report.
+No ADC block at that low point has yet been acquired. Calibration and the
+cause of the earlier unresponsiveness remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1110,6 +1116,54 @@ See `minima-sda-check/`, `minima-reconnected-midpoint/`,
 `minima-reconnected-arm/` and `minima-reconnected-block/` in the October 29
 public evidence bundle for exact sources and raw records. Earlier failed
 records remain unchanged.
+
+## Fresh supply comparison and persistent DC calibration setup
+
+The operator reported `4.89V / 1.636V / 1.633V` for supply (DC 20 V),
+D45 and D50 (DC 2 V), respectively. Recomputing the preceding new-boot
+block with 4.89 V rather than 4.86 V gives nominal A3=1.63634 V and
+A4=1.63543 V. Their differences from the later DMM displays are +0.34 mV
+and +2.43 mV. The original raw block and its original conversion remain
+unchanged; this offline comparison has its own record. It assumes the
+later supply display is representative of capture time. Sequential
+measurements and unestablished meter accuracy preclude a millivolt accuracy
+claim or a one-point ADC calibration fit.
+
+The instrument gained a separate, boot-bound `DC` command so a human can
+read a persistent calibration level with the DMM. CAPTURE HOLD continues
+to return to REF after acquisition. DC uses the armed envelope, bounded
+moves and A2 settling, reports its held code, and is checked by a subsequent
+PING. The host requires advertised support before sending it; malformed,
+stale-boot, unarmed and out-of-range requests do not change the output.
+Settling/cancellation errors park at REF, while host communication ambiguity
+is recorded without automatic retries or an assumed output state.
+
+Seventy-one targeted tests cover real-sketch parsing with fake IO, host
+reset/timeout/code-mismatch paths and CLI routing. Minima compiled to
+66,476 B flash / 15,920 B static RAM; WiFi to 69,932 B / 18,356 B.
+These are software checks, separate from the physical operation below.
+
+The operator reported `Minima 두 번 완료` in response to manual DFU
+instructions with wiring retained and no DUT. The identified Minima
+bootloader accepted the checked binary. Four unarmed PINGs, 31/31 USB
+presence samples over 30 seconds and all used ADC readbacks at 255 passed.
+PING advertised DC support, with new boot ID
+`cd496fa1aa18dcb15bae7d05553fe560`. No output command was sent by the
+upload controller. The earlier preparation record's `uploaded:false`
+remains historical; the subsequent upload record establishes completion.
+
+With supply conversion 4.89 V and REF target 1.633 V, an explicit ARM
+established code 1368. The first persistent DC target was 0.633 V; integer
+envelope clamping produces code 531. The `dc_held` acknowledgement and
+post-PING agreed on code 531 and the same boot. This confirms firmware
+state, not the physical voltage. D35/D40/D45/D50 DC 2 V displays are now
+requested; the first three are driven low, while A4 remains on fixed REF.
+No ADC block or fit at this point is claimed. Varying A1–A3's driven level
+does not calibrate A4's gain across a range.
+
+The offline comparison, preparation, upload, explicit ARM and first held
+point are retained separately in the October 29 bundle. Prior failures,
+pending-at-the-time instructions and raw capture records are unchanged.
 
 ## Standing conventions (current)
 

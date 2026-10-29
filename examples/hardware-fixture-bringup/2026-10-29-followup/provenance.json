@@ -375,6 +375,126 @@
       "source": "runs/hardware-minima-capture/20261029T054821-4327661a62/events.jsonl",
       "published": "minima-reconnected-block/events.jsonl",
       "sha256": "971cff2ebc52fb6a3a5b70e60010fe534539b663a02b35387276baf7012fc83d"
+    },
+    {
+      "source": "runs/hardware-minima-supply-comparison/20261029T055649-6dc052211e/events.jsonl",
+      "published": "minima-supply-comparison/events.jsonl",
+      "sha256": "84acc476b5ea6c99641b76f9a2b459880ace6df79b1e18d9c0d3f7cba947c3af"
+    },
+    {
+      "source": "runs/hardware-minima-supply-comparison/20261029T055649-6dc052211e/controller-source.py",
+      "published": "minima-supply-comparison/controller-source.py",
+      "sha256": "d2134f21a383832115bdab4ceed28e0fca2db75208ad826e1fac302553c514fe"
+    },
+    {
+      "source": "runs/hardware-minima-supply-comparison/20261029T055649-6dc052211e/analysis.json",
+      "published": "minima-supply-comparison/analysis.json",
+      "sha256": "48294946b711638aa973531d7980954bef87d3aeb3a077f3347e45a90d71b1ba"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/events.jsonl",
+      "published": "dc-hold-preparation/events.jsonl",
+      "sha256": "627ae8f92d4c7b27dd92359261b870317513074518184f61dbede37056640d54"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/validation.json",
+      "published": "dc-hold-preparation/validation.json",
+      "sha256": "4405f723d0b61046d7d796854c76d7b408b25b02bc751a7f3e9dd445d8100269"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/tests.log",
+      "published": "dc-hold-preparation/tests.log",
+      "sha256": "a305e6cdc5340fa818c8516ee45a8ee12694bcc0f1337b8921fb6eed6e90e94a"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/minima-compile.log",
+      "published": "dc-hold-preparation/minima-compile.log",
+      "sha256": "38341cdc34d968185cfa2a6d4cdd9f5c74d439495a535a484eb714cb2be0b89e"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/wifi-compile.log",
+      "published": "dc-hold-preparation/wifi-compile.log",
+      "sha256": "9a0a9a6ec10d61b7379b6bb08fc69c4099332c24bfb2b1350d9b507ac3bfc567"
+    },
+    {
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca/instrument.ino",
+      "published": "dc-hold-preparation/instrument.ino",
+      "sha256": "51b16b75ee98c986dbb3e8f6d22a386d67f23f61a1e8002cfe6120ed4b07895c"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/events.jsonl",
+      "published": "minima-dc-upload/events.jsonl",
+      "sha256": "7c59c3840fef23ed7990d63b7abff3c7d6a3cb45ab37aaf973ce46078a416da5"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/controller-source.py",
+      "published": "minima-dc-upload/controller-source.py",
+      "sha256": "31ef37a76e242808a0ecbf32cedae35220806f442be14cd888616629e34d8da6"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/upload.log",
+      "published": "minima-dc-upload/upload.log",
+      "sha256": "82cec8ac4e6ecf6c94e2708cfdda2656ccec0daf57477757c6a5691b52fb63b4"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/instrument.ino",
+      "published": "minima-dc-upload/instrument.ino",
+      "sha256": "51b16b75ee98c986dbb3e8f6d22a386d67f23f61a1e8002cfe6120ed4b07895c"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/boot_identity.h",
+      "published": "minima-dc-upload/boot_identity.h",
+      "sha256": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8"
+    },
+    {
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a/minima-dc-hold-compile.log",
+      "published": "minima-dc-upload/minima-dc-hold-compile.log",
+      "sha256": "38341cdc34d968185cfa2a6d4cdd9f5c74d439495a535a484eb714cb2be0b89e"
+    },
+    {
+      "source": "runs/hardware-minima-dc-calibration/20261029T060429-04c6c0a13a/events.jsonl",
+      "published": "minima-dc-low-setup/events.jsonl",
+      "sha256": "296afecb3f9a3ebbc824363e4596848a861969332bf865c6e331a49c038e064e"
+    },
+    {
+      "source": "runs/hardware-minima-dc-calibration/20261029T060429-04c6c0a13a/controller-source.py",
+      "published": "minima-dc-low-setup/controller-source.py",
+      "sha256": "1faa10cc4f70aa6f7041681196ca4c5b0ce49ba48ca8ca3a87d2f80190b05973"
+    },
+    {
+      "source": "runs/hardware-minima-dc-calibration/20261029T060429-04c6c0a13a/host-instrument.py",
+      "published": "minima-dc-low-setup/host-instrument.py",
+      "sha256": "c8c3bebc874626f8cc329352b55ee34b8f176e005ab715d52854100e58e24c2a"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T060429-61f186ad2b/events.jsonl",
+      "published": "minima-dc-arm/events.jsonl",
+      "sha256": "54303bcc28ab958c29aa99a7f22d48bd2a28325c4d9306e98d0a70095532c862"
+    },
+    {
+      "source": "runs/hardware-minima-dc-hold/20261029T060434-b86e10e608/events.jsonl",
+      "published": "minima-dc-low-held/events.jsonl",
+      "sha256": "761c76de62a44097a5ab224fe634f5601a882be6074fee369237bf65db3342ae"
+    },
+    {
+      "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f/events.jsonl",
+      "published": "dc-hold-host-endpoints/events.jsonl",
+      "sha256": "ca915f54193ceb6e614d79c712addb29b5dd64cfbf560a064c95956e1b9b5931"
+    },
+    {
+      "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f/host-instrument.py",
+      "published": "dc-hold-host-endpoints/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f/test-instrument.py",
+      "published": "dc-hold-host-endpoints/test-instrument.py",
+      "sha256": "cc5a0b19aa34628672ef0e46793f828bd1a3b0f27885a8485a678d6f0e47c880"
+    },
+    {
+      "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f/tests.log",
+      "published": "dc-hold-host-endpoints/tests.log",
+      "sha256": "6894e52c0f9cf5eb237835761f054f661e2dcb6adc7a4ddbddebb2ea615e3b20"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -827,7 +947,122 @@
         "uptime_ms_start": 510385,
         "uptime_ms_end": 513361
       }
+    },
+    {
+      "folder": "minima-supply-comparison",
+      "source": "runs/hardware-minima-supply-comparison/20261029T055649-6dc052211e",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "raw_capture_record": "runs/hardware-minima-capture/20261029T054821-4327661a62",
+        "calibration_performed": false,
+        "hardware_commands_sent": false
+      }
+    },
+    {
+      "folder": "dc-hold-preparation",
+      "source": "runs/hardware-dc-hold-preparation/20261029T060126-6568bcafca",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "tests_passed": 71,
+        "board_compiles_passed": 2,
+        "uploaded": false,
+        "hardware_verified": false,
+        "hardware_IO_performed": false
+      }
+    },
+    {
+      "folder": "minima-dc-upload",
+      "source": "runs/hardware-minima-dc-upload/20261029T060304-97be44864a",
+      "events": 51,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "upload_completed": true,
+        "port": "/dev/cu.usbmodem3101",
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "boot_id_ready": true,
+        "PINGs_verified": 4,
+        "uptime_ms_first": 2916,
+        "uptime_ms_last": 41970,
+        "closed_port_USB_samples_present": 31,
+        "same_boot_across_port_cycles": true,
+        "armed": false,
+        "dc_hold_supported": true,
+        "active_ADC_states": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "output_commands_requested": false,
+        "ADC_capture_requested": false,
+        "physical_reset_test_performed": false,
+        "fixture_connected_during_USB_observation": true,
+        "long_duration_stability_established": false
+      }
+    },
+    {
+      "folder": "minima-dc-low-setup",
+      "source": "runs/hardware-minima-dc-calibration/20261029T060429-04c6c0a13a",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "arm_record": "runs/hardware-minima-capture/20261029T060429-61f186ad2b",
+        "DC_hold_record": "runs/hardware-minima-dc-hold/20261029T060434-b86e10e608",
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "held_code": 531,
+        "nominal_target_v": 0.633,
+        "DMM_readings_pending": true,
+        "ADC_block_acquired": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-dc-arm",
+      "source": "runs/hardware-minima-capture/20261029T060429-61f186ad2b",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "reference_established": true,
+        "diagnosis_performed": false,
+        "instruction": "Check REF, attach the test circuit, then capture with --boot-id set to this boot_id.",
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 84532,
+        "uptime_ms_end": 86938
+      }
+    },
+    {
+      "folder": "minima-dc-low-held",
+      "source": "runs/hardware-minima-dc-hold/20261029T060434-b86e10e608",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "boot_id": "cd496fa1aa18dcb15bae7d05553fe560",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 88949,
+        "uptime_ms_end": 91452,
+        "held_code": 531,
+        "nominal_target_v": 0.633,
+        "output_remains_driven": true,
+        "accepted_samples": 0,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "dc-hold-host-endpoints",
+      "source": "runs/hardware-dc-host-endpoints/20261029T060733-c09447fc8f",
+      "events": 3,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "tests_passed": 71,
+        "firmware_changed": false,
+        "hardware_IO_performed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T05:49:47.755104+00:00"
+  "last_appended_at_utc": "2026-10-29T06:07:33.133801+00:00"
 }

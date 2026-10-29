@@ -11,6 +11,10 @@ serial device remained listed. Calibration and long-duration stability
 remain incomplete. The operator subsequently confirmed USB reconnection;
 a new boot answered PING, and explicit re-arm plus one additional midpoint
 block passed. This does not identify the earlier communication fault.
+Fresh supply/D45/D50 displays are 4.89/1.636/1.633 V. A separate offline
+comparison uses that later supply. Tested DC-hold firmware has subsequently
+been uploaded and the first low level set; DMM readings and a raw block at
+that low level are still pending.
 
 | Record | Observed result |
 | --- | --- |
@@ -32,6 +36,11 @@ block passed. This does not identify the earlier communication fault.
 | `minima-handshake-review/` | Separate PING-only diagnostic also received zero bytes; Minima remained enumerated before/after, no output commands |
 | `minima-sda-check/` | D50/SDA both 1.633 V reported; PING answered with new boot ID and unarmed state |
 | `minima-reconnected-midpoint/`, `minima-reconnected-arm/`, `minima-reconnected-block/` | Operator USB reconnection confirmed; explicit new-ID ARM and one 512-frame block passed, raw data and source snapshots retained |
+| `minima-supply-comparison/` | Later 4.89 V supply and D45/D50 readings compared offline with the preceding block; original data unchanged |
+| `dc-hold-preparation/` | 71 targeted tests and both board compiles passed; preparation-only record, not itself an upload |
+| `dc-hold-host-endpoints/` | DC and CAPTURE HOLD share endpoint rounding and integer code limits; 71 tests pass, no additional firmware change or hardware IO |
+| `minima-dc-upload/` | Confirmed manual DFU, successful upload, four unarmed PINGs with DC support, 30-second presence check passed |
+| `minima-dc-arm/`, `minima-dc-low-held/`, `minima-dc-low-setup/` | New boot explicitly armed at code 1368, persistent low level verified at code 531; no low-point ADC block yet |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -58,7 +67,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Twenty-seven chains contain 405 events.
+hashes and event-chain terminal states. Thirty-four chains contain 484 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -132,3 +141,19 @@ cross-boot calibration correction is applied. Nominal volts still use
 the older 4.86 V supply reading. Fresh supply/D45/D50 displays are now
 requested with output, wiring and USB unchanged. The prior failed runs
 remain failed, and this brief success is not a long-duration stability test.
+
+The next DMM report supplied 4.89 V / 1.636 V / 1.633 V. Using that later
+supply for an offline conversion gives nominal A3=1.63634 V and
+A4=1.63543 V, differing from the displays by +0.34/+2.43 mV. This is not a
+simultaneous measurement or a calibrated accuracy result. No original
+capture, conversion or failure record was overwritten.
+
+Persistent DC calibration holds are now supported by a separate command.
+The boot guard, integer envelope, bounded moves, settling and host
+postcheck were tested, then the checked Minima binary was uploaded after
+the operator's manual DFU confirmation. Its new boot
+`cd496fa1aa18dcb15bae7d05553fe560` was explicitly armed using 4.89 V / 1.633 V
+and acknowledged the first low level at code 531. The requested target is
+0.633 V; physical DMM values remain pending. A4 is still fixed REF, so this
+step alone cannot establish its gain over the stimulus range. There has
+been no low-point ADC block, multi-point fit or hardware diagnosis yet.

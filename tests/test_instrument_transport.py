@@ -118,3 +118,83 @@ def test_capture_requires_explicit_valid_arm_boot_id_before_opening_port(monkeyp
     monkeypatch.setattr(instrument.serial,'Serial',forbidden)
     with pytest.raises(instrument.BootContinuityError):
         instrument.acquire_block('test',CONFIG,output=tmp_path,expected_boot_id=boot)
+
+
+def dc_pong(uptime=10000,boot=BOOT,current=None):
+    return {**pong(uptime,boot),'dc_hold_supported':True,
+            'current_code':CONFIG.ref_code if current is None else current}
+
+
+def dc_run(tmp_path,hold_v=.6):
+    return instrument.set_dc_level('test',CONFIG,hold_v=hold_v,expected_boot_id=BOOT,output=tmp_path)
+
+
+def test_dc_hold_requires_acknowledged_code_and_postcheck_without_capture(monkeypatch,tmp_path):
+    command=instrument.dc_hold_command(CONFIG,boot_id=BOOT,hold_v=.6);code=int(command.split()[2])
+    board=attach(monkeypatch,[dc_pong(),envelope('dc_held',13000,held_code=code),dc_pong(14000,current=code)])
+    path,result=dc_run(tmp_path)
+    assert board.writes==[b'PING\n',command,b'PING\n']
+    assert result['held_code']==code and result['output_remains_driven'] is True
+    assert result['accepted_samples']==0 and result['calibration_performed'] is False
+    assert read_events(path)[-1]['kind']=='run_completed'
+
+
+@pytest.mark.parametrize('fault',['legacy_support','unarmed','limits','reset_before','reset_during',
+                                'reset_after','wrong_ack','wrong_post','settle_failed','timeout',
+                                'partial_json','disconnect','backwards_uptime'])
+def test_dc_uncertainty_cannot_trigger_rearm_or_success(monkeypatch,tmp_path,fault):
+    code=int(instrument.dc_hold_command(CONFIG,boot_id=BOOT,hold_v=.6).split()[2])
+    replies=[dc_pong(),envelope('dc_held',13000,held_code=code),dc_pong(14000,current=code)]
+    if fault=='legacy_support':replies[0].pop('dc_hold_supported')
+    if fault=='unarmed':replies[0]['armed']=False
+    if fault=='limits':replies[0]['ref_code']+=1
+    if fault=='reset_before':replies[0]['boot_id']=OTHER
+    if fault=='reset_during':replies[1]['boot_id']=OTHER
+    if fault=='reset_after':replies[2]['boot_id']=OTHER
+    if fault=='wrong_ack':replies[1]['held_code']+=1
+    if fault=='wrong_post':replies[2]['current_code']+=1
+    if fault=='settle_failed':replies[1]=envelope('error',13000,message='DC settling failed')
+    if fault=='timeout':replies[1]=b''
+    if fault=='partial_json':replies[1]=b'{"type":"dc_held"'
+    if fault=='disconnect':replies[1]=serial.SerialException('disconnected')
+    if fault=='backwards_uptime':replies[1]['uptime_ms']=9000
+    board=attach(monkeypatch,replies)
+    with pytest.raises(RuntimeError,match='unconfirmed'):dc_run(tmp_path)
+    events=read_events(next(tmp_path.iterdir()))
+    assert events[-1]['kind']=='run_failed' and events[-2]['kind']=='DC_hold_invalidated'
+    assert events[-2]['payload']['output_state_confirmed'] is False
+    assert not any(c.startswith((b'ARM ',b'CAPTURE ',b'STOP ')) for c in board.writes)
+    assert sum(c.startswith(b'DC ') for c in board.writes)<=1
+    if fault in ('legacy_support','unarmed','limits','reset_before'):assert board.writes==[b'PING\n']
+
+
+def test_dc_missing_identity_never_opens_port(monkeypatch,tmp_path):
+    def forbidden(*a,**kw):pytest.fail('Missing identity must not open serial')
+    monkeypatch.setattr(instrument.serial,'Serial',forbidden)
+    with pytest.raises(instrument.BootContinuityError):
+        instrument.set_dc_level('test',CONFIG,hold_v=.6,expected_boot_id=None,output=tmp_path)
+
+
+def test_cli_dc_selects_only_persistent_level_transport(monkeypatch,tmp_path,capsys):
+    import sys
+    from benchmate import cli
+    calls=[]
+    def hold(port,config,**kwargs):
+        calls.append((port,config,kwargs));return tmp_path,{'held_code':523}
+    def forbidden(*a,**kw):pytest.fail('DC CLI must not invoke ARM/capture transport')
+    monkeypatch.setattr(instrument,'set_dc_level',hold)
+    monkeypatch.setattr(instrument,'acquire_block',forbidden)
+    monkeypatch.setattr(sys,'argv',['benchmate','instrument','--port','test','--vref-v','4.7',
+                                   '--boot-id',BOOT,'--set-dc-v','0.6'])
+    assert cli.main()==0
+    assert len(calls)==1 and calls[0][2]['expected_boot_id']==BOOT and calls[0][2]['hold_v']==.6
+    assert json.loads(capsys.readouterr().out)['held_code']==523
+
+
+def test_cli_dc_cannot_be_combined_with_arm(monkeypatch):
+    import sys
+    from benchmate import cli
+    monkeypatch.setattr(sys,'argv',['benchmate','instrument','--port','test','--vref-v','4.7',
+                                   '--set-dc-v','0.6','--arm-only'])
+    with pytest.raises(SystemExit) as exc:cli.main()
+    assert exc.value.code==2

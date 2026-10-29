@@ -96,6 +96,17 @@ class InstrumentConfig:
         return f'ARM {boot_id} {center} {center-span} {center+span} {span} {self.settle_ms} {self.stable_delta_counts} {low} {high}\n'.encode()
 
 
+def _dc_code(config,voltage):
+    # One float ULP permits decimal endpoints such as 1.6 - 1. Integer
+    # clamping still enforces the exact armed envelope for both DC and HOLD.
+    low=math.nextafter(config.ref_v-1,-math.inf)
+    high=math.nextafter(config.ref_v+1,math.inf)
+    if type(voltage) not in (int,float) or not math.isfinite(voltage) or not low<=voltage<=high:
+        raise ValueError('DC/HOLD needs a voltage within REF ± 1 V')
+    code=round(4095*voltage/config.vref_v)
+    return min(config.ref_code+config.max_jump,max(config.ref_code-config.max_jump,code))
+
+
 def capture_command(config, *, boot_id, kind='step', samples=512, period_us=500,
                     amplitude_v=.5, frequency_hz=None, hold_v=None):
     validate_boot_id(boot_id)
@@ -104,10 +115,7 @@ def capture_command(config, *, boot_id, kind='step', samples=512, period_us=500,
     if kind not in ('step','sine','hold'):
         raise ValueError('Unsupported waveform')
     if kind=='hold':
-        if hold_v is None or not math.isfinite(hold_v) or abs(hold_v-config.ref_v)>1:
-            raise ValueError('HOLD needs a voltage within REF ± 1 V')
-        amplitude = round(4095*hold_v/config.vref_v)
-        amplitude = min(config.ref_code+config.max_jump,max(config.ref_code-config.max_jump,amplitude))
+        amplitude = _dc_code(config,hold_v)
         frequency=0
     else:
         if not math.isfinite(amplitude_v) or not 0<amplitude_v<=1 or (kind=='step' and amplitude_v>.5):
@@ -167,6 +175,58 @@ def validate_block(packet, *, expected_command=None):
         if (packet.get('kind'),count,packet.get('period_us'),packet.get('amplitude_or_hold_code'),packet.get('frequency_millihz')) != (kind,int(n),int(period),int(amplitude),int(frequency)):
             raise ValueError('Capture does not match request')
     return packet
+
+
+def dc_hold_command(config, *, boot_id, hold_v):
+    """A persistent calibration level, bounded by the already armed envelope."""
+    validate_boot_id(boot_id)
+    code=_dc_code(config,hold_v)
+    return f'DC {boot_id} {code}\n'.encode()
+
+
+def set_dc_level(port,config,*,hold_v,expected_boot_id,output='runs'):
+    """Explicit, boot-bound calibration hold; no capture, retry or auto-arm."""
+    request=dc_hold_command(config,boot_id=expected_boot_id,hold_v=hold_v)
+    code=int(request.split()[2]);continuity=BootContinuity(expected_boot_id)
+    log=Recorder(output,mode='hardware_uncalibrated_DC_hold')
+    log.add('DC_configuration',{'configuration':asdict(config),'request':request.decode().strip(),
+        'expected_boot_id':expected_boot_id,'nominal_target_v':hold_v,
+        'scope':'DUT disconnected, calibration fixture only. Output remains driven for the DMM reading; no calibrated voltage claim.'})
+
+    def check_state(packet):
+        continuity.check(packet)
+        if packet.get('type')!='pong' or packet.get('dc_hold_supported') is not True:
+            raise ValueError('Firmware does not advertise DC hold support')
+        if packet.get('armed') is not True or packet.get('ref_code')!=config.ref_code or packet.get('max_jump_code')!=config.max_jump:
+            raise ValueError('Instrument not armed with matching limits; explicit re-arm required')
+
+    try:
+        # At most two bounded moves plus a final stability window; allow the
+        # configured maximum settle time and a return-to-REF after failure.
+        with serial.Serial(port,115200,timeout=40,write_timeout=2) as board:
+            time.sleep(2);board.reset_input_buffer();board.write(b'PING\n')
+            check_state(receive_response(board,log,'firmware_handshake'))
+            start_uptime=continuity.previous_uptime_ms
+            board.write(request)
+            held=receive_response(board,log,'DC_hold_response');continuity.check(held)
+            if held.get('type')!='dc_held' or held.get('held_code')!=code:
+                raise ValueError('DC level not acknowledged at the requested code')
+            board.write(b'PING\n')
+            post=receive_response(board,log,'firmware_postcheck');check_state(post)
+            if post.get('current_code')!=code:
+                raise ValueError('DC level differs in postcheck')
+        result={'source':'hardware_uncalibrated','boot_id':continuity.boot_id,'boot_continuity_checked':True,
+                'uptime_ms_start':start_uptime,'uptime_ms_end':continuity.previous_uptime_ms,
+                'held_code':code,'nominal_target_v':hold_v,'output_remains_driven':True,
+                'accepted_samples':0,'calibration_performed':False}
+        log.add('run_completed',result);return log.path,result
+    except Exception as exc:
+        reason=str(exc) if isinstance(exc,ValueError) else type(exc).__name__
+        log.add('DC_hold_invalidated',{'reason':reason,'expected_boot_id':continuity.boot_id,
+            'output_state_confirmed':False,'accepted_samples':0,'automatic_rearm_or_retry':False})
+        log.add('run_failed',{'error':reason,'valid_for_analysis':False})
+        raise RuntimeError(f'DC hold unconfirmed ({type(exc).__name__}); record: {log.path}. '
+                           'Output may remain driven; no automatic recovery was attempted.') from None
 
 
 def acquire_block(port,config,*,output='runs',arm_only=False,expected_boot_id=None,**settings):

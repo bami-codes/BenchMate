@@ -1,0 +1,41 @@
+{
+  "source_sha256": {
+    "firmware/instrument/instrument.ino": "51b16b75ee98c986dbb3e8f6d22a386d67f23f61a1e8002cfe6120ed4b07895c",
+    "firmware/instrument/boot_identity.h": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8",
+    "src/benchmate/instrument.py": "c8c3bebc874626f8cc329352b55ee34b8f176e005ab715d52854100e58e24c2a",
+    "src/benchmate/cli.py": "934d53a7fc0ba86472fbc32c8906d359017aecf68866a6e5c0f1976fcba46ccb",
+    "tests/test_instrument.py": "e7f7ad589306a9995334f9f72cd5380436b297614677961e9961a72aee3c399d",
+    "tests/test_instrument_transport.py": "aa5cbe2b26bd6e3b0e93d4032739ae526680394ee7704ab232b77615ef097935",
+    "tests/test_instrument_firmware.py": "d8bfe95b5a128952c221705a8b66147678367424d82b11f6b09a297cfbb6ead6",
+    "tests/firmware_stubs/instrument_protocol.cpp": "7214be342435697c75f3a8e51c58f0df523653608a967e506eefd8e578596a0e",
+    "tests/firmware_stubs/Arduino.h": "4c41602fabd93e394ede4afa03704040212ec353c5b0cecaab8527a39d448041"
+  },
+  "test_command": ".venv/bin/python -m pytest -q tests/test_instrument.py tests/test_instrument_transport.py tests/test_instrument_firmware.py",
+  "tests_passed": 71,
+  "features": [
+    "Explicit DC command requires current boot ID, armed state and existing voltage envelope.",
+    "Ramps between endpoints in bounded steps and checks A2 settling.",
+    "Settling failure or incoming cancellation returns to REF; host uncertainty invalidates without retry.",
+    "PING advertises support/current code; old firmware cannot receive a DC command through the new host helper.",
+    "CAPTURE behavior remains return-to-REF; no measurement counts are claimed by a DC set operation."
+  ],
+  "compiles": {
+    "minima": {
+      "fqbn": "arduino:renesas_uno:minima",
+      "binary_sha256": "d95999d0ac7254438fc1b693bb98e844b876d41ee28d05f38342296ce48fb9a1",
+      "log": "minima-compile.log"
+    },
+    "wifi": {
+      "fqbn": "arduino:renesas_uno:unor4wifi",
+      "binary_sha256": "171fa7454dc25fb5ee7957244cac788ad07d17b321002bc71cefa02318f5b6be",
+      "log": "wifi-compile.log"
+    }
+  },
+  "uploaded": false,
+  "hardware_verified": false,
+  "hardware_IO_performed": false,
+  "limits": [
+    "Native tests use fake ADC/serial, not physical accuracy.",
+    "Manual upload and hardware validation remain pending."
+  ]
+}

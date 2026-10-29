@@ -17,7 +17,8 @@ inline uint32_t micros() {return ++clockUs;}
 inline void delay(uint32_t ms) {clockUs+=(uint64_t)ms*1000;}
 inline void analogReadResolution(int) {}
 inline void analogWriteResolution(int) {}
-inline uint16_t analogRead(int) {clockUs+=25;return 5000;}
+inline uint16_t adcValue=5000;
+inline uint16_t analogRead(int) {clockUs+=25;return adcValue;}
 inline void analogWrite(int,int value) {dacWrites.push_back(value);}
 struct FakeAdc {uint8_t ADSSTR[16]={0};uint8_t ADSSTRL=0;};
 inline FakeAdc adcRegisters;

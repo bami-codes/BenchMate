@@ -1,6 +1,6 @@
 import copy
 import pytest
-from benchmate.instrument import InstrumentConfig,capture_command,validate_block,BootContinuity,BootContinuityError
+from benchmate.instrument import InstrumentConfig,capture_command,validate_block,BootContinuity,BootContinuityError,dc_hold_command
 
 BOOT='1234567890abcdef1234567890abcdef'
 
@@ -85,3 +85,25 @@ def test_unidentified_block_is_never_accepted(field):
 def test_block_from_different_boot_cannot_match_same_waveform_request():
     with pytest.raises(BootContinuityError):
         validate_block(packet(),expected_command=f'CAPTURE {"a"*32} STEP 16 500 435 0\n'.encode())
+
+
+def test_dc_calibration_endpoints_stay_inside_armed_integer_envelope():
+    for supply in (4,4.86,4.89,5.5):
+        c=InstrumentConfig(supply)
+        for target in (c.ref_v-1,c.ref_v,c.ref_v+1):
+            code=int(dc_hold_command(c,boot_id=BOOT,hold_v=target).split()[2])
+            assert c.ref_code-c.max_jump<=code<=c.ref_code+c.max_jump
+            assert abs(code-c.ref_code)*supply/4095<=1
+            hold=int(capture_command(c,boot_id=BOOT,kind='hold',hold_v=target).split()[5])
+            assert hold==code
+    # Literal meter-range endpoints must not fail due to subtraction rounding.
+    c=InstrumentConfig(4.89,1.633)
+    for target in (.633,2.633):
+        code=int(dc_hold_command(c,boot_id=BOOT,hold_v=target).split()[2])
+        assert int(capture_command(c,boot_id=BOOT,kind='hold',hold_v=target).split()[5])==code
+
+
+@pytest.mark.parametrize('target',[float('nan'),float('inf'),True,None,'0.6',.59,2.61])
+def test_dc_invalid_level_is_rejected_before_transport(target):
+    with pytest.raises(ValueError):dc_hold_command(InstrumentConfig(4.89),boot_id=BOOT,hold_v=target)
+    with pytest.raises(ValueError):capture_command(InstrumentConfig(4.89),boot_id=BOOT,kind='hold',hold_v=target)

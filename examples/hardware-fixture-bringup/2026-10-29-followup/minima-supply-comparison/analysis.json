@@ -1,0 +1,38 @@
+{
+  "raw_capture_record": "runs/hardware-minima-capture/20261029T054821-4327661a62",
+  "capture_boot_id": "00577aec01ebd2245c7d99edcd14432b",
+  "channels": {
+    "A1": {
+      "mean_counts": 5482.87109375,
+      "nominal_v_using_old_4_86_supply": 1.6264880373329063,
+      "nominal_v_using_later_4_89_supply": 1.636528086946072
+    },
+    "A2": {
+      "mean_counts": 5477.42578125,
+      "nominal_v_using_old_4_86_supply": 1.6248726910135507,
+      "nominal_v_using_later_4_89_supply": 1.6349027693531404
+    },
+    "A3": {
+      "mean_counts": 5482.24609375,
+      "nominal_v_using_old_4_86_supply": 1.6263026317295368,
+      "nominal_v_using_later_4_89_supply": 1.6363415368636696,
+      "operator_DMM_v": 1.636,
+      "sequential_ADC_minus_DMM_mV": 0.34153686366966696
+    },
+    "A4": {
+      "mean_counts": 5479.177734375,
+      "nominal_v_using_old_4_86_supply": 1.6253924060954954,
+      "nominal_v_using_later_4_89_supply": 1.6354256925528747,
+      "operator_DMM_v": 1.633,
+      "sequential_ADC_minus_DMM_mV": 2.4256925528747253
+    }
+  },
+  "assumptions": [
+    "ADC full-scale 16383 and later supply display 4.89 V; no channel gain/offset fit.",
+    "Later supply may differ from supply during capture; DMM readings are sequential.",
+    "Display agreement is not an accuracy bound."
+  ],
+  "calibration_performed": false,
+  "hardware_commands_sent": false,
+  "original_record_changed": false
+}

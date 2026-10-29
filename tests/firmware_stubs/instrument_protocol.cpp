@@ -28,16 +28,33 @@ int main(int argc,char **argv) {
   send("ARM "+wrong+limits);assert(dacWrites.empty());
   send("CAPTURE "+wrong+" HOLD 16 500 1394 0");assert(dacWrites.empty());
   send("STOP "+wrong);assert(dacWrites.empty());
+  send("DC "+wrong+" 523");assert(dacWrites.empty());
   send("INVALID");assert(dacWrites.empty());
   if (rngMode=="ok") {
     assert(bootIdReady && strlen(bootId)==32);
     const std::string id(bootId);
+    send("DC "+id+" 523");assert(dacWrites.empty()); // unarmed
     // A malformed command cannot silently truncate into a valid ARM.
     std::string malformed="ARM "+id+limits;
     malformed.push_back('\0');malformed+="ignored";
     send(malformed);assert(dacWrites.empty());
     send("ARM "+id+limits);assert(armed && !dacWrites.empty());
     auto writes=dacWrites.size();
+    send("DC "+wrong+" 523");assert(dacWrites.size()==writes);
+    for (const auto &bad : {"522","2266","-1","nan","99999999999","523 extra"}) {
+      send("DC "+id+" "+bad);assert(dacWrites.size()==writes);
+    }
+    send("DC "+id+" 2265");assert(currentCode==2265);
+    send("PING"); // open-ended hold survives status checks
+    assert(currentCode==2265);
+    send("DC "+id+" 523");assert(currentCode==523);
+    for (size_t i=writes;i<dacWrites.size();i++) assert(abs(dacWrites[i]-dacWrites[i-1])<=871);
+    send("STOP "+id);assert(currentCode==1394);
+    adcValue=0; // settling failure must return to REF, not leave an unconfirmed level
+    send("DC "+id+" 523");assert(currentCode==1394);
+    adcValue=5000;
+    send("DC "+id+" 523\nPING");assert(currentCode==1394); // pipelined input cancels
+    writes=dacWrites.size();
     send("CAPTURE "+wrong+" HOLD 16 500 1394 0");assert(dacWrites.size()==writes);
     send("STOP "+wrong);assert(dacWrites.size()==writes);
     send("CAPTURE "+id+" HOLD 16 500 1394 0");assert(dacWrites.size()>writes);
