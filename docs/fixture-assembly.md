@@ -26,7 +26,13 @@ D50–G50 with a short jumper is now operator-confirmed, with supply/D50/G50
 4.86/1.63/1.63 V. The corrected ADC firmware was uploaded manually after
 a failed automatic transition. Three 512-frame blocks passed acquisition
 checks; all used sampling-state registers were 255 before/after and boot ID
-was unchanged. Rare larger deviations persist. Calibration remains incomplete.
+was unchanged. Rare larger deviations persist. The later DC 2 V displays
+are D35/D40/D45/D50 = 1.631/1.630/1.631/1.629 V and U1 pin 3 = 1.629 V.
+A fresh capture attempt received no initial PING response, so no CAPTURE
+command was sent and zero samples were accepted. A separate PING-only
+check also received no response while the Minima serial identity remained
+listed. Current boot continuity/output state cannot be confirmed over
+serial. Calibration remains incomplete.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -997,6 +1003,57 @@ requested check. No multi-point calibration or DUT inference is complete.
 The public follow-up retains both upload attempts, the exact firmware and
 host used, the ARM record, all three raw blocks, and unfiltered descriptive
 statistics. The first pre-fix rejected block remains rejected.
+
+## Finer midpoint displays and subsequent handshake failure
+
+The operator answered the DC 2 V range instruction with
+`1.631/1.630 / 1.631/1.629이렇게고 1번칩 3번핀도 1.629`:
+
+| Probe point | Operator display |
+| --- | --- |
+| D35, A1 source | 1.631 V |
+| D40, A2 source | 1.630 V |
+| D45, A3 source | 1.631 V |
+| D50, buffered REF | 1.629 V |
+| U1 pin 3, divider input | 1.629 V |
+
+These are sequential displays relative to Arduino GND, with 1 mV display
+resolution, not established 1 mV accuracy. Equal REF/divider displays do
+not establish a zero amplifier offset. No one-point calibration was fitted.
+
+At 11:28:39 KST, one same-setting HOLD capture was attempted to compare with
+these displays. Its preflight found the expected Minima, but the initial
+PING returned zero bytes before the 60-second read timeout. The host never
+sent CAPTURE, ARM or STOP; the run was invalidated with zero accepted
+samples. The requested CAPTURE string recorded in its configuration is
+not evidence that the command was sent. No current ADC/DMM comparison
+was computed, and the three earlier valid blocks remain separate.
+
+A separate read-only diagnostic at 11:33 KST sent only one PING, again
+receiving zero bytes within five seconds. The expected Minima serial port
+and VID/PID were listed both before and after that check. No other process
+holding the serial device was found in the preceding snapshot. This is
+currently an enumerated-but-unresponsive observation, distinct from the
+earlier WiFi disappearance. There was no continuous USB-presence monitor
+over the intervening period, so a transient removal is not excluded. No
+boot ID or uptime was returned; a reset, firmware stall or USB-path fault
+cannot yet be distinguished. No automatic capture retry or re-arm occurred.
+
+Before changing wiring or resetting, the next requested physical check is
+DC 2 V at D50 and the board header explicitly labelled SDA, both relative
+to the same GND. The [official Minima pinout](https://docs.arduino.cc/resources/pinouts/ABX00080-full-pinout.pdf)
+identifies SDA and A4 as the same signal; the installed core also maps both
+to pin 18. This checks for a lead/contact voltage drop between the
+breadboard REF node and the board ADC node. The operator should report if
+the label/contact is unclear rather than guess. The result is pending.
+The earlier A4 ADC/DMM discrepancy is still unresolved; neither an ADC
+offset nor a wiring drop is established from the available readings.
+
+Exact operator report, failed handshake and separate diagnostic records
+are retained in `precise-midpoint-attempt/`,
+`precise-midpoint-handshake-failed/` and `minima-handshake-review/` in the
+October 29 public follow-up bundle. No firmware or wiring changed during
+these software checks.
 
 ## Standing conventions (current)
 

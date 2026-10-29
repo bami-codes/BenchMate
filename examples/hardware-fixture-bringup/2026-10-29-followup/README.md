@@ -5,7 +5,10 @@ The operator subsequently confirmed transfer of the seven fixture leads
 to Minima, with supply 4.88 V and REF 1.62 V. The later records retain the unsuccessful identity/upload checks as well
 as the passing checks. The fixed-REF jumper and updated ADC firmware are
 now confirmed; three raw midpoint blocks passed acquisition integrity
-checks. Calibration and long-duration stability remain incomplete.
+checks. A later capture attempt failed before CAPTURE because the initial
+PING received no bytes. A separate PING-only check also failed while the
+serial device remained listed. Calibration and long-duration stability
+remain incomplete.
 
 | Record | Observed result |
 | --- | --- |
@@ -23,6 +26,8 @@ checks. Calibration and long-duration stability remain incomplete.
 | `corrected-fixture-arm/` | Explicit ARM at new supply/REF settings, expected new boot ID, code 1373 |
 | `first-valid-midpoint/`, `valid-midpoint-block-1/` | First 512-frame raw block passes validation, source snapshots and analysis retained |
 | `valid-midpoint-block-2/`, `valid-midpoint-block-3/`, `midpoint-repeat-analysis/` | Two additional same-condition blocks investigate larger deviations, all raw samples retained |
+| `precise-midpoint-attempt/`, `precise-midpoint-handshake-failed/` | DC 2 V operator readings retained; new attempt stopped at initial PING, no CAPTURE sent and zero accepted samples |
+| `minima-handshake-review/` | Separate PING-only diagnostic also received zero bytes; Minima remained enumerated before/after, no output commands |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -49,7 +54,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Twenty chains contain 359 events.
+hashes and event-chain terminal states. Twenty-three chains contain 376 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -91,7 +96,19 @@ Read-completion offsets are approximately 52/105/158/216 us, not calibrated
 sampling apertures. These are uncalibrated diagnostic observations; no
 Gaussian/AR(1) fit, accuracy bound or long-duration reliability is accepted.
 
-The current output is code 1373, nominal 1.63 V. The operator is asked for
-D35/D40/D45/D50 readings on the DC 2 V range with wiring/output unchanged;
-those readings are pending. Multi-point calibration and physical interruption
-during acquisition remain pending.
+The last confirmed output setting was code 1373, nominal 1.63 V. The
+operator subsequently reported D35/D40/D45/D50 = 1.631/1.630/1.631/1.629 V
+and U1 pin 3 = 1.629 V on the DC 2 V range. These are sequential displays,
+not established millivolt accuracy. A subsequent capture attempt received
+zero bytes during its initial 60-second PING wait; CAPTURE was never sent.
+A separately recorded five-second PING-only diagnostic also received no
+response, with the expected serial identity present before/after. No new
+ADC comparison was calculated. Current boot continuity and output state
+cannot be confirmed over serial. A transient intervening USB removal is
+not excluded by these snapshots; no root cause is established.
+
+The next requested DMM check compares breadboard D50 against the board
+header labelled SDA (the A4 signal) to distinguish a possible lead/contact
+drop from the earlier uncalibrated ADC discrepancy. No reset, stimulus or
+firmware change is made during that check. Its result, multi-point
+calibration and physical interruption during acquisition remain pending.

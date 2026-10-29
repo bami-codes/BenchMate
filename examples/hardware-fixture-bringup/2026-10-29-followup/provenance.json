@@ -305,6 +305,31 @@
       "source": "runs/hardware-minima-midpoint-repeat/20261029T021438-a3b799efbb/analysis.json",
       "published": "midpoint-repeat-analysis/analysis.json",
       "sha256": "645476d7957c500560531410f92afda12590a572041d3a58f6608eaee8d6ef7f"
+    },
+    {
+      "source": "runs/hardware-minima-precise-midpoint/20261029T022839-9fbc7b2fec/events.jsonl",
+      "published": "precise-midpoint-attempt/events.jsonl",
+      "sha256": "957dabd72dd627d5c4fa81c6b144767b3d9fe2ad1fcef85da1d8fa4a1254a604"
+    },
+    {
+      "source": "runs/hardware-minima-precise-midpoint/20261029T022839-9fbc7b2fec/controller-source.py",
+      "published": "precise-midpoint-attempt/controller-source.py",
+      "sha256": "48df0d0cb846f376e92a54d6ef52329195c5a4b8032bfcd3b14b7f6b7f254fa8"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T022839-baeb98283f/events.jsonl",
+      "published": "precise-midpoint-handshake-failed/events.jsonl",
+      "sha256": "2af8c3077c32a513abd681a8c395c674bc7da3434000cc0e319ff4e083c2827c"
+    },
+    {
+      "source": "runs/hardware-minima-handshake-review/20261029T023304-3dc8e37813/events.jsonl",
+      "published": "minima-handshake-review/events.jsonl",
+      "sha256": "fbdbc7e2a7ebacc6829abe2a8ca34d618322cfe579d2d8b9700edeb40297fd62"
+    },
+    {
+      "source": "runs/hardware-minima-handshake-review/20261029T023304-3dc8e37813/controller-source.py",
+      "published": "minima-handshake-review/controller-source.py",
+      "sha256": "aeaeb46e33f319c5b5b79aca4ec78617732297b53c8b6de0dae88890078e361b"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -637,7 +662,39 @@
         "output_state": "parked at code 1373, nominal REF 1.63 V",
         "calibration_performed": false
       }
+    },
+    {
+      "folder": "precise-midpoint-attempt",
+      "source": "runs/hardware-minima-precise-midpoint/20261029T022839-9fbc7b2fec",
+      "events": 4,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Instrument run invalid (ValueError); record: runs/hardware-minima-capture/20261029T022839-baeb98283f. Check the connection; disconnect DUT before explicit re-arming.",
+        "automatic_retry_or_rearm": false
+      }
+    },
+    {
+      "folder": "precise-midpoint-handshake-failed",
+      "source": "runs/hardware-minima-capture/20261029T022839-baeb98283f",
+      "events": 5,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Incomplete or malformed instrument response; this run is invalid",
+        "valid_for_analysis": false
+      }
+    },
+    {
+      "folder": "minima-handshake-review",
+      "source": "runs/hardware-minima-handshake-review/20261029T023304-3dc8e37813",
+      "events": 8,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "No PING response within 5 seconds",
+        "boot_continuity_established": false,
+        "stimulus_command_sent": false,
+        "automatic_retry": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T02:17:48.637085+00:00"
+  "last_appended_at_utc": "2026-10-29T02:33:56.258050+00:00"
 }
