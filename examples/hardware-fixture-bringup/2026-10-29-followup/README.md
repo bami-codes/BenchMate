@@ -24,8 +24,11 @@ and absence of a persistent unpowered continuity tone are operator-confirmed.
 The operator clarified that the blue GND post remains and only the red
 +5 V post was removed; J27 was not installed. Power/REF read 4.88/1.63 V.
 The first reconnect PING failed; a confirmed single RESET then restored
-new-boot responses and explicit REF ARM. Physical DAC/driver voltages are
-pending. No midpoint ADC capture or higher voltage was commanded.
+new-boot responses and explicit REF ARM. The subsequent B13/A11/D50 report
+is 1.62/3.4/1.64 V: the driver does not follow the DAC input. USB-off
+confirmation is requested before unpowered input/feedback contact checks.
+Physical recovery is not established. No midpoint ADC capture or higher
+voltage was commanded.
 
 | Record | Observed result |
 | --- | --- |
@@ -58,6 +61,7 @@ pending. No midpoint ADC capture or higher voltage was commanded.
 | `minima-unpowered-check/` | Operator confirms USB off, added probe posts removed, no persistent rail tone; single J27 ground access and fresh power/REF readings requested |
 | `minima-contact-power-recovery-failed/` | Operator clarifies retained blue GND post, removed red +5 V post and 4.88/1.63 V supply/REF; PING still fails, no output command |
 | `minima-contact-reset-recovery/`, `minima-contact-recovery-arm/` | Confirmed single RESET, two new-boot unarmed PINGs, explicit REF ARM and postcheck pass; physical output verification pending |
+| `minima-driver-voltage-mismatch/` | Later B13/A11/D50 report 1.62/3.4/1.64 V; physical recovery not established, USB-off requested before contact checks, no hardware commands |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -84,7 +88,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Forty-three chains contain 548 events.
+hashes and event-chain terminal states. Forty-four chains contain 553 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -213,3 +217,9 @@ ADC settings. An explicit ARM then confirmed code 1368 using 4.88 V / 1.63 V.
 B13/A11/D50 DMM readings are pending. This is staged recovery, not a
 completed calibration, proof of no damage, or a diagnosis of every earlier
 USB fault. No firmware change or midpoint/high-point capture was made.
+
+The subsequent physical check reports B13/A11/D50 at 1.62/3.4/1.64 V.
+This is a driver/input mismatch, not a successful follower check or a
+calibration point. USB disconnection and LED-off confirmation are pending
+before unpowered U1 input/feedback contact checks. Chip damage is not
+established. No hardware command was issued for this report.

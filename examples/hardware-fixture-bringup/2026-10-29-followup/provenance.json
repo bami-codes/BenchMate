@@ -600,6 +600,16 @@
       "source": "runs/hardware-minima-capture/20261029T064629-4e3c8ef02b/events.jsonl",
       "published": "minima-contact-recovery-arm/events.jsonl",
       "sha256": "215cf2ca4923333ebd36d3d793f1bb16e36d6113d2d6ab81dd709378b9a5f1fb"
+    },
+    {
+      "source": "runs/hardware-minima-driver-mismatch/20261029T065746-47b8578b22/events.jsonl",
+      "published": "minima-driver-voltage-mismatch/events.jsonl",
+      "sha256": "675fe93efd30d1f36ec95fe72293de6bbbc658f1ba7b55b1fc8e8493fc6f06c6"
+    },
+    {
+      "source": "runs/hardware-minima-driver-mismatch/20261029T065746-47b8578b22/controller-source.py",
+      "published": "minima-driver-voltage-mismatch/controller-source.py",
+      "sha256": "6c8e3c95adc76b595f8cbcdd0ab1a3e45a66df5f881d1f0cab1629ef703d7adc"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1316,7 +1326,22 @@
         "uptime_ms_start": 40757,
         "uptime_ms_end": 43163
       }
+    },
+    {
+      "folder": "minima-driver-voltage-mismatch",
+      "source": "runs/hardware-minima-driver-mismatch/20261029T065746-47b8578b22",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "operator_report_recorded": true,
+        "hardware_IO_performed": false,
+        "output_or_firmware_changes": false,
+        "ADC_capture_requested": false,
+        "calibration_performed": false,
+        "recovery_verified": false,
+        "awaiting": "USB disconnected and power LED off confirmation"
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T06:48:02.460333+00:00"
+  "last_appended_at_utc": "2026-10-29T06:58:19.258264+00:00"
 }

@@ -56,9 +56,12 @@ later clarified that only the red +5 V post was removed and the original
 blue GND post remains; the requested J27 relocation was not performed.
 Fresh power/REF displays are 4.88/1.63 V. PING after reconnect was still
 unanswered. An operator-confirmed single RESET restored responses with a
-new unarmed boot; explicit ARM then established code 1368. DAC/driver/REF
-DMM verification is pending. No midpoint ADC capture or higher target was
-commanded. Calibration and long-duration reliability remain unresolved.
+new unarmed boot; explicit ARM then established code 1368. The subsequent
+B13/A11/D50 report is 1.62/3.4/1.64 V: the driver output does not follow
+the DAC input. Physical recovery is not established. USB disconnection
+and LED-off confirmation are requested before checking U1 input/feedback
+contacts; chip damage is not yet established. No midpoint ADC capture or
+higher target was commanded. Calibration and reliability remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1306,6 +1309,26 @@ continued across the power interruption. Both the failed reconnect check
 and the successful post-RESET check are retained in
 `minima-contact-power-recovery-failed/`, `minima-contact-reset-recovery/`
 and `minima-contact-recovery-arm/`.
+
+## Driver voltage mismatch after communication recovery
+
+The operator's subsequent B13/A11/D50 report is `1.62V /  3.4V / 1.64V`,
+following the DC 20 V instruction with the retained blue-rail GND reference.
+These sequential readings do not show a recovered voltage follower:
+B13 is the requested DAC input node, but the U1 driver output at A11 is
+substantially higher. No fresh supply reading was supplied in this report.
+The report is retained as fault evidence, not accepted for calibration.
+
+The next instruction is to disconnect Minima USB, confirm the power LED
+is off, retain the absent red +5 V probe post, and leave all other wires
+and ICs in place. This power-off confirmation is pending. U1's input and
+negative-feedback contacts will then be checked unpowered, including
+contact at the actual package legs. A loose path, IC fault or other
+electrical cause has not yet been distinguished. No serial, stimulus,
+capture or firmware command was sent for this report. See
+`minima-driver-voltage-mismatch/` in the evidence bundle. The earlier
+successful PING and ARM remain evidence of communication and command
+state only; they do not establish correct physical output.
 
 ## Standing conventions (current)
 
