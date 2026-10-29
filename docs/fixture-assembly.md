@@ -1,6 +1,17 @@
 # D2 physical assembly — coordinate record
 
-Latest status, 2026-10-29 Asia/Seoul: U1 REF and driver gross DC checks
+Latest status, 2026-10-29 Asia/Seoul: the operator installed the measured
+100.8 kohm input pull-down at B13–E16, using B13 because the divider
+resistor obstructs C13. Reconnected supply/REF/input/driver readings are
+4.88/1.631/0.003/0.002 V before DAC setup. The first PING failed without
+ARM or CAPTURE. After confirmed single RESET, new unarmed boot
+`019190dbdf4f80d8a5ae9f53a7f3368a` passed REF setup at code 1369 and one
+512-frame midpoint capture. Timing and provisional gross-voltage guards
+passed; calibration and USB reliability remain unestablished. Fresh
+B13/D35/D40/D45/D50 DC 2 V readings are requested while output stays at
+the same code. No additional ten-minute monitoring prerequisite.
+
+Chronological assembly history: U1 REF and driver gross DC checks
 are recorded; two ten-minute USB windows passed after earlier disconnects.
 The operator reports U2/A1–A4 assembly and the requested continuity checks
 complete. Six in-circuit resistor readings and midpoint U2 DMM readings
@@ -1577,6 +1588,12 @@ remain intact and the failed watch is not retroactively accepted.
 
 ## Standing conventions (current)
 
+- The measured 100.8 kohm input pull-down is installed at B13–E16 by
+  operator report. C13 was obstructed and not used. The new B13 probe
+  contact is the resistor lead, not the previously removed free post.
+- The operator confirms no USB/RESET action during the earlier high
+  DMM measurement; this is not a no-touch statement or proof that no
+  spontaneous reset occurred. The failed watch remains rejected.
 - The intended supply rails are the UPPER LEFT red section for +5 V and
   UPPER LEFT blue section for Arduino GND (0 V). The operator reports the
   fixture-side jumpers installed and has supplied the first powered DC

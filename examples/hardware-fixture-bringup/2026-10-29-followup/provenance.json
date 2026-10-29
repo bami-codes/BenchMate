@@ -865,6 +865,51 @@
       "source": "runs/hardware-minima-high-point-review/20261029T084811-2d6e2ec3eb/minima-kernel-review.json",
       "published": "minima-high-point-review/minima-kernel-review.json",
       "sha256": "a3640c77d2c65d886a9575786017505d3077e9f159877310cb79252adfb8d68b"
+    },
+    {
+      "source": "runs/hardware-minima-high-followup/20261029T085542-ae106fdf0c/events.jsonl",
+      "published": "minima-high-operator-followup/events.jsonl",
+      "sha256": "f1a53967876ea0c6ed0c8cda5c2c8455b58669a9b047e3694c88abb17c9a5258"
+    },
+    {
+      "source": "runs/hardware-minima-input-pulldown/20261029T090925-d8e6d36e63/events.jsonl",
+      "published": "minima-input-pulldown/events.jsonl",
+      "sha256": "f2f10d8a465625947572b8ac171eaf6e1a19c296716f0a10ccfa3e352e9cc05c"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-startup/20261029T091920-4a5f9cbadf/events.jsonl",
+      "published": "minima-pulldown-startup-failed/events.jsonl",
+      "sha256": "410229017ffca36a8db9c12beb9a89c9d22524ed92ea89e8c8ce917cca2f0811"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-startup/20261029T091920-4a5f9cbadf/controller-source.py",
+      "published": "minima-pulldown-startup-failed/controller-source.py",
+      "sha256": "5b56a74bddf3dfd8ddc99e7b433c0615a686828bd3d7e126a26e603613f600c5"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-startup/20261029T091920-4a5f9cbadf/host-instrument.py",
+      "published": "minima-pulldown-startup-failed/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-reset-startup/20261029T092109-a30d6ded4c/events.jsonl",
+      "published": "minima-pulldown-reset-startup/events.jsonl",
+      "sha256": "712d695dda5d5c8c391caac1bac19b93218e62253e3c1feb02833d0afb6b22cf"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-reset-startup/20261029T092109-a30d6ded4c/controller-source.py",
+      "published": "minima-pulldown-reset-startup/controller-source.py",
+      "sha256": "4aa46ca8fba22e6ce8ddda6fc8364176be62ea310a8ea688b10033ecc2397563"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-reset-startup/20261029T092109-a30d6ded4c/host-instrument.py",
+      "published": "minima-pulldown-reset-startup/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-pulldown-reset-startup/20261029T092109-a30d6ded4c/analysis.json",
+      "published": "minima-pulldown-reset-startup/analysis.json",
+      "sha256": "43b19c084093c94554f5dff0a6a408b6dcfd1a1716e85b174ba3ddcc9fbb0f6f"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1929,7 +1974,109 @@
         "output_state_not_confirmed_by_firmware_after_failure": true,
         "next_step": "Await requested operator single RESET; verify new unarmed boot before explicit REF setup. Re-measure any later high ADC pair."
       }
+    },
+    {
+      "folder": "minima-high-operator-followup",
+      "source": "runs/hardware-minima-high-followup/20261029T085542-ae106fdf0c",
+      "events": 4,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "hardware_commands_sent": false,
+        "firmware_changed": false,
+        "calibration_performed": false,
+        "awaiting": "USB-off / isolated 100k resistance / C13–E16 installation confirmation"
+      }
+    },
+    {
+      "folder": "minima-input-pulldown",
+      "source": "runs/hardware-minima-input-pulldown/20261029T090925-d8e6d36e63",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "wiring_revision_operator_confirmed": true,
+        "hardware_commands_sent": false,
+        "firmware_changed": false,
+        "USB_reconnection_and_power_readings_pending": true,
+        "USB_fault_fixed": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-pulldown-startup-failed",
+      "source": "runs/hardware-minima-pulldown-startup/20261029T091920-4a5f9cbadf",
+      "events": 6,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "stage": "startup_PING",
+        "error": "Incomplete or malformed instrument response; this run is invalid",
+        "accepted_calibration_pairs": 0,
+        "automatic_retry_or_rearm": false,
+        "output_state_now_confirmed": false
+      }
+    },
+    {
+      "folder": "minima-pulldown-reset-startup",
+      "source": "runs/hardware-minima-pulldown-reset-startup/20261029T092109-a30d6ded4c",
+      "events": 14,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "019190dbdf4f80d8a5ae9f53a7f3368a",
+        "held_code": 1369,
+        "configuration": {
+          "vref_v": 4.88,
+          "ref_v": 1.631,
+          "settle_ms": 1200,
+          "stable_delta_counts": 20
+        },
+        "channels": {
+          "A1": {
+            "mean_counts": 5463.4296875,
+            "std_counts": 8.897048560729369,
+            "min_counts": 5385,
+            "max_counts": 5514,
+            "nominal_mean_v": 1.6273903970579218
+          },
+          "A2": {
+            "mean_counts": 5464.1171875,
+            "std_counts": 4.028025293997077,
+            "min_counts": 5434,
+            "max_counts": 5479,
+            "nominal_mean_v": 1.6275951825062542
+          },
+          "A3": {
+            "mean_counts": 5466.7890625,
+            "std_counts": 7.60693096642689,
+            "min_counts": 5412,
+            "max_counts": 5509,
+            "nominal_mean_v": 1.6283910532259047
+          },
+          "A4": {
+            "mean_counts": 5519.892578125,
+            "std_counts": 4.3826494316624585,
+            "min_counts": 5492,
+            "max_counts": 5545,
+            "nominal_mean_v": 1.6442089837789131
+          }
+        },
+        "gross_checks": {
+          "raw_not_at_rails": true,
+          "all_means_near_REF": true,
+          "all_samples_near_REF": true,
+          "channel_mean_spread_within_50mV": true
+        },
+        "samples": 512,
+        "frame_interval_us_min": 1998,
+        "frame_interval_us_max": 2003,
+        "overruns": 0,
+        "calibration_performed": false,
+        "fresh_midpoint_DMM_pending": true,
+        "nominal_volts_are_not_calibrated": true,
+        "all_samples_retained": true,
+        "output_remains_at_REF_code": true,
+        "serial_connection_now_closed": true,
+        "USB_fault_cure_established": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T08:48:26.745673+00:00"
+  "last_appended_at_utc": "2026-10-29T09:23:06.932215+00:00"
 }

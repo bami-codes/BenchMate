@@ -1,6 +1,15 @@
 # U2 midpoint and spare Minima bring-up — October 29, 2026
 
 **Hardware preparation, not completed calibration or circuit diagnosis.**
+
+**Current:** measured 100.8 kohm input pull-down installed at B13–E16.
+Operator startup supply/REF/input/driver readings are
+4.88/1.631/0.003/0.002 V. The first PING fails without output commands;
+confirmed single RESET then restores a new unarmed boot. REF code 1369
+and a 512-frame raw midpoint block pass. Fresh DMM readings for that
+driven midpoint remain pending; no calibration fit or USB cure is claimed.
+
+The following paragraphs retain the chronological history.
 The operator subsequently confirmed transfer of the seven fixture leads
 to Minima, with supply 4.88 V and REF 1.62 V. The later records retain the unsuccessful identity/upload checks as well
 as the passing checks. The fixed-REF jumper and updated ADC firmware are
@@ -16,7 +25,7 @@ comparison uses that later supply. Tested DC-hold firmware has subsequently
 been uploaded. The first low-level DMM report and a following 512-frame
 block are complete; the same boot then held the midpoint for a fresh report.
 
-**Latest: high-point ADC pairing is paused after a USB failure.** The earlier operator report was
+**Earlier interruption: high-point ADC pairing paused after a USB failure.** The earlier operator report was
 D35/D40/D45 at 3.28 V and then reported contact between the +5 V and GND
 probe posts. A PING-only check failed; kernel logs show USB loss and
 re-enumeration between the last good response and this check. USB disconnection
@@ -94,6 +103,10 @@ failure; a single RESET is requested. The USB cause and calibration remain open.
 | `minima-high-DMM-protocol/` | High-point DC 2 V differences and bracketing REF readings requested before data; probe-only moves, no circuit changes |
 | `minima-high-held-watch-failed/` | Continuous-open monitor passes 240 PINGs, then receives zero bytes at 17:37:43 KST; failed chain retained, no high ADC capture |
 | `minima-high-point-review/` | Original and corrected DMM displays, derived voltages, selected kernel errors and rejection of high ADC pairing; no hardware commands |
+| `minima-high-operator-followup/` | No USB/RESET action during high DMM confirmed; extended cause investigation paused, input pull-down proposed |
+| `minima-input-pulldown/` | Isolated 100.8 kohm value, C13 obstruction and confirmed B13–E16 installation recorded |
+| `minima-pulldown-startup-failed/` | Startup voltages retained; first PING receives no bytes, no ARM or CAPTURE sent |
+| `minima-pulldown-reset-startup/` | Manual single RESET, new unarmed boot, explicit REF and one 512-frame midpoint block pass; fresh driven-point DMM pending |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -120,7 +133,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Sixty-four chains contain 2,132 events.
+hashes and event-chain terminal states. Sixty-eight chains contain 2,161 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -331,3 +344,24 @@ operator. No high ADC block or calibration fit is accepted, and no
 REF-return command followed the fault. Continuous-open periodic PING
 alone did not prevent this failure. A new single RESET has been requested
 before verifying a fresh unarmed boot and explicitly restoring REF.
+
+That RESET request was subsequently superseded by a powered-off input
+pull-down installation. The isolated resistor reads 100.8 kohm; C13 is
+blocked by the divider resistor body, so B13 on the same input strip is
+used instead, with the other end at E16 GND. Reconnected input and driver
+are reported at 3/2 mV before DAC setup. This is one startup observation,
+not a controlled proof that the resistor cured the previous high-output
+condition or a USB fix. The first PING after reconnection still fails.
+
+The operator then confirms single RESET with USB and wiring retained.
+One serial connection verifies new unarmed boot, explicitly arms REF at
+code 1369, captures 512 frames at that same code, and verifies post-PING.
+Intervals are 1998–2003 us with no overruns. Before measurement, broad
+diagnostic gates were declared: channel means within 100 mV of reported
+REF, every sample within 150 mV, mean channel spread at most 50 mV, and
+no raw rail samples. All pass using nominal 4.88 V ADC conversion; these
+are provisional wiring/saturation checks, not accuracy or noise limits.
+Nominal means for A1/A2/A3/A4 are 1.62739/1.62760/1.62839/1.64421 V.
+All samples, including larger deviations, remain. The startup input/REF
+DMM report is not a driven midpoint calibration pair. Fresh B13 and four
+measurement-node DMM readings are requested without changing output.

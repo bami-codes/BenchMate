@@ -1,0 +1,54 @@
+{
+  "boot_id": "019190dbdf4f80d8a5ae9f53a7f3368a",
+  "held_code": 1369,
+  "configuration": {
+    "vref_v": 4.88,
+    "ref_v": 1.631,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "channels": {
+    "A1": {
+      "mean_counts": 5463.4296875,
+      "std_counts": 8.897048560729369,
+      "min_counts": 5385,
+      "max_counts": 5514,
+      "nominal_mean_v": 1.6273903970579218
+    },
+    "A2": {
+      "mean_counts": 5464.1171875,
+      "std_counts": 4.028025293997077,
+      "min_counts": 5434,
+      "max_counts": 5479,
+      "nominal_mean_v": 1.6275951825062542
+    },
+    "A3": {
+      "mean_counts": 5466.7890625,
+      "std_counts": 7.60693096642689,
+      "min_counts": 5412,
+      "max_counts": 5509,
+      "nominal_mean_v": 1.6283910532259047
+    },
+    "A4": {
+      "mean_counts": 5519.892578125,
+      "std_counts": 4.3826494316624585,
+      "min_counts": 5492,
+      "max_counts": 5545,
+      "nominal_mean_v": 1.6442089837789131
+    }
+  },
+  "gross_checks": {
+    "raw_not_at_rails": true,
+    "all_means_near_REF": true,
+    "all_samples_near_REF": true,
+    "channel_mean_spread_within_50mV": true
+  },
+  "samples": 512,
+  "frame_interval_us_min": 1998,
+  "frame_interval_us_max": 2003,
+  "overruns": 0,
+  "calibration_performed": false,
+  "fresh_midpoint_DMM_pending": true,
+  "nominal_volts_are_not_calibrated": true,
+  "all_samples_retained": true
+}
