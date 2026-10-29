@@ -610,6 +610,16 @@
       "source": "runs/hardware-minima-driver-mismatch/20261029T065746-47b8578b22/controller-source.py",
       "published": "minima-driver-voltage-mismatch/controller-source.py",
       "sha256": "6c8e3c95adc76b595f8cbcdd0ab1a3e45a66df5f881d1f0cab1629ef703d7adc"
+    },
+    {
+      "source": "runs/hardware-minima-contact-clarification/20261029T070759-af02817dbc/events.jsonl",
+      "published": "minima-driver-contact-clarification/events.jsonl",
+      "sha256": "20617009b2e3f8fba772353e685100c0bb59c1644d8e9a4a307ed1705d958e08"
+    },
+    {
+      "source": "runs/hardware-minima-contact-clarification/20261029T070759-af02817dbc/controller-source.py",
+      "published": "minima-driver-contact-clarification/controller-source.py",
+      "sha256": "cc3ee832dfbf3cc620a4e8b7450dea9b67e2962d38b793895300c88a9a22a411"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1341,7 +1351,21 @@
         "recovery_verified": false,
         "awaiting": "USB disconnected and power LED off confirmation"
       }
+    },
+    {
+      "folder": "minima-driver-contact-clarification",
+      "source": "runs/hardware-minima-contact-clarification/20261029T070759-af02817dbc",
+      "events": 5,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "operator_clarification_recorded": true,
+        "original_voltage_record_preserved": true,
+        "hardware_IO_performed": false,
+        "calibration_sweep_still_stopped": true,
+        "fault_cause_established": false,
+        "awaiting": "Actual U1 pin 6 to pin 7 continuity result"
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T06:58:19.258264+00:00"
+  "last_appended_at_utc": "2026-10-29T07:09:03.941764+00:00"
 }

@@ -57,10 +57,12 @@ blue GND post remains; the requested J27 relocation was not performed.
 Fresh power/REF displays are 4.88/1.63 V. PING after reconnect was still
 unanswered. An operator-confirmed single RESET restored responses with a
 new unarmed boot; explicit ARM then established code 1368. The subsequent
-B13/A11/D50 report is 1.62/3.4/1.64 V: the driver output does not follow
-the DAC input. Physical recovery is not established. USB disconnection
-and LED-off confirmation are requested before checking U1 input/feedback
-contacts; chip damage is not yet established. No midpoint ADC capture or
+B13/A11/D50-labelled report is 1.62/3.4/1.64 V: the operator clarified
+that the first two readings were directly at U1 pins 5/7 because the probe
+posts had been removed the previous night. USB disconnection and LED-off
+are now confirmed, with B12-to-D11 continuity reported. Actual pin 6-to-7
+contact remains to be checked. Physical recovery or chip damage is not
+established. No midpoint ADC capture or
 higher target was commanded. Calibration and reliability remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
@@ -1329,6 +1331,25 @@ capture or firmware command was sent for this report. See
 `minima-driver-voltage-mismatch/` in the evidence bundle. The earlier
 successful PING and ARM remain evidence of communication and command
 state only; they do not establish correct physical output.
+
+## Actual voltage contacts and limited feedback continuity confirmation
+
+The operator clarified that B13 and A11 probe posts had been removed the
+previous night. The prior 1.62 V and 3.4 V displays were measured directly
+on U1 package pins 5 and 7, respectively, rather than on those posts.
+The earlier raw report retains the requested node labels; this subsequent
+clarification records the actual probe contacts without rewriting it.
+There are no new powered voltage readings in this clarification.
+
+USB disconnected and power LED off are now explicitly confirmed. The
+operator skipped the two post-to-pin checks and reported a beep between
+B12 and D11. This establishes reported continuity between the breadboard
+feedback nodes but does not verify the actual pin 6 contact. The inference
+that the chip is latched is not established. The next request is one
+unpowered continuity check directly between U1 metal pins 6 (E12) and 7
+(E11), avoiding contact between the probe tips, or a report that access is
+too difficult. No wires or ICs are to be moved; USB remains disconnected.
+No hardware command was sent. See `minima-driver-contact-clarification/`.
 
 ## Standing conventions (current)
 
