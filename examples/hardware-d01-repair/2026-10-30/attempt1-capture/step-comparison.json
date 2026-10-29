@@ -1,0 +1,106 @@
+{
+  "models": {
+    "repair_to_declared_nominal_C": {
+      "RMS_mV": 12.025992187080867,
+      "mean_residual_mV": 11.85559417265057,
+      "max_abs_residual_mV": 30.183161294744963,
+      "regions": [
+        {
+          "name": "pre_step",
+          "samples": 51,
+          "RMS_mV": 9.178938521725245,
+          "max_abs_mV": 16.464710858528075
+        },
+        {
+          "name": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 11.699273198439473,
+          "max_abs_mV": 14.033474786113498
+        },
+        {
+          "name": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 12.28203242722904,
+          "max_abs_mV": 14.621061754122033
+        },
+        {
+          "name": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 12.537639431771902,
+          "max_abs_mV": 30.183161294744963
+        },
+        {
+          "name": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 12.226213806218615,
+          "max_abs_mV": 20.92573375452167
+        }
+      ],
+      "checks": {
+        "whole_RMS": false,
+        "all_regional_RMS": false,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": false,
+      "refitted_samples": 0
+    },
+    "no_repair_counterfactual": {
+      "RMS_mV": 19.418723046344613,
+      "mean_residual_mV": 15.871810449070052,
+      "max_abs_residual_mV": 63.71454356563078,
+      "regions": [
+        {
+          "name": "pre_step",
+          "samples": 51,
+          "RMS_mV": 9.178938521725245,
+          "max_abs_mV": 16.464710858528075
+        },
+        {
+          "name": "0_to_5ms",
+          "samples": 10,
+          "RMS_mV": 44.05969273078732,
+          "max_abs_mV": 59.81094403291798
+        },
+        {
+          "name": "5_to_20ms",
+          "samples": 30,
+          "RMS_mV": 53.40331960214628,
+          "max_abs_mV": 63.71454356563078
+        },
+        {
+          "name": "20_to_80ms",
+          "samples": 120,
+          "RMS_mV": 17.974022029133625,
+          "max_abs_mV": 35.82849970014279
+        },
+        {
+          "name": "after_80ms",
+          "samples": 301,
+          "RMS_mV": 12.231663037700459,
+          "max_abs_mV": 20.926576390451366
+        }
+      ],
+      "checks": {
+        "whole_RMS": false,
+        "all_regional_RMS": false,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": false,
+      "refitted_samples": 0
+    }
+  },
+  "max_time_error_us": 3.0000000000030003,
+  "max_DAC_code_error": 0,
+  "electrical_guards": {
+    "raw_not_at_rails": true,
+    "A4_envelope": true,
+    "A4_block_mean_stability": true,
+    "signal_envelope": true
+  },
+  "frame_interval_us_range": [
+    497,
+    503
+  ]
+}

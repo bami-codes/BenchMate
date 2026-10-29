@@ -1,0 +1,92 @@
+[
+  {
+    "source": "runs/hardware-d01-repair-voltage/20261029T152235-5b2d459f80/controller-source.py",
+    "copy": "attempt1-voltage-predictions/controller-source.py",
+    "sha256": "f01d295b6edb1b13840a856cfffa0e2fdd63fda97325957c1b9dd36f0e5ea22c"
+  },
+  {
+    "source": "runs/hardware-d01-repair-voltage/20261029T152235-5b2d459f80/events.jsonl",
+    "copy": "attempt1-voltage-predictions/events.jsonl",
+    "sha256": "17d74203994ca2626111ccc4c644c435de2a2b2934b2807c637fb9b3de032122"
+  },
+  {
+    "source": "runs/hardware-d01-repair-voltage/20261029T152235-5b2d459f80/model-plan.json",
+    "copy": "attempt1-voltage-predictions/model-plan.json",
+    "sha256": "f7adca32ddd08ace55dae31f4c5ce112664240e30d560f58ed2f87f08fa9358d"
+  },
+  {
+    "source": "runs/hardware-d01-repair-voltage/20261029T152235-5b2d459f80/prediction.json",
+    "copy": "attempt1-voltage-predictions/prediction.json",
+    "sha256": "e280d26180739020eedfbda82b04cd69d7f55910964c6e19dff699d0ab7a1b25"
+  },
+  {
+    "source": "runs/hardware-d01-repair-voltage/20261029T152235-5b2d459f80/provisional-calibration.json",
+    "copy": "attempt1-voltage-predictions/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/controller-source.py",
+    "copy": "attempt1-capture/controller-source.py",
+    "sha256": "8f13c813ae1495fb3f4b9f08a45e3f4d18f6bb0eb4fb38af89e586321b07f405"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/events.jsonl",
+    "copy": "attempt1-capture/events.jsonl",
+    "sha256": "8e5489bae4072740f9aa357153c148e3854a1c598c27bc0fa142e39792f63d9a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/host-instrument.py",
+    "copy": "attempt1-capture/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/prediction.json",
+    "copy": "attempt1-capture/prediction.json",
+    "sha256": "e280d26180739020eedfbda82b04cd69d7f55910964c6e19dff699d0ab7a1b25"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/provisional-calibration.json",
+    "copy": "attempt1-capture/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/result.json",
+    "copy": "attempt1-capture/result.json",
+    "sha256": "ded46e7059fc8468f81a04e30892f235aa52649b96e6793d23fb1f9e3d1461de"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/sine-comparison.json",
+    "copy": "attempt1-capture/sine-comparison.json",
+    "sha256": "077abd67ee878a3095a4fb925384395e2ace4881f3d05d0e37435c5d45843420"
+  },
+  {
+    "source": "runs/hardware-d01-repair-capture/20261029T152603-7f7fe66185/step-comparison.json",
+    "copy": "attempt1-capture/step-comparison.json",
+    "sha256": "4254d5bca560d7c52345e9856e54de53b63944add7347c4e13b0312a13809e49"
+  },
+  {
+    "source": "runs/hardware-d01-repair-analysis/20261029T152902-9dc4817e75/analysis.json",
+    "copy": "attempt1-analysis/analysis.json",
+    "sha256": "6aa0be0c83f13ad23644b54eb63e0b2e5884c9cb1dbfd200a38c902d8da86b59"
+  },
+  {
+    "source": "runs/hardware-d01-repair-analysis/20261029T152902-9dc4817e75/controller-source.py",
+    "copy": "attempt1-analysis/controller-source.py",
+    "sha256": "0819cf56026a737a44bac710617d65c7e751de187d4ef6f6ab86bf4e5ecf5143"
+  },
+  {
+    "source": "runs/hardware-d01-repair-analysis/20261029T152902-9dc4817e75/events.jsonl",
+    "copy": "attempt1-analysis/events.jsonl",
+    "sha256": "50f16bf9fa9908b1c6e7768b7ee4fcce75b418c07d2e593126eb6c04e9e5cd4b"
+  },
+  {
+    "source": "runs/hardware-d01-repair-analysis/20261029T152902-9dc4817e75/repair-attempt1.png",
+    "copy": "attempt1-analysis/repair-attempt1.png",
+    "sha256": "a34053b467a4a0f7ec84f6e777cc75cb2165b51efdefb76364872a0b0a4abef3"
+  },
+  {
+    "source": "runs/hardware-d01-repair-analysis/20261029T152902-9dc4817e75/repair-attempt1.svg",
+    "copy": "attempt1-analysis/repair-attempt1.svg",
+    "sha256": "b065d660e37d25cf594f9e3b08018122121f359a466610603fc6c375e2856abf"
+  }
+]

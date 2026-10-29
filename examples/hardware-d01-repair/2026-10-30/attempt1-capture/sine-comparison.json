@@ -1,0 +1,142 @@
+{
+  "models": {
+    "repair_to_declared_nominal_C": {
+      "RMS_mV": 13.115062549410464,
+      "mean_residual_mV": 12.789387272836445,
+      "max_abs_residual_mV": 30.495543375353982,
+      "regions": [
+        {
+          "name": "phase_0",
+          "samples": 77,
+          "RMS_mV": 14.13833987637855,
+          "max_abs_mV": 30.495543375353982
+        },
+        {
+          "name": "phase_1",
+          "samples": 60,
+          "RMS_mV": 14.724595678683587,
+          "max_abs_mV": 17.918408777221728
+        },
+        {
+          "name": "phase_2",
+          "samples": 65,
+          "RMS_mV": 14.58563181700357,
+          "max_abs_mV": 17.77263429299536
+        },
+        {
+          "name": "phase_3",
+          "samples": 60,
+          "RMS_mV": 13.712259162279592,
+          "max_abs_mV": 17.31303539494555
+        },
+        {
+          "name": "phase_4",
+          "samples": 65,
+          "RMS_mV": 12.0459718181922,
+          "max_abs_mV": 15.144755327157089
+        },
+        {
+          "name": "phase_5",
+          "samples": 60,
+          "RMS_mV": 11.689137525596463,
+          "max_abs_mV": 29.63028995427841
+        },
+        {
+          "name": "phase_6",
+          "samples": 65,
+          "RMS_mV": 11.099945299377438,
+          "max_abs_mV": 28.570200468203353
+        },
+        {
+          "name": "phase_7",
+          "samples": 60,
+          "RMS_mV": 12.191286116105298,
+          "max_abs_mV": 19.613531428611218
+        }
+      ],
+      "checks": {
+        "whole_RMS": false,
+        "all_regional_RMS": false,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": false,
+      "refitted_samples": 0
+    },
+    "no_repair_counterfactual": {
+      "RMS_mV": 17.69228044725142,
+      "mean_residual_mV": 13.13090598122807,
+      "max_abs_residual_mV": 45.11517913898322,
+      "regions": [
+        {
+          "name": "phase_0",
+          "samples": 77,
+          "RMS_mV": 28.514332529610957,
+          "max_abs_mV": 45.11517913898322
+        },
+        {
+          "name": "phase_1",
+          "samples": 60,
+          "RMS_mV": 26.40670437146208,
+          "max_abs_mV": 30.29449968949649
+        },
+        {
+          "name": "phase_2",
+          "samples": 65,
+          "RMS_mV": 16.750428605522984,
+          "max_abs_mV": 23.543018519980528
+        },
+        {
+          "name": "phase_3",
+          "samples": 60,
+          "RMS_mV": 6.008048601222634,
+          "max_abs_mV": 17.239310930296625
+        },
+        {
+          "name": "phase_4",
+          "samples": 65,
+          "RMS_mV": 3.0054150892549725,
+          "max_abs_mV": 6.710281359660675
+        },
+        {
+          "name": "phase_5",
+          "samples": 60,
+          "RMS_mV": 3.1984666897988916,
+          "max_abs_mV": 15.315525054180767
+        },
+        {
+          "name": "phase_6",
+          "samples": 65,
+          "RMS_mV": 10.115878538302612,
+          "max_abs_mV": 24.85867220263227
+        },
+        {
+          "name": "phase_7",
+          "samples": 60,
+          "RMS_mV": 21.4335589654601,
+          "max_abs_mV": 27.613993022848284
+        }
+      ],
+      "checks": {
+        "whole_RMS": false,
+        "all_regional_RMS": false,
+        "timing": true,
+        "DAC_codes": true
+      },
+      "passed": false,
+      "refitted_samples": 0
+    }
+  },
+  "max_time_error_us": 14.000000000069512,
+  "max_DAC_code_error": 0,
+  "electrical_guards": {
+    "raw_not_at_rails": true,
+    "A4_envelope": true,
+    "A4_block_mean_stability": true,
+    "signal_envelope": true
+  },
+  "frame_interval_us_range": [
+    1991,
+    2011
+  ]
+}

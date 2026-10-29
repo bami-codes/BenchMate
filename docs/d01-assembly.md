@@ -1,3 +1,10 @@
+> October 30 update: the added I8-I13 capacitor has been removed with USB
+> disconnected, the original parts/output load retained, and the first two
+> repair captures completed. Their frozen absolute-voltage checks failed;
+> the descriptive tau is 4.97 ms. See the [current repair record](../examples/hardware-d01-repair/2026-10-30/README.md).
+> Latest boot is `965280fa5627e569080ee7e6fb95d326`, held code 1371. The
+> sections below retain the earlier assembly and acquisition history.
+
 # D01 controlled capacitor-value fault — assembly confirmed
 
 Status, 2026-10-29 Asia/Seoul: **two D01 loaded development attempts are
