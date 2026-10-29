@@ -1,0 +1,8 @@
+{
+  "fixture": "unloaded",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": false,
+  "verbatim": "USB 분리 / 996Ω 제거·11번 복원 / 추가 C 설치 / 8열 삐 / 13열 삐 / 추가 확인: A28↔A35 삐, D55↔A35 무음, D55↔F22 무음",
+  "operator_only_assembly_record": true,
+  "assembly_truth_not_model_input": true
+}

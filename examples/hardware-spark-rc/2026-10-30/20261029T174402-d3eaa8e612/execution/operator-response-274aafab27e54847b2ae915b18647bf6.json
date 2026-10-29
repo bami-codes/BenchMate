@@ -1,0 +1,7 @@
+{
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "verbatim": "USB 분리 후 OUT 부하 E30–A55 연결(D55↔F22 삐, D55↔A35 무음 확인) / IN 분기 없음·나머지 유지 / USB 재연결 완료",
+  "request_id": "274aafab27e54847b2ae915b18647bf6",
+  "fixture": "output_load"
+}

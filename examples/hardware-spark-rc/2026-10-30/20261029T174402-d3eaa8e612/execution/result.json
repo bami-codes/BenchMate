@@ -1,0 +1,386 @@
+{
+  "source": "physical",
+  "llm_used": true,
+  "mode": "live_spark_with_physical_RC",
+  "scope": "Physical known-passive RC; measured-IN conditional incremental response, nominal-design point alternatives and provisional calibration. Not absolute voltage accuracy, blinded diagnosis, full D2 or calibrated confidence.",
+  "agent_report": {
+    "verdict": "verified",
+    "candidate": "c_changed",
+    "current_explanation": "무부하 스텝 tau 0.0214초로 공칭 0.01초 대비 증가 확인. 9.99kohm 부하 스텝에서 C변경·R공칭 모델만 전체 3.0mV 및 모든 구간 9mV 허용 이내로 지지, 동일 고정 모델의 0.15V 5Hz 사인 검증도 C변경만 전체 3.0mV 전구간 통과. 제한된 물리적 RC/증분/잠정 범위에서 지지됨. 절대 교정 아님.",
+    "unresolved": "개체 식별·조립 진실·R/C 연속 정밀값 미확정, 9mV 허용은 교정된 신뢰구간 아님, 수리·신뢰성·완전 진단 미해결.",
+    "next_observation": "다른 부하·주파수 조건에서 증분 응답을 추가 측정하여 잠정 모델 유지 여부 확인 필요.",
+    "scope": "Physical known-passive RC; measured-IN conditional incremental response, nominal-design point alternatives and provisional calibration. Not absolute voltage accuracy, blinded diagnosis, full D2 or calibrated confidence.",
+    "repair_performed": false
+  },
+  "selected_actions": [
+    "unloaded_step",
+    "attach_output_load_step",
+    "reserved_sine"
+  ],
+  "observations": [
+    {
+      "phase": "unloaded_step",
+      "tau_s": 0.021383658508343437,
+      "training_RMS_mV": 5.50262995838306,
+      "individual_R_C_identified": false
+    },
+    {
+      "phase": "attach_output_load_step",
+      "scores": {
+        "nominal_rc": {
+          "RMS_mV": 12.790675784769872,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 2.266765503382633
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 35.21864586933656
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 43.83530025741922
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 9.182951187555418
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 3.3276915824824234
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        },
+        "r_changed": {
+          "RMS_mV": 32.456502970573716,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 38.049741953800755
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 34.15284659232128
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 14.542285518954852
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 30.06151605257665
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 33.562782966013195
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        },
+        "c_changed": {
+          "RMS_mV": 2.9983767729458504,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 2.2465759843018955
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 1.3941513525796152
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 4.1172603682728885
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 2.1123770812010707
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 3.3021509697333573
+            }
+          ],
+          "passed": true,
+          "scored_OUT_refitted": false
+        }
+      },
+      "supported": [
+        "c_changed"
+      ]
+    },
+    {
+      "phase": "reserved_sine",
+      "scores": {
+        "nominal_rc": {
+          "RMS_mV": 8.538674369909812,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 11.648341390446381
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 9.072870043766832
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 3.7944266590625486
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 8.109702413544703
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 11.280572428898934
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 8.452182859271506
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 2.884130526512418
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 8.126545360938058
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        },
+        "r_changed": {
+          "RMS_mV": 18.269477430480915,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 7.295750170504631
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 16.07896099311706
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 25.119578448636112
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 20.85490673985325
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 7.283638454781907
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 15.878517567386567
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 24.772364485296258
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 20.699007940390423
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        },
+        "c_changed": {
+          "RMS_mV": 3.0432859010547677,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 2.7370177265939346
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 3.3395811559926294
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 3.280531747832801
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 2.9795664764366316
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 4.282827400118976
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 1.9427829254267293
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 1.8964258362441333
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 3.191771238962892
+            }
+          ],
+          "passed": true,
+          "scored_OUT_refitted": false
+        }
+      },
+      "supported": [
+        "c_changed"
+      ],
+      "passed": true
+    }
+  ],
+  "training": {
+    "tau_s": 0.021383658508343437,
+    "training_RMS_mV": 5.50262995838306,
+    "training_adequate": true,
+    "training_frames": 512,
+    "fit_parameters": [
+      "tau_s"
+    ],
+    "gain_fixed": 1.0,
+    "offset_from_separate_HOLD": true,
+    "individual_R_C_identified": false,
+    "point_models": {
+      "nominal_rc": {
+        "R_ohm": 10000.0,
+        "C_f": 1e-06
+      },
+      "r_changed": {
+        "R_ohm": 21383.658508343437,
+        "C_f": 1e-06
+      },
+      "c_changed": {
+        "R_ohm": 10000.0,
+        "C_f": 2.1383658508343437e-06
+      }
+    }
+  },
+  "reserved_check_passed": true,
+  "scored_capture_count": 3,
+  "repair_performed": false,
+  "absolute_voltage_validation": false,
+  "full_D2_accepted": false,
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "medium",
+  "http_requests": 5,
+  "usage": [
+    {
+      "input_tokens": 1149,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 288,
+      "output_tokens_details": {
+        "reasoning_tokens": 225
+      },
+      "total_tokens": 1437
+    },
+    {
+      "input_tokens": 1600,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 262,
+      "output_tokens_details": {
+        "reasoning_tokens": 149
+      },
+      "total_tokens": 1862
+    },
+    {
+      "input_tokens": 2245,
+      "input_tokens_details": {
+        "cached_tokens": 1521
+      },
+      "output_tokens": 449,
+      "output_tokens_details": {
+        "reasoning_tokens": 264
+      },
+      "total_tokens": 2694
+    },
+    {
+      "input_tokens": 3639,
+      "input_tokens_details": {
+        "cached_tokens": 2161
+      },
+      "output_tokens": 158,
+      "output_tokens_details": {
+        "reasoning_tokens": 87
+      },
+      "total_tokens": 3797
+    },
+    {
+      "input_tokens": 5551,
+      "input_tokens_details": {
+        "cached_tokens": 1137
+      },
+      "output_tokens": 897,
+      "output_tokens_details": {
+        "reasoning_tokens": 578
+      },
+      "total_tokens": 6448
+    }
+  ],
+  "api_elapsed_s": 15.815781833138317,
+  "reserved_allowance_usd": 5.0,
+  "instrument": {
+    "capture_attempts": 15,
+    "retained_frames": 7680,
+    "scored_captures_completed": 3,
+    "requested_wiring_interventions_completed": 1,
+    "latest_boot_id": "4faed097aeda0ad9efdd84b22dd1ba4e",
+    "output_state_confirmed": true,
+    "automatic_retry_or_rearm": false,
+    "automatic_A4_tracking": false
+  }
+}

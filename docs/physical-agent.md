@@ -1,6 +1,6 @@
 # Bounded Spark controller for a physical RC fixture
 
-The adapter is implemented and tested; its first physical execution is pending.
+The [first physical execution](../examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md) completed on October 30, 2026 (Asia/Seoul): Spark selected new measurements, the loaded and reserved checks supported C change, and all 7,680 frames are retained. The run used five API requests and one manual load intervention.
 It uses the existing Meta transport with at most eight requests, fixed serial
 commands, boot continuity and raw REF/path/timing guards. The existing agent,
 repair and discovery CLI commands retain their synthetic-only behavior.
@@ -56,3 +56,21 @@ checked that an operator-only assembly marker never entered model tool results.
 This first adapter targets known passive RC development fixtures and provisional
 channel maps. It does not establish blinded diagnostic accuracy, calibrated
 uncertainty, absolute-voltage accuracy, full D2 acceptance or physical repair.
+
+## First execution checkpoint
+
+Unloaded training tau: 21.384 ms, RMS 5.503 mV. Frozen C-change loaded-step
+and reserved-sine predictions achieved 2.998/3.043 mV RMS, with worst regions
+4.117/4.283 mV. Nominal RC and R change failed the joint whole/region rule.
+The independent sine used 0.15 V command amplitude and the same fitted model
+parameters. All boot, raw reference and timing guards passed.
+
+The prelaunch automatic approval rejection caused zero API/serial calls and is
+preserved separately. Explicit approval covered the Meta destination, measurement
+summaries and eight requests maximum. Five requests were actually made. The model
+received no operator assembly record or past specimen observations.
+
+The first physical result is reviewed through its raw event record, audit and
+standalone comparison figure. Rendering these new physical event types in the
+existing browser workspace remains separate work. No physical repair was
+performed in this run; the reintroduced capacitor fault remains installed.

@@ -4,7 +4,9 @@ BenchMate chooses measurements that distinguish circuit hypotheses, commits a pr
 
 ## Current evidence
 
-Implemented: continuous one-state RC inference, live Muse Spark experiment control, model-authored netlists executed by ngspice, a synthetic repair sequence, and an English experiment workspace shared by replay and live logs. **Automated diagnosis results still use synthetic observations. A known physical RC has now passed a limited frozen-prediction engineering check; calibrated absolute hardware accuracy, automated physical diagnosis and holdout generalization remain unestablished.**
+Implemented: continuous one-state RC inference, live Muse Spark experiment control, model-authored netlists executed by ngspice, a synthetic repair sequence, and an English experiment workspace shared by replay and live logs. **A first bounded Spark-directed physical RC run now selected new measurements and passed an independent conditional-response check. Most benchmark, repair and discovery workflows remain synthetic; calibrated absolute hardware accuracy, general physical diagnosis and holdout generalization remain unestablished.**
+
+- **First Spark-directed physical D01 run:** [actual execution and raw records](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md). Spark selected a new unloaded step (tau 21.384 ms), requested a manual 9.99 kohm OUT load, then chose an independent lower-amplitude sine check. With unchanged models, C change passed at **2.998/3.043 mV RMS**; R change and nominal RC failed the common whole/region criteria. Five API requests and all 7,680 frames are retained. Assembly truth and earlier specimen results were withheld from model input. This is a provisional known-passive RC development result, not a blinded accuracy benchmark or a repair performed by Spark.
 
 - **First physical circuit:** a [B1 step capture and new sine check](examples/hardware-b1-bringup/2026-10-29/README.md) on Minima + LM358. Step fit tau is 10.11 ms versus a 9.83 ms component-reading reference. The sine prediction was saved before its capture and achieved 4.93 mV RMS without refitting (mean +3.96 mV). Both blocks passed boot/timing checks. An added 9.99 kohm load then passed a separate frozen step forecast at 2.22 mV RMS; its descriptive gain/tau are 0.4985/5.09 ms. These were scripted known-specimen checks, not Spark diagnosis. Unloaded data identifies only tau; a separate loaded RC-conditional estimate is available, with provisional calibration and no calibrated uncertainty claim.
 
@@ -51,7 +53,7 @@ uv run benchmate discover
 uv run benchmate repair --case d01-r --live
 ```
 
-`--case` selects simulator truth only. The model receives observations and declared knowledge, not specimen identity. Current `--mode` is a user declaration, never selected automatically from the case ID. `discover` defaults to max reasoning; ordinary `agent` defaults to medium. Temperature is the provider default. `repair --live` uses Spark for diagnosis and numerical posterior predictions for repair. All currently use synthetic instruments.
+`--case` selects simulator truth only. The model receives observations and declared knowledge, not specimen identity. Current `--mode` is a user declaration, never selected automatically from the case ID. `discover` defaults to max reasoning; ordinary `agent` defaults to medium. Temperature is the provider default. `repair --live` uses Spark for diagnosis and numerical posterior predictions for repair. The CLI commands above use synthetic instruments. The separately bounded [physical RC adapter](docs/physical-agent.md) has its own explicit hookup and protocol requirements.
 
 ## Review recorded evidence
 
@@ -75,7 +77,7 @@ sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/dac_
 sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/instrument
 ```
 
-Start with non-driving raw bring-up. The optional [bare-board DC loopback](docs/dac-loopback.md) holds one A0 output at a time for raw ADC acquisition and a manual DMM reading, before the LM358 fixture is built. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. Hardware inference remains blocked pending fixture calibration.
+Start with non-driving raw bring-up. The optional [bare-board DC loopback](docs/dac-loopback.md) holds one A0 output at a time for raw ADC acquisition and a manual DMM reading, before the LM358 fixture is built. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. General hardware inference remains pending fixture calibration; the limited known-passive physical adapter above uses documented provisional maps and explicit guards.
 
 ## Providers and bounds
 

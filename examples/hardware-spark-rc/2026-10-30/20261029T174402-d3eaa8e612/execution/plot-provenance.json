@@ -1,0 +1,5 @@
+{
+  "training_curve_display": "Recomputed from recorded training tau and IN for display only; explicitly a fitted training curve.",
+  "loaded_and_reserved_curves": "Exact prediction arrays stored in original execution events; no plot-time refit.",
+  "voltage_display": "Subtract the separately recorded HOLD output origin from observed and predicted OUT."
+}

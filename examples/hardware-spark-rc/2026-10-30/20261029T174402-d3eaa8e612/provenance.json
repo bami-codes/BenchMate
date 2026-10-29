@@ -1,0 +1,97 @@
+[
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/events.jsonl",
+    "copy": "execution/events.jsonl",
+    "sha256": "12ae389d77876283f62f520239ea4806a5dc77925c8bbe25708833922d29603f"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/initial-operator-report.json",
+    "copy": "execution/initial-operator-report.json",
+    "sha256": "b352c56dbc7c4a084bdeb9317fcff73aebb8c27444bad3d5416ad8b6e29956cc"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/operator-request.json",
+    "copy": "execution/operator-request.json",
+    "sha256": "921f3c6e856d13a84ee1a94d912500987e7a6e30b09c9f07503c28eddcf935bd"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/operator-response-274aafab27e54847b2ae915b18647bf6.json",
+    "copy": "execution/operator-response-274aafab27e54847b2ae915b18647bf6.json",
+    "sha256": "62f51a2e2892cabd24276cfa6a088cd3ac5fdd6fbad2b3f1bdcf801b743bf583"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/physical-spark-comparison.png",
+    "copy": "execution/physical-spark-comparison.png",
+    "sha256": "c92bdc90e472913eeaa219a4d9bc72b359879a20ccf92b8a64754f2e77a03b37"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/plot-provenance.json",
+    "copy": "execution/plot-provenance.json",
+    "sha256": "d525113953a6b06842373c04fc1e2df832df9927ed036a7677b2930c2ca67df4"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/plot-source.py",
+    "copy": "execution/plot-source.py",
+    "sha256": "a30b8a676c15a5f924e1ca7af8ac67dcf6e42a6c690397069cc99b6d09d83513"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/protocol.json",
+    "copy": "execution/protocol.json",
+    "sha256": "19b6c90132970c1d0d63e4ffdc9ff84af615048ab0cdfdf7cae90220f29c100f"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/result.json",
+    "copy": "execution/result.json",
+    "sha256": "5d53614f06357169e3344df9db39e9f6a4830ede64af9f219d2112d1f1e50394"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/scripts/physical_spark_rc.py",
+    "copy": "execution/source/scripts/physical_spark_rc.py",
+    "sha256": "5d05257696b58b5c96b7fbafd89ab5a5af07248ccb4dff8926595ade0230dea9"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/agent.py",
+    "copy": "execution/source/src/benchmate/agent.py",
+    "sha256": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/instrument.py",
+    "copy": "execution/source/src/benchmate/instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/measured_input.py",
+    "copy": "execution/source/src/benchmate/measured_input.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/physical_bench.py",
+    "copy": "execution/source/src/benchmate/physical_bench.py",
+    "sha256": "9f0e5f5fd2fa90022a5bc296bf97091453db2e3605564f6821b62c74dcbbfea9"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/physical_rc.py",
+    "copy": "execution/source/src/benchmate/physical_rc.py",
+    "sha256": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784"
+  },
+  {
+    "source": "runs/hardware-spark-rc/20261029T174402-d3eaa8e612/source/src/benchmate/providers.py",
+    "copy": "execution/source/src/benchmate/providers.py",
+    "sha256": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839"
+  },
+  {
+    "source": "runs/hardware-spark-rc-preparation/20261029T174020-e94c02b3df/events.jsonl",
+    "copy": "preparation/events.jsonl",
+    "sha256": "7475fd168a8882743d3fb739dd5775b2afdbc937a62141b72a880f5fd89a169e"
+  },
+  {
+    "source": "runs/hardware-spark-rc-preparation/20261029T174020-e94c02b3df/operator-preparation.json",
+    "copy": "preparation/operator-preparation.json",
+    "sha256": "abfc7a0c5a202f63e3594a25107409123bd77a48283815826a01578e399b1a7f"
+  },
+  {
+    "source": "runs/hardware-spark-rc-preflight/20261029T174206-eaf2c0c0c2/events.jsonl",
+    "copy": "prelaunch-approval-block/events.jsonl",
+    "sha256": "556373084b177eb7fa4726466d93e460d0815a6cbc38af325897c525d05ff529"
+  }
+]

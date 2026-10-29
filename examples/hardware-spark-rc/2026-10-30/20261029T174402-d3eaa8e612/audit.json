@@ -1,0 +1,63 @@
+{
+  "terminal_status": "run_completed",
+  "API_responses": 5,
+  "physical_observations": 3,
+  "manual_load_requests": 1,
+  "measurement_selection_precedes_capture": true,
+  "origins_precede_scored_captures": true,
+  "loaded_and_reserved_models_identical": true,
+  "assembly_markers_absent_from_model_tool_results": true,
+  "scores": [
+    {
+      "phase": "attach_output_load_step",
+      "models": {
+        "nominal_rc": {
+          "RMS_mV": 12.790675784769872,
+          "passed": false,
+          "worst_region_RMS_mV": 43.83530025741922
+        },
+        "r_changed": {
+          "RMS_mV": 32.456502970573716,
+          "passed": false,
+          "worst_region_RMS_mV": 38.049741953800755
+        },
+        "c_changed": {
+          "RMS_mV": 2.9983767729458504,
+          "passed": true,
+          "worst_region_RMS_mV": 4.1172603682728885
+        }
+      }
+    },
+    {
+      "phase": "reserved_sine",
+      "models": {
+        "nominal_rc": {
+          "RMS_mV": 8.538674369909812,
+          "passed": false,
+          "worst_region_RMS_mV": 11.648341390446381
+        },
+        "r_changed": {
+          "RMS_mV": 18.269477430480915,
+          "passed": false,
+          "worst_region_RMS_mV": 25.119578448636112
+        },
+        "c_changed": {
+          "RMS_mV": 3.0432859010547677,
+          "passed": true,
+          "worst_region_RMS_mV": 4.282827400118976
+        }
+      }
+    }
+  ],
+  "instrument": {
+    "capture_attempts": 15,
+    "retained_frames": 7680,
+    "scored_captures_completed": 3,
+    "requested_wiring_interventions_completed": 1,
+    "latest_boot_id": "4faed097aeda0ad9efdd84b22dd1ba4e",
+    "output_state_confirmed": true,
+    "automatic_retry_or_rearm": false,
+    "automatic_A4_tracking": false
+  },
+  "repair_performed": false
+}

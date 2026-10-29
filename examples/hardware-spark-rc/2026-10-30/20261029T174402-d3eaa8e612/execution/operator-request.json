@@ -1,0 +1,8 @@
+{
+  "request_id": "274aafab27e54847b2ae915b18647bf6",
+  "fixture": "output_load",
+  "USB_off_required": true,
+  "instruction": "USB를 뽑고 LED가 꺼지면 큰 보드 E30–A55 OUT 부하 점퍼 하나를 연결한다. A55–C35 IN 분기는 없어야 한다. B28–B35 우회 점퍼, D55–D60 9.99kΩ 저항, C23–A60 REF선, 14번 점퍼와 미니보드 DUT는 유지한다. USB를 같은 포트에 재연결한 뒤 완료를 보고한다.",
+  "model_selected_action": "attach_output_load_step",
+  "response_file": "operator-response-274aafab27e54847b2ae915b18647bf6.json"
+}
