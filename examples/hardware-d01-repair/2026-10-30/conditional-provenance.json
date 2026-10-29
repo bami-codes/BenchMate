@@ -1,0 +1,162 @@
+[
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/capture-controller.py",
+    "copy": "conditional-protocol-initial/capture-controller.py",
+    "sha256": "e1c01b85d941a5d010022aca1e1b04b01ea0093ebb97b5a11cd9f6acf7a8e5f2"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/events.jsonl",
+    "copy": "conditional-protocol-initial/events.jsonl",
+    "sha256": "11d4dd6c51a367298afc49b6265b96f9de9dc349e1131e58182738f48a0480d7"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/measured-input-predictor.py",
+    "copy": "conditional-protocol-initial/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/protocol-source.py",
+    "copy": "conditional-protocol-initial/protocol-source.py",
+    "sha256": "1dd7fd2749f5b8191377187abf7c7fda02f7490073950dbc8dd70a8567ff5cd3"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/protocol.json",
+    "copy": "conditional-protocol-initial/protocol.json",
+    "sha256": "c933e4d06a6bc493d2f39c62eaa10478415fea52a680432c5c667f7137472ea2"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T154919-76b86ed75c/provisional-calibration.json",
+    "copy": "conditional-protocol-initial/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/controller-source.py",
+    "copy": "conditional-transport-failure/controller-source.py",
+    "sha256": "e1c01b85d941a5d010022aca1e1b04b01ea0093ebb97b5a11cd9f6acf7a8e5f2"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/events.jsonl",
+    "copy": "conditional-transport-failure/events.jsonl",
+    "sha256": "fea14b9d5a6cb6811be72760074060b0f36835c79445bce58b77e4669df231f9"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/host-instrument.py",
+    "copy": "conditional-transport-failure/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/measured-input-predictor.py",
+    "copy": "conditional-transport-failure/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/prediction.json",
+    "copy": "conditional-transport-failure/prediction.json",
+    "sha256": "c933e4d06a6bc493d2f39c62eaa10478415fea52a680432c5c667f7137472ea2"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T154955-695b8dca47/provisional-calibration.json",
+    "copy": "conditional-transport-failure/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/capture-controller.py",
+    "copy": "conditional-protocol-after-reset/capture-controller.py",
+    "sha256": "8fcf1664920748c7950ba85aa83d484567c5b4ca84bae00ee4c6196a1463e985"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/events.jsonl",
+    "copy": "conditional-protocol-after-reset/events.jsonl",
+    "sha256": "75e75350dc2c88d9d9793886372684113c892c816a3e2c2abf23bcc3816c1b7e"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/measured-input-predictor.py",
+    "copy": "conditional-protocol-after-reset/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/protocol-source.py",
+    "copy": "conditional-protocol-after-reset/protocol-source.py",
+    "sha256": "d3e0bb8eca2cf1a7a5101fedbec1feeff8d72e99697e28250ce357a32e61ee7b"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/protocol.json",
+    "copy": "conditional-protocol-after-reset/protocol.json",
+    "sha256": "f8ae300a43a1e0123dffdd55b6421b13bbd7002198c015161ef91be2ec70cc25"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-protocol/20261029T155639-a88e8fda4e/provisional-calibration.json",
+    "copy": "conditional-protocol-after-reset/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/baseline.json",
+    "copy": "conditional-capture/baseline.json",
+    "sha256": "3e48cd43d54cd3aacd978740b2193571d50e480e0328ffa3ecc58ff94394c369"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/controller-source.py",
+    "copy": "conditional-capture/controller-source.py",
+    "sha256": "8fcf1664920748c7950ba85aa83d484567c5b4ca84bae00ee4c6196a1463e985"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/events.jsonl",
+    "copy": "conditional-capture/events.jsonl",
+    "sha256": "7f1374c6b6abc81518b83257f9f9d8508d10582eea2f1ad069ec2c73c30dbc5a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/host-instrument.py",
+    "copy": "conditional-capture/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/measured-input-predictor.py",
+    "copy": "conditional-capture/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/prediction.json",
+    "copy": "conditional-capture/prediction.json",
+    "sha256": "f8ae300a43a1e0123dffdd55b6421b13bbd7002198c015161ef91be2ec70cc25"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/provisional-calibration.json",
+    "copy": "conditional-capture/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/result.json",
+    "copy": "conditional-capture/result.json",
+    "sha256": "3bd85f7e853d61b9813ba1eb76e755ca79b544de576b46ab5095a9cdac1d7de7"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/sine-comparison.json",
+    "copy": "conditional-capture/sine-comparison.json",
+    "sha256": "9baa010630da58b605fa866b752fb7b93dda4ac505376053c432f0007fb0ef8f"
+  },
+  {
+    "source": "runs/hardware-d01-repair-conditional-capture/20261029T155657-c2bfe4be61/step-comparison.json",
+    "copy": "conditional-capture/step-comparison.json",
+    "sha256": "8b9b7cc55f51fa5f6e9b16c96c4f926c75ca7f757132934d12b8013d3e611f0a"
+  },
+  {
+    "source": "runs/hardware-d01-conditional-analysis/20261029T160218-876b92821f/audit.json",
+    "copy": "conditional-analysis/audit.json",
+    "sha256": "a2a8dbf75116ad3e21ca3885f2eef40954999ba3424233acaf99cbc1bedc3e1b"
+  },
+  {
+    "source": "runs/hardware-d01-conditional-analysis/20261029T160218-876b92821f/conditional-repair.png",
+    "copy": "conditional-analysis/conditional-repair.png",
+    "sha256": "d527b36cc2b162bb1e7d181fa36e8d47da272685dce44bce81a772e196c97583"
+  },
+  {
+    "source": "runs/hardware-d01-conditional-analysis/20261029T160218-876b92821f/controller-source.py",
+    "copy": "conditional-analysis/controller-source.py",
+    "sha256": "b2591b082d6f73d18954dda3180c6fc496b80b0f4ba2be8f81e9ce7b30c304b7"
+  },
+  {
+    "source": "runs/hardware-d01-conditional-analysis/20261029T160218-876b92821f/events.jsonl",
+    "copy": "conditional-analysis/events.jsonl",
+    "sha256": "3ba6b2cf1cb0da7da8e5aa5d001983ad4bb5e22c88b1f3ba95e4cddd8ee9b979"
+  }
+]

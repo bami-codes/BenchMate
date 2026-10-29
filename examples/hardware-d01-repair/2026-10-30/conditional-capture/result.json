@@ -1,0 +1,368 @@
+{
+  "boot_id": "32edea4b481494f595ac2d2bf5cd3a17",
+  "configuration": {
+    "vref_v": 4.89,
+    "ref_v": 1.637,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "output_parked_ref_code": 1371,
+  "prediction_sha256": "f8ae300a43a1e0123dffdd55b6421b13bbd7002198c015161ef91be2ec70cc25",
+  "baseline": {
+    "input_v": 1.6288108893760993,
+    "output_v": 1.633370401105482,
+    "mean_counts": [
+      5471.91796875,
+      5487.40234375,
+      5473.684895833333,
+      5515.305338541667
+    ],
+    "calibration_frames": 1536,
+    "scored_OUT_samples_used": 0,
+    "sha256": "3e48cd43d54cd3aacd978740b2193571d50e480e0328ffa3ecc58ff94394c369"
+  },
+  "scores": {
+    "step": {
+      "models": {
+        "repair_to_declared_nominal_C": {
+          "RMS_mV": 2.1182275186023563,
+          "mean_residual_mV": -1.502120831857104,
+          "max_abs_residual_mV": 14.2182095981922,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 3.4055315650386033,
+              "max_abs_mV": 9.28816755921491
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 2.2362178755518816,
+              "max_abs_mV": 3.572092173479202
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 1.8964925155746994,
+              "max_abs_mV": 3.8153420097040147
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 1.782492314633735,
+              "max_abs_mV": 5.3233684435003426
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 1.9687137434843456,
+              "max_abs_mV": 14.2182095981922
+            }
+          ],
+          "checks": {
+            "whole_RMS": true,
+            "all_regional_RMS": true,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": true,
+          "refitted_samples": 0
+        },
+        "no_repair_counterfactual": {
+          "RMS_mV": 11.26730771570196,
+          "mean_residual_mV": 2.507214436144837,
+          "max_abs_residual_mV": 48.97422165963139,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 3.4268362748209413,
+              "max_abs_mV": 9.307339827272276
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 31.565558476339184,
+              "max_abs_mV": 45.92549984865557
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 39.80341085639145,
+              "max_abs_mV": 48.97422165963139
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 6.922273354875152,
+              "max_abs_mV": 22.47953542260972
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 1.9608292089937762,
+              "max_abs_mV": 14.118738606116121
+            }
+          ],
+          "checks": {
+            "whole_RMS": false,
+            "all_regional_RMS": false,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": false,
+          "refitted_samples": 0
+        }
+      },
+      "max_time_error_us": 3.0000000000030003,
+      "max_DAC_code_error": 0,
+      "electrical_guards": {
+        "raw_not_at_rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_stability": true,
+        "signal_envelope": true
+      },
+      "frame_interval_us_range": [
+        497,
+        503
+      ]
+    },
+    "sine": {
+      "models": {
+        "repair_to_declared_nominal_C": {
+          "RMS_mV": 2.044703629468389,
+          "mean_residual_mV": -0.2378822157916953,
+          "max_abs_residual_mV": 17.243825796118053,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 1.5358291559273545,
+              "max_abs_mV": 4.817120202054825
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 1.9975431652743225,
+              "max_abs_mV": 6.340640336673253
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 1.8014346835203752,
+              "max_abs_mV": 5.414728316484707
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 3.1375915742848135,
+              "max_abs_mV": 17.243825796118053
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 2.0114078500427026,
+              "max_abs_mV": 8.120430035972515
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 2.2382376916791986,
+              "max_abs_mV": 9.69095985039048
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 1.9431645050830864,
+              "max_abs_mV": 5.7078472574130235
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 1.3475019942098536,
+              "max_abs_mV": 3.84636120194215
+            }
+          ],
+          "checks": {
+            "whole_RMS": true,
+            "all_regional_RMS": true,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": true,
+          "refitted_samples": 0
+        },
+        "no_repair_counterfactual": {
+          "RMS_mV": 11.339855744318683,
+          "mean_residual_mV": 0.10579608815244804,
+          "max_abs_residual_mV": 23.698542735491213,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 14.569952293214087,
+              "max_abs_mV": 19.69317248300495
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 12.839092843375878,
+              "max_abs_mV": 18.95536489159899
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 4.820723490517315,
+              "max_abs_mV": 10.02083926998032
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 10.22180899328547,
+              "max_abs_mV": 23.698542735491213
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 15.227146899880413,
+              "max_abs_mV": 23.08680172980626
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 13.133786731474297,
+              "max_abs_mV": 23.623037557086278
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 4.695261957259254,
+              "max_abs_mV": 11.571255539709613
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 9.100543469930415,
+              "max_abs_mV": 14.512676253379597
+            }
+          ],
+          "checks": {
+            "whole_RMS": false,
+            "all_regional_RMS": false,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": false,
+          "refitted_samples": 0
+        }
+      },
+      "max_time_error_us": 14.000000000069512,
+      "max_DAC_code_error": 0,
+      "electrical_guards": {
+        "raw_not_at_rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_stability": true,
+        "signal_envelope": true
+      },
+      "frame_interval_us_range": [
+        1991,
+        2011
+      ]
+    }
+  },
+  "reference_block_means": [
+    {
+      "label": "baseline_1",
+      "nominal_A4_mean_v": 1.6458800757645118,
+      "is_hold": true,
+      "mean_counts": [
+        5471.900390625,
+        5486.703125,
+        5473.693359375,
+        5514.203125
+      ]
+    },
+    {
+      "label": "baseline_2",
+      "nominal_A4_mean_v": 1.6462560907743544,
+      "is_hold": true,
+      "mean_counts": [
+        5472.47265625,
+        5487.623046875,
+        5473.16015625,
+        5515.462890625
+      ]
+    },
+    {
+      "label": "baseline_3",
+      "nominal_A4_mean_v": 1.6464910272843798,
+      "is_hold": true,
+      "mean_counts": [
+        5471.380859375,
+        5487.880859375,
+        5474.201171875,
+        5516.25
+      ]
+    },
+    {
+      "label": "step",
+      "nominal_A4_mean_v": 1.6469941295378592,
+      "is_hold": false,
+      "mean_counts": [
+        6006.19140625,
+        5733.6640625,
+        6008.087890625,
+        5517.935546875
+      ]
+    },
+    {
+      "label": "reference_between",
+      "nominal_A4_mean_v": 1.64667349658373,
+      "is_hold": true,
+      "mean_counts": [
+        5471.380859375,
+        5488.05078125,
+        5474.041015625,
+        5516.861328125
+      ]
+    },
+    {
+      "label": "sine",
+      "nominal_A4_mean_v": 1.646562149503296,
+      "is_hold": false,
+      "mean_counts": [
+        5478.064453125,
+        5488.271484375,
+        5479.25390625,
+        5516.48828125
+      ]
+    },
+    {
+      "label": "reference_after_sine",
+      "nominal_A4_mean_v": 1.6460468049006591,
+      "is_hold": true,
+      "mean_counts": [
+        5471.451171875,
+        5487.44140625,
+        5474.146484375,
+        5514.76171875
+      ]
+    }
+  ],
+  "A4_mean_span_mV": 1.1140537733473899,
+  "capture_attempts": 7,
+  "total_frames": 3584,
+  "verification_frames": 1024,
+  "guard_frames": 2560,
+  "both_repair_waveforms_passed": true,
+  "no_repair_step_failed": true,
+  "incremental_repair_check_passed": true,
+  "post_repair_samples_used_for_refit": 0,
+  "automatic_A4_tracking": false,
+  "full_D2_accepted": false,
+  "Spark_invoked": false,
+  "scope": "Prospective measured-IN-conditioned incremental repair response. Does not validate absolute voltage, REF/A2 offset calibration or full D2.",
+  "absolute_voltage_verification_passed": false,
+  "conditional_on_observed_input": true
+}

@@ -94,3 +94,19 @@ timing, saturation and reference guards. A failed guard stops that capture;
 do not spend the day pursuing full-range automatic tracking before repair.
 The [October 30 plan](2026-10-30-plan.md) prioritizes repair, B1/B6 shunt
 comparison and the first actual Spark-directed hardware run.
+
+
+## Measured-input revision and bounded physical result
+
+Stationary DMM REF / DRIVE-REF was 1.635 / -0.010 V. Comparing different
+boots and codes does not prove a code-independent 6 mV actuator drift. Under
+the retained provisional mappings, measured A1 and commanded driver predictions
+in the failed attempt differed by only about 0.30 mV on average, insufficient
+to explain its +12–13 mV OUT residual by input substitution alone.
+
+The [measured-IN method](measured-input.md) therefore verifies incremental
+response from a separate stationary origin. A new prospective step/sine check
+passed at 2.118/2.045 mV RMS with the original repair model unchanged. This
+does not correct or rescore the old absolute predictions. A4 servo control
+remains disabled, and meter use is retained where absolute bias or a failed
+guard requires it.

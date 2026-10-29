@@ -1,0 +1,23 @@
+{
+  "protocol_precedes_first_device_command": true,
+  "baseline_precedes_both_scored_waveforms": true,
+  "baseline_sha256": "3e48cd43d54cd3aacd978740b2193571d50e480e0328ffa3ecc58ff94394c369",
+  "predictor_source_matches_frozen_hash": true,
+  "recorded_prediction_residuals_reproduce_scores": true,
+  "validation_OUT_samples_used_by_predictor": 0,
+  "incremental_repair_check_passed": true,
+  "absolute_voltage_verification_passed": false,
+  "capture_frames": 3584,
+  "scored_frames": 1024,
+  "separate_origin_frames": 1536,
+  "return_guard_frames": 1024,
+  "previous_zero_capture_timeout_preserved": true,
+  "unit_tests_passed": 9,
+  "fake_device_cases_passed": [
+    "repaired response with +12mV baseline offset",
+    "unrepaired response rejected",
+    "changed boot abort",
+    "bad REF abort"
+  ],
+  "fake_device_checks_use_no_real_serial_port": true
+}

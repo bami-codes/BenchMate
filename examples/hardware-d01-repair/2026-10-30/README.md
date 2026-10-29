@@ -1,8 +1,9 @@
 # D01 physical repair — pre-intervention prediction
 
-Status: the operator removed the added capacitor, and the first post-repair
-step/sine captures completed. **Both frozen absolute-voltage checks failed**;
-the separate fitted dynamics are close to the repair prediction.
+Status: **new input-conditioned incremental repair checks passed**. The first
+absolute-voltage checks remain failed. The later protocol uses a separate
+pre-stimulus HOLD origin and measured IN, with unchanged circuit parameters;
+it does not establish absolute voltage accuracy.
 
 Using the earlier loaded-response estimate R = 10.15948 kohm and the
 declared nominal repair capacitance 1 uF, with the same 9.99 kohm output load,
@@ -63,3 +64,50 @@ with output/USB/wiring unchanged.
 [capture result](attempt1-capture/result.json),
 [descriptive analysis](attempt1-analysis/analysis.json), and
 [source-copy hashes](attempt1-provenance.json) preserve the full attempt.
+
+
+## Prospective measured-input incremental check
+
+The user reported stationary **REF 1.635 V / DRIVE-REF -0.010 V** and proposed
+using measured IN. Under the existing provisional mappings, the first attempt's
+A1 differed from its predicted driver level by only +0.300/+0.289 mV on average
+(step/sine), corresponding to about +0.15 mV at OUT. Input substitution alone
+therefore cannot remove that attempt's +12–13 mV output residual.
+
+The revised protocol fixes R, C, gain, thresholds, input handling and
+initialization before new data. Three separate HOLD blocks then fix input/output
+origins before either scored waveform. The predictor receives measured A1 and
+channel timing; it never receives scored A2 values. A4 remains a stability guard.
+This is an incremental, measured-input-conditioned check; the predicted curve
+becomes available after IN is observed, not before acquisition. No scored OUT
+offset, amplitude, phase or circuit parameter is fitted.
+
+The first start received zero bytes for PING and stopped before any capture
+or stimulus. That record remains in `conditional-transport-failure`. After
+the operator reported RESET, a separately frozen continuation required a new
+unarmed boot and one explicit REF ARM. USB/wiring were reported unchanged;
+the prior supply estimate was retained, not newly metered. This exception is
+limited to the known passive fixture and raw stationary guards.
+
+| Fixed conditional model | Step RMS | 5 Hz sine RMS | Result |
+|---|---:|---:|---|
+| Repair to nominal C | **2.118 mV** | **2.045 mV** | Whole and all regional checks passed |
+| No-repair counterfactual | 11.267 mV | 11.340 mV | Failed |
+
+Worst repaired-model region RMS was 3.406 mV for the step and 3.138 mV for
+the sine, below the unchanged 9 mV limits. All 3,584 frames were retained:
+1,536 origin frames, 1,024 scored frames and 1,024 return-guard frames.
+A4 block means spanned 1.114 mV. Boot `32edea4b481494f595ac2d2bf5cd3a17`
+remained unchanged; output returned to code 1371. No additional DMM reading
+or center-tracking loop was used for this check.
+
+This supports the repaired **incremental response within the two declared
+models**. Absolute-voltage accuracy, general REF tracking, B5 nonlinear
+calibration, broad diagnosis and full D2 acceptance remain unestablished.
+The first failed absolute checks are not relabeled as passed.
+
+![New input-conditioned predictions and all residuals](conditional-analysis/conditional-repair.png)
+
+[Protocol](conditional-protocol-after-reset/protocol.json),
+[result](conditional-capture/result.json), [audit](conditional-analysis/audit.json),
+and [source-copy hashes](conditional-provenance.json) preserve this separate attempt.
