@@ -9,6 +9,18 @@
 constexpr uint16_t MAX_SAMPLES = 512;
 constexpr uint8_t NCH = 4;
 const uint8_t PINS[NCH] = {A1,A2,A3,A4};
+// UNO R4 Minima/WiFi core 1.6.0 pin maps: A1/A2/A3=AN000/001/002,
+// A4=AN021 (shared ADSSTRL). Other register slots are not our channels;
+// in particular ADSSTR[15] is reserved and may read zero.
+const uint8_t ADC_CHANNELS[NCH] = {0,1,2,21};
+uint8_t adcSampleState(uint8_t channel) {
+  return channel<16 ? R_ADC0->ADSSTR[channel] : R_ADC0->ADSSTRL;
+}
+void printAdcStates(const uint8_t *states) {
+  Serial.print('[');
+  for (uint8_t c=0;c<NCH;c++) {if(c) Serial.print(',');Serial.print(states[c]);}
+  Serial.print(']');
+}
 uint16_t values[MAX_SAMPLES][NCH];
 uint16_t offsets[MAX_SAMPLES][NCH];
 uint16_t dacCodes[MAX_SAMPLES];
@@ -86,7 +98,12 @@ void ping() {
   beginResponse("pong");
   Serial.print(",\"adc_bits\":14,\"dac_bits\":12,\"calibrated\":false,\"max_samples\":512,\"armed\":");
   Serial.print(armed?"true":"false");Serial.print(",\"ref_code\":");Serial.print(refCode);
-  Serial.print(",\"max_jump_code\":");Serial.print(maxJump);Serial.println("}");
+  Serial.print(",\"max_jump_code\":");Serial.print(maxJump);
+  uint8_t states[NCH];
+  for (uint8_t c=0;c<NCH;c++) states[c]=adcSampleState(ADC_CHANNELS[c]);
+  Serial.print(",\"adc_sample_state_channels\":");printAdcStates(ADC_CHANNELS);
+  Serial.print(",\"adc_sample_states_readback\":");printAdcStates(states);
+  Serial.println("}");
 }
 
 bool number(const char *text,uint32_t &value) {
@@ -114,6 +131,8 @@ void capture(const char *kind,uint32_t count,uint32_t period,uint32_t amplitude,
   }
   uint16_t startCode = hold?amplitude:(step?refCode-amplitude:refCode);
   if (!moveSettled(startCode)) { park();error("settling failed or cancelled");return; }
+  uint8_t statesBefore[NCH];
+  for (uint8_t c=0;c<NCH;c++) statesBefore[c]=adcSampleState(ADC_CHANNELS[c]);
   uint32_t warmup = sine ? (uint32_t)ceil(max((double)settleMs*1000,2e9/frequencyMilliHz)/period) : 0;
   uint32_t origin=micros(), capturedOrigin=0, overruns=0, maxLate=0;
   bool aborted=false, offsetOverflow=false;
@@ -148,9 +167,11 @@ void capture(const char *kind,uint32_t count,uint32_t period,uint32_t amplitude,
   // Final scan may also exceed its allocated period.
   if (!aborted && (uint32_t)(micros()-origin)>(warmup+count)*period) overruns++;
   park();
-  uint8_t minState=255;
-  for (uint8_t c=0;c<16;c++) minState=min(minState,(uint8_t)R_ADC0->ADSSTR[c]);
-  minState=min(minState,(uint8_t)R_ADC0->ADSSTRL);
+  uint8_t minState=255, statesAfter[NCH];
+  for (uint8_t c=0;c<NCH;c++) {
+    statesAfter[c]=adcSampleState(ADC_CHANNELS[c]);
+    minState=min(minState,min(statesBefore[c],statesAfter[c]));
+  }
   beginResponse("capture");
   Serial.print(",\"source\":\"hardware_uncalibrated\",\"adc_bits\":14,\"dac_bits\":12,\"channels\":[\"A1\",\"A2\",\"A3\",\"A4\"],\"timestamp_semantics\":\"analogRead_completion_us\",\"kind\":\"");
   Serial.print(kind);Serial.print("\",\"requested_samples\":");Serial.print(count);
@@ -159,6 +180,9 @@ void capture(const char *kind,uint32_t count,uint32_t period,uint32_t amplitude,
   Serial.print(",\"frequency_millihz\":");Serial.print(frequencyMilliHz);
   Serial.print(",\"step_index\":");Serial.print(count/10);
   Serial.print(",\"adc_sample_states_requested\":255,\"adc_sample_states_readback_min\":");Serial.print(minState);
+  Serial.print(",\"adc_sample_state_channels\":");printAdcStates(ADC_CHANNELS);
+  Serial.print(",\"adc_sample_states_readback_before\":");printAdcStates(statesBefore);
+  Serial.print(",\"adc_sample_states_readback_after\":");printAdcStates(statesAfter);
   Serial.print(",\"timing_valid\":");Serial.print(!aborted&&!overruns&&!offsetOverflow?"true":"false");
   Serial.print(",\"overruns\":");Serial.print(overruns);
   Serial.print(",\"max_start_lateness_us\":");Serial.print(maxLate);
@@ -211,8 +235,11 @@ void setup() {
   for (uint8_t c=0;c<NCH;c++) analogRead(PINS[c]);
   // RA4M1 sampling state registers, based on the installed Renesas core header.
   // Report readback in every packet so D2 can detect an overridden setting.
-  for (uint8_t c=0;c<16;c++) R_ADC0->ADSSTR[c]=255;
-  R_ADC0->ADSSTRL=255;
+  for (uint8_t c=0;c<NCH;c++) {
+    uint8_t channel=ADC_CHANNELS[c];
+    if (channel<16) R_ADC0->ADSSTR[channel]=255;
+    else R_ADC0->ADSSTRL=255;
+  }
   // A0 remains undriven until the explicit ARM command.
 }
 

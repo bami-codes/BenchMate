@@ -125,6 +125,46 @@
       "source": "runs/hardware-minima-fixture/20261029T013558-074fdc0481/controller-source.py",
       "published": "minima-reset-arm/controller-source.py",
       "sha256": "5c4871ee77fc77237cb0308737e12e18b02a43601238b2ac4a5b59ba548a404b"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint/20261029T014429-da92d5941d/events.jsonl",
+      "published": "minima-midpoint-attempt/events.jsonl",
+      "sha256": "e02f7e01a33602167178795835421f7ab537f30a9715d7efda1bc829e66d12cd"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint/20261029T014429-da92d5941d/controller-source.py",
+      "published": "minima-midpoint-attempt/controller-source.py",
+      "sha256": "4fe76cf53fa224797ff9bfc53be545a7cceef91769189287fd48c8c402d902f4"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T014429-febe039572/events.jsonl",
+      "published": "minima-midpoint-rejected/events.jsonl",
+      "sha256": "7e2e9bee0cd8c861df2acb6c8b623e1d60ef2cd3cfd09d431179c07ffa21ef59"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T014429-febe039572/host-instrument.py",
+      "published": "minima-midpoint-rejected/host-instrument.py",
+      "sha256": "74b578204708d0b7d3e592789fa479845d9800ac24e6932ec3692c6f5587115d"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T014429-febe039572/instrument.ino",
+      "published": "minima-midpoint-rejected/instrument.ino",
+      "sha256": "03a30aa66d7bd3567b7d94a705c70ecb6af9a107254e950c4f333e61c817a4d5"
+    },
+    {
+      "source": "runs/hardware-minima-a4-review/20261029T014836-b7f42640e7/events.jsonl",
+      "published": "minima-a4-review/events.jsonl",
+      "sha256": "97d4b1afb04de91356aada76f90e79820bec924951205290bee24c0dba11e221"
+    },
+    {
+      "source": "runs/minima-adc-check-compile.log",
+      "published": "adc-readback-fix/minima-adc-check-compile.log",
+      "sha256": "f25e047f8cffbade350014f2ad9778cc56f6d5e130d1640ef7878ef76f756476"
+    },
+    {
+      "source": "runs/wifi-adc-check-compile.log",
+      "published": "adc-readback-fix/wifi-adc-check-compile.log",
+      "sha256": "7fc92f86156a9de6cc4579c0a14f63d162856df71e55c601607da0272832f04c"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -258,7 +298,40 @@
         "DMM_output_check_pending": true,
         "physical_acquisition_interruption_test_performed": false
       }
+    },
+    {
+      "folder": "minima-midpoint-attempt",
+      "source": "runs/hardware-minima-midpoint/20261029T014429-da92d5941d",
+      "events": 4,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Instrument run invalid (ValueError); record: runs/hardware-minima-capture/20261029T014429-febe039572. Check the connection; disconnect DUT before explicit re-arming.",
+        "automatic_retry_or_rearm": false,
+        "calibration_performed": false
+      }
+    },
+    {
+      "folder": "minima-midpoint-rejected",
+      "source": "runs/hardware-minima-capture/20261029T014429-febe039572",
+      "events": 6,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "ADC long sampling-state request was not retained",
+        "valid_for_analysis": false
+      }
+    },
+    {
+      "folder": "minima-a4-review",
+      "source": "runs/hardware-minima-a4-review/20261029T014836-b7f42640e7",
+      "events": 7,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "record_only": true,
+        "calibration_performed": false,
+        "ADC_samples_accepted": 0,
+        "root_cause_confirmed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T01:37:17.531690+00:00"
+  "last_appended_at_utc": "2026-10-29T01:48:50.570362+00:00"
 }

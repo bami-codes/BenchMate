@@ -11,6 +11,8 @@ def packet():
             'adc_bits':14,'dac_bits':12,'channels':['A1','A2','A3','A4'],
             'timestamp_semantics':'analogRead_completion_us','timing_valid':True,'overruns':0,
             'adc_sample_states_readback_min':255,'requested_samples':16,'period_us':500,
+            'adc_sample_state_channels':[0,1,2,21],
+            'adc_sample_states_readback_before':[255]*4,'adc_sample_states_readback_after':[255]*4,
             'kind':'STEP','amplitude_or_hold_code':435,'frequency_millihz':0,
             'rows':[[i*500,1394,1000,1000,1000,1000,20,40,60,80] for i in range(16)]}
 
@@ -46,6 +48,18 @@ def test_bad_capture_cannot_be_accepted(fault):
     if fault=='adc_state':data['adc_sample_states_readback_min']=24
     if fault=='source':data['source']='calibrated'
     with pytest.raises(ValueError):validate_block(data)
+
+
+@pytest.mark.parametrize('field',['adc_sample_states_readback_before','adc_sample_states_readback_after'])
+@pytest.mark.parametrize('value',[None,[255]*3,[255,255,255,24],[255,255,255,255.0]])
+def test_used_channel_readback_cannot_be_hidden_by_passing_minimum(field,value):
+    data=packet();data[field]=value
+    with pytest.raises(ValueError,match='Active ADC'):validate_block(data)
+
+
+def test_sampling_state_mapping_must_include_A4_channel_21():
+    data=packet();data['adc_sample_state_channels']=[0,1,2,3]
+    with pytest.raises(ValueError,match='mapping'):validate_block(data)
 
 
 def test_millis_rollover_is_not_mistaken_for_reboot():

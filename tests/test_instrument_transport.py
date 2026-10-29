@@ -23,6 +23,8 @@ def capture():
     return envelope('capture',13000,source='hardware_uncalibrated',adc_bits=14,dac_bits=12,
         channels=['A1','A2','A3','A4'],timestamp_semantics='analogRead_completion_us',
         timing_valid=True,overruns=0,adc_sample_states_readback_min=255,
+        adc_sample_state_channels=[0,1,2,21],
+        adc_sample_states_readback_before=[255]*4,adc_sample_states_readback_after=[255]*4,
         requested_samples=16,period_us=500,kind='STEP',amplitude_or_hold_code=435,
         frequency_millihz=0,parked_ref_code=CONFIG.ref_code,
         rows=[[i*500,CONFIG.ref_code,1000,1000,1000,1000,20,40,60,80] for i in range(16)])

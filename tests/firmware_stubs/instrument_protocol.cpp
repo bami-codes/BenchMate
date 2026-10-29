@@ -17,6 +17,11 @@ void send(const std::string &line) {Serial.input=line+"\n";loop();}
 int main(int argc,char **argv) {
   rngMode=argc>1?argv[1]:"ok";
   setup();assert(dacWrites.empty());
+  // Only the three dedicated registers and shared AN016+ register belong
+  // to this fixture. Reserved/unused zero readbacks must not poison its QA.
+  for (int c=3;c<16;c++) assert(R_ADC0->ADSSTR[c]==0);
+  assert(R_ADC0->ADSSTR[0]==255 && R_ADC0->ADSSTR[1]==255 &&
+         R_ADC0->ADSSTR[2]==255 && R_ADC0->ADSSTRL==255);
   send("PING");assert(dacWrites.empty());
   const std::string wrong(32,'a');
   const std::string limits=" 1394 523 2265 871 1200 20 1742 9412";

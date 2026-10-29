@@ -136,6 +136,12 @@ def validate_block(packet, *, expected_command=None):
         raise ValueError('Acquisition timing failed; reduce rate and repeat D2 timing check')
     if packet.get('adc_sample_states_readback_min')!=255:
         raise ValueError('ADC long sampling-state request was not retained')
+    if packet.get('adc_sample_state_channels') != [0,1,2,21]:
+        raise ValueError('Missing or unexpected ADC sampling-state channel mapping')
+    for field in ('adc_sample_states_readback_before','adc_sample_states_readback_after'):
+        values=packet.get(field)
+        if not isinstance(values,list) or len(values)!=4 or any(type(v) is not int or v!=255 for v in values):
+            raise ValueError('Active ADC sampling states must be retained before and after capture')
     count=packet.get('requested_samples')
     period=packet.get('period_us')
     if type(count) is not int or not 16<=count<=512 or type(period) is not int or not 100<=period<=20000:

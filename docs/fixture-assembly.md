@@ -15,8 +15,13 @@ unarmed. The operator then confirmed the seven-lead transfer and supply
 boot ID and uptime continued. After an explicitly reported single RESET,
 the ID changed and stale ARM/CAPTURE commands were rejected. New-ID ARM
 now holds code 1359 (nominal 1.62 V); 31/31 USB samples over 30 seconds
-and the final reopened PING passed. DMM output readings, ADC checks,
-interrupted-acquisition testing and D2 calibration remain pending.
+and the final reopened PING passed. DMM D35/D40/D45/D50 readings were
+1.61/1.61/1.61/1.62 V. The first 512-frame block was received but rejected
+by the ADC-state check; zero samples were accepted. A used-register-only
+software fix is compiled/tested, not uploaded. D50/G50 DMM readings of
+1.62/2.15 V also establish a reported physical A4-series-resistor voltage
+difference. The operator is asked to power off and isolate the A4 board
+connection for a resistance check. Calibration remains incomplete.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -857,6 +862,51 @@ Long-duration fixture stability, calibration and interrupted acquisition
 remain untested. Both the stopped initial identity check and the
 successful RESET/ARM record are retained in the October 29 follow-up
 bundle as `minima-transfer-precheck/` and `minima-reset-arm/`.
+
+## First Minima block rejected; A4 voltage difference investigated
+
+The operator confirmed Minima and reported D35/D40/D45/D50 as
+1.61/1.61/1.61/1.62 V (DC 20 V, Arduino-GND reference). One HOLD capture
+requested 512 four-channel frames at a 2,000 us period, bound to boot
+`f17b838790daf6d542844f859c0c3d32`. The response contained 512 rows and
+reported no timing overruns, but the sampling-state minimum was zero.
+The host rejected the block and retained it; no automatic retry occurred.
+These timing flags are diagnostic contents of a rejected packet, not a
+completed calibrated timing validation or accepted acquisition.
+
+Review found the firmware wrote/read all 16 dedicated sampling-state
+slots, including unused/reserved ones. The correction touches only the
+actual A1/A2/A3 channels 0/1/2 and A4 channel 21 via ADSSTRL. PING now
+reports those states, and CAPTURE records them before/after acquisition.
+The host requires explicit [0,1,2,21] mapping and four integer 255 values
+at both checks. A native test leaves unused slots zero; corrupt/missing
+active readback still fails. 46 related tests and both board compiles
+passed. The revised firmware has not been uploaded; actual used-register
+readbacks remain to be checked. The old rejected block is not reclassified.
+
+The rejected block's uncorrected voltage estimates were approximately
+1.616/1.615/1.617/2.156 V using the reported 4.88 V supply. A separate
+operator DMM check then reported D50=1.62 V and G50=2.15 V, without a
+firmware or stimulus change during the requested check. This indicates
+a physical voltage difference across the A4 series resistor, independently
+of the ADC-state-check bug. A simple +5 V pull-up model would imply about
+5.12 kohm using the earlier in-circuit 0.994 kohm reading, but that is a
+hypothesis, not confirmation of a board resistor or wiring cause.
+
+The [official Minima schematic](https://docs.arduino.cc/resources/schematics/ABX00080-schematics.pdf)
+marks R1/R2 I2C pullups not mounted. The compatible board's actual assembly
+has not been established. The operator is asked to unplug USB, confirm
+power off, check the H50 wire terminates at the printed A4 pin, remove
+only that board-side end, then measure board A4-to-5V resistance in both
+probe polarities at the 20 kohm range. Leave USB and that wire disconnected.
+This resistance report is pending. No bypass, resistor replacement or
+board modification has been requested.
+
+The failed wrapper/capture and subsequent operator/software review are
+retained in `minima-midpoint-attempt/`, `minima-midpoint-rejected/` and
+`minima-a4-review/` in the October 29 public bundle. Archived old firmware
+and host source hashes match the actual acquisition; new code does not
+replace the source associated with that failed record.
 
 ## Standing conventions (current)
 
