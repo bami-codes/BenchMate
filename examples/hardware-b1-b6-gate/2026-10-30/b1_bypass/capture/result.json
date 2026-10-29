@@ -1,0 +1,243 @@
+{
+  "boot_id": "df30dadf96e11e908eeb1caac6bb961d",
+  "configuration": {
+    "vref_v": 4.89,
+    "ref_v": 1.637,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "output_parked_ref_code": 1371,
+  "prediction_sha256": "90a08690dac02531a88d57e924ee7d6cb638e420a37a9a86b4387a1f7a7c8605",
+  "baseline": {
+    "input_v": 1.6291933011153554,
+    "output_v": 1.6270353765601977,
+    "mean_counts": [
+      5473.199869791667,
+      5466.18359375,
+      5474.863932291667,
+      5513.162109375
+    ],
+    "calibration_frames": 1536,
+    "scored_OUT_samples_used": 0,
+    "sha256": "5242a84bf25bbe87dbde92a5b292eb30373cfa79fef4c4b5c31f3d92083a76cd"
+  },
+  "scores": {
+    "step": {
+      "models": {
+        "no_input_branch": {
+          "RMS_mV": 5.951532574525671,
+          "mean_residual_mV": -5.328206589477519,
+          "max_abs_residual_mV": 17.53698183912733,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 4.993480689473048,
+              "max_abs_mV": 17.53698183912733
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 4.75605025591719,
+              "max_abs_mV": 7.891268612611357
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 4.728835041329471,
+              "max_abs_mV": 7.434910293287134
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 5.87967217377524,
+              "max_abs_mV": 16.102575100283012
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 6.266034475661924,
+              "max_abs_mV": 16.670002798677697
+            }
+          ],
+          "checks": {
+            "whole_RMS": true,
+            "all_regional_RMS": true,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": true,
+          "refitted_samples": 0
+        },
+        "input_branch": {
+          "RMS_mV": 5.951532574525671,
+          "mean_residual_mV": -5.328206589477519,
+          "max_abs_residual_mV": 17.53698183912733,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 4.993480689473048,
+              "max_abs_mV": 17.53698183912733
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 4.75605025591719,
+              "max_abs_mV": 7.891268612611357
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 4.728835041329471,
+              "max_abs_mV": 7.434910293287134
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 5.87967217377524,
+              "max_abs_mV": 16.102575100283012
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 6.266034475661924,
+              "max_abs_mV": 16.670002798677697
+            }
+          ],
+          "checks": {
+            "whole_RMS": true,
+            "all_regional_RMS": true,
+            "timing": true,
+            "DAC_codes": true
+          },
+          "passed": true,
+          "refitted_samples": 0
+        }
+      },
+      "max_time_error_us": 3.0000000000030003,
+      "max_DAC_code_error": 0,
+      "current_evidence": {
+        "scope": "Two declared branch alternatives; engineering thresholds, not calibrated confidence.",
+        "drive_excursion_v": 0.39863653745530225,
+        "observed_drop_contrast_v": 2.853264555891964e-05,
+        "normalized_drop_contrast": 7.15755904891656e-05,
+        "low_drop_mean_v": -0.0005790943585472486,
+        "high_drop_mean_v": -0.0005505617129883289,
+        "low_path_sample_SD_mV": 2.2883042615984555,
+        "high_path_sample_SD_mV": 2.3519683256483193,
+        "low_samples": 51,
+        "high_samples": 100,
+        "trimmed_samples": 0,
+        "two_levels_in_one_step_block": true,
+        "independent_DC_blocks": 0,
+        "shunt_ohm": 0.0,
+        "branch_ohm": 9990.0,
+        "absolute_error_limit_mV": 9.0,
+        "scores": {
+          "no_input_branch": {
+            "predicted_contrast_v": 0.0,
+            "residual_mV": 0.02853264555891964,
+            "passed": true
+          },
+          "input_branch": {
+            "predicted_contrast_v": 0.0,
+            "residual_mV": 0.02853264555891964,
+            "passed": true
+          }
+        },
+        "supported_alternatives": [
+          "no_input_branch",
+          "input_branch"
+        ]
+      },
+      "electrical_guards": {
+        "raw_not_at_rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_stability": true,
+        "signal_envelope": true
+      },
+      "frame_interval_us_range": [
+        497,
+        503
+      ]
+    }
+  },
+  "reference_block_means": [
+    {
+      "label": "baseline_1",
+      "nominal_A4_mean_v": 1.645371726789965,
+      "is_hold": true,
+      "mean_counts": [
+        5473.0703125,
+        5466.416015625,
+        5474.6015625,
+        5512.5
+      ]
+    },
+    {
+      "label": "baseline_2",
+      "nominal_A4_mean_v": 1.6457535714898825,
+      "is_hold": true,
+      "mean_counts": [
+        5473.10546875,
+        5466.09375,
+        5475.23828125,
+        5513.779296875
+      ]
+    },
+    {
+      "label": "baseline_3",
+      "nominal_A4_mean_v": 1.645582761570683,
+      "is_hold": true,
+      "mean_counts": [
+        5473.423828125,
+        5466.041015625,
+        5474.751953125,
+        5513.20703125
+      ]
+    },
+    {
+      "label": "step",
+      "nominal_A4_mean_v": 1.6461161782125524,
+      "is_hold": false,
+      "mean_counts": [
+        6008.0546875,
+        5928.98828125,
+        6009.396484375,
+        5514.994140625
+      ]
+    },
+    {
+      "label": "reference_after_step",
+      "nominal_A4_mean_v": 1.6455891742297657,
+      "is_hold": true,
+      "mean_counts": [
+        5473.267578125,
+        5466.525390625,
+        5474.58984375,
+        5513.228515625
+      ]
+    }
+  ],
+  "A4_mean_span_mV": 0.7444514225873888,
+  "capture_attempts": 5,
+  "total_frames": 2560,
+  "verification_frames": 512,
+  "guard_frames": 2048,
+  "condition_id": "b1_bypass",
+  "supported_branch_alternatives": [
+    "no_input_branch",
+    "input_branch"
+  ],
+  "conditional_transfer_check_passed": true,
+  "branch_status": "unresolved",
+  "all_four_condition_gate_complete": false,
+  "scored_OUT_samples_used_for_refit": 0,
+  "automatic_A4_tracking": false,
+  "full_D2_accepted": false,
+  "Spark_invoked": false,
+  "scope": "Known-passive B1/B6 engineering gate within two declared input-branch alternatives; not a blinded five-family diagnosis or final benchmark.",
+  "absolute_voltage_verification_passed": false,
+  "conditional_on_observed_input": true
+}

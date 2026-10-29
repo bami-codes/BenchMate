@@ -1,4 +1,4 @@
-# B1/B6 physical gate — protocol frozen, no gate captures yet
+# B1/B6 physical gate — common protocol and recorded conditions
 
 The operator removed the E30-A55 OUT-load jumper with USB disconnected and
 reported a separate shunt of **996 ohm**. The 9.99 kohm resistor and its REF
@@ -20,4 +20,14 @@ The smaller +/-0.2 V stimulus is reported explicitly; the registered ideal
 
 First requested state is restored B1 with jumper 11 retained and no load/input
 branch. New shunt installation and later rewiring require their own USB-off
-confirmation. All four conditions remain pending.
+confirmation. The per-condition status below supersedes this initial preparation snapshot. The four-condition gate is not complete until all controls are recorded.
+
+
+## Recorded conditions
+
+| Condition | OUT RMS | A3−A1 level contrast | Supported alternatives |
+|---|---:|---:|---|
+| [b1_bypass](b1_bypass/README.md) | 5.952 mV | 0.029 mV | no_input_branch, input_branch |
+| b6_bypass | Pending | Pending | Pending |
+| b6_shunt | Pending | Pending | Pending |
+| b1_shunt | Pending | Pending | Pending |

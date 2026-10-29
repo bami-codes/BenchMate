@@ -1,0 +1,82 @@
+[
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/capture-controller.py",
+    "copy": "condition/capture-controller.py",
+    "sha256": "6ca4adadb6058a98c2451de6999a2e703d04c2e3c5ec73467e47243b08d93c2b"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/common-plan.json",
+    "copy": "condition/common-plan.json",
+    "sha256": "fc4c5a98e92839b4d305f129c6732c17c4fd4c181665633c7399ba4ff8466747"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/condition.json",
+    "copy": "condition/condition.json",
+    "sha256": "90a08690dac02531a88d57e924ee7d6cb638e420a37a9a86b4387a1f7a7c8605"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/controller-source.py",
+    "copy": "condition/controller-source.py",
+    "sha256": "e4b527afe20e8658d13259ac5c31efc66f28aba3091ce744f1eaa3b3bcc94093"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/events.jsonl",
+    "copy": "condition/events.jsonl",
+    "sha256": "5bf8cd325a37f3b347f0ddef37ac02468c714ab13d6fc53c297c077375689af2"
+  },
+  {
+    "source": "runs/hardware-b1-b6-condition/20261029T162017-ef30140f68/provisional-calibration.json",
+    "copy": "condition/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/baseline.json",
+    "copy": "capture/baseline.json",
+    "sha256": "5242a84bf25bbe87dbde92a5b292eb30373cfa79fef4c4b5c31f3d92083a76cd"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/branch-evaluator.py",
+    "copy": "capture/branch-evaluator.py",
+    "sha256": "9cc7516154972d7c3460998be65c3465a9481f64641fdbd98e3794db2d075c77"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/controller-source.py",
+    "copy": "capture/controller-source.py",
+    "sha256": "6ca4adadb6058a98c2451de6999a2e703d04c2e3c5ec73467e47243b08d93c2b"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/events.jsonl",
+    "copy": "capture/events.jsonl",
+    "sha256": "5073f384bfcba16d23b1912fab7a2361344c67c555d4e41cd7d4f5b989e0f77d"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/host-instrument.py",
+    "copy": "capture/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/measured-input-predictor.py",
+    "copy": "capture/measured-input-predictor.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/prediction.json",
+    "copy": "capture/prediction.json",
+    "sha256": "90a08690dac02531a88d57e924ee7d6cb638e420a37a9a86b4387a1f7a7c8605"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/provisional-calibration.json",
+    "copy": "capture/provisional-calibration.json",
+    "sha256": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/result.json",
+    "copy": "capture/result.json",
+    "sha256": "0af80199cee8699e34bf0c8336e50d9674073e5d6c4e8644f5d647991e11ed09"
+  },
+  {
+    "source": "runs/hardware-b1-b6-gate-capture/20261029T162031-2ac11016bf/step-comparison.json",
+    "copy": "capture/step-comparison.json",
+    "sha256": "3c7d893bac6620306189a1ab145a745e96defec28c356b7dfd71f41534d081f4"
+  }
+]
