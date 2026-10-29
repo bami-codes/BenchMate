@@ -1,0 +1,50 @@
+{
+  "mode": "offline_continuation_audit_no_hardware_IO",
+  "capture_start_utc": "2026-10-29T14:39:46.829356+00:00",
+  "capture_end_utc": "2026-10-29T14:40:16.963870+00:00",
+  "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+  "held_code": 1374,
+  "blocks": 10,
+  "frames": 5120,
+  "all_hash_chains_valid": true,
+  "all_blocks_valid": true,
+  "only_same_code_hold_and_ping": true,
+  "overruns": 0,
+  "raw_nominal_difference_mV_range": [
+    -4.55823466970335,
+    -3.961274406015381
+  ],
+  "existing_local_anchor_difference_mV_range": [
+    -2.0118150435151083,
+    -1.414860327555445
+  ],
+  "existing_local_anchor_difference_mV_mean": -1.7054671154686616,
+  "block_mean_span_mV": {
+    "A1": 0.39467001808276875,
+    "A2": 0.14807412790697674,
+    "A3": 0.3497814045046695,
+    "A4": 0.34628359045962276
+  },
+  "operator_report": {
+    "verbatim": "해봤자 +- 0.002?",
+    "source_session_id": "01a187d7-c426-7340-8518-ad7cde31c32c",
+    "source_message_timestamp_utc": "2026-10-29T14:42:26.955Z",
+    "interpretation": "Approximate millivolt-scale variation; not an exact signed minimum/maximum or calibrated bound.",
+    "exact_observation_interval_unknown": true,
+    "contact_continuity_not_explicitly_confirmed": true
+  },
+  "timing_limit": "ADC window was 23:39:46.829–23:40:16.964 KST. Start notice was recorded at 23:40:06.052 KST; delivery/read time and operator interval are unknown. Exact overlap is not established.",
+  "assessment": "Existing local-anchor estimate is roughly compatible with the approximate report, but neither simultaneous accuracy nor automatic tracking is validated.",
+  "no_new_fit_or_offset_adjustment": true,
+  "automatic_tracking_enabled": false,
+  "full_D2_accepted": false,
+  "physical_repair_performed": false,
+  "hardware_status_report_in_continuation": "이전 세션 중단, USB·배선 그대로",
+  "hardware_status_independently_rechecked": false,
+  "next_order": [
+    "Verify same boot and held state before any device operation.",
+    "Resolve the remaining A4 tracking check with a clearly synchronized differential meter interval, or retain manual reference checks for a separately logged engineering repair.",
+    "Freeze the repair prediction before requesting extra-capacitor removal; obtain fresh boot and reference checks after USB reconnection.",
+    "Verify physical repair without refitting; restore B1 and complete the B1/B6 before/after-shunt gate."
+  ]
+}

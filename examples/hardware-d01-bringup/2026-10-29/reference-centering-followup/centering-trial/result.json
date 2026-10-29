@@ -1,0 +1,30 @@
+{
+  "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+  "held_code": 1374,
+  "max_jump_code": 837,
+  "before_mean_counts": {
+    "A1": 5464.630859375,
+    "A2": 5468.00390625,
+    "A3": 5465.919921875,
+    "A4": 5493.17578125
+  },
+  "after_mean_counts": {
+    "A1": 5483.990234375,
+    "A2": 5478.5546875,
+    "A3": 5486.05078125,
+    "A4": 5493.19921875
+  },
+  "local_estimated_DRIVE_v": 1.6379254761463715,
+  "local_estimated_REF_v": 1.637512721242103,
+  "local_estimated_difference_mV": 0.4127549042685086,
+  "A4_mean_drift_mV": 0.006995628090093389,
+  "checks": {
+    "REF_mean_drift": true,
+    "local_ADC_DRIVE_minus_REF": true
+  },
+  "ADC_checks_passed": true,
+  "independent_DMM_check_pending": true,
+  "general_auto_tracking_enabled": false,
+  "existing_calibration_profile_modified": false,
+  "full_D2_accepted": false
+}

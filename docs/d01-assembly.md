@@ -22,11 +22,16 @@ R 10.159 kohm / C 2.033 uF. The loaded observations favor increased C
 within the declared RC alternatives. No Spark diagnosis, physical repair,
 full-family posterior or full D2 acceptance is claimed.
 
-Same boot `a09aa39f4755ba059967f31ac9221cd3`, REF code 1369 remains held.
-Extra C, OUT load, jumper 11 and jumper 14 are unchanged. A no-output-change
-ADC snapshot has been saved, and REF/DRIVE/OUT/REF DMM readings are requested
-to check A4 and path alignment before repair validation. No extra part or
-wiring change is requested. [Records](../examples/hardware-d01-bringup/2026-10-29/README.md).
+The latest recorded state is boot `a09aa39f4755ba059967f31ac9221cd3`,
+held code **1374**, after a separately logged local centering trial. Extra C,
+OUT load, jumper 11 and jumper 14 remain installed according to the last
+confirmed setup. The independent DMM point check passed, but automatic
+tracking remains unvalidated. The subsequent ten-block observation and
+approximate DMM reply are preserved in the
+[centering follow-up](../examples/hardware-d01-bringup/2026-10-29/reference-centering-followup/README.md).
+The continuation-session user reported the previous session stopped and
+USB/wiring unchanged; recheck the device state before another operation.
+No capacitor removal or other wiring change has yet been requested.
 
 ## Coordinates and parts
 

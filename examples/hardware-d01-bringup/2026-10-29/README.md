@@ -92,8 +92,12 @@ The second attempt A4 guard instead reads 1.63816 V, close to the new
 DMM report 1.635 V; a later unchanged-output snapshot gives 1.63814 V.
 These changes reinforce the need to separate real REF movement from
 ADC/path error. Calibrated reference tracking could reduce meter work;
-it is not enabled. A REF/DRIVE/OUT/REF meter report is currently pending
-between fixed-output ADC snapshots.
+it is not enabled. The [centering follow-up](reference-centering-followup/README.md)
+now preserves the completed DMM bracket, one small centering move, its
+independent point check, the later A4 mismatch, and ten fixed-output ADC
+blocks. The existing local-anchor difference was -2.012 to -1.415 mV;
+the later approximate DMM reply was "해봤자 +- 0.002?". Exact interval
+overlap is unknown, so this does not validate automatic tracking.
 See the [implementation conditions](../../../docs/reference-tracking.md).
 
 The [assembly guide](../../../docs/d01-assembly.md) retains the planned

@@ -65,11 +65,32 @@ historical sequential DMM/ADC pairs. Actual REF changes and conversion/path
 errors need close-in-time observations. The repeat's raw A4-minus-DMM is
 about 3.16 mV, outside the earlier four-record difference range.
 
-A fixed-output ADC bracket is now started at code 1369. The requested DMM
-contacts are D50 REF, D45 DRIVE, D55 actual OUT, then D50 REF again. After
-the report, one unchanged-output ADC block can check whether the reference
-remained stable over that interval. No automatic centering, gain change or
-repair is enabled by the currently incomplete bracket.
+The code-1369 bracket and one small centering move to code 1374 are now
+archived in the [reference-centering follow-up](../examples/hardware-d01-bringup/2026-10-29/reference-centering-followup/README.md).
+The independent DMM point check passed, but a later A4 mean changed by
+5.53 mV. A subsequent ten-block fixed-output observation was stable in
+its block means; the previously saved local anchors give DRIVE minus REF
+from -2.012 to -1.415 mV without a new fit. The operator reported roughly
+"+- 0.002", but exact ADC/DMM interval overlap and contact continuity were
+not established. Automatic tracking, full-range calibration and physical
+repair remain unvalidated. The last recorded held code is 1374; recheck
+boot and output state before further hardware work.
 
 The [raw comparison and audit](../examples/hardware-d01-bringup/2026-10-29/README.md)
 retain the failed voltage predictions and conditional R/C analysis.
+
+
+## October 30 execution decision
+
+The ten-block A4 mean span was 0.346 mV. It did not reproduce the earlier
+5.53 mV change and cannot identify that earlier change's cause. The DMM
+reports do not establish a continuously signed +0.002 V during the full
+capture. Do not classify this as either an A4 fault or confirmed REF drift.
+
+Automatic A4-to-DAC tracking stays disabled. Continue the limited engineering
+workflow with explicit manual supply/REF checks after wiring or USB changes,
+the retained provisional conversion policy, frozen predictions and boot,
+timing, saturation and reference guards. A failed guard stops that capture;
+do not spend the day pursuing full-range automatic tracking before repair.
+The [October 30 plan](2026-10-30-plan.md) prioritizes repair, B1/B6 shunt
+comparison and the first actual Spark-directed hardware run.

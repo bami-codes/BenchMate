@@ -1,0 +1,102 @@
+[
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T141757-e5abc8312a/controller-source.py",
+    "copy": "alignment-after-dmm/controller-source.py",
+    "sha256": "e349bf9026b33210f785cba7bea707dac5cc4d7699a01ac3ce8245d4aaf2efc8"
+  },
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T141757-e5abc8312a/events.jsonl",
+    "copy": "alignment-after-dmm/events.jsonl",
+    "sha256": "c74b329c7c3615295fe6812ea538595e42883bcba7c81f7d869ca1f966142b2d"
+  },
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T141757-e5abc8312a/summary.json",
+    "copy": "alignment-after-dmm/summary.json",
+    "sha256": "4e9f05d9e262c2dc6f0c1c26e72355cbf7727aaf826b6ea0d70ced83ba28020a"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-plan/20261029T142321-622c7d06f9/controller-source.py",
+    "copy": "centering-plan/controller-source.py",
+    "sha256": "fafe81abe8686401281b047d98e20514ca527918ffb4b530e39803367343ac65"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-plan/20261029T142321-622c7d06f9/events.jsonl",
+    "copy": "centering-plan/events.jsonl",
+    "sha256": "0a795e4f4fc247e5926a61c4eb53899383fff11ae9e5178b228675577a25e235"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-plan/20261029T142321-622c7d06f9/plan.json",
+    "copy": "centering-plan/plan.json",
+    "sha256": "cbdd7c0faa406cbd617f2b442683ccce85e838794893b5a336b25f14935ec009"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-trial/20261029T142505-120bb8e3b0/controller-source.py",
+    "copy": "centering-trial/controller-source.py",
+    "sha256": "a12194290b0682be21ef45242818aad8441dccc861e68a935819199341d2236c"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-trial/20261029T142505-120bb8e3b0/events.jsonl",
+    "copy": "centering-trial/events.jsonl",
+    "sha256": "cd2527237204b680712703d334e2b698b2dc736ed993abd595b3fa0a53ed10dd"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-trial/20261029T142505-120bb8e3b0/host-instrument.py",
+    "copy": "centering-trial/host-instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-trial/20261029T142505-120bb8e3b0/plan.json",
+    "copy": "centering-trial/plan.json",
+    "sha256": "cbdd7c0faa406cbd617f2b442683ccce85e838794893b5a336b25f14935ec009"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-trial/20261029T142505-120bb8e3b0/result.json",
+    "copy": "centering-trial/result.json",
+    "sha256": "8ecc60a997ed7b10b42de1fe86b7cef38e6561743ec692d7df3edbf3bb8e1846"
+  },
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T142841-35469e8228/controller-source.py",
+    "copy": "centering-after-dmm/controller-source.py",
+    "sha256": "579f4d836fab970f9d7232cedd6317078c161887c789e7add90a007b194cb55e"
+  },
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T142841-35469e8228/events.jsonl",
+    "copy": "centering-after-dmm/events.jsonl",
+    "sha256": "e74ce1ddfc444c5b32ec024463a0335d4ecd49a3a60e352b9373db2fa2f08aef"
+  },
+  {
+    "source": "runs/hardware-d01-reference-alignment/20261029T142841-35469e8228/summary.json",
+    "copy": "centering-after-dmm/summary.json",
+    "sha256": "73e76edb7f827cc02ced60d363d9cf314ec487211d1747edce6b1289f5466c6a"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-assessment/20261029T143635-7472a4b244/assessment.json",
+    "copy": "centering-assessment/assessment.json",
+    "sha256": "84334cbe86497996b3574f0d05577d9215d9e4779b9f2332099a8474591d632d"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-assessment/20261029T143635-7472a4b244/controller-source.py",
+    "copy": "centering-assessment/controller-source.py",
+    "sha256": "f95763bc1c2c3d01a9be41c174ecb691420b5fba45cd41d15d13e7810b3443d8"
+  },
+  {
+    "source": "runs/hardware-local-ref-centering-assessment/20261029T143635-7472a4b244/events.jsonl",
+    "copy": "centering-assessment/events.jsonl",
+    "sha256": "f13efc21d704c00b54f3ccd94a7783586b8961a3e864c7c42d1b407f1f71c735"
+  },
+  {
+    "source": "runs/hardware-simultaneous-ref-difference/20261029T143944-c8d95652c0/controller-source.py",
+    "copy": "fixed-output-observation/controller-source.py",
+    "sha256": "4fbd05299975c143b61bcf299b811b0f68ce28d6ced1a272e17e4d99a3f4dced"
+  },
+  {
+    "source": "runs/hardware-simultaneous-ref-difference/20261029T143944-c8d95652c0/events.jsonl",
+    "copy": "fixed-output-observation/events.jsonl",
+    "sha256": "1be6ad37fb7499b9572d4985794720e2f6a75b308695630bc9c83a2efafe558c"
+  },
+  {
+    "source": "runs/hardware-simultaneous-ref-difference/20261029T143944-c8d95652c0/summary.json",
+    "copy": "fixed-output-observation/summary.json",
+    "sha256": "a23a409f88258511fb0ebcacd2825710d820e43ea6fdb6d366f951fa9ae144a9"
+  }
+]

@@ -1,0 +1,121 @@
+{
+  "scope": "One same-boot near-REF centering calibration trial; automatic/general tracking remains disabled pending independent verification",
+  "boot_id": "a09aa39f4755ba059967f31ac9221cd3",
+  "previous_uptime_ms": 1860034,
+  "old_code": 1369,
+  "old_max_jump_code": 837,
+  "new_code": 1374,
+  "supply_estimate_v": 4.89,
+  "supply_remeasured_during_bracket": false,
+  "DMM_report": {
+    "verbatim": "REF \uc804 1.637 / DRIVE 1.632 / OUT 1.634 / REF \ud6c4 1.637",
+    "REF_before_v": 1.637,
+    "DRIVE_v": 1.632,
+    "OUT_v": 1.634,
+    "REF_after_v": 1.637,
+    "range": "DC 2 V",
+    "exact_read_timestamps_unknown": true
+  },
+  "bracket_mean_drift_mV": {
+    "A1": 0.2617530843709943,
+    "A2": -0.26350199139351765,
+    "A3": 0.0332292334279436,
+    "A4": 1.9092234995879875
+  },
+  "bracket_limit_mV": 3,
+  "before_after_noise": [
+    {
+      "sample_SD_counts": {
+        "A1": 8.654136375899748,
+        "A2": 5.738349879391047,
+        "A3": 10.281420915459657,
+        "A4": 7.562387040042007
+      },
+      "min_counts": [
+        5387,
+        5431,
+        5397,
+        5440
+      ],
+      "max_counts": [
+        5539,
+        5535,
+        5534,
+        5543
+      ]
+    },
+    {
+      "sample_SD_counts": {
+        "A1": 9.843789701873778,
+        "A2": 3.830806937745092,
+        "A3": 7.910580517526267,
+        "A4": 6.374095807102473
+      },
+      "min_counts": [
+        5390,
+        5452,
+        5395,
+        5447
+      ],
+      "max_counts": [
+        5537,
+        5502,
+        5533,
+        5546
+      ]
+    }
+  ],
+  "anchor_mean_counts": {
+    "A1": 5464.3740234375,
+    "A2": 5468.896484375,
+    "A3": 5466.1982421875,
+    "A4": 5491.4814453125
+  },
+  "control_anchor": {
+    "A3": {
+      "anchor_v": 1.632,
+      "gain_v_per_count_assumed": 0.0002984744736034551
+    },
+    "A4": {
+      "anchor_v": 1.637,
+      "gain_v_per_count_assumed": 0.0002984801318439846
+    },
+    "DAC_to_driver_gain_v_per_code_assumed": 0.001193648383144491,
+    "A4_gain_calibrated": false,
+    "existing_profile_modified": false
+  },
+  "latest_estimated_DRIVE_v": 1.6320166143017532,
+  "latest_estimated_REF_v": 1.637954611749794,
+  "requested_delta_codes": 5,
+  "predicted_delta_DRIVE_v": 0.005968241915722455,
+  "predicted_DRIVE_after_v": 1.6379848562174757,
+  "predicted_DRIVE_minus_REF_after_v": 3.024446768162825e-05,
+  "arm_command": "ARM a09aa39f4755ba059967f31ac9221cd3 1374 537 2211 837 1200 20 1802 9173",
+  "hold_command": "CAPTURE a09aa39f4755ba059967f31ac9221cd3 HOLD 512 2000 1374 0",
+  "guards": {
+    "same_boot_held_code_and_ADC_state_required": true,
+    "pre_capture_mean_drift_mV_max": 3,
+    "raw_limits_exclusive": [
+      16,
+      16367
+    ],
+    "max_code_move": 8,
+    "max_estimated_move_v": 0.01,
+    "post_A4_mean_drift_mV_max": 3,
+    "post_ADC_DRIVE_minus_REF_abs_mV_max": 3,
+    "independent_DMM_DRIVE_minus_REF_abs_mV_max": 3,
+    "independent_DMM_REF_before_after_abs_mV_max": 3
+  },
+  "limits": [
+    "Point anchors are sequential and their ADC brackets differ; they do not prove simultaneity.",
+    "A4 slope is assumed and A3/DAC slopes are retained from provisional calibration.",
+    "This is only near the current REF, in this boot and unchanged fixture.",
+    "A successful independent DMM check supports one small centering move, not general tracking, absolute accuracy or full D2 acceptance.",
+    "No old prediction score is altered, and no OUT verification trace is used to adjust a forecast."
+  ],
+  "source_hashes": {
+    "examples/hardware-d01-bringup/2026-10-29/reference-alignment-before-DMM/events.jsonl": "20cc757022b567f4d690ba8bf89d3c95996b9ed08d0232401e1a5db52b332835",
+    "runs/hardware-d01-reference-alignment/20261029T141757-e5abc8312a/events.jsonl": "c74b329c7c3615295fe6812ea538595e42883bcba7c81f7d869ca1f966142b2d",
+    "examples/hardware-fixture-bringup/2026-10-29-followup/minima-three-point-analysis/provisional-calibration.json": "3547849c606096b288f7cea66cb6535a4d8988f8f57883cb638b816b7700902a"
+  }
+}
