@@ -77,9 +77,16 @@ confirmed no touching during the ten-minute window and reported precise
 U1 pin 5 / D35 / D40 / D45 / D50 values of
 1.620/1.620/1.619/1.620/1.628 V. The separate held-level monitor completed
 650 checks over 1305.597 s and closed before a same-boot 512-frame midpoint
-capture, which passed. A subsequent 0.65 V DC hold (code 548) passed;
-PING-only monitoring is active during its pending DMM report. Firmware
-and wiring are unchanged; the fault cause and multi-point calibration remain open.
+capture, which passed. The subsequent low-point pin 5 / D35 / D40 / D45 /
+D50 report is 0.648/0.648/0.647/0.648/1.628 V. Its monitor closed after
+270 checks and a same-boot 512-frame block passed. The next 2.60 V target
+(code 2191) was set, but its continuously open monitor failed after 240
+successful PINGs at 17:37:43 KST. Corrected high DMM displays are
+1.629 / 0.975 / 0.975 / 0.974 / 0.975 / 1.629 V in the requested order;
+derived absolute pin 5/D35/D40/D45 values are 2.604/2.604/2.603/2.604 V.
+They are DMM-only observations, not an accepted ADC calibration pair.
+No subsequent capture or REF-return command was sent. A single RESET is
+requested before a new-boot check; the fault cause and calibration remain open.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -1506,6 +1513,67 @@ A new PING-only monitor keeps the low level under observation at
 It remains incomplete and unexported. The pending low-point DMM instruction
 uses the same five contacts and DC 2 V range; D50 remains fixed REF.
 Output and firmware stay unchanged while the operator reads the values.
+
+## Low point paired with ADC; high point prepared for differential DMM
+
+The operator reported `0.648V / 0.648V / 0.647V / 0.648V / 1.628V` for
+actual U1 pin 5 / D35 / D40 / D45 / D50 on DC 2 V. The low-level monitor
+completed 270 same-boot/code checks over 542.202 s, then closed explicitly
+before capture. The 512-frame low HOLD block passed identity, ADC-state
+and timing checks, with intervals 1998–2003 us and no overruns. Means for
+A1/A2/A3/A4 are 2177.9629/2181.4336/2182.9863/5487.9668 counts; SDs are
+9.3359/3.2241/5.7761/5.7642 counts. All raw samples remain, including the
+larger deviations. The DMM report and ADC block are sequential and no
+multi-point fit has yet been accepted.
+
+Capture parked at the configured 1.62 V center. A subsequent DC command
+held code 2191, nominal 2.60 V, on the same boot. Both moves stay within
+the firmware's maximum per-move code bound. This interior high point is
+below the measured REF plus 1 V. See `minima-low-held-watch/`,
+`minima-dc-recovery-low-point/`, `minima-dc-recovery-low-block/` and
+`minima-dc-recovery-high-held/`.
+
+The high-point DMM instruction is recorded before receiving its data in
+`minima-high-DMM-protocol/`. All six displays use DC 2 V: first REF-to-GND,
+then move only the black meter probe to D50 and read pin 5/D35/D40/D45
+relative to REF, then restore black to GND and read REF again. No circuit
+wire changes and no GND–REF jumper are requested. This avoids the coarser
+DC 20 V display for the high-point differences. Original differences and
+both REF displays will be retained. Absolute high voltages will be derived,
+not direct readings; common-reference uncertainty, reference drift and
+sequential timing must remain explicit. Meter accuracy is not established.
+
+The high-level PING-only monitor was started at
+`runs/hardware-minima-held-level-watch/20261029T082934-fd6fc27a85`.
+Its subsequent failure and DMM-only outcome are recorded below.
+
+## Corrected high DMM report; continuous-open USB failure
+
+The operator first supplied two-decimal displays, then corrected them to
+`1.629V / 0.975V / 0.975V / 0.974V / 0.975V / 1.629V` for REF before,
+pin 5 minus REF, D35 minus REF, D40 minus REF, D45 minus REF, REF after.
+Both reports remain in `minima-high-point-review/`. Adding the common
+1.629 V REF display gives 2.604/2.604/2.603/2.604 V; these are derived
+values with shared reference uncertainty, not direct absolute readings.
+The requested range was DC 2 V; the operator did not separately restate
+the range. Meter accuracy and exact reading timestamps remain unknown.
+
+The monitor passed 240 PINGs, last at 17:37:36.099 KST, then received no
+response bytes and terminated at 17:37:43.111. Minima-specific kernel
+messages show transaction errors starting at 17:37:36.845. The
+17:35–17:40 query contains 3,002 such messages; its limited keyword
+search finds no loss/enumeration messages. The port remains listed at
+17:45:23. This does not identify a cause or establish a board reset.
+Keeping the port open with periodic PING was insufficient to prevent
+this failure. No no-touch claim is made for this measurement window.
+
+`minima-high-held-watch-failed/` retains the failed chain. No high ADC
+capture, calibration fit or return-to-REF command followed the failure.
+The DMM report is retained without pairing it to an ADC block. The next
+requested action is a single operator RESET, followed by verification
+of a new unarmed boot before explicit REF setup. Any later high ADC
+pair requires a fresh DMM reading; earlier completed low/mid blocks
+remain intact and the failed watch is not retroactively accepted.
 
 ## Standing conventions (current)
 

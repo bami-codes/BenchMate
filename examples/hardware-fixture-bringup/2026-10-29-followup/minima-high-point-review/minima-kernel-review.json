@@ -1,0 +1,34 @@
+{
+  "query_KST": "2026-10-29 17:35:00\u201317:40:00",
+  "predicate": "process == kernel AND eventMessage contains UNO R4 Minima",
+  "raw_sha256": "158ceffa8cf0b03f96c14adebc7e36dd373e1d29cdfb353f3b4c6517cb2cb454",
+  "messages": 3012,
+  "transaction_error_count": 3002,
+  "loss_keyword_count": 0,
+  "enumeration_keyword_count": 0,
+  "loss_keywords": [
+    "terminate",
+    "disconnect",
+    "device lost"
+  ],
+  "enumeration_keyword": "enumerated",
+  "excerpts": [
+    {
+      "timestamp": "2026-10-29 17:37:36.845037+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x82: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 17:37:36.845540+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x00: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 17:39:59.925191+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    },
+    {
+      "timestamp": "2026-10-29 17:39:59.973188+0900",
+      "message": "AppleUSBXHCIRequest: AppleUSBIORequest::complete: device 1 (UNO R4 Minima@03100000) endpoint 0x81: status 0xe00002ed (transaction error): 0 bytes transferred"
+    }
+  ],
+  "limits": "Device-name filtered query only; no unique cause or complete absence of reset/USB events established."
+}

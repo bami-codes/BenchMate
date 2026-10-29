@@ -16,7 +16,7 @@ comparison uses that later supply. Tested DC-hold firmware has subsequently
 been uploaded. The first low-level DMM report and a following 512-frame
 block are complete; the same boot then held the midpoint for a fresh report.
 
-**Latest: the midpoint voltage sweep is stopped.** The operator reported
+**Latest: high-point ADC pairing is paused after a USB failure.** The earlier operator report was
 D35/D40/D45 at 3.28 V and then reported contact between the +5 V and GND
 probe posts. A PING-only check failed; kernel logs show USB loss and
 re-enumeration between the last good response and this check. USB disconnection
@@ -40,8 +40,13 @@ query returned no messages. Operator no-touch confirmation is now recorded.
 A same-level DC check passed; the following DMM readings are U1 pin 5 /
 D35 / D40 / D45 / D50 = 1.620/1.620/1.619/1.620/1.628 V. The held-level
 watch closed after 650 checks, then a same-boot 512-frame midpoint block
-passed. A new 0.65 V low hold is under PING-only monitoring pending DMM.
-The USB cause and multi-point calibration remain open.
+passed. The subsequent low report is 0.648/0.648/0.647/0.648/1.628 V;
+its monitor closed after 270 checks and the 512-frame block passed. The
+2.60 V high hold monitor subsequently failed after 240 PINGs. Corrected
+high DMM displays are 1.629/0.975/0.975/0.974/0.975/1.629 V, giving derived
+absolute pin 5/D35/D40/D45 values of 2.604/2.604/2.603/2.604 V. These are
+not paired to an ADC block. No capture or REF-return command followed the
+failure; a single RESET is requested. The USB cause and calibration remain open.
 
 | Record | Observed result |
 | --- | --- |
@@ -84,6 +89,11 @@ The USB cause and multi-point calibration remain open.
 | `minima-post-watch-ref/`, `minima-post-watch-ref-held/` | Same-boot 1.62 V DC settling and code postcheck pass; precise operator DMM values pending |
 | `minima-midpoint-held-watch/` | Separate PING-only connection passes 650 checks over 1305.597 s, closes explicitly before capture; includes operator DMM probing |
 | `minima-dc-recovery-mid-point/`, `minima-dc-recovery-mid-block/`, `minima-dc-recovery-low-held/` | Precise midpoint DMM plus 512-frame raw block pass; same-boot interior low target 0.65 V/code 548 held for the next report |
+| `minima-low-held-watch/` | Low level passes 270 same-boot/code checks over 542.202 s, closes explicitly before capture |
+| `minima-dc-recovery-low-point/`, `minima-dc-recovery-low-block/`, `minima-dc-recovery-high-held/` | Low DMM plus 512-frame block pass; same-boot high target 2.60 V/code 2191 held |
+| `minima-high-DMM-protocol/` | High-point DC 2 V differences and bracketing REF readings requested before data; probe-only moves, no circuit changes |
+| `minima-high-held-watch-failed/` | Continuous-open monitor passes 240 PINGs, then receives zero bytes at 17:37:43 KST; failed chain retained, no high ADC capture |
+| `minima-high-point-review/` | Original and corrected DMM displays, derived voltages, selected kernel errors and rejection of high ADC pairing; no hardware commands |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -110,7 +120,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Fifty-seven chains contain 1,584 events.
+hashes and event-chain terminal states. Sixty-four chains contain 2,132 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -294,3 +304,30 @@ No fitting or accuracy claim follows from one point. The next target is
 0.65 V, inside the envelope with margin against the measured 1.628 V REF.
 Its code 548 hold passes; a new PING-only monitor is active for the next
 DMM report and remains unexported while incomplete.
+
+The low point subsequently reports pin 5/D35/D40/D45/D50 at
+0.648/0.648/0.647/0.648/1.628 V. Its monitor closes after 270 checks;
+512 raw frames pass with no overruns and no sample trimming. A same-boot
+2.60 V/code 2191 high hold then passes. Its requested six DMM readings
+use DC 2 V: REF-to-GND before/after and four node-to-REF differences.
+Only probes move. Any absolute high voltage will be derived from these
+readings, retaining shared-reference and sequential-measurement limits.
+The high monitor subsequently failed after 240 successful PINGs; the
+complete failed chain is now exported. Last successful response was
+17:37:36.099 KST, kernel transaction errors start at 17:37:36.845, and
+the monitor terminates at 17:37:43.111 with zero response bytes. A
+Minima-only kernel query from 17:35–17:40 contains 3,002 transaction
+errors. Selected messages and the raw-log hash are retained; raw host
+logs are not published. The port remains listed at 17:45:23. No unique
+cause or reset is established, and the operator's physical actions
+during the measurement window are not yet confirmed.
+
+The corrected report is REF before/after 1.629 V, with pin 5/D35/D40/D45
+differences of 0.975/0.975/0.974/0.975 V. Absolute derived values are
+2.604/2.604/2.603/2.604 V; shared REF error, possible intermediate drift
+and unknown meter accuracy remain. The earlier coarse report is also
+retained. The requested DC 2 V range was not separately restated by the
+operator. No high ADC block or calibration fit is accepted, and no
+REF-return command followed the fault. Continuous-open periodic PING
+alone did not prevent this failure. A new single RESET has been requested
+before verifying a fresh unarmed boot and explicitly restoring REF.
