@@ -180,6 +180,131 @@
       "source": "runs/hardware-minima-a4-resistance/20261029T020213-340d5541f1/connectivity-result.json",
       "published": "minima-a4-resistance/connectivity-result.json",
       "sha256": "7459818e326f419272f55bf495d55a62c4618f9564533313a55f3d0a8bbe34c3"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/events.jsonl",
+      "published": "adc-fix-upload-failed/events.jsonl",
+      "sha256": "64255181f97576f663757eedf70912949970eeebbdc2cf3b1c00312158de5c8d"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/upload.log",
+      "published": "adc-fix-upload-failed/upload.log",
+      "sha256": "d9b5d27d91ce54c27002092769bfc6642eed893b8371fd47f7b5bf17232617d8"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/controller-source.py",
+      "published": "adc-fix-upload-failed/controller-source.py",
+      "sha256": "5668d46b91f80a300bfc01184222cd2c47dede01768f1c511feb589f62bc91bb"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/instrument.ino",
+      "published": "adc-fix-upload-failed/instrument.ino",
+      "sha256": "023b81285c55ac078be1ca201022006fbf2b6e68cfecd988620c6ecf652de44d"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/boot_identity.h",
+      "published": "adc-fix-upload-failed/boot_identity.h",
+      "sha256": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/minima-adc-check-compile.log",
+      "published": "adc-fix-upload-failed/minima-adc-check-compile.log",
+      "sha256": "f25e047f8cffbade350014f2ad9778cc56f6d5e130d1640ef7878ef76f756476"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb/followup-observations.json",
+      "published": "adc-fix-upload-failed/followup-observations.json",
+      "sha256": "022d53cbba27e9a46900cd2554d74113d769c0b4ecdbd75aed9870d339359b3f"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/events.jsonl",
+      "published": "adc-fix-upload/events.jsonl",
+      "sha256": "9e8df3175b3c3a0c32ba22d1e2f702b68470f7f0e3fe252cedc44a66335bdedb"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/upload.log",
+      "published": "adc-fix-upload/upload.log",
+      "sha256": "4f9d1e56ef2ad9a437e0efe8fdd00eed61500335315408a5f422ddfb39c25a6f"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/controller-source.py",
+      "published": "adc-fix-upload/controller-source.py",
+      "sha256": "5668d46b91f80a300bfc01184222cd2c47dede01768f1c511feb589f62bc91bb"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/instrument.ino",
+      "published": "adc-fix-upload/instrument.ino",
+      "sha256": "023b81285c55ac078be1ca201022006fbf2b6e68cfecd988620c6ecf652de44d"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/boot_identity.h",
+      "published": "adc-fix-upload/boot_identity.h",
+      "sha256": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8"
+    },
+    {
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f/minima-adc-check-compile.log",
+      "published": "adc-fix-upload/minima-adc-check-compile.log",
+      "sha256": "f25e047f8cffbade350014f2ad9778cc56f6d5e130d1640ef7878ef76f756476"
+    },
+    {
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3/events.jsonl",
+      "published": "first-valid-midpoint/events.jsonl",
+      "sha256": "4d295eec8821289a8a613da50779b369e8a5be5e0615f67c5ab8fe2148427136"
+    },
+    {
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3/controller-source.py",
+      "published": "first-valid-midpoint/controller-source.py",
+      "sha256": "f041323fe55e0e24ca79b328e91067c7712c412c4f4399a9c5ee49cfc6e68151"
+    },
+    {
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3/host-instrument.py",
+      "published": "first-valid-midpoint/host-instrument.py",
+      "sha256": "0db9569118b2a2469576bc84fad8ad277552a50073d8352e6486fa4e2a050eb2"
+    },
+    {
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3/instrument.ino",
+      "published": "first-valid-midpoint/instrument.ino",
+      "sha256": "023b81285c55ac078be1ca201022006fbf2b6e68cfecd988620c6ecf652de44d"
+    },
+    {
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3/analysis.json",
+      "published": "first-valid-midpoint/analysis.json",
+      "sha256": "1ab793b187ff89645d62e5944533d8ef5b6be36828ba64fe5b6ea173c38dfd45"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T021311-fafc476df2/events.jsonl",
+      "published": "corrected-fixture-arm/events.jsonl",
+      "sha256": "cfa23982a96e684f8f0bad3fcbc16da51abaad750961693ca69c0eb98ff47501"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T021315-fec924bf30/events.jsonl",
+      "published": "valid-midpoint-block-1/events.jsonl",
+      "sha256": "a313dd7751c101184f2fae2b076d499066d68caecc1395165e73be0e86e57b65"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T021438-82870ff1a0/events.jsonl",
+      "published": "valid-midpoint-block-2/events.jsonl",
+      "sha256": "f273a53b50a5ac6ef7c0284ba3fd0f3a1ee4467ebfa8ab7ae3a09239d1150184"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T021443-215e7ab26a/events.jsonl",
+      "published": "valid-midpoint-block-3/events.jsonl",
+      "sha256": "1529e8be8a0cc04cd32bc637e4150ec55c96f017a839d56f9025af8dc0a1e319"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint-repeat/20261029T021438-a3b799efbb/events.jsonl",
+      "published": "midpoint-repeat-analysis/events.jsonl",
+      "sha256": "e37b917ef7705380826d280fa483d8b8dde42714253427e1fd5877a55268bab3"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint-repeat/20261029T021438-a3b799efbb/controller-source.py",
+      "published": "midpoint-repeat-analysis/controller-source.py",
+      "sha256": "90e15b5e79a04bc9a2de3ee4db751f6cc3636b2512a0091f7f9e416d8ddb193b"
+    },
+    {
+      "source": "runs/hardware-minima-midpoint-repeat/20261029T021438-a3b799efbb/analysis.json",
+      "published": "midpoint-repeat-analysis/analysis.json",
+      "sha256": "645476d7957c500560531410f92afda12590a572041d3a58f6608eaee8d6ef7f"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -358,7 +483,161 @@
         "operator_revision_confirmation": "pending",
         "ADC_samples_accepted": 0
       }
+    },
+    {
+      "folder": "adc-fix-upload-failed",
+      "source": "runs/hardware-minima-adc-fix/20261029T021030-6565e6bcbb",
+      "events": 7,
+      "terminal": "run_failed",
+      "terminal_payload": {
+        "error": "Upload failed; no automatic retry",
+        "automatic_retry": false,
+        "output_commands_requested": false,
+        "ADC_capture_requested": false
+      }
+    },
+    {
+      "folder": "adc-fix-upload",
+      "source": "runs/hardware-minima-adc-fix/20261029T021205-69b721fd5f",
+      "events": 51,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "upload_completed": true,
+        "port": "/dev/cu.usbmodem3101",
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "boot_id_ready": true,
+        "PINGs_verified": 4,
+        "uptime_ms_first": 2914,
+        "uptime_ms_last": 41964,
+        "closed_port_USB_samples_present": 31,
+        "same_boot_across_port_cycles": true,
+        "armed": false,
+        "active_ADC_states": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "output_commands_requested": false,
+        "ADC_capture_requested": false,
+        "physical_reset_test_performed": false,
+        "fixture_connected_during_USB_observation": true,
+        "long_duration_stability_established": false
+      }
+    },
+    {
+      "folder": "first-valid-midpoint",
+      "source": "runs/hardware-minima-corrected-midpoint/20261029T021311-bfd1fefbf3",
+      "events": 7,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "capture_record": "runs/hardware-minima-capture/20261029T021315-fec924bf30",
+        "arm_record": "runs/hardware-minima-capture/20261029T021311-fafc476df2",
+        "accepted_frames": 512,
+        "channels": 4,
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "calibration_performed": false,
+        "output_remains_driven": true,
+        "parked_ref_code": 1373
+      }
+    },
+    {
+      "folder": "corrected-fixture-arm",
+      "source": "runs/hardware-minima-capture/20261029T021311-fafc476df2",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "reference_established": true,
+        "diagnosis_performed": false,
+        "instruction": "Check REF, attach the test circuit, then capture with --boot-id set to this boot_id.",
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 65035,
+        "uptime_ms_end": 67441
+      }
+    },
+    {
+      "folder": "valid-midpoint-block-1",
+      "source": "runs/hardware-minima-capture/20261029T021315-fec924bf30",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1999,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1373,
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 69450,
+        "uptime_ms_end": 72421
+      }
+    },
+    {
+      "folder": "valid-midpoint-block-2",
+      "source": "runs/hardware-minima-capture/20261029T021438-82870ff1a0",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1999,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1373,
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 152033,
+        "uptime_ms_end": 155004
+      }
+    },
+    {
+      "folder": "valid-midpoint-block-3",
+      "source": "runs/hardware-minima-capture/20261029T021443-215e7ab26a",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "samples": 512,
+        "diagnosis_performed": false,
+        "stimulus_generated": true,
+        "period_us_requested": 2000,
+        "frame_interval_us_min": 1999,
+        "frame_interval_us_max": 2003,
+        "timestamp_semantics": "read completion; sample aperture awaits calibration",
+        "parked_ref_code": 1373,
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 157016,
+        "uptime_ms_end": 159989
+      }
+    },
+    {
+      "folder": "midpoint-repeat-analysis",
+      "source": "runs/hardware-minima-midpoint-repeat/20261029T021438-a3b799efbb",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "additional_blocks": 2,
+        "additional_frames": 1024,
+        "boot_id": "7dd3b19411ed4ecda7e4f286c8ce45f5",
+        "records": [
+          "runs/hardware-minima-capture/20261029T021315-fec924bf30",
+          "runs/hardware-minima-capture/20261029T021438-82870ff1a0",
+          "runs/hardware-minima-capture/20261029T021443-215e7ab26a"
+        ],
+        "output_state": "parked at code 1373, nominal REF 1.63 V",
+        "calibration_performed": false
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T02:03:30.149536+00:00"
+  "last_appended_at_utc": "2026-10-29T02:17:48.637085+00:00"
 }

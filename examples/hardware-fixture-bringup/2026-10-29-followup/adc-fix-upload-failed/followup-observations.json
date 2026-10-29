@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-10-29T02:12:02.344182+00:00",
+  "upload_failure": "Runtime DFU Cannot set alternate interface zero: LIBUSB_ERROR_OTHER; dfu exit 74",
+  "after_failure_runtime_serial_identity_present": true,
+  "DFU_list_runtime_product_id": "2341:0069",
+  "DFU_list_serial": "UNKNOWN",
+  "DFU_list_warning": "Failed to retrieve language identifiers",
+  "operator_manual_double_RESET_report": "두번완료",
+  "after_manual_RESET_identified_bootloader": "2341:0369",
+  "bootloader_serial": "3612211F36323632E4B233334B572F52",
+  "automatic_retry": false,
+  "scope": "Upload mode transition failure, not observed idle USB removal; no firmware flash success in this failed run."
+}

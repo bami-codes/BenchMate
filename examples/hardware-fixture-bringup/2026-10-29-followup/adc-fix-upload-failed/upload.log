@@ -1,0 +1,16 @@
+dfu-util 0.11-arduino4
+
+Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+Copyright 2010-2021 Tormod Volden and Stefan Schmidt
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Opening DFU capable USB device...
+Device ID 2341:0069
+Run-Time device DFU version 0101
+Claiming USB DFU (Run-Time) Interface...
+Setting Alternate Interface zero...
+dfu-util: Failed to retrieve language identifiers
+dfu-util: Failed to retrieve language identifiers
+dfu-util: Cannot set alternate interface zero: LIBUSB_ERROR_OTHER
+Failed uploading: uploading error: exit status 74

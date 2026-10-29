@@ -2,8 +2,10 @@
 
 **Hardware preparation, not completed calibration or circuit diagnosis.**
 The operator subsequently confirmed transfer of the seven fixture leads
-to Minima, with supply 4.88 V and REF 1.62 V. The later RESET/ARM records
-below retain the initial unsuccessful identity check as well as the pass.
+to Minima, with supply 4.88 V and REF 1.62 V. The later records retain the unsuccessful identity/upload checks as well
+as the passing checks. The fixed-REF jumper and updated ADC firmware are
+now confirmed; three raw midpoint blocks passed acquisition integrity
+checks. Calibration and long-duration stability remain incomplete.
 
 | Record | Observed result |
 | --- | --- |
@@ -16,6 +18,11 @@ below retain the initial unsuccessful identity check as well as the pass.
 | `minima-transfer-precheck/` | Transfer reported, but old ID and continuing uptime did not establish a new boot; stopped before output commands |
 | `minima-midpoint-attempt/` | Operator midpoint 1.61/1.61/1.61/1.62 V; one requested capture failed validation |
 | `minima-midpoint-rejected/` | 512 raw frames retained, zero accepted samples; old host and firmware snapshots match recorded hashes |
+| `adc-fix-upload-failed/` | Runtime DFU interface update failed; application serial identity still listed, no automatic retry |
+| `adc-fix-upload/` | Operator double RESET then successful manual-mode update, used-channel PING readbacks all 255 and 30-second USB observation passed |
+| `corrected-fixture-arm/` | Explicit ARM at new supply/REF settings, expected new boot ID, code 1373 |
+| `first-valid-midpoint/`, `valid-midpoint-block-1/` | First 512-frame raw block passes validation, source snapshots and analysis retained |
+| `valid-midpoint-block-2/`, `valid-midpoint-block-3/`, `midpoint-repeat-analysis/` | Two additional same-condition blocks investigate larger deviations, all raw samples retained |
 | `minima-a4-resistance/` | Board A4–5V reported 5.19–5.20 kohm both directions with external A4 lead removed; fixed-REF direct-sense revision requested, not yet confirmed |
 | `minima-a4-review/` | D50/G50 1.62/2.15 V; physical voltage difference under investigation, used-register fix compiled/tested but not uploaded |
 | `minima-reset-arm/` | Operator-confirmed single RESET changed ID; host rejected old identity and firmware rejected old-ID ARM/CAPTURE; new-ID ARM at code 1359, 31/31 USB-presence samples over 30 s and final reopened PING passed |
@@ -42,7 +49,7 @@ uncalibrated, and these are not ADC calibration readings. Minima will
 require its own supply/REF checks and ADC/DAC calibration.
 
 [Provenance](provenance.json) lists exact byte copies, source paths, SHA-256
-hashes and event-chain terminal states. Twelve chains contain 264 events.
+hashes and event-chain terminal states. Twenty chains contain 359 events.
 Historical pending instructions remain unchanged; later reports are in
 separate sidecars or subsequent records. Hashes detect changes relative
 to these copies, not independent proof of the measurements. Upload logs
@@ -55,8 +62,9 @@ The subsequent ADC attempt was rejected because the old sampling-state
 check included unused/reserved register slots. The correction configures
 and checks only channels 0/1/2/21 and records states before and after a
 block. Related tests: 46 passed; Minima and WiFi compiles passed (logs in
-`adc-readback-fix/`). The fix is not yet uploaded. Rejected data is not
-retroactively accepted.
+`adc-readback-fix/`). A subsequent manual-mode upload and three captures confirm all four
+used registers remain 255 before/after. Rejected data is not retroactively
+accepted.
 
 A4 also differs physically: D50 on the REF side is 1.62 V while G50 on
 the ADC side is 2.15 V per a separate DMM report. A roughly 5.1 kohm path
@@ -69,4 +77,21 @@ continuity and recheck supply/D50/G50. The remaining series resistors and
 REF pull-down stay installed. This exception is for internal buffered REF
 only; its measured noise/load behavior still requires verification. The
 original and revised connectivity checks are retained separately.
-Physical completion, firmware upload and D2 calibration remain pending.
+The operator subsequently confirmed the jumper/continuity/reconnection and
+supply/D50/G50 readings of 4.86/1.63/1.63 V. The failed runtime DFU attempt
+and successful manual upload are retained separately.
+
+Three HOLD blocks contain 512 frames each at requested 2,000 us intervals.
+All passed complete-row, boot-ID, used-register, timing and post-PING
+checks; frame intervals were 1,999–2,003 us with no overruns. Approximate
+means using 4.86 V and ideal ADC scaling are A1 1.626 V, A2 1.625 V,
+A3 1.626 V, A4 1.638–1.639 V. Within-block SDs span about 1.28–2.84 mV,
+with larger tails up to 24.4 mV from a block mean. No outliers are deleted.
+Read-completion offsets are approximately 52/105/158/216 us, not calibrated
+sampling apertures. These are uncalibrated diagnostic observations; no
+Gaussian/AR(1) fit, accuracy bound or long-duration reliability is accepted.
+
+The current output is code 1373, nominal 1.63 V. The operator is asked for
+D35/D40/D45/D50 readings on the DC 2 V range with wiring/output unchanged;
+those readings are pending. Multi-point calibration and physical interruption
+during acquisition remain pending.

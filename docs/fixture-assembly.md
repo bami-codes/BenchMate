@@ -22,8 +22,11 @@ software fix is compiled/tested, not uploaded. D50/G50 DMM readings of
 1.62/2.15 V also establish a reported physical A4-series-resistor voltage
 difference. The isolated external A4 connection check reported board
 A4-to-5V resistance 5.19–5.20 kohm in both probe polarities. Replacing only
-D50–G50 with a short jumper for fixed buffered REF sensing is requested;
-completion and new supply/REF readings are pending. Calibration remains incomplete.
+D50–G50 with a short jumper is now operator-confirmed, with supply/D50/G50
+4.86/1.63/1.63 V. The corrected ADC firmware was uploaded manually after
+a failed automatic transition. Three 512-frame blocks passed acquisition
+checks; all used sampling-state registers were 255 before/after and boot ID
+was unchanged. Rare larger deviations persist. Calibration remains incomplete.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
 and [current wiring table](fixture-wiring-table.md).
@@ -942,6 +945,59 @@ A4-to-buffered-REF continuity, output separation and removable calibration/
 shunt connections. The original four-resistor checker remains historical.
 This is a design check, not proof of physical assembly or stability.
 
+## Corrected fixture, uploaded ADC fix and first three valid raw blocks
+
+The operator reported “완료 / 4.86 / 1.63 / 1.63” after the requested
+D50–G50 short jumper, A4 reconnection, continuity and supply/REF checks.
+The two sides now display the same REF voltage on the DC 20 V range.
+This resolves the previously visible approximately 0.53 V division at
+that node; equal displays do not establish sub-resolution equality.
+
+The first update attempt failed in the runtime DFU interface with
+`Cannot set alternate interface zero: LIBUSB_ERROR_OTHER` (dfu exit 74).
+The application serial identity remained listed, and the DFU query showed
+runtime 2341:0069 with language-identifier warnings. This was an upload
+mode problem, not evidence of another idle USB disappearance. That failed
+attempt is preserved. After the operator reported “두번완료”, the expected
+2341:0369 bootloader and Minima serial were accessible; manual-mode upload
+succeeded. Four unarmed PINGs and 31/31 presence samples over 30 seconds
+passed. PING now reads [255,255,255,255] for channels [0,1,2,21].
+
+With no DUT attached, a new explicit ARM used the reported supply 4.86 V
+and REF target 1.63 V: code 1373, boot ID
+`7dd3b19411ed4ecda7e4f286c8ce45f5`. One HOLD block and two additional
+same-condition blocks were recorded at 512 frames each and requested
+period 2,000 us. The repeats were planned after observing larger tails in
+the first block, not automatic recovery of a failed run. All three have
+complete rows, unchanged boot ID, all four used ADC state registers at
+255 before/after, no overruns, and frame intervals 1,999–2,003 us.
+
+| Channel | Nominal mean across three blocks | Within-block sample SD range |
+| --- | --- | --- |
+| A1 | approximately 1.626 V | 2.40–2.84 mV |
+| A2 | approximately 1.625 V | 1.73–2.07 mV |
+| A3 | approximately 1.626 V | 1.90–2.50 mV |
+| A4 | approximately 1.638–1.639 V | 1.28–1.34 mV |
+
+These conversions use the reported 4.86 V and ideal ADC full scale, not
+calibrated per-channel gain/offset. Read-completion offsets were about
+52/105/158/216 us; these are not sampling apertures. Larger deviations
+repeat: worst deviation from a block mean is about 24.4 mV on A1 and
+9.9 mV on A4. No samples were trimmed. A single Gaussian or AR(1) noise
+model is not declared calibrated from these blocks; further noise and
+accuracy work remains. Three short passing blocks do not establish
+long-duration USB reliability or the original WiFi fault's cause.
+
+The current output stays at code 1373. The operator is asked to keep
+USB/wiring unchanged, use DC voltage 2 V range, and report D35/D40/D45/D50
+relative to Arduino GND to the available displayed precision. Those
+readings are pending; no stimulus/firmware change is made during that
+requested check. No multi-point calibration or DUT inference is complete.
+
+The public follow-up retains both upload attempts, the exact firmware and
+host used, the ARM record, all three raw blocks, and unfiltered descriptive
+statistics. The first pre-fix rejected block remains rejected.
+
 ## Standing conventions (current)
 
 - The intended supply rails are the UPPER LEFT red section for +5 V and
@@ -953,7 +1009,7 @@ This is a design check, not proof of physical assembly or stability.
 - Configure both halves of each powered LM358 deliberately; the auxiliary
   input is parked at REF by the current table.
 - The old loopback must remain isolated. A1–A3 retain their series
-  resistors. A4 fixed-REF sensing is being revised to a direct short jumper
-  at D50–G50 after the measured pull-up-like board path; completion pending.
+  resistors. A4 fixed-REF sensing now uses the operator-confirmed short
+  jumper at D50–G50 after the measured pull-up-like board path.
   A5 is unconnected.
 - Keep USB unplugged during wiring, resistance or continuity checks.
