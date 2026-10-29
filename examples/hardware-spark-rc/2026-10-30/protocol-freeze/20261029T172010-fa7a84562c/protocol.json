@@ -1,0 +1,159 @@
+{
+  "configuration": {
+    "vref_v": 4.89,
+    "ref_v": 1.637,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "voltage_conversion": {
+    "reported_supply_ratio": 1.0020491803278688,
+    "channels": {
+      "A1": {
+        "gain_v_per_count": 0.0002983161155394755,
+        "offset_v": -0.00355042361205783
+      },
+      "A2": {
+        "gain_v_per_count": 0.00029855785780426585,
+        "offset_v": -0.004936687554625794
+      },
+      "A3": {
+        "gain_v_per_count": 0.0002984744736034551,
+        "offset_v": -0.005288341646810059
+      }
+    }
+  },
+  "guard_limits": {
+    "REF_mean_delta_v_max": 0.1,
+    "REF_any_sample_delta_v_max": 0.15,
+    "REF_channel_mean_spread_v_max": 0.05,
+    "signal_envelope_v": 0.35,
+    "A4_envelope_v": 0.15,
+    "raw_rails_exclusive": [
+      16,
+      16367
+    ]
+  },
+  "scope": "Physical known-passive RC; measured-IN conditional incremental response, nominal-design point alternatives and provisional calibration. Not absolute voltage accuracy, blinded diagnosis, full D2 or calibrated confidence.",
+  "USB_identity": [
+    9025,
+    105,
+    "3612211F36323632E4B233334B572F52"
+  ],
+  "nominal_design": {
+    "R_ohm": 10000.0,
+    "C_f": 1e-06
+  },
+  "intervention_load_ohm": 9990.0,
+  "first_measurement": {
+    "kind": "step",
+    "samples": 512,
+    "period_us": 500,
+    "amplitude_v": 0.2
+  },
+  "reserved_verification": {
+    "kind": "sine",
+    "samples": 512,
+    "period_us": 2000,
+    "amplitude_v": 0.15,
+    "frequency_hz": 5.0
+  },
+  "source_sha256": {
+    "src/benchmate/physical_rc.py": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784",
+    "src/benchmate/physical_bench.py": "9f0e5f5fd2fa90022a5bc296bf97091453db2e3605564f6821b62c74dcbbfea9",
+    "src/benchmate/measured_input.py": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221",
+    "src/benchmate/instrument.py": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780",
+    "src/benchmate/agent.py": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "scripts/physical_spark_rc.py": "5d05257696b58b5c96b7fbafd89ab5a5af07248ccb4dff8926595ade0230dea9"
+  },
+  "calibration_source": "examples/hardware-b1-b6-gate/2026-10-30/b1_bypass/condition/condition.json",
+  "calibration_source_sha256": "90a08690dac02531a88d57e924ee7d6cb638e420a37a9a86b4387a1f7a7c8605",
+  "power_policy": "Known passive fixture only. Last supply estimate 4.89 V retained, not newly metered. Code 1371 is a command center, not proof of physical REF. Explicit USB-off hookup/reconnection confirmation required for a fresh boot and one ARM. Same-fixture continuation requires the same armed boot. No firmware update, retry, servo or automatic re-arm.",
+  "training": {
+    "capture": "first unloaded step only",
+    "free_parameters": [
+      "tau_s"
+    ],
+    "tau_bounds_s": [
+      0.002,
+      0.08
+    ],
+    "gain_fixed": 1.0,
+    "baseline": "three separate HOLD blocks before the waveform",
+    "all_512_OUT_samples_used": true,
+    "fixed_point_alternatives": [
+      "nominal R and C",
+      "R=tau/Cnom with C=Cnom",
+      "R=Rnom with C=tau/Rnom"
+    ],
+    "model_refit_from_loaded_or_reserved_data": false
+  },
+  "scoring": {
+    "whole_RMS_mV_max": 9,
+    "each_region_RMS_mV_max": 9,
+    "step_regions_ms": [
+      [
+        "pre_step",
+        null,
+        0
+      ],
+      [
+        "0_to_5ms",
+        0,
+        5
+      ],
+      [
+        "5_to_20ms",
+        5,
+        20
+      ],
+      [
+        "20_to_80ms",
+        20,
+        80
+      ],
+      [
+        "after_80ms",
+        80,
+        null
+      ]
+    ],
+    "sine_phase_bins": 8,
+    "A4_block_mean_span_mV_max": 3,
+    "stationary_path_mean_span_mV_max": 3,
+    "max_time_error_us": 25,
+    "step_DAC_code_error_max": 0,
+    "sine_DAC_code_error_max": 1,
+    "same_frozen_models_for_loaded_step_and_reserved_sine": true,
+    "guard_reference_reset_only_after_confirmed_new_boot": true,
+    "waveforms_conditioned_on_measured_IN": true,
+    "scored_OUT_never_used_for_reserved_prediction": true
+  },
+  "budget": {
+    "initial_training_captures": 1,
+    "diagnostic_captures_max": 2,
+    "reserved_captures_max": 1,
+    "stationary_HOLD_blocks_per_scored_capture": 4,
+    "frames_per_capture": 512,
+    "max_API_requests": 8,
+    "usual_useful_path_scored_captures": 3,
+    "usual_useful_path_total_frames": 7680,
+    "operator_response_timeout_seconds": 1800,
+    "timeout_never_approval": true
+  },
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider tests/test_physical_bench.py tests/test_physical_rc.py tests/test_measured_input.py tests/test_instrument.py tests/test_instrument_transport.py tests/test_agent.py tests/test_providers.py",
+    "passed": 113,
+    "physical_hardware_IO": false,
+    "API_calls": 0
+  },
+  "exclusions": [
+    "specimen identity and assembly truth from model input",
+    "previous specimen observations from model input",
+    "arbitrary model-provided commands or voltages",
+    "automatic mounting",
+    "physical repair in this first adapter run",
+    "absolute-voltage or calibrated-confidence claims",
+    "full-family or blinded benchmark claims"
+  ]
+}
