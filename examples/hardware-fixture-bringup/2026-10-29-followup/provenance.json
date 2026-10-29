@@ -630,6 +630,26 @@
       "source": "runs/hardware-minima-pin-feedback/20261029T071318-5fec08ea86/controller-source.py",
       "published": "minima-driver-pin-feedback/controller-source.py",
       "sha256": "bb534b00dda8de1c8a8064cceef121cb3e6149dae242366c9b7a5769c6ab954a"
+    },
+    {
+      "source": "runs/hardware-minima-driver-power-reapplication/20261029T072055-53145320d9/events.jsonl",
+      "published": "minima-driver-power-reapplication/events.jsonl",
+      "sha256": "74cd89a0a06a26c92e4d2b94d89c90949707ea67e0d092ec4a89ded4dd905b59"
+    },
+    {
+      "source": "runs/hardware-minima-driver-power-reapplication/20261029T072055-53145320d9/controller-source.py",
+      "published": "minima-driver-power-reapplication/controller-source.py",
+      "sha256": "292076372b6fdfb060758a5445d20ef8d54e00c29639ead0eba992e38e91df56"
+    },
+    {
+      "source": "runs/hardware-minima-driver-power-reapplication/20261029T072055-53145320d9/host-instrument.py",
+      "published": "minima-driver-power-reapplication/host-instrument.py",
+      "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+    },
+    {
+      "source": "runs/hardware-minima-capture/20261029T072057-b0a17efa44/events.jsonl",
+      "published": "minima-driver-power-reapplication-arm/events.jsonl",
+      "sha256": "19f5b5320f0efe3ad5b63939bf22e1abf077be7c593cf8faf2c1d0351858bc5d"
     }
   ],
   "policy": "Selected completed records and sidecars copied byte for byte. No binaries, private photos, keys, holdouts or process inventories.",
@@ -1387,7 +1407,40 @@
         "calibration_performed": false,
         "awaiting": "USB reconnect confirmation and fresh supply/REF displays"
       }
+    },
+    {
+      "folder": "minima-driver-power-reapplication",
+      "source": "runs/hardware-minima-driver-power-reapplication/20261029T072055-53145320d9",
+      "events": 9,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "boot_id": "b4ab5f3bf78ec9374ac381996885027b",
+        "new_boot_verified": true,
+        "ARM_record": "runs/hardware-minima-capture/20261029T072057-b0a17efa44",
+        "held_code": 1365,
+        "nominal_target_v": 1.62,
+        "ADC_capture_requested": false,
+        "physical_driver_recovery_not_yet_verified": true,
+        "calibration_performed": false,
+        "sweep_not_resumed": true
+      }
+    },
+    {
+      "folder": "minima-driver-power-reapplication-arm",
+      "source": "runs/hardware-minima-capture/20261029T072057-b0a17efa44",
+      "events": 6,
+      "terminal": "run_completed",
+      "terminal_payload": {
+        "source": "hardware_uncalibrated",
+        "reference_established": true,
+        "diagnosis_performed": false,
+        "instruction": "Check REF, attach the test circuit, then capture with --boot-id set to this boot_id.",
+        "boot_id": "b4ab5f3bf78ec9374ac381996885027b",
+        "boot_continuity_checked": true,
+        "uptime_ms_start": 236907,
+        "uptime_ms_end": 239312
+      }
     }
   ],
-  "last_appended_at_utc": "2026-10-29T07:14:05.416300+00:00"
+  "last_appended_at_utc": "2026-10-29T07:22:54.993522+00:00"
 }

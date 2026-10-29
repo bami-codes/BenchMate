@@ -61,10 +61,11 @@ B13/A11/D50-labelled report is 1.62/3.4/1.64 V: the operator clarified
 that the first two readings were directly at U1 pins 5/7 because the probe
 posts had been removed the previous night. USB disconnection and LED-off
 are now confirmed, with B12-to-D11 continuity reported. The subsequent
-actual metal pin 6-to-7 check also beeps. Same-cable/port USB reconnection
-and fresh supply/REF readings are requested before any new DAC command;
-no wiring or IC change is requested. Physical recovery or chip damage is
-not established. No midpoint ADC capture or
+actual metal pin 6-to-7 check also beeps. USB reconnection is now confirmed,
+with fresh supply/REF 4.86/1.62 V. A new unarmed boot was verified, followed
+by explicit ARM at code 1365 and a matching postcheck. Actual U1 pin 5/6/7
+and D50 voltages are pending. No wiring or IC change was requested.
+Physical recovery or chip damage is not established. No midpoint ADC capture or
 higher target was commanded. Calibration and reliability remain unresolved.
 This document is chronological; earlier pending instructions below are
 historical. See the [public evidence bundle](../examples/hardware-fixture-bringup/README.md)
@@ -1365,6 +1366,31 @@ resistor A3-side lead) and REF (D50) readings relative to the retained
 blue-rail GND post. The red +5 V post stays removed. No DAC command is
 sent until this report and a new boot/status check. Reconnection and
 new voltage readings are pending. See `minima-driver-pin-feedback/`.
+
+## Power reapplication: new boot and REF command verified
+
+After the direct feedback check, the operator reported
+`연결완료 / 4.86V / 1.62V`. The instruction used DC 20 V, the retained
+blue-rail GND post, the existing divider resistor A3-side supply lead,
+and D50 REF; wiring and ICs were to remain unchanged. The power-off
+duration was not measured.
+
+The identified Minima answered PING with new boot
+`b4ab5f3bf78ec9374ac381996885027b`, unarmed state, current/ref code zero,
+DC capability and all four active ADC states at 255. An explicit ARM
+then used supply conversion 4.86 V and target 1.62 V (code 1365, maximum
+jump 842). Its pre/post checks kept the same boot, and the postcheck
+confirmed the target code. No firmware upload, ADC block, high point,
+automatic retry or wiring change occurred.
+
+This confirms the command state only. The next requested sequential DMM
+readings are the actual U1 metal pins 5 (E13), 6 (E12), 7 (E11), then D50,
+on DC 20 V relative to the retained GND post. Those values are pending;
+the output and firmware remain unchanged during the operator check.
+Physical driver recovery and the cause of the earlier 3.4 V remain
+unestablished. Exact controller/host snapshots and the separate ARM record
+are in `minima-driver-power-reapplication/` and
+`minima-driver-power-reapplication-arm/`.
 
 ## Standing conventions (current)
 
