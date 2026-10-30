@@ -1,0 +1,8 @@
+{
+  "request_id": "c10f82144d1441849dd15cc8ed69ec3b",
+  "kind": "independent_DMM_bias",
+  "boot_id": "ec013fc1d18498e43fcab8435be24ce4",
+  "held_code": 1376,
+  "response_file": "bias-response-c10f82144d1441849dd15cc8ed69ec3b.json",
+  "instruction": "USB・배선・RESET을 그대로 두고 DC 2V에서 검정 프로브를 큰 보드 D50 REF에 고정한다. 빨강으로 A35 IN 점퍼 금속, 이어 E30 OUT 접점을 읽어 IN−REF / OUT−REF를 부호와 마지막 자리까지 보고한다."
+}

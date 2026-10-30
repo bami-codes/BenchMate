@@ -1,0 +1,14 @@
+{
+  "request_id": "c10f82144d1441849dd15cc8ed69ec3b",
+  "verbatim": "검정 D50 기준: IN−REF −0.008 V / OUT−REF −0.008 V",
+  "input_minus_REF_v": -0.008,
+  "output_minus_REF_v": -0.008,
+  "related_attempt": "runs/hardware-b5-range-control/20261030T035419-baf50eef2e",
+  "related_boot_id": "ec013fc1d18498e43fcab8435be24ce4",
+  "reply_received_after_attempt_failed": true,
+  "independent_measurement_timestamp_known": false,
+  "used_for_anchor": false,
+  "used_to_authorize_waveform": false,
+  "reason": "Attempt already terminated after zero-byte waiting_DMM_PING; preserve the reply without altering the terminal record or carrying this bias across RESET.",
+  "subsequent_operator_reset_confirmation": "reset 완료"
+}

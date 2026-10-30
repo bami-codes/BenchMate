@@ -1,0 +1,125 @@
+{
+  "configuration": {
+    "vref_v": 4.89,
+    "ref_v": 1.637,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "voltage_conversion": {
+    "reported_supply_ratio": 1.0020491803278688,
+    "channels": {
+      "A1": {
+        "gain_v_per_count": 0.0002983161155394755,
+        "offset_v": -0.00355042361205783
+      },
+      "A2": {
+        "gain_v_per_count": 0.00029855785780426585,
+        "offset_v": -0.004936687554625794
+      },
+      "A3": {
+        "gain_v_per_count": 0.0002984744736034551,
+        "offset_v": -0.005288341646810059
+      }
+    }
+  },
+  "guard_limits": {
+    "REF_mean_delta_v_max": 0.1,
+    "REF_any_sample_delta_v_max": 0.15,
+    "REF_channel_mean_spread_v_max": 0.05,
+    "signal_envelope_v": 0.95,
+    "A4_envelope_v": 0.15,
+    "raw_rails_exclusive": [
+      16,
+      16367
+    ]
+  },
+  "scope": "Prospective resistor-only range and physical-bias control before B5 diode insertion; not a B5 discovery or full D2 acceptance.",
+  "previous_boot_id": "4faed097aeda0ad9efdd84b22dd1ba4e",
+  "USB_identity": [
+    9025,
+    105,
+    "3612211F36323632E4B233334B572F52"
+  ],
+  "calibration_supply_v": 4.89,
+  "driver_v_per_code": 0.001193648383144491,
+  "calibration_source": "examples/hardware-b1-b6-gate/2026-10-30/b1_bypass/condition/condition.json",
+  "calibration_source_sha256": "90a08690dac02531a88d57e924ee7d6cb638e420a37a9a86b4387a1f7a7c8605",
+  "source_sha256": {
+    "src/benchmate/range_control.py": "e2a0ab7adb18129b892d13d4bf758b21d9d159154b54f23f3d9db9f552645f1a",
+    "src/benchmate/physical_bench.py": "9f0e5f5fd2fa90022a5bc296bf97091453db2e3605564f6821b62c74dcbbfea9",
+    "src/benchmate/physical_rc.py": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784",
+    "src/benchmate/instrument.py": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780",
+    "src/benchmate/measured_input.py": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "scripts/b5_range_control.py": "2e9bc131cc7cedff02279274c68be0f82ddb38f625d333db4ad5039c9888bda4"
+  },
+  "control_order": [
+    {
+      "kind": "sine",
+      "samples": 512,
+      "period_us": 4000,
+      "amplitude_v": 0.2,
+      "frequency_hz": 1.0
+    },
+    {
+      "kind": "step",
+      "samples": 512,
+      "period_us": 500,
+      "amplitude_v": 0.5
+    },
+    {
+      "kind": "sine",
+      "samples": 512,
+      "period_us": 4000,
+      "amplitude_v": 0.8,
+      "frequency_hz": 1.0
+    }
+  ],
+  "anchors": {
+    "fresh_supply_and_REF_before_ARM": true,
+    "DMM_IN_minus_REF_and_OUT_minus_REF_at_HOLD": true,
+    "DMM_absolute_bias_limit_v": 0.03,
+    "DMM_path_difference_limit_v": 0.01,
+    "subsequent_HOLD_blocks": 3,
+    "gain_policy": "prior channel/driver gains times fresh reported supply divided by 4.89; no waveform fit",
+    "offset_policy": "independent DMM physical biases minus subsequent HOLD means; never assumed zero"
+  },
+  "fixed_scores": {
+    "OUT_minus_IN_whole_and_region_RMS_mV_max": 9,
+    "IN_minus_frozen_driver_whole_and_region_RMS_mV_max": 9,
+    "A4_and_stationary_channel_mean_span_mV_max": 3,
+    "max_time_error_us": 25,
+    "sine_DAC_code_error_max": 1,
+    "step_DAC_code_error_max": 0,
+    "input_5_95_span_ratio_bounds": [
+      0.85,
+      1.05
+    ],
+    "physical_bias_peak_margin_v": 0.06
+  },
+  "startup": "Known passive resistor-only fixture. Confirm USB-off changes and new boot. One explicit REF ARM; no automatic retry, servo, firmware upload or re-arm.",
+  "budget": {
+    "API_calls": 0,
+    "scored_waveforms": 3,
+    "stationary_HOLD_blocks": 7,
+    "expected_frames": 5120,
+    "max_operator_wait_seconds": 1800,
+    "while_waiting": "PING only every 2 seconds; same boot and REF park required"
+  },
+  "failure": "Preserve all data and stop before the next scored waveform; no new amplitude or threshold after viewing failure.",
+  "B5_revision": {
+    "large_amplitude_v": 0.8,
+    "original_synthetic_large_amplitude_v": 1.0,
+    "reason": "Headroom for first physical development conditions, declared before any diode data.",
+    "planned_training": "0.5 V step; 1 Hz 0.2/0.8 V sine unloaded; 0.8 V sine with separately measured nominal 4.7 kohm load.",
+    "reserved": "0.35 V step and 1 Hz 0.8 V sine with 9.99 kohm load; all B5 data still unobserved."
+  },
+  "validation": {
+    "tests_passed": 13,
+    "real_serial_IO": false,
+    "API_calls": 0,
+    "tests": "Independent DC anchors, drive clipping, buffer clipping, regional failures, bias bounds; fake byte-protocol runner normal/bad-REF/clipped-drive stop."
+  },
+  "assembly_status": "Operator removal/loose-diode reply pending; diode not requested for insertion.",
+  "cited_diode_polarity_source": "https://www.vishay.com/docs/81857/1n4148.pdf"
+}
