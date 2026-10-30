@@ -1,0 +1,79 @@
+{
+  "source_hash_chain_verified": true,
+  "requests": 5,
+  "all_five_completed_and_retained": true,
+  "distinct_response_ids": 5,
+  "tools": [],
+  "physical_IO": 0,
+  "unchanged_question": "Designed RC low-pass 10 kΩ, 1 µF. Measured time constant 21.4 ms. What is wrong?",
+  "script_source_commit": "8bd39b5ae6a32efb9e2f01c8f5ce87462c02fab4",
+  "script_sha256": "e31e34b25452ae4b6ab007b911e8b6701cfbaad1c11f4bd1b956732be7c223f8",
+  "separate_authorization_preserved": true,
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 14610,
+      "sha256": "d82bdc1b3368a5550c4113cf1847308d09b55bd99a28e56b3af0f3df273b1f92"
+    },
+    {
+      "path": "result.json",
+      "bytes": 6670,
+      "sha256": "bac0eddbef0c8736e6ecb5c0e9a73474bb1f749e6a1a2afd0d56ba0ac56585da"
+    },
+    {
+      "path": "authorization.json",
+      "bytes": 524,
+      "sha256": "8ed9ec469fa8fb37aa2fec5f5e29f18dad06956121a3ccff1d13bd99c0561363"
+    },
+    {
+      "path": "reply-01.md",
+      "bytes": 762,
+      "sha256": "4ec6d1f49e5a6237fb5397d8442b6a0521c802b42b25574d1309981d94fcead9"
+    },
+    {
+      "path": "reply-02.md",
+      "bytes": 594,
+      "sha256": "3101ec7c1ce86ac5b767005e126d57c43a722297c0f26103c6f944915910b017"
+    },
+    {
+      "path": "reply-03.md",
+      "bytes": 710,
+      "sha256": "126b91902b7f8ae300b408a481125d17af2243a366c9f0711282df9d9d9c1691"
+    },
+    {
+      "path": "reply-04.md",
+      "bytes": 827,
+      "sha256": "3d000ac2449e00cc22a1feccc1d895102a238be9da31689b244cef0ee616088b"
+    },
+    {
+      "path": "reply-05.md",
+      "bytes": 1157,
+      "sha256": "cbe875aa703393878c23691c064dd5c781779b12aa80dfa61ab25960b37887d0"
+    }
+  ],
+  "review": {
+    "review_type": "Human-readable assistant review after seeing all five replies; not an automatic or preregistered accuracy score.",
+    "primary_measurement_confusion_assertion_count": 5,
+    "explicit_conditional_component_alternative_reply_indices": [
+      5
+    ],
+    "measurement_recheck_suggested_reply_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "interpretation": "The rise-time hypothesis is plausible but was not established by the prompt. All replies recommend a recheck; the fifth also discusses a larger capacitor if tau really is 21.4ms.",
+    "nominal_tau_ms": 10.0,
+    "ideal_10_to_90_rise_ms": 21.972245773362197,
+    "nominal_time_constant_if_21_4_is_rise_ms": 9.739559724907158,
+    "fact_not_supplied": "No oscilloscope, cursor method, rise-time readout, measured component tolerances or waveform was included.",
+    "claims_excluded": [
+      "general Spark failure rate",
+      "statistical accuracy comparison",
+      "proof from this prompt of which component is wrong"
+    ],
+    "D01_comparison_limit": "The recorded physical D01 used Spark medium; this no-tool run uses max. Different information and effort; not a controlled ablation."
+  }
+}

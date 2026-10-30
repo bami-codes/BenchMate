@@ -45,3 +45,5 @@ The mock plant is deterministic and deliberately simple, using an independent
 diode equation solver. This successful integration rehearsal is not blinded
 diagnostic accuracy, physical B5 validation, loaded extrapolation, or repair.
 The next [physical procedure](../../../../docs/b5-operator.md) is prepared separately.
+
+[Recorded prediction/observation figure](comparison.png) uses the exact saved arrays, with no new fit or simulation. Its source/output hashes are in comparison.provenance.json.

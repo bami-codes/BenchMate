@@ -74,4 +74,4 @@ The source hash chain, 40 source files, publication barrier, frozen numerical
 models and sparse provider tool results passed the retained local audit. This
 completes the bounded mock integration milestone, not physical B5 or the original
 loaded/repeated-run gate. B5-specific user consent covered this run only; the
-separate no-tool five-request comparison still awaits its own scope confirmation.
+separate no-tool five-request comparison later received its own explicit approval and completed; see [the original replies](../examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md).

@@ -1,0 +1,12 @@
+{
+  "user_reply_verbatim": "동의 — 위 질문으로 Meta API 5회 추가 실행",
+  "destination": "https://api.meta.ai/v1/responses",
+  "max_paid_requests": 5,
+  "reasoning_effort": "max",
+  "exact_question": "Designed RC low-pass 10 kΩ, 1 µF. Measured time constant 21.4 ms. What is wrong?",
+  "fresh_context_each_request": true,
+  "tools": [],
+  "physical_data_or_assembly_information_sent": false,
+  "automatic_retry": false,
+  "notes": "Separate explicit approval from the completed seven-request B5 mock run."
+}

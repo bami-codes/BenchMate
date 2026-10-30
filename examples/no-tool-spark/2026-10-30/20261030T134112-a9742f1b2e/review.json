@@ -1,0 +1,25 @@
+{
+  "review_type": "Human-readable assistant review after seeing all five replies; not an automatic or preregistered accuracy score.",
+  "primary_measurement_confusion_assertion_count": 5,
+  "explicit_conditional_component_alternative_reply_indices": [
+    5
+  ],
+  "measurement_recheck_suggested_reply_indices": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "interpretation": "The rise-time hypothesis is plausible but was not established by the prompt. All replies recommend a recheck; the fifth also discusses a larger capacitor if tau really is 21.4ms.",
+  "nominal_tau_ms": 10.0,
+  "ideal_10_to_90_rise_ms": 21.972245773362197,
+  "nominal_time_constant_if_21_4_is_rise_ms": 9.739559724907158,
+  "fact_not_supplied": "No oscilloscope, cursor method, rise-time readout, measured component tolerances or waveform was included.",
+  "claims_excluded": [
+    "general Spark failure rate",
+    "statistical accuracy comparison",
+    "proof from this prompt of which component is wrong"
+  ],
+  "D01_comparison_limit": "The recorded physical D01 used Spark medium; this no-tool run uses max. Different information and effort; not a controlled ablation."
+}

@@ -1,4 +1,4 @@
-# No-tool Spark comparison — prepared, not yet executed
+# No-tool Spark comparison — completed October 30, 2026
 
 Five independent requests use the exact same question:
 
@@ -21,3 +21,18 @@ the same AI recognizes the missing evidence, then BenchMate performs the test.
 This is a small qualitative illustration, not a statistically established
 accuracy comparison. It requires its own explicit paid-call/transmission scope;
 the earlier D01 consent and the B5 eight-request consent are separate.
+
+## Recorded result
+
+[All five original replies and review](../examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md)
+are retained. Each primarily asserted that 21.4ms was a 10–90% rise-time reading,
+not the time constant. All suggested measurement rechecks; reply 5 also explicitly
+allowed a larger capacitor if the stated time constant was real. The rise-time
+hypothesis is plausible, but its asserted measurement method was not supplied.
+
+Use this to motivate testing an explanation, not a general claim that Spark
+cannot diagnose circuits. This baseline used max; the completed physical D01
+used medium and much richer evidence. It is not a controlled accuracy ablation.
+The question was unchanged and all five responses were included; no revised
+prompt or selective rerun was used after seeing the result. Five requests were
+explicitly approved separately from B5, and all five completed without retries.
