@@ -20,15 +20,16 @@ from .netlist import (validate_netlist, render_proposal, topology_fingerprint,
 def validate_input_template(template):
     if not isinstance(template,dict) or set(template)!={'source','settings','data'}:
         raise ValueError('Input-only template required; scored OUT is not accepted')
-    if template['source']!='physical_input_only':
+    if template['source'] not in ('physical_input_only','adc_input_only','mock_adc_input_only','command_input_only'):
         raise ValueError('Explicit physical input-only provenance required')
     s=template['settings'];d=template['data']
+    input_key='input_minus_ref_v' if template['source']=='physical_input_only' else 'input_relative_origin_v'
     if set(s)!={'kind','period_us','samples','frequency_hz','step_index','load_ohm'}:
         raise ValueError('Unexpected physical input settings')
-    if set(d)!={'frame_time_s','input_minus_ref_v','input_delay_s','output_delay_s'}:
+    if set(d)!={'frame_time_s',input_key,'input_delay_s','output_delay_s'}:
         raise ValueError('Only measured input and channel timestamps are accepted')
     arrays=[np.asarray(d[k],dtype=float) for k in
-            ('frame_time_s','input_minus_ref_v','input_delay_s','output_delay_s')]
+            ('frame_time_s',input_key,'input_delay_s','output_delay_s')]
     t,u,di,do=arrays
     if (type(s['samples']) is not int or not 16<=s['samples']<=512 or
         any(a.shape!=(s['samples'],) or not np.isfinite(a).all() for a in arrays)):
@@ -152,6 +153,7 @@ def simulate_physical_netlist(elements,template,*,diode=None,before_run=None):
             'physical_history_measured':False}
     else:sampled=run(0)
     return {'predicted_output_minus_ref_v':sampled[:,1].tolist(),
+        'input_provenance':template['source'],
         'predicted_input_minus_ref_v':sampled[:,0].tolist(),
         'initialization':initialization,'simulator_invocations':invocations,
         'topology_sha256':topology_fingerprint(checked),'rendered_proposal':render_proposal(checked),

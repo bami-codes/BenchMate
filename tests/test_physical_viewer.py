@@ -1,5 +1,6 @@
 """Recorded physical RC presentation: no future leakage or reconstructed fits."""
 import json
+from copy import deepcopy
 from pathlib import Path
 import shutil
 import subprocess
@@ -36,6 +37,22 @@ def test_initial_view_does_not_claim_future_physical_evidence(events):
     view=evaluate(events,0)
     assert view['origin']=='unknown' and view['series']==[] and view['report'] is None
     assert view['verification'] is None and 'verified' not in view['status'].lower()
+
+
+def test_product_story_uses_only_recorded_reason_and_operator_request(events):
+    before=index(events,'physical_measurement_selected','attach_output_load_step')-1
+    story=evaluate(events,before,'physicalProductStory(view)')
+    assert story['reason'] is None and story['request'] is None and not story['complete']
+    request=index(events,'operator_action_requested')
+    story=evaluate(events,request,'physicalProductStory(view)')
+    assert story['reason']==events[before+1]['payload']['reason'] and story['translated']
+    assert story['request']['sequence']==request and not story['confirmation']
+    final=evaluate(events,len(events)-1,'physicalProductStory(view)')
+    assert final['complete'] and 'Repair was not performed' in final['limits']
+    other=deepcopy(events)
+    other[before+1]['payload']['reason']='A different model reason must not inherit this translation.'
+    changed=evaluate(other,len(events)-1,'physicalProductStory(view)')
+    assert not changed['translated'] and changed['explanation']==other[before+1]['payload']['reason']
 
 
 def test_training_trace_never_gains_a_reconstructed_curve(events):

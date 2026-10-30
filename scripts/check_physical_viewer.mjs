@@ -18,6 +18,15 @@ for(const [width,height,name]of [[1440,900,'desktop'],[1280,900,'laptop'],[390,8
   await cdp('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<500});
   const loaded=event('Page.loadEventFired');await cdp('Page.navigate',{url:target});await loaded;
   await evaluate('document.fonts.ready');
+  assert(await evaluate('document.body.classList.contains("product-view")'), 'Product story is not the default');
+  assert(await evaluate('document.getElementById("product-original-reason").textContent.includes("tau=R*C")'), 'Actual Spark reason absent');
+  assert(await evaluate('document.getElementById("product-limits").textContent.includes("Repair was not performed")'), 'Repair scope lost');
+  const product=await evaluate('({overflow:document.documentElement.scrollWidth>innerWidth,bottom:Math.max(...[...document.querySelectorAll(".figure-panel,.product-story,.timeline-panel,.mounting-panel")].map(e=>e.getBoundingClientRect().bottom))})');
+  assert(!product.overflow, 'Product horizontal overflow');
+  if(width>800)assert(product.bottom<=900, 'Product panels exceed desktop viewport: '+JSON.stringify(product));
+  const pm=await cdp('Page.getLayoutMetrics');const ps=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(pm.cssContentSize.height),scale:1}});
+  await writeFile(output+'/'+name+'-product.png',Buffer.from(ps.data,'base64'));
+  await evaluate('document.getElementById("evidence-tab").click()');
   assert(await evaluate('!!window.BenchMateUI'),'UI did not initialize');
   const layout=await evaluate(`({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,headline:document.getElementById('headline').textContent,panels:[...document.querySelectorAll('.figure-panel,.report-panel,.timeline-panel,.mounting-panel')].map(e=>({name:e.className,top:e.getBoundingClientRect().top,bottom:e.getBoundingClientRect().bottom}))})`);
   assert(!layout.overflow,'Horizontal overflow');assert(layout.headline==='Spark at the workbench','Wrong renderer');
@@ -46,7 +55,7 @@ assert(await evaluate("document.querySelector('[data-model=c_changed]').textCont
 await evaluate("document.querySelector('[data-trace=drive]').click()");
 assert(await evaluate("!!document.querySelector('#chart path[data-series=drive]')&&document.getElementById('drive-label').textContent==='Measured IN'"),'Measured input toggle failed');
 await evaluate(`BenchMateUI.select(${indices.count-1});document.getElementById('expand-report').click()`);
-assert(await evaluate("document.querySelector('details').open&&document.getElementById('original-report').textContent.includes('current_explanation')"),'Original report inaccessible');
+assert(await evaluate("document.querySelector('.evidence-drawer').open&&document.getElementById('original-report').textContent.includes('current_explanation')"),'Original report inaccessible');
 await evaluate("document.getElementById('expand-report').click();document.getElementById('cursor').focus()");
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowLeft',code:'ArrowLeft',windowsVirtualKeyCode:37});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowLeft',code:'ArrowLeft',windowsVirtualKeyCode:37});
 assert(await evaluate(`BenchMateUI.getState().cursor===${indices.count-2}`),'Keyboard timeline failed');

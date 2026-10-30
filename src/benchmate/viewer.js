@@ -22,7 +22,7 @@ const statusNames = {
   repair_verified:'Repair prediction verified', repair_not_verified:'Repair prediction did not match'
 };
 const state = {record:initialRecord, events:initialRecord.events || [], cursor:(initialRecord.events?.length || 1)-1,
-  timer:null, following:initialRecord.transport==='live_log', condition:null, trace:{observed:true,baseline:true,predicted:true,drive:false},
+  timer:null, presentation:'product', following:initialRecord.transport==='live_log', condition:null, trace:{observed:true,baseline:true,predicted:true,drive:false},
   chartSeries:[], chartGeometry:null, lastFocus:null, lastCursor:null, milestones:[], connection:initialRecord.transport==='live_log'?'connecting':'offline', connectionMessage:'', integrityFailed:false};
 const setText = (id,value) => { $(id).textContent = value == null ? '—' : String(value); };
 const last = (list,kinds) => [...list].reverse().find(e => kinds.includes(e.kind));
@@ -314,6 +314,7 @@ function renderTimeline(vm){
 }
 function render(){
   if(isPhysicalRC(state.events)){renderPhysicalRC();return;}
+  document.body.classList.remove('physical-rc','product-view');$('presentation-switch').hidden=true;$('product-story').hidden=true;
   if(!state.events.length){setText('status','Waiting for the first event');return;}
   const vm=reduce(state.events,state.cursor),plot=plotFor(vm),{focus,settings,series,predictionEvent,unit}=plot;
   const discovery=vm.mode.includes('discovery'),repair=vm.mode.includes('repair');
@@ -386,6 +387,8 @@ function select(index,announce=false){stop();state.following=false;state.conditi
 function milestone(direction){const available=state.milestones.filter(i=>direction<0?i<state.cursor:i>state.cursor);select(direction<0?available.at(-1)??0:available[0]??state.events.length-1,true);}
 $('previous').onclick=()=>milestone(-1);$('next-event').onclick=()=>milestone(1);$('cursor').oninput=e=>select(Number(e.target.value));
 $('condition').onchange=e=>{state.condition=Number(e.target.value);render();};
+$('product-tab').onclick=()=>{state.presentation='product';render();};
+$('evidence-tab').onclick=()=>{state.presentation='evidence';render();};
 $('expand-report').onclick=()=>{const drawer=document.querySelector('.evidence-drawer');drawer.open=!drawer.open;if(drawer.open){$('original-report').setAttribute('tabindex','-1');$('original-report').focus();}};
 document.querySelector('.evidence-drawer').ontoggle=e=>{$('expand-report').setAttribute('aria-expanded',String(e.target.open));setText('expand-report',$('expand-report').disabled?'Report not recorded yet':e.target.open?'Hide original report':'Read original report');};
 $('play').onclick=()=>{if(state.timer){stop();return;}state.following=false;state.condition=null;state.cursor=0;render();$('play').querySelector('span').textContent='Pause';$('play').setAttribute('aria-label','Pause replay');state.timer=setInterval(()=>{if(state.cursor>=state.events.length-1){stop();return;}state.cursor=isPhysicalRC(state.events)?state.milestones.find(i=>i>state.cursor)??state.events.length-1:state.cursor+1;render();},950);};

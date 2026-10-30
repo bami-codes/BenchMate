@@ -1,0 +1,92 @@
+{
+  "target": "file:///Users/bami/Documents/metaai/runs/demo/physical-d01.html",
+  "layouts": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "overflow": false,
+      "headline": "Spark at the workbench",
+      "panels": [
+        {
+          "name": "figure-panel surface",
+          "top": 246.09375,
+          "bottom": 671.09375
+        },
+        {
+          "name": "report-panel",
+          "top": 246.09375,
+          "bottom": 605.59375
+        },
+        {
+          "name": "timeline-panel surface",
+          "top": 687.09375,
+          "bottom": 797.59375
+        },
+        {
+          "name": "mounting-panel surface",
+          "top": 687.09375,
+          "bottom": 894.1875
+        }
+      ]
+    },
+    {
+      "name": "laptop",
+      "width": 1280,
+      "overflow": false,
+      "headline": "Spark at the workbench",
+      "panels": [
+        {
+          "name": "figure-panel surface",
+          "top": 246.09375,
+          "bottom": 671.09375
+        },
+        {
+          "name": "report-panel",
+          "top": 246.09375,
+          "bottom": 605.59375
+        },
+        {
+          "name": "timeline-panel surface",
+          "top": 687.09375,
+          "bottom": 797.59375
+        },
+        {
+          "name": "mounting-panel surface",
+          "top": 687.09375,
+          "bottom": 894.1875
+        }
+      ]
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "overflow": false,
+      "headline": "Spark at the workbench",
+      "panels": [
+        {
+          "name": "figure-panel surface",
+          "top": 409.1875,
+          "bottom": 1023.359375
+        },
+        {
+          "name": "report-panel",
+          "top": 1045.359375,
+          "bottom": 1440.25
+        },
+        {
+          "name": "timeline-panel surface",
+          "top": 1462.25,
+          "bottom": 1579.25
+        },
+        {
+          "name": "mounting-panel surface",
+          "top": 1601.25,
+          "bottom": 1834.84375
+        }
+      ]
+    }
+  ],
+  "assertions": 43,
+  "passed": true,
+  "errors": []
+}

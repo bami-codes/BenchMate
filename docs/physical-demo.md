@@ -58,3 +58,14 @@ The existing synthetic discovery screen is also regression checked.
 `scripts/check_physical_viewer.mjs` expects a separately launched isolated
 Chrome on local DevTools port 9338, never the user's browser profile. See
 [validation result](physical-viewer-validation.json) for this build's checks.
+
+## Story and Evidence views
+
+The physical D01 export now opens in Story mode. It shows the recorded Spark reason
+(with an explicitly labelled English translation and the exact Korean original),
+the historical operator request and a scoped conclusion. Evidence retains the
+HOLD origins, provisional channel maps, whole/regional checks and original report.
+Both views use identical recorded curves and event order. The reason/request are
+absent before their events; conditional curves never precede measured IN. No repair
+is implied by this diagnosis record. Browser QA passed 43 assertions at 1440, 1280
+and 390 pixel widths; desktop main panels fit a 900 pixel viewport.

@@ -1,3 +1,11 @@
+# Current prospective protocol — October 30, unloaded ADC revision
+
+The historical DMM-anchored attempts below are retained unchanged. Before any
+physical B5 diode observation, the user agreed to an unloaded same-boot protocol
+with no DMM-voltage pause. Use [b5-unloaded-v2.md](b5-unloaded-v2.md) and the
+[operator guide](b5-operator.md) for the next execution. Original loaded
+extrapolation checks remain pending. Current power-down has not been confirmed.
+
 # B5 preparation and resistor-only range control — October 30, 2026 KST
 
 Status: prospective preparation; no B5 diode capture or structure-discovery run
