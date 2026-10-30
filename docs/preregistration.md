@@ -112,3 +112,31 @@ The capacitive ODE regression exceeded the unchanged 60-second fitting budget on
 Reason: prior free-text reports suggested moving the reference to 1.2 V, but the fixture reference is fixed near 1.6 V. In fixed, continuous and discovery modes, finish_report now accepts a structured next_observation: an exact configured action ID or a declared unavailable-capability ID, plus rationale. The engine validates the exclusive branches and generates the actionable wording from immutable menu settings; the rationale cannot supply parameters. Adjustable reference, temperature control and extended waveform capabilities are declared unavailable. Unknown actions, extra custom settings and old free-text suggestions are rejected. This check establishes menu membership only, not information value, physical calibration, or permission to execute beyond the current acquisition budget. Discovery can inspect future menu details without acquiring data.
 
 The report records the model's choice and reason alongside the engine's check. Original tool-call arguments remain unchanged. Historical unvalidated suggestions stay available in Evidence but are not presented as executable instructions. The UI adds a training-only inset of DC-removed small-signal output times the amplitude ratio against large-signal output, using only already-visible captures and the recorded diagnostic. No observation gates, candidates, B5 wiring, verification conditions, fitting or acquisition budgets change. One development API check of the new report contract follows this commit; it is not a frozen evaluation.
+
+## First physical B5 preparation — 2026-10-30, before diode observations
+
+The prior Spark-directed physical D01 run is complete. The next target remains
+B5 structure proposal and independent checks; no B5 diode data or holdout has
+been acquired for this revision. A resistor-only fixture control comes first.
+
+The first physical development large-signal amplitude is explicitly **0.8 V**
+instead of the synthetic example's 1.0 V, to retain operating headroom. Small
+signal remains 0.2 V; sine frequency is 1 Hz, 512 frames at 4 ms. The planned
+training step is 0.5 V. Reserve the 0.35 V step and 0.8 V sine with the existing
+9.99 kohm load; a separately measured nominal 4.7 kohm load is training-only.
+This does not claim a result at +/-1 V or completion of the original D2 freeze.
+
+Nonlinear physical prediction must retain actual IN/OUT-minus-REF bias. Fresh
+supply/REF and independent differential DMM readings at HOLD anchor channel
+offsets before scored waveforms. Do not silently set both DC origins to zero,
+fit scored OUT offsets, or identify the diode model from a one-point meter test.
+Provisional gains may scale with newly reported supply; their slope is not
+fit from scored data. Raw A4 remains a stability guard, with no automatic servo.
+
+The local resistor-only control compares OUT with measured IN and independently
+checks IN against the prior driver-volts-per-code map. The same predeclared
+9 mV whole/region allowance and 3 mV stationary/A4 span apply; these remain
+engineering limits, not confidence bounds. Failures stop later scored captures
+and remain visible. The control makes zero API calls. It is not a B5 discovery,
+full D2 acceptance, or the November 1 repeated-run/X1 development gate.
+See [preparation and bias policy](b5-preparation.md).
