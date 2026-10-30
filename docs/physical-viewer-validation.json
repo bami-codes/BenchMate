@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "physical_source": "examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution/events.jsonl",
+  "source_sha256": "12ae389d77876283f62f520239ea4806a5dc77925c8bbe25708833922d29603f",
+  "source_modified": false,
+  "python_checks": {
+    "tests": [
+      "tests/test_physical_viewer.py",
+      "tests/test_viewer.py"
+    ],
+    "passed": 13
+  },
+  "physical_browser": {
+    "layouts": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "headline": "Spark at the workbench",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 657.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 561.59375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 673.09375,
+            "bottom": 869.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 673.09375,
+            "bottom": 880.1875
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "headline": "Spark at the workbench",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 657.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 561.59375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 673.09375,
+            "bottom": 869.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 673.09375,
+            "bottom": 880.1875
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "headline": "Spark at the workbench",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 361.1875,
+            "bottom": 975.359375
+          },
+          {
+            "name": "report-panel",
+            "top": 997.359375,
+            "bottom": 1392.25
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1414.25,
+            "bottom": 1795.25
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 1817.25,
+            "bottom": 2050.84375
+          }
+        ]
+      }
+    ],
+    "assertions": 29,
+    "passed": true,
+    "errors": []
+  },
+  "synthetic_browser": {
+    "results": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 666.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "laptop",
+        "width": 1280,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 202.09375,
+            "bottom": 672.09375
+          },
+          {
+            "name": "report-panel",
+            "top": 202.09375,
+            "bottom": 666.09375
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 688.09375,
+            "bottom": 884.59375
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 688.09375,
+            "bottom": 898.28125
+          }
+        ]
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "overflow": false,
+        "language": "en",
+        "panels": [
+          {
+            "name": "figure-panel surface",
+            "top": 302.1875,
+            "bottom": 1057.96875
+          },
+          {
+            "name": "report-panel",
+            "top": 1079.96875,
+            "bottom": 1604.25
+          },
+          {
+            "name": "timeline-panel surface",
+            "top": 1626.25,
+            "bottom": 2007.25
+          },
+          {
+            "name": "mounting-panel surface",
+            "top": 2029.25,
+            "bottom": 2265.9375
+          }
+        ]
+      }
+    ],
+    "interactions": "passed",
+    "errors": []
+  },
+  "new_hardware_commands": 0,
+  "new_API_calls": 0,
+  "scope": "Read-only presentation of existing physical evidence; no new B5 observation or calibration result.",
+  "repeated_phase_latest_selection_check": "passed",
+  "original_archived_files_hash_checked": 19
+}

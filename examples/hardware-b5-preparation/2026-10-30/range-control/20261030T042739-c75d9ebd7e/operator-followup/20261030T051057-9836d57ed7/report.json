@@ -1,0 +1,20 @@
+{
+  "related_attempt": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e",
+  "related_request_id": "f317755b10d444dd9c1c54980b05db3d",
+  "verbatim_measurement_excerpt": "가만히 있는데도 값이 요동치거나 잴때마다 바뀌거나 그러는데",
+  "reported_channels": [
+    "IN-minus-REF",
+    "OUT-minus-REF"
+  ],
+  "stable_numeric_bias_available": false,
+  "numeric_range_or_fluctuation_rate_reported": false,
+  "cause_identified": false,
+  "does_not_establish_ADC_fault_or_REF_drift": true,
+  "previous_minus_8mV_values_reused": false,
+  "attempt_had_already_terminated": "DMM reply timeout; no scored waveform sent",
+  "decision": "Stop the repeated manual DMM workflow. No range or B5 physical pass is claimed. Prioritize reviewable existing physical D01 evidence and offline B5 integration.",
+  "power_down_requested": true,
+  "power_down_confirmation_received": false,
+  "serial_commands_from_this_followup": 0,
+  "API_calls_from_this_followup": 0
+}

@@ -1,0 +1,20 @@
+{
+  "fixture": "resistor_only",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "verbatim": "연결 / 4.90V / 1.646V; 대기 중 통신 중단 후 reset 완료",
+  "supply_v": 4.9,
+  "REF_v": 1.646,
+  "readings_scope": "Previously reported supply and REF readings reused after RESET with no reported USB or wiring change; new differential DMM anchors required after ARM.",
+  "preparation_verbatim": "USB 분리 / C 2개·OUT 부하 점퍼 제거 / 1N4148 확인 / 정방향 0.590V / 역방향 OL",
+  "preparation_record": "runs/hardware-b5-preparation/20261030T034456-8fe410dad0",
+  "reset_confirmation": "reset 완료",
+  "previous_failed_attempt": "runs/hardware-b5-range-control/20261030T035419-baf50eef2e",
+  "previous_attempt_capture_count": 1,
+  "previous_attempt_scored_waveforms": 0,
+  "previous_attempt_API_calls": 0,
+  "diode_outside_circuit": true,
+  "diode_bag_marking_reported": "1N4148",
+  "diode_meter_forward_v": 0.59,
+  "diode_meter_reverse_display": "OL"
+}

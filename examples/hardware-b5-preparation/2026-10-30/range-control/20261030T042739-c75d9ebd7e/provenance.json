@@ -1,0 +1,67 @@
+[
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/bias-request.json",
+    "copy": "execution/bias-request.json",
+    "sha256": "4fb93752f4293ade62a31e2f5607bba80b4f70f5010710c4e31c00c39f3d35ae"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/connection-report.json",
+    "copy": "execution/connection-report.json",
+    "sha256": "caa62b3180d3f10c43f56ed59ccff0a3c419b5df6a9a9d5bd7988aa00f00ec82"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/events.jsonl",
+    "copy": "execution/events.jsonl",
+    "sha256": "5fd9978a0bd6f717016edede86346a03d1a9b94b38d3506f4510eeaa0f681539"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/protocol.json",
+    "copy": "execution/protocol.json",
+    "sha256": "c2608faa15ce38db1497b13b7cb0fce3d58bc7e4c9e3409d09fe8d845bd6507a"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/scripts/b5_range_control.py",
+    "copy": "execution/source/scripts/b5_range_control.py",
+    "sha256": "2e9bc131cc7cedff02279274c68be0f82ddb38f625d333db4ad5039c9888bda4"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/instrument.py",
+    "copy": "execution/source/src/benchmate/instrument.py",
+    "sha256": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/measured_input.py",
+    "copy": "execution/source/src/benchmate/measured_input.py",
+    "sha256": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/physical_bench.py",
+    "copy": "execution/source/src/benchmate/physical_bench.py",
+    "sha256": "9f0e5f5fd2fa90022a5bc296bf97091453db2e3605564f6821b62c74dcbbfea9"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/physical_rc.py",
+    "copy": "execution/source/src/benchmate/physical_rc.py",
+    "sha256": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/range_control.py",
+    "copy": "execution/source/src/benchmate/range_control.py",
+    "sha256": "e2a0ab7adb18129b892d13d4bf758b21d9d159154b54f23f3d9db9f552645f1a"
+  },
+  {
+    "source": "runs/hardware-b5-range-control/20261030T042739-c75d9ebd7e/source/src/benchmate/records.py",
+    "copy": "execution/source/src/benchmate/records.py",
+    "sha256": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf"
+  },
+  {
+    "source": "runs/hardware-b5-preparation/20261030T034456-8fe410dad0/events.jsonl",
+    "copy": "preparation/events.jsonl",
+    "sha256": "cd2a52a514afda8c2f6873b34121368d4e1060d761d857e0111c937d08108373"
+  },
+  {
+    "source": "runs/hardware-b5-preparation/20261030T034456-8fe410dad0/preparation.json",
+    "copy": "preparation/preparation.json",
+    "sha256": "b3708980c085a261ba241d52a528c46ca077f297570de22a1c6bee434c5978ba"
+  }
+]

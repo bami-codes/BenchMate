@@ -14,6 +14,7 @@ const labels = {
   repair_verification_acquisition:'Post-repair observation acquired', repair_verification:'Repair checked',
   run_completed:'Session completed', run_failed:'Session failed', raw_capture:'Raw hardware captured'
 };
+Object.assign(labels,physicalRCLabels);
 const statusNames = {
   unresolved:'More evidence needed', verification_required:'Ready to test a prediction',
   verified_within_declared_candidates:'Prediction verified', all_candidates_inadequate:'Initial models do not fit',
@@ -36,6 +37,10 @@ function sparkActor(sequence){
   return {name:'Spark · '+label,kind:'spark',title:'Recorded API reasoning effort: '+(effort||'not recorded')};
 }
 function actorFor(event){
+  if(event.kind==='physical_measurement_selected')return event.payload.selected_by==='muse_spark'?sparkActor(event.sequence):{name:'Engine',kind:'engine'};
+  if(['operator_action_requested','operator_wiring_confirmation'].includes(event.kind))return {name:'Operator',kind:'operator'};
+  if(event.kind==='physical_observation')return {name:'Instrument',kind:'engine'};
+  if(event.kind==='physical_acquisition_plan_frozen')return {name:'Engine',kind:'engine'};
   if(event.kind==='tool_call'||event.kind==='netlist_proposed')return sparkActor(event.sequence);
   if(event.kind==='agent_report'){
     const provider=state.events.some(e=>e.sequence<=event.sequence&&e.kind==='provider_configuration');
@@ -308,6 +313,7 @@ function renderTimeline(vm){
   if(focused!==null)root.querySelector(`[data-index="${focused}"]`)?.focus({preventScroll:true});
 }
 function render(){
+  if(isPhysicalRC(state.events)){renderPhysicalRC();return;}
   if(!state.events.length){setText('status','Waiting for the first event');return;}
   const vm=reduce(state.events,state.cursor),plot=plotFor(vm),{focus,settings,series,predictionEvent,unit}=plot;
   const discovery=vm.mode.includes('discovery'),repair=vm.mode.includes('repair');
@@ -331,6 +337,7 @@ function render(){
   renderResidual(series);
   setText('plot-title',plot.training&&series.some(s=>s.key==='baseline')?'Compare explanations':'Prediction & observation');
   setText('prediction-label',plot.training?'Spark structure · fit':'Committed prediction');
+  setText('drive-label','Drive');
   setText('baseline-label',plot.expanded?(plot.training?'Best tested linear model':'Frozen linear prediction'):(plot.training?'Best RC fit':'Frozen RC prediction'));
   document.querySelector('[data-trace=predicted]').title=plot.training?"Engine simulation of Spark's structure, fitted to training observations.":'Numerical prediction recorded before the matching verification observation.';
   for(const button of document.querySelectorAll('[data-trace]'))button.disabled=!series.some(s=>s.key===button.dataset.trace);
@@ -381,7 +388,7 @@ $('previous').onclick=()=>milestone(-1);$('next-event').onclick=()=>milestone(1)
 $('condition').onchange=e=>{state.condition=Number(e.target.value);render();};
 $('expand-report').onclick=()=>{const drawer=document.querySelector('.evidence-drawer');drawer.open=!drawer.open;if(drawer.open){$('original-report').setAttribute('tabindex','-1');$('original-report').focus();}};
 document.querySelector('.evidence-drawer').ontoggle=e=>{$('expand-report').setAttribute('aria-expanded',String(e.target.open));setText('expand-report',$('expand-report').disabled?'Report not recorded yet':e.target.open?'Hide original report':'Read original report');};
-$('play').onclick=()=>{if(state.timer){stop();return;}state.following=false;state.condition=null;state.cursor=0;render();$('play').querySelector('span').textContent='Pause';$('play').setAttribute('aria-label','Pause replay');state.timer=setInterval(()=>{if(state.cursor>=state.events.length-1){stop();return;}state.cursor++;render();},950);};
+$('play').onclick=()=>{if(state.timer){stop();return;}state.following=false;state.condition=null;state.cursor=0;render();$('play').querySelector('span').textContent='Pause';$('play').setAttribute('aria-label','Pause replay');state.timer=setInterval(()=>{if(state.cursor>=state.events.length-1){stop();return;}state.cursor=isPhysicalRC(state.events)?state.milestones.find(i=>i>state.cursor)??state.events.length-1:state.cursor+1;render();},950);};
 $('follow').onclick=()=>{stop();state.condition=null;state.following=true;state.cursor=state.events.length-1;render();};
 for(const button of document.querySelectorAll('[data-trace]'))button.onclick=()=>{const key=button.dataset.trace;state.trace[key]=!state.trace[key];button.setAttribute('aria-pressed',state.trace[key]);render();};
 $('chart').onpointermove=e=>{const g=state.chartGeometry;if(!g)return;const rect=$('chart').getBoundingClientRect(),px=e.clientX-rect.left;if(px<g.left||px>g.width-g.right){$('plot-readout').hidden=true;return;}const x=g.xmin+(px-g.left)/(g.width-g.left-g.right)*(g.xmax-g.xmin),readings=[];for(const s of state.chartSeries.filter(s=>state.trace[s.key])){let closest=0;for(let i=1;i<s.x.length;i++)if(Math.abs(s.x[i]-x)<Math.abs(s.x[closest]-x))closest=i;readings.push(s.key+': '+s.y[closest].toFixed(3));}setText('plot-readout','x '+x.toFixed(3)+' · '+readings.join(' / '));$('plot-readout').hidden=!readings.length;};
@@ -399,7 +406,7 @@ function ingest(record){
 function connectionError(message,integrity=false){
   state.integrityFailed ||= integrity;state.connection='disconnected';state.connectionMessage=message;render();
 }
-window.BenchMateUI={ingest,select,reduce,getState:()=>({cursor:state.cursor,eventCount:state.events.length,following:state.following,transport:state.record.transport||'replay',connection:state.connection,integrityFailed:state.integrityFailed})};
+window.BenchMateUI={ingest,select,reduce,physicalRCView,getState:()=>({cursor:state.cursor,eventCount:state.events.length,following:state.following,transport:state.record.transport||'replay',connection:state.connection,integrityFailed:state.integrityFailed})};
 if(state.record.transport==='live_log'){
   const stream=new EventSource('/events');
   stream.onmessage=e=>{try{if(!ingest(JSON.parse(e.data))&&state.integrityFailed)stream.close();}catch{connectionError('The incoming record could not be read. Waiting to reconnect.');}};

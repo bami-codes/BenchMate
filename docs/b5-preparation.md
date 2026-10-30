@@ -85,3 +85,17 @@ load. Both models/topologies and input processing must freeze before either
 reserved B5 observation; neither is used to fit the proposal. A control-only
 range pass does not count as B5 training, discovery, independent verification,
 full D2 or the November 1 repeated-run/X1 development gate.
+
+## Subsequent operator report: stop the manual bias workflow
+
+The operator reported fluctuating, nonrepeatable IN-minus-REF and OUT-minus-REF
+meter readings and requested that repeated measurement work stop consuming the
+hackathon schedule. The three attempts are [preserved together](../examples/hardware-b5-preparation/2026-10-30/range-control/README.md).
+No scored range waveform or diode observation occurred. The old -8/-8 mV report
+was not transferred to the later boot. Cause, fluctuation magnitude and precise
+timing remain unknown; the report does not prove ADC or REF failure.
+
+The preceding procedure is retained as history, not an active request to keep
+measuring. The waiting process has terminated. Power-down was requested but not
+confirmed. Work has moved to reviewable existing physical evidence and offline
+B5 integration; physical nonlinear verification remains pending.

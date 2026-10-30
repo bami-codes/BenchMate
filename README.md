@@ -57,6 +57,12 @@ uv run benchmate repair --case d01-r --live
 
 ## Review recorded evidence
 
+The [physical D01 demonstration](docs/physical-demo.md) now replays the actual Spark-selected load intervention and reserved sine check in this same workspace. It uses exact recorded conditional curves, preserves failed alternatives, and makes no new hardware or API call.
+
+```sh
+uv run benchmate view examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution --output runs/demo/physical-d01.html
+```
+
 ```sh
 uv run benchmate replay examples/discovery-menu-english
 uv run benchmate view examples/discovery-menu-english --output runs/discovery-report.html

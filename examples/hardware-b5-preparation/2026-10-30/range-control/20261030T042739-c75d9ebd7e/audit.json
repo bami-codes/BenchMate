@@ -1,0 +1,27 @@
+{
+  "terminal_status": "run_failed",
+  "passed": false,
+  "failure_stage": "waiting_DMM",
+  "error": "DMM reply timeout; no scored waveform sent",
+  "API_calls": 0,
+  "diode_installed": false,
+  "B5_discovery_completed": false,
+  "protocol_sha256": "c2608faa15ce38db1497b13b7cb0fce3d58bc7e4c9e3409d09fe8d845bd6507a",
+  "source_hashes_match_predeclared_protocol": true,
+  "source_copy_hashes_verified": true,
+  "raw_blocks_retained": 1,
+  "raw_frames_retained": 512,
+  "independent_bias_frozen_before_each_waveform": false,
+  "automatic_retry_or_rearm": false,
+  "scores": [],
+  "instrument": {
+    "capture_attempts": 1,
+    "retained_frames": 512,
+    "scored_captures_completed": 0,
+    "requested_wiring_interventions_completed": 0,
+    "latest_boot_id": "406b47f3f601918ca2f759d02015462b",
+    "output_state_confirmed": false,
+    "automatic_retry_or_rearm": false,
+    "automatic_A4_tracking": false
+  }
+}

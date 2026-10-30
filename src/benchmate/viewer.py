@@ -41,7 +41,7 @@ def render_viewer(record):
     return (resources.joinpath('viewer.html').read_text()
             .replace('/*CONNECT_POLICY*/',"'self'" if record.get('transport')=='live_log' else "'none'")
             .replace('/*VIEWER_CSS*/',css)
-            .replace('/*VIEWER_JS*/',resources.joinpath('viewer.js').read_text())
+            .replace('/*VIEWER_JS*/',resources.joinpath('viewer_physical.js').read_text()+'\n'+resources.joinpath('viewer.js').read_text())
             .replace('/*FONT_LICENSE*/',json.dumps(resources.joinpath('assets','OFL.txt').read_text()).replace('<','\\u003c'))
             .replace('/*RECORD_DATA*/',payload))
 
