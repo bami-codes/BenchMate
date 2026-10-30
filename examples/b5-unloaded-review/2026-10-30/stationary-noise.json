@@ -1,0 +1,134 @@
+[
+  {
+    "attempt": "20261030T035419-baf50eef2e",
+    "duration_s": 1.022,
+    "samples": 512,
+    "boot_id": "ec013fc1d18498e43fcab8435be24ce4",
+    "code": 1376,
+    "timestamp": "2026-10-30T03:54:26.770304+00:00",
+    "channels": {
+      "A1": {
+        "mean_counts": 5491.55859375,
+        "std_counts": 6.110566733719606,
+        "std_mV": 1.826608303796542,
+        "trend_mV_per_s": 0.09957882839014191,
+        "fitted_change_over_block_mV": 0.10176956261472504,
+        "last128_minus_first128_mV": 0.11676803474415465,
+        "detrended_std_mV": 1.826370645514271,
+        "peak_to_peak_mV": 36.46899261134922,
+        "lag1_correlation": -0.010923844361901114
+      },
+      "A2": {
+        "mean_counts": 5492.783203125,
+        "std_counts": 8.611980862580117,
+        "std_mV": 2.576432583463792,
+        "trend_mV_per_s": -0.22782923765276597,
+        "fitted_change_over_block_mV": -0.23284148088112683,
+        "last128_minus_first128_mV": 0.016360772179723426,
+        "detrended_std_mV": 2.57555049817014,
+        "peak_to_peak_mV": 35.60104026291765,
+        "lag1_correlation": 0.0539701211841954
+      },
+      "A4": {
+        "mean_counts": 5618.60546875,
+        "std_counts": 7.650167194046734,
+        "std_mV": 2.2880924892162007,
+        "trend_mV_per_s": -0.033639029545915015,
+        "fitted_change_over_block_mV": -0.03437908819592514,
+        "last128_minus_first128_mV": 0.004673289385436874,
+        "detrended_std_mV": 2.2880708395353255,
+        "peak_to_peak_mV": 25.72178477690295,
+        "lag1_correlation": -0.07118672020276884
+      }
+    },
+    "centered_differences_std_mV": {
+      "A2-A1": 3.1197740088729606,
+      "A1-A4": 2.918147447844998,
+      "A2-A4": 3.4298738084291114
+    },
+    "guard": {
+      "label": "pre_DMM_HOLD",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6424731190487079,
+        1.6428393881042804,
+        1.6432003997092988,
+        1.6804716350408997
+      ]
+    }
+  },
+  {
+    "attempt": "20261030T042739-c75d9ebd7e",
+    "duration_s": 1.022,
+    "samples": 512,
+    "boot_id": "406b47f3f601918ca2f759d02015462b",
+    "code": 1376,
+    "timestamp": "2026-10-30T04:27:48.472353+00:00",
+    "channels": {
+      "A1": {
+        "mean_counts": 5493.353515625,
+        "std_counts": 6.094014527100083,
+        "std_mV": 1.8216604160841767,
+        "trend_mV_per_s": -0.11325984830755888,
+        "fitted_change_over_block_mV": -0.11575156497032517,
+        "last128_minus_first128_mV": -0.004670721389629762,
+        "detrended_std_mV": 1.821352127563903,
+        "peak_to_peak_mV": 32.88187858400374,
+        "lag1_correlation": 0.038913728695584945
+      },
+      "A2": {
+        "mean_counts": 5492.615234375,
+        "std_counts": 9.006759928342733,
+        "std_mV": 2.694538007120705,
+        "trend_mV_per_s": 0.00812353341415883,
+        "fitted_change_over_block_mV": 0.008302251149270324,
+        "last128_minus_first128_mV": -0.04908231653871553,
+        "detrended_std_mV": 2.6945369350046953,
+        "peak_to_peak_mV": 29.617672151503257,
+        "lag1_correlation": 0.019132937607257924
+      },
+      "A4": {
+        "mean_counts": 5494.29296875,
+        "std_counts": 8.859642075472319,
+        "std_mV": 2.649834961228983,
+        "trend_mV_per_s": -0.395563987180733,
+        "fitted_change_over_block_mV": -0.404266394898709,
+        "last128_minus_first128_mV": -0.1588918391014431,
+        "detrended_std_mV": 2.647248757560992,
+        "peak_to_peak_mV": 30.80632362815095,
+        "lag1_correlation": 0.02055998758506305
+      }
+    },
+    "centered_differences_std_mV": {
+      "A2-A1": 3.234099741439835,
+      "A1-A4": 3.2421513060889984,
+      "A2-A4": 3.919522348670154
+    },
+    "guard": {
+      "label": "pre_DMM_HOLD",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6430099631668478,
+        1.6427891502433905,
+        1.6435841936000695,
+        1.6432909446911401
+      ]
+    }
+  }
+]

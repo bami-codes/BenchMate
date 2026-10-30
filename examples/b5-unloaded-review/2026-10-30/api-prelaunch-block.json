@@ -1,0 +1,9 @@
+{
+  "status": "blocked_before_process_creation",
+  "physical_IO": 0,
+  "API_requests": 0,
+  "automatic_retry": false,
+  "prepared_commit": "ae6952a979228976e00b551db37f066009a9ec17",
+  "reason": "Automatic approval review requires explicit approval for new B5 waveform summaries, configuration and generated-netlist egress to Meta; previous approval was D01-specific.",
+  "next_action": "Await user response to the explicit B5-only eight-request consent question."
+}

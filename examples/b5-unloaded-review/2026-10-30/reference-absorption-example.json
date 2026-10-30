@@ -1,0 +1,45 @@
+{
+  "purpose": "Offline mathematical counterexamples, not board measurements",
+  "assumptions": {
+    "R_ohm": 10000.0,
+    "IS_A": 3e-09,
+    "N": 1.9,
+    "T_C": 27,
+    "RS_ohm": 1.0,
+    "REF_V": 1.64,
+    "assumed_REF_shift_V": 0.037,
+    "input_sine_amplitude_V": 0.8
+  },
+  "shifted_IS_A": 6.369440147179052e-09,
+  "REF_absorption": [
+    {
+      "load_ohm": null,
+      "RMS_difference_mV": 0.02722222248326634,
+      "max_difference_mV": 0.033694401470052426
+    },
+    {
+      "load_ohm": 4700.0,
+      "RMS_difference_mV": 24.985873959775603,
+      "max_difference_mV": 25.18080581605986
+    },
+    {
+      "load_ohm": 9990.0,
+      "RMS_difference_mV": 17.29181259970115,
+      "max_difference_mV": 18.526091388341605
+    }
+  ],
+  "unloaded_R_IS_tradeoff": {
+    "pairs": [
+      [
+        10000.0,
+        3e-09
+      ],
+      [
+        20000.0,
+        1.5e-09
+      ]
+    ],
+    "RMS_difference_mV": 0.006051895046272007,
+    "max_difference_mV": 0.014903585322301183
+  }
+}

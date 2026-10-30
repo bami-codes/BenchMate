@@ -90,9 +90,9 @@ if(discovery){
 await evaluate("document.querySelector('[data-trace=drive]').click()");assert(await evaluate("!!document.querySelector('#chart path[data-series=drive]')"),'Trace control failed');
 await evaluate("document.querySelector('[data-trace=drive]').click();document.getElementById('expand-report').click()");
 assert(await evaluate("document.getElementById('expand-report').getAttribute('aria-expanded')==='true'"),'Report expansion failed');
-await evaluate("document.getElementById('expand-report').click();document.querySelector('summary').click()");
+await evaluate("document.getElementById('expand-report').click();document.querySelector('.evidence-drawer > summary').click()");
 assert(await evaluate("document.querySelector('.evidence-drawer').open"),'Evidence disclosure failed');
-await evaluate("document.querySelector('summary').click();document.getElementById('cursor').focus()");
+await evaluate("document.querySelector('.evidence-drawer > summary').click();document.getElementById('cursor').focus()");
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowLeft',code:'ArrowLeft',windowsVirtualKeyCode:37});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowLeft',code:'ArrowLeft',windowsVirtualKeyCode:37});
 assert(await evaluate(`BenchMateUI.getState().cursor===${count-2}`),'Keyboard slider failed');
 await evaluate("document.getElementById('play').click()");

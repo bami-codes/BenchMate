@@ -1,0 +1,22 @@
+{
+  "agent_report": {
+    "verdict": "verified",
+    "explanation": "Scripted mock integration test completed. No physical or Spark evidence.",
+    "limits": "Unloaded behavioral check only; no unique parameters or topology.",
+    "source": "mock",
+    "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+  },
+  "source": "mock",
+  "reserved_check_passed": true,
+  "proposals": 1,
+  "instrument": {
+    "source": "mock",
+    "waveforms": 8,
+    "real_serial_commands": 0,
+    "physical_measurements": 0,
+    "operator_actions_simulated": true
+  },
+  "provider": "scripted",
+  "http_requests": 0,
+  "Spark_authored": false
+}

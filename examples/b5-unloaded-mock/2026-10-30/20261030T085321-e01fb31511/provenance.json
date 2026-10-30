@@ -1,0 +1,25 @@
+{
+  "source_commit": "ae6952a979228976e00b551db37f066009a9ec17",
+  "source_run": "runs/b5-unloaded/20261030T085321-e01fb31511",
+  "files": [
+    {
+      "path": "events.jsonl",
+      "sha256": "8f406a3788808490d4588a02bc2578f5c2b8b55055840624b6e40c0eee00ad23",
+      "bytes": 487230
+    },
+    {
+      "path": "result.json",
+      "sha256": "615b618b437f037d2485cfd341f3c229a309bb4a6f72354e717a0d0573ee8071",
+      "bytes": 662
+    },
+    {
+      "path": "predictions-frozen.json",
+      "sha256": "d980c8e3131e8b75e045cf9f65c3652a98dd83903da788d93ea761196b38abc1",
+      "bytes": 58048
+    }
+  ],
+  "provider": "scripted",
+  "API_calls": 0,
+  "physical_IO": 0,
+  "Spark_authored": false
+}
