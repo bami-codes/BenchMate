@@ -21,6 +21,8 @@ for(const [width,height,name]of [[1440,900,'desktop'],[1280,900,'laptop'],[390,8
   assert(await evaluate('document.body.classList.contains("product-view")'), 'Product story is not the default');
   assert(await evaluate('document.getElementById("product-original-reason").textContent.includes("tau=R*C")'), 'Actual Spark reason absent');
   assert(await evaluate('document.getElementById("product-limits").textContent.includes("Repair was not performed")'), 'Repair scope lost');
+  assert(await evaluate('!document.getElementById("product-problem").hidden&&document.getElementById("product-design").textContent==="10 kΩ · 1 µF · τ ≈ 10 ms"&&document.getElementById("product-measured").textContent==="21.4 ms"'), 'Problem card does not match the recorded design and fit');
+  assert(await evaluate('!document.getElementById("product-capacitance").hidden&&document.getElementById("product-capacitance").textContent.includes("2.1× design (assuming R = 10 kΩ)")'), 'Capacitance estimate or nominal-R assumption missing');
   const product=await evaluate('({overflow:document.documentElement.scrollWidth>innerWidth,bottom:Math.max(...[...document.querySelectorAll(".figure-panel,.product-story,.timeline-panel,.mounting-panel")].map(e=>e.getBoundingClientRect().bottom))})');
   assert(!product.overflow, 'Product horizontal overflow');
   if(width>800)assert(product.bottom<=900, 'Product panels exceed desktop viewport: '+JSON.stringify(product));
@@ -32,14 +34,20 @@ for(const [width,height,name]of [[1440,900,'desktop'],[1280,900,'laptop'],[390,8
   assert(!layout.overflow,'Horizontal overflow');assert(layout.headline==='Spark at the workbench','Wrong renderer');
   if(width>800)assert(layout.panels.every(p=>p.bottom<=900),'Main panels exceed desktop viewport: '+JSON.stringify(layout));
   const metrics=await cdp('Page.getLayoutMetrics');const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});
-  await writeFile(output+'/'+name+'.png',Buffer.from(shot.data,'base64'));layouts.push({name,...layout});
+  await writeFile(output+'/'+name+'.png',Buffer.from(shot.data,'base64'));layouts.push({name,product,...layout});
 }
 await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false});
 const indices=await evaluate(`(()=>{const e=initialRecord.events;return {count:e.length,training:e.findIndex(x=>x.kind==='unloaded_training_completed'),plan:e.findIndex(x=>x.kind==='physical_acquisition_plan_frozen'&&x.payload.phase==='reserved_sine'),observation:e.findIndex(x=>x.kind==='physical_observation'&&x.payload.phase==='reserved_sine'),check:e.findIndex(x=>x.kind==='physical_verification'),loaded:e.findIndex(x=>x.kind==='physical_measurement_selected'&&x.payload.phase==='attach_output_load_step')};})()`);
 await evaluate('BenchMateUI.select(0)');
 assert(await evaluate("document.getElementById('source').textContent==='Source pending'&&!document.querySelector('#chart path[data-series]')&&!document.getElementById('status').textContent.includes('Verified')"),'Future result leaked at start');
+await evaluate('document.getElementById("product-tab").click()');
+assert(await evaluate('document.getElementById("product-measured").textContent==="Not measured yet"&&document.getElementById("product-capacitance").hidden'), 'Problem card or estimate leaks a future result');
+await evaluate('document.getElementById("evidence-tab").click()');
 await evaluate(`BenchMateUI.select(${indices.training})`);
 assert(await evaluate("!!document.querySelector('#chart path[data-series=observed]')&&!document.querySelector('#chart path[data-series=predicted]')&&document.getElementById('explanation').textContent.includes('indistinguishable')"),'Training stage or fit provenance wrong');
+await evaluate('document.getElementById("product-tab").click()');
+assert(await evaluate('document.getElementById("product-measured").textContent==="21.4 ms"&&document.getElementById("product-capacitance").hidden'), 'Training alone must not establish a capacitance change');
+await evaluate('document.getElementById("evidence-tab").click()');
 await evaluate(`BenchMateUI.select(${indices.plan})`);
 assert(await evaluate("!document.querySelector('#chart path[data-series]')&&document.getElementById('comparison-note').textContent.includes('new measured IN')"),'Conditional future curves leaked');
 assert(await evaluate(`actorFor(state.events[${indices.plan}]).name==='Engine'`),'Frozen model parameters attributed to the wrong actor');

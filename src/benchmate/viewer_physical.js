@@ -149,6 +149,9 @@ function renderPhysicalRC(){
 function selectPhysicalStage(sequence){select(sequence,true);}
 
 function physicalProductStory(vm){
+  const nominal=vm.training?.payload.point_models?.nominal_rc||vm.visible.find(e=>e.kind==='tool_result'&&e.payload.result?.nominal_design)?.payload.result.nominal_design;
+  const design=nominal?`${nominal.R_ohm/1000} kΩ · ${nominal.C_f*1e6} µF · τ ≈ ${(nominal.R_ohm*nominal.C_f*1000).toFixed(0)} ms`:'Waiting for the recorded design';
+  const measured=vm.training?`${(vm.training.payload.tau_s*1000).toFixed(1)} ms`:'Not measured yet';
   const reason=vm.loaded?.selection?.payload.reason||null;
   const translated=reason==='무부하 스텝은 tau=R*C만 식별하여 R 변화와 C 변화를 구분할 수 없으며 반복은 정보가 없으므로, 9.99kohm 부하를 OUT-REF에 연결하면 R 분압으로 정상상태 게인이 달라져 R 변경과 C 변경 대안을 구분할 수 있기 때문. 물리적 재배선은 작업자가 수동으로 수행하며 자동 장착이 아님.';
   const request=vm.visible.find(e=>e.kind==='operator_action_requested')||null;
@@ -158,7 +161,9 @@ function physicalProductStory(vm){
   if(vm.training){title='One trace. Two explanations.';explanation=`The measured time constant is ${(vm.training.payload.tau_s*1000).toFixed(2)} ms. That alone cannot tell resistance change from capacitance change.`;}
   if(reason){title='Change the test. Separate the explanations.';explanation=translated?'An unloaded step identifies only R × C. Repeating it adds no information. A 9.99 kΩ output load changes the divider gain, separating resistance change from capacitance change. The operator performs the wiring.':reason;}
   const failed=vm.terminal?.kind==='run_failed'||vm.verification?.payload.passed===false;
-  return {reason,translated,request,confirmation,title,explanation,complete,
+  const cModel=vm.training?.payload.point_models?.c_changed;
+  const capacitance=!failed&&complete&&vm.report.payload.candidate==='c_changed'&&nominal&&cModel?`Capacitance ≈ ${(cModel.C_f/nominal.C_f).toFixed(1)}× design (assuming R = ${nominal.R_ohm/1000} kΩ).`:null;
+  return {reason,translated,request,confirmation,title,explanation,complete,design,measured,capacitance,
     conclusion:failed?'The experiment stopped without a verified conclusion.':complete?'Capacitance change explains both checks.':vm.loaded?.comparison?'One explanation fits. Test it on a new waveform.':'Choose a test that can distinguish the explanations.',
     label:complete?'Checked on an unused waveform':failed?'Conclusion withheld':'The next decision',
     limits:complete?'Within the declared RC alternatives. Repair was not performed in this run.':'Recorded development experiment. The operator handles physical changes.'};
@@ -167,12 +172,16 @@ function physicalProductStory(vm){
 function renderPhysicalProduct(vm){
   const product=state.presentation!=='evidence',story=physicalProductStory(vm);
   $('presentation-switch').hidden=false;$('product-story').hidden=!product;
+  $('product-problem').hidden=!product;
+  setText('product-design',story.design);setText('product-measured',story.measured);
+  setText('product-problem-question','R or C changed? The alternatives tested here.');
   document.body.classList.toggle('product-view',product);
   $('product-tab').setAttribute('aria-pressed',String(product));$('evidence-tab').setAttribute('aria-pressed',String(!product));
   setText('product-title',story.title);setText('product-reason',story.explanation);
   setText('product-reason-note',story.reason?(story.translated?'English translation of Spark’s recorded reason':'Original recorded reason')+' · event '+vm.loaded.selection.sequence:'Reading aid from the events available at this point.');
   $('product-original').hidden=!story.reason;setText('product-original-reason',story.reason);
   setText('product-conclusion-label',story.label);setText('product-conclusion-text',story.conclusion);setText('product-limits',story.limits);
+  $('product-capacitance').hidden=!story.capacitance;setText('product-capacitance',story.capacitance);
   const loaded=vm.loaded?.comparison?.payload.scores?.c_changed,verified=vm.verification?.payload.scores?.c_changed;
   setText('product-metrics',story.complete&&loaded&&verified?`Output error: ${loaded.RMS_mV.toFixed(2)} mV with the load · ${verified.RMS_mV.toFixed(2)} mV on the new sine. Whole and regional checks passed.`:'');
   if(!product)return;

@@ -61,11 +61,22 @@ Chrome on local DevTools port 9338, never the user's browser profile. See
 
 ## Story and Evidence views
 
-The physical D01 export now opens in Story mode. It shows the recorded Spark reason
+The physical D01 export now opens in Story mode. A problem card contrasts the
+recorded 10 kΩ / 1 µF design (τ ≈ 10 ms) with the fitted 21.4 ms response and labels
+R/C changes as the alternatives tested here. Design and measurement values only
+appear when their source events are available during replay.
+
+It shows the recorded Spark reason
 (with an explicitly labelled English translation and the exact Korean original),
 the historical operator request and a scoped conclusion. Evidence retains the
 HOLD origins, provisional channel maps, whole/regional checks and original report.
 Both views use identical recorded curves and event order. The reason/request are
 absent before their events; conditional curves never precede measured IN. No repair
-is implied by this diagnosis record. Browser QA passed 43 assertions at 1440, 1280
-and 390 pixel widths; desktop main panels fit a 900 pixel viewport.
+is implied by this diagnosis record. After the verified C-change report, the
+conclusion adds “Capacitance ≈ 2.1× design (assuming R = 10 kΩ).” This uses the
+recorded C-change point model (2.138 µF / 1 µF), not a new fit or a direct component
+measurement. It stays hidden during training and before verification/reporting.
+
+Browser QA passed 51 assertions at 1440, 1280 and 390 pixel widths; desktop main
+panels fit a 900 pixel viewport. The physical/general viewer tests passed 14 checks.
+See [Story validation](physical-product-validation.json) for the latest browser result.

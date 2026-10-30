@@ -314,7 +314,7 @@ function renderTimeline(vm){
 }
 function render(){
   if(isPhysicalRC(state.events)){renderPhysicalRC();return;}
-  document.body.classList.remove('physical-rc','product-view');$('presentation-switch').hidden=true;$('product-story').hidden=true;
+  document.body.classList.remove('physical-rc','product-view');$('presentation-switch').hidden=true;$('product-story').hidden=true;$('product-problem').hidden=true;
   if(!state.events.length){setText('status','Waiting for the first event');return;}
   const vm=reduce(state.events,state.cursor),plot=plotFor(vm),{focus,settings,series,predictionEvent,unit}=plot;
   const discovery=vm.mode.includes('discovery'),repair=vm.mode.includes('repair');

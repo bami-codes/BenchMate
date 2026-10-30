@@ -3,6 +3,10 @@
   "layouts": [
     {
       "name": "desktop",
+      "product": {
+        "overflow": false,
+        "bottom": 873.265625
+      },
       "width": 1440,
       "overflow": false,
       "headline": "Spark at the workbench",
@@ -31,6 +35,10 @@
     },
     {
       "name": "laptop",
+      "product": {
+        "overflow": false,
+        "bottom": 873.265625
+      },
       "width": 1280,
       "overflow": false,
       "headline": "Spark at the workbench",
@@ -59,6 +67,10 @@
     },
     {
       "name": "mobile",
+      "product": {
+        "overflow": false,
+        "bottom": 1735.875
+      },
       "width": 390,
       "overflow": false,
       "headline": "Spark at the workbench",
@@ -86,7 +98,7 @@
       ]
     }
   ],
-  "assertions": 43,
+  "assertions": 51,
   "passed": true,
   "errors": []
 }
