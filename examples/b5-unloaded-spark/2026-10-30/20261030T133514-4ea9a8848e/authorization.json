@@ -1,0 +1,23 @@
+{
+  "user_reply_verbatim": "동의 — B5 모의 데이터 범위로 Meta API 최대 8회",
+  "destination": "https://api.meta.ai/v1/responses",
+  "max_paid_requests": 8,
+  "reasoning_effort": "max",
+  "bench": "mock",
+  "allowed_payload": [
+    "tool specifications",
+    "settings",
+    "25 mock training summary points per waveform",
+    "errors",
+    "generated netlist",
+    "verification summaries"
+  ],
+  "excluded_payload": [
+    "full ADC arrays",
+    "assembly truth",
+    "previous physical results",
+    "local file contents"
+  ],
+  "physical_hardware_IO_authorized": false,
+  "notes": "Explicit user approval received before this new process. Earlier automatic-review block made zero requests."
+}

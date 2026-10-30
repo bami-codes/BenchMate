@@ -58,3 +58,20 @@ stay outside the provider payload.
 Physical invocation needs a fresh confirmed resistor-only setup. The current
 workspace's previously requested power-down has not been confirmed. No physical
 B5 or Spark-directed repair result is implied by this code or its unit tests.
+
+## First actual Spark mock rehearsal completed
+
+[The October 30 Spark max run](../examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md)
+completed in seven API requests. Spark chose the amplitude sweep and generated
+one series-R / OUT-to-REF diode proposal outside the five initial linear families.
+The exact model and command forecasts were pushed in `9cff3e8` before both reserved
+mock acquisitions. Conditional whole RMS was 1.667 / 1.734mV; command-forecast
+whole RMS was 1.925 / 1.953mV. Every regional check also passed; frozen linear
+alternatives failed. The local parameter rank was 3 of 5, so no unique R/IS/REF
+or topology claim is made. Eight mock waveforms, zero physical measurements.
+
+The source hash chain, 40 source files, publication barrier, frozen numerical
+models and sparse provider tool results passed the retained local audit. This
+completes the bounded mock integration milestone, not physical B5 or the original
+loaded/repeated-run gate. B5-specific user consent covered this run only; the
+separate no-tool five-request comparison still awaits its own scope confirmation.

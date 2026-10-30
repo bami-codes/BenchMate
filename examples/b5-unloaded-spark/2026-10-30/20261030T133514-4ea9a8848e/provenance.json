@@ -1,0 +1,26 @@
+{
+  "source_commit": "8bd39b5ae6a32efb9e2f01c8f5ce87462c02fab4",
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 495291,
+      "sha256": "3828e72a3f5403f86fa1ea0fd55875b00808b626aa863283c807a166771f9087"
+    },
+    {
+      "path": "result.json",
+      "bytes": 2709,
+      "sha256": "c60f10c500de490aedea0e5bd0601f9d93ec8b0038aa5008d7f0b4af5fc73194"
+    },
+    {
+      "path": "predictions-frozen.json",
+      "bytes": 58048,
+      "sha256": "d980c8e3131e8b75e045cf9f65c3652a98dd83903da788d93ea761196b38abc1"
+    },
+    {
+      "path": "authorization.json",
+      "bytes": 710,
+      "sha256": "3bc8c97c69f088165ab31399c33c909b722ab0f518aeb6478758e9d0b43f14cc"
+    }
+  ],
+  "source_manifest_event": 1
+}
