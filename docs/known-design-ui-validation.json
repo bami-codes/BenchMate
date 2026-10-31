@@ -1,0 +1,18 @@
+{
+  "source": "Software fixture; no actual Spark output",
+  "actual_API_calls": 0,
+  "hardware_IO": false,
+  "checks": 14,
+  "passed": true,
+  "errors": [],
+  "layouts": [
+    {
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "overflow": false
+    }
+  ]
+}

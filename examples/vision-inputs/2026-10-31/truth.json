@@ -1,0 +1,83 @@
+{
+  "scope": "Local answer key; never part of the provider payload. Three hand-authored schematic fixtures, not an accuracy benchmark.",
+  "cases": [
+    {
+      "file": "case-01.png",
+      "source": "synthetic_schematic",
+      "expected": {
+        "R_ohm": 10000,
+        "C_f": 1e-06,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": true
+      },
+      "case": "labelled_rc"
+    },
+    {
+      "file": "case-02.png",
+      "source": "synthetic_schematic",
+      "expected": {
+        "R_ohm": 4700,
+        "C_f": 4.7e-07,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": true
+      },
+      "case": "labelled_rc"
+    },
+    {
+      "file": "case-03.png",
+      "source": "synthetic_schematic",
+      "expected": {
+        "R_ohm": 22000,
+        "C_f": null,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": false
+      },
+      "case": "missing_capacitance"
+    }
+  ]
+}

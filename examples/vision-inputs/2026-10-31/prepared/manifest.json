@@ -1,0 +1,54 @@
+{
+  "schema": "benchmate.vision_manifest.v1",
+  "images": [
+    {
+      "id": "image-01",
+      "file": "image-01.png",
+      "source_kind": "intended_schematic",
+      "info": {
+        "sha256": "02e3c887f773fccaf9b2a356e597f88cfce2b75e442ffb5b97595777acfadda0",
+        "width": 1100,
+        "height": 650,
+        "bytes": 14418,
+        "metadata_removed": true,
+        "orientation_applied": true,
+        "resize_max_edge": 1600,
+        "source_sha256": "02e3c887f773fccaf9b2a356e597f88cfce2b75e442ffb5b97595777acfadda0"
+      }
+    },
+    {
+      "id": "image-02",
+      "file": "image-02.png",
+      "source_kind": "intended_schematic",
+      "info": {
+        "sha256": "c3711742c80348d0a28e4c368caa9a423a72984c381e06a609a226bc0c7c4af7",
+        "width": 1100,
+        "height": 650,
+        "bytes": 15450,
+        "metadata_removed": true,
+        "orientation_applied": true,
+        "resize_max_edge": 1600,
+        "source_sha256": "c3711742c80348d0a28e4c368caa9a423a72984c381e06a609a226bc0c7c4af7"
+      }
+    },
+    {
+      "id": "image-03",
+      "file": "image-03.png",
+      "source_kind": "intended_schematic",
+      "info": {
+        "sha256": "74ffa08abddc14a72bffe2f1347829b973795310526b1127acd26dab50033901",
+        "width": 1100,
+        "height": 650,
+        "bytes": 14426,
+        "metadata_removed": true,
+        "orientation_applied": true,
+        "resize_max_edge": 1600,
+        "source_sha256": "74ffa08abddc14a72bffe2f1347829b973795310526b1127acd26dab50033901"
+      }
+    }
+  ],
+  "max_paid_requests": 3,
+  "automatic_retry": false,
+  "hardware_IO": false,
+  "all_outputs_retained": true
+}

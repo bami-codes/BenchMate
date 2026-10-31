@@ -1,108 +1,105 @@
 # BenchMate
 
-BenchMate chooses measurements that distinguish circuit hypotheses, commits a prediction, and checks it against a new observation. Built during the Meta Global AI Developer Hackathon, starting October 27, 2026 (Asia/Seoul), as a solo indie project.
+**Muse Spark chooses an experiment, then checks its explanation against a real circuit.**
 
-## Current evidence
+For students and makers who can see a circuit behaving strangely but do not know
+what to measure next. Built solo during the Meta Global AI Developer Hackathon.
 
-Implemented: continuous one-state RC inference, live Muse Spark experiment control, model-authored netlists executed by ngspice, a synthetic repair sequence, and an English experiment workspace shared by replay and live logs. **A first bounded Spark-directed physical RC run now selected new measurements and passed an independent conditional-response check. Most benchmark, repair and discovery workflows remain synthetic; calibrated absolute hardware accuracy, general physical diagnosis and holdout generalization remain unestablished.**
+```mermaid
+flowchart LR
+    A[Describe the problem] --> B[Spark chooses a test]
+    B --> C[Operator connects the requested fixture]
+    C --> D[Bench measures the circuit]
+    D --> E[Compare explanations]
+    E --> F[Freeze the model]
+    F --> G[Check an unused input]
+    G --> H[Report what is supported and still unknown]
+    E -->|None fit| I[Spark proposes a new structure]
+    I --> F
+```
 
-- **First Spark-directed physical D01 run:** [actual execution and raw records](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md). Spark selected a new unloaded step (tau 21.384 ms), requested a manual 9.99 kohm OUT load, then chose an independent lower-amplitude sine check. With unchanged models, C change passed at **2.998/3.043 mV RMS**; R change and nominal RC failed the common whole/region criteria. Five API requests and all 7,680 frames are retained. Assembly truth and earlier specimen results were withheld from model input. This is a provisional known-passive RC development result, not a blinded accuracy benchmark or a repair performed by Spark.
+**Start with the real D01 experiment:** a designed 10 kΩ / 1 µF circuit responded
+with a **21.4 ms** time constant instead of about 10 ms. Spark requested a known
+output load to distinguish resistance change from capacitance change, then chose
+a new sine-wave check. The unchanged C-change model passed both checks at
+**3.00 / 3.04 mV RMS**; the R-change and nominal alternatives failed the common
+whole-waveform/regional criteria. This supports a capacitance estimate of about
+2.1× design **assuming nominal resistance**, within these declared RC alternatives.
 
-- **First physical circuit:** a [B1 step capture and new sine check](examples/hardware-b1-bringup/2026-10-29/README.md) on Minima + LM358. Step fit tau is 10.11 ms versus a 9.83 ms component-reading reference. The sine prediction was saved before its capture and achieved 4.93 mV RMS without refitting (mean +3.96 mV). Both blocks passed boot/timing checks. An added 9.99 kohm load then passed a separate frozen step forecast at 2.22 mV RMS; its descriptive gain/tau are 0.4985/5.09 ms. These were scripted known-specimen checks, not Spark diagnosis. Unloaded data identifies only tau; a separate loaded RC-conditional estimate is available, with provisional calibration and no calibrated uncertainty claim.
+[Real run, Spark’s decisions and raw evidence](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md)
+· [Open the Story replay locally](docs/physical-demo.md)
 
-- **B1/B6 physical shunt gate:** [four known-passive controls passed](examples/hardware-b1-b6-gate/2026-10-30/README.md). Both bypass controls remained unresolved. With the same measured 996 ohm shunt, the two-level DRIVE-minus-IN contrast was 35.814 mV for B6 (36.106 mV predicted) and 0.784 mV for B1 (zero predicted); the common criteria separated the declared alternatives. All 10,240 frames are retained. This is a scripted engineering gate, not blinded five-family diagnosis or a calibrated detection limit.
+![BenchMate Story: real D01 problem, Spark decision, comparison and result](docs/assets/d01-story.png)
 
-- **First D01 physical observation:** the [unloaded controlled-fault response](examples/hardware-d01-bringup/2026-10-29/README.md) has a fitted tau of 20.32 ms. The first loaded forecasts failed regional checks and remain visible. After a new independent REF meter report, an explicitly logged development repeat saved both predictions before recapture: the C-change point passed whole/regional checks at 5.65 mV RMS, while the R-change point failed at 27.64 mV. This supports C change within the declared RC alternatives; it is not a first-attempt or holdout success. The added capacitor was then removed: [first physical repair checks](examples/hardware-d01-repair/2026-10-30/README.md) retained both absolute-voltage failures (12.03/13.12 mV RMS), while a separate fit returned tau 4.97 ms and gain 0.503. A separately frozen measured-IN incremental check then passed at 2.12/2.04 mV RMS; its stationary origin was acquired before both scored waveforms. This verifies the limited response-change check, not absolute voltage. A4 alignment and full D2 validation remain pending.
+*Real hardware, recorded execution. These comparison curves use measured IN;
+they are not output curves predicted before measurement. Spark chooses the test;
+the operator changes the wiring. This run did not perform a repair.*
 
-- Parameter fitting and normalized evidence integration are separate. The tau=RC transformation preserves the original R/C prior. Mystery specimens share five linear topologies: two RC families plus resistor-only, input-leak and output-leak configurations with discrete C=0. Schematic repair priors require explicit `--mode repair`.
-- Whole traces and predefined transient/phase regions use common noise whitening. Per-channel AR(1) parameters are supported; current defaults are uncalibrated synthetic assumptions.
-- The 85-condition menu includes six configurable frequencies, 0.2/1 V sines, steps, 4.7k/10k loads and shunt states. The physical frequency limit remains pending D2.
-- Generated element connections and diode orientation reach ngspice unchanged. Numerical R/C values and bounded diode IS/N are fitted on training observations. Synthetic truth now differs from the starting diode library. Both reserved predictions precede both verification acquisitions.
-- Capacitive sine proposals use checked numerical pre-roll to match settled observations. Actual ngspice invocations, including settling checks, consume the proposal budget; repeated training evaluations can be reused. Training amplitude scaling is reported separately from independent verification and does not localize nonlinearity to a diode by itself.
-- D01 repair predicts the replacement's effect before simulated component replacement, then checks two new observations.
-- A bare-board UNO R4 WiFi [five-point DC loopback check](docs/dac-loopback.md) now has real raw ADC records and separate operator DMM readings: nominal 0.6–2.6 V produced displays of 0.59–0.60, 1.09, 1.59, 2.09 and 2.59 V. This checks basic output/input response; it is not converter calibration or circuit diagnosis. The initial USB and probe-contact observations are retained.
-- The [LM358 fixture bring-up record](examples/hardware-fixture-bringup/README.md) retains physical assembly, DMM checks, USB failures and recovery. Its [October 29 follow-up](examples/hardware-fixture-bringup/2026-10-29-followup/README.md) includes three DC points, provisional A1–A3 path maps and a small loopback sine check. A2 includes its buffer. A4 gain and full D2 calibration remain incomplete; the USB fault cause and long-run reliability remain open.
-- D2 DAC/ADC firmware was uploaded to Minima and has real 512-frame blocks with per-channel read-completion timestamps. Instrument v2 binds commands to a per-boot ID and accepts a capture only after a matching post-capture PING; resets, incomplete replies and disconnects invalidate the run without automatic re-arming. A manual RESET changed the ID and stale-ID commands were rejected. Deliberate RESET/unplug during an active capture remains a separate D2 check.
+## What works today
 
-See [latest recommendation/UI validation](docs/recommendation-validation.json): next measurements are constrained to the fixture menu or explicitly unavailable equipment, and the training amplitude check has its own plot. An actual Spark run selected a fixed-REF menu action after inspecting its settings. The five-family B1/B6 regression retains identical initial evidence, separates structure after the shunt, and passes verification after loading. Recommendations are for future runs; D2 hardware calibration is pending.
+| Capability | Evidence and status |
+| --- | --- |
+| Spark directs a physical RC diagnosis and checks an unused waveform | **Real hardware completed.** One bounded development run; repeatability is not yet established. |
+| Spark proposes a structure outside five initial linear families | **Mock bench completed.** Proposed R + OUT→REF diode; two new input conditions passed. [All seven requests, prior prediction publication and checks](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md). Physical B5 remains pending. |
+| Physical repair response | **Scripted engineering check completed.** [Recorded failures and subsequent incremental checks](examples/hardware-d01-repair/2026-10-30/README.md). Spark-directed physical repair remains pending. |
+| Check a known design from an image | **Input/review workflow implemented.** Local metadata removal, bounded Spark vision transport, editable candidate and explicit operator review. Actual image-reading evaluation is pending. [Scope and usage](docs/known-design.md). |
+| No-tool comparison | **Five actual Spark replies retained.** Qualitative illustration, not a controlled accuracy benchmark. [All five answers and limitations](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md). |
+| General diagnosis, calibrated absolute voltage, sealed holdout and reliability benchmark | **Not established.** |
 
-The [preceding linear-family validation](docs/linear-validation.json) covers: the common five-family comparator, training-only amplitude check, capacitive settling regressions, and one actual Spark run with two predictions frozen before both synthetic verification captures. The original B5 circuit is unchanged. Physical B5 discovery remains pending; the limited D01 incremental repair check is recorded separately above.
+## Where Meta models make decisions
 
-The [earlier pre-board validation](docs/preboard-validation.json) retains both original nonlinear attempts: the first max-reasoning call exhausted its 4,096-token output cap before a proposal; the second used an explicit 8,192-token cap and passed two synthetic verification conditions. This is a development check, not a reliability estimate.
+| Model | Actual role | Status |
+| --- | --- | --- |
+| Muse Spark 1.3 · medium | Selects physical D01 measurements, requests manual intervention, chooses verification and reports the result | Five recorded API requests |
+| Muse Spark 1.3 · max | Selects B5 mock experiments and proposes the literal netlist; five separate no-tool responses | Seven mock-run requests + five baseline requests |
+| Muse Spark 1.3 · vision | Reads a circuit image into a provisional design candidate | Integration ready; actual vision evaluation pending |
+| Muse Spark Open · Baseten | Connectivity experiment | No benchmark or physical-control claim |
+| SAM 3.1 | Potential component highlight for a repair image | Documentation feasibility check only; not integrated or evaluated |
 
-The [earlier story/UI revision](docs/story-ui-validation.json) adds recorded training comparison curves and an actual live-log/replay check; its API attempt is retained separately and does not establish reliability. Older logs remain unchanged, with any reconstructed curves labelled explicitly.
+The numerical engine fits and scores models. Spark selects actions and authors
+new structures; its prose is not itself experimental evidence. A photo of an
+assembled circuit is kept separate from nominal design and from blind tests.
 
-The earlier [structure/UI revision](docs/structure-ui-validation.json) retains two further live executions with mismatched diode truth and neutral English prompts. Both completed. The first report included an unsupported detection-limit statement, so the next prompt explicitly prohibited such claims and shortened the report; the original is preserved. These are evolving development attempts, not a frozen success-rate benchmark.
+## Reproduce without hardware or API calls
 
-## Run
-
-Python 3.11+, `uv`, and **ngspice 47+** for nonlinear work. Earlier versions are rejected because the 42 build reproduced a PWL input-waveform error; CI builds checksum-pinned version 47 with `sh scripts/build-ngspice.sh`. This installs into `.tools/ngspice-47/bin` (add that directory to PATH), without replacing system tools.
+Python 3.11+, `uv`, and ngspice 47+ for nonlinear work. See the
+[full setup and evidence history](docs/evidence-index.md) for the pinned ngspice build.
 
 ```sh
 uv sync --extra dev
-uv run benchmate doctor
 uv run pytest -q
-# Engine only, no API calls:
-uv run benchmate simulate --case b6 --r-scale 1.01 --c-scale 1.05
-uv run benchmate simulate --case d01-r --mode repair
-uv run benchmate repair --case d01-c
-# Live Spark, with MODEL_API_KEY in local .env:
-uv run benchmate agent --case b6
-uv run benchmate agent --case d01-r --mode repair
-uv run benchmate discover
-uv run benchmate repair --case d01-r --live
-```
-
-`--case` selects simulator truth only. The model receives observations and declared knowledge, not specimen identity. Current `--mode` is a user declaration, never selected automatically from the case ID. `discover` defaults to max reasoning; ordinary `agent` defaults to medium. Temperature is the provider default. `repair --live` uses Spark for diagnosis and numerical posterior predictions for repair. The CLI commands above use synthetic instruments. The separately bounded [physical RC adapter](docs/physical-agent.md) has its own explicit hookup and protocol requirements.
-
-## Review recorded evidence
-
-The [physical D01 demonstration](docs/physical-demo.md) now replays the actual Spark-selected load intervention and reserved sine check in this same workspace. It uses exact recorded conditional curves, preserves failed alternatives, and makes no new hardware or API call.
-
-```sh
 uv run benchmate view examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution --output runs/demo/physical-d01.html
+uv run benchmate simulate --case d01-c --mode repair
 ```
 
-```sh
-uv run benchmate replay examples/discovery-menu-english
-uv run benchmate view examples/discovery-menu-english --output runs/discovery-report.html
-# Observe new events from a running command in the same workspace:
-uv run benchmate watch runs/YOUR_RUNNING_SESSION --port 8765
-```
+Open `runs/demo/physical-d01.html`: **Story** explains the problem, Spark's reason,
+the operator request and the result; **Evidence** preserves the full checks and
+original report. Replay requires no network or board.
 
-Open the HTML locally, or visit the loopback URL printed by `watch`. Both use the same event reducer and renderer: observed/best-RC/proposed-structure training comparison, frozen-model verification with per-model residuals, netlist schematic, three-field report, effort-labelled timeline and illustrated connections. Historical RC counterfactuals are explicitly labelled reconstructed; new runs commit both models before observing reserved conditions. Moving backward hides later reports/observations. `watch` follows a verified append-only log and can pause to inspect earlier events; it cannot start an API call or drive hardware. Origin (synthetic/uncalibrated hardware) is separate from viewing mode (replay/live log). Board integration follows D2. See [workspace behavior and QA](docs/viewer.md).
+For image intake, `uv sync --extra vision` then
+`uv run python scripts/known_design.py serve` starts a local **API-disabled** preview.
+Paid execution is explicit, bounded and never activates hardware.
 
-JSONL replay/export verifies the hash chain. This is not external attestation or proof against complete record rewriting. `runs/` is ignored; reviewed examples are explicitly exported. Earlier fixed-value milestones remain in historical examples/tests and `workflow.py`/`engine.py`; current CLI diagnosis uses `experiments.py`/`inference.py`.
+Physical work follows [the B5 operator guide](docs/b5-operator.md), a frozen
+protocol and fresh operator confirmation. Do not infer the current wiring from
+historical replay footage.
 
-## Hardware preparation
+## Evidence, limits and provenance
 
-```sh
-sh scripts/arduino.sh board list
-sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/bringup
-sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/dac_loopback
-sh scripts/arduino.sh compile --fqbn arduino:renesas_uno:unor4wifi firmware/instrument
-```
+- Predictions/model parameters are frozen before the designated verification
+  observations. Command-input forecasts and measured-IN comparisons are labelled separately.
+- Failed attempts and all selected comparison responses are retained. Development
+  repeats are not a frozen success-rate benchmark.
+- JSONL hash chains detect record changes relative to the saved hashes; they are
+  not independent external attestation.
+- Calibration is provisional, supported circuits are narrow, and manual fixture
+  changes remain necessary. No general-purpose autonomous repair claim is made.
 
-Start with non-driving raw bring-up. The optional [bare-board DC loopback](docs/dac-loopback.md) holds one A0 output at a time for raw ADC acquisition and a manual DMM reading, before the LM358 fixture is built. Then follow [D2 instrument instructions](docs/instrument.md): establish REF with the DUT disconnected, attach the test circuit, and request capture separately. Supply/DAC reference is entered from measurement. Compilation does not establish waveform quality, sample rate or accuracy. General hardware inference remains pending fixture calibration; the limited known-passive physical adapter above uses documented provisional maps and explicit guards.
+[Full evidence index](docs/evidence-index.md) · [Protocol commitments](docs/preregistration.md)
+· [Physical experiment scope](docs/physical-agent.md) · [Source license](LICENSE)
 
-## Providers and bounds
-
-- Meta: `https://api.meta.ai/v1/responses`, `muse-spark-1.3`. Encrypted reasoning is replayed in memory, never logged.
-- Baseten connectivity: `https://inference.baseten.co/v1/chat/completions`, exactly `meta-models/muse-spark-open-1026`. Use `benchmate api-smoke --provider baseten`.
-- Integrated runs allow at most eight requests. Ordinary calls allow 4,096 output tokens / 64 KB JSON; nonlinear discovery allows 8,192 / 128 KB. No automatic retries or silent provider substitutions.
-- $1 is reserved per bounded request from separate Meta ($120) and Baseten ($80) local allowances. Reservations are **not actual charges** and can stop work before credits are spent. External usage and unverified Baseten pricing are separate.
-- Keys stay in `.env`; private assemblies stay in `.private/`. Neither is committed. Raw records omit credentials and hidden reasoning.
-
-## Scope
-
-The mystery grammar is currently one-state RC with/without an input branch, not the full planned two-stage grammar. Priors, numerical convergence and approximate predictive checks are documented in [inference notes](docs/inference.md). The diode fit estimates effective IS/N at a fixed 27°C and RS=1Ω; it does not establish accuracy for a physical 1N4148, parasitic capacitance or temperature variation. Fair baseline evaluation, physical repeatability and the final ten-run block remain pending.
-
-D2 must establish supply/REF, DAC/buffer behavior, offsets/gain, actual channel timing/jitter, noise/model error, current detection, settling and usable frequencies. X2 stays unopened until final pipeline freeze. See [preregistration](docs/preregistration.md) and [holdout commitments](docs/holdout-commitments.json).
-
-## Provenance
-
-Implemented during the event: circuit solvers, inference, tools, provider transport, netlist validation/ngspice harness, synthetic repair, records/viewer, firmware and tests. Developed with Codex assistance. Muse Spark runs in the included agent/discovery recordings; Spark Open has a connectivity recording. Muse Code has not yet been used.
-
-Dependencies/tools: NumPy, SciPy, HTTPX, pySerial, pytest, Arduino CLI/Renesas UNO R4 core, ngspice and GitHub CLI. MIT license; dependencies retain their own licenses.
-
-UI design uses [Impeccable](https://github.com/pbakaus/impeccable) guidance and the design contract in [PRODUCT.md](PRODUCT.md)/[DESIGN.md](DESIGN.md). IBM Plex Sans is embedded offline under its [OFL license](src/benchmate/assets/OFL.txt). Impeccable's tool cache is local and is not a runtime dependency.
+Built during the event with Codex assistance. Muse Spark is the recorded runtime
+agent. Core dependencies include NumPy, SciPy, HTTPX, pySerial, ngspice and the
+Arduino UNO R4 toolchain. Optional vision preprocessing uses Pillow. UI fonts are
+IBM Plex Sans under the included OFL license; prior design guidance is credited in
+[the implementation history](docs/evidence-index.md).

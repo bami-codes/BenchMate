@@ -1,0 +1,173 @@
+{
+  "configuration": {
+    "vref_v": 4.9,
+    "ref_v": 1.646,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "voltage_conversion": {
+    "reported_supply_ratio": 1.0020491803278688,
+    "channels": {
+      "A1": {
+        "gain_v_per_count": 0.00029892616894548675,
+        "offset_v": -0.00355042361205783
+      },
+      "A2": {
+        "gain_v_per_count": 0.00029916840557073676,
+        "offset_v": -0.004936687554625794
+      },
+      "A3": {
+        "gain_v_per_count": 0.00029908485085008795,
+        "offset_v": -0.005288341646810059
+      }
+    }
+  },
+  "guard_limits": {
+    "REF_mean_delta_v_max": 0.1,
+    "REF_any_sample_delta_v_max": 0.15,
+    "REF_channel_mean_spread_v_max": 0.05,
+    "signal_envelope_v": 0.95,
+    "A4_envelope_v": 0.15,
+    "raw_rails_exclusive": [
+      16,
+      16367
+    ]
+  },
+  "USB_identity": [
+    9025,
+    105,
+    "3612211F36323632E4B233334B572F52"
+  ],
+  "previous_boot_id": "406b47f3f601918ca2f759d02015462b",
+  "b5_protocol": {
+    "version": "b5-unloaded-adc-v2",
+    "control": [
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.2,
+        "frequency_hz": 1.0
+      },
+      {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.5
+      },
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.8,
+        "frequency_hz": 1.0
+      }
+    ],
+    "training": [
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.2,
+        "frequency_hz": 1.0
+      },
+      {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.5
+      },
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.8,
+        "frequency_hz": 1.0
+      }
+    ],
+    "reserved": [
+      {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.35
+      },
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.65,
+        "frequency_hz": 5.0
+      }
+    ],
+    "load_ohm": null,
+    "same_boot_and_origin_for_training_and_reserved": true,
+    "A4_block_mean_span_mV_max": 3,
+    "stationary_path_mean_span_mV_max": 3,
+    "whole_and_each_region_RMS_mV_max": 9,
+    "reference_nuisance_bound_v": 0.08,
+    "differential_output_offset_bound_v": 0.01,
+    "proposal_limit": 2,
+    "claims": [
+      "unloaded predictive adequacy on two held-out inputs"
+    ],
+    "excluded_claims": [
+      "unique R or IS",
+      "unique topology",
+      "absolute REF calibration",
+      "loaded extrapolation"
+    ],
+    "supersedes": "Loaded physical B5 plan prospectively; its untouched load checks remain pending."
+  },
+  "source_sha256": {
+    "src/benchmate/__init__.py": "3762ba97ca26d3267a3613949a24f8d4261cf7a2ce67d3bfb5f99d69c6944805",
+    "src/benchmate/agent.py": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194",
+    "src/benchmate/b5_bench.py": "dabed36d718f32f4c723759b4d8c58ff42ad32e62384535d6ad6c4de1b6aec0a",
+    "src/benchmate/b5_models.py": "6effdadd51f74613ac0dabba7dbcde1389492cc607705efa536e215aa5caabbd",
+    "src/benchmate/b5_session.py": "1383f190abc4e7a3ce2e5628f5b0f63695e2b7ba193dca26fd964ea5a87cc808",
+    "src/benchmate/branch_gate.py": "9cc7516154972d7c3460998be65c3465a9481f64641fdbd98e3794db2d075c77",
+    "src/benchmate/cli.py": "934d53a7fc0ba86472fbc32c8906d359017aecf68866a6e5c0f1976fcba46ccb",
+    "src/benchmate/comparison.py": "cd46e9cf0e7098aa4be4c0183e9992b320431dcda9a00aa9c21a562d17f0377c",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "src/benchmate/continuous_agent.py": "9acc864e925d18763226aa8307172520268505967aa187ad337c72d3227a3708",
+    "src/benchmate/dac_loopback.py": "560eed8dfcf9e736c41c1d9ea01a8f95a06d79cba2bca093b2dff034aca1c8c6",
+    "src/benchmate/discovery.py": "8866833e30f1c57c70c5c5a3fb4c6eb6af77f776159668085db514e6993b9487",
+    "src/benchmate/engine.py": "012bf9230cc9dc1f5290c853dfc549ff82969cb2bd508e111e699bbc8960b77e",
+    "src/benchmate/experiments.py": "1c6321c77ac80819d942911edb5b07e94a20f8e851132529eeecc37814e1921c",
+    "src/benchmate/hardware.py": "5363da1433ec44e13c1dde6aa65a6a72f0c4de607549485bc08f220bed91e078",
+    "src/benchmate/inference.py": "af6d342e60438fd97a99e57cd1c91557438452c840869ac84b32cbfd7deaa4ba",
+    "src/benchmate/instrument.py": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780",
+    "src/benchmate/known_design.py": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab",
+    "src/benchmate/known_design_web.py": "11672bea239630b68c9dbe2961528aa3101636f05fe5a0d695a6d01b82a3f65c",
+    "src/benchmate/linearity.py": "32af27d449a749445cc521b330ffc9bdcb05368aee3723486337bfabd3b7f996",
+    "src/benchmate/live_viewer.py": "300c12205f7850502766ac9788973dc8d71e0cc614647289bc55bc148786145c",
+    "src/benchmate/measured_input.py": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221",
+    "src/benchmate/menu.py": "097aac2f7f25dbf951665361b1c5a768f5260da30e192523f86c6c1768696433",
+    "src/benchmate/netlist.py": "076c3bbc8167da2dece0836cedec349879e835a4aca3e2bc92399e1c6843aa29",
+    "src/benchmate/noise.py": "5f122cbef4d1c869ae9ddefa4ecf133dc45a694269af463aed7685f57c02d503",
+    "src/benchmate/nonlinear_simulation.py": "df7fac7e8154e1fa935543d9f61dae274595b028f891a0e15dc0e2e18695bd2a",
+    "src/benchmate/physical_bench.py": "9f0e5f5fd2fa90022a5bc296bf97091453db2e3605564f6821b62c74dcbbfea9",
+    "src/benchmate/physical_fitting.py": "8cb8da1c424edc3631c1f815f0490dd93a01f2e2628dd5d98041fbd643612f95",
+    "src/benchmate/physical_netlist.py": "533da5fbf9642b64b34ef2677b63710b4bd61af03af96bc7541a98debd32a3f1",
+    "src/benchmate/physical_rc.py": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784",
+    "src/benchmate/physics.py": "c5895c1312925da6a32b90026bf51eafdfae0f8f8f7f38bf03ed9c9ebe937683",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/range_control.py": "e2a0ab7adb18129b892d13d4bf758b21d9d159154b54f23f3d9db9f552645f1a",
+    "src/benchmate/recommendations.py": "bc75944c41e4f5e5e6ccd2a579fe9a206a012d596ae2a7e29f389724f4cb861b",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "src/benchmate/repair.py": "15795a64381d3fa561d607cfd0ff286eb23dd2a8e90a3d2e0022765267bc5120",
+    "src/benchmate/simulation.py": "7c69c35baaa22a7d4a58969ae2f1f53173c714fc6dd175e945f367287288edcc",
+    "src/benchmate/stimulus.py": "bdbfff3c4256f4908f81f8bb763267bd3221bdbfb3aeb0d5f915154ed20822c5",
+    "src/benchmate/vector.py": "54d664958189925c0e27311c542587a9e6e95e89a07fcbac8e5c60aa71714574",
+    "src/benchmate/viewer.py": "9fd4b43176ef6950a00642235225856a8cbe87529bdfbbd192c9b7a3e84f7c2e",
+    "src/benchmate/workflow.py": "7a66ba2ac4409429a48a513e5d34601c7324a0204b174e264c7f481eb7882046",
+    "scripts/b5_unloaded.py": "e78c1d5dd06f71035b4715b125004dcf695a73ef4f392ff49fcefcc3c930a81d"
+  },
+  "calibration_provenance": {
+    "source": "examples/hardware-b5-preparation/2026-10-30/plan-freeze/20261030T033824-73cfdedc30/plan.json",
+    "sha256": "c2608faa15ce38db1497b13b7cb0fce3d58bc7e4c9e3409d09fe8d845bd6507a",
+    "voltage_estimates": "Last reported 4.90V supply / 1.646V REF on October 30, not new measurements.",
+    "ADC_gain_policy": "Old provisional gains scaled once by 4.90/4.89; no waveform-derived gain fit.",
+    "A4_policy": "Loose electrical plausibility and same-boot block-change guard, never an absolute voltage anchor."
+  }
+}
