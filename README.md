@@ -42,7 +42,7 @@ the operator changes the wiring. This run did not perform a repair.*
 | Spark directs a physical RC diagnosis and checks an unused waveform | **Real hardware completed.** One bounded development run; repeatability is not yet established. |
 | Spark proposes a structure outside five initial linear families | **Mock bench completed.** Proposed R + OUT→REF diode; two new input conditions passed. [All seven requests, prior prediction publication and checks](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md). Physical B5 remains pending. |
 | Physical repair response | **Scripted engineering check completed.** [Recorded failures and subsequent incremental checks](examples/hardware-d01-repair/2026-10-30/README.md). Spark-directed physical repair remains pending. |
-| Check a known design from an image | **Input/review workflow implemented.** Local metadata removal, bounded Spark vision transport, editable candidate and explicit operator review. Actual image-reading evaluation is pending. [Scope and usage](docs/known-design.md). |
+| Check a known design from an image | **Input/review workflow implemented.** Local metadata removal, bounded Spark vision transport, editable candidate and explicit operator review. **Three synthetic schematic checks completed**: two label/connection matches, one unknown value preserved. Real photos and precise localization remain unvalidated. [All outputs](examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md). [Scope and usage](docs/known-design.md). |
 | No-tool comparison | **Five actual Spark replies retained.** Qualitative illustration, not a controlled accuracy benchmark. [All five answers and limitations](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md). |
 | General diagnosis, calibrated absolute voltage, sealed holdout and reliability benchmark | **Not established.** |
 
@@ -52,7 +52,7 @@ the operator changes the wiring. This run did not perform a repair.*
 | --- | --- | --- |
 | Muse Spark 1.3 · medium | Selects physical D01 measurements, requests manual intervention, chooses verification and reports the result | Five recorded API requests |
 | Muse Spark 1.3 · max | Selects B5 mock experiments and proposes the literal netlist; five separate no-tool responses | Seven mock-run requests + five baseline requests |
-| Muse Spark 1.3 · vision | Reads a circuit image into a provisional design candidate | Integration ready; actual vision evaluation pending |
+| Muse Spark 1.3 · vision | Reads a circuit image into a provisional design candidate | Three actual requests on synthetic schematics; real-photo evaluation pending |
 | Muse Spark Open · Baseten | Connectivity experiment | No benchmark or physical-control claim |
 | SAM 3.1 | Potential component highlight for a repair image | Documentation feasibility check only; not integrated or evaluated |
 

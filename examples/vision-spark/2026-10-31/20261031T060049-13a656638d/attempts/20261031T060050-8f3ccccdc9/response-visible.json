@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6ae5842327e65980b9d54c6a",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 1943,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 2451,
+    "output_tokens_details": {
+      "reasoning_tokens": 2086
+    },
+    "total_tokens": 4394
+  },
+  "elapsed_s": 17.32908770791255,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_03d88b13-e2a5-410c-a0ef-5be04ffbbb38",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Provisional transcription underway — reading only the labeled schematic.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_602e8288-7ceb-4e45-9d7a-c04161a8fa6c",
+      "call_id": "call_602e8288-7ceb-4e45-9d7a-c04161a8fa6c",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[],\"components\":[{\"a\":\"IN\",\"b\":\"OUT\",\"bbox\":[0.295,0.329,0.553,0.414],\"evidence\":\"Rectangle resistor symbol with left lead connected to IN line and right lead connected to OUT line junction dot, label R1 10 kOhm above\",\"kind\":\"R\",\"marking\":\"R1 10 kΩ\",\"name\":\"R1\",\"value_si\":10000.0},{\"a\":\"OUT\",\"b\":\"REF\",\"bbox\":[0.61,0.508,0.725,0.558],\"evidence\":\"Two parallel horizontal lines capacitor symbol in vertical branch from OUT junction dot down to REF line, label C1 1 uF to right\",\"kind\":\"C\",\"marking\":\"C1 1 µF\",\"name\":\"C1\",\"value_si\":0.000001}],\"status\":\"needs_review\",\"summary\":\"Provisional visual transcription of intended schematic titled 'RC low-pass — intended schematic' showing R1 between IN and OUT, and C1 branch from OUT junction to REF. Values from legible labels only. Not verified, no diagnosis.\"}",
+      "status": "completed"
+    }
+  ]
+}

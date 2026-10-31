@@ -1,0 +1,11 @@
+{
+  "user_verbatim": "동의 — 합성 회로도 3장으로 Meta API 3회 실행",
+  "destination": "https://api.meta.ai/v1/responses",
+  "model": "muse-spark-1.3",
+  "effort": "max",
+  "max_requests": 3,
+  "manifest_sha256": "a95b151c129a199ec4f33e48bcbc640be3056fc511829a2d9b64ddd0694535eb",
+  "source_commit": "9fb9e7f2c808f5dff9f2c05a0a05b1dd6803efc5",
+  "scope": "Three synthetic schematic images, one per fresh request, reading instructions and report schema only. No answer key, D01 image, ADC, prior results or file paths. Retain all visible replies and failures. No automatic retry or hardware I/O.",
+  "real_photo_status": "User confirmed not available; proceed with synthetic images only."
+}

@@ -1,0 +1,51 @@
+{
+  "source_kind": "intended_schematic",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "a": "IN",
+        "b": "OUT",
+        "bbox": [
+          0.294,
+          0.358,
+          0.527,
+          0.463
+        ],
+        "evidence": "Rectangle symbol on top horizontal wire between IN lead on left and junction dot to OUT on right, labeled above",
+        "kind": "R",
+        "marking": "R1 4.7 kΩ",
+        "name": "R1",
+        "value_si": 4700.0
+      },
+      {
+        "a": "OUT",
+        "b": "REF",
+        "bbox": [
+          0.585,
+          0.552,
+          0.674,
+          0.625
+        ],
+        "evidence": "Two parallel plate symbol on vertical wire between upper OUT junction dot and lower wire to REF, labeled to the right",
+        "kind": "C",
+        "marking": "C1 470 nF",
+        "name": "C1",
+        "value_si": 4.7e-07
+      }
+    ],
+    "status": "needs_review",
+    "summary": "Provisional visual transcription of intended RC low-pass schematic: R1 between IN and OUT node, C1 between OUT node and REF. Values taken from legible labels only."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\nR1 IN OUT 4700\nC1 OUT REF 4.7e-07\n",
+  "nominal_rc_candidate": {
+    "R_ohm": 4700.0,
+    "C_f": 4.7e-07,
+    "tau_s": 0.002209
+  },
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}

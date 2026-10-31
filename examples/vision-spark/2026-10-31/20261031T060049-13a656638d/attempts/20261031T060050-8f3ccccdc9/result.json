@@ -1,0 +1,51 @@
+{
+  "source_kind": "intended_schematic",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "a": "IN",
+        "b": "OUT",
+        "bbox": [
+          0.295,
+          0.329,
+          0.553,
+          0.414
+        ],
+        "evidence": "Rectangle resistor symbol with left lead connected to IN line and right lead connected to OUT line junction dot, label R1 10 kOhm above",
+        "kind": "R",
+        "marking": "R1 10 kΩ",
+        "name": "R1",
+        "value_si": 10000.0
+      },
+      {
+        "a": "OUT",
+        "b": "REF",
+        "bbox": [
+          0.61,
+          0.508,
+          0.725,
+          0.558
+        ],
+        "evidence": "Two parallel horizontal lines capacitor symbol in vertical branch from OUT junction dot down to REF line, label C1 1 uF to right",
+        "kind": "C",
+        "marking": "C1 1 µF",
+        "name": "C1",
+        "value_si": 1e-06
+      }
+    ],
+    "status": "needs_review",
+    "summary": "Provisional visual transcription of intended schematic titled 'RC low-pass — intended schematic' showing R1 between IN and OUT, and C1 branch from OUT junction to REF. Values from legible labels only. Not verified, no diagnosis."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\nR1 IN OUT 10000\nC1 OUT REF 1e-06\n",
+  "nominal_rc_candidate": {
+    "R_ohm": 10000.0,
+    "C_f": 1e-06,
+    "tau_s": 0.01
+  },
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}

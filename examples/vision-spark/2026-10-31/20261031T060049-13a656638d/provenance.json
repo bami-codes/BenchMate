@@ -1,0 +1,28 @@
+{
+  "source_commit": "9fb9e7f2c808f5dff9f2c05a0a05b1dd6803efc5",
+  "original_run_relative": "runs/vision/20261031T060049-13a656638d",
+  "files_copied_without_changes": {
+    "attempts/20261031T060050-8f3ccccdc9/arguments.txt": "e7663d2451b0d507e22ef021bc1ec16cf3cedea44599df3b980c92ae6e88b51f",
+    "attempts/20261031T060050-8f3ccccdc9/events.jsonl": "f50d93c66cc7fb797a6e983d8cd8e6283381f81f22dde8307d9ee0550a5e4909",
+    "attempts/20261031T060050-8f3ccccdc9/input.png": "02e3c887f773fccaf9b2a356e597f88cfce2b75e442ffb5b97595777acfadda0",
+    "attempts/20261031T060050-8f3ccccdc9/plan.json": "ba76bb8371333b53ee248a66bb0db49cfbc251d295a0a8e87d91daef74232e56",
+    "attempts/20261031T060050-8f3ccccdc9/response-visible.json": "da5d29811f6daf40ef095af89691739482b2c401678cf1519e4cfbec9ea00c86",
+    "attempts/20261031T060050-8f3ccccdc9/result.json": "8809a3479d13249961f0f3cb4bedff98a6bf80835241519636057fef0d17d31e",
+    "attempts/20261031T060107-5492ab7ee4/arguments.txt": "c35d955af06547ceb2022f2d5f6e72dd850b1c2cc7abf135f4649a189cedd57e",
+    "attempts/20261031T060107-5492ab7ee4/events.jsonl": "0e04e785d045c71622db704b485ebcda5a6ac72d6eb7f29800e7f856638d3224",
+    "attempts/20261031T060107-5492ab7ee4/input.png": "c3711742c80348d0a28e4c368caa9a423a72984c381e06a609a226bc0c7c4af7",
+    "attempts/20261031T060107-5492ab7ee4/plan.json": "9c546106a11de460256cf3cb0eb8e3e9d268abb741af307d9d6894c9bec52b8b",
+    "attempts/20261031T060107-5492ab7ee4/response-visible.json": "863079017f72c3d817aced8829fd005d5d18ed9fcc597d40e277928f752c590b",
+    "attempts/20261031T060107-5492ab7ee4/result.json": "654d0aced5034c0eb8cf859ab0e5be28a9d326841144e6e843e1551a78b97d8f",
+    "attempts/20261031T060116-0192856444/arguments.txt": "c65f1341e6fb777bf43e99208182a6b699b865c505a627a4f3b3f74a1417e1de",
+    "attempts/20261031T060116-0192856444/events.jsonl": "ac2ab04b5d8351492e4ea0541d1b802373e24728e83c950cd2157dd0cfbde787",
+    "attempts/20261031T060116-0192856444/input.png": "74ffa08abddc14a72bffe2f1347829b973795310526b1127acd26dab50033901",
+    "attempts/20261031T060116-0192856444/plan.json": "8fe099f72080457f47f61313a5488e367991e6a6c831d7c2968d602feeb7a996",
+    "attempts/20261031T060116-0192856444/response-visible.json": "a296311adb8555f90223de548e1e13d8e71bcbe194ae2df11de8686cb539f89c",
+    "attempts/20261031T060116-0192856444/result.json": "997aa5e4d799c062c696c6ad8f3670bf90a2884d18c5e1af9600053e5ed53598",
+    "events.jsonl": "67fd3dafd5ea32bfc7b3b9e09364204ca3114d0490c25eb072fde4ba0a0bcb74",
+    "result.json": "c2e77ba2c841f5c2fe7a75c48e6ebe55d74927c410d935274663c45f4f8299ad"
+  },
+  "raw_files_unchanged": true,
+  "audit_scope": "Local hash/source/payload checks, not external attestation."
+}

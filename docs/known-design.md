@@ -1,9 +1,12 @@
 # Check a known design — image intake
 
 This is a new, separate entry workflow. It does not retroactively attach a photo
-to the D01 run, change a B5 protocol, or power a circuit. Real image-reading
-evaluation is **pending**. Hand-drawn schematic and D01-board photographs have
-not yet been supplied for this workflow.
+to the D01 run, change a B5 protocol, or power a circuit. Three actual Spark max calls on synthetic schematics are complete: both fully
+labelled drawings matched their R/C values and connections, and the drawing with
+C marked `?` remained incomplete with a null value. [All original outputs and
+audit](../examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md).
+These are clean-drawing development checks. Real-photo evaluation is **pending**;
+the user confirmed no hand-drawn schematic or D01-board photo is available yet.
 
 1. Choose **intended schematic** or **assembled circuit** and select a JPEG,
    PNG or WebP. The local service applies EXIF orientation, limits the image to
@@ -82,3 +85,11 @@ permission; no external API was used. After the last display/review changes, all
 14 image-workflow tests passed again. Browser QA passed 14 checks at 1440 and 390
 pixel widths using an explicitly labelled software fixture, with zero real model
 calls. See [UI result](known-design-ui-validation.json).
+
+## Observed location limitation
+
+The three actual responses contain approximate boxes that do not enclose the
+full drawn component symbols. Image 03’s capacitor box omits the lower plate.
+This post-hoc finding does not change the retained values/connections, but these
+coordinates must not directly target SAM or identify a part for a repair. The
+current UI does not use them for either purpose.

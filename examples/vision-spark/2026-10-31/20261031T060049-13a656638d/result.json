@@ -1,0 +1,25 @@
+{
+  "outcomes": [
+    {
+      "id": "image-01",
+      "run": "20261031T060050-8f3ccccdc9",
+      "status": "unverified_visual_candidate",
+      "requests": 1
+    },
+    {
+      "id": "image-02",
+      "run": "20261031T060107-5492ab7ee4",
+      "status": "unverified_visual_candidate",
+      "requests": 1
+    },
+    {
+      "id": "image-03",
+      "run": "20261031T060116-0192856444",
+      "status": "unverified_visual_candidate",
+      "requests": 1
+    }
+  ],
+  "all_attempts_retained": true,
+  "requests": 3,
+  "hardware_IO": false
+}

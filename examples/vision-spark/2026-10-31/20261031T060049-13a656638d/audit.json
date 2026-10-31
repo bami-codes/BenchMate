@@ -1,0 +1,245 @@
+{
+  "scope": "Three synthetic schematic development checks. Not real-photo accuracy, hardware evidence or a general vision benchmark.",
+  "source_commit": "9fb9e7f2c808f5dff9f2c05a0a05b1dd6803efc5",
+  "manifest_sha256": "a95b151c129a199ec4f33e48bcbc640be3056fc511829a2d9b64ddd0694535eb",
+  "truth_sha256": "375ce87d0d811be980f125d09ffd5e039ac7227b6269136519714a8035018b12",
+  "batch_events_sha256": "67fd3dafd5ea32bfc7b3b9e09364204ca3114d0490c25eb072fde4ba0a0bcb74",
+  "hash_chains_verified": 4,
+  "source_files_verified": 4,
+  "payload_hashes_verified": 3,
+  "metadata_free_images_verified": 3,
+  "all_visible_arguments_retained": true,
+  "fresh_context_requests": 3,
+  "automatic_retry": false,
+  "hardware_IO": false,
+  "API_elapsed_s": 43.26320799975656,
+  "token_usage": {
+    "input_tokens": 5829,
+    "output_tokens": 6073,
+    "total_tokens": 11902
+  },
+  "preexisting_answer_key_checks": [
+    {
+      "id": "image-01",
+      "input": "case-01.png",
+      "attempt": "20261031T060050-8f3ccccdc9",
+      "expected": {
+        "R_ohm": 10000,
+        "C_f": 1e-06,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": true
+      },
+      "observed_values": {
+        "R": 10000.0,
+        "C": 1e-06
+      },
+      "reported_status": "needs_review",
+      "component_set_matches": true,
+      "values_match": true,
+      "connections_match": true,
+      "unknown_preserved": true,
+      "handoff_gate_matches": true,
+      "declared_fixture_checks_pass": true,
+      "posthoc_bbox_diagnostic": [
+        {
+          "name": "R1",
+          "predicted_pixels": [
+            324.5,
+            213.85000000000002,
+            608.3000000000001,
+            269.09999999999997
+          ],
+          "drawing_symbol_body_pixels": [
+            300,
+            205,
+            490,
+            255
+          ],
+          "contains_full_symbol_body": false
+        },
+        {
+          "name": "C1",
+          "predicted_pixels": [
+            671.0,
+            330.2,
+            797.5,
+            362.70000000000005
+          ],
+          "drawing_symbol_body_pixels": [
+            590,
+            345,
+            710,
+            367
+          ],
+          "contains_full_symbol_body": false
+        }
+      ],
+      "response_id": "resp_6ae5842327e65980b9d54c6a",
+      "api_elapsed_s": 17.32908770791255
+    },
+    {
+      "id": "image-02",
+      "input": "case-02.png",
+      "attempt": "20261031T060107-5492ab7ee4",
+      "expected": {
+        "R_ohm": 4700,
+        "C_f": 4.7e-07,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": true
+      },
+      "observed_values": {
+        "R": 4700.0,
+        "C": 4.7e-07
+      },
+      "reported_status": "needs_review",
+      "component_set_matches": true,
+      "values_match": true,
+      "connections_match": true,
+      "unknown_preserved": true,
+      "handoff_gate_matches": true,
+      "declared_fixture_checks_pass": true,
+      "posthoc_bbox_diagnostic": [
+        {
+          "name": "R1",
+          "predicted_pixels": [
+            323.4,
+            232.7,
+            579.7,
+            300.95
+          ],
+          "drawing_symbol_body_pixels": [
+            300,
+            205,
+            490,
+            255
+          ],
+          "contains_full_symbol_body": false
+        },
+        {
+          "name": "C1",
+          "predicted_pixels": [
+            643.5,
+            358.8,
+            741.4000000000001,
+            406.25
+          ],
+          "drawing_symbol_body_pixels": [
+            590,
+            345,
+            710,
+            367
+          ],
+          "contains_full_symbol_body": false
+        }
+      ],
+      "response_id": "resp_6ae5842bb466cfaff40742e1",
+      "api_elapsed_s": 8.733634375035763
+    },
+    {
+      "id": "image-03",
+      "input": "case-03.png",
+      "attempt": "20261031T060116-0192856444",
+      "expected": {
+        "R_ohm": 22000,
+        "C_f": null,
+        "connections": [
+          {
+            "kind": "R",
+            "nodes": [
+              "IN",
+              "OUT"
+            ]
+          },
+          {
+            "kind": "C",
+            "nodes": [
+              "OUT",
+              "REF"
+            ]
+          }
+        ],
+        "nominal_design_allowed_after_review": false
+      },
+      "observed_values": {
+        "R": 22000,
+        "C": null
+      },
+      "reported_status": "incomplete",
+      "component_set_matches": true,
+      "values_match": true,
+      "connections_match": true,
+      "unknown_preserved": true,
+      "handoff_gate_matches": true,
+      "declared_fixture_checks_pass": true,
+      "posthoc_bbox_diagnostic": [
+        {
+          "name": "R1",
+          "predicted_pixels": [
+            324.5,
+            214.5,
+            555.5,
+            273.0
+          ],
+          "drawing_symbol_body_pixels": [
+            300,
+            205,
+            490,
+            255
+          ],
+          "contains_full_symbol_body": false
+        },
+        {
+          "name": "C1",
+          "predicted_pixels": [
+            643.5,
+            317.2,
+            767.8,
+            345.8
+          ],
+          "drawing_symbol_body_pixels": [
+            590,
+            345,
+            710,
+            367
+          ],
+          "contains_full_symbol_body": false
+        }
+      ],
+      "response_id": "resp_6ae5843c2955fa18a5fe419f",
+      "api_elapsed_s": 17.200485916808248
+    }
+  ],
+  "declared_checks_passed": 3,
+  "bbox_scope": "Post-hoc symbol-body containment diagnostic, not a preregistered scoring rule. Box semantics were not tightly defined; do not use these coordinates as precise repair/SAM targeting.",
+  "external_attestation": false
+}

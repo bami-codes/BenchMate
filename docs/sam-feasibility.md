@@ -27,3 +27,11 @@ Sources checked October 31:
 - [Meta: segmenting with prompts](https://dev.meta.ai/docs/sam/segmenting)
 - [Official installation prerequisites](https://github.com/facebookresearch/sam3#installation)
 - [SAM 3.1 model card](https://huggingface.co/facebook/sam3.1)
+
+## Follow-up evidence from Spark vision (still zero SAM calls)
+
+The [three actual schematic reads](../examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md)
+matched visible values/connections but returned imprecise component boxes. In
+image 03 the C1 box excludes the lower capacitor plate. A Spark-generated box
+must therefore be reviewed before any SAM targeting; this synthetic-schematic
+observation does not establish SAM quality or real-breadboard localization.

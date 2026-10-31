@@ -1,0 +1,50 @@
+{
+  "source_kind": "intended_schematic",
+  "candidate": {
+    "ambiguities": [
+      "C1 capacitance value shown as '?' and not legible as farads — operator must confirm intended value",
+      "Source is an intended schematic only; physical assembly/wiring was not observed — operator must confirm actual implementation if applicable"
+    ],
+    "components": [
+      {
+        "a": "IN",
+        "b": "OUT",
+        "bbox": [
+          0.295,
+          0.33,
+          0.505,
+          0.42
+        ],
+        "evidence": "Rectangular resistor symbol with left wire to 'IN' and right wire to OUT junction dot, labeled 'R1 22 kΩ' above",
+        "kind": "R",
+        "marking": "R1 22 kΩ",
+        "name": "R1",
+        "value_si": 22000
+      },
+      {
+        "a": "OUT",
+        "b": "REF",
+        "bbox": [
+          0.585,
+          0.488,
+          0.698,
+          0.532
+        ],
+        "evidence": "Two-plate capacitor symbol with top wire to OUT junction dot and bottom wire to 'REF' line, labeled 'C1 ?' to the right",
+        "kind": "C",
+        "marking": "C1 ?",
+        "name": "C1",
+        "value_si": null
+      }
+    ],
+    "status": "incomplete",
+    "summary": "Provisional visual transcription of intended RC low-pass schematic: R1 between IN and OUT, C1 between OUT and REF; C1 value unreadable."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\nR1 IN OUT 22000\n* C1: unresolved connection or value\n",
+  "nominal_rc_candidate": null,
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}
