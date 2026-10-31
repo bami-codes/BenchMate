@@ -1,0 +1,12 @@
+{
+  "source": "Actual archived Spark schematic read and separate D01 physical record; review actions are software QA",
+  "actual_API_calls": 0,
+  "hardware_IO": false,
+  "checks": 17,
+  "passed": true,
+  "errors": [],
+  "widths": [
+    1440,
+    390
+  ]
+}

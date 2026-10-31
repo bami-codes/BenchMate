@@ -11,24 +11,25 @@ from urllib.parse import urlsplit
 from .known_design import KINDS, MAX_IMAGE_BYTES, confirm_design, extract, sanitize_image
 from .live_viewer import allowed_origin
 from .records import Recorder
+from .design_replay import matches_d01
 
 
-def make_server(*, output, env_path, budget_path, port=8766, enable_api=False, max_requests=10, extractor=extract):
+def make_server(*, output, env_path, budget_path, port=8766, enable_api=False, max_requests=10, extractor=extract, demo=None):
     if type(max_requests) is not int or not 1<=max_requests<=10:raise ValueError('At most ten image requests')
     log=Recorder(output,mode='known_design_intake_ui')
     log.add('intake_session_policy',{'paid_API_enabled':enable_api,'max_requests':max_requests,
         'hardware_IO':False,'automatic_retry':False})
-    token=secrets.token_urlsafe(24);images={};results={};requests=0
+    token=secrets.token_urlsafe(24);images={};results={};requests=0;reviews={}
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self,*args):pass
 
-        def send(self,status,value,mime='application/json'):
+        def send(self,status,value,mime='application/json',replay=False):
             body=json.dumps(value,ensure_ascii=False).encode() if mime=='application/json' else value
             self.send_response(status);self.send_header('Content-Type',mime)
             self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store')
             self.send_header('X-Content-Type-Options','nosniff')
-            self.send_header('Content-Security-Policy',"default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'")
+            self.send_header('Content-Security-Policy', ("default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; frame-ancestors 'self'; base-uri 'none'" if replay else "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'none'"))
             self.end_headers();self.wfile.write(body)
 
         def permitted(self,post=False):
@@ -44,7 +45,9 @@ def make_server(*, output, env_path, budget_path, port=8766, enable_api=False, m
             elif path in ('/known_design.css','/known_design.js'):
                 self.send(200,files('benchmate').joinpath(path[1:]).read_bytes(),
                     'text/css' if path.endswith('.css') else 'text/javascript')
-            elif path=='/state':self.send(200,{'api_enabled':enable_api,'requests':requests,'max_requests':max_requests})
+            elif path=='/state':self.send(200,{'api_enabled':enable_api,'requests':requests,'max_requests':max_requests,'recorded_demo_available':demo is not None})
+            elif path=='/replay/d01' and demo and any(matches_d01(v) for v in reviews.values()):
+                self.send(200,demo['viewer'],'text/html; charset=utf-8',replay=True)
             elif path.startswith('/image/') and path[7:] in images:self.send(200,images[path[7:]][0],'image/png')
             else:self.send(404,{'error':'Not found'})
 
@@ -57,7 +60,16 @@ def make_server(*, output, env_path, budget_path, port=8766, enable_api=False, m
                     raise ValueError('Bounded JSON body required')
                 data=json.loads(self.rfile.read(length))
                 path=urlsplit(self.path).path
-                if path=='/prepare':
+                if path=='/recorded-example':
+                    if demo is None:raise ValueError('Start with --demo to load the recorded example')
+                    identity='recorded-'+secrets.token_hex(8)
+                    images[identity]=(demo['image'],demo['info'],'intended_schematic')
+                    run=log.path/identity;run.mkdir()
+                    results[identity]={'run':str(run),'result':demo['result']}
+                    log.add('recorded_vision_loaded',{'id':identity,**demo['provenance']})
+                    self.send(200,{'id':identity,'image':demo['info'],'source_kind':'intended_schematic',
+                        'already_requested':True,'recorded':True,'result':demo['result'],'provenance':demo['provenance']})
+                elif path=='/prepare':
                     kind=data.get('source_kind')
                     if kind not in KINDS:raise ValueError('Choose intended schematic or assembly photo')
                     raw=base64.b64decode(data['image_base64'],validate=True)
@@ -82,8 +94,12 @@ def make_server(*, output, env_path, budget_path, port=8766, enable_api=False, m
                 elif path=='/confirm':
                     entry=results.get(data['id'],{})
                     reviewed=confirm_design(entry.get('result',{}),data['candidate'],reviewer_note=data['reviewer_note'])
+                    reviewed['historical_example']={'available':demo is not None and matches_d01(reviewed),
+                        'same_specimen_established':False,'new_measurement':False,
+                        'record_sha256':demo['provenance']['physical_record_sha256'] if demo else None}
                     target=Path(entry['run'])/'confirmed-design.json'
                     with target.open('x') as file:json.dump(reviewed,file,ensure_ascii=False,indent=2);file.write('\n')
+                    reviews[data['id']]=reviewed
                     log.add('design_confirmed_by_operator',{'image_id':data['id'],'design':reviewed})
                     self.send(200,reviewed)
                 else:self.send(404,{'error':'Not found'})

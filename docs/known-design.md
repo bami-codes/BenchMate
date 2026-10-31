@@ -93,3 +93,28 @@ full drawn component symbols. Image 03’s capacitor box omits the lower plate.
 This post-hoc finding does not change the retained values/connections, but these
 coordinates must not directly target SAM or identify a part for a repair. The
 current UI does not use them for either purpose.
+
+
+## Connected recorded walkthrough — October 31
+
+Run `uv run python scripts/known_design.py serve --demo` and open
+http://127.0.0.1:8766. Load the recorded example, check the schematic, supply a
+review note and save. A matching 10 kΩ / 1 µF nominal design offers a bridge to
+the **separate** October 30 D01 physical run. Other values do not unlock that
+matching-example handoff. Both the synthetic schematic reading and the physical
+experiment are labelled as recorded; no new API call or hardware action occurs.
+
+The example loader pins the image, visual result and both event logs by SHA-256,
+verifies their hash chains, and keeps new review records in `runs/vision-ui`.
+It never writes into either public evidence archive. Review notes made by browser
+QA are software-test actions, not historical operator confirmations.
+
+The four replay scenes are the unloaded observation, Spark's request for a
+manual load, the measured comparison and the final unused-input verification.
+The original viewer supplies Story and Evidence; conditional curves and the
+capacitance conclusion appear only at the relevant recorded event. The operator
+request in replay is not a request to change the present hardware.
+
+[Browser validation](design-replay-ui-validation.json): 17 checks at desktop and
+390 px mobile width, zero new API calls, zero hardware IO. Sixteen Python tests
+cover image preparation, bounded transport and the matching/review boundary.

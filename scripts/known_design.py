@@ -37,6 +37,7 @@ def main():
     batch.add_argument('--execute',action='store_true');batch.add_argument('--approved-manifest-sha256')
     batch.add_argument('--output',default=str(ROOT/'runs/vision'))
     serve=sub.add_parser('serve');serve.add_argument('--execute',action='store_true')
+    serve.add_argument('--demo',action='store_true',help='Load the recorded schematic reading and separate D01 replay; no paid calls')
     serve.add_argument('--port',type=int,default=8766);serve.add_argument('--max-requests',type=int,default=10)
     serve.add_argument('--output',default=str(ROOT/'runs/vision-ui'))
     args=p.parse_args()
@@ -77,8 +78,10 @@ def main():
     else:
         if not 1024<=args.port<=65535:raise ValueError('Choose port 1024..65535')
         from benchmate.known_design_web import make_server
+        from benchmate.design_replay import load_demo
         server=make_server(output=args.output,env_path=ROOT/'.env',budget_path=ROOT/'.private/api-budget.json',
-            port=args.port,enable_api=args.execute,max_requests=args.max_requests)
+            port=args.port,enable_api=args.execute,max_requests=args.max_requests,
+            demo=load_demo(ROOT) if args.demo else None)
         print(json.dumps({'url':f'http://127.0.0.1:{server.server_port}','paid_API_enabled':args.execute,
             'record':str(server.intake_log.path),'hardware_IO':False}),flush=True)
         try:server.serve_forever()

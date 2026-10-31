@@ -42,7 +42,7 @@ the operator changes the wiring. This run did not perform a repair.*
 | Spark directs a physical RC diagnosis and checks an unused waveform | **Real hardware completed.** One bounded development run; repeatability is not yet established. |
 | Spark proposes a structure outside five initial linear families | **Mock bench completed.** Proposed R + OUT→REF diode; two new input conditions passed. [All seven requests, prior prediction publication and checks](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md). Physical B5 remains pending. |
 | Physical repair response | **Scripted engineering check completed.** [Recorded failures and subsequent incremental checks](examples/hardware-d01-repair/2026-10-30/README.md). Spark-directed physical repair remains pending. |
-| Check a known design from an image | **Input/review workflow implemented.** Local metadata removal, bounded Spark vision transport, editable candidate and explicit operator review. **Three synthetic schematic checks completed**: two label/connection matches, one unknown value preserved. Real photos and precise localization remain unvalidated. [All outputs](examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md). [Scope and usage](docs/known-design.md). |
+| Check a known design from an image | **Image → review → separate D01 replay implemented.** Local metadata removal, bounded Spark vision transport, editable candidate and explicit operator review. **Three synthetic schematic checks completed**: two label/connection matches, one unknown value preserved. Real photos and precise localization remain unvalidated. [All outputs](examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md). [Scope and usage](docs/known-design.md). |
 | No-tool comparison | **Five actual Spark replies retained.** Qualitative illustration, not a controlled accuracy benchmark. [All five answers and limitations](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md). |
 | General diagnosis, calibrated absolute voltage, sealed holdout and reliability benchmark | **Not established.** |
 
@@ -77,8 +77,14 @@ the operator request and the result; **Evidence** preserves the full checks and
 original report. Replay requires no network or board.
 
 For image intake, `uv sync --extra vision` then
-`uv run python scripts/known_design.py serve` starts a local **API-disabled** preview.
+`uv run python scripts/known_design.py serve --demo` starts a local **API-disabled** walkthrough.
+Load the recorded schematic read, review it, and continue to the separate D01
+physical replay with the same nominal design. This does not measure the selected image.
 Paid execution is explicit, bounded and never activates hardware.
+
+[Build your own](docs/build-your-own.md): parts and historical budget, complete
+fixture wiring, firmware upload and the first communication check. New-builder
+commissioning is still manual and has not been independently reproduced.
 
 Physical work follows [the B5 operator guide](docs/b5-operator.md), a frozen
 protocol and fresh operator confirmation. Do not infer the current wiring from

@@ -1,8 +1,12 @@
 # SAM 3.1 feasibility — October 31, 2026
 
-Decision: use the official API if a later, separately authorized component-mask
-probe is justified. Do not install a local GPU stack or integrate SAM before the
-physical B5 gate. This was a documentation/environment check, **zero SAM calls**.
+Current scheduling update (October 31 evening): the user authorized a bounded
+one-photo API feasibility trial while physical work is unavailable. This overrides
+the earlier after-B5 timing for the **trial**, not a claim of integration or quality.
+No breadboard photo was found among project image files (private holdouts were
+excluded); an operator-supplied path is pending. **Zero SAM calls so far.**
+Do not substitute a synthetic schematic and call it a breadboard-photo test.
+Do not install a local GPU stack for this one-hour-limited probe.
 
 | Question | Observed answer |
 | --- | --- |
