@@ -1,0 +1,44 @@
+{
+  "index": 10,
+  "effort": "max",
+  "response_id": "resp_6ae5d229ab54c5fc57c54549",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 1413,
+    "input_tokens_details": {
+      "cached_tokens": 1393
+    },
+    "output_tokens": 1665,
+    "output_tokens_details": {
+      "reasoning_tokens": 1552
+    },
+    "total_tokens": 3078
+  },
+  "elapsed_s": 13.292416458949447,
+  "visible_output_verbatim": [
+    {
+      "type": "message",
+      "id": "rs_fb09a31f-8b22-4f67-ae58-e94585ae79d6",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "무부하 단계만으로는 개별 식별이 불가해 기록된 선택을 재현합니다.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_7b311ddb-4b96-40dc-85ca-8e0d9c1243d6",
+      "call_id": "call_7b311ddb-4b96-40dc-85ca-8e0d9c1243d6",
+      "name": "measure",
+      "arguments": "{\"action\":\"attach_output_load_step\",\"reason\":\"무부하 τ만으로 R·C 구분 불가, 부하 스텝으로 식별 필요\"}",
+      "status": "completed"
+    }
+  ],
+  "classification": "attach_output_load_step"
+}

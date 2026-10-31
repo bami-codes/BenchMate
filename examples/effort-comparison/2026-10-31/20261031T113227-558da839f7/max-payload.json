@@ -1,0 +1,107 @@
+{
+  "model": "muse-spark-1.3",
+  "store": false,
+  "max_output_tokens": 8192,
+  "tools": [
+    {
+      "type": "function",
+      "name": "inspect_experiment",
+      "description": "Replay choice only; will not execute. Inspect physical evidence and the allowed menu.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Replay choice only; will not execute. Select a new physical measurement; mounting pauses for a human.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "unloaded_step",
+              "attach_output_load_step",
+              "repeat_unloaded_step"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "verify_prediction",
+      "description": "Replay choice only; will not execute. Acquire a new lower-amplitude sine for the frozen loaded models.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "finish_report",
+      "description": "Replay choice only; will not execute. Record an evidence-checked report.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "abstained"
+            ]
+          },
+          "candidate": {
+            "type": "string"
+          },
+          "current_explanation": {
+            "type": "string"
+          },
+          "unresolved": {
+            "type": "string"
+          },
+          "next_observation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "candidate",
+          "current_explanation",
+          "unresolved",
+          "next_observation"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "auto",
+  "parallel_tool_calls": false,
+  "input": [
+    {
+      "role": "user",
+      "content": "This is a decision-only REPLAY of a recorded BenchMate experiment.\nNo hardware is connected to this conversation. Tool calls will be recorded,\nnot executed. Choose the next action at the supplied snapshot by returning\nexactly one tool call and a concise Korean reason where the tool accepts one.\nThe experiment has already been inspected and its unloaded training step has\ncompleted. The attached snapshot is its unchanged historical tool result.\nChoose among the currently available actions, or abstain if the evidence is\ninsufficient to act. Do not assume any later measurement or assembly truth.\n\nThe declared alternatives are nominal RC, R changed with C nominal, and C\nchanged with R nominal. The common engineering allowance is 9 mV RMS for the\nwhole waveform AND each region, not a calibrated confidence interval.\nMeasurement tools represent fixed allowed experiments; physical rewiring\nwould require a human. Report neither a unique fault nor completed repair\nfrom evidence that does not establish it. Verification and a verified final\nreport are only available after the required observations.\nThe task is to choose the next experiment, not to solve an unseen waveform.\n\nRecorded tool result follows:\n{\"source\": \"physical\", \"scope\": \"Physical known-passive RC; measured-IN conditional incremental response, nominal-design point alternatives and provisional calibration. Not absolute voltage accuracy, blinded diagnosis, full D2 or calibrated confidence.\", \"nominal_design\": {\"R_ohm\": 10000.0, \"C_f\": 1e-06}, \"training\": {\"tau_s\": 0.021383658508343437, \"training_RMS_mV\": 5.50262995838306, \"training_adequate\": true, \"training_frames\": 512, \"fit_parameters\": [\"tau_s\"], \"gain_fixed\": 1.0, \"offset_from_separate_HOLD\": true, \"individual_R_C_identified\": false, \"point_models\": {\"nominal_rc\": {\"R_ohm\": 10000.0, \"C_f\": 1e-06}, \"r_changed\": {\"R_ohm\": 21383.658508343437, \"C_f\": 1e-06}, \"c_changed\": {\"R_ohm\": 10000.0, \"C_f\": 2.1383658508343437e-06}}}, \"observations\": [{\"phase\": \"unloaded_step\", \"tau_s\": 0.021383658508343437, \"training_RMS_mV\": 5.50262995838306, \"individual_R_C_identified\": false}], \"supported_candidates\": [], \"allowed_measurements\": [\"attach_output_load_step\", \"repeat_unloaded_step\"], \"load_ohm\": 9990.0, \"diagnostic_remaining\": 2, \"verification_available\": false, \"verified\": false, \"automatic_wiring\": false, \"repair_performed\": false}"
+    }
+  ],
+  "reasoning": {
+    "effort": "max"
+  }
+}

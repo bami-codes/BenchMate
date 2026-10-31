@@ -1,0 +1,60 @@
+{
+  "schema": "benchmate.effort_decision_replay.v1",
+  "destination": "https://api.meta.ai/v1/responses",
+  "requests_max": 10,
+  "order": [
+    "medium",
+    "max",
+    "max",
+    "medium",
+    "medium",
+    "max",
+    "max",
+    "medium",
+    "medium",
+    "max"
+  ],
+  "payloads": {
+    "medium": {
+      "file": "medium-payload.json",
+      "sha256": "8caee40ae7591af5dfe8cb5702763d71a744ecad72757df3c43fef7ea7757e82"
+    },
+    "max": {
+      "file": "max-payload.json",
+      "sha256": "c2542c6ef6c27232b0d7cb0d8d838fbd1ae9424ce779f503c3f2701638579513"
+    }
+  },
+  "fresh_context_each_request": true,
+  "standard_mapping": "medium is the API effort used by the existing standard D01 run",
+  "hardware_IO": false,
+  "execute_tool_calls": false,
+  "automatic_retry": false,
+  "source_record": "examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution",
+  "source_sha256": "12ae389d77876283f62f520239ea4806a5dc77925c8bbe25708833922d29603f",
+  "observation_event": 50,
+  "observation_event_sha256": "91077bbddb6e115b7ad68e4f745d648d07e3ec2a12e0cf03041a35a3ea8ce2a1",
+  "source_files": {
+    "scripts/compare_spark_effort.py": "04fdaba02ba9c7c6846e30ce644f221991210dd84a3b54d3afa0dd89904b1cfb",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "src/benchmate/physical_rc.py": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784"
+  },
+  "predeclared_review": {
+    "primary": "Count exact measure/attach_output_load_step calls with nonempty reason, repeats, abstentions, inspection requests and invalid outputs.",
+    "reason_review": "Report whether text connects loaded gain to R, distinguishes R/C alternatives, and avoids claiming an observed result. Manual descriptive review, not a blinded score.",
+    "secondary": [
+      "elapsed_s",
+      "input_tokens",
+      "output_tokens",
+      "total_tokens"
+    ],
+    "limitations": [
+      "Single easy snapshot with only two available experiments; five samples per setting.",
+      "Nominal alternatives are supplied; not autonomous hypothesis discovery or a full-agent accuracy comparison.",
+      "Neutral replay prompt differs from original directed-load prompt; original hidden reasoning is not reconstructed.",
+      "No claim that max is necessary or superior unless these results support a narrow statement."
+    ],
+    "on_failure": "Retain every attempt. Stop on HTTP/network failure; do not replace or retry it."
+  }
+}

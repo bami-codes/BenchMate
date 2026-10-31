@@ -1,0 +1,41 @@
+{
+  "requests": 10,
+  "actual_hardware_IO": false,
+  "tools_executed": 0,
+  "prompt_plan_commit": "5ec90af2f52c02786fcd80e618409a0e491a5a06",
+  "plan_sha256": "611eaf5ec7560e56ba91f70dfa0287700c31c7e079e78bdb56c254c0131facec",
+  "groups": {
+    "medium": {
+      "attempts": 5,
+      "load_selected": 5,
+      "mean_elapsed_s": 4.54250036678277,
+      "median_elapsed_s": 4.626106707844883,
+      "min_elapsed_s": 3.616254416992888,
+      "max_elapsed_s": 5.067949499934912,
+      "input_tokens": 7065,
+      "output_tokens": 4096,
+      "total_tokens": 11161,
+      "explicit_loaded_gain_explanation_in_visible_reason": 0,
+      "R_C_nonidentifiability_explained": 5,
+      "unsupported_observed_result_or_repair_claim": 0
+    },
+    "max": {
+      "attempts": 5,
+      "load_selected": 5,
+      "mean_elapsed_s": 14.30508798318915,
+      "median_elapsed_s": 14.271469208179042,
+      "min_elapsed_s": 13.292416458949447,
+      "max_elapsed_s": 15.648714165901765,
+      "input_tokens": 7065,
+      "output_tokens": 8854,
+      "total_tokens": 15919,
+      "explicit_loaded_gain_explanation_in_visible_reason": 0,
+      "R_C_nonidentifiability_explained": 5,
+      "unsupported_observed_result_or_repair_claim": 0
+    }
+  },
+  "review_note": "Manual descriptive review of all ten visible reasons; not a blinded semantic score. All state unloaded R/C ambiguity, none explicitly explains the loaded voltage-divider gain.",
+  "latency_caveat": "Five calls per condition in one interleaved session; prompt-cache hits vary. End-to-end request latency is observed, not a general latency benchmark.",
+  "conclusion": "No observed decision benefit from max on this single constrained snapshot. Retain medium for this D01 choice; this does not evaluate nonlinear B5 structure discovery.",
+  "mean_latency_ratio_max_over_medium": 3.149166060127529
+}

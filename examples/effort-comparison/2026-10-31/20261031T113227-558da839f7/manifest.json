@@ -1,0 +1,30 @@
+{
+  "files": {
+    "README.md": "b500138adecad5dd744afc08c4bda4c5d3ad35eee4e40700228535de1a67cbd6",
+    "events.jsonl": "5d89708ad00c96fbc5c07be660dc594462eb27db4acf2c997e438ec0a1453b9c",
+    "max-payload.json": "c2542c6ef6c27232b0d7cb0d8d838fbd1ae9424ce779f503c3f2701638579513",
+    "medium-payload.json": "8caee40ae7591af5dfe8cb5702763d71a744ecad72757df3c43fef7ea7757e82",
+    "plan.json": "611eaf5ec7560e56ba91f70dfa0287700c31c7e079e78bdb56c254c0131facec",
+    "reply-01-medium.json": "fb8a9d111a231446e02e8de98d705ceaf9d6f21794cf9c4d9c2c88cad51a8f29",
+    "reply-02-max.json": "b93866e6713f2c1d8931538ab29ff94493950e272a67f53edefa5b0f76f2ff21",
+    "reply-03-max.json": "e9f919cd922ce96c14f2312b752d1761f953d31118dc165852a878f46f16114d",
+    "reply-04-medium.json": "c9591d0b9219b804736bd4b8d216ca5c892db939cbb7767abb560366b6103f87",
+    "reply-05-medium.json": "d3688ae4f0314d8fa3407aaeac1cf272e9a077191517f7b08fb780b8618d9c0b",
+    "reply-06-max.json": "654df695837a6f49b80f44b1d11bda13c7ad6996ad24e75aeef7da20e0f4dc01",
+    "reply-07-max.json": "b567c332b8cb87d2c2073399d27416d77d639dfeb8a102a669af58ccdaf0d844",
+    "reply-08-medium.json": "dc0f068db3771a7448ea5b3cbae4dc31355317d11254591b3859c4897eeff298",
+    "reply-09-medium.json": "44e9da70be21ef6144eaf4c3fec6580014c2df6c8cab3bc6aed92078a8e0ec96",
+    "reply-10-max.json": "3fc0355188f0ec65f6dee0803309cd9219bcd4045ce3d6aae5f6c5630f3ee999",
+    "result.json": "59e50221d60ce95d2af031787c3ac96f83bf9fa912d9c6d802306a308f67c464",
+    "source/scripts/compare_spark_effort.py": "04fdaba02ba9c7c6846e30ce644f221991210dd84a3b54d3afa0dd89904b1cfb",
+    "source/src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "source/src/benchmate/physical_rc.py": "ed7c39ace14fb7051ea9c14969af02b3bc3c300f362589ca729328fc4fe9b784",
+    "source/src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "source/src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "summary.json": "d30515139ff78f264c851bff60a0a1b8ad66937480d5b754c7e08a83f06b707c"
+  },
+  "original_batch_files_byte_identical": true,
+  "source_record_sha256": "12ae389d77876283f62f520239ea4806a5dc77925c8bbe25708833922d29603f",
+  "requests": 10,
+  "all_outcomes_retained": true
+}
