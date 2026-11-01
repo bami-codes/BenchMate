@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "page": "index.html",
+      "title": "BenchMate \u00b7 Ask the circuit",
+      "body_characters": 3119,
+      "overflow": false
+    },
+    {
+      "page": "d01.html",
+      "title": "BenchMate \u2014 Experiment workspace",
+      "body_characters": 2194,
+      "overflow": false
+    },
+    {
+      "page": "repair.html",
+      "title": "BenchMate \u2014 Experiment workspace",
+      "body_characters": 2478,
+      "overflow": false
+    },
+    {
+      "page": "b5.html",
+      "title": "BenchMate \u00b7 B5 discovery replay",
+      "body_characters": 2173,
+      "overflow": false
+    },
+    {
+      "page": "index.html",
+      "viewport": "mobile",
+      "overflow": false
+    },
+    {
+      "page": "b5.html",
+      "viewport": "mobile",
+      "overflow": false
+    }
+  ],
+  "javascript_errors": []
+}
