@@ -1,0 +1,301 @@
+{
+  "protocol": "b5-variants-design-v1.1-reviewed",
+  "status": "Design fixed before physical B5; implementation and selection may occur overnight, evaluation only after physical B5 and source/publication checks. Changes are recorded in deviations.md.",
+  "question": "On hidden circuits that BenchMate's five starting linear models cannot explain, how often does Muse Spark propose a structure that passes two unseen inputs and agrees with the hidden circuit on a wider input set, and how often does it add a diode that is not there?",
+  "report_as": "Performance on the circuits selected by this rule, under the preregistered alternatives, noise and measurement budget. Not a claim of unique topology or component values.",
+  "scope": "Simulated variant bench only (source 'mock' in every record). Unloaded B5 menu. Not hardware evidence.",
+  "frozen_sources_at_cf33122": {
+    "note": "Spark-facing session, models, netlist grammar, provider and prompt must be byte-identical at evaluation. A change to any of them is a new protocol version.",
+    "git_blobs": {
+      "src/benchmate/b5_session.py": "9527cc49e16bfeff60dc9ba510f3e9989babb5ac",
+      "src/benchmate/b5_models.py": "5f1ef0e91fa634aecf85f059a246071a1f40d012",
+      "src/benchmate/netlist.py": "62c146a21c21667389f4f93216ccccbebca987f4",
+      "src/benchmate/physical_netlist.py": "d2a1050b483dbd562abb32796a9d9dd9e28b7af2",
+      "src/benchmate/providers.py": "dca4fdb46e25aae480d33f7dc1bd380c20022139",
+      "src/benchmate/agent.py": "205b59e242907eba43386b0d7b0cea53526df746"
+    },
+    "prompt": "b5_session.PROMPT unchanged",
+    "tools": "b5_session.TOOLS unchanged"
+  },
+  "new_files_after_physical_b5": [
+    "experiments/b5_variants/bench.py",
+    "experiments/b5_variants/fitting.py",
+    "experiments/b5_variants/run.py",
+    "tests/test_b5_variants.py"
+  ],
+  "measurement_budget": {
+    "same_as_session": "resistor_control (3 control conditions, before installation), one specimen installation, training = amplitude_sweep (the three TRAINING conditions; one repeat_small allowed), at most 2 netlist proposals, one verification of 2 RESERVED conditions. Proposals and verification are refused by the session unless every starting family fails training.",
+    "training_conditions": "b5_session.TRAINING",
+    "reserved_conditions": "b5_session.RESERVED",
+    "selection_uses_exactly_these": true
+  },
+  "bench": {
+    "interface": "Same as MockB5Bench: source 'mock', prepare_specimen once, acquire(settings, role), metadata. The resistor control is an ideal wire before installation, as in MockB5Bench.",
+    "simulator": "Independent of the proposal path (no ngspice). Memoryless variants: per-sample root solve. Variants with a capacitor: implicit integration, at least 20 substeps per sample. Drive and timing follow MockB5Bench: commanded template, gain 0.997 plus the same 1.2 mV ripple, held between samples, template input/output delays.",
+    "noise": {
+      "input_sd_v": 0.0012,
+      "output_sd_v": 0.0015,
+      "independent_gaussian_per_sample": true
+    },
+    "nuisance": {
+      "reference_offset_v": 0.023,
+      "output_bias_v": 0.001
+    },
+    "diode": {
+      "is_a": 2.7e-09,
+      "n": 1.87,
+      "temperature_k": 300.15,
+      "note": "inside DIODE_BOUNDS; all diodes in a variant share it, as the proposal grammar requires"
+    },
+    "validation_before_any_model_call": [
+      "Noiseless G1\u2013G3 each pass their own linear family within 4.5 mV on training and reserved conditions.",
+      "The same seed reproduces identical arrays.",
+      "No bench output field carries the variant id, structure or values."
+    ]
+  },
+  "grid": {
+    "note": "Fixed now, before the physical B5 run. Values are not tuned per variant. R is series IN\u2013OUT unless stated; D x\u2192y means anode x, cathode y.",
+    "structure_variants": [
+      {
+        "id": "D1",
+        "elements": "R 10k IN\u2013OUT; D OUT\u2192REF",
+        "idea": "clamp on the positive side (the B5 form)"
+      },
+      {
+        "id": "D2",
+        "elements": "R 10k IN\u2013OUT; D REF\u2192OUT",
+        "idea": "clamp on the negative side"
+      },
+      {
+        "id": "D3",
+        "elements": "R 10k IN\u2013OUT; D OUT\u2192REF; D REF\u2192OUT",
+        "idea": "clamp on both sides"
+      },
+      {
+        "id": "D4",
+        "elements": "R 10k IN\u2013OUT; D OUT\u2192REF; R 47k OUT\u2013REF",
+        "idea": "clamp plus divider"
+      },
+      {
+        "id": "D5",
+        "elements": "D IN\u2192OUT; R 10k OUT\u2013REF",
+        "idea": "series diode, half-wave"
+      },
+      {
+        "id": "D6",
+        "elements": "R 10k IN\u2013OUT; D OUT\u2192REF; C 1\u00b5F OUT\u2013REF",
+        "idea": "clamp plus low-pass"
+      },
+      {
+        "id": "D7",
+        "elements": "R 4.7k IN\u2013OUT; D OUT\u2192N1; D N1\u2192REF",
+        "idea": "two stacked diodes; may barely conduct in the menu range"
+      },
+      {
+        "id": "D8",
+        "elements": "D IN\u2192OUT; D OUT\u2192IN; R 10k OUT\u2013REF",
+        "idea": "antiparallel diodes between IN and OUT followed by R to REF; bidirectional dead zone, not anti-series diodes"
+      }
+    ],
+    "linear_outside_variants": [
+      {
+        "id": "L1",
+        "elements": "C 1\u00b5F IN\u2013OUT; R 10k OUT\u2013REF",
+        "idea": "high-pass, \u03c4 10 ms; no diode"
+      },
+      {
+        "id": "L2",
+        "elements": "C 4.7\u00b5F IN\u2013OUT; R 47k OUT\u2013REF",
+        "idea": "high-pass, \u03c4 0.22 s; no diode"
+      }
+    ],
+    "gate_controls": [
+      {
+        "id": "G1",
+        "elements": "R 10k IN\u2013OUT",
+        "family": "resistor"
+      },
+      {
+        "id": "G2",
+        "elements": "R 10k IN\u2013OUT; C 1\u00b5F OUT\u2013REF",
+        "family": "rc"
+      },
+      {
+        "id": "G3",
+        "elements": "R 10k IN\u2013OUT; R 22k OUT\u2013REF",
+        "family": "resistor_output_leak"
+      }
+    ],
+    "value_robustness_later": {
+      "priority": "secondary; only after the structure and control results exist; never pooled with them",
+      "variants": [
+        {
+          "id": "V1",
+          "base": "D1",
+          "change": "series R 4.7k"
+        },
+        {
+          "id": "V2",
+          "base": "D1",
+          "change": "series R 22k"
+        },
+        {
+          "id": "V3",
+          "base": "D2",
+          "change": "series R 4.7k"
+        },
+        {
+          "id": "V4",
+          "base": "D2",
+          "change": "series R 22k"
+        }
+      ]
+    }
+  },
+  "alternative_set": {
+    "members": "The five starting linear families (b5_models.fit_linear parameterisation and bounds) and the ten grid netlists D1\u2013D8, L1, L2 (b5_models.fit_proposal parameterisation and bounds). Fifteen in total.",
+    "limit": "Distinguishability is only ever judged against these fifteen. Other connections may produce the same response; no unique-structure claim is made."
+  },
+  "fitting_procedure": {
+    "used_by": "selection and the oracle_library arm (Spark's own proposals go through fit_proposal exactly as in the session)",
+    "data": "training observations only; reserved observations are scored, never fitted",
+    "true_values_never_used": "Every structure, including the variant's own, starts from the same generic values below.",
+    "starts": {
+      "count": 3,
+      "linear": "log-midpoint of each bound (fit_linear's start), then the 25% and 75% points of each log range; REF and offset start at 0",
+      "netlist": "generic values R 10k, C 1\u00b5F, diode IS 1 nA, N 1.8; then all R and C \u00d70.3 with IS 0.1 nA, N 1.3; then \u00d73 with IS 10 nA, N 2.2; clipped to bounds"
+    },
+    "optimizer": "scipy least_squares (trf), the same residual and bounds as b5_models; linear max_nfev 120 per start; netlist 420 simulations or 60 s per start, as in fit_proposal",
+    "choice": "the start with the lowest training cost among starts that finished",
+    "failure": "A structure whose starts all fail to finish (budget, deadline, simulator error) is recorded as fit_failed. A fit_failed alternative is never counted as rejected."
+  },
+  "noise_streams": {
+    "selection": "seed = first 8 bytes of SHA-256('b5-variants-select:' + id + ':' + k), k = 1..3; interpret first eight bytes unsigned big-endian",
+    "evaluation": "seed = first 8 bytes of SHA-256('b5-variants-eval:' + id), interpreted unsigned big-endian; both Spark repetitions and all arms share waveforms by condition",
+    "development": "prefix 'b5-variants-dev:'; development runs are scripted arms plus at most one Spark run on D1",
+    "separation": "Selection observations and seeds are never reused for evaluation scores.",
+    "acquisition_order": "Derive each waveform RNG from its phase seed, purpose and canonical settings, independently of call order. A repeat_small uses its own fixed repeat index; later conditions do not shift."
+  },
+  "selection_rule": {
+    "applied": "by code, after the bench passes validation and before any evaluation run; uses no Spark output; writes classification.json with every per-replicate fit, failure and reason, hashed and committed before Spark runs",
+    "replicates": 3,
+    "per_replicate": "simulate training and reserved observations with the selection noise stream; fit all fifteen alternatives to training with the fitting procedure; score each fitted alternative on training and both reserved observations with b5_models.score (whole and every region \u2264 9 mV)",
+    "classes": {
+      "linear_adequate": "some starting family passes training and both reserved in all 3 replicates",
+      "gate_open": "every starting family fails training in all 3 replicates",
+      "borderline": "anything else (gate behaviour not stable under the selection noise)"
+    },
+    "for_gate_open_variants": {
+      "recoverable": "the variant's own structure passes training and both reserved in all 3 replicates; otherwise engine_unsolvable",
+      "distinguishable": "recoverable AND every alternative has at least one converged fit in every replicate AND every other alternative fails training or a reserved check in all three replicates. Any fit_failed alternative makes distinguishability unresolved, never true.",
+      "confusable_with": "alternatives that passed everything in at least one replicate; recorded by name"
+    },
+    "primary_set": "gate_open \u2227 recoverable \u2227 distinguishable",
+    "nothing_dropped": "Every grid variant is still run in every arm. The class only decides the table row. Excluded variants appear with their reason.",
+    "compute_cap": "3 h wall clock for the whole selection on the evaluation machine; a variant not finished by then is selection_incomplete, run anyway, and reported outside the primary set",
+    "gate_fidelity": "Record the unchanged session single-start fit_linear separately; gate_open additionally requires that it opens the proposal gate in all three replicates. Any nonconverged starting-family fit blocks primary eligibility.",
+    "zero_primary": "If N=0, report no eligible cases; no division by zero, no accuracy headline, no relaxing rules after results."
+  },
+  "scoring": {
+    "equivalence_check": {
+      "conditions": [
+        "RESERVED[0] step 0.35 V",
+        "RESERVED[1] sine 5 Hz 0.65 V",
+        {
+          "kind": "sine",
+          "samples": 512,
+          "period_us": 2000,
+          "amplitude_v": 0.5,
+          "frequency_hz": 2.0
+        },
+        {
+          "kind": "step",
+          "samples": 512,
+          "period_us": 500,
+          "amplitude_v": 0.7
+        },
+        {
+          "kind": "sine",
+          "samples": 512,
+          "period_us": 4000,
+          "amplitude_v": 0.85,
+          "frequency_hz": 1.0
+        }
+      ],
+      "rule": "Use the exact independently generated noiseless measured-input template and channel timestamps for the hidden-circuit response, not an ideal commanded waveform. Compare frozen model without refit, whole and every region <=9 mV on all five. Includes three additional inputs never acquired in-session; never shown to Spark.",
+      "meaning": "agrees with the hidden circuit on a wider input set; not the same topology"
+    },
+    "run_outcomes": {
+      "correct": "accepted report 'verified' (both reserved checks passed in-session, no refit) AND equivalence check passed",
+      "wrong": "accepted report 'verified' AND equivalence check failed",
+      "gate_closed": "the session refused proposals because a starting family fitted",
+      "abstained": "everything else: failed verification, proposals used up, provider failure, timeout, no accepted report"
+    },
+    "per_class": {
+      "primary_set": "correct counts toward the primary metric",
+      "L1, L2": "also count any proposal containing a diode as 'unneeded diode', verified or not",
+      "linear_adequate": "correct = gate_closed with no 'verified' report"
+    },
+    "primary_metric": "Spark correct runs over primary-set runs, as X of 2N runs and per variant (both runs / one / neither). Runs are clustered by variant, not independent circuits.",
+    "safety_metrics": [
+      "wrong verifications over all runs",
+      "unneeded diodes on L1, L2",
+      "gate failures on linear_adequate"
+    ],
+    "secondary": [
+      "proposals used",
+      "provider requests and settled cost",
+      "elapsed time",
+      "reserved-check RMS"
+    ],
+    "extra_forecast_note": "The separate commanded-input forecast remains in session records; wider-set scoring is conditional-input comparison, not a command forecast claim."
+  },
+  "arms": {
+    "engine_only": {
+      "model_calls": 0,
+      "description": "Five starting families only. It closes the gate or abstains; by construction it cannot verify a new structure. Reported as the starting point, not as a competitor."
+    },
+    "oracle_library": {
+      "model_calls": 0,
+      "description": "On an open gate, fits all ten grid netlists to the evaluation training data with the fitting procedure, freezes the passing one with the lowest worst-region training RMS, and runs the same two reserved checks once. Same data as Spark; ten human-listed candidates where Spark has two proposals and no list."
+    },
+    "spark": {
+      "model_calls": "\u2264 8 per run",
+      "description": "Muse Spark 1.3, effort max, 8192 output tokens, 128 kB payload, PROMPT and TOOLS unchanged, as in the B5 Spark runs. Two independent runs per variant (fresh context, same evaluation noise); one run per gate control."
+    }
+  },
+  "failure_and_interruption": {
+    "transport": "HTTP 429/5xx or network failure with at most one request made: one rerun allowed; the first attempt stays primary in the table and both are kept",
+    "provider_protocol": "no tool call, malformed call, request budget exhausted: abstained, no rerun",
+    "bench_or_simulator_error": "abstained and flagged; if caused by a bench bug, the fix is a new protocol version and every arm is rerun for every variant",
+    "run_timeout": "30 min wall clock per run; abstained",
+    "interruption": "resumable; a run with any recorded request is never silently restarted",
+    "publication": "Predictions are frozen and hashed in-session as in B5; for source 'mock' the receipt is local (published true, remote false), which B5Session accepts."
+  },
+  "budget": {
+    "spark_runs": 23,
+    "meta_request_ceiling": 184,
+    "cost_rule": "reserve the maximum expected cost before each request, settle on reported usage",
+    "retry_rule": "184 total HTTP requests including any permitted transport recovery; recovery does not raise the cap."
+  },
+  "freeze_before_evaluation": [
+    "bench, selection code, harness and tests committed and pushed; their hashes recorded in the evaluation protocol",
+    "variants.json (truth: netlists and values) committed separately from the harness and hashed; the session never reads it",
+    "classification.json committed and hashed before any Spark evaluation run",
+    "deviations.md lists every difference from this design"
+  ],
+  "interpretation_fixed_in_advance": [
+    "Every arm, variant and run reported; borderline, engine_unsolvable, not-distinguishable and selection_incomplete variants in their own rows.",
+    "Engine-only cannot verify a new structure by construction; never phrased as Spark beating the engine.",
+    "If oracle_library \u2265 Spark: Spark reached X without a list of candidate structures, while an engine given every answer structure reached Y.",
+    "Wrong verifications and unneeded diodes are stated next to the headline number.",
+    "Results incomplete by 11/3 09:00 KST are excluded from video; use actual available physical outcome with accurate pass/fail labels and the existing mock, never assume physical success."
+  ],
+  "not_claimed": [
+    "hardware accuracy",
+    "unique topology or component values",
+    "loaded behaviour",
+    "generalisation beyond this grid, grammar, noise and budget"
+  ],
+  "implementation_timing": "New experiment files outside src/benchmate may be implemented and selection run before physical B5. No final variant evaluation until physical B5 attempt completes."
+}
