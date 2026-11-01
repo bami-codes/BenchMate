@@ -1,5 +1,5 @@
 {
-  "protocol": "b5-variants-design-v1.1-reviewed",
+  "protocol": "b5-variants-design-v1.2-reviewed",
   "status": "Design fixed before physical B5; implementation and selection may occur overnight, evaluation only after physical B5 and source/publication checks. Changes are recorded in deviations.md.",
   "question": "On hidden circuits that BenchMate's five starting linear models cannot explain, how often does Muse Spark propose a structure that passes two unseen inputs and agrees with the hidden circuit on a wider input set, and how often does it add a diode that is not there?",
   "report_as": "Performance on the circuits selected by this rule, under the preregistered alternatives, noise and measurement budget. Not a claim of unique topology or component values.",
@@ -212,7 +212,7 @@
           "kind": "step",
           "samples": 512,
           "period_us": 500,
-          "amplitude_v": 0.7
+          "amplitude_v": 0.45
         },
         {
           "kind": "sine",

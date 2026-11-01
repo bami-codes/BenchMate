@@ -1,4 +1,4 @@
-# B5 variant design — reviewed v1.1
+# B5 variant design — reviewed v1.2
 
 Design: [design.json](../examples/b5-variants/2026-11-02/design.json).
 Frozen before any physical B5 run or final variant evaluation. The grid is the
@@ -37,3 +37,7 @@ all ten answer structures and is a disclosed strong comparator. No LLM advantage
 is assumed. Actual hypothesis-gate behaviour and unneeded diode proposals are
 reported separately from predictive validity. The video cutoff is November 3,
 09:00 KST; physical success is never assumed by a fallback script.
+
+Before variant observations: the extra step is 0.45 V, because a high-pass
+responds to a full -A to +A transition and the old 0.7 V step can exceed the
+existing 1.05 V output guard. The held-out session inputs are unchanged.

@@ -1,0 +1,14 @@
+{
+  "protocol": "b5-variants-implementation-v1",
+  "design": "b5-variants-design-v1.2-reviewed",
+  "phase": "selection only; no final evaluation authorised by this command",
+  "validation": "53 relevant tests passed, including independent truth controls, repeatability, leakage schema, KCL, numerical convergence and failed-fit classification",
+  "source_protection": "All overnight protected sources unchanged; new modules are outside src/benchmate",
+  "sha256": {
+    "experiments/b5_variants/bench.py": "624bf885effc01b87fbec712893c50931e1923a9f681ccfea5d8ec5208b6b673",
+    "experiments/b5_variants/fitting.py": "c799013da05cc001d8d6deb13625fc70056b89f4b22374090e8066e460d26f2e",
+    "experiments/b5_variants/run.py": "79b6a3b6cbbe55709b30b368b469adf34b273be9b8240abbe2a078c747d6e919",
+    "tests/test_b5_variants.py": "9610e93c49722edba535dfefc832dfdd82d915853a284f20f7469a238489972d",
+    "examples/b5-variants/2026-11-02/design.json": "4ae1f7f140f6a186ed534ffb316ccbe2b4faf582ff652839d1cb657ecb7478a2"
+  }
+}
