@@ -30,8 +30,8 @@ SOURCES=('scripts/photo_model_probe.py','src/benchmate/known_design.py',
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
 
-def sam_payload(image,concept):
-    if concept not in CONCEPTS:raise ValueError('Only the two planned concepts')
+def sam_payload(image,concept,*,allowed_concepts=CONCEPTS):
+    if concept not in allowed_concepts:raise ValueError('Only explicitly planned concepts')
     return {'model':'sam-3.1','store':False,'stream':False,
         'metadata':{'mask_encoding':'one_bit','include_confidence':'true'},
         'input':[{'type':'message','role':'user','content':[
@@ -65,8 +65,8 @@ def freeze(manifest_path,output):
     save(out/'plan.json',plan)
     print(json.dumps({'plan':str(out/'plan.json'),'sha256':sha((out/'plan.json').read_bytes()),'requests_max':3,'hardware_IO':False}))
 
-def sam_attempt(image,concept,*,output):
-    log=Recorder(output,mode='live_sam_single_photo_concept');payload=sam_payload(image,concept)
+def sam_attempt(image,concept,*,output,allowed_concepts=CONCEPTS):
+    log=Recorder(output,mode='live_sam_single_photo_concept');payload=sam_payload(image,concept,allowed_concepts=allowed_concepts)
     log.add('sam_request_frozen',{'concept':concept,'payload_sha256':sha(canonical(payload)),
         'image_sha256':sha(image),'endpoint':ENDPOINT,'model':'sam-3.1','requests_max':1,'hardware_IO':False})
     keys={};requests=0;start=None
