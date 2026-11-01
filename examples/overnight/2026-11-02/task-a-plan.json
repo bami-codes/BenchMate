@@ -1,0 +1,36 @@
+{
+  "protocol": "overnight-task-a-supplement-v1",
+  "authorization": "User explicitly requested autonomous overnight execution with judgment, including the proposed Task A batch; no decision questions while asleep.",
+  "supersedes": "The Task A paid-execution exclusion in the initial overnight plan, prospectively only. No earlier records or limits are edited.",
+  "scientific_protocol": "linear-benchmark-v1.1; all 30 Task A specimens and original scoring fixed at cf33122; no prompt/menu/threshold/specimen changes.",
+  "reason": "Core rehearsals and Task B finished for $1.7489474. Use the remaining unattended window to complete the preregistered information-access comparison.",
+  "endpoint": "https://api.meta.ai/v1/responses",
+  "model": "muse-spark-1.3",
+  "effort": "medium",
+  "arms": [
+    {
+      "name": "no_tool",
+      "specimens": 30,
+      "max_requests": 30
+    },
+    {
+      "name": "spark",
+      "specimens": 30,
+      "max_requests": 240
+    }
+  ],
+  "max_requests": 270,
+  "cost_cap_usd": 10.0,
+  "combined_max_with_completed_initial_night_usd": 11.7489474,
+  "data_sent": "Registered synthetic nominal design/family bounds and rounded time constant for no-tool; generated measurement summaries and engine analysis/tool schemas for bench arm. No photographs, assembly truth, physical data, local files or credentials in payload.",
+  "hardware_commands": 0,
+  "final_B5_variant_evaluation": false,
+  "automatic_retry": false,
+  "time_limit_seconds_per_arm": 5400,
+  "budget": "Separate $1 request reservation/usage settlement; original shared physical ledger and first overnight ledger unchanged. Standard rates from the registered overnight cost guard.",
+  "interpretation": "An information-access comparison, not matched intrinsic model accuracy or a general Spark error rate. Appropriate abstentions remain visible; report every circuit, strong engine/fixed baselines, all first attempts and actual usage.",
+  "wrapper_sha256": {
+    "experiments/task_a.py": "10d1b0c991da911874f56b562ef106e44b6c91501ff5f8d731994bb967da8eec",
+    "experiments/night_budget.py": "fb0114c513e71ecaf5510244f1ff26c3833b68deb1a381a78c9a43153c5682d2"
+  }
+}

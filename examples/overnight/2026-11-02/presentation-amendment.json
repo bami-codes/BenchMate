@@ -1,0 +1,28 @@
+{
+  "amendment": "presentation-only PNG archive portability fix",
+  "after_overnight_paid_runs": true,
+  "reason": "GitHub Ubuntu CI failed three tests because re-encoding the same clean PNG did not yield identical compression bytes. Metadata checks must inspect PNG chunks and decoded image, not encoder byte identity.",
+  "changed_originally_protected_file": {
+    "path": "src/benchmate/design_replay.py",
+    "before_sha256": "125e3658feae4e4a0f016d5e139bee5d7d8f73a680146fbf5e4a432d0dd7b511",
+    "after_sha256": "761fe120a60927c10a1c0b9a7e5e1390304beb15717584d101c3bcfcb8f3ce83"
+  },
+  "unchanged_protected_files": 51,
+  "D01_physical_protocol_dependencies_unchanged": 17,
+  "runners_firmware_shared_fitting_unchanged": true,
+  "B5_selection_sources_changed": false,
+  "archive_bytes_hashes_prompts_API_payloads_changed": false,
+  "new_paid_calls": 0,
+  "hardware_commands": 0,
+  "implementation": "Separate RGB PNG archive checker accepts only CRC-checked IHDR/IDAT/IEND with dimensions <=1600. Pinned image SHA remains mandatory; EXIF/text/profiles/animation/trailing data are rejected.",
+  "historical_photo_probe_plan": "Old execution plans remain immutable and fail closed on source mismatch; no old plan is re-executed.",
+  "references": [
+    "https://www.w3.org/TR/png-3/#5Chunk-layout",
+    "https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#png"
+  ],
+  "additional_archive_validation_entrypoints": [
+    "scripts/known_design.py",
+    "scripts/photo_model_probe.py",
+    "scripts/sam_concept_probe.py"
+  ]
+}

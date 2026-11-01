@@ -1,0 +1,36 @@
+{
+  "url": "https://bami-codes.github.io/BenchMate/",
+  "branch_commit": "8a47a05bed3941b74e9b135ab908aee6d3824741",
+  "checked_files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "f18477c3b4b68e3b535fd84d45f78a95cdaf76e7eb0dc386b66a75bf63a91461"
+    },
+    {
+      "path": "d01.html",
+      "status": 200,
+      "sha256": "5121f9c09d55ae9da973be1a867d830d6c0374e50cec08601586ba2366578456"
+    },
+    {
+      "path": "repair.html",
+      "status": 200,
+      "sha256": "539f405e74d67f6f8f3cdb2e2687195d045de7ee56f48e325f13c0e8e3448e2f"
+    },
+    {
+      "path": "b5.html",
+      "status": 200,
+      "sha256": "ff91b0890c516be05bd1dfdbf8cb49e5aa50ca527cbc307bca815edc3d1dac28"
+    },
+    {
+      "path": "b5-data.json",
+      "status": 200,
+      "sha256": "ae9b2e2c8349f74b039e275a7d77c9c3861ccb19761e0cb88585cbb96d52aa9e"
+    },
+    {
+      "path": "manifest.json",
+      "status": 200,
+      "sha256": "f78e87333d3e171c33f94aa1c4da93f679c8681558d74603573fb77994e5549e"
+    }
+  ]
+}

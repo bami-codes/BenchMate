@@ -14,6 +14,8 @@ with no oscilloscope, no function generator and nobody to ask, it turns an Ardui
 into a signal source and recorder, lets Spark choose the experiments, and makes every
 explanation earn its place with a measurement it has not seen yet.
 
+**[Open the interactive replay](https://bami-codes.github.io/BenchMate/) · No installation or API key.**
+
 Built solo during the Meta Global AI Developer Hackathon (first commit Oct 27, 2026).
 
 ![BenchMate Story view of the real D01 run](docs/assets/d01-story.png)

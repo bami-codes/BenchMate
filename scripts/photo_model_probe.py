@@ -18,13 +18,14 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 import httpx
 from PIL import Image,ImageDraw
 from benchmate.config import load_keys,redact
-from benchmate.known_design import extract,payload_for,request_plan,sanitize_image
+from benchmate.known_design import extract,payload_for,request_plan
+from benchmate.image_archive import verify_clean_png
 from benchmate.providers import PROVIDERS,ProviderError,reserve_budget
 from benchmate.records import Recorder,canonical,read_events
 
 CONCEPTS=('capacitor','resistor')
 ENDPOINT='https://api.meta.ai/v1/responses'
-SOURCES=('scripts/photo_model_probe.py','src/benchmate/known_design.py',
+SOURCES=('scripts/photo_model_probe.py','src/benchmate/image_archive.py','src/benchmate/known_design.py',
          'src/benchmate/providers.py','src/benchmate/records.py','src/benchmate/config.py')
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
@@ -45,8 +46,8 @@ def freeze(manifest_path,output):
     if entry['source_kind']!='assembly_photo':raise ValueError('Actual assembly photo required')
     file=(path.parent/entry['file']).resolve()
     if file.parent!=path.parent.resolve():raise ValueError('Image must be beside manifest')
-    image=file.read_bytes();clean,_=sanitize_image(image)
-    if sha(image)!=entry['info']['sha256'] or image!=clean:raise ValueError('Expected clean canonical PNG')
+    image=file.read_bytes();verify_clean_png(image)
+    if sha(image)!=entry['info']['sha256']:raise ValueError('Expected the pinned metadata-free PNG')
     out=Path(output);out.mkdir(parents=True,exist_ok=False);(out/'input.png').write_bytes(image)
     plan={'schema':'benchmate.photo_model_probe.v1','destination':ENDPOINT,'requests_max':3,
         'order':['spark_vision','sam_capacitor','sam_resistor'],'hardware_IO':False,'automatic_retry':False,
@@ -106,7 +107,7 @@ def execute(path,approved,output):
     if sha(path.read_bytes())!=approved or plan['requests_max']!=3 or plan['order']!=['spark_vision','sam_capacitor','sam_resistor']:
         raise ValueError('Exact reviewed three-call plan required')
     if plan['destination']!=ENDPOINT or sha(image)!=plan['image']['sha256']:raise ValueError('Destination/image mismatch')
-    if sanitize_image(image)[0]!=image:raise ValueError('Canonical metadata-free image required')
+    verify_clean_png(image)
     for name,digest in plan['source_files'].items():
         if sha((ROOT/name).read_bytes())!=digest:raise ValueError('Source changed: '+name)
     if sha(canonical(payload_for(image,'assembly_photo')))!=plan['vision']['payload_sha256']:raise ValueError('Vision payload mismatch')

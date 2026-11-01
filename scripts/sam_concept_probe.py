@@ -23,7 +23,8 @@ def payload(image,concept):return shared.sam_payload(image,concept,allowed_conce
 
 def freeze(output):
     image=(ROOT/IMAGE).read_bytes()
-    if shared.sha(image)!=IMAGE_SHA or shared.sanitize_image(image)[0]!=image:raise ValueError('Exact previously cleaned image required')
+    shared.verify_clean_png(image)
+    if shared.sha(image)!=IMAGE_SHA:raise ValueError('Exact previously cleaned image required')
     out=Path(output);out.mkdir(parents=True,exist_ok=False);(out/'input.png').write_bytes(image)
     plan={'schema':'benchmate.sam_prompt_specificity.v1','experiment':'new_prompt_specificity_experiment',
         'not_a_retry_of':'examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe',
@@ -41,8 +42,9 @@ def freeze(output):
 def execute(plan_path,digest,commit,output):
     path=Path(plan_path).resolve();plan=json.loads(path.read_text());image=(path.parent/'input.png').read_bytes()
     if (shared.sha(path.read_bytes())!=digest or plan['concepts']!=list(CONCEPTS) or plan['requests_max']!=3
-        or plan['destination']!=shared.ENDPOINT or shared.sha(image)!=IMAGE_SHA or shared.sanitize_image(image)[0]!=image):
+        or plan['destination']!=shared.ENDPOINT or shared.sha(image)!=IMAGE_SHA):
         raise ValueError('Reviewed frozen plan/image required')
+    shared.verify_clean_png(image)
     if set(plan['source_files'])!=set(SOURCES):raise ValueError('Incomplete source freeze')
     for p,h in plan['source_files'].items():
         if shared.sha((ROOT/p).read_bytes())!=h:raise ValueError('Source changed after freeze')

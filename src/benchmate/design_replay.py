@@ -7,7 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
-from .known_design import sanitize_image
+from .image_archive import verify_clean_png
 from .viewer import load_record, render_viewer
 
 D01 = 'examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution'
@@ -35,9 +35,8 @@ def load_demo(root):
             or hashlib.sha256(raw).hexdigest() != RESULT_SHA
             or hashlib.sha256(original).hexdigest() != IMAGE_SHA):
         raise ValueError('Recorded demo evidence changed')
-    image, info = sanitize_image(original)
-    if image != original:
-        raise ValueError('Recorded demo image is not metadata-free')
+    info = verify_clean_png(original)
+    image = original
     return {'image': image, 'info': info, 'result': json.loads(raw),
             'viewer': render_viewer(physical).encode(),
             'provenance': {'vision_record_sha256': VISION_SHA,

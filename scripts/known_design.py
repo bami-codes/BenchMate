@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from benchmate.known_design import extract, request_plan, sanitize_image, sha
+from benchmate.image_archive import verify_clean_png
 from benchmate.records import Recorder
 
 
@@ -21,8 +22,8 @@ def read_manifest(path):
         if target.parent!=path.parent:raise ValueError('Image must be beside its manifest')
         image=target.read_bytes()
         if sha(image)!=entry['info']['sha256']:raise ValueError('Prepared image hash mismatch')
-        normalized,info=sanitize_image(image)
-        if normalized!=image or not entry['info']['metadata_removed']:raise ValueError('Prepared image is not a clean canonical PNG')
+        verify_clean_png(image)
+        if not entry['info']['metadata_removed']:raise ValueError('Prepared image must be recorded as metadata-free')
         plan=request_plan(entry['info'],entry['source_kind'])
         checked.append((entry,image,plan))
     return manifest,sha(raw),checked
@@ -60,7 +61,7 @@ def main():
         receipt=Path(args.manifest).parent/'execution-receipt.json'
         with receipt.open('x') as file:json.dump({'manifest_sha256':digest,'attempt_started':True},file)
         log=Recorder(args.output,mode='spark_vision_bounded_batch')
-        sources={name:sha((ROOT/name).read_bytes()) for name in ['scripts/known_design.py','src/benchmate/known_design.py','src/benchmate/providers.py','src/benchmate/records.py']}
+        sources={name:sha((ROOT/name).read_bytes()) for name in ['scripts/known_design.py','src/benchmate/image_archive.py','src/benchmate/known_design.py','src/benchmate/providers.py','src/benchmate/records.py']}
         log.add('vision_batch_frozen',{'manifest_sha256':digest,'max_paid_requests':len(checked),'source_sha256':sources,'all_outputs_retained':True})
         outcomes=[]
         try:
