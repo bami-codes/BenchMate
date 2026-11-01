@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.600 --> 00:00:04.996
+First, a fault I planted, in a circuit designed for 10 ms.
+
+2
+00:00:05.696 --> 00:00:09.547
+Measured time constant: 21.4 ms. Twice as slow.
+
+3
+00:00:10.547 --> 00:00:16.236
+The first measurement fits two explanations: a larger R or a larger C.
+
+4
+00:00:17.436 --> 00:00:20.239
+Repeating the unloaded test cannot separate them.
+
+5
+00:00:20.839 --> 00:00:22.776
+So Spark asks for a known load.
+
+6
+00:00:25.976 --> 00:00:28.724
+Both models are locked before the next measurement.
+
+7
+00:00:29.824 --> 00:00:31.154
+Only one survives.
+
+8
+00:00:34.654 --> 00:00:37.121
+Then it passes a waveform it never saw.
+
+9
+00:00:40.621 --> 00:00:45.744
+Capacitance ≈ 2.1× design, assuming R = 10 kΩ.
+
+10
+00:00:46.744 --> 00:00:48.559
+And it says what it still doesn't know.
