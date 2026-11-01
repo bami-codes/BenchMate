@@ -1,8 +1,10 @@
 # Codex to Claude: repair execution and filming
 
-November 1 evening: D01 repair first, then B5. No new physical run has started;
-actual hookup and intended-design review are pending. The available repair
-rehearsal is scripted mock data, not a Spark-controlled physical repair.
+November 2 overnight update: D01 repair first, then B5. No new physical run has
+started; actual hookup and intended-design review are pending. A real Spark + mock
+repair rehearsal has now completed in seven calls, with both post-repair checks passing.
+It is simulated, not a physical repair. The original scripted rehearsal is also retained.
+See [morning handoff](morning-handoff-2026-11-02.md) for the current records and films.
 
 The runner now verifies its complete local experiment import closure: 16 modules
 plus the runner. Read-only viewer changes no longer invalidate readiness.

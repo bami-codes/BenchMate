@@ -130,8 +130,10 @@ physical repair, physical B5 and another operator's completion remain the next t
 ## Why you can trust the numbers
 
 - **Predict first, measure second.** Model parameters are frozen before each scored
-  measurement. Repair and discovery forecasts are committed and pushed to GitHub
-  before the operator acts; the run refuses to ask for the repair if the push fails.
+  measurement. Physical repair requires the forecast to be committed and pushed to
+  GitHub before the operator acts; the run refuses the repair request if publication
+  fails. The B5 mock above also published first. Some mock rehearsals freeze locally
+  only, and their records and replays explicitly say so.
 - **Every attempt is kept.** Failed forecasts, aborted runs and USB dropouts stay in
   `examples/` next to the successes ([first repair forecasts that missed](examples/hardware-d01-repair/2026-10-30/README.md)).
 - **Tamper-evident records.** Each run is a hash-chained JSONL log; the viewer refuses

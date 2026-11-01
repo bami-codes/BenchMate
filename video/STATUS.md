@@ -2,6 +2,14 @@
 
 Ready locally:
 
+- `out/benchmate-backup-cut.mp4`: **155.806 s (2:36), 1920×1080, 30 fps**, a complete
+  backup edit with local English narration and burned-in captions. Matching `.srt`
+  and `backup-export.json` preserve timing and sources. Forum → introduction → one
+  physical diagnosis → explicitly simulated repair and B5 → all comparison rows → close.
+  This is an editing backup, not an uploaded submission or proof of pending hardware.
+  The repair mock froze its model locally; unlike the original B5 mock, it did not push
+  forecasts remotely. The film preserves that distinction.
+
 - `out/d01-physical-highlight.mp4`: **51.359 s, 1920×1080, 30 fps**, English synthetic
   narration and burned-in captions. `out/d01-physical-highlight.srt` is the matching
   sidecar. This is one retained Oct 30 physical diagnosis, **not live footage** and
@@ -31,7 +39,8 @@ Important for the full three-minute edit:
   a new physical run needs its own source/quote/score review before replacing them.
 - Numbers use shape as well as colour; all fixed-plan rows remain. Unrun is not zero,
   incomplete is not a correct rejection, random repetitions are the same circuits.
-- No final three-minute submission video has been exported or uploaded.
+- A full-length backup draft has been exported; no final submission video has been uploaded.
+  Replace simulated scenes only after a new physical run exists and has been reviewed.
 
 Rebuild the standalone highlight: generate local speech with `voice_highlight.py`,
 then render with `render_highlight.py`. The former uses the versions and model revision
@@ -39,3 +48,8 @@ in `highlight-export.json`; the latter needs Playwright/Chromium and ffmpeg.
 It checks both the physical-event hash and reviewed plot data before encoding.
 Use `render_benchmark.py` for the numbers clip after `extract_benchmark.py`.
 Fonts retain their OFL notices. Kokoro model code/weights are Apache-2.0.
+
+Rebuild the backup with `voice_backup.py` (offline Kokoro) and `render_backup.py`.
+`backup-narration.json` and `data/backup-timeline.json` are separate from the older
+full-edit script. All 18 backup contact-sheet frames were inspected; the audio decodes
+cleanly with peak −1.5 dB. This is technical QA, not a human listening pass.

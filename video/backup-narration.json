@@ -1,0 +1,177 @@
+{
+  "kind": "complete backup editing draft, not uploaded submission",
+  "status": "physical diagnosis plus explicitly simulated repair and B5",
+  "voice": "am_michael",
+  "speed": 1.02,
+  "model": "hexgrad/Kokoro-82M",
+  "scope": "Separate retained executions; transitions label source. No physical repair/B5/novice completion claims. No vision/no-tool exchanges inserted into the D01 sequence.",
+  "forum_sources": [
+    "https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099",
+    "https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099?page=3"
+  ],
+  "photo": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+  "lines": [
+    {
+      "scene": "hook",
+      "id": "F1",
+      "cap": "A voltage divider should read 1.8 volts. It reads 1.1.",
+      "say": "A voltage divider should read one point eight volts. It reads one point one.",
+      "gap": 0.1
+    },
+    {
+      "scene": "hook",
+      "id": "F2",
+      "cap": "The forum has competing explanations.",
+      "say": "The forum has competing explanations.",
+      "gap": 0.1
+    },
+    {
+      "scene": "hook",
+      "id": "F3",
+      "cap": "An unpowered chip is suggested early.",
+      "say": "An unpowered chip is suggested early.",
+      "gap": 0.1
+    },
+    {
+      "scene": "hook",
+      "id": "F4",
+      "cap": "A real test confirms it.",
+      "say": "A real test confirms it.",
+      "gap": 1.1
+    },
+    {
+      "scene": "backup_intro",
+      "id": "I1",
+      "cap": "BenchMate gives Muse Spark a bench to run those tests.",
+      "say": "BenchMate gives Muse Spark a bench to run those tests.",
+      "gap": 0.6
+    },
+    {
+      "scene": "backup_intro",
+      "id": "I2",
+      "cap": "An Arduino drives the circuit and records it.",
+      "say": "An Arduino drives the circuit and records it.",
+      "gap": 0.5
+    },
+    {
+      "scene": "backup_intro",
+      "id": "I3",
+      "cap": "Spark chooses the experiment. A person follows its wiring requests.",
+      "say": "Spark chooses the experiment. A person follows its wiring requests.",
+      "gap": 1.2
+    },
+    {
+      "scene": "backup_repair",
+      "id": "R1",
+      "cap": "This next loop is a rehearsal: real Spark, a simulated bench.",
+      "say": "This next loop is a rehearsal: real Spark, a simulated bench.",
+      "gap": 0.9
+    },
+    {
+      "scene": "backup_repair",
+      "id": "R2",
+      "cap": "It asks to restore the designed capacitance, then locks the repair model.",
+      "say": "It asks to restore the designed capacitance, then locks the repair model.",
+      "gap": 1.3
+    },
+    {
+      "scene": "backup_repair",
+      "id": "R3",
+      "cap": "Both post-repair checks pass. Physical repair is the next test.",
+      "say": "Both post-repair checks pass. Physical repair is the next test.",
+      "gap": 2.0
+    },
+    {
+      "scene": "discover",
+      "id": "L23",
+      "cap": "Now a simulated clamp, inspired by the forum, not an ESP32.",
+      "say": "Now a simulated clamp, inspired by the forum, not an E S P thirty-two.",
+      "gap": 0.3
+    },
+    {
+      "scene": "discover",
+      "id": "L34",
+      "cap": "Spark gets measurements, not the circuit wiring.",
+      "say": "Spark gets measurements, not the circuit wiring.",
+      "gap": 0.6
+    },
+    {
+      "scene": "discover",
+      "id": "L35",
+      "cap": "Small signals pass. Larger signals flatten on top.",
+      "say": "Small signals pass. Larger signals flatten on top.",
+      "gap": 1.1
+    },
+    {
+      "scene": "discover",
+      "id": "L36",
+      "cap": "No starting linear model fits.",
+      "say": "No starting linear model fits.",
+      "gap": 0.7
+    },
+    {
+      "scene": "discover",
+      "id": "L24",
+      "cap": "So Spark proposes a new netlist: a resistor and a diode.",
+      "say": "So Spark proposes a new netlist: a resistor and a diode.",
+      "gap": 2.0
+    },
+    {
+      "scene": "discover",
+      "id": "L25",
+      "cap": "ngspice checks it. The forecast is published before reserved measurements.",
+      "say": "N G spice checks it. The forecast is published before reserved measurements.",
+      "gap": 1.2
+    },
+    {
+      "scene": "discover",
+      "id": "L26",
+      "cap": "Both unseen inputs match, within the stated allowance.",
+      "say": "Both unseen inputs match, within the stated allowance.",
+      "gap": 2.2
+    },
+    {
+      "scene": "numbers",
+      "id": "N1",
+      "cap": "On the synthetic benchmark, measurement access resolves ambiguous cases.",
+      "say": "On the synthetic benchmark, measurement access resolves ambiguous cases.",
+      "gap": 0.5
+    },
+    {
+      "scene": "numbers",
+      "id": "N2",
+      "cap": "Strong fixed plans match the linear task. Every first attempt is public.",
+      "say": "Strong fixed plans match the linear task. Every first attempt is public.",
+      "gap": 1.8
+    },
+    {
+      "scene": "backup_close",
+      "id": "C1",
+      "cap": "For makers, a low-cost bench and an explanation you can inspect.",
+      "say": "For makers, a low-cost bench and an explanation you can inspect.",
+      "gap": 0.6
+    },
+    {
+      "scene": "backup_close",
+      "id": "C2",
+      "cap": "BenchMate turns a plausible explanation into a tested one.",
+      "say": "BenchMate turns a plausible explanation into a tested one.",
+      "gap": 0.8
+    },
+    {
+      "scene": "backup_close",
+      "id": "C3",
+      "cap": "Build it. Inspect the evidence. Choose the next test.",
+      "say": "Build it. Inspect the evidence. Choose the next test.",
+      "gap": 2.0
+    }
+  ],
+  "source_sha256": {
+    "video/data/backup-repair.json": "551ed3c2e8ee8a9fde4e2155b273854a9314f692b6d5f3920b741d74574f346c",
+    "video/data/backup-b5.json": "edcf3e644433afe0ce903f0caea9fa7ec68faa46c4ccad100401b2bd3d04b112",
+    "video/data/benchmark.json": "aeb68e12853aac3fc8911c3046926910239969a180fa2fc4b33d3279b6c0af7c",
+    "video/d01-highlight-narration.json": "ebb84835d96e5315a385ca0ea61f93b1c5abc277aab7266dcbd93ae0164908c8",
+    "video/data/d01-highlight-timeline.json": "6249c173d5fa01b307856925f8e97428a86ae529632c48c294c095aa97ca8f43",
+    "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+  }
+}

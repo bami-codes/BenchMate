@@ -281,10 +281,10 @@ SCENES.discover=(C,D)=>{
   const ptitle=E('div',{style:{position:'absolute',left:'30px',top:'22px',fontSize:'28px',fontWeight:600}},panel,'');
   const tr=b.train[2],v1=b.ver[1];
   const ct=chart(panel,{x:10,y:110,w:1070,h:500,xr:[0,2.05],yr:[-0.9,0.9],ticksX:[0,0.5,1,1.5,2],ticksY:[-0.8,-0.4,0,0.4,0.8],fmtX:v=>v+' s',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
-  const sm=b.train[0];const sin_=ct.line(sm.t,sm.in,{color:'#9aa29e',width:3}),sout=ct.line(sm.t,sm.out,{color:'#bb4c27',width:4});
-  const pin=ct.line(tr.t,tr.in,{color:'#9aa29e',width:3}),pout=ct.line(tr.t,tr.out,{color:'#bb4c27',width:4}),pfit=ct.line(tr.t,b.train_pred[2],{color:'#315e91',dash:'10 9',width:3.5});
+  const sm=b.train[0];const sin_=ct.line(sm.input_t||sm.t,sm.in,{color:'#9aa29e',width:3}),sout=ct.line(sm.t,sm.out,{color:'#bb4c27',width:4});
+  const pin=ct.line(tr.input_t||tr.t,tr.in,{color:'#9aa29e',width:3}),pout=ct.line(tr.t,tr.out,{color:'#bb4c27',width:4}),pfit=ct.line(tr.t,b.train_pred[2],{color:'#315e91',dash:'10 9',width:3.5});
   const cv=chart(panel,{x:10,y:110,w:1070,h:500,xr:[0,1.03],yr:[-0.75,0.75],ticksX:[0,0.25,0.5,0.75,1],ticksY:[-0.6,-0.3,0,0.3,0.6],fmtX:v=>v+' s',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
-  const vin=cv.line(v1.t,v1.in,{color:'#9aa29e',width:3}),vout=cv.line(v1.t,v1.out,{color:'#bb4c27',width:4}),vpred=cv.line(v1.t,b.ver_pred[1],{color:'#315e91',dash:'10 9',width:3.5});
+  const vin=cv.line(v1.input_t||v1.t,v1.in,{color:'#9aa29e',width:3}),vout=cv.line(v1.t,v1.out,{color:'#bb4c27',width:4}),vpred=cv.line(v1.t,b.ver_pred[1],{color:'#315e91',dash:'10 9',width:3.5});
   const leg=E('div',{style:{position:'absolute',left:'30px',top:'70px'}},panel);legendItem(leg,0,0,'#9aa29e','Input');legendItem(leg,150,0,'#bb4c27','Output');const legP=legendItem(leg,310,0,'#315e91','Spark’s netlist as written, simulated',true);
   const clip=E('div',{style:{position:'absolute',left:'640px',top:'150px',fontSize:'24px',color:'var(--observed)',fontWeight:600}},panel,'top half flattens at +0.47 V');
   const lin=box(1210,130,638,null,{padding:'22px 26px'});

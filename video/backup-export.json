@@ -1,0 +1,69 @@
+{
+  "file": "benchmate-backup-cut.mp4",
+  "sha256": "8a9a7ee5e9a6bab9443f39bb5fdc5b0a49fbfcc819dc0432a82bdf3e11f2a8fd",
+  "duration_s": 155.805667,
+  "size_bytes": 8032999,
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1080,
+      "side_data_list": [
+        {}
+      ]
+    },
+    {
+      "codec_name": "aac"
+    }
+  ],
+  "javascript_errors": [],
+  "scope": "backup edit: one physical D01 diagnosis, separately labelled actual-Spark mock repair and mock B5; no physical repair/B5/participant result",
+  "sources": {
+    "video/data/backup-repair.json": "551ed3c2e8ee8a9fde4e2155b273854a9314f692b6d5f3920b741d74574f346c",
+    "video/data/backup-b5.json": "edcf3e644433afe0ce903f0caea9fa7ec68faa46c4ccad100401b2bd3d04b112",
+    "video/data/benchmark.json": "aeb68e12853aac3fc8911c3046926910239969a180fa2fc4b33d3279b6c0af7c",
+    "video/d01-highlight-narration.json": "ebb84835d96e5315a385ca0ea61f93b1c5abc277aab7266dcbd93ae0164908c8",
+    "video/data/d01-highlight-timeline.json": "6249c173d5fa01b307856925f8e97428a86ae529632c48c294c095aa97ca8f43",
+    "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+  },
+  "narration_sha256": "d8997b60626e5d6ba52e6b204718b41f424942924e09b450e37637520312c4f1",
+  "voice_generated_locally": true,
+  "human_audio_review": false,
+  "scenes": [
+    {
+      "name": "hook",
+      "start": 0,
+      "duration": 12.764
+    },
+    {
+      "name": "backup_intro",
+      "start": 12.764,
+      "duration": 13.129
+    },
+    {
+      "name": "diagnose",
+      "start": 25.893,
+      "duration": 51.359
+    },
+    {
+      "name": "backup_repair",
+      "start": 77.252,
+      "duration": 17.167
+    },
+    {
+      "name": "discover",
+      "start": 94.419,
+      "duration": 34.112
+    },
+    {
+      "name": "numbers",
+      "start": 128.531,
+      "duration": 12.252
+    },
+    {
+      "name": "backup_close",
+      "start": 140.783,
+      "duration": 14.902
+    }
+  ]
+}

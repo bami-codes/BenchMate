@@ -1,7 +1,8 @@
 # Video pipeline
 
 This pipeline builds recorded-data scenes for the three-minute demo. The final submission
-edit is still pending. A complete 51-second physical-diagnosis highlight is ready; see
+edit is still pending. A complete **2:36 backup draft** and a standalone **51-second
+physical-diagnosis highlight** are ready locally; see
 [editing status](STATUS.md).
 
 - `extract_*.py` read the hash-chained event logs in `examples/` and write `data/*.json`.
