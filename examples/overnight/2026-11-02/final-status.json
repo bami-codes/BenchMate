@@ -1,0 +1,62 @@
+{
+  "hardware_commands": 0,
+  "actual_external_API_requests": 465,
+  "usage_estimated_cost_usd": 4.08661535,
+  "meta_requests": 322,
+  "meta_usage_estimated_cost_usd": 2.98877455,
+  "baseten_requests": 143,
+  "baseten_usage_estimated_cost_usd": 1.0978408,
+  "unknown_cost_reservations": 0,
+  "local_only_failed_probe_attempts": 6,
+  "dashboard_invoice_verified": false,
+  "tests": {
+    "passed": 400,
+    "skipped": 1
+  },
+  "physical_protocol_dependencies_unchanged": 17,
+  "protected_sources_unchanged": 51,
+  "documented_presentation_only_exception": "src/benchmate/design_replay.py",
+  "real_spark_mock_repair_passed": true,
+  "same_B5_mock_development_repetitions_passed": 5,
+  "same_B5_mock_development_repetitions_total": 5,
+  "synthetic_task_A": {
+    "spark_no_measurements_identified_in_family": "8/24",
+    "spark_bench_identified_in_family": "24/24",
+    "spark_bench_dual_change_reports": "5/6",
+    "spark_open_identified_in_family": "21/24",
+    "spark_open_dual_change_reports": "1/6",
+    "spark_open_incomplete": 8,
+    "engine_and_fixed_identified_in_family": "24/24",
+    "engine_and_fixed_dual_change_reports": "6/6"
+  },
+  "synthetic_task_B": {
+    "spark_hidden_ranking": "15/16",
+    "engine_and_fixed": "16/16",
+    "random_repeated_runs": "30/48",
+    "independent_circuits": 16,
+    "spark_mean_simulated_mounts": 2.88,
+    "fixed_mean_simulated_mounts": 1.0
+  },
+  "b5_selection": {
+    "attempt_finished": true,
+    "complete": false,
+    "classified_variants": 5,
+    "registered_variants": 13,
+    "selected_primary_count": 0,
+    "elapsed_s": 10811.0949569589,
+    "selection_rule_changed": false,
+    "final_evaluation_run": false,
+    "publication": "examples/b5-variants/2026-11-02/selection-publication.json"
+  },
+  "public_replay": "https://bami-codes.github.io/BenchMate/",
+  "full_backup_video": {
+    "file": "video/out/benchmate-backup-cut.mp4",
+    "duration_s": 155.805667,
+    "human_audio_review": false,
+    "submission_uploaded": false
+  },
+  "physical_repair": "pending operator",
+  "physical_B5": "pending operator",
+  "participant_session": "not run",
+  "X1_X2": "unopened and excluded from this submission"
+}

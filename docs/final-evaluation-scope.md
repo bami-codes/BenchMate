@@ -26,3 +26,6 @@ Hardware priority is repair → B5 → participant. Stop hardware by November 2,
 a participant-only extension to the following morning is the existing maximum, not an
 excuse to start new circuit development. Unfinished work stays labelled not run or
 incomplete; it is never scored as a successful abstention by default.
+
+Selection outcome: 5/13 variants received a selection classification under the fixed wall-time budget; 0 selected for the primary set. The remaining variants are explicitly incomplete. No final B5 variant model evaluation was run. See [all selection outcomes](../examples/b5-variants/2026-11-02/SELECTION.md).
+No accuracy headline is available with an empty primary set.

@@ -77,3 +77,5 @@ Across these and the original batch: **465 actual requests, $4.08661535 calculat
 from returned usage**, all settled locally. Meta $2.98877455; Baseten $1.09784080.
 The six local pre-HTTP guard failures in the retired probe are not charged requests.
 These totals are not provider invoices. Original per-batch cost files are preserved.
+
+Final machine-readable handoff: [final-status.json](final-status.json). B5 variant selection is separate from model evaluation; its fixed-budget outcomes, fitting failures and incomplete cases are retained in [SELECTION.md](../../b5-variants/2026-11-02/SELECTION.md). No final variant accuracy is claimed.
