@@ -55,7 +55,7 @@ the operator changes the wiring. This run did not perform a repair.*
 | Muse Spark 1.3 · max | Selects B5 mock experiments and proposes the literal netlist; five separate no-tool responses | Seven mock-run requests + five baseline + five decision-replay requests |
 | Muse Spark 1.3 · vision | Reads a circuit image into a provisional design candidate | Three synthetic schematic reads + one real assembly-photo read; uncertainty retained |
 | Muse Spark Open · Baseten | Connectivity experiment | No benchmark or physical-control claim |
-| SAM 3.1 | Potential component highlight for a repair image | Two real-photo calls: capacitor missed, resistor body/leads segmented. [All results](examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/README.md). Not integrated |
+| SAM 3.1 | Potential component highlight for a repair image | Five real-photo calls across two distinct experiments. Original capacitor miss and resistor mask retained. Of three preregistered new descriptions, only `blue rectangular component` segmented the capacitor body (no leads). [All new outcomes](examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/README.md). Optional, not integrated |
 
 For the tested D01 fork, keep `medium`: max made the same choices and was slower
 in this small comparison. B5 structure discovery has not had the same comparison.

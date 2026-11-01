@@ -1,0 +1,42 @@
+{
+  "requests": 3,
+  "outcomes": [
+    {
+      "task": "sam_blue capacitor",
+      "run": "sam/20261101T063214-63ea79bcfe",
+      "status": "completed",
+      "concept": "blue capacitor",
+      "requests": 1,
+      "elapsed_s": 2.5988329579122365,
+      "empty_output": true,
+      "hardware_IO": false,
+      "visual_quality": "not_yet_reviewed"
+    },
+    {
+      "task": "sam_blue rectangular component",
+      "run": "sam/20261101T063217-f3d2fcc688",
+      "status": "completed",
+      "concept": "blue rectangular component",
+      "requests": 1,
+      "elapsed_s": 1.6987829999998212,
+      "empty_output": false,
+      "hardware_IO": false,
+      "visual_quality": "not_yet_reviewed"
+    },
+    {
+      "task": "sam_film capacitor",
+      "run": "sam/20261101T063219-4a82179edf",
+      "status": "completed",
+      "concept": "film capacitor",
+      "requests": 1,
+      "elapsed_s": 2.5078325408976525,
+      "empty_output": true,
+      "hardware_IO": false,
+      "visual_quality": "not_yet_reviewed"
+    }
+  ],
+  "all_attempts_retained": true,
+  "hardware_IO": false,
+  "experiment": "new_prompt_specificity_experiment",
+  "automatic_retry": false
+}

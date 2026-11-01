@@ -1,0 +1,65 @@
+{
+  "concept": "blue rectangular component",
+  "parser_version": "0.1.0",
+  "diagnostics": [],
+  "records": [
+    {
+      "kind": "box",
+      "order": 0,
+      "object_id": "0",
+      "left": 534,
+      "top": 535,
+      "right": 696,
+      "bottom": 766,
+      "frame": null,
+      "confidence": 0.9532163739204407
+    },
+    {
+      "kind": "mask",
+      "order": 1,
+      "object_id": "0",
+      "identity": {
+        "media": "image",
+        "frame_index": null,
+        "object_id": "0"
+      },
+      "revision": 1,
+      "mask": {
+        "encoding": "one_bit",
+        "payload": "!!!!!pFjFttGHHrRn4R[ZYxHbAbz/?kS8&mvGr!plB'inh!TpEFk1%X0EZr3_HSr?(x5ClRX1_aTZ3bat-Z#0adz56ly9vQ5!!",
+        "width": 162,
+        "height": 231
+      },
+      "bounds": {
+        "left": 534,
+        "top": 535,
+        "right": 696,
+        "bottom": 766
+      },
+      "frame": null,
+      "confidence": 0.9532163739204407
+    }
+  ],
+  "masks": [
+    {
+      "object_id": "0",
+      "bounds_half_open": [
+        534,
+        535,
+        696,
+        766
+      ],
+      "confidence": 0.9532163739204407,
+      "raster_size": [
+        162,
+        231
+      ],
+      "source_mask_file": "blue rectangular component-object-0-mask.png",
+      "overlay_file": "blue rectangular component-object-0-overlay.png",
+      "resize_to_box": false,
+      "foreground_pixels": 33269
+    }
+  ],
+  "source_output_sha256": "8912942976d37d86ffadf5d2cd58a2ddc5e94fecaef1820d7a30b053bbc1a6f6",
+  "match_count": 1
+}

@@ -1,0 +1,27 @@
+{
+  "review_method": "Direct visual inspection of full image and unedited all-masks overlay; no pixel ground-truth mask.",
+  "results": [
+    {
+      "concept": "blue capacitor",
+      "matches": 0,
+      "interpretation": "Miss retained"
+    },
+    {
+      "concept": "blue rectangular component",
+      "matches": 1,
+      "interpretation": "Mask follows the visible blue box body; both metal leads excluded. No obvious unrelated area at this view. Edge accuracy unscored."
+    },
+    {
+      "concept": "film capacitor",
+      "matches": 0,
+      "interpretation": "Miss retained"
+    }
+  ],
+  "confidence_is_calibrated_accuracy": false,
+  "component_identity_or_wiring_verified": false,
+  "D01_extra_capacitor_localized": false,
+  "prior_trial_unchanged": true,
+  "decision": "Optional visual body highlight only; SAM remains nonessential. Need a separate actual two-capacitor image to assess disambiguation.",
+  "original_photo_folders_included": false,
+  "GPS_or_EXIF_transmitted": false
+}

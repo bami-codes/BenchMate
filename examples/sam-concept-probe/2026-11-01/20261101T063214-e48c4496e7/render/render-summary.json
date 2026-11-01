@@ -1,0 +1,25 @@
+{
+  "source_run_sha256": "b2ff44380e8cdf9f5c6a50786adb8853d0bcf2139ef238e4a94ccfecddfe5301",
+  "results": [
+    {
+      "concept": "blue capacitor",
+      "match_count": 0,
+      "diagnostics": 0
+    },
+    {
+      "concept": "blue rectangular component",
+      "match_count": 1,
+      "diagnostics": 0
+    },
+    {
+      "concept": "film capacitor",
+      "match_count": 0,
+      "diagnostics": 0
+    }
+  ],
+  "all_masks_rendered": true,
+  "manual_mask_edits": false,
+  "renderer_source_sha256": "282c5e8646a5cecac31fedee3641c3dc7c26d2d201772a80925ecff80b127a73",
+  "new_API_calls": 0,
+  "hardware_IO": false
+}

@@ -1,0 +1,171 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2586,
+      "sha256": "566dbd74b93c56d843ec0f1e883ffda8197114ba1238e4e80b510d31182ab8a8"
+    },
+    {
+      "path": "events.jsonl",
+      "bytes": 6604,
+      "sha256": "b2ff44380e8cdf9f5c6a50786adb8853d0bcf2139ef238e4a94ccfecddfe5301"
+    },
+    {
+      "path": "input.png",
+      "bytes": 1486256,
+      "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+    },
+    {
+      "path": "plan.json",
+      "bytes": 4050,
+      "sha256": "b2fc35318a40a60668af75f3ee71b12f578b359d228825be73885814733a6924"
+    },
+    {
+      "path": "qualitative-review.json",
+      "bytes": 996,
+      "sha256": "21d26817d83d3835e5fa1dc7bacc942400af90cba3defeabaacf154b3cbfcac6"
+    },
+    {
+      "path": "render/blue capacitor-all-masks.png",
+      "bytes": 1486256,
+      "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+    },
+    {
+      "path": "render/blue capacitor-decoded.json",
+      "bytes": 230,
+      "sha256": "c79707a27404a0805fb0aa79714cc3dc06226a73e9b39eb929c2ca7a54d0cb08"
+    },
+    {
+      "path": "render/blue rectangular component-all-masks.png",
+      "bytes": 1486710,
+      "sha256": "2d5866c72cd36f4e69b46bf595fa80fe90fa5ff1692445f4ed2042bd02a19db3"
+    },
+    {
+      "path": "render/blue rectangular component-decoded.json",
+      "bytes": 1492,
+      "sha256": "8ca668d181df05e560a8c0091835fe9ecfa60b2fc80b93fdeeec81b4fc9a14a7"
+    },
+    {
+      "path": "render/blue rectangular component-object-0-mask.png",
+      "bytes": 2669,
+      "sha256": "b91d3cef39ff43b4e11b5f292e2a9bc131cbb1466778929b54df0a1cfccb1dd9"
+    },
+    {
+      "path": "render/blue rectangular component-object-0-overlay.png",
+      "bytes": 1486710,
+      "sha256": "2d5866c72cd36f4e69b46bf595fa80fe90fa5ff1692445f4ed2042bd02a19db3"
+    },
+    {
+      "path": "render/film capacitor-all-masks.png",
+      "bytes": 1486256,
+      "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+    },
+    {
+      "path": "render/film capacitor-decoded.json",
+      "bytes": 230,
+      "sha256": "9cfa02267011985559553193c4976ebfab76e26c7921866164198eed84c921bc"
+    },
+    {
+      "path": "render/render-summary.json",
+      "bytes": 612,
+      "sha256": "87f52431e3e5375883224cc26189a0e6088f903a5b05049923e283c98112c6ab"
+    },
+    {
+      "path": "result.json",
+      "bytes": 1160,
+      "sha256": "0bcc5d6518b4317312822dceff52fd52f56fc7a037c2f9412586559b0413f413"
+    },
+    {
+      "path": "sam/20261101T063214-63ea79bcfe/events.jsonl",
+      "bytes": 2427,
+      "sha256": "4aa438022b380b88cd2c166a23849c531c455c37286fb3d34e57f1bc460f8855"
+    },
+    {
+      "path": "sam/20261101T063214-63ea79bcfe/output-text.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "sam/20261101T063214-63ea79bcfe/response-visible.json",
+      "bytes": 687,
+      "sha256": "0c19f19b6f7f5b1025eaa0dcdef2fb2314b1108472c6f0ec3b9ddc2ecba49995"
+    },
+    {
+      "path": "sam/20261101T063214-63ea79bcfe/result.json",
+      "bytes": 199,
+      "sha256": "80fa8f682cee241becd991a331ce3581c4dd653aeb08efa880869d4ce285dfae"
+    },
+    {
+      "path": "sam/20261101T063217-f3d2fcc688/events.jsonl",
+      "bytes": 2678,
+      "sha256": "39bf633c37777ddf7b9c2972fe3a2e5e67393337458a23e59301d4e4968f216e"
+    },
+    {
+      "path": "sam/20261101T063217-f3d2fcc688/output-text.txt",
+      "bytes": 225,
+      "sha256": "8912942976d37d86ffadf5d2cd58a2ddc5e94fecaef1820d7a30b053bbc1a6f6"
+    },
+    {
+      "path": "sam/20261101T063217-f3d2fcc688/response-visible.json",
+      "bytes": 913,
+      "sha256": "9ed777271ebfa36f2dd4484c33b887d83f8d793b7b504b83f3ab461e23d5ddf1"
+    },
+    {
+      "path": "sam/20261101T063217-f3d2fcc688/result.json",
+      "bytes": 212,
+      "sha256": "46ab03b22090f55b9e24ded55a54765af0d7e8c3e0a28e0d4c9fad74d1e346e5"
+    },
+    {
+      "path": "sam/20261101T063219-4a82179edf/events.jsonl",
+      "bytes": 2427,
+      "sha256": "8af6427145d37d6d89fec0def6f3cf5d5ddc1c5c95a7bcd4f5ce12b9b4258616"
+    },
+    {
+      "path": "sam/20261101T063219-4a82179edf/output-text.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "sam/20261101T063219-4a82179edf/response-visible.json",
+      "bytes": 687,
+      "sha256": "006f4f6f07e9d16098d72ee4456373fa15a2b7b85ff438f1435ef6322759be28"
+    },
+    {
+      "path": "sam/20261101T063219-4a82179edf/result.json",
+      "bytes": 199,
+      "sha256": "bbcc26e707d2681fb7f1cbb66d9a9070f811d2de66fe7f12ea7fcb2191b0f924"
+    },
+    {
+      "path": "source/scripts/photo_model_probe.py",
+      "bytes": 13978,
+      "sha256": "282c5e8646a5cecac31fedee3641c3dc7c26d2d201772a80925ecff80b127a73"
+    },
+    {
+      "path": "source/scripts/sam_concept_probe.py",
+      "bytes": 6158,
+      "sha256": "4f70333917c54e00662e519182de0f2a8e28774842269f3f0c0cf14b7745c3fa"
+    },
+    {
+      "path": "source/src/benchmate/config.py",
+      "bytes": 1087,
+      "sha256": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64"
+    },
+    {
+      "path": "source/src/benchmate/known_design.py",
+      "bytes": 13667,
+      "sha256": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab"
+    },
+    {
+      "path": "source/src/benchmate/providers.py",
+      "bytes": 14692,
+      "sha256": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839"
+    },
+    {
+      "path": "source/src/benchmate/records.py",
+      "bytes": 2000,
+      "sha256": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf"
+    }
+  ],
+  "raw_and_generated_files_retained": true,
+  "all_PNG_metadata_empty": true
+}
