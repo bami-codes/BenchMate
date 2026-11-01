@@ -1,0 +1,17 @@
+{
+  "classification_sha256": "bf9a0e77cfa9d23ddf477b0a1927867fbf47eb4737153ae22fab743542c11edd",
+  "archive_sha256": "7ebe56cd9f3d6dce934db3103268629d6f806209e0a9cf88cde5e9ba39d93f46",
+  "selection_started_at_commit": "ab814e31824001e3b8f5ae478c763a2073b5caec",
+  "selection_rule_changed_after_start": false,
+  "classification_complete": false,
+  "primary_variants": [],
+  "elapsed_s": 10811.0949569589,
+  "max_wall_time_s": 10800,
+  "deadline_check": "between optimizer fits; actual elapsed time may exceed the budget by one active fit",
+  "physical_measurements": 0,
+  "model_calls": 0,
+  "final_evaluation_run": false,
+  "physical_B5_lock_remains": true,
+  "classification_is_selection_not_accuracy": true,
+  "environment_note": "Wall-clock-limited local selection ran alongside video rendering and other overnight preparation; unfinished fits/cases remain visible."
+}

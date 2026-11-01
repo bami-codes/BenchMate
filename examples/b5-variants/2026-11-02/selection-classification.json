@@ -1,0 +1,89 @@
+{
+  "source": "mock",
+  "phase": "selection",
+  "variants": {
+    "D1": {
+      "class": "distinguishability_unresolved",
+      "primary": false,
+      "fit_failures": [
+        "netlist:D6",
+        "netlist:D7"
+      ],
+      "confusable_with": [
+        "netlist:D4"
+      ]
+    },
+    "D2": {
+      "class": "distinguishability_unresolved",
+      "primary": false,
+      "fit_failures": [
+        "netlist:D7"
+      ],
+      "confusable_with": []
+    },
+    "D3": {
+      "class": "distinguishability_unresolved",
+      "primary": false,
+      "fit_failures": [
+        "netlist:D6",
+        "netlist:D7"
+      ],
+      "confusable_with": []
+    },
+    "D4": {
+      "class": "distinguishability_unresolved",
+      "primary": false,
+      "fit_failures": [
+        "netlist:D6",
+        "netlist:D7"
+      ],
+      "confusable_with": []
+    },
+    "D5": {
+      "class": "distinguishability_unresolved",
+      "primary": false,
+      "fit_failures": [
+        "netlist:D7"
+      ],
+      "confusable_with": []
+    },
+    "D6": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "D7": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "D8": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "L1": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "L2": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "G1": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "G2": {
+      "class": "selection_incomplete",
+      "primary": false
+    },
+    "G3": {
+      "class": "selection_incomplete",
+      "primary": false
+    }
+  },
+  "primary": [],
+  "physical_measurements": 0,
+  "model_calls": 0,
+  "elapsed_s": 10811.0949569589,
+  "complete": false,
+  "accuracy_claim": null
+}
