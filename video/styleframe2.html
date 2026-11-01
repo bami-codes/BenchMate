@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Archivo;src:url(fonts/Archivo-var.woff2) format('woff2');font-weight:400 800;font-stretch:62% 125%}
+:root{--board:#eef0ec;--ink:#000;--soft:#5f6360;--red:#d42a2a;--blue:#2c5bb5;--tape:#f5c400;--green:#1c8c4e;--grey:#a3a6a1}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--board);color:var(--ink);font-family:Archivo,sans-serif;font-stretch:100%;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+.frame{position:absolute;inset:0;display:none}.frame.on{display:block}
+/* breadboard hole field: 2.54 mm pitch, groups of five, very low contrast */
+.holes{position:absolute;inset:0;background-image:radial-gradient(circle,#d9dcd6 2.2px,transparent 2.6px);background-size:24px 24px;background-position:12px 12px;opacity:.9}
+.gutter{position:absolute;left:0;right:0;height:46px;background:var(--board)}
+/* label-maker tape: the one loud element */
+.tape{position:absolute;display:inline-block;padding:9px 18px 10px;background:var(--tape);color:#000;font-stretch:75%;font-weight:700;font-size:30px;letter-spacing:.01em;box-shadow:0 1px 0 rgba(0,0,0,.12),0 6px 14px rgba(0,0,0,.10);white-space:nowrap}
+.tape.white{background:#fbfbf8}.tape.black{background:#111;color:#f5c400}
+.tape::before,.tape::after{content:"";position:absolute;top:0;bottom:0;width:6px;background:inherit;filter:brightness(.94)}
+.tape::before{left:-6px;clip-path:polygon(100% 0,0 12%,60% 30%,0 50%,70% 68%,0 86%,100% 100%)}
+.tape::after{right:-6px;clip-path:polygon(0 0,100% 10%,40% 28%,100% 48%,30% 66%,100% 84%,0 100%)}
+.big{font-weight:800;font-stretch:112%;letter-spacing:-.03em;line-height:.9}
+.sub{position:absolute;left:0;right:0;bottom:58px;text-align:center}
+.sub span{display:inline-block;background:rgba(0,0,0,.82);color:#fff;font-size:38px;font-weight:500;padding:8px 22px 10px}
+</style></head><body>
+
+<div class="frame" id="A">
+  <div class="holes"></div><div class="gutter" style="top:528px"></div>
+  <div style="position:absolute;left:150px;top:118px;font-size:30px;color:var(--soft)">Arduino forum, July 2021</div>
+  <div style="position:absolute;left:150px;top:160px;width:1500px;font-size:66px;font-weight:700;font-stretch:88%;letter-spacing:-.015em;line-height:1.05">Voltage divider is not giving correct voltage</div>
+  <div style="position:absolute;left:150px;top:300px;display:flex;gap:110px;align-items:flex-end">
+    <div><div style="font-size:28px;color:var(--soft);margin-bottom:6px">should read</div><div class="big" style="font-size:200px">1.8 V</div></div>
+    <div><div style="font-size:28px;color:var(--red);margin-bottom:6px">reads</div><div class="big" style="font-size:200px;color:var(--red)">1.1 V</div></div>
+  </div>
+  <span class="tape white" style="left:150px;top:640px;transform:rotate(-1.4deg);color:#555">resistor tolerance?</span>
+  <span class="tape white" style="left:520px;top:612px;transform:rotate(1.1deg);color:#555">the meter?</span>
+  <span class="tape white" style="left:790px;top:668px;transform:rotate(-.6deg);color:#555">bad solder?</span>
+  <span class="tape white" style="left:1080px;top:628px;transform:rotate(.9deg);color:#555">ADC setup?</span>
+  <span class="tape" style="left:610px;top:760px;transform:rotate(-.8deg);font-size:38px">Is the ESP32 even powered?</span>
+  <div class="sub"><span>Early on, a reply points to the cause: the ESP32 has no power.</span></div>
+</div>
+
+<div class="frame" id="B">
+  <div class="holes"></div>
+  <div style="position:absolute;left:110px;top:92px;font-size:28px;color:var(--soft)">Recorded on the real circuit, Oct 30. The 9.99 kΩ load is connected.</div>
+  <div style="position:absolute;left:110px;top:132px;font-size:64px;font-weight:700;font-stretch:88%;letter-spacing:-.015em">Which explanation survives?</div>
+  <div style="position:absolute;left:96px;top:240px;width:1300px;height:640px;background:#fff;box-shadow:0 0 0 1px #d8dbd5"></div>
+  <svg id="plot" width="1220" height="560" style="position:absolute;left:140px;top:280px;overflow:visible"></svg>
+  <div style="position:absolute;left:1460px;top:250px;width:380px;height:300px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.18)"><img src="data/bench_crop.jpg" style="width:380px;height:300px;object-fit:cover;filter:contrast(1.08) saturate(1.05)"></div>
+  <span class="tape white" style="left:1475px;top:532px;transform:rotate(-1.2deg);font-size:26px">circuit under test</span>
+  <div style="position:absolute;left:1460px;top:640px;width:390px;font-size:27px;line-height:1.35">
+    <div style="color:var(--soft)">Both models were locked before this measurement.</div>
+  </div>
+  <span class="tape white" id="tR" style="left:930px;top:640px;transform:rotate(.8deg);font-size:28px;color:#444">“R changed” misses by 32.5 mV</span>
+  <span class="tape" id="tC" style="left:860px;top:322px;transform:rotate(-1deg);font-size:32px">“C changed” within 3.0 mV</span>
+  <div class="sub"><span>Only one survives.</span></div>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+function S(t,a,p){const e=document.createElementNS(NS,t);for(const[k,v]of Object.entries(a))e.setAttribute(k,v);p&&p.appendChild(e);return e;}
+window.draw=D=>{
+  const svg=document.getElementById('plot'),L=D.loaded,w=1220,h=560;
+  const X=t=>t/0.256*w,Y=v=>h/2-v/0.13*(h/2);
+  for(const v of [-0.1,0,0.1])S('line',{x1:0,x2:w,y1:Y(v),y2:Y(v),stroke:v===0?'#c9ccc6':'#ebede9','stroke-width':2},svg);
+  const path=(ys,att)=>{let d='';L.t.forEach((t,i)=>{d+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(ys[i]).toFixed(1);});return S('path',{d,fill:'none','stroke-linecap':'round','stroke-linejoin':'round',...att},svg);};
+  path(L.r_changed,{stroke:'#a3a6a1','stroke-width':4,'stroke-dasharray':'2 12'});
+  path(L.observed,{stroke:'#d42a2a','stroke-width':5});
+  path(L.c_changed,{stroke:'#2c5bb5','stroke-width':4,'stroke-dasharray':'16 12'});
+  const t=(x,y,s,c,anchor='start')=>{const e=S('text',{x,y,fill:c,'font-size':24,'font-family':'Archivo','text-anchor':anchor},svg);e.textContent=s;};
+  t(X(0.03),Y(0.105)-18,'measured','#d42a2a');t(w,h+40,'256 ms','#8a8d88','end');t(0,h+40,'0','#8a8d88');
+};
+window.show=id=>{for(const f of document.querySelectorAll('.frame'))f.classList.toggle('on',f.id===id);};
+</script></body></html>

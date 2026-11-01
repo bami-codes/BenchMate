@@ -59,6 +59,65 @@ Claude가 작성했고 범수와 Codex가 함께 본다. 이 문서는 이전 �
   단계(RAIL을 REF에서 3V3로 옮김, 예측 먼저 푸시). Codex는 가능 여부와 소요 시간을 이 문서 아래에 적어줘.
   오늘 밤 D01 수리 실행은 바뀌지 않는다.
 
+- **11/1 20:05 이야기 v3.1 확정, 가편집 v2 완료(Claude):** Codex 검토 세 가지를 모두 반영했다. B5는 "포럼 문제에서 영감을 받은
+  단순화한 입력 클램프 시험 회로"로 소개하고, 전원 켜기 단계와 시간 비교는 뺐다. 57번 글 인용, "설명은 있었지만 시험으로 확인해야 했다"는
+  메시지를 반영했고, 수리 장면은 자리표시자로 두었다. README 첫머리와 B5 단락, `docs/story-v3.md`, `docs/video-script.md`, `docs/submission.md`를
+  갱신했다. 커밋 요청: 위 문서들, `README.md`, `video/`, 뷰어 파일, `tests/test_repair_viewer.py`.
+
+- **11/1 20:50 합성 벤치마크 사전등록 준비 완료(Claude, Codex 검토·커밋 요청).** 표 #4·#5를 하나의 사전등록 실험으로 묶었다.
+  `docs/linear-benchmark.md`(사람용), `examples/linear-benchmark/2026-11-01/protocol.json`·`specimens.json`(기계용, 정답표 해시 고정),
+  `scripts/benchmark_linear.py`(하네스), `src/benchmate/providers_baseten.py`(Spark Open 어댑터), `tests/test_linear_benchmark.py`.
+  Codex 소유 폴더라서 **작업 표시를 여기 남긴다. 검토 후 커밋·푸시해 줘.** 기존 파일은 고치지 않았다.
+  - 과제 A "어느 부품이 바뀌었나"(repair, 30개: 정상·R·C 각 8 + 후보 밖 R·C 동시 변경 6), 과제 B "무엇이 연결됐나"(mystery, 16개).
+  - 7개 arm: 도구 없는 Spark, 무작위×3, 고정 계획, 엔진 단독, Spark(순위 보임 = 제품), Spark(순위 숨김), Spark Open.
+    같은 시편·잡음 시드·메뉴·예산·검증 규칙. 순위 숨김 arm은 "Spark가 스스로 좋은 실험을 고르나"를 직접 잰다.
+  - 결과 예측과 보고 규칙(전부 공개, p<0.05 아니면 "더 낫다" 금지, 재실행은 전송 오류 1회만)을 측정 전에 적어 두었다.
+  - 개발용 시편(별도 시드)으로만 점검했다(영상·README 인용 금지): 엔진 단독 46/46, 고정 계획 46/46, 후보 밖 6개 모두 거부.
+    무작위는 과제 A 72/72(어떤 실험이든 대부분 R·C가 갈림 → **과제 A의 요점은 '측정 없음 vs 벤치'**),
+    과제 B 31/48(17번 판단 보류, 배선 변경 평균 2.8회 vs 엔진 1회) → **실험 선택의 차이는 과제 B에서 드러난다.** 잘못 확정은 전 arm 0.
+    가짜 공급자로 Spark arm 배선, MockTransport로 Baseten 어댑터를 시험했다(새 테스트 6개 통과). 실제 API는 아직 0회.
+  - 고정 해시: `protocol.json` 1f68dc0a…1dba73, `specimens.json` 8aaee2a5…028a593, `benchmark_linear.py` 7eb05055…5093335.
+  - **커밋·푸시 전에는 평가 시편을 한 번도 돌리지 않는다.** 커밋 후 Claude가 스크립트 arm(엔진·고정·무작위)을 돌리고 결과 폴더를 넘긴다.
+  - Spark arm은 맥에서 Codex가 실행한다. 범수 동의가 필요한 호출 수(상한/보통): no_tool 30/30, spark 368/~184,
+    spark_hidden 368/~207, spark_open(Baseten) 368/~184. 로컬 한도(요청당 $1 적립)는 현재 meta 93/120, baseten 2/80이라
+    **한도를 올릴지는 범수 결정**(실제 청구액은 콘솔에서 먼저 확인). 순서 제안: no_tool → spark → spark_hidden → spark_open.
+  - 실행: `uv run python scripts/benchmark_linear.py run --arm spark --execute --max-requests 368`, 결과 `runs/linear-benchmark/<arm>/results.jsonl`,
+    집계 `score --write`. 끝나면 `runs/linear-benchmark`를 `examples/linear-benchmark/2026-11-01/results/`로 옮겨 커밋.
+- **11/1 20:50 영상 플랜 A/B/C(Claude):** `docs/video-plans.md`. B5 실물 통과(A), 실패(B, 클라이맥스를 D01 수리+재현으로),
+  수리 예측 빗나감(C, 신뢰 장면). 숫자 장면 문장은 벤치마크 결과별로 미리 골라 두었다. 결정은 B5 두 번째 시도 직후.
+- **11/2 01:50 B5 변형 설계 사전등록 초안(Claude, Codex 검토·커밋 요청 — 실물 B5 전에).** `docs/b5-variants.md`, `examples/b5-variants/2026-11-02/design.json`.
+  코드는 아직 없고 실행기 파일도 건드리지 않았다. Spark 쪽 파일(b5_session·b5_models·netlist·physical_netlist·providers·agent)은 cf33122의 blob 해시로 고정했다.
+  - 격자: 구조 변형 D1–D8, 후보 밖 선형 L1·L2(고역통과, 다이오드 없음 → 불필요한 다이오드 제안 측정), 게이트 대조 G1–G3. 값 견고성 V1–V4는 나중에, 합치지 않음.
+  - 구분 가능성: 9mV 단독 기준은 쓰지 않는다. 선정용 잡음 3회 × 사전등록 대안 15개(시작 5개 + 격자 10개)를 학습 데이터로만,
+    고정 시작점 3개에서 맞추고(정답 구조도 참값 없이), 예약 입력 2개로 채점한다. 시작 모델 전부 탈락 + 자기 구조 통과 + 다른 대안 전부 탈락이
+    3회 모두면 주 집계에 넣는다. 맞추기 실패는 `fit_failed`로 따로 기록하고 탈락으로 세지 않는다. 선정은 Spark 결과를 안 쓰고, 계산 상한은 3시간.
+  - 선정용과 평가용 난수는 분리했다. 정답 파일은 실행기와 분리해서 해시로 고정하고, classification.json은 Spark 실행 전에 커밋한다.
+  - 비교군: 엔진 단독(구성상 새 구조 검증 불가 → 경쟁자로 표현 금지), 격자 구조 10개를 받은 엔진(oracle library), Spark max 변형당 2회(최대 184회 호출).
+  - 결과 표현: "사전등록한 대안·잡음·측정 예산 아래에서 이 규칙으로 선정된 회로에서의 성능". 유일한 구조 주장은 하지 않는다. 11/3 09:00까지 결과가 없으면 영상에서 뺀다.
+- **11/2 02:10 영상 플랜 개정·숫자 장면(Claude).** `docs/video-plans.md`: 순서를 포럼 → D01 → B5 → 다른 사람의 완수 → 숫자 → 해커톤 기간 제작으로 바꿨다.
+  B5 개입 예측 줄은 뺐고, 플랜 B 대조 검사 문구는 "그 조건에서 IN/OUT 일치"로 좁혔다. 과제 A는 측정 접근권 비교로 부른다.
+  `video/stage_tape.html` 숫자 장면은 모양으로 구분한다: 채운 원 = 맞음, 빈 사각 = 옳게 보류, 회색 고리 = 결정 못 함, 빨강 X = 틀림.
+  B5 변형 패널을 크게, 과제 B(고정 절차 행 포함)를 크게, 과제 A를 작게 둔다. 연습 데이터는 "not for the video" 표시로만 확인했다.
+
+## 우승 완성상 (11/1 20:30, 범수 확정 대기)
+
+목표는 1등이다. 작업은 "확인한 강팀(LastSeen, MuseCell, Say-and-Grasp, PIVOT) 대비 우위를 입증하는 데 기여하는가"로 고른다.
+
+**완성상:** Spark가 측정으로 자기 설명이 틀렸다는 결과를 받고, 새 구조를 제안하고, 아직 보지 않은 실물 응답을 예측하고,
+수리 효과를 미리 공개한 뒤 실제로 고쳐서 확인한다. 처음 쓰는 사람도 그 요청을 따라 문제를 해결한다.
+
+| # | 산출물 | 완료 기준 | 담당 | 언제 |
+| --- | --- | --- | --- | --- |
+| 1 | Spark 지휘 D01 실물 수리 | 진단 → 수리 요청 → 예측 푸시 → 수리 → 새 부팅 검사, 촬영본 포함 | 범수(작업·촬영) + Codex | 11/1 밤 (리허설 먼저) |
+| 2 | 실물 B5 | 선형 후보 실패 → Spark 구조 제안 → 미사용 실물 입력 예측 통과(또는 실패 그대로 보고), 촬영 | 범수 + Codex | 11/2, 3시간·2회 |
+| 3 | 처음 쓰는 사람 실행 | 개발자가 아닌 사람 1명이 BenchMate 요청만 보고 작업자 역할을 수행(반복 실행 1회 겸용), 걸린 시간·개입 횟수 기록, 촬영 | 범수(사람 섭외) + Codex | 11/2, 가능하면 |
+| 4 | 공정한 기준선 | 같은 정보·도구·예산. 고정 절차, 고전-확장(다이오드 후보 포함)과 비교. 동률도 그대로 보고 | Codex | 11/2 (하드웨어 없이) |
+| 5 | Spark Open 비교 | D01 부하 선택 갈림길을 Spark Open(Baseten)으로 5회 재실행, medium/max 비교와 같은 형식 | Codex | 11/2 (하드웨어 없이, 1시간) |
+| 6 | 영상 | 자기 수정 장면(B5)과 수리 장면이 설명 없이 이해됨, 실물 촬영 중심, 라벨 테이프 디자인 | Claude | 계속 병행, 11/3 최종본 |
+| 7 | GitHub | README 결과표 + GIF, 뷰어를 GitHub Pages로 공개(심사위원이 실제 기록을 바로 열람) | Claude(내용) + Codex(Pages 설정) | 11/3 |
+
+일정은 기존대로 간다: 11/2 23시 하드웨어 동결, 11/4 22시 제출 목표.
+
 ## 역할과 파일 소유 (충돌 방지)
 
 | 담당 | 맡는 것 | 파일 |
@@ -155,3 +214,15 @@ a testable prediction.’ 같은 검증 중심 문장으로 간다. 순위를 �
 
 원문: [첫 질문과 초기 전원/클램프 설명](https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099),
 [46번 확인 보고와 57번 결론](https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099?page=3).
+
+## 11/2 야간 실행 결과 — Codex
+
+실제 Spark 모의 수리 1회 완료, B5 동일 모의 시편 5/5 첫 시도 통과.
+과제 B 순위 숨김 15/16, 엔진·고정 절차 16/16, 무작위 30/48. B14는
+검증 후 최종 보고 전 호출 소진으로 미완료 처리. 실패를 성공 재시도로 덮지 않음.
+총 160회, 사용량 기반 $1.7489474, 미정산 0회. 실물 작동 0회.
+B5 변형 설계 v1.2 및 별도 벤치 구현을 먼저 푸시했고 선정 계산 진행 중.
+새 파일과 구현은 experiments 아래, 보호한 실물 Python/펌웨어 소스 52개 불변.
+영상 미실행 행·상태 모양·Spark mock 오표시 수정. 제출 테마 Push the Frontier.
+[아침 실행 인계](morning-handoff-2026-11-02.md)와
+[원문·비교표·비용](../examples/overnight/2026-11-02/README.md)을 먼저 읽는다.

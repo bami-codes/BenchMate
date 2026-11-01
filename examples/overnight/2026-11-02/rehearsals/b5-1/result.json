@@ -1,0 +1,104 @@
+{
+  "agent_report": {
+    "explanation": "Mock rehearsal, unloaded scope only. Resistor control passed. Linear families failed training. R IN-OUT plus diode OUT-REF passed training ~1.8mV and both held-out conditional and forecast checks <2.6mV at 9mV.",
+    "limits": "Mock, not physical evidence. Verified only unloaded predictive adequacy on tested inputs. No unique R, IS, topology, absolute REF, or loaded extrapolation. R, IS, REF confounded; input branches invisible.",
+    "verdict": "verified",
+    "source": "mock",
+    "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+  },
+  "source": "mock",
+  "reserved_check_passed": true,
+  "proposals": 1,
+  "instrument": {
+    "source": "mock",
+    "waveforms": 8,
+    "real_serial_commands": 0,
+    "physical_measurements": 0,
+    "operator_actions_simulated": true
+  },
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "max",
+  "http_requests": 7,
+  "usage": [
+    {
+      "input_tokens": 1493,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 900,
+      "output_tokens_details": {
+        "reasoning_tokens": 841
+      },
+      "total_tokens": 2393
+    },
+    {
+      "input_tokens": 2939,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 596,
+      "output_tokens_details": {
+        "reasoning_tokens": 482
+      },
+      "total_tokens": 3535
+    },
+    {
+      "input_tokens": 4190,
+      "input_tokens_details": {
+        "cached_tokens": 2929
+      },
+      "output_tokens": 116,
+      "output_tokens_details": {
+        "reasoning_tokens": 59
+      },
+      "total_tokens": 4306
+    },
+    {
+      "input_tokens": 4360,
+      "input_tokens_details": {
+        "cached_tokens": 1393
+      },
+      "output_tokens": 562,
+      "output_tokens_details": {
+        "reasoning_tokens": 437
+      },
+      "total_tokens": 4922
+    },
+    {
+      "input_tokens": 11602,
+      "input_tokens_details": {
+        "cached_tokens": 4081
+      },
+      "output_tokens": 5303,
+      "output_tokens_details": {
+        "reasoning_tokens": 5080
+      },
+      "total_tokens": 16905
+    },
+    {
+      "input_tokens": 17967,
+      "input_tokens_details": {
+        "cached_tokens": 4337
+      },
+      "output_tokens": 318,
+      "output_tokens_details": {
+        "reasoning_tokens": 257
+      },
+      "total_tokens": 18285
+    },
+    {
+      "input_tokens": 21263,
+      "input_tokens_details": {
+        "cached_tokens": 11505
+      },
+      "output_tokens": 1519,
+      "output_tokens_details": {
+        "reasoning_tokens": 1324
+      },
+      "total_tokens": 22782
+    }
+  ],
+  "api_elapsed_s": 85.3205775830429,
+  "reserved_allowance_usd": 7.0
+}

@@ -18,3 +18,8 @@ Selection is deterministic conditional on machine/optimizer deadlines; deadline
 and numerical failures are explicit unknowns. Its three repetitions are an
 engineering screen, not a confidence guarantee. Every excluded grid member
 remains reportable. An empty primary set is a valid possible outcome.
+
+An additive implementation-v2 supplies the final evaluator and reporter while the
+v1 selection process continues. bench.py, fitting.py, run.py and design.json
+are byte-identical to selection start. The extra test validates a physical-log
+lock and bounded audit inputs. Final evaluation has not been run.

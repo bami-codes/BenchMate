@@ -42,3 +42,6 @@ main{max-width:1600px;padding:26px 32px 20px;margin:auto}.session-header{display
 @media(max-width:1100px) and (min-width:801px){.product-view .workbench{grid-template-columns:minmax(0,1fr) 310px}.product-story h2{font-size:22px}.product-story blockquote{font-size:14px}}
 @media(max-width:800px){.product-story{grid-column:1;grid-row:1}.product-view .figure-panel{grid-row:2}.product-view .timeline-panel{grid-row:4}.product-view .mounting-panel{grid-row:3}.product-story h2{font-size:27px}.product-view .mount-body{display:block}.presentation-switch span{font-size:10px}.presentation-switch button{min-height:36px}.product-view #chart{height:220px}}
 @media(max-width:800px){.product-problem{grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);gap:8px;padding:12px}.product-problem>div:first-child{grid-column:1/-1}.product-problem p{font-size:13px}.product-problem #product-measured{font-size:20px}}
+
+/* Repair runs: the frozen prediction is shown with its hash and public commit. */
+.product-lock{margin-top:8px;padding:8px 10px;border-left:2px solid var(--accent);background:var(--tint);font-size:11px;line-height:1.45}.product-lock[hidden]{display:none}.product-lock strong{color:var(--accent);font-weight:600}.product-lock a{color:var(--accent)}

@@ -1,0 +1,460 @@
+{
+  "source": "mock/synthetic only",
+  "physical_measurements": 0,
+  "serial_commands": 0,
+  "rehearsals": [
+    {
+      "job": "d01",
+      "run_id": "20261101T164227-3bce7c1d71",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "verdict": "repair_verified",
+        "current_explanation": "본 건은 MOCK 모의 rehearsal이며 신규 물리실험이 아님. 무부하 tau 약 0.02s로 공칭 0.01s의 2배였고 단독으로 R/C 분리 불가. 부하 스텝과 0.15V/5Hz 동결모델 검증에서 c_changed만 9mV 전체+영역 기준 통과, r_changed·nominal 탈락. 수리전 명령기반 예측과 수리후 새 부팅 독립 HOLD원점의 측정-IN 조건부비교는 일치(불일치 없음): 스텝 복원모델 0.49mV 통과 vs 미변경 11.39mV 탈락, 0.10V/4Hz 사인 복원 0.47mV vs 미변경 4.19mV(9mV 허용내 통과이나 오차 9배차). scored-OUT 재적합 없음.",
+        "unresolved": "9mV 허용은 공학적 합격기준이며 교정된 신뢰도가 아님. 절대교정·범용정확도·자동조작은 미확립. 사인에서 미변경모델도 허용통과하므로 스텝 병행 없이는 단독 식별 불가. 실물 증거 없음.",
+        "next_observation": "물리 확정には 별도 교정된 계측기로 공칭 R=10kΩ, C=1uF 복원 상태의 독립 재측정 필요.",
+        "source": "mock",
+        "decision_actor": "muse_spark",
+        "repair_intervention_reported": true,
+        "repair_verified": true,
+        "scope": "Known passive RC development fixture with provisional calibration; no general topology or unique component identification.",
+        "physical_repair_demonstrated": false
+      },
+      "independent_circuit_count": 1
+    },
+    {
+      "job": "b5-1",
+      "run_id": "20261101T164247-a136ee4437",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "explanation": "Mock rehearsal, unloaded scope only. Resistor control passed. Linear families failed training. R IN-OUT plus diode OUT-REF passed training ~1.8mV and both held-out conditional and forecast checks <2.6mV at 9mV.",
+        "limits": "Mock, not physical evidence. Verified only unloaded predictive adequacy on tested inputs. No unique R, IS, topology, absolute REF, or loaded extrapolation. R, IS, REF confounded; input branches invisible.",
+        "verdict": "verified",
+        "source": "mock",
+        "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+      },
+      "independent_circuit_count": 1
+    },
+    {
+      "job": "b5-2",
+      "run_id": "20261101T164419-d96974052e",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "explanation": "Mock unloaded rehearsal. Control passed. Proposed series R plus OUT-to-REF diode explains positive clipping with no transient. Training RMS ~1.9mV. Both held-out conditional and forecast checks passed whole and all regions below 9mV.",
+        "limits": "Mock unloaded scope only. No loaded extrapolation. Provisional ADC coordinates, not absolute REF. R, IS and REF confounded; no unique parts or topology claimed. Input branches could stay invisible.",
+        "verdict": "verified",
+        "source": "mock",
+        "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+      },
+      "independent_circuit_count": 1
+    },
+    {
+      "job": "b5-3",
+      "run_id": "20261101T164537-15878329df",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "explanation": "Mock rehearsal only, not physical evidence. Unloaded series-R shunt-diode clipper passed training and both held-out conditional and forecast checks under 9mV whole and regions.",
+        "limits": "Mock unloaded scope only. No claim of unique R, IS, topology, or absolute REF calibration. Input branches may stay invisible. No loaded extrapolation; pending load checks untouched.",
+        "verdict": "verified",
+        "source": "mock",
+        "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+      },
+      "independent_circuit_count": 1
+    },
+    {
+      "job": "b5-4",
+      "run_id": "20261101T164628-4f3d51aaa9",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "explanation": "Mock rehearsal unloaded. Resistor control passed. All linear families failed. Series R plus OUT-REF diode passed training and both held-out conditional and forecast checks under 9mV whole and regions.",
+        "limits": "Mock only, not physical evidence. Unloaded scope only, no loaded claims. R, IS, REF confounded; no unique parts or topology. ADC provisional, not absolute REF. Input branches may stay invisible.",
+        "verdict": "verified",
+        "source": "mock",
+        "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+      },
+      "independent_circuit_count": 1
+    },
+    {
+      "job": "b5-5",
+      "run_id": "20261101T164737-4c3a408860",
+      "http_requests": 7,
+      "passed": true,
+      "source": "mock",
+      "report": {
+        "explanation": "Mock rehearsal only. Unloaded series-R shunt-diode model predicted two held-out unloaded waveforms within 9mV whole and all regions, while all linear families failed.",
+        "limits": "Mock unloaded scope only, not physical or loaded. No unique R, IS, topology or absolute REF claimed; confounding possible. Input branches may stay invisible. No extrapolation beyond tested unloaded conditions.",
+        "verdict": "verified",
+        "source": "mock",
+        "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+      },
+      "independent_circuit_count": 1
+    }
+  ],
+  "budget": {
+    "http_requests": 160,
+    "usage_calculated_usd": 1.7489474,
+    "unsettled_requests": 0,
+    "cap_usd": 30,
+    "max_requests": 176,
+    "basis": "Reported token usage at standard published rates; not a billing-dashboard invoice. Original physical shared ledger unchanged."
+  },
+  "linear": {
+    "protocol_sha256": "03ba14edcf3b226c195e8404e7e0142d63289f7ae598bd548527647378416042",
+    "specimens": "8aaee2a5b237f6f3ac3405ac8f458ead6f3027dc160b1fc8746ba5704028a593",
+    "table": [
+      {
+        "arm": "engine",
+        "task": "A",
+        "runs": 30,
+        "expected_runs": 30,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "24/24",
+        "correct_rate": 1.0,
+        "wilson95": [
+          0.8620194241710247,
+          1.0
+        ],
+        "interval_method": "Wilson over specimens",
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 0,
+        "out_of_family_rejected": "6/6",
+        "transport_reruns": 0,
+        "all_attempts": 30,
+        "all_attempt_outcomes": {
+          "correct": 24,
+          "wrong": 0,
+          "rejected": 6,
+          "false_rejection": 0,
+          "abstained": 0,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.03,
+        "mean_wiring_changes": 1.0,
+        "matched_engine_top_choice": "31/31"
+      },
+      {
+        "arm": "engine",
+        "task": "B",
+        "runs": 16,
+        "expected_runs": 16,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "16/16",
+        "correct_rate": 1.0,
+        "wilson95": [
+          0.8063865817272802,
+          1.0
+        ],
+        "interval_method": "Wilson over specimens",
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 0,
+        "out_of_family_rejected": null,
+        "transport_reruns": 0,
+        "all_attempts": 16,
+        "all_attempt_outcomes": {
+          "correct": 16,
+          "wrong": 0,
+          "rejected": 0,
+          "false_rejection": 0,
+          "abstained": 0,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.0,
+        "mean_wiring_changes": 1.0,
+        "matched_engine_top_choice": "16/16"
+      },
+      {
+        "arm": "fixed",
+        "task": "A",
+        "runs": 30,
+        "expected_runs": 30,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "24/24",
+        "correct_rate": 1.0,
+        "wilson95": [
+          0.8620194241710247,
+          1.0
+        ],
+        "interval_method": "Wilson over specimens",
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 0,
+        "out_of_family_rejected": "6/6",
+        "transport_reruns": 0,
+        "all_attempts": 30,
+        "all_attempt_outcomes": {
+          "correct": 24,
+          "wrong": 0,
+          "rejected": 6,
+          "false_rejection": 0,
+          "abstained": 0,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.0,
+        "mean_wiring_changes": 1.0,
+        "matched_engine_top_choice": "6/30"
+      },
+      {
+        "arm": "fixed",
+        "task": "B",
+        "runs": 16,
+        "expected_runs": 16,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "16/16",
+        "correct_rate": 1.0,
+        "wilson95": [
+          0.8063865817272802,
+          1.0
+        ],
+        "interval_method": "Wilson over specimens",
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 0,
+        "out_of_family_rejected": null,
+        "transport_reruns": 0,
+        "all_attempts": 16,
+        "all_attempt_outcomes": {
+          "correct": 16,
+          "wrong": 0,
+          "rejected": 0,
+          "false_rejection": 0,
+          "abstained": 0,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.0,
+        "mean_wiring_changes": 1.0,
+        "matched_engine_top_choice": "16/16"
+      },
+      {
+        "arm": "random",
+        "task": "A",
+        "runs": 90,
+        "expected_runs": 90,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "71/72",
+        "correct_rate": 0.986,
+        "wilson95": null,
+        "cluster_bootstrap95": [
+          0.9583333333333334,
+          1.0
+        ],
+        "interval_method": "percentile bootstrap over circuits; all random repeats kept together",
+        "independent_specimens": 24,
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 2,
+        "out_of_family_rejected": "17/18",
+        "transport_reruns": 0,
+        "all_attempts": 90,
+        "all_attempt_outcomes": {
+          "correct": 71,
+          "wrong": 0,
+          "rejected": 17,
+          "false_rejection": 0,
+          "abstained": 2,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.36,
+        "mean_wiring_changes": 1.49,
+        "matched_engine_top_choice": "1/122"
+      },
+      {
+        "arm": "random",
+        "task": "B",
+        "runs": 48,
+        "expected_runs": 48,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "30/48",
+        "correct_rate": 0.625,
+        "wilson95": null,
+        "cluster_bootstrap95": [
+          0.4583333333333333,
+          0.7916666666666666
+        ],
+        "interval_method": "percentile bootstrap over circuits; all random repeats kept together",
+        "independent_specimens": 16,
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 18,
+        "out_of_family_rejected": null,
+        "transport_reruns": 0,
+        "all_attempts": 48,
+        "all_attempt_outcomes": {
+          "correct": 30,
+          "wrong": 0,
+          "rejected": 0,
+          "false_rejection": 0,
+          "abstained": 18,
+          "incomplete": 0,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 2.35,
+        "mean_wiring_changes": 2.81,
+        "matched_engine_top_choice": "3/112"
+      },
+      {
+        "arm": "spark",
+        "task": "A",
+        "status": "not run"
+      },
+      {
+        "arm": "spark",
+        "task": "B",
+        "status": "not run"
+      },
+      {
+        "arm": "spark_hidden",
+        "task": "A",
+        "status": "not run"
+      },
+      {
+        "arm": "spark_hidden",
+        "task": "B",
+        "runs": 16,
+        "expected_runs": 16,
+        "status": "complete",
+        "primary_basis": "first attempt per specimen/replicate, including failures",
+        "in_family_correct": "15/16",
+        "correct_rate": 0.938,
+        "wilson95": [
+          0.7167073163197013,
+          0.9888809426916687
+        ],
+        "interval_method": "Wilson over specimens",
+        "wrong_identifications": 0,
+        "false_rejections": 0,
+        "abstained_or_incomplete": 1,
+        "out_of_family_rejected": null,
+        "transport_reruns": 0,
+        "all_attempts": 16,
+        "all_attempt_outcomes": {
+          "correct": 15,
+          "wrong": 0,
+          "rejected": 0,
+          "false_rejection": 0,
+          "abstained": 0,
+          "incomplete": 1,
+          "unparsed": 0
+        },
+        "mean_diagnostic_acquisitions": 1.94,
+        "mean_wiring_changes": 2.88,
+        "matched_engine_top_choice": "0/30",
+        "provider_requests": 118
+      },
+      {
+        "arm": "spark_open",
+        "task": "A",
+        "status": "not run"
+      },
+      {
+        "arm": "spark_open",
+        "task": "B",
+        "status": "not run"
+      },
+      {
+        "arm": "no_tool",
+        "task": "A",
+        "status": "not run"
+      }
+    ],
+    "paired": [
+      {
+        "pair": [
+          "spark",
+          "no_tool"
+        ],
+        "task": "A",
+        "status": "incomplete; no significance claim",
+        "specimens": 0,
+        "expected_specimens": 24
+      },
+      {
+        "pair": [
+          "spark",
+          "engine"
+        ],
+        "task": "A",
+        "status": "incomplete; no significance claim",
+        "specimens": 0,
+        "expected_specimens": 24
+      },
+      {
+        "pair": [
+          "spark",
+          "engine"
+        ],
+        "task": "B",
+        "status": "incomplete; no significance claim",
+        "specimens": 0,
+        "expected_specimens": 16
+      },
+      {
+        "pair": [
+          "spark",
+          "random"
+        ],
+        "task": "B",
+        "status": "incomplete; no significance claim",
+        "specimens": 0,
+        "expected_specimens": 16
+      },
+      {
+        "pair": [
+          "spark_hidden",
+          "random"
+        ],
+        "task": "B",
+        "specimens": 16,
+        "only_first_correct": 5,
+        "only_second_correct": 1,
+        "exact_mcnemar_p": 0.21875,
+        "holm_adjusted_p": 1.0,
+        "first_arm_superiority_supported": false
+      },
+      {
+        "pair": [
+          "spark_hidden",
+          "engine"
+        ],
+        "task": "B",
+        "specimens": 16,
+        "only_first_correct": 0,
+        "only_second_correct": 1,
+        "exact_mcnemar_p": 1.0,
+        "holm_adjusted_p": 1.0,
+        "first_arm_superiority_supported": false
+      },
+      {
+        "pair": [
+          "spark_hidden",
+          "spark"
+        ],
+        "task": "B",
+        "status": "incomplete; no significance claim",
+        "specimens": 0,
+        "expected_specimens": 16
+      }
+    ]
+  }
+}

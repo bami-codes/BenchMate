@@ -73,3 +73,22 @@ def test_unfinished_selection_and_actual_gate_mismatch_are_not_primary():
     from b5_variants.run import classify
     assert classify([])['class']=='selection_incomplete'
     assert not classify([{'incomplete':True}]*3)['primary']
+
+def test_final_evaluation_stays_locked_on_mock_and_audit_uses_bounded_input():
+    import json
+    from b5_variants.evaluate import physical_gate,equivalence
+    with pytest.raises(ValueError,match='physical B5'):
+        physical_gate(ROOT/'examples/overnight/2026-11-02/rehearsals/d01')
+    design=json.loads((ROOT/'examples/b5-variants/2026-11-02/design.json').read_text())
+    model={'kind':'linear','family':'rc','parameters':{'r_ohm':10000.,'c_f':1e-6},'reference_v':REF,'output_offset_v':BIAS}
+    checks=equivalence(model,'G2',design)
+    assert len(checks)==5 and all(c['passed'] for c in checks)
+
+def test_empty_or_partial_primary_set_never_gets_accuracy_rate(tmp_path):
+    from b5_variants.report import build
+    classification={'primary':[],'variants':{v:{'class':'selection_incomplete'} for v in IDS}}
+    result=build(tmp_path,classification)
+    assert all(r['primary_rate'] is None and r['primary_status']=='empty_primary_set' for r in result['table'])
+    classification['primary']=['D1']
+    result=build(tmp_path,classification)
+    assert all(r['primary_rate'] is None and r['primary_status']=='incomplete' for r in result['table'])

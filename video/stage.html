@@ -1,0 +1,369 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>BenchMate video stage</title>
+<style>
+@font-face{font-family:Plex;src:url(fonts/IBMPlexSans-Regular.woff2);font-weight:400}
+@font-face{font-family:Plex;src:url(fonts/IBMPlexSans-SemiBold.woff2);font-weight:600}
+@font-face{font-family:PlexMono;src:url(fonts/IBMPlexMono-400.woff2);font-weight:400}
+@font-face{font-family:PlexMono;src:url(fonts/IBMPlexMono-600.woff2);font-weight:600}
+:root{--ground:#f7f8f5;--surface:#fff;--ink:#1c2b27;--secondary:#55635e;--line:#dce3dc;--shell:#183d35;--accent:#1f6954;--tint:#eaf1eb;
+--observed:#bb4c27;--predicted:#315e91;--drive:#9aa29e;--success:#23714e;--error:#b33c39;--warning:#905515;--spark:#2a55c9}
+*{box-sizing:border-box}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--ground);font-family:Plex,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+.mono{font-family:PlexMono,monospace;font-variant-numeric:tabular-nums}
+.dark{background:var(--shell);color:#fff}
+.card{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(24,61,53,.08)}
+.badge{display:inline-block;font-size:20px;font-weight:600;padding:5px 14px;border-radius:999px;letter-spacing:.01em}
+.badge.spark{background:#e7edfb;color:var(--spark)}
+.badge.engine{background:var(--tint);color:var(--accent)}
+.badge.operator{background:#fbefdc;color:var(--warning)}
+.badge.fail{background:#f8e3e2;color:var(--error)}
+.badge.pass{background:#e2f1e8;color:var(--success)}
+.chapter{position:absolute;left:72px;top:52px;font-size:22px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.chapter.light{color:#9cc7b7}
+.prov{position:absolute;right:72px;top:46px;font-size:20px;font-weight:600;padding:6px 16px;border-radius:999px;border:1.5px solid}
+.prov.real{color:#905515;border-color:#e2c597;background:#fff8ee}
+.prov.sim{color:#5b4a9e;border-color:#cfc6ef;background:#f5f2ff}
+.prov.rehearsal{color:#55635e;border-color:#cfd6d1;background:#f2f4f2}
+#caption{position:absolute;left:0;right:0;bottom:46px;text-align:center;pointer-events:none;z-index:50}
+#caption span{display:inline-block;max-width:1560px;background:rgba(18,30,26,.84);color:#fff;font-size:36px;line-height:1.32;padding:10px 28px 12px;border-radius:12px}
+h1,h2,h3,p{margin:0}
+.big{font-size:84px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.title{font-size:56px;font-weight:600;letter-spacing:-.02em;line-height:1.12}
+.sub{font-size:30px;color:var(--secondary);line-height:1.4}
+.label{font-size:22px;color:var(--secondary)}
+svg text{font-family:Plex,sans-serif}
+</style></head>
+<body><div id="stage"></div><div id="caption"><span id="captext" style="display:none"></span></div>
+<script>
+'use strict';
+const W=1920,H=1080,NS='http://www.w3.org/2000/svg';
+const stage=document.getElementById('stage');
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const easeOut=x=>1-Math.pow(1-x,3);
+const tw=(t,a,d=.6,f=easeOut)=>f(clamp((t-a)/d));
+function E(tag,props={},parent=stage,html){const el=document.createElement(tag);for(const[k,v]of Object.entries(props)){if(k==='style')Object.assign(el.style,v);else if(k==='cls')el.className=v;else el.setAttribute(k,v);}if(html!==undefined)el.innerHTML=html;parent.appendChild(el);return el;}
+function S(tag,attrs={},parent){const el=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,v);if(parent)parent.appendChild(el);return el;}
+function show(el,o,dy=0,dx=0,scale=1){el.style.opacity=o;el.style.transform=`translate(${dx}px,${dy}px) scale(${scale})`;}
+function enter(el,t,a,d=.6,dist=24){const k=tw(t,a,d);show(el,k,(1-k)*dist);return k;}
+function exitk(t,a,d=.5){return 1-tw(t,a,d);}
+function both(el,t,a,b,d=.5,dist=24){const k=tw(t,a,d)*(b==null?1:exitk(t,b,d));show(el,k,(1-tw(t,a,d))*dist);return k;}
+function typed(el,text,t,a,cps=38){const n=Math.floor(clamp((t-a)*cps,0,text.length));el.textContent=text.slice(0,n);return n>=text.length;}
+function count(t,a,d,v0,v1){return v0+(v1-v0)*tw(t,a,d,ease);}
+
+/* Chart: progressive traces in data coordinates. */
+function chart(parent,{x,y,w,h,xr,yr,xlabel='',ylabel='',grid=true,ticksX=[],ticksY=[],fmtX=v=>v,fmtY=v=>v}){
+  const svg=S('svg',{width:w,height:h,viewBox:`0 0 ${w} ${h}`,style:`position:absolute;left:${x}px;top:${y}px;overflow:visible`},parent);
+  const pad={l:86,r:24,t:18,b:58},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
+  const X=v=>pad.l+(v-xr[0])/(xr[1]-xr[0])*pw,Y=v=>pad.t+(1-(v-yr[0])/(yr[1]-yr[0]))*ph;
+  const g=S('g',{},svg);
+  if(grid){for(const v of ticksY){S('line',{x1:pad.l,x2:pad.l+pw,y1:Y(v),y2:Y(v),stroke:'#e3e8e3','stroke-width':1.5},g);const tx=S('text',{x:pad.l-14,y:Y(v)+7,'text-anchor':'end','font-size':20,fill:'#6b7873'},g);tx.textContent=fmtY(v);}
+    for(const v of ticksX){const tx=S('text',{x:X(v),y:pad.t+ph+34,'text-anchor':'middle','font-size':20,fill:'#6b7873'},g);tx.textContent=fmtX(v);}}
+  S('line',{x1:pad.l,x2:pad.l+pw,y1:pad.t+ph,y2:pad.t+ph,stroke:'#b9c3bd','stroke-width':2},g);
+  if(xlabel){const t=S('text',{x:pad.l+pw,y:pad.t+ph+56,'text-anchor':'end','font-size':19,fill:'#6b7873'},g);t.textContent=xlabel;}
+  if(ylabel){const t=S('text',{x:pad.l-14,y:pad.t-2,'text-anchor':'end','font-size':19,fill:'#6b7873'},g);t.textContent=ylabel;}
+  const api={svg,X,Y,pad,pw,ph,
+    line(xs,ys,{color='#bb4c27',width=3.5,dash=null,opacity=1}={}){const p=S('path',{fill:'none',stroke:color,'stroke-width':width,'stroke-linejoin':'round','stroke-linecap':'round',opacity},svg);if(dash)p.setAttribute('stroke-dasharray',dash);p._pts=xs.map((v,i)=>[X(v),Y(ys[i])]);p.setAttribute('d','');return p;},
+    reveal(p,frac){const n=Math.max(0,Math.floor(p._pts.length*clamp(frac)));if(n<2){p.setAttribute('d','');return;}let d='M'+p._pts[0][0].toFixed(1)+' '+p._pts[0][1].toFixed(1);for(let i=1;i<n;i++)d+='L'+p._pts[i][0].toFixed(1)+' '+p._pts[i][1].toFixed(1);p.setAttribute('d',d);}
+  };
+  return api;
+}
+function legendItem(parent,x,y,color,text,dash){const g=E('div',{style:{position:'absolute',left:x+'px',top:y+'px',display:'flex',alignItems:'center',gap:'12px',fontSize:'22px',color:'#3c4a45',whiteSpace:'nowrap'}},parent);
+  const sw=E('span',{style:{display:'inline-block',width:'38px',borderTop:`${dash?'3.5px dashed':'4px solid'} ${color}`}},g);E('span',{},g,text);return g;}
+function chapter(text,light){return E('div',{cls:'chapter'+(light?' light':'')},stage,text);}
+function prov(kind,text){return E('div',{cls:'prov '+kind},stage,text);}
+function box(x,y,w,h,extra={}){return E('div',{cls:'card',style:{left:x+'px',top:y+'px',width:w+'px',height:h==null?'auto':h+'px',...extra}});}
+function lock(){return '<svg width="26" height="26" viewBox="0 0 24 24" style="vertical-align:-4px"><rect x="5" y="10" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.2" fill="none"/></svg>';}
+const check='<span style="color:var(--success);font-weight:600">✓</span>',cross='<span style="color:var(--error);font-weight:600">✗</span>';
+
+/* ---------------- Scenes ---------------- */
+const SCENES={};
+
+SCENES.hook=(C,D)=>{
+  document.body.style.background='#f7f8f5';
+  const c=C.cues;
+  chapter('A real forum thread');
+  const src=E('div',{style:{position:'absolute',right:'72px',top:'48px',fontSize:'20px',color:'#55635e'}},stage,'Arduino Forum · July 2021 · paraphrased, link in README');
+  // Thread card (generic styling, no forum branding or usernames)
+  const card=box(300,140,1320,null,{padding:'30px 40px'});
+  card.innerHTML=`<div class="label" style="font-size:20px;margin-bottom:6px">Thread</div>
+   <div style="font-size:40px;font-weight:600;letter-spacing:-.01em">“Voltage divider is not giving correct voltage”</div>
+   <div style="display:flex;align-items:center;gap:26px;margin-top:22px;font-size:27px;color:#3c4a45">
+     <span>3.7 V battery</span><span style="color:#9aa29e">→</span><span>100 kΩ / 100 kΩ divider</span><span style="color:#9aa29e">→</span><span>ESP32 pin</span></div>
+   <div style="display:flex;gap:60px;margin-top:22px;align-items:baseline">
+     <div><div class="label" style="font-size:20px">expected</div><div class="mono" style="font-size:64px;font-weight:600">1.8 V</div></div>
+     <div><div class="label" style="font-size:20px">measured</div><div class="mono" id="meas" style="font-size:64px;font-weight:600;color:var(--observed)">1.1 V</div></div></div>`;
+  const guesses=['resistor tolerance?','the meter’s input resistance?','is R1 changing?','bad solder joints?','is the pin set up as an ADC?','negative voltages?'];
+  const pos=[[300,560],[760,540],[1290,565],[420,650],[930,640],[1340,660]];
+  const chips=guesses.map((g,i)=>E('div',{style:{position:'absolute',left:pos[i][0]+'px',top:pos[i][1]+'px',fontSize:'27px',padding:'10px 20px',borderRadius:'999px',background:'#fff',border:'1.5px solid #dce3dc',color:'#3c4a45'}},stage,g));
+  const right=E('div',{style:{position:'absolute',left:'300px',top:'560px',width:'1320px',padding:'22px 30px',borderRadius:'14px',background:'#eaf1eb',border:'1.5px solid #9cc7b7'}},stage,
+   '<div class="label" style="font-size:20px;color:#1f6954">early replies · Jul 12</div><div style="font-size:31px;margin-top:6px;line-height:1.35">Is the ESP32 powered? If not, current flows into its pin through the input clamp.</div>');
+  const test=E('div',{style:{position:'absolute',left:'300px',top:'560px',width:'640px',padding:'22px 28px',borderRadius:'14px',background:'#fff8ee',border:'1.5px solid #e7d5bb'}},stage,
+   '<div class="label" style="font-size:20px;color:#905515">the poster tests it · Jul 17</div><div style="font-size:28px;margin-top:8px;line-height:1.5">ESP32 unpowered → wrong voltage<br>ESP32 powered → correct voltage</div>');
+  const quote=E('div',{style:{position:'absolute',left:'980px',top:'560px',width:'640px',padding:'22px 28px',borderRadius:'14px',background:'#fff',border:'1.5px solid #dce3dc'}},stage,
+   '<div style="font-size:31px;font-weight:600;line-height:1.35">“Real life testing was the correct way to find the issue.”</div><div class="label" style="font-size:20px;margin-top:10px">the original poster · Jul 25</div>');
+  return t=>{
+    show(src,tw(t,0.1,0.5));enter(card,t,0.1,0.6);
+    const gEnd=c.F3.start-0.3;
+    chips.forEach((ch,i)=>{const k=tw(t,c.F2.start-0.1+i*0.32,0.4)*exitk(t,gEnd,0.35);show(ch,k,(1-tw(t,c.F2.start-0.1+i*0.32,0.4))*16);});
+    const kR=tw(t,c.F3.start-0.2,0.5)*exitk(t,c.F4.start-0.35,0.35);show(right,kR,(1-tw(t,c.F3.start-0.2,0.5))*20);
+    enter(test,t,c.F4.start-0.1,0.5);enter(quote,t,c.F4.start+1.0,0.5);
+  };
+};
+
+SCENES.intro=(C,D)=>{
+  document.body.style.background='#183d35';
+  const bg=E('div',{cls:'dark',style:{position:'absolute',inset:0}});
+  const logo=E('div',{style:{position:'absolute',left:0,right:0,top:'300px',textAlign:'center'}},bg,'<div style="font-size:120px;font-weight:600;letter-spacing:-.035em">BenchMate</div><div style="font-size:34px;color:#b9d6cb;margin-top:6px">Muse Spark chooses the experiment. The bench decides.</div>');
+  const tag=E('div',{style:{position:'absolute',left:0,right:0,top:'590px',textAlign:'center',fontSize:'24px',color:'#8fb5a7'}},bg,'Built during the Meta Global AI Developer Hackathon · Oct 27 – Nov 4, 2026');
+  // diagram
+  const dia=E('div',{style:{position:'absolute',inset:0}},bg);
+  const photo=E('div',{style:{position:'absolute',left:'1200px',top:'120px',width:'570px',height:'760px',borderRadius:'18px',overflow:'hidden',boxShadow:'0 20px 50px rgba(0,0,0,.35)'}},dia,'<img src="data/bench.jpg" style="width:570px;height:760px;object-fit:cover">');
+  const photoCap=E('div',{style:{position:'absolute',left:'1200px',top:'894px',width:'570px',fontSize:'20px',color:'#9cc7b7'}},dia,'The actual fixture: Arduino UNO R4 + LM358 buffers + circuit under test');
+  const nodes=[['Muse Spark 1.3','chooses the next experiment','spark',130],['BenchMate engine','simulates, fits, scores, locks predictions','engine',315],['Arduino UNO R4','drives the circuit, measures it','engine',500],['You','move a wire when Spark asks','operator',685]];
+  const els=nodes.map(([a,b,kind,y])=>{const n=E('div',{style:{position:'absolute',left:'150px',top:y+'px',width:'860px',padding:'22px 30px',borderRadius:'14px',background:'rgba(255,255,255,.07)',border:'1.5px solid rgba(255,255,255,.18)'}},dia);n.innerHTML=`<div style="display:flex;align-items:center;gap:16px"><span class="badge ${kind}">${a}</span><span style="font-size:30px;color:#e6f0ec">${b}</span></div>`;return n;});
+  const arrows=[0,1,2].map(i=>E('div',{style:{position:'absolute',left:'560px',top:(nodes[i][3]+104)+'px',fontSize:'40px',color:'#7fb3a1'}},dia,'↓'));
+  const cost=E('div',{style:{position:'absolute',left:'150px',top:'860px',fontSize:'28px',color:'#cfe3db'}},dia,'≈ $40 of parts · no oscilloscope · no function generator');
+  const c=C.cues;
+  return t=>{
+    const kl=tw(t,0.1,0.8)*exitk(t,c.L7.start-0.6,0.5);show(logo,kl,(1-tw(t,0.1,0.8))*20);tag.style.opacity=tw(t,0.6,0.6)*exitk(t,c.L7.start-0.6,0.5);
+    dia.style.opacity=tw(t,c.L7.start-0.4,0.5);
+    show(photo,tw(t,c.L7.start-0.2,0.6),0,(1-tw(t,c.L7.start-0.2,0.6))*40);photoCap.style.opacity=tw(t,c.L7.start+0.6,0.5);
+    els.forEach((n,i)=>{const at=[c.L7.start-0.2,c.L7.start+0.5,c.L7.start+1.3,c.L8.start+1.8][i];enter(n,t,at,0.5);});
+    arrows.forEach((a,i)=>a.style.opacity=tw(t,[c.L7.start+0.3,c.L7.start+1.1,c.L8.start+1.6][i],0.4));
+    cost.style.opacity=tw(t,c.L7.start+2.6,0.5);
+  };
+};
+
+SCENES.diagnose=(C,D)=>{
+  document.body.style.background='#f7f8f5';
+  const d=D.d01,c=C.cues;
+  chapter('Diagnose');const kst=new Date(Date.parse(d.start)+9*3600e3);prov('real','Real hardware · recorded run, '+kst.toLocaleString('en-US',{month:'short',day:'numeric',timeZone:'UTC'}));
+  // Problem banner
+  const ban=box(72,118,1776,96,{display:'flex',alignItems:'center',gap:'40px',padding:'0 36px',background:'#eaf1eb',borderColor:'#cadbce'});
+  ban.innerHTML='<div style="font-size:26px;font-weight:600">Designed RC low-pass</div><div class="mono" style="font-size:34px">10 kΩ · 1 µF · τ ≈ 10 ms</div><div style="font-size:40px;color:var(--accent)">→</div><div style="font-size:26px;color:#55635e">measured τ</div><div id="tau" class="mono" style="font-size:48px;font-weight:600;color:var(--accent)">—</div><div id="slow" style="font-size:30px;color:var(--observed);font-weight:600;opacity:0">2.1× slower</div>';
+  // Charts: unloaded (left), loaded/reserved (same position, swapped)
+  const panel=box(72,240,1150,640);
+  const ptitle=E('div',{style:{position:'absolute',left:'32px',top:'22px',fontSize:'28px',fontWeight:600}},panel,'');
+  const pnote=E('div',{style:{position:'absolute',left:'32px',bottom:'18px',fontSize:'19px',color:'#6b7873',width:'1080px'}},panel,'');
+  const u=d.unloaded,L=d.loaded,R=d.reserved;
+  const ms=a=>a.map(v=>v*1000);
+  const cu=chart(panel,{x:16,y:110,w:1110,h:440,xr:[0,0.256],yr:[-0.22,0.22],ticksX:[0,.05,.1,.15,.2,.25],ticksY:[-0.2,-0.1,0,0.1,0.2],fmtX:v=>Math.round(v*1000)+' ms',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
+  const pu={nom:cu.line(u.t,u.nominal,{color:'#7a827e',dash:'10 9',width:3}),obs:cu.line(u.t,u.observed,{color:'#bb4c27',width:4})};
+  const cl=chart(panel,{x:16,y:110,w:1110,h:440,xr:[0,0.256],yr:[-0.13,0.13],ticksX:[0,.05,.1,.15,.2,.25],ticksY:[-0.1,0,0.1],fmtX:v=>Math.round(v*1000)+' ms',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
+  const pl={};pl.obs=cl.line(L.t,L.observed,{color:'#bb4c27',width:4});pl.r=cl.line(L.t,L.r_changed,{color:'#7a827e',dash:'10 9',width:3.5});pl.c=cl.line(L.t,L.c_changed,{color:'#315e91',dash:'12 8',width:4});
+  const cr=chart(panel,{x:16,y:110,w:1110,h:440,xr:[0,1.02],yr:[-0.13,0.13],ticksX:[0,.25,.5,.75,1],ticksY:[-0.1,0,0.1],fmtX:v=>v+' s',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
+  const pr={};pr.obs=cr.line(R.t,R.observed,{color:'#bb4c27',width:3.5});pr.r=cr.line(R.t,R.r_changed,{color:'#7a827e',dash:'10 9',width:3});pr.c=cr.line(R.t,R.c_changed,{color:'#315e91',dash:'12 8',width:4});
+  const legU=E('div',{style:{position:'absolute',left:'32px',top:'70px'}},panel);legendItem(legU,0,0,'#bb4c27','Measured output');legendItem(legU,280,0,'#7a827e','What the design predicts (τ = 10 ms)',true);
+  const legL=E('div',{style:{position:'absolute',left:'32px',top:'70px'}},panel);legendItem(legL,0,0,'#bb4c27','Measured');legendItem(legL,200,0,'#7a827e','“R changed” model',true);legendItem(legL,500,0,'#315e91','“C changed” model',true);
+  // Right column cards
+  const hyp=E('div',{style:{position:'absolute',left:'1250px',top:'240px',width:'598px'}});
+  const hR=box(0,0,598,150,{padding:'22px 26px'});hyp.appendChild(hR);hR.innerHTML='<div class="label">Explanation A</div><div style="font-size:34px;font-weight:600">Resistor grew to 21 kΩ</div><div id="hRs" class="mono" style="font-size:22px;color:#55635e;margin-top:6px">same unloaded curve</div>';
+  const hC=box(0,172,598,150,{padding:'22px 26px'});hyp.appendChild(hC);hC.innerHTML='<div class="label">Explanation B</div><div style="font-size:34px;font-weight:600">Capacitor grew to 2.1 µF</div><div id="hCs" class="mono" style="font-size:22px;color:#55635e;margin-top:6px">same unloaded curve</div>';
+  const same=E('div',{style:{position:'absolute',left:0,top:'346px',width:'598px',fontSize:'27px',lineHeight:1.4,color:'#3c4a45'}},hyp,'Repeat the same step: <b>R × C</b> is all it can see. Same answer, every time.');
+  const nt=box(1250,240,598,null,{padding:'24px 28px',borderColor:'#c9d6f3'});
+  nt.innerHTML='<div style="display:flex;gap:12px;align-items:center"><span class="badge spark">Muse Spark · no tools</span><span class="label" style="font-size:19px">actual reply 1 of 5</span></div><div style="font-size:30px;font-weight:600;line-height:1.3;margin:16px 0 10px">“Nothing is wrong with the circuit. You didn’t measure τ.”</div><div style="font-size:21px;color:#3c4a45;line-height:1.45">All five replies opened this way: a 10–90% rise time mistaken for τ. A plausible hypothesis. All five also advised re-measuring.</div>';
+  const spark=box(1250,240,598,null,{padding:'24px 28px',borderColor:'#c9d6f3'});
+  spark.innerHTML=`<span class="badge spark">Spark’s decision · Muse Spark 1.3</span><div style="font-size:31px;font-weight:600;line-height:1.3;margin:16px 0 12px">Change the test. Add a 9.99 kΩ load.</div><div style="font-size:23px;line-height:1.45;color:#3c4a45">“${d.reason_load_en||d.reason_load_ko}”</div><div class="label" style="font-size:18px;margin-top:10px">${d.reason_load_en?'English translation of the recorded Korean reason':'Recorded reason'} · event ${d.reason_load_seq}</div>`;
+  const req=box(1250,640,598,null,{padding:'22px 28px',background:'#fff8ee',borderColor:'#e7d5bb'});
+  req.innerHTML='<span class="badge operator">Request to the operator</span><div style="font-size:30px;line-height:1.35;margin-top:14px">“Connect the output load.”</div><div class="label" style="font-size:19px;margin-top:8px">USB off → one jumper → USB on. The board re-checks itself.</div>';
+  const locks=E('div',{style:{position:'absolute',left:'1250px',top:'240px',width:'598px'}});
+  const lR=box(0,0,598,180,{padding:'22px 26px'});locks.appendChild(lR);lR.innerHTML=`<div style="display:flex;justify-content:space-between"><span class="label">“R changed” predicts</span><span style="color:#55635e">${lock()}</span></div><div class="mono" style="font-size:34px;margin-top:8px">gain ${d.models.r_changed.gain.toFixed(2)} · τ ${(d.models.r_changed.tau_s*1000).toFixed(1)} ms</div><div id="lRs" class="mono" style="font-size:28px;margin-top:10px;height:36px"></div>`;
+  const lC=box(0,200,598,180,{padding:'22px 26px'});locks.appendChild(lC);lC.innerHTML=`<div style="display:flex;justify-content:space-between"><span class="label">“C changed” predicts</span><span style="color:#315e91">${lock()}</span></div><div class="mono" style="font-size:34px;margin-top:8px">gain ${d.models.c_changed.gain.toFixed(2)} · τ ${(d.models.c_changed.tau_s*1000).toFixed(1)} ms</div><div id="lCs" class="mono" style="font-size:28px;margin-top:10px;height:36px"></div>`;
+  const lockNote=E('div',{style:{position:'absolute',left:0,top:'402px',width:'598px',fontSize:'21px',color:'#55635e',lineHeight:1.4}},locks,'Parameters locked before the loaded measurement. Curves are computed from the input measured during it.');
+  const verdict=box(1250,240,598,null,{padding:'26px 30px',borderColor:'#bcd8c8'});
+  verdict.innerHTML=`<span class="badge pass">Verdict</span><div style="font-size:38px;font-weight:600;line-height:1.25;margin:16px 0 8px">Capacitance ≈ 2.1× design</div><div class="label">assuming R = 10 kΩ · within the declared RC alternatives</div><div class="mono" style="font-size:24px;margin-top:18px;line-height:1.6">load step&nbsp;&nbsp; ${d.loaded_scores.c_changed.rms.toFixed(1)} mV ${check}<br>unseen sine ${d.reserved_scores.c_changed.rms.toFixed(1)} mV ${check}</div>`;
+  const unknown=box(1250,640,598,null,{padding:'22px 28px'});
+  unknown.innerHTML='<div style="font-size:26px;font-weight:600;margin-bottom:10px">Still unknown</div><div style="font-size:24px;line-height:1.5;color:#3c4a45">· Exact R and C values<br>· Calibrated confidence (9 mV is an engineering allowance)</div>';
+  const vis=E('div',{style:{position:'absolute',left:'72px',top:'240px',width:'1776px',height:'640px'}});
+  const sch=box(0,0,1150,640,{overflow:'hidden'});vis.appendChild(sch);
+  sch.innerHTML='<div style="position:absolute;left:32px;top:22px;font-size:28px;font-weight:600">Intended schematic (image)</div><img src="data/schematic.png" style="position:absolute;left:100px;top:90px;width:950px">';
+  const vr=box(1178,0,598,null,{padding:'24px 28px',borderColor:'#c9d6f3'});vis.appendChild(vr);
+  vr.innerHTML='<span class="badge spark">Muse Spark · vision</span><div style="font-size:30px;font-weight:600;margin:16px 0 12px">Read from the image</div>'+D.vision.components.map(c=>`<div class="mono" style="font-size:26px;padding:8px 0;border-top:1px solid #edf0ed">${c.marking} <span style="color:#55635e;font-size:21px">${c.a}–${c.b}</span></div>`).join('')+'<div class="label" style="font-size:18px;margin-top:8px">Values from legible labels only; ambiguities kept, never guessed.'+(D.vision.note?' '+D.vision.note:'')+'</div>';
+  const ok=box(1178,330,598,null,{padding:'22px 28px',background:'#fff8ee',borderColor:'#e7d5bb'});vis.appendChild(ok);
+  ok.innerHTML='<span class="badge operator">Operator review</span><div style="font-size:28px;margin-top:12px">Confirmed: 10 kΩ, 1 µF</div><div class="label" style="font-size:19px;margin-top:6px">The confirmed design becomes the nominal model.</div>';
+  const runS=(Date.parse(d.end)-Date.parse(d.start))/1000;
+  const stats=E('div',{style:{position:'absolute',left:'72px',top:'898px',fontSize:'24px',color:'#55635e'}},stage,`Whole run: ${Math.floor(runS/60)} min ${Math.round(runS%60)} s · ${d.decisions} Spark decisions · ${d.wiring} wiring change${d.wiring===1?'':'s'}`+(d.frames_total?` · ${d.frames_total.toLocaleString('en-US')} frames kept`:''));
+  const tauEl=()=>document.getElementById('tau');
+  return t=>{
+    enter(ban,t,0.1,0.5);
+    const tauK=tw(t,c.L10.start+0.2,1.4,ease);tauEl().textContent=t<c.L10.start?'—':(10+(d.tau_ms-10)*tauK).toFixed(1)+' ms';
+    document.getElementById('slow').style.opacity=tw(t,c.L10.start+1.8,0.4);
+    const hasVis=!!c.L32, tVisEnd=hasVis?c.L10.start-0.35:-1;
+    vis.style.opacity=hasVis?tw(t,c.L9.start,0.5)*exitk(t,tVisEnd,0.35):0;
+    if(hasVis){enter(sch,t,c.L9.start,0.5);enter(vr,t,c.L32.start+0.5,0.5);enter(ok,t,c.L32.start+2.0,0.5);}
+    show(panel,hasVis?tw(t,tVisEnd,0.4):tw(t,0.2,0.5),0);
+    // phases
+    const tLoadSel=c.L13.start, tLoadObs=c.L15.start-0.2, tRes=c.L16.start;
+    const phaseU=t<tLoadObs-0.6, phaseL=t>=tLoadObs-0.6&&t<tRes, phaseR=t>=tRes;
+    cu.svg.style.opacity=phaseU?1:0;legU.style.opacity=phaseU?tw(t,c.L9.start,0.4):0;
+    cl.svg.style.opacity=phaseL?1:0;legL.style.opacity=phaseL?1:(phaseR?1:0);
+    cr.svg.style.opacity=phaseR?1:0;
+    ptitle.textContent=phaseU?'Unloaded step response':phaseL?'With the 9.99 kΩ load: which explanation survives?':'A waveform it never saw: 5 Hz sine, reserved';
+    pnote.textContent=phaseU?'Measured on the real circuit. Design curve computed from the measured input.':phaseL?'Model parameters locked before this measurement · curves use the measured input · 9 mV allowance, whole and every region':'Reserved condition: never used to fit anything · same frozen models';
+    cu.reveal(pu.nom,tw(t,c.L9.start+0.3,1.6,ease));cu.reveal(pu.obs,tw(t,c.L10.start,1.6,ease));
+    cl.reveal(pl.obs,tw(t,tLoadObs,1.2,ease));cl.reveal(pl.r,tw(t,tLoadObs+1.3,0.9,ease));cl.reveal(pl.c,tw(t,tLoadObs+2.0,0.9,ease));
+    cr.reveal(pr.obs,tw(t,tRes+0.3,1.3,ease));cr.reveal(pr.c,tw(t,tRes+1.6,1.0,ease));cr.reveal(pr.r,tw(t,tRes+1.6,1.0,ease));
+    // right column sequencing
+    const kN=c.L33?tw(t,c.L33.start-0.2,0.5)*exitk(t,c.L11.start-0.4,0.4):0;show(nt,kN,(1-tw(t,c.L33?c.L33.start-0.2:0,0.5))*24);
+    const kH=tw(t,c.L11.start-0.2,0.5)*exitk(t,tLoadSel-0.3);hyp.style.opacity=kH;
+    enter(hR,t,c.L11.start-0.1,0.5);enter(hC,t,c.L11.start+0.9,0.5);same.style.opacity=tw(t,c.L12.start,0.5);
+    const kS=tw(t,tLoadSel-0.2,0.5)*exitk(t,c.L14.start-0.4);show(spark,kS,(1-tw(t,tLoadSel-0.2,0.5))*24);
+    const kQ=tw(t,tLoadSel+2.4,0.5)*exitk(t,c.L14.start-0.4);show(req,kQ,(1-tw(t,tLoadSel+2.4,0.5))*24);
+    const kL=tw(t,c.L14.start-0.2,0.5)*exitk(t,c.L17.start-0.4);locks.style.opacity=kL;
+    enter(lR,t,c.L14.start-0.1,0.5);enter(lC,t,c.L14.start+0.4,0.5);lockNote.style.opacity=tw(t,c.L14.start+1.2,0.5);
+    const lRs=document.getElementById('lRs'),lCs=document.getElementById('lCs');
+    lRs.innerHTML=t>tLoadObs+1.6?`step ${d.loaded_scores.r_changed.rms.toFixed(1)} mV ${cross}`:'';
+    lCs.innerHTML=t>tLoadObs+2.3?`step ${d.loaded_scores.c_changed.rms.toFixed(1)} mV ${check}`+(t>tRes+2.4?` · sine ${d.reserved_scores.c_changed.rms.toFixed(1)} mV ${check}`:''):'';
+    lR.style.opacity=(t>tLoadObs+1.9?0.45:1)*tw(t,c.L14.start-0.1,0.5);
+    const kV=tw(t,c.L17.start-0.2,0.6);show(verdict,kV,(1-kV)*24);
+    const kU=tw(t,c.L18.start-0.1,0.5);show(unknown,kU,(1-kU)*24);
+    stats.style.opacity=tw(t,c.L18.start+1.0,0.6);
+  };
+};
+
+SCENES.repair=(C,D)=>{
+  document.body.style.background='#f7f8f5';
+  const r=D.repair,c=C.cues;
+  if(r.pending){
+    chapter('Repair');prov('rehearsal','PENDING · Spark-directed physical repair (tonight)');
+    const slot=(x,y,w,h,title,body)=>{const b=box(x,y,w,h,{padding:'26px 30px',background:'repeating-linear-gradient(135deg,#fbfbf9 0 14px,#f1f3ef 14px 28px)',borderStyle:'dashed',borderColor:'#b9c3bd'});b.innerHTML=`<div class="label" style="font-size:19px;letter-spacing:.08em;text-transform:uppercase">pending</div><div style="font-size:30px;font-weight:600;margin:10px 0 8px">${title}</div><div style="font-size:22px;color:#55635e;line-height:1.45">${body}</div>`;return b;};
+    const s1=slot(72,130,800,230,'Spark’s repair request','Recorded reason from tonight’s run (translated, with original).');
+    const s2=slot(72,390,800,250,'Forecast pushed to GitHub first','Commit hash and time from the run. Repaired / not repaired forecast curves.');
+    const s3=slot(72,670,800,230,'Footage: the extra capacitor comes out','Overhead phone video, recorded during the run.');
+    const s4=slot(910,130,938,770,'After the repair: measured vs. forecast','Measured-input comparison and the pre-published forecast, scored separately, per check.');
+    return t=>{enter(s1,t,0.2,0.5);enter(s2,t,c.L20.start-0.1,0.5);enter(s3,t,c.L21.start,0.5);enter(s4,t,c.L21.start+1.2,0.5);};
+  }
+  chapter('Repair');prov(r.source==='physical'?'real':'rehearsal',r.source==='physical'?'Real hardware · Spark-directed repair':'PLACEHOLDER · mock rehearsal data');
+  const req=box(72,130,800,null,{padding:'26px 30px',borderColor:'#c9d6f3'});
+  req.innerHTML=`<span class="badge spark">Spark’s repair request</span><div style="font-size:36px;font-weight:600;margin:16px 0 10px">Restore the designed capacitance.</div><div style="font-size:23px;color:#3c4a45;line-height:1.45">${r.reason_en}</div>`;
+  const pub=box(72,410,800,null,{padding:'24px 30px',background:'#f4f8f5',borderColor:'#bcd8c8'});
+  pub.innerHTML=`<div style="display:flex;align-items:center;gap:14px;color:var(--accent)">${lock()}<span style="font-size:28px;font-weight:600">Forecast pushed to GitHub first</span></div><div class="mono" style="font-size:23px;margin-top:14px;line-height:1.7;color:#1c2b27">commit ${r.commit.slice(0,7)} · ${r.commit_time}<br>repaired: gain ${r.restored.gain.toFixed(2)} · τ ${(r.restored.tau_s*1000).toFixed(1)} ms<br>not repaired: gain ${r.unchanged.gain.toFixed(2)} · τ ${(r.unchanged.tau_s*1000).toFixed(1)} ms</div>`;
+  const act=box(72,720,800,null,{padding:'22px 30px',background:'#fff8ee',borderColor:'#e7d5bb'});
+  act.innerHTML=`<span class="badge operator">Operator</span><div style="font-size:28px;margin-top:12px">Removed the extra capacitor · ${r.repair_time}</div><div class="label" style="font-size:19px;margin-top:6px">USB off → repair → USB on. A new boot is required.</div>`;
+  const panel=box(910,130,938,760);
+  const ptitle=E('div',{style:{position:'absolute',left:'30px',top:'22px',fontSize:'28px',fontWeight:600}},panel,'');
+  const leg=E('div',{style:{position:'absolute',left:'30px',top:'70px'}},panel);
+  const lgM=legendItem(leg,0,0,'#bb4c27','Measured after repair');legendItem(leg,290,0,'#315e91','Forecast: repaired',true);legendItem(leg,560,0,'#7a827e','Forecast: not repaired',true);
+  const ch=chart(panel,{x:10,y:110,w:910,h:480,xr:[0,0.256],yr:r.yr,ticksX:[0,.05,.1,.15,.2,.25],ticksY:r.ticksY,fmtX:v=>Math.round(v*1000)+' ms',fmtY:v=>v.toFixed(2),xlabel:'time',ylabel:'V'});
+  const fu=ch.line(r.ft,r.f_unchanged,{color:'#7a827e',dash:'10 9',width:3.5}),fr=ch.line(r.ft,r.f_restored,{color:'#315e91',dash:'12 8',width:4}),po=ch.line(r.t,r.observed,{color:'#bb4c27',width:4});
+  const pending=E('div',{style:{position:'absolute',left:'560px',top:'330px',fontSize:'26px',color:'#905515',fontWeight:600}},panel,'awaiting the repaired circuit…');
+  const sc=E('div',{cls:'mono',style:{position:'absolute',left:'30px',top:'620px',fontSize:'23px',lineHeight:1.65}},panel,'');
+  const mk=v=>v?check:cross;
+  return t=>{
+    enter(req,t,0.2,0.5);enter(pub,t,c.L20.start-0.1,0.5);enter(act,t,c.L21.start,0.5);
+    enter(panel,t,c.L20.start+0.6,0.5);
+    const measured=t>c.L22.start-0.7;
+    ptitle.textContent=measured?'After the repair: does the forecast hold?':'Published before anyone touched the circuit';
+    lgM.style.opacity=measured?1:0.25;
+    ch.reveal(fr,tw(t,c.L20.start+1.0,1.2,ease));ch.reveal(fu,tw(t,c.L20.start+1.6,1.2,ease));
+    pending.style.opacity=tw(t,c.L20.start+2.4,0.4)*(measured?0:1);
+    ch.reveal(po,tw(t,c.L22.start-0.6,1.4,ease));
+    sc.innerHTML=t>c.L22.start+1.0?`repaired model&nbsp;&nbsp; step ${r.scores.restored[0].toFixed(1)} mV ${mk(r.pass.restored[0])} · 4 Hz sine ${r.scores.restored[1].toFixed(1)} mV ${mk(r.pass.restored[1])}`+(t>c.L22.start+1.7?`<br>not repaired&nbsp;&nbsp;&nbsp; step ${r.scores.unchanged[0].toFixed(1)} mV ${mk(r.pass.unchanged[0])} · 4 Hz sine ${r.scores.unchanged[1].toFixed(1)} mV ${mk(r.pass.unchanged[1])}`:'')+(t>c.L22.start+2.4?`<br><span style="font-family:Plex;font-size:20px;color:#55635e">Forecast vs. measured: ${r.forecast_rms.map((v,i)=>v.toFixed(1)+' mV '+(r.pass.forecast[i]?'✓':'✗')).join(' · ')} · scores use whole waveform and every region, 9 mV</span>`:''):'';
+  };
+};
+
+SCENES.discover=(C,D)=>{
+  document.body.style.background='#f7f8f5';
+  const b=D.b5,c=C.cues;
+  chapter('Discover');prov('sim','Simulated bench · Spark decisions are real API calls');
+  const insp=E('div',{style:{position:'absolute',left:'72px',top:'92px',fontSize:'21px',color:'#55635e'}},stage,'A simplified input-clamp test circuit inspired by the forum problem · not an ESP32 · Spark is not told the wiring');
+  const bridge=E('div',{style:{position:'absolute',left:'72px',top:'330px',width:'1776px',display:'grid',gridTemplateColumns:'1fr 80px 1fr',alignItems:'center'}});
+  const bl=box(0,0,0,null,{position:'relative',width:'auto',padding:'30px 34px'});bridge.appendChild(bl);
+  bl.innerHTML='<div class="label" style="font-size:20px">In the forum thread</div><div style="font-size:32px;font-weight:600;line-height:1.3;margin-top:8px">An unpowered chip’s input clamp pulled the divider down.</div><div style="font-size:23px;color:#55635e;margin-top:10px">Explained early, confirmed by the poster’s own test.</div>';
+  E('div',{style:{fontSize:'44px',color:'#1f6954',textAlign:'center'}},bridge,'→');
+  const br=box(0,0,0,null,{position:'relative',width:'auto',padding:'30px 34px',borderColor:'#cfc6ef'});bridge.appendChild(br);
+  br.innerHTML='<div class="label" style="font-size:20px">On the bench</div><div style="font-size:32px;font-weight:600;line-height:1.3;margin-top:8px">A simplified test circuit with a hidden clamp diode.</div><div style="font-size:23px;color:#55635e;margin-top:10px">Spark sees only measurements, never the wiring.</div>';
+  const follow=E('div',{style:{position:'absolute',left:'640px',top:'330px',fontSize:'24px',color:'#55635e',fontWeight:600}},stage,'output follows input');
+  const panel=box(72,130,1100,720);
+  const ptitle=E('div',{style:{position:'absolute',left:'30px',top:'22px',fontSize:'28px',fontWeight:600}},panel,'');
+  const tr=b.train[2],v1=b.ver[1];
+  const ct=chart(panel,{x:10,y:110,w:1070,h:500,xr:[0,2.05],yr:[-0.9,0.9],ticksX:[0,0.5,1,1.5,2],ticksY:[-0.8,-0.4,0,0.4,0.8],fmtX:v=>v+' s',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
+  const sm=b.train[0];const sin_=ct.line(sm.t,sm.in,{color:'#9aa29e',width:3}),sout=ct.line(sm.t,sm.out,{color:'#bb4c27',width:4});
+  const pin=ct.line(tr.t,tr.in,{color:'#9aa29e',width:3}),pout=ct.line(tr.t,tr.out,{color:'#bb4c27',width:4}),pfit=ct.line(tr.t,b.train_pred[2],{color:'#315e91',dash:'10 9',width:3.5});
+  const cv=chart(panel,{x:10,y:110,w:1070,h:500,xr:[0,1.03],yr:[-0.75,0.75],ticksX:[0,0.25,0.5,0.75,1],ticksY:[-0.6,-0.3,0,0.3,0.6],fmtX:v=>v+' s',fmtY:v=>v.toFixed(1),xlabel:'time',ylabel:'V'});
+  const vin=cv.line(v1.t,v1.in,{color:'#9aa29e',width:3}),vout=cv.line(v1.t,v1.out,{color:'#bb4c27',width:4}),vpred=cv.line(v1.t,b.ver_pred[1],{color:'#315e91',dash:'10 9',width:3.5});
+  const leg=E('div',{style:{position:'absolute',left:'30px',top:'70px'}},panel);legendItem(leg,0,0,'#9aa29e','Input');legendItem(leg,150,0,'#bb4c27','Output');const legP=legendItem(leg,310,0,'#315e91','Spark’s netlist as written, simulated',true);
+  const clip=E('div',{style:{position:'absolute',left:'640px',top:'150px',fontSize:'24px',color:'var(--observed)',fontWeight:600}},panel,'top half flattens at +0.47 V');
+  const lin=box(1210,130,638,null,{padding:'22px 26px'});
+  lin.innerHTML='<div style="font-size:26px;font-weight:600;margin-bottom:10px">Five starting linear models</div>'+b.linear_train.map(l=>`<div class="mono" style="display:flex;justify-content:space-between;font-size:22px;padding:5px 0;border-top:1px solid #edf0ed"><span>${({rc:'RC low-pass',rc_input_branch:'RC + input branch',resistor:'resistor',resistor_input_branch:'resistor + input branch',resistor_output_leak:'resistor + output leak'})[l.family]}</span><span>${l.worst_check_rms.toFixed(0)} mV ${cross}</span></div>`).join('')+'<div class="label" style="font-size:18px;margin-top:8px">worst training error · allowance 9 mV</div>';
+  const prop=box(1210,130,638,null,{padding:'24px 28px',borderColor:'#c9d6f3'});
+  prop.innerHTML=`<span class="badge spark">Muse Spark 1.3 · max</span><div style="font-size:31px;font-weight:600;margin:14px 0 6px">Proposed: R from IN to OUT, diode from OUT to REF</div><div class="label" style="font-size:19px">a structure outside the five starting models</div>
+  <svg width="580" height="120" viewBox="0 0 580 120"><g stroke="#1c2b27" stroke-width="3" fill="none"><path d="M20 40h90"/><path d="M110 40l10-14 20 28 20-28 20 28 20-28 10 14"/><path d="M210 40h160"/><path d="M370 40v20"/><path d="M355 60h30l-15 26z" fill="#1c2b27"/><path d="M355 88h30"/><path d="M370 88v22"/></g><g font-size="20" fill="#3c4a45"><text x="8" y="28">IN</text><text x="372" y="28">OUT</text><text x="390" y="114">REF</text><text x="128" y="78">R1</text><text x="396" y="80">D1</text></g></svg>
+  <div style="font-size:21px;line-height:1.45;color:#3c4a45">“Small sine follows gain 1, negative follows, positive clips ~0.41 V at 0.5 V in and ~0.47 V at 0.8 V in… matching single diode shunt to REF via series R.”</div><div class="label" style="font-size:18px;margin-top:8px">Spark’s recorded rationale (original English)</div>`;
+  const frz=box(1210,640,638,null,{padding:'20px 26px',background:'#f4f8f5',borderColor:'#bcd8c8'});
+  frz.innerHTML=`<div style="display:flex;align-items:center;gap:12px;color:var(--accent)">${lock()}<span style="font-size:25px;font-weight:600">Netlist → ngspice → locked prediction</span></div><div class="mono" style="font-size:21px;margin-top:10px">pushed to GitHub · commit ${b.publication.commit.slice(0,7)}</div>`;
+  const res=box(1210,130,638,null,{padding:'22px 26px',borderColor:'#bcd8c8'});
+  res.innerHTML=`<span class="badge pass">Two unseen inputs</span><div class="mono" style="font-size:24px;line-height:1.7;margin-top:14px">±0.35 V step&nbsp;&nbsp;&nbsp;&nbsp; ${b.ver_scores[0].cond.toFixed(1)} mV ${check}<br>±0.65 V 5 Hz sine ${b.ver_scores[1].cond.toFixed(1)} mV ${check}</div><div style="font-size:22px;color:#3c4a45;margin-top:12px">Every linear alternative failed both.</div>`;
+  return t=>{
+    enter(panel,t,c.L34?c.L34.start+2.2:0.2,0.5);
+    const tV=c.L26.start-0.3, phaseT=t<tV;
+    ct.svg.style.opacity=phaseT?1:0;cv.svg.style.opacity=phaseT?0:1;
+    const tS=c.L35?c.L35.start:0.4, tB=c.L35?c.L35.start+1.4:0.8, smallPhase=t<tB;
+    insp.style.opacity=tw(t,0.1,0.5);
+    const kB=tw(t,0.2,0.5)*exitk(t,c.L34?c.L34.start+2.2:3,0.4);bridge.style.opacity=kB;
+    follow.style.opacity=(smallPhase&&phaseT)?tw(t,tS+0.4,0.4):0;
+    ptitle.textContent=phaseT?(smallPhase?'Training input: ±0.2 V, 1 Hz sine':'Training input: ±0.8 V, 1 Hz sine'):'Unseen input: ±0.65 V, 5 Hz sine';
+    ct.reveal(sin_,smallPhase?tw(t,tS-0.6,0.8,ease):0);ct.reveal(sout,smallPhase?tw(t,tS-0.3,0.8,ease):0);
+    ct.reveal(pin,smallPhase?0:tw(t,tB,0.8,ease));ct.reveal(pout,smallPhase?0:tw(t,tB+0.2,1.1,ease));ct.reveal(pfit,tw(t,c.L25.start+0.2,1.2,ease));
+    legP.style.opacity=tw(t,c.L25.start+0.2,0.4);clip.style.opacity=tw(t,tB+1.2,0.4)*(phaseT?1:0);
+    cv.reveal(vin,tw(t,tV,0.6,ease));cv.reveal(vout,tw(t,tV+0.3,1.1,ease));cv.reveal(vpred,tw(t,tV+1.2,1.0,ease));
+    const tL=c.L36?c.L36.start-0.2:c.L23.start+0.8;const kLin=tw(t,tL,0.5)*exitk(t,c.L24.start-0.3);show(lin,kLin,(1-tw(t,tL,0.5))*24);
+    const kP=tw(t,c.L24.start-0.2,0.5)*exitk(t,tV-0.2);show(prop,kP,(1-tw(t,c.L24.start-0.2,0.5))*24);
+    const kF=tw(t,c.L25.start+1.0,0.5)*exitk(t,tV-0.2);show(frz,kF,(1-tw(t,c.L25.start+1.0,0.5))*24);
+    const kR=tw(t,tV+1.6,0.5);show(res,kR,(1-kR)*24);
+  };
+};
+
+SCENES.trust=(C,D)=>{
+  document.body.style.background='#f7f8f5';
+  const c=C.cues,T=D.trust;
+  chapter('Why trust it');
+  const tl=E('div',{style:{position:'absolute',left:'120px',top:'170px',width:'1680px'}});
+  const rows=T.rows.map((r,i)=>{const row=box(0,i*170,1680,140,{padding:'24px 32px',display:'flex',alignItems:'center',gap:'34px'});tl.appendChild(row);
+    row.innerHTML=`<div style="width:430px"><div style="font-size:28px;font-weight:600">${r.what}</div><div class="label" style="font-size:20px">${r.note}</div></div>
+    <div style="flex:1;display:flex;align-items:center;gap:20px"><div style="text-align:center"><div style="color:var(--accent)">${lock()}</div><div class="mono" style="font-size:22px">${r.commit}</div><div class="label" style="font-size:19px">${r.t1}</div></div>
+    <div style="flex:1;height:3px;background:linear-gradient(90deg,#1f6954,#bb4c27)"></div><div class="label" style="font-size:20px">${r.gap}</div><div style="flex:1;height:3px;background:#bb4c27"></div>
+    <div style="text-align:center"><div style="color:var(--observed);font-size:26px">●</div><div style="font-size:22px">measured</div><div class="label" style="font-size:19px">${r.t2}</div></div></div>`;return row;});
+  const fails=E('div',{style:{position:'absolute',left:'120px',top:(170+T.rows.length*170+20)+'px',width:'1680px',fontSize:'27px',lineHeight:1.55,color:'#3c4a45'}},stage,T.fails);
+  return t=>{rows.forEach((r,i)=>enter(r,t,0.2+i*0.5,0.5));fails.style.opacity=tw(t,c.L28.start,0.6);};
+};
+
+SCENES.close=(C,D)=>{
+  document.body.style.background='#183d35';
+  const c=C.cues;
+  const bg=E('div',{cls:'dark',style:{position:'absolute',inset:0}});
+  const steps=[['Hypothesize','Muse Spark'],['Choose the test','Muse Spark'],['Lock the prediction','engine + git'],['Measure','Arduino bench'],['Verify','engine']];
+  const cx=960,cy=430,R=290;
+  const ring=E('div',{style:{position:'absolute',inset:0}},bg);
+  const svg=S('svg',{width:W,height:H,style:'position:absolute;left:0;top:0'},ring);
+  const circ=S('circle',{cx,cy,r:R,fill:'none',stroke:'#3f7a68','stroke-width':3,'stroke-dasharray':2*Math.PI*R,'stroke-dashoffset':2*Math.PI*R},svg);
+  const nodes=steps.map(([a,b],i)=>{const ang=-Math.PI/2+i*2*Math.PI/5,x=cx+R*Math.cos(ang),y=cy+R*Math.sin(ang);
+    const n=E('div',{style:{position:'absolute',left:(x-150)+'px',top:(y-48)+'px',width:'300px',textAlign:'center',padding:'14px 10px',borderRadius:'14px',background:i===2?'#1f6954':'#214b41',border:'1.5px solid '+(i===2?'#7fd1b1':'rgba(255,255,255,.2)')}},ring);
+    n.innerHTML=`<div style="font-size:30px;font-weight:600">${a}</div><div style="font-size:20px;color:#a9cdbf">${b}</div>`;return n;});
+  const center=E('div',{style:{position:'absolute',left:(cx-200)+'px',top:(cy-40)+'px',width:'400px',textAlign:'center',fontSize:'24px',color:'#a9cdbf'}},ring,'no fit → new hypothesis');
+  const end=E('div',{style:{position:'absolute',left:0,right:0,top:'300px',textAlign:'center'}},bg,'<div style="font-size:120px;font-weight:600;letter-spacing:-.035em">BenchMate</div><div style="font-size:38px;color:#cfe3db;margin-top:10px">Turn a plausible explanation into a tested one.</div><div style="font-size:26px;color:#8fb5a7;margin-top:46px">Powered by Muse Spark · github.com/bami-codes/BenchMate</div>');
+  return t=>{
+    const kr=exitk(t,c.L30.start-0.5,0.5);ring.style.opacity=kr*tw(t,0,0.5);
+    circ.setAttribute('stroke-dashoffset',2*Math.PI*R*(1-tw(t,0.2,c.L29.end-0.2,x=>x)));
+    const at=[0,1.0,2.0,3.3,4.0].map(v=>c.L29.start+v*(c.L29.end-c.L29.start)/4.6);
+    nodes.forEach((n,i)=>{const k=tw(t,at[i]-0.1,0.4);show(n,k,0,0,0.9+0.1*k);});center.style.opacity=tw(t,c.L29.end,0.5);
+    const ke=tw(t,c.L30.start-0.2,0.8);show(end,ke,(1-ke)*20);
+  };
+};
+
+SCENES.overlay=(C,D)=>{document.body.style.background='transparent';document.documentElement.style.background='transparent';
+  const lab=C.label?E('div',{style:{position:'absolute',left:'135px',top:'40px',fontSize:'26px',fontWeight:600,color:'#fff',letterSpacing:'.01em'}},stage,C.label):null;
+  return t=>{};};
+
+/* ---------------- Driver ---------------- */
+let update=null,cues={},fx=null,dur=0;
+const fadeEl=E('div',{style:{position:'absolute',inset:0,zIndex:40,pointerEvents:'none',opacity:0}},document.body);
+window.setupScene=(name,scene,data,opts={})=>{stage.innerHTML='';cues=scene.cues;dur=scene.duration||0;fx=opts;update=SCENES[name](scene,data);};
+window.frame=t=>{update(t);
+  if(fx&&fx.inBg!==undefined&&t<0.45){fadeEl.style.background=fx.inBg;fadeEl.style.opacity=1-easeOut(clamp(t/0.45));}
+  else if(fx&&fx.outBg&&t>dur-0.45){fadeEl.style.background=fx.outBg;fadeEl.style.opacity=easeOut(clamp((t-(dur-0.45))/0.45));}
+  else fadeEl.style.opacity=0;const cap=document.getElementById('captext');let txt='';for(const c of Object.values(cues)){if(t>=c.start-0.05&&t<=c.end+0.35)txt=c.cap;}cap.style.display=txt?'inline-block':'none';cap.textContent=txt;};
+</script></body></html>

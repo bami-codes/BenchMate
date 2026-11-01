@@ -1,5 +1,5 @@
 {
-  "protocol": "b5-variants-implementation-v1",
+  "protocol": "b5-variants-implementation-v2",
   "design": "b5-variants-design-v1.2-reviewed",
   "phase": "selection only; no final evaluation authorised by this command",
   "validation": "53 relevant tests passed, including independent truth controls, repeatability, leakage schema, KCL, numerical convergence and failed-fit classification",
@@ -8,7 +8,13 @@
     "experiments/b5_variants/bench.py": "624bf885effc01b87fbec712893c50931e1923a9f681ccfea5d8ec5208b6b673",
     "experiments/b5_variants/fitting.py": "c799013da05cc001d8d6deb13625fc70056b89f4b22374090e8066e460d26f2e",
     "experiments/b5_variants/run.py": "79b6a3b6cbbe55709b30b368b469adf34b273be9b8240abbe2a078c747d6e919",
-    "tests/test_b5_variants.py": "9610e93c49722edba535dfefc832dfdd82d915853a284f20f7469a238489972d",
-    "examples/b5-variants/2026-11-02/design.json": "4ae1f7f140f6a186ed534ffb316ccbe2b4faf582ff652839d1cb657ecb7478a2"
-  }
+    "tests/test_b5_variants.py": "8a31144a19635271f68455b4d86d05de3184135e91c286ffc8d79f8744578f98",
+    "examples/b5-variants/2026-11-02/design.json": "4ae1f7f140f6a186ed534ffb316ccbe2b4faf582ff652839d1cb657ecb7478a2",
+    "experiments/b5_variants/evaluate.py": "521eff63b8ecba30e58d1efc893729746562b7bbeb636b1082c8b97841b0b13a",
+    "experiments/b5_variants/report.py": "a9e7ad1c81d94374d6b604f8f71e031745ef3d4760ae8904ddbaca766f3eaa28",
+    "experiments/night_budget.py": "fb0114c513e71ecaf5510244f1ff26c3833b68deb1a381a78c9a43153c5682d2",
+    "examples/b5-variants/2026-11-02/variants.json": "4f768a16b52c7312ccd7617759a4b73da0febe6bb939cdb2ab7d96bd7d99c567"
+  },
+  "selection_started_at_commit": "ab814e31824001e3b8f5ae478c763a2073b5caec",
+  "addendum": "Added final evaluator, report, physical-log lock, truth manifest and tests; selection solver, fitting and selection rules unchanged. No final evaluation run."
 }

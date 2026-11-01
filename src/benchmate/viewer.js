@@ -37,6 +37,7 @@ function sparkActor(sequence){
   return {name:'Spark · '+label,kind:'spark',title:'Recorded API reasoning effort: '+(effort||'not recorded')};
 }
 function actorFor(event){
+  const special=typeof repairActor==='function'?repairActor(event):null;if(special)return special;
   if(event.kind==='physical_measurement_selected')return event.payload.selected_by==='muse_spark'?sparkActor(event.sequence):{name:'Engine',kind:'engine'};
   if(['operator_action_requested','operator_wiring_confirmation'].includes(event.kind))return {name:'Operator',kind:'operator'};
   if(event.kind==='physical_observation')return {name:'Instrument',kind:'engine'};

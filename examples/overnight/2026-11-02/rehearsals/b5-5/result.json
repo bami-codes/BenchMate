@@ -1,0 +1,104 @@
+{
+  "agent_report": {
+    "explanation": "Mock rehearsal only. Unloaded series-R shunt-diode model predicted two held-out unloaded waveforms within 9mV whole and all regions, while all linear families failed.",
+    "limits": "Mock unloaded scope only, not physical or loaded. No unique R, IS, topology or absolute REF claimed; confounding possible. Input branches may stay invisible. No extrapolation beyond tested unloaded conditions.",
+    "verdict": "verified",
+    "source": "mock",
+    "scope": "Unloaded behavior only; no unique parameters/topology or loaded extrapolation."
+  },
+  "source": "mock",
+  "reserved_check_passed": true,
+  "proposals": 1,
+  "instrument": {
+    "source": "mock",
+    "waveforms": 8,
+    "real_serial_commands": 0,
+    "physical_measurements": 0,
+    "operator_actions_simulated": true
+  },
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "max",
+  "http_requests": 7,
+  "usage": [
+    {
+      "input_tokens": 1493,
+      "input_tokens_details": {
+        "cached_tokens": 1393
+      },
+      "output_tokens": 807,
+      "output_tokens_details": {
+        "reasoning_tokens": 747
+      },
+      "total_tokens": 2300
+    },
+    {
+      "input_tokens": 2846,
+      "input_tokens_details": {
+        "cached_tokens": 1393
+      },
+      "output_tokens": 408,
+      "output_tokens_details": {
+        "reasoning_tokens": 301
+      },
+      "total_tokens": 3254
+    },
+    {
+      "input_tokens": 3909,
+      "input_tokens_details": {
+        "cached_tokens": 1393
+      },
+      "output_tokens": 93,
+      "output_tokens_details": {
+        "reasoning_tokens": 35
+      },
+      "total_tokens": 4002
+    },
+    {
+      "input_tokens": 4056,
+      "input_tokens_details": {
+        "cached_tokens": 2801
+      },
+      "output_tokens": 249,
+      "output_tokens_details": {
+        "reasoning_tokens": 126
+      },
+      "total_tokens": 4305
+    },
+    {
+      "input_tokens": 10985,
+      "input_tokens_details": {
+        "cached_tokens": 3825
+      },
+      "output_tokens": 4281,
+      "output_tokens_details": {
+        "reasoning_tokens": 4056
+      },
+      "total_tokens": 15266
+    },
+    {
+      "input_tokens": 16337,
+      "input_tokens_details": {
+        "cached_tokens": 1393
+      },
+      "output_tokens": 295,
+      "output_tokens_details": {
+        "reasoning_tokens": 235
+      },
+      "total_tokens": 16632
+    },
+    {
+      "input_tokens": 19609,
+      "input_tokens_details": {
+        "cached_tokens": 16241
+      },
+      "output_tokens": 1011,
+      "output_tokens_details": {
+        "reasoning_tokens": 859
+      },
+      "total_tokens": 20620
+    }
+  ],
+  "api_elapsed_s": 58.37900183186866,
+  "reserved_allowance_usd": 7.0
+}

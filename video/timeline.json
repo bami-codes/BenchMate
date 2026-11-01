@@ -1,0 +1,232 @@
+{
+ "voice": "am_michael",
+ "scenes": [
+  {
+   "name": "hook",
+   "start": 0,
+   "duration": 21.574,
+   "cues": {
+    "F1": {
+     "start": 0.5,
+     "end": 6.72,
+     "cap": "On the Arduino forum, a voltage divider reads 1.1 V instead of 1.8."
+    },
+    "F2": {
+     "start": 7.32,
+     "end": 11.107,
+     "cap": "Replies guess: resistor tolerance, the meter, bad solder."
+    },
+    "F3": {
+     "start": 11.607,
+     "end": 16.681,
+     "cap": "Early on, a reply points to the cause: the ESP32 has no power."
+    },
+    "F4": {
+     "start": 17.281,
+     "end": 19.374,
+     "cap": "Days later, a test confirms it."
+    }
+   }
+  },
+  {
+   "name": "intro",
+   "start": 21.574,
+   "duration": 16.216,
+   "cues": {
+    "L6": {
+     "start": 1.6,
+     "end": 4.815,
+     "cap": "BenchMate gives Muse Spark a bench to run those tests."
+    },
+    "L7": {
+     "start": 5.515,
+     "end": 10.536,
+     "cap": "An Arduino drives the circuit and measures it. About $40 of parts."
+    },
+    "L8": {
+     "start": 11.536,
+     "end": 15.216,
+     "cap": "Spark chooses each experiment. I only move the wires."
+    }
+   }
+  },
+  {
+   "name": "diagnose",
+   "start": 37.789,
+   "duration": 49.725,
+   "cues": {
+    "L9": {
+     "start": 0.5,
+     "end": 4.949,
+     "cap": "First, a fault I planted, in a circuit designed for 10 ms."
+    },
+    "L32": {
+     "start": 5.349,
+     "end": 8.591,
+     "cap": "Spark reads its schematic. I confirm the values."
+    },
+    "L10": {
+     "start": 9.391,
+     "end": 12.534,
+     "cap": "It measures 21.4 ms. Twice as slow."
+    },
+    "L33": {
+     "start": 13.334,
+     "end": 16.268,
+     "cap": "Without a bench, Spark guessed: nothing is wrong."
+    },
+    "L11": {
+     "start": 17.869,
+     "end": 22.688,
+     "cap": "With one, it sees two suspects: a bigger resistor, or a bigger capacitor."
+    },
+    "L12": {
+     "start": 23.188,
+     "end": 25.406,
+     "cap": "Another step test can't separate them."
+    },
+    "L13": {
+     "start": 25.706,
+     "end": 27.685,
+     "cap": "So Spark asks for a known load."
+    },
+    "L14": {
+     "start": 30.485,
+     "end": 32.239,
+     "cap": "Both answers are locked first."
+    },
+    "L15": {
+     "start": 33.039,
+     "end": 34.454,
+     "cap": "Only one survives."
+    },
+    "L16": {
+     "start": 36.854,
+     "end": 39.426,
+     "cap": "Then it passes a waveform it never saw."
+    },
+    "L17": {
+     "start": 41.826,
+     "end": 45.509,
+     "cap": "Verdict: the capacitor is about twice its design value."
+    },
+    "L18": {
+     "start": 46.409,
+     "end": 48.225,
+     "cap": "And it says what it still doesn't know."
+    }
+   }
+  },
+  {
+   "name": "app",
+   "start": 87.515,
+   "duration": 9.0,
+   "cues": {
+    "L31": {
+     "start": 2.2,
+     "end": 5.191,
+     "cap": "In the app, every step links back to its raw data."
+    }
+   }
+  },
+  {
+   "name": "repair",
+   "start": 96.515,
+   "duration": 17.506,
+   "cues": {
+    "L19": {
+     "start": 0.5,
+     "end": 4.572,
+     "cap": "Spark asks for one fix: restore the designed capacitance."
+    },
+    "L20": {
+     "start": 5.572,
+     "end": 9.051,
+     "cap": "Its prediction goes to GitHub before I touch anything."
+    },
+    "L21": {
+     "start": 11.251,
+     "end": 14.906,
+     "cap": "I pull the extra capacitor, and the bench measures again."
+    }
+   }
+  },
+  {
+   "name": "discover",
+   "start": 114.021,
+   "duration": 33.854,
+   "cues": {
+    "L23": {
+     "start": 0.5,
+     "end": 4.02,
+     "cap": "Next, a test circuit inspired by that forum problem."
+    },
+    "L34": {
+     "start": 4.42,
+     "end": 7.913,
+     "cap": "It hides a clamp diode. Spark isn't told the wiring."
+    },
+    "L35": {
+     "start": 8.513,
+     "end": 12.085,
+     "cap": "Small signals pass. Big ones get flattened on top."
+    },
+    "L36": {
+     "start": 13.685,
+     "end": 16.129,
+     "cap": "None of the five starting models can do that."
+    },
+    "L24": {
+     "start": 16.929,
+     "end": 21.059,
+     "cap": "So Spark proposes a new structure: a resistor and a diode."
+    },
+    "L25": {
+     "start": 23.459,
+     "end": 27.071,
+     "cap": "Its netlist becomes a simulation, then a locked prediction."
+    },
+    "L26": {
+     "start": 28.871,
+     "end": 31.854,
+     "cap": "Two inputs it never trained on. Both match."
+    }
+   }
+  },
+  {
+   "name": "trust",
+   "start": 147.875,
+   "duration": 10.053,
+   "cues": {
+    "L27": {
+     "start": 0.4,
+     "end": 3.682,
+     "cap": "Rules and predictions are locked before each measurement."
+    },
+    "L28": {
+     "start": 5.882,
+     "end": 8.653,
+     "cap": "Every attempt is kept. Failures included."
+    }
+   }
+  },
+  {
+   "name": "close",
+   "start": 157.928,
+   "duration": 12.089,
+   "cues": {
+    "L29": {
+     "start": 0.6,
+     "end": 4.68,
+     "cap": "Hypothesize. Choose the test. Lock the prediction. Measure. Verify."
+    },
+    "L30": {
+     "start": 5.88,
+     "end": 9.889,
+     "cap": "BenchMate turns a plausible explanation into a tested one."
+    }
+   }
+  }
+ ],
+ "total": 170.017
+}

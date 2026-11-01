@@ -28,6 +28,20 @@ def load_record(run, *, live=False):
             if not 0<=sequence<len(events) or events[sequence]['sha256']!=entry['event_sha256']:
                 raise ValueError('Comparison event does not match the event record')
         record['comparison']=comparison
+    notes=path.parent/'translations.json'
+    if notes.is_file():
+        # English reading aids for recorded model wording; each entry is pinned to one event hash and its exact original text.
+        translations={}
+        for entry in json.loads(notes.read_text()).get('entries',[]):
+            sequence=entry['event_sequence']
+            if not 0<=sequence<len(events):
+                if live:continue
+                raise ValueError('Translation event is outside the event record')
+            event=events[sequence]
+            if event['sha256']!=entry['event_sha256'] or event['payload'].get(entry['field'])!=entry['original']:
+                raise ValueError('Translation does not match the event record')
+            translations[str(sequence)]=entry['english']
+        record['translations']=translations
     return record
 
 

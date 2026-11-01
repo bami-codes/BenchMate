@@ -1,0 +1,153 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Archivo;src:url(fonts/Archivo-var.woff2) format('woff2');font-weight:400 800;font-stretch:62% 125%}
+:root{--board:#eef0ec;--ink:#000;--soft:#5f6360;--red:#d42a2a;--blue:#2c5bb5;--tape:#f5c400;--grey:#a3a6a1}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--board);color:var(--ink);font-family:Archivo,sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+#cam{position:absolute;inset:0;transform-origin:50% 45%}
+.holes{position:absolute;inset:-60px;background-image:radial-gradient(circle,#d6d9d3 2.2px,transparent 2.6px);background-size:24px 24px}
+.tape{position:absolute;display:inline-block;padding:9px 18px 10px;background:var(--tape);color:#000;font-stretch:75%;font-weight:700;font-size:30px;white-space:nowrap;box-shadow:0 1px 0 rgba(0,0,0,.12),0 6px 14px rgba(0,0,0,.10);transform-origin:20% 50%}
+.tape.white{background:#fbfbf8}
+.tape::before,.tape::after{content:"";position:absolute;top:0;bottom:0;width:6px;background:inherit;filter:brightness(.94)}
+.tape::before{left:-6px;clip-path:polygon(100% 0,0 12%,60% 30%,0 50%,70% 68%,0 86%,100% 100%)}
+.tape::after{right:-6px;clip-path:polygon(0 0,100% 10%,40% 28%,100% 48%,30% 66%,100% 84%,0 100%)}
+.big{font-weight:800;font-stretch:112%;letter-spacing:-.03em;line-height:.9}
+.head{font-weight:700;font-stretch:88%;letter-spacing:-.015em;line-height:1.05}
+.soft{color:var(--soft)}
+#sub{position:absolute;left:0;right:0;bottom:58px;text-align:center;z-index:50}
+#sub span{display:inline-block;background:rgba(0,0,0,.84);color:#fff;font-size:38px;font-weight:500;padding:8px 22px 10px}
+#fade{position:absolute;inset:0;z-index:40;pointer-events:none;opacity:0;background:var(--board)}
+</style></head><body><div id="cam"><div class="holes"></div><div id="stage"></div></div><div id="fade"></div><div id="sub"><span id="captext" style="display:none"></span></div>
+<script>
+'use strict';
+const NS='http://www.w3.org/2000/svg',stage=document.getElementById('stage'),cam=document.getElementById('cam');
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const easeOut=x=>1-Math.pow(1-x,3),easeIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const tw=(t,a,d=.5,f=easeOut)=>f(clamp((t-a)/d));
+// damped spring 0→1 used for tape "stick"
+const spring=(t,a)=>{if(t<a)return 0;const x=t-a;return 1-Math.exp(-14*x)*Math.cos(18*x);};
+function E(tag,props={},parent=stage,html){const el=document.createElement(tag);for(const[k,v]of Object.entries(props)){if(k==='style')Object.assign(el.style,v);else if(k==='cls')el.className=v;else el.setAttribute(k,v);}if(html!==undefined)el.innerHTML=html;parent.appendChild(el);return el;}
+function S(t,a,p){const e=document.createElementNS(NS,t);for(const[k,v]of Object.entries(a))e.setAttribute(k,v);p&&p.appendChild(e);return e;}
+const SFX=[];
+function tape(text,x,y,rot,{white=false,size=30,color=null}={}){const el=E('span',{cls:'tape'+(white?' white':''),style:{left:x+'px',top:y+'px',fontSize:size+'px',opacity:0}},stage,text);if(color)el.style.color=color;el._rot=rot;return el;}
+function stick(el,t,a,dim=1){ // lands from slightly above and larger, settles with a spring
+  if(!SFX.includes(a)&&a>=0)SFX.push(a);
+  const s=spring(t,a),k=clamp((t-a)/0.08);
+  el.style.opacity=(t<a?0:1)*dim;
+  el.style.transform=`translate(0,${(1-s)*-14}px) rotate(${el._rot+(1-s)*-2.5}deg) scale(${1+(1-s)*0.06})`;
+  el.style.boxShadow=`0 1px 0 rgba(0,0,0,.12),0 ${6+(1-k)*10}px ${14+(1-k)*14}px rgba(0,0,0,${.10+(1-k)*.06})`;
+}
+function wipe(el,t,a,d=.6){const k=tw(t,a,d,easeIO);el.style.clipPath=`inset(0 ${100-k*100}% 0 0)`;}
+function fadeTo(el,t,a,o,d=.4){const k=tw(t,a,d);el.style.opacity=1+(o-1)*k;}
+
+const SCENES={};
+SCENES.hook=(C)=>{
+  const c=C.cues;
+  const src=E('div',{cls:'soft',style:{position:'absolute',left:'150px',top:'118px',fontSize:'30px'}},stage,'Arduino forum, July 2021');
+  const title=E('div',{cls:'head',style:{position:'absolute',left:'150px',top:'160px',width:'1600px',fontSize:'68px'}},stage,'Voltage divider is not giving correct voltage');
+  const nums=E('div',{style:{position:'absolute',left:'150px',top:'300px',display:'flex',gap:'110px',alignItems:'flex-end'}});
+  const n1=E('div',{},nums,'<div class="soft" style="font-size:28px;margin-bottom:6px">should read</div><div class="big" style="font-size:200px">1.8 V</div>');
+  const n2=E('div',{},nums,'<div style="font-size:28px;margin-bottom:6px;color:var(--red)">reads</div><div class="big" style="font-size:200px;color:var(--red)">1.1 V</div>');
+  const g=[tape('resistor tolerance?',150,640,-1.4,{white:true,color:'#555'}),tape('the meter?',520,612,1.1,{white:true,color:'#555'}),tape('bad solder?',790,668,-.6,{white:true,color:'#555'}),tape('ADC setup?',1080,628,.9,{white:true,color:'#555'})];
+  const key=tape('Is the ESP32 even powered?',610,760,-.8,{size:38});
+  const res=E('div',{style:{position:'absolute',left:'150px',top:'600px',width:'1620px'}});
+  const r1=tape('ESP32 unpowered: wrong voltage',0,0,-1,{white:true,size:34});res.appendChild(r1);
+  const r2=tape('ESP32 powered: correct voltage',560,10,.7,{size:34});res.appendChild(r2);
+  const q=E('div',{cls:'head',style:{position:'absolute',left:'0px',top:'110px',fontSize:'52px',width:'1500px'}},res,'“Real life testing was the correct way to find the issue.”<div class="soft" style="font-size:28px;font-weight:400;margin-top:12px">the original poster, July 25</div>');
+  return t=>{
+    cam.style.transform=`scale(${1+0.035*tw(t,0,C.duration,x=>x)})`;
+    src.style.opacity=tw(t,0.1,.4);wipe(title,t,0.25,.8);
+    n1.style.opacity=tw(t,c.F1.start+1.2,.35);
+    const k2=spring(t,c.F1.start+2.6);n2.style.opacity=t<c.F1.start+2.6?0:1;n2.style.transform=`scale(${1+(1-k2)*0.05})`;n2.style.transformOrigin='0 100%';
+    if(t>=c.F1.start+2.6&&!SFX.includes(c.F1.start+2.6))SFX.push(c.F1.start+2.6);
+    const gone=c.F4.start-0.25;
+    g.forEach((el,i)=>{stick(el,t,c.F2.start+0.25+i*0.62,(t>c.F3.start+0.4?0.32:1));if(t>gone){const k=tw(t,gone,.35);el.style.opacity=(1-k)*0.32;el.style.transform+=` translate(0,${k*30}px)`;}});
+    stick(key,t,c.F3.start+0.9);if(t>gone){const k=tw(t,gone,.35);key.style.opacity=1-k;key.style.transform+=` translate(0,${k*30}px)`;}
+    if(t<gone+0.2){r1.style.opacity=0;r2.style.opacity=0;q.style.opacity=0;}
+    else{stick(r1,t,c.F4.start+0.35);stick(r2,t,c.F4.start+1.05);const kq=tw(t,c.F4.start+2.1,.6);q.style.opacity=kq;q.style.transform=`translate(0,${(1-kq)*12}px)`;}
+  };
+};
+SCENES.survive=(C,D)=>{
+  const c=C.cues,L=D.d01.loaded,m=D.d01.models,sc=D.d01.loaded_scores;
+  const hd=E('div',{cls:'soft',style:{position:'absolute',left:'110px',top:'92px',fontSize:'28px'}},stage,'Recorded on the real circuit, Oct 30. The 9.99 kΩ load is connected.');
+  const h1=E('div',{cls:'head',style:{position:'absolute',left:'110px',top:'132px',fontSize:'64px'}},stage,'Which explanation survives?');
+  const paper=E('div',{style:{position:'absolute',left:'96px',top:'240px',width:'1300px',height:'640px',background:'#fff',boxShadow:'0 0 0 1px #d8dbd5'}});
+  const svg=S('svg',{width:1220,height:560,style:'position:absolute;left:140px;top:280px;overflow:visible'},stage);
+  const w=1220,h=560,X=t=>t/0.256*w,Y=v=>h/2-v/0.13*(h/2);
+  for(const v of [-0.1,0,0.1])S('line',{x1:0,x2:w,y1:Y(v),y2:Y(v),stroke:v===0?'#c9ccc6':'#ebede9','stroke-width':2},svg);
+  const mk=(ys,att)=>{const p=S('path',{fill:'none','stroke-linecap':'round','stroke-linejoin':'round',...att},svg);p._pts=L.t.map((tt,i)=>[X(tt),Y(ys[i])]);return p;};
+  const rev=(p,f)=>{const n=Math.floor(p._pts.length*clamp(f));p.setAttribute('d',n<2?'':'M'+p._pts.slice(0,n).map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join('L'));};
+  const po=mk(L.observed,{stroke:'#d42a2a','stroke-width':5}),pr=mk(L.r_changed,{stroke:'#a3a6a1','stroke-width':4,'stroke-dasharray':'2 12'}),pc=mk(L.c_changed,{stroke:'#2c5bb5','stroke-width':4,'stroke-dasharray':'16 12'});
+  const meas=S('text',{x:X(0.03),y:Y(0.105)-18,fill:'#d42a2a','font-size':24,'font-family':'Archivo',opacity:0},svg);meas.textContent='measured';
+  const note=E('div',{cls:'soft',style:{position:'absolute',left:'1460px',top:'560px',width:'390px',fontSize:'26px',lineHeight:1.35}},stage,'Model parameters were locked before this measurement. The curves use the input measured during it.');
+  const tR=tape(`R changed: gain ${m.r_changed.gain.toFixed(2)}, τ ${(m.r_changed.tau_s*1000).toFixed(1)} ms`,1460,300,-1.1,{white:true,size:27});
+  const tC=tape(`C changed: gain ${m.c_changed.gain.toFixed(2)}, τ ${(m.c_changed.tau_s*1000).toFixed(1)} ms`,1460,400,.8,{white:true,size:27});
+  const vR=tape(`misses by ${sc.r_changed.rms.toFixed(1)} mV`,1480,354,.6,{white:true,size:26,color:'#b3261e'});
+  const vC=tape(`within ${sc.c_changed.rms.toFixed(1)} mV`,1480,454,-.9,{size:30});
+  return t=>{
+    cam.style.transform=`scale(${1+0.025*tw(t,0,C.duration,x=>x)})`;
+    hd.style.opacity=tw(t,0,.3);
+    stick(tR,t,c.L14.start+0.3);stick(tC,t,c.L14.start+0.75);note.style.opacity=tw(t,c.L14.start+1.2,.4);
+    const tm=c.L15.start-0.6;rev(po,tw(t,tm,1.1,easeIO));meas.setAttribute('opacity',tw(t,tm+0.6,.3));
+    rev(pr,tw(t,tm+1.2,.8,easeIO));rev(pc,tw(t,tm+1.7,.8,easeIO));
+    stick(vR,t,tm+2.1);stick(vC,t,tm+2.7);
+    if(t>tm+2.3)tR.style.opacity=1-0.55*tw(t,tm+2.3,.3);
+  };
+};
+// Recorded first attempts only. Shape distinguishes success, correct abstention,
+// indecision and error; unrun arms are labelled rather than assigned zero.
+SCENES.numbers=(C,D)=>{
+  const B=D.bench,T=B.tasks.B;
+  const practice=B.development||B.placeholder;
+  const incomplete=T.rows.some(r=>r.status==='incomplete');
+  E('div',{cls:'head',style:{position:'absolute',left:'100px',top:'72px',fontSize:'64px'}},stage,'Which experiment next?');
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'155px',fontSize:'26px'}},stage,`Synthetic bench · ${T.classes.length} independent circuits · first attempts · random repeated 3×`);
+  if(practice||incomplete)E('div',{style:{position:'absolute',right:'70px',top:'30px',fontSize:'25px',color:'#b3261e',fontWeight:700}},stage,practice?'DEVELOPMENT / PLACEHOLDER — NOT FOR THE VIDEO':'PARTIAL EVALUATION — NOT FOR THE VIDEO');
+  const svg=S('svg',{width:1920,height:1080,style:'position:absolute;inset:0'},stage);
+  function symbol(outcome,cx,cy,r,outside=false){
+    const g=S('g',{'data-outcome':outcome},svg);
+    if(outcome==='correct')S('circle',{cx,cy,r,fill:'#111'},g);
+    else if(outcome==='rejected'&&outside)S('rect',{x:cx-r,y:cy-r,width:2*r,height:2*r,fill:'none',stroke:'#111','stroke-width':3},g);
+    else if(outcome==='wrong'){
+      S('path',{d:`M${cx-r},${cy-r} L${cx+r},${cy+r} M${cx+r},${cy-r} L${cx-r},${cy+r}`,stroke:'#c52c2c','stroke-width':4,fill:'none'},g);
+    }else if(outcome==='missing')S('path',{d:`M${cx-r},${cy} L${cx+r},${cy}`,stroke:'#a3a6a1','stroke-width':3},g);
+    else S('circle',{cx,cy,r,fill:'none',stroke:'#858984','stroke-width':3},g);
+    return g;
+  }
+  [['correct','Correct',false],['rejected','Correctly held off',true],['incomplete','Undecided',false],['wrong','Wrong',false]].forEach(([o,label,outside],i)=>{
+    symbol(o,112+i*290,218,9,outside);const t=S('text',{x:132+i*290,y:226,'font-size':24,'font-family':'Archivo',fill:'#333'},svg);t.textContent=label;
+  });
+  for(const [x,text] of [[620,'ONE POSITION PER CIRCUIT'],[1470,'CORRECT / RUNS'],[1690,'MEAN MOUNTS']]){
+    E('div',{cls:'soft',style:{position:'absolute',left:x+'px',top:'270px',fontSize:'20px'}},stage,text);
+  }
+  const rows=T.rows.map((r,k)=>{
+    const y=334+k*80;
+    const tag=tape(r.label,100,y-24,k%2?.4:-.4,{white:r.arm!=='spark_hidden',size:26});
+    const symbols=[];
+    if(r.status!=='not run'&&r.strips){
+      r.strips.forEach((st,j)=>st.forEach((o,i)=>symbols.push(symbol(o,628+i*48,y+(j-(r.strips.length-1)/2)*20,r.strips.length>1?6:10))));
+    }
+    const count=E('div',{style:{position:'absolute',left:'1470px',top:(y-20)+'px',fontSize:'32px',fontWeight:700}},stage,r.status==='not run'?'not run':`${r.correct} / ${r.of}`);
+    const mounts=E('div',{style:{position:'absolute',left:'1730px',top:(y-20)+'px',fontSize:'30px'}},stage,r.mean_wiring_changes==null?'—':String(r.mean_wiring_changes));
+    return {tag,symbols,count,mounts,at:.3+k*.7};
+  });
+  const A=B.tasks.A.rows;
+  const available=A.filter(r=>r.status==='complete').map(r=>`${r.label}: ${r.correct}/${r.of}`).join(' · ');
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'848px',fontSize:'22px'}},stage,'Task A · which part changed? '+(available||'not run'));
+  const aa=A.find(r=>r.arm==='engine'&&r.status==='complete');
+  if(aa&&aa.outside){
+    E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'891px',fontSize:'22px'}},stage,'Task A · both parts changed · engine:');
+    aa.outside[0].forEach((o,i)=>symbol(o,560+i*35,904,8,true));
+  }
+  const paidA=A.filter(r=>['no_tool','spark','spark_hidden','spark_open'].includes(r.arm)&&r.status==='not run').map(r=>r.label);
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'934px',fontSize:'20px'}},stage,'Not run in Task A: '+(paidA.join(' · ')||'none'));
+  E('div',{cls:'soft',style:{position:'absolute',right:'90px',top:'891px',fontSize:'22px'}},stage,'B5 variants: final evaluation not run');
+  E('div',{cls:'soft',style:{position:'absolute',right:'90px',top:'934px',fontSize:'20px'}},stage,'Mounts are simulated fixture settings, not physical rewiring.');
+  return t=>rows.forEach(r=>{stick(r.tag,t,r.at);r.count.style.opacity=r.mounts.style.opacity=tw(t,r.at+.3,.3);r.symbols.forEach((s,i)=>s.style.opacity=tw(t,r.at+.15+(i%16)*.025,.15));});
+};
+let update=null,cues={},dur=0,fx={};
+window.setupScene=(name,scene,data,opts={})=>{stage.innerHTML='';SFX.length=0;cues=scene.cues;dur=scene.duration;fx=opts;update=SCENES[name](scene,data);};
+window.frame=t=>{update(t);const f=document.getElementById('fade');
+  if(fx.inBg&&t<0.4){f.style.background=fx.inBg;f.style.opacity=1-easeOut(t/0.4);}else if(fx.outBg&&t>dur-0.4){f.style.background=fx.outBg;f.style.opacity=easeOut((t-(dur-0.4))/0.4);}else f.style.opacity=0;
+  const cap=document.getElementById('captext');let txt='';for(const c of Object.values(cues)){if(t>=c.start-0.05&&t<=c.end+0.35)txt=c.cap;}cap.style.display=txt?'inline-block':'none';cap.textContent=txt;};
+window.sfx=()=>SFX.slice().sort((a,b)=>a-b);
+</script></body></html>
