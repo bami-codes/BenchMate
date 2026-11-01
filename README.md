@@ -18,7 +18,9 @@ explanation earn its place with a measurement it has not seen yet.
 
 Built solo during the Meta Global AI Developer Hackathon (first commit Oct 27, 2026).
 
-![BenchMate Story view of the real D01 run](docs/assets/d01-story.png)
+[![Recorded D01 diagnosis: Spark requests a load, locks the models and compares the new measurement](docs/assets/d01-recorded-diagnosis.gif)](https://bami-codes.github.io/BenchMate/#watch)
+
+*Animation of one retained physical run, not live footage. [Static Story view](docs/assets/d01-story.png).*
 
 ## What it did on a real circuit
 
