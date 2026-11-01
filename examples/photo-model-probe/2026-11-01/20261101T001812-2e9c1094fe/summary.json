@@ -1,0 +1,80 @@
+{
+  "photo": "User-selected cleaned IMG_8885; one development image",
+  "model_requests": 3,
+  "hardware_IO": false,
+  "automatic_retries": 0,
+  "plan_commit": "64ea5046ce4f2c5f5654840f072dd30d111d9a57",
+  "vision": {
+    "requests": 1,
+    "elapsed_s": 17.700729292118922,
+    "usage": {
+      "input_tokens": 3495,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 2078,
+      "output_tokens_details": {
+        "reasoning_tokens": 1532
+      },
+      "total_tokens": 5573
+    },
+    "candidate_status": "incomplete",
+    "R_ohm": null,
+    "C_f_candidate": 1e-06,
+    "C_marking": "105J100",
+    "all_terminals": "UNKNOWN",
+    "nominal_design_established": false,
+    "measurement_verified": false,
+    "manual_review": "The capacitor marking is visually consistent but low contrast; resistor value was left unreadable. No intended design or hidden connectivity claimed.",
+    "localization_review": "R box normalized y=0.448..0.498 maps to 716.8..796.8 px, below the resistor body visible around 663..702 px. C box begins at y=576 px, below the visible top around 535 px. Boxes are not suitable for automatic component targeting; no pixel-truth accuracy score."
+  },
+  "sam": [
+    {
+      "concept": "capacitor",
+      "requests": 1,
+      "elapsed_s": 2.3228216250427067,
+      "response_status": "completed",
+      "match_count": 0,
+      "diagnostics": [],
+      "masks": [],
+      "manual_review": "Visible foreground capacitor missed; completed empty response."
+    },
+    {
+      "concept": "resistor",
+      "requests": 1,
+      "elapsed_s": 3.3511108339298517,
+      "response_status": "completed",
+      "match_count": 1,
+      "diagnostics": [],
+      "masks": [
+        {
+          "object_id": "0",
+          "bounds_half_open": [
+            277,
+            663,
+            478,
+            724
+          ],
+          "confidence": 0.5631399154663086,
+          "raster_size": [
+            201,
+            61
+          ],
+          "source_mask_file": "resistor-object-0-mask.png",
+          "overlay_file": "resistor-object-0-overlay.png",
+          "resize_to_box": false,
+          "foreground_pixels": 4674
+        }
+      ],
+      "manual_review": "Single mask follows the visible resistor body and both curved leads. No obvious additional false-positive region in visual inspection; small edge errors are unscored."
+    }
+  ],
+  "decision": "Do not make text-only capacitor segmentation a required repair step. One resistor mask is a promising display-only result, not a validated general component detector.",
+  "display_failure_preserved": "First offline render called a factory incorrectly. failure.json retained; fixed offline only, no new paid calls or mask edits.",
+  "limitations": [
+    "One deliberately selected clear photo; no general accuracy estimate",
+    "No ground-truth pixel masks or electrical continuity measurement",
+    "A SAM score is not a probability of correct diagnosis",
+    "No image of the two-capacitor D01 specimen was tested"
+  ]
+}

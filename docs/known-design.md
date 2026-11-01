@@ -5,8 +5,13 @@ to the D01 run, change a B5 protocol, or power a circuit. Three actual Spark max
 labelled drawings matched their R/C values and connections, and the drawing with
 C marked `?` remained incomplete with a null value. [All original outputs and
 audit](../examples/vision-spark/2026-10-31/20261031T060049-13a656638d/README.md).
-These are clean-drawing development checks. Real-photo evaluation is **pending**;
-the user confirmed no hand-drawn schematic or D01-board photo is available yet.
+These are clean-drawing development checks. On November 1, one separately
+requested **real assembly-photo read** completed: resistor value null, capacitor
+marking `105J100` with provisional 1 µF, all terminals UNKNOWN and status
+`incomplete`. It established no nominal design or electrical diagnosis.
+[All real-photo outputs](../examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/README.md). The resistor and capacitor location
+boxes are visibly imprecise. A hand-drawn schematic and the two-capacitor D01
+fault photo have not been tested.
 
 1. Choose **intended schematic** or **assembled circuit** and select a JPEG,
    PNG or WebP. The local service applies EXIF orientation, limits the image to

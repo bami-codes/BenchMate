@@ -1,3 +1,27 @@
+# Actual photo probe — November 1, 2026
+
+The [requested two SAM calls](../examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/README.md) are complete on the same
+metadata-free 1200 × 1600 IMG_8885 image. `capacitor` returned **zero matches**
+in 2.32 s, missing the visible blue box capacitor. `resistor` returned **one
+mask** in 3.35 s that visually follows the body and both visible curved leads.
+All outputs and the empty result are preserved. No retry, box prompt, manual
+mask edit or hardware action occurred.
+
+The official API worked with this account. A pinned, lightweight Python parser
+(`meta-sam-parser==0.1.0`) decoded the mask on the Mac; no GPU/model installation
+was needed. This demonstrates API + local decoding, **not local SAM inference**.
+An initial renderer factory-call mistake was fixed offline and retained as a
+failed display attempt. No new paid request was needed.
+
+Decision: keep text-only capacitor highlighting out of the required repair flow.
+The single resistor mask is a display example, not general detection accuracy.
+No two-capacitor D01 image was evaluated and no additional capacitor was identified.
+The two API calls finish this bounded probe; physical B5 remains first at the
+operator's planned November 1 16:00 session. Earlier feasibility notes below are
+historical and do not describe the latest call count.
+
+---
+
 # SAM 3.1 feasibility — October 31, 2026
 
 Current scheduling update (October 31 evening): the user authorized a bounded

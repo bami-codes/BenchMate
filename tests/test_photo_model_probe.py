@@ -51,3 +51,16 @@ def test_sam_keeps_empty_and_failure_without_retry(tmp_path,monkeypatch,status,b
     assert 'software-test-only' not in (run/'events.jsonl').read_text()
     assert probe.read_events(run)[-1]['kind']==('run_completed' if expected=='completed' else 'run_failed')
     if expected=='completed':assert result['empty_output'] is True
+
+
+def test_offline_parser_reproduces_actual_mask_without_new_request(tmp_path):
+    pytest.importorskip('meta_sam_parser')
+    run=ROOT/'examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe'
+    before=probe.sha((run/'events.jsonl').read_bytes())
+    probe.render(run,tmp_path/'render')
+    summary=json.loads((tmp_path/'render/render-summary.json').read_text())
+    assert [(x['concept'],x['match_count'],x['diagnostics']) for x in summary['results']]==[('capacitor',0,0),('resistor',1,0)]
+    assert summary['new_API_calls']==0 and not summary['manual_mask_edits']
+    mask=tmp_path/'render/resistor-object-0-mask.png'
+    assert mask.read_bytes()==(run/'render-v2/resistor-object-0-mask.png').read_bytes()
+    assert probe.sha((run/'events.jsonl').read_bytes())==before

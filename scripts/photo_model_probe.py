@@ -142,7 +142,7 @@ def render(run,output):
     for attempt in result['outcomes']:
         if not attempt['task'].startswith('sam_') or attempt['status']!='completed':continue
         concept=attempt['concept'];raw=(run/attempt['run']/'output-text.txt').read_text()
-        parser=image_segmentation_format.create_parser();parser.push(raw);parsed=parser.finish(CompletedOutcome()).result
+        parser=image_segmentation_format().create_parser();parser.push(raw);parsed=parser.finish(CompletedOutcome()).result
         report={'concept':concept,'parser_version':version('meta-sam-parser'),'diagnostics':[asdict(x) for x in parsed.diagnostics],
                 'records':[asdict(x) for x in parsed.records],'masks':[],'source_output_sha256':sha(raw.encode())}
         masks=[x for x in parsed.records if x.kind=='mask'];combined=image.convert('RGBA');colors=[(40,196,126),(242,146,56),(87,137,255)]
@@ -170,7 +170,7 @@ def render(run,output):
         report['match_count']=len(masks);save(out/(concept+'-decoded.json'),report)
         reports.append({'concept':concept,'match_count':len(masks),'diagnostics':len(parsed.diagnostics)})
     save(out/'render-summary.json',{'source_run_sha256':sha((run/'events.jsonl').read_bytes()),'results':reports,
-        'all_masks_rendered':True,'manual_mask_edits':False,'new_API_calls':0,'hardware_IO':False})
+        'all_masks_rendered':True,'manual_mask_edits':False,'renderer_source_sha256':sha(Path(__file__).read_bytes()),'new_API_calls':0,'hardware_IO':False})
     print(json.dumps({'render':str(out),'results':reports}))
 
 if __name__=='__main__':

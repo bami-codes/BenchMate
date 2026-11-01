@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "concept": "resistor",
+  "requests": 1,
+  "elapsed_s": 3.3511108339298517,
+  "empty_output": false,
+  "hardware_IO": false,
+  "visual_quality": "not_yet_reviewed"
+}

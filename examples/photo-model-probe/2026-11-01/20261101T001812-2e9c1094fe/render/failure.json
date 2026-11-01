@@ -1,0 +1,6 @@
+{
+  "status": "offline_render_failed",
+  "error": "AttributeError: image_segmentation_format is a factory function; create_parser called on function",
+  "new_API_calls": 0,
+  "raw_model_outputs_unchanged": true
+}

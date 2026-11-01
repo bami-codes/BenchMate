@@ -1,0 +1,55 @@
+{
+  "source_kind": "assembly_photo",
+  "candidate": {
+    "ambiguities": [
+      "No IN/OUT/REF port labels visible in image; all terminals set to UNKNOWN.",
+      "Breadboard internal connectivity / hole-to-hole wiring is not visible and must not be assumed; operator must confirm intended nodes.",
+      "Resistor color bands illegible due to resolution/focus; value cannot be transcribed, operator must confirm with direct inspection.",
+      "Capacitor top marking appears as '105J100' but is slightly blurry/low contrast; operator must confirm exact characters, value, tolerance and voltage.",
+      "Lead insertion holes/rows visible but electrical continuity beneath breadboard is occluded; remains UNKNOWN.",
+      "Background larger breadboard with out-of-focus black vertical parts and small orange part is blurred and occluded; not transcribed as components, operator must confirm if in scope.",
+      "Visible physical assembly does not specify intended design; operator must confirm schematic intent."
+    ],
+    "components": [
+      {
+        "a": "UNKNOWN",
+        "b": "UNKNOWN",
+        "bbox": [
+          0.205,
+          0.448,
+          0.375,
+          0.498
+        ],
+        "evidence": "Small axial component with leads inserted into top rows of foreground white mini-breadboard, left of blue box component",
+        "kind": "R",
+        "marking": "color bands illegible",
+        "name": "R1",
+        "value_si": null
+      },
+      {
+        "a": "UNKNOWN",
+        "b": "UNKNOWN",
+        "bbox": [
+          0.41,
+          0.36,
+          0.62,
+          0.54
+        ],
+        "evidence": "Blue rectangular box component with two wire leads inserted into top rows of foreground white mini-breadboard; top face shows text '105J100'",
+        "kind": "C",
+        "marking": "105J100",
+        "name": "C1",
+        "value_si": 1e-06
+      }
+    ],
+    "status": "incomplete",
+    "summary": "Provisional visual transcription of assembly_photo: foreground mini-breadboard holds one resistor (bands unreadable) and one blue box capacitor marked '105J100' (~1uF provisional). No labelled IN/OUT/REF ports; no assumed breadboard connectivity; all nodes UNKNOWN. Background breadboard blurred, not transcribed. Requires operator confirmation."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\n* R1: unresolved connection or value\n* C1: unresolved connection or value\n",
+  "nominal_rc_candidate": null,
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}

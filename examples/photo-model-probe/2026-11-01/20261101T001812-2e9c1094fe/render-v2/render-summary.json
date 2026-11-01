@@ -1,0 +1,20 @@
+{
+  "source_run_sha256": "d88f2590d83f6e959d3f83a9afb4029244936a230e789e3c3746c160540b56b0",
+  "results": [
+    {
+      "concept": "capacitor",
+      "match_count": 0,
+      "diagnostics": 0
+    },
+    {
+      "concept": "resistor",
+      "match_count": 1,
+      "diagnostics": 0
+    }
+  ],
+  "all_masks_rendered": true,
+  "manual_mask_edits": false,
+  "renderer_source_sha256": "f5b6ca11256d56f25eeb59935470794fc2bfe0f8dd39a00588446293846a78ca",
+  "new_API_calls": 0,
+  "hardware_IO": false
+}

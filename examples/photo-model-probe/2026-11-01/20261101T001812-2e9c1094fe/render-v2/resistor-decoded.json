@@ -1,0 +1,65 @@
+{
+  "concept": "resistor",
+  "parser_version": "0.1.0",
+  "diagnostics": [],
+  "records": [
+    {
+      "kind": "box",
+      "order": 0,
+      "object_id": "0",
+      "left": 277,
+      "top": 663,
+      "right": 478,
+      "bottom": 724,
+      "frame": null,
+      "confidence": 0.5631399154663086
+    },
+    {
+      "kind": "mask",
+      "order": 1,
+      "object_id": "0",
+      "identity": {
+        "media": "image",
+        "frame_index": null,
+        "object_id": "0"
+      },
+      "revision": 1,
+      "mask": {
+        "encoding": "one_bit",
+        "payload": "!!!!#/Ci]]aYs0:6tsp.`H$01Z6Q0a6XL0rCch4PeoW`SKTObtJZZ^oV)NM!h)tCAU3LIx[VNr3YWyt7nUln5Z!t719-'v@'].uC:7%UBVXcaKk=[QeMm`Cc7=0ug:!!",
+        "width": 201,
+        "height": 61
+      },
+      "bounds": {
+        "left": 277,
+        "top": 663,
+        "right": 478,
+        "bottom": 724
+      },
+      "frame": null,
+      "confidence": 0.5631399154663086
+    }
+  ],
+  "masks": [
+    {
+      "object_id": "0",
+      "bounds_half_open": [
+        277,
+        663,
+        478,
+        724
+      ],
+      "confidence": 0.5631399154663086,
+      "raster_size": [
+        201,
+        61
+      ],
+      "source_mask_file": "resistor-object-0-mask.png",
+      "overlay_file": "resistor-object-0-overlay.png",
+      "resize_to_box": false,
+      "foreground_pixels": 4674
+    }
+  ],
+  "source_output_sha256": "13a9cd467d428479382790cf5338c49933d2b3b8c6ee2d6c4b7d2a41d834cc7a",
+  "match_count": 1
+}

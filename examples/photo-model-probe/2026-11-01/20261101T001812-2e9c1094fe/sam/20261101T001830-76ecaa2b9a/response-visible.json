@@ -1,0 +1,33 @@
+{
+  "response_id": "resp_6ae68558e7a107cdbdd84e42",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 0,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 0,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 0,
+    "images_processed": 1
+  },
+  "elapsed_s": 2.3228216250427067,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "msg_366cc371-2ab1-417b-a702-6ec1542c22a9",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}
