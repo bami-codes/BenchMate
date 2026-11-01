@@ -1,0 +1,113 @@
+{
+  "source": "synthetic only",
+  "protocol": "linear-benchmark-v1.1",
+  "plan_commit": "c491769883e003ffbd77c10cc631e5752fd6d272",
+  "endpoint": "https://inference.baseten.co/v1/chat/completions",
+  "model": "meta-models/muse-spark-open-1026",
+  "physical_measurements": 0,
+  "development_runs": 2,
+  "development_successes": 2,
+  "evaluation_runs": 30,
+  "in_family_correct": "21/24",
+  "out_of_family_rejected": "1/6",
+  "outcomes": {
+    "correct": 21,
+    "incomplete": 8,
+    "rejected": 1
+  },
+  "requests_including_development": 120,
+  "evaluation_requests": 112,
+  "usage_calculated_usd": 0.92318245,
+  "unsettled": 0,
+  "failures": [
+    {
+      "specimen": "A05",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "unresolved",
+      "report_accepted": false,
+      "provider_requests": 2,
+      "tool_calls_in_last_reply": [
+        3
+      ]
+    },
+    {
+      "specimen": "A10",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        4
+      ]
+    },
+    {
+      "specimen": "A12",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        4
+      ]
+    },
+    {
+      "specimen": "A13",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "unresolved",
+      "report_accepted": false,
+      "provider_requests": 2,
+      "tool_calls_in_last_reply": [
+        3
+      ]
+    },
+    {
+      "specimen": "A15",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        3
+      ]
+    },
+    {
+      "specimen": "A16",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "unresolved",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        2
+      ]
+    },
+    {
+      "specimen": "A19",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        5
+      ]
+    },
+    {
+      "specimen": "A23",
+      "outcome": "incomplete",
+      "error": "Agent must return exactly one tool call per turn",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 3,
+      "tool_calls_in_last_reply": [
+        3
+      ]
+    }
+  ],
+  "interpretation": "All eight incomplete attempts returned multiple tool calls against the frozen one-tool-per-turn adapter. This is end-to-end system performance including interface failures, not a clean comparison of model reasoning."
+}

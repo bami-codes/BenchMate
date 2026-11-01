@@ -1,0 +1,29 @@
+{
+  "study": "post-evaluation development transport probe",
+  "reason": "All eight incomplete first Spark Open Task A evaluations returned 2\u20135 tool calls; frozen adapter requires one. Baseten documentation states parallel_tool_calls defaults true.",
+  "documentation": "https://docs.baseten.co/reference/inference-api/chat-completions",
+  "model": "meta-models/muse-spark-open-1026",
+  "endpoint": "https://inference.baseten.co/v1/chat/completions",
+  "cases": "first six Task A development specimens from frozen development seed, selected by index only",
+  "conditions": [
+    "original request, parallel setting omitted",
+    "same request with parallel_tool_calls=false"
+  ],
+  "order": "even zero-based specimen index: default then single; odd index: single then default",
+  "per_run_request_cap": 8,
+  "total_request_cap": 96,
+  "cost_cap_usd": 3,
+  "budget_relation": "120 original calls + 96 maximum <= prior 256 cap; original $0.92318245 + $3 <= prior $10. Separate ledger, no physical allowance changes.",
+  "timeout_s_per_run": 300,
+  "automatic_retries": 0,
+  "evaluation_cases_run": 0,
+  "physical_measurements": 0,
+  "interpretation": "Development interface compatibility check after observing evaluation failures. Do not replace original 21/24, count paired repeats as new circuits, or claim independently confirmed accuracy gain. Report both conditions and all failures.",
+  "source_sha256": {
+    "experiments/open_serial_tools.py": "fbaa64b5e67aab0337890bb404046bc56d1c6cbf2dfd384b514ff316b26ad9f3",
+    "experiments/open_benchmark.py": "dd9d1ec613ecc5ab1c28e0e536d5ec0eb6bed7500c85bf073f42fec657452cc9",
+    "experiments/night_budget.py": "fb0114c513e71ecaf5510244f1ff26c3833b68deb1a381a78c9a43153c5682d2",
+    "scripts/benchmark_linear.py": "642aabc9fd45e308b6c41e6571efe3f29b46acef1493ed76dc384d78c9514ca2",
+    "src/benchmate/providers_baseten.py": "093be451312f54a0efa05251567cd7e36604f3a4095a79bb881b15f84f494320"
+  }
+}

@@ -1,0 +1,440 @@
+{
+ "protocol_sha256": "03ba14edcf3b226c195e8404e7e0142d63289f7ae598bd548527647378416042",
+ "specimens": "8aaee2a5b237f6f3ac3405ac8f458ead6f3027dc160b1fc8746ba5704028a593",
+ "table": [
+  {
+   "arm": "engine",
+   "task": "A",
+   "runs": 30,
+   "expected_runs": 30,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "24/24",
+   "correct_rate": 1.0,
+   "wilson95": [
+    0.8620194241710247,
+    1.0
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 0,
+   "out_of_family_rejected": "6/6",
+   "transport_reruns": 0,
+   "all_attempts": 30,
+   "all_attempt_outcomes": {
+    "correct": 24,
+    "wrong": 0,
+    "rejected": 6,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.03,
+   "mean_wiring_changes": 1.0,
+   "matched_engine_top_choice": "31/31"
+  },
+  {
+   "arm": "engine",
+   "task": "B",
+   "runs": 16,
+   "expected_runs": 16,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "16/16",
+   "correct_rate": 1.0,
+   "wilson95": [
+    0.8063865817272802,
+    1.0
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 0,
+   "out_of_family_rejected": null,
+   "transport_reruns": 0,
+   "all_attempts": 16,
+   "all_attempt_outcomes": {
+    "correct": 16,
+    "wrong": 0,
+    "rejected": 0,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.0,
+   "mean_wiring_changes": 1.0,
+   "matched_engine_top_choice": "16/16"
+  },
+  {
+   "arm": "fixed",
+   "task": "A",
+   "runs": 30,
+   "expected_runs": 30,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "24/24",
+   "correct_rate": 1.0,
+   "wilson95": [
+    0.8620194241710247,
+    1.0
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 0,
+   "out_of_family_rejected": "6/6",
+   "transport_reruns": 0,
+   "all_attempts": 30,
+   "all_attempt_outcomes": {
+    "correct": 24,
+    "wrong": 0,
+    "rejected": 6,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.0,
+   "mean_wiring_changes": 1.0,
+   "matched_engine_top_choice": "6/30"
+  },
+  {
+   "arm": "fixed",
+   "task": "B",
+   "runs": 16,
+   "expected_runs": 16,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "16/16",
+   "correct_rate": 1.0,
+   "wilson95": [
+    0.8063865817272802,
+    1.0
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 0,
+   "out_of_family_rejected": null,
+   "transport_reruns": 0,
+   "all_attempts": 16,
+   "all_attempt_outcomes": {
+    "correct": 16,
+    "wrong": 0,
+    "rejected": 0,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.0,
+   "mean_wiring_changes": 1.0,
+   "matched_engine_top_choice": "16/16"
+  },
+  {
+   "arm": "random",
+   "task": "A",
+   "runs": 90,
+   "expected_runs": 90,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "71/72",
+   "correct_rate": 0.986,
+   "wilson95": null,
+   "cluster_bootstrap95": [
+    0.9583333333333334,
+    1.0
+   ],
+   "interval_method": "percentile bootstrap over circuits; all random repeats kept together",
+   "independent_specimens": 24,
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 2,
+   "out_of_family_rejected": "17/18",
+   "transport_reruns": 0,
+   "all_attempts": 90,
+   "all_attempt_outcomes": {
+    "correct": 71,
+    "wrong": 0,
+    "rejected": 17,
+    "false_rejection": 0,
+    "abstained": 2,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.36,
+   "mean_wiring_changes": 1.49,
+   "matched_engine_top_choice": "1/122"
+  },
+  {
+   "arm": "random",
+   "task": "B",
+   "runs": 48,
+   "expected_runs": 48,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "30/48",
+   "correct_rate": 0.625,
+   "wilson95": null,
+   "cluster_bootstrap95": [
+    0.4583333333333333,
+    0.7916666666666666
+   ],
+   "interval_method": "percentile bootstrap over circuits; all random repeats kept together",
+   "independent_specimens": 16,
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 18,
+   "out_of_family_rejected": null,
+   "transport_reruns": 0,
+   "all_attempts": 48,
+   "all_attempt_outcomes": {
+    "correct": 30,
+    "wrong": 0,
+    "rejected": 0,
+    "false_rejection": 0,
+    "abstained": 18,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 2.35,
+   "mean_wiring_changes": 2.81,
+   "matched_engine_top_choice": "3/112"
+  },
+  {
+   "arm": "spark",
+   "task": "A",
+   "runs": 30,
+   "expected_runs": 30,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "24/24",
+   "correct_rate": 1.0,
+   "wilson95": [
+    0.8620194241710247,
+    1.0
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 1,
+   "out_of_family_rejected": "5/6",
+   "transport_reruns": 0,
+   "all_attempts": 30,
+   "all_attempt_outcomes": {
+    "correct": 24,
+    "wrong": 0,
+    "rejected": 5,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 1,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.0,
+   "mean_wiring_changes": 1.0,
+   "matched_engine_top_choice": "28/30",
+   "provider_requests": 132
+  },
+  {
+   "arm": "spark",
+   "task": "B",
+   "status": "not run"
+  },
+  {
+   "arm": "spark_hidden",
+   "task": "A",
+   "status": "not run"
+  },
+  {
+   "arm": "spark_hidden",
+   "task": "B",
+   "runs": 16,
+   "expected_runs": 16,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "15/16",
+   "correct_rate": 0.938,
+   "wilson95": [
+    0.7167073163197013,
+    0.9888809426916687
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 1,
+   "out_of_family_rejected": null,
+   "transport_reruns": 0,
+   "all_attempts": 16,
+   "all_attempt_outcomes": {
+    "correct": 15,
+    "wrong": 0,
+    "rejected": 0,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 1,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 1.94,
+   "mean_wiring_changes": 2.88,
+   "matched_engine_top_choice": "0/30",
+   "provider_requests": 118
+  },
+  {
+   "arm": "spark_open",
+   "task": "A",
+   "runs": 30,
+   "expected_runs": 30,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "21/24",
+   "correct_rate": 0.875,
+   "wilson95": [
+    0.6899571185214243,
+    0.9565574496068442
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 8,
+   "out_of_family_rejected": "1/6",
+   "transport_reruns": 0,
+   "all_attempts": 30,
+   "all_attempt_outcomes": {
+    "correct": 21,
+    "wrong": 0,
+    "rejected": 1,
+    "false_rejection": 0,
+    "abstained": 0,
+    "incomplete": 8,
+    "unparsed": 0
+   },
+   "mean_diagnostic_acquisitions": 0.9,
+   "mean_wiring_changes": 0.9,
+   "matched_engine_top_choice": "26/27",
+   "provider_requests": 112
+  },
+  {
+   "arm": "spark_open",
+   "task": "B",
+   "status": "not run"
+  },
+  {
+   "arm": "no_tool",
+   "task": "A",
+   "runs": 30,
+   "expected_runs": 30,
+   "status": "complete",
+   "primary_basis": "first attempt per specimen/replicate, including failures",
+   "in_family_correct": "8/24",
+   "correct_rate": 0.333,
+   "wilson95": [
+    0.17971978688379642,
+    0.5329404050591954
+   ],
+   "interval_method": "Wilson over specimens",
+   "wrong_identifications": 0,
+   "false_rejections": 0,
+   "abstained_or_incomplete": 22,
+   "out_of_family_rejected": "0/6",
+   "transport_reruns": 0,
+   "all_attempts": 30,
+   "all_attempt_outcomes": {
+    "correct": 8,
+    "wrong": 0,
+    "rejected": 0,
+    "false_rejection": 0,
+    "abstained": 22,
+    "incomplete": 0,
+    "unparsed": 0
+   },
+   "provider_requests": 30
+  }
+ ],
+ "paired": [
+  {
+   "pair": [
+    "spark",
+    "no_tool"
+   ],
+   "task": "A",
+   "specimens": 24,
+   "only_first_correct": 16,
+   "only_second_correct": 0,
+   "exact_mcnemar_p": 3.0517578125e-05,
+   "holm_adjusted_p": 0.000213623046875,
+   "first_arm_superiority_supported": true
+  },
+  {
+   "pair": [
+    "spark",
+    "engine"
+   ],
+   "task": "A",
+   "specimens": 24,
+   "only_first_correct": 0,
+   "only_second_correct": 0,
+   "exact_mcnemar_p": 1.0,
+   "holm_adjusted_p": 1.0,
+   "first_arm_superiority_supported": false
+  },
+  {
+   "pair": [
+    "spark",
+    "engine"
+   ],
+   "task": "B",
+   "status": "incomplete; no significance claim",
+   "specimens": 0,
+   "expected_specimens": 16
+  },
+  {
+   "pair": [
+    "spark",
+    "random"
+   ],
+   "task": "B",
+   "status": "incomplete; no significance claim",
+   "specimens": 0,
+   "expected_specimens": 16
+  },
+  {
+   "pair": [
+    "spark_hidden",
+    "random"
+   ],
+   "task": "B",
+   "specimens": 16,
+   "only_first_correct": 5,
+   "only_second_correct": 1,
+   "exact_mcnemar_p": 0.21875,
+   "holm_adjusted_p": 1.0,
+   "first_arm_superiority_supported": false
+  },
+  {
+   "pair": [
+    "spark_hidden",
+    "engine"
+   ],
+   "task": "B",
+   "specimens": 16,
+   "only_first_correct": 0,
+   "only_second_correct": 1,
+   "exact_mcnemar_p": 1.0,
+   "holm_adjusted_p": 1.0,
+   "first_arm_superiority_supported": false
+  },
+  {
+   "pair": [
+    "spark_hidden",
+    "spark"
+   ],
+   "task": "B",
+   "status": "incomplete; no significance claim",
+   "specimens": 0,
+   "expected_specimens": 16
+  }
+ ]
+}

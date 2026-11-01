@@ -1,0 +1,1812 @@
+{
+  "schema": "mock-night-budget-v1",
+  "cap_usd": 10.0,
+  "request_cap": 256,
+  "requests": [
+    {
+      "id": "ff66981268ec42c8b7f985f1975735f4",
+      "job": "dev-a",
+      "at_unix": 1793556088.594837,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00678845,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 66,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    {
+      "id": "4963b3026c544f6a8a7fe4d8b37d44a0",
+      "job": "dev-a",
+      "at_unix": 1793556089.9890828,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0067982,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8452,
+        "output_tokens": 472,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "c6de35eaeac84bbaab9531e10bf0593a",
+      "job": "dev-a",
+      "at_unix": 1793556092.8209112,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0068361,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12377,
+        "output_tokens": 221,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "bc69b23837e74ea6bb667cc1888b648b",
+      "job": "dev-a",
+      "at_unix": 1793556095.381761,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01048335,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16481,
+        "output_tokens": 866,
+        "input_tokens_details": {
+          "cached_tokens": 12544
+        }
+      }
+    },
+    {
+      "id": "445c1be025a34420a4d746427939d3bc",
+      "job": "dev-b",
+      "at_unix": 1793556101.0603101,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "d7cf472d96b747ebbeebf776b128ccf8",
+      "job": "dev-b",
+      "at_unix": 1793556102.225784,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0082974,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 9288,
+        "output_tokens": 612,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "149e398fe6374d8586b34678842bcebd",
+      "job": "dev-b",
+      "at_unix": 1793556111.122703,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0079432,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 14361,
+        "output_tokens": 163,
+        "input_tokens_details": {
+          "cached_tokens": 9728
+        }
+      }
+    },
+    {
+      "id": "b818b3c072644a6ba7db3963c126c78d",
+      "job": "dev-b",
+      "at_unix": 1793556112.84205,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01239035,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 19414,
+        "output_tokens": 949,
+        "input_tokens_details": {
+          "cached_tokens": 14464
+        }
+      }
+    },
+    {
+      "id": "3c793ca5d38446928bfa2b916eaad062",
+      "job": "task-a",
+      "at_unix": 1793556118.7751,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00113945,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 62,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "a6f3a0ac4143492f86a4e72776256c6c",
+      "job": "task-a",
+      "at_unix": 1793556119.62002,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00818795,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8452,
+        "output_tokens": 799,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "4621bc833c734cddbffa793539ac600e",
+      "job": "task-a",
+      "at_unix": 1793556123.827241,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0164872,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12670,
+        "output_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    {
+      "id": "87456a98cecf458995aeddacdcdcd8ac",
+      "job": "task-a",
+      "at_unix": 1793556125.578134,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.012518,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16702,
+        "output_tokens": 1346,
+        "input_tokens_details": {
+          "cached_tokens": 12800
+        }
+      }
+    },
+    {
+      "id": "0956eef5e5604c6daa95c6a3afc44b42",
+      "job": "task-a",
+      "at_unix": 1793556130.6556852,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.006908,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "2b6013c8d4e84b13825383746460dccd",
+      "job": "task-a",
+      "at_unix": 1793556131.5090518,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01402725,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8512,
+        "output_tokens": 797,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "66a8396560cd4820a88b2fbe79d731cf",
+      "job": "task-a",
+      "at_unix": 1793556135.514422,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0168985,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12832,
+        "output_tokens": 202,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "660383e038a544bda729077b90297e74",
+      "job": "task-a",
+      "at_unix": 1793556137.299129,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00995195,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16982,
+        "output_tokens": 693,
+        "input_tokens_details": {
+          "cached_tokens": 12928
+        }
+      }
+    },
+    {
+      "id": "15b3b41888de43a8988cc59e90ed051f",
+      "job": "task-a",
+      "at_unix": 1793556141.213397,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00115645,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 66,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "6902658b2b6b4f7f91fbeaa211fdf02c",
+      "job": "task-a",
+      "at_unix": 1793556142.238027,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01008295,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8455,
+        "output_tokens": 1244,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "f3d8b84c780b4d2297c2d38e0343def3",
+      "job": "task-a",
+      "at_unix": 1793556147.7769878,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01758475,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 13075,
+        "output_tokens": 292,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "48ab072e55154700b3fe306b2104d1d5",
+      "job": "task-a",
+      "at_unix": 1793556150.83094,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0206294,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 17185,
+        "output_tokens": 1191,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "7987d0ba0134437699d2c457c800142a",
+      "job": "task-a",
+      "at_unix": 1793556155.792873,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "c3da0597e52f40c3a102c725b2a1ed5d",
+      "job": "task-a",
+      "at_unix": 1793556156.8730938,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00673145,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8453,
+        "output_tokens": 456,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "bdfd7154cef443f7a4a85d721014e50d",
+      "job": "task-a",
+      "at_unix": 1793556159.519018,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0064601,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12355,
+        "output_tokens": 139,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "1b26080d7bb14abc9c0eb8dac1b11e67",
+      "job": "task-a",
+      "at_unix": 1793556160.9558988,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01669645,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16374,
+        "output_tokens": 471,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "dd19db8614544f75bfd9075944c8ce8b",
+      "job": "task-a",
+      "at_unix": 1793556163.9349608,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.006908,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "605d1bcbf82d4d60a698a7c85e9b2821",
+      "job": "task-a",
+      "at_unix": 1793556165.094938,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0103189,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8515,
+        "output_tokens": 1315,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "aba2d83b0708425a872e7223d13b6f1a",
+      "job": "task-a",
+      "at_unix": 1793556171.14378,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00691225,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 62,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "b99d44f3f09046c5a5d0859c3d7ecfef",
+      "job": "task-a",
+      "at_unix": 1793556171.991266,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.012885,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8455,
+        "output_tokens": 545,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "3b8ae4e2362f4b07a79c8aea877fb2d2",
+      "job": "task-a",
+      "at_unix": 1793556175.7998452,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01195275,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 9110,
+        "output_tokens": 133,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "id": "f8d81288c4224ab8a0cb64b44cdcae7b",
+      "job": "task-a",
+      "at_unix": 1793556177.222005,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00688705,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12646,
+        "output_tokens": 187,
+        "input_tokens_details": {
+          "cached_tokens": 8832
+        }
+      }
+    },
+    {
+      "id": "9f347a6f6f79407faaf09d6af41fbc9b",
+      "job": "task-a",
+      "at_unix": 1793556180.092216,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0106998,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16641,
+        "output_tokens": 903,
+        "input_tokens_details": {
+          "cached_tokens": 12672
+        }
+      }
+    },
+    {
+      "id": "4c758a3e77904173a378bb7564de25f1",
+      "job": "task-a",
+      "at_unix": 1793556184.474015,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00115645,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 66,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "b5dc598db7624e81913d0aadf9e51dfa",
+      "job": "task-a",
+      "at_unix": 1793556185.980486,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0081862,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8454,
+        "output_tokens": 798,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "80e3c5c312854dfb91e244c59dc8e200",
+      "job": "task-a",
+      "at_unix": 1793556190.07101,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01093895,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12635,
+        "output_tokens": 216,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "20cfa4c8115c44c8a476b8d16c08ee54",
+      "job": "task-a",
+      "at_unix": 1793556191.968493,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.016424,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16672,
+        "output_tokens": 1280,
+        "input_tokens_details": {
+          "cached_tokens": 8960
+        }
+      }
+    },
+    {
+      "id": "e4defa0284df4e84aff31dc4bd35ea75",
+      "job": "task-a",
+      "at_unix": 1793556197.0950289,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 63,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "94b4085248b946668d2b026c2433b2ba",
+      "job": "task-a",
+      "at_unix": 1793556197.973089,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01000145,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8519,
+        "output_tokens": 1206,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "78167c1840924db18c1d70b6a102611c",
+      "job": "task-a",
+      "at_unix": 1793556203.424774,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.006822,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 13246,
+        "output_tokens": 194,
+        "input_tokens_details": {
+          "cached_tokens": 9600
+        }
+      }
+    },
+    {
+      "id": "4244ad81267a43e8bc539df31948f52f",
+      "job": "task-a",
+      "at_unix": 1793556205.884989,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01355555,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 17391,
+        "output_tokens": 1520,
+        "input_tokens_details": {
+          "cached_tokens": 13312
+        }
+      }
+    },
+    {
+      "id": "6875db5b74df4229a1642adb4550d65a",
+      "job": "task-a",
+      "at_unix": 1793556212.6611042,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00113095,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 60,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "7ea7403618cb41cd9787cc0588c76718",
+      "job": "task-a",
+      "at_unix": 1793556213.4727979,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00781395,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8452,
+        "output_tokens": 711,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "71bca4447b1741cfa51040f6ccd7a3c6",
+      "job": "task-a",
+      "at_unix": 1793556217.213313,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0110877,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12618,
+        "output_tokens": 256,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "4c889f02849e49b18c7997679d40f035",
+      "job": "task-a",
+      "at_unix": 1793556219.097996,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01360375,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16758,
+        "output_tokens": 1585,
+        "input_tokens_details": {
+          "cached_tokens": 12800
+        }
+      }
+    },
+    {
+      "id": "d1d72bf819034175b5c17521a3a76e71",
+      "job": "task-a",
+      "at_unix": 1793556225.433689,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "109f630a3ceb4933a45f07bbda52a9c3",
+      "job": "task-a",
+      "at_unix": 1793556226.284214,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00699755,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8470,
+        "output_tokens": 613,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "45a1c9dc82f449d7b58e244d74b79476",
+      "job": "task-a",
+      "at_unix": 1793556229.4348989,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0139898,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 11620,
+        "output_tokens": 2160,
+        "input_tokens_details": {
+          "cached_tokens": 8832
+        }
+      }
+    },
+    {
+      "id": "d75a55486fbd492abc3662ee2c4a3b98",
+      "job": "task-a",
+      "at_unix": 1793556239.194425,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "bd76d84c45594c5c8630041bf7cdde13",
+      "job": "task-a",
+      "at_unix": 1793556240.0861921,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0058517,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8453,
+        "output_tokens": 249,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "7c6fb59fa61c4d919d3c09a4355e7542",
+      "job": "task-a",
+      "at_unix": 1793556242.267412,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0064209,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12160,
+        "output_tokens": 154,
+        "input_tokens_details": {
+          "cached_tokens": 8576
+        }
+      }
+    },
+    {
+      "id": "ca31041cfbc349739653ca0830f0d7e2",
+      "job": "task-a",
+      "at_unix": 1793556243.794507,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.010572,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16197,
+        "output_tokens": 871,
+        "input_tokens_details": {
+          "cached_tokens": 12160
+        }
+      }
+    },
+    {
+      "id": "3d1586bd9d3940f19bc33ecffada8be0",
+      "job": "task-a",
+      "at_unix": 1793556248.247222,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "964cd7eb92fa4632bcac87036ce9d529",
+      "job": "task-a",
+      "at_unix": 1793556249.796604,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0086187,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8477,
+        "output_tokens": 893,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "f1c101d4be3d4ab5818b86e415ad985b",
+      "job": "task-a",
+      "at_unix": 1793556254.611858,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0132599,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 11918,
+        "output_tokens": 2000,
+        "input_tokens_details": {
+          "cached_tokens": 9216
+        }
+      }
+    },
+    {
+      "id": "9845104714424dc59a7eee10041a35c3",
+      "job": "task-a",
+      "at_unix": 1793556263.422629,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011607,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 67,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "01e592be2c584226b3e8aaff8b1af036",
+      "job": "task-a",
+      "at_unix": 1793556264.580828,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00671205,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8517,
+        "output_tokens": 532,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "48071dc9f9cc47ebbb99c6dc60b3183b",
+      "job": "task-a",
+      "at_unix": 1793556267.789531,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011607,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 67,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "65aedb2312554829931c32a04be7523b",
+      "job": "task-a",
+      "at_unix": 1793556268.66797,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0121657,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8513,
+        "output_tokens": 1717,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "6654f5eb2595438b82cab6bbf02af61d",
+      "job": "task-a",
+      "at_unix": 1793556279.1056461,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0122437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 13672,
+        "output_tokens": 218,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "3665538a7165485cbd7999c93026c4bf",
+      "job": "task-a",
+      "at_unix": 1793556280.917713,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0133491,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 17758,
+        "output_tokens": 1496,
+        "input_tokens_details": {
+          "cached_tokens": 13824
+        }
+      }
+    },
+    {
+      "id": "cf225a7176dc49dc957e2d0b892ee868",
+      "job": "task-a",
+      "at_unix": 1793556287.36642,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 63,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "45c0d87ba972424f89656b55f73c7eea",
+      "job": "task-a",
+      "at_unix": 1793556288.238702,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0070674,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8474,
+        "output_tokens": 562,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "a8e771d2a9e940b7a62cd31defa9ce8e",
+      "job": "task-a",
+      "at_unix": 1793556291.175974,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00966455,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 11570,
+        "output_tokens": 1157,
+        "input_tokens_details": {
+          "cached_tokens": 8832
+        }
+      }
+    },
+    {
+      "id": "7594466688c44c6d911058e38cd871db",
+      "job": "task-a",
+      "at_unix": 1793556297.226005,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00114795,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 64,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "5b3182c3040d4624aa18775d7c7eb452",
+      "job": "task-a",
+      "at_unix": 1793556298.1111522,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0080039,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8516,
+        "output_tokens": 770,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "cfdfa22cb13249b4927e79d6b3aa5f44",
+      "job": "task-a",
+      "at_unix": 1793556301.808683,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00646965,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 9417,
+        "output_tokens": 144,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        }
+      }
+    },
+    {
+      "id": "c366b3a3ed3341959da47efda6051ae3",
+      "job": "task-a",
+      "at_unix": 1793556303.7569458,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 63,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "51d56c9bc117422883ae9446327bdcd7",
+      "job": "task-a",
+      "at_unix": 1793556304.604299,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0067407,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8457,
+        "output_tokens": 457,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "26fbb5ea45d44479833e5590b0f3e9e8",
+      "job": "task-a",
+      "at_unix": 1793556307.191371,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0066016,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12305,
+        "output_tokens": 187,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "105c3f4aeb1e4fce875a62e2742a6bb5",
+      "job": "task-a",
+      "at_unix": 1793556308.705035,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0107749,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16316,
+        "output_tokens": 950,
+        "input_tokens_details": {
+          "cached_tokens": 12416
+        }
+      }
+    },
+    {
+      "id": "019b44aed8e9412b828042d9a2e584fc",
+      "job": "task-a",
+      "at_unix": 1793556312.913992,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00113095,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 60,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "f90ea58114974b4b87e056d9a0a02a03",
+      "job": "task-a",
+      "at_unix": 1793556313.942912,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0096637,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8514,
+        "output_tokens": 1128,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "c30b5c026479459a9f1226aa3929d7d9",
+      "job": "task-a",
+      "at_unix": 1793556319.619605,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00701035,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 13151,
+        "output_tokens": 200,
+        "input_tokens_details": {
+          "cached_tokens": 9344
+        }
+      }
+    },
+    {
+      "id": "95f05aefa75e4703a90f916e16974c29",
+      "job": "task-a",
+      "at_unix": 1793556321.3641422,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0097816,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 17309,
+        "output_tokens": 623,
+        "input_tokens_details": {
+          "cached_tokens": 13184
+        }
+      }
+    },
+    {
+      "id": "e5d8720429834b9daea6a483b1323d06",
+      "job": "task-a",
+      "at_unix": 1793556325.120219,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "b53ab959abf74fef8b57547b93062ca9",
+      "job": "task-a",
+      "at_unix": 1793556325.9721978,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00840745,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8478,
+        "output_tokens": 843,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "94d3e59aa7d2475baf2867a15c910a31",
+      "job": "task-a",
+      "at_unix": 1793556330.0947058,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00996995,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 11873,
+        "output_tokens": 1206,
+        "input_tokens_details": {
+          "cached_tokens": 9088
+        }
+      }
+    },
+    {
+      "id": "666ede3408ca4e219c4762e4dbf7a4da",
+      "job": "task-a",
+      "at_unix": 1793556335.644537,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011267,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 59,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "93bcc555189b496081c3a2ab58c962f8",
+      "job": "task-a",
+      "at_unix": 1793556336.938773,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00827695,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8513,
+        "output_tokens": 802,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "0d3099f27201419a89ad8d2b7a923b9b",
+      "job": "task-a",
+      "at_unix": 1793556341.1726642,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00662195,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12819,
+        "output_tokens": 140,
+        "input_tokens_details": {
+          "cached_tokens": 9088
+        }
+      }
+    },
+    {
+      "id": "a94bc0cbec1a42c6841a361d7f5a9b86",
+      "job": "task-a",
+      "at_unix": 1793556342.473902,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0107625,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16899,
+        "output_tokens": 875,
+        "input_tokens_details": {
+          "cached_tokens": 12800
+        }
+      }
+    },
+    {
+      "id": "48d62f40198f43af950733abde6eb892",
+      "job": "task-a",
+      "at_unix": 1793556346.31918,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00114795,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 64,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "5cb25be8b3774d0184d3326a339cf85c",
+      "job": "task-a",
+      "at_unix": 1793556347.225369,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00615055,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8452,
+        "output_tokens": 419,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "dcf43d010b6f474bae86af3afa9d2e67",
+      "job": "task-a",
+      "at_unix": 1793556349.851829,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0066066,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12292,
+        "output_tokens": 192,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "76cd0526851d4231883857173d96cf8b",
+      "job": "task-a",
+      "at_unix": 1793556351.314687,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01311745,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16323,
+        "output_tokens": 1466,
+        "input_tokens_details": {
+          "cached_tokens": 12288
+        }
+      }
+    },
+    {
+      "id": "67401ba1963d4e05a009f273f60288d8",
+      "job": "task-a",
+      "at_unix": 1793556357.082203,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 63,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "937105fa71854074ae6c1cec45629827",
+      "job": "task-a",
+      "at_unix": 1793556357.913196,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00712155,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8457,
+        "output_tokens": 646,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "b819d493202d4fd2956a6ff66e2a1b02",
+      "job": "task-a",
+      "at_unix": 1793556361.5346172,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00632225,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12555,
+        "output_tokens": 114,
+        "input_tokens_details": {
+          "cached_tokens": 8960
+        }
+      }
+    },
+    {
+      "id": "233f53827cc94560bd838181367a7125",
+      "job": "task-a",
+      "at_unix": 1793556362.7240388,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0126291,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16552,
+        "output_tokens": 1350,
+        "input_tokens_details": {
+          "cached_tokens": 12544
+        }
+      }
+    },
+    {
+      "id": "b7ef870983334f9f89a8bb5cd0762c36",
+      "job": "task-a",
+      "at_unix": 1793556367.984643,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00112245,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 58,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "94f0c7a1aabd4d988f012b59229603a1",
+      "job": "task-a",
+      "at_unix": 1793556368.949418,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01012595,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8469,
+        "output_tokens": 1250,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "2168930334ba4465a8eef43eb782df82",
+      "job": "task-a",
+      "at_unix": 1793556374.453065,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01083305,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12252,
+        "output_tokens": 1397,
+        "input_tokens_details": {
+          "cached_tokens": 9472
+        }
+      }
+    },
+    {
+      "id": "4cf4fff0a18541aba7b24f8be3ed7778",
+      "job": "task-a",
+      "at_unix": 1793556381.160964,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00113945,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 62,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "52adc8af6aee415e930385e5713c9b66",
+      "job": "task-a",
+      "at_unix": 1793556382.4824162,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0079902,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8474,
+        "output_tokens": 746,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "b7f046a658234fe29c3421f1d39a3df0",
+      "job": "task-a",
+      "at_unix": 1793556386.24431,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0098877,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 11763,
+        "output_tokens": 1219,
+        "input_tokens_details": {
+          "cached_tokens": 9088
+        }
+      }
+    },
+    {
+      "id": "898bcc28056d4761a6f05c0462f20350",
+      "job": "task-a",
+      "at_unix": 1793556392.8019562,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00517925,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12990,
+        "output_tokens": 711,
+        "input_tokens_details": {
+          "cached_tokens": 12800
+        }
+      }
+    },
+    {
+      "id": "8e6a6fdca6874e53ba1a5617b720a64d",
+      "job": "task-a",
+      "at_unix": 1793556396.581741,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00775095,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16240,
+        "output_tokens": 559,
+        "input_tokens_details": {
+          "cached_tokens": 13568
+        }
+      }
+    },
+    {
+      "id": "8983a720f75c4a5c8ed6993162a5b402",
+      "job": "task-a",
+      "at_unix": 1793556400.2358332,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00135195,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 112,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "e69accb319a0457ea99f2574bb51a449",
+      "job": "task-a",
+      "at_unix": 1793556401.234945,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00817995,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8500,
+        "output_tokens": 783,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "b458a4e5d82d4f48880019b93d450229",
+      "job": "task-a",
+      "at_unix": 1793556405.812143,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00697395,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12696,
+        "output_tokens": 259,
+        "input_tokens_details": {
+          "cached_tokens": 9088
+        }
+      }
+    },
+    {
+      "id": "ae721a9ebb0b4a1f86933b785fa8b710",
+      "job": "task-a",
+      "at_unix": 1793556407.619613,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.012862,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16814,
+        "output_tokens": 1394,
+        "input_tokens_details": {
+          "cached_tokens": 12800
+        }
+      }
+    },
+    {
+      "id": "f8a65098feb943179e2f761ce7ffb68c",
+      "job": "task-a",
+      "at_unix": 1793556413.0247738,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011607,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 67,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "9f8f8c334f2f45899b8f98de93459265",
+      "job": "task-a",
+      "at_unix": 1793556414.804208,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00724405,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8453,
+        "output_tokens": 676,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "b45be22e9e954131b03ef7011defcdec",
+      "job": "task-a",
+      "at_unix": 1793556419.949685,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0105183,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12531,
+        "output_tokens": 247,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "2690a51e85df4a83898107a977deb6a0",
+      "job": "task-a",
+      "at_unix": 1793556421.94561,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0117878,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16607,
+        "output_tokens": 1169,
+        "input_tokens_details": {
+          "cached_tokens": 12672
+        }
+      }
+    },
+    {
+      "id": "3662fbcbb3744723990c099e6c636a0e",
+      "job": "task-a",
+      "at_unix": 1793556426.958426,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011437,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 63,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "b25c7c7d20fe4447b5378357db37f813",
+      "job": "task-a",
+      "at_unix": 1793556428.40098,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00629145,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8458,
+        "output_tokens": 351,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "1d0615a326a1406bbb7eb430104232b7",
+      "job": "task-a",
+      "at_unix": 1793556431.146865,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0063839,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12195,
+        "output_tokens": 135,
+        "input_tokens_details": {
+          "cached_tokens": 8576
+        }
+      }
+    },
+    {
+      "id": "c0ca5d6e2661434fbb3d46f3eb3b6279",
+      "job": "task-a",
+      "at_unix": 1793556432.542489,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00974075,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16161,
+        "output_tokens": 686,
+        "input_tokens_details": {
+          "cached_tokens": 12160
+        }
+      }
+    },
+    {
+      "id": "35f05b8a43bb4a6b837585a1a25a01ad",
+      "job": "task-a",
+      "at_unix": 1793556436.45163,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011352,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 61,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "fd406c83cf134359817fc38a230b3e36",
+      "job": "task-a",
+      "at_unix": 1793556437.2571478,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00688145,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8454,
+        "output_tokens": 491,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "0e0ccf5717f9469a88cad4f168ac50b2",
+      "job": "task-a",
+      "at_unix": 1793556440.110208,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0065141,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12337,
+        "output_tokens": 157,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "2165388286ba4f1483078bb549259ec4",
+      "job": "task-a",
+      "at_unix": 1793556441.5075781,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0112869,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16321,
+        "output_tokens": 1069,
+        "input_tokens_details": {
+          "cached_tokens": 12416
+        }
+      }
+    },
+    {
+      "id": "9eb29f5aee214ab19f699e14cb61f16c",
+      "job": "task-a",
+      "at_unix": 1793556445.969358,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0011607,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 67,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "43460bea269f456bb007413865c11971",
+      "job": "task-a",
+      "at_unix": 1793556446.799907,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0061233,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8454,
+        "output_tokens": 412,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        }
+      }
+    },
+    {
+      "id": "5b8696cf8fbb417db3efee7b51325d8f",
+      "job": "task-a",
+      "at_unix": 1793556449.4127119,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00665985,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 12304,
+        "output_tokens": 201,
+        "input_tokens_details": {
+          "cached_tokens": 8704
+        }
+      }
+    },
+    {
+      "id": "87e48e5122aa4734a29f2f103316f82e",
+      "job": "task-a",
+      "at_unix": 1793556451.0606132,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01061415,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 16388,
+        "output_tokens": 891,
+        "input_tokens_details": {
+          "cached_tokens": 12416
+        }
+      }
+    },
+    {
+      "id": "2a8f6ecbaaf04cdb95ef545a4acafd60",
+      "job": "task-a",
+      "at_unix": 1793556454.870998,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.00113945,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 5319,
+        "output_tokens": 62,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "a3d3414b3d2f4dd3a794412a2ff758a5",
+      "job": "task-a",
+      "at_unix": 1793556456.749644,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.01173745,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 8456,
+        "output_tokens": 1633,
+        "input_tokens_details": {
+          "cached_tokens": 5248
+        }
+      }
+    },
+    {
+      "id": "a360261d68874a2591d2f5be4aea9d3f",
+      "job": "task-a",
+      "at_unix": 1793556464.831132,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0070114,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 13480,
+        "output_tokens": 236,
+        "input_tokens_details": {
+          "cached_tokens": 9856
+        }
+      }
+    },
+    {
+      "id": "76fad6791a3c4ce0a334200f3739fc44",
+      "job": "task-a",
+      "at_unix": 1793556466.504386,
+      "status": "settled",
+      "charged_or_reserved_usd": 0.0167627,
+      "http_status": 200,
+      "usage": {
+        "input_tokens": 17547,
+        "output_tokens": 2295,
+        "input_tokens_details": {
+          "cached_tokens": 13568
+        }
+      }
+    }
+  ],
+  "rates": {
+    "input": 1.25e-06,
+    "cached": 1.5e-07,
+    "output": 4.25e-06
+  }
+}
