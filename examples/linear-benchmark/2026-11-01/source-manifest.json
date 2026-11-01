@@ -1,0 +1,23 @@
+{
+  "scope": "complete local import closure; independent presentation excluded",
+  "files": {
+    "scripts/benchmark_linear.py": "642aabc9fd45e308b6c41e6571efe3f29b46acef1493ed76dc384d78c9514ca2",
+    "src/benchmate/__init__.py": "3762ba97ca26d3267a3613949a24f8d4261cf7a2ce67d3bfb5f99d69c6944805",
+    "src/benchmate/agent.py": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "src/benchmate/continuous_agent.py": "9acc864e925d18763226aa8307172520268505967aa187ad337c72d3227a3708",
+    "src/benchmate/engine.py": "012bf9230cc9dc1f5290c853dfc549ff82969cb2bd508e111e699bbc8960b77e",
+    "src/benchmate/experiments.py": "1c6321c77ac80819d942911edb5b07e94a20f8e851132529eeecc37814e1921c",
+    "src/benchmate/inference.py": "af6d342e60438fd97a99e57cd1c91557438452c840869ac84b32cbfd7deaa4ba",
+    "src/benchmate/menu.py": "097aac2f7f25dbf951665361b1c5a768f5260da30e192523f86c6c1768696433",
+    "src/benchmate/noise.py": "5f122cbef4d1c869ae9ddefa4ecf133dc45a694269af463aed7685f57c02d503",
+    "src/benchmate/physics.py": "c5895c1312925da6a32b90026bf51eafdfae0f8f8f7f38bf03ed9c9ebe937683",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/providers_baseten.py": "093be451312f54a0efa05251567cd7e36604f3a4095a79bb881b15f84f494320",
+    "src/benchmate/recommendations.py": "bc75944c41e4f5e5e6ccd2a579fe9a206a012d596ae2a7e29f389724f4cb861b",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "src/benchmate/simulation.py": "7c69c35baaa22a7d4a58969ae2f1f53173c714fc6dd175e945f367287288edcc",
+    "src/benchmate/stimulus.py": "bdbfff3c4256f4908f81f8bb763267bd3221bdbfb3aeb0d5f915154ed20822c5",
+    "src/benchmate/vector.py": "54d664958189925c0e27311c542587a9e6e95e89a07fcbac8e5c60aa71714574"
+  }
+}

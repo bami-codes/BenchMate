@@ -1,0 +1,293 @@
+{
+  "protocol": "linear-benchmark-v1.1",
+  "question": "On the synthetic instrument, does the choice of experiment change what BenchMate can correctly identify, and does Muse Spark choose experiments well with and without the engine's ranking?",
+  "scope": "Synthetic instrument only (ideal drive, independent Gaussian sensor noise 1 mV RMS). Declared linear one-state families. Not a hardware accuracy result and not a nonlinear discovery result.",
+  "harness": "scripts/benchmark_linear.py",
+  "master_seed": 20261101,
+  "development_seed": 990001,
+  "specimens_file": "specimens.json",
+  "specimens_sha256": "8aaee2a5b237f6f3ac3405ac8f458ead6f3027dc160b1fc8746ba5704028a593",
+  "budget": {
+    "exploration": 1,
+    "diagnostic": 3,
+    "confirmation": 1,
+    "shunt_dc_pair_cost": 2
+  },
+  "menu": "benchmate.menu.measurement_menu(MenuConfig()) — 85 actions, identical for every arm",
+  "verification_rule": "ContinuousSession.verify: posterior prediction frozen before one reserved confirmation acquisition; whole waveform and every region must pass; no refit",
+  "tasks": {
+    "A": {
+      "title": "Which part changed?",
+      "mode": "repair",
+      "declared_families": "inference.families_for('repair'): nominal, r_changed, c_changed",
+      "classes": [
+        {
+          "name": "nominal",
+          "count": 8,
+          "in_family": true,
+          "sampling_bounds": {
+            "r_ohm": [
+              9500,
+              10500
+            ],
+            "c_f": [
+              9e-07,
+              1.1e-06
+            ]
+          }
+        },
+        {
+          "name": "r_changed",
+          "count": 8,
+          "in_family": true,
+          "sampling_bounds": {
+            "r_ohm": [
+              15000,
+              25000
+            ],
+            "c_f": [
+              9e-07,
+              1.1e-06
+            ]
+          }
+        },
+        {
+          "name": "c_changed",
+          "count": 8,
+          "in_family": true,
+          "sampling_bounds": {
+            "r_ohm": [
+              9500,
+              10500
+            ],
+            "c_f": [
+              1.5e-06,
+              2.5e-06
+            ]
+          }
+        },
+        {
+          "name": "both_changed",
+          "count": 6,
+          "in_family": false,
+          "sampling_bounds": {
+            "r_ohm": [
+              15000,
+              17000
+            ],
+            "c_f": [
+              1.5e-06,
+              1.65e-06
+            ]
+          },
+          "note": "Outside every declared family, with a time constant (22.5–28 ms) inside the range the changed families can produce. The correct outcome is not to verify any family."
+        }
+      ],
+      "fixed_plan": [
+        "step_a0.5_s0_l10000",
+        "step_a0.5_s0_l4700",
+        "sine_f2_a1.0_s0_l0"
+      ]
+    },
+    "B": {
+      "title": "What is connected?",
+      "mode": "mystery",
+      "declared_families": "inference.families_for('mystery'): rc, rc_input_branch, resistor, resistor_input_branch, resistor_output_leak",
+      "classes": [
+        {
+          "name": "rc",
+          "count": 8,
+          "in_family": true,
+          "sampling_bounds": {
+            "r_ohm": [
+              6800,
+              33000
+            ],
+            "c_f": [
+              6.8e-07,
+              3.3e-06
+            ]
+          }
+        },
+        {
+          "name": "rc_input_branch",
+          "count": 8,
+          "in_family": true,
+          "sampling_bounds": {
+            "r_ohm": [
+              6800,
+              33000
+            ],
+            "c_f": [
+              6.8e-07,
+              3.3e-06
+            ],
+            "input_parallel_ohm": [
+              6800,
+              33000
+            ]
+          }
+        }
+      ],
+      "fixed_plan": [
+        "step_a0.5_s1000_l0",
+        "step_a0.5_s0_l10000",
+        "sine_f2_a1.0_s1000_l4700"
+      ]
+    }
+  },
+  "fixed_plan_note": "Both fixed plans were written after seeing the engine's first choice on development specimens. This favours the fixed-plan baseline.",
+  "arms": {
+    "engine": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "description": "Engine-only greedy: always the top affordable action of BenchMate's ranking (experiments.drive_engine). No model call."
+    },
+    "fixed": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "description": "The task's fixed plan in order, stopping as soon as the evidence is no longer unresolved. No model call."
+    },
+    "random": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "replicates": 3,
+      "description": "Uniform choice among affordable menu actions, seeded per specimen and replicate. No model call."
+    },
+    "spark": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "description": "Muse Spark 1.3 operating BenchMate with the engine's top-five ranking visible (the product configuration). Unchanged CONTINUOUS_PROMPT."
+    },
+    "spark_hidden": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "description": "Muse Spark 1.3 operating BenchMate with the ranking withheld; it sees the full action list and the engine's fit and identifiability results, and chooses from its own reasoning. Prompt differs only in the sentence about the ranked menu (HIDDEN_PROMPT)."
+    },
+    "spark_open": {
+      "tasks": [
+        "A",
+        "B"
+      ],
+      "conditional": true,
+      "description": "Muse Spark Open (Baseten, meta-models/muse-spark-open-1026, provider-default reasoning) with the same tools, prompt and ranking as 'spark'. Runs only if a chat-completions adapter passes the development specimens first; otherwise reported as not run."
+    },
+    "no_tool": {
+      "tasks": [
+        "A"
+      ],
+      "max_output_tokens": 8192,
+      "description": "Muse Spark 1.3, one fresh request per Task A specimen, no tools. Receives nominal design, three declared family bounds and the ideal unloaded time constant rounded to 0.1 ms. Bench arms receive noisy waveform summaries and numerical analysis instead. This measures available-information differences, not a controlled intrinsic model-accuracy comparison."
+    }
+  },
+  "live": {
+    "provider": "meta",
+    "model": "muse-spark-1.3",
+    "effort": "medium",
+    "max_requests_per_run": 8,
+    "max_payload_bytes": 128000,
+    "temperature": "provider_default",
+    "automatic_retry": false
+  },
+  "scoring": {
+    "verified": "An accepted finish_report with verdict 'verified'. The session refuses that verdict unless the frozen prediction passed. A run that ends without an accepted report is 'incomplete'.",
+    "in_family": {
+      "correct": "verified and candidate equals the truth class",
+      "wrong": "verified and candidate differs",
+      "false_rejection": "evidence status all_candidates_inadequate",
+      "abstained": "anything else, including incomplete"
+    },
+    "out_of_family": {
+      "wrong": "any family verified",
+      "rejected": "evidence status all_candidates_inadequate",
+      "abstained": "anything else"
+    },
+    "no_tool": "Raw family answers are scored against specimen truth for descriptive identification; cannot_tell is abstention, none_fit rejection, unparsed never correct. This condition has different information access; it is not a matched with/without-tools accuracy ablation.",
+    "primary_metric": "First-attempt correct identifications over in-family specimens per arm/task. Wilson interval for one run per circuit; random reports pooled descriptive rate with a circuit-cluster bootstrap retaining three repeats together. Partial rows are explicitly labelled and cannot support superiority claims.",
+    "safety_metric": "Wrong identifications over all specimens.",
+    "secondary": [
+      "out-of-family rejected",
+      "false rejections",
+      "mean diagnostic acquisitions",
+      "mean wiring changes (simulated mountings)",
+      "provider requests",
+      "share of measurements that equal the engine's top affordable action at that moment (from the logged ranking; descriptive only)"
+    ],
+    "paired_test": "Exact two-sided McNemar on first attempts, same complete in-family specimen set, random replicate 0. Holm adjustment across all seven preregistered pairs; superiority requires adjusted p < 0.05 AND the first arm is better.",
+    "retry_accounting": "First attempt remains primary even after recovery. Every attempt is retained; all-attempt outcome counts, HTTP requests and recovery counts are reported separately."
+  },
+  "paired_comparisons": [
+    [
+      "spark",
+      "no_tool",
+      "A"
+    ],
+    [
+      "spark",
+      "engine",
+      "A"
+    ],
+    [
+      "spark",
+      "engine",
+      "B"
+    ],
+    [
+      "spark",
+      "random",
+      "B"
+    ],
+    [
+      "spark_hidden",
+      "random",
+      "B"
+    ],
+    [
+      "spark_hidden",
+      "engine",
+      "B"
+    ],
+    [
+      "spark_hidden",
+      "spark",
+      "B"
+    ]
+  ],
+  "predictions_before_running": {
+    "A_bench": "engine and spark identify at least 23/24 in-family specimens and verify none of the 6 out-of-family specimens.",
+    "B_choice": "random identifies fewer specimens than engine and uses more wiring changes; spark_hidden is reported against both whatever the result.",
+    "safety": "engine, fixed, spark and spark_hidden make zero wrong identifications.",
+    "A_no_tool_information": "Tau alone cannot generally distinguish R from C where the family tau intervals overlap. Their unequal declared bounds also create edge intervals compatible with only one changed family. There is no 8/24 accuracy ceiling: guessing may be correct. Do not score a justified cannot_tell as a false identification or claim intrinsic model inferiority."
+  },
+  "reporting_rules": [
+    "Every registered arm/task appears, including not-run and partial rows. Primary tables preserve first attempts; all-attempt outcomes and costs are also reported. No specimen or failed attempt is discarded.",
+    "A run is never repeated except once after a provider transport error (network failure, HTTP 429 or 5xx) with at most one request made; both records stay on disk and the table counts reruns.",
+    "If spark does not beat engine, say it matched or trailed. Better-choice claims require a complete paired comparison, Holm-adjusted p < 0.05 across all registered comparisons, and a positive effect; report actual effect sizes and intervals.",
+    "spark_hidden results are reported even if worse than random.",
+    "If spark_open is not run, the table says 'not run' and why.",
+    "Development runs use development_seed specimens only and are kept under runs/linear-benchmark/dev; evaluation specimens are not run before this protocol, specimens.json and the harness are committed and pushed.",
+    "Any change to the harness, prompts, menu or scoring after the first evaluation run is a new protocol version; earlier results stay published.",
+    "Task A no-tool is a separate information-access condition; its raw correct fraction is never called a general Spark error rate, nor used to claim the numerical engine improves intrinsic reasoning.",
+    "The two structural classes in Task B are initial linear families, not B5 diode discovery. This benchmark does not implement the separately planned nonlinear classical-extended comparison."
+  ],
+  "not_claimed": [
+    "hardware accuracy",
+    "calibrated confidence",
+    "nonlinear structure discovery",
+    "generalisation beyond these families and sampling bounds"
+  ],
+  "review_revision": "2026-11-02 KST, before any evaluation run: preserve first attempts; circuit-cluster random intervals; Holm adjustment; accurate no-tool scope; cumulative request counts; frozen import closure and publication gate. Specimen seed, table and engine unchanged.",
+  "source_manifest_sha256": "88b5e231f47e4c5424617b086e2d818ded94dcd6b2cf858c3696db20da5da5e0",
+  "execution": "All imported experiment modules and adapters are frozen in source-manifest.json. Evaluation verifies current files match that freeze and committed HEAD, and HEAD equals origin/main, before creating runs. Whole tasks may be scheduled separately with --task; individual evaluation samples may not be selected. --max-requests is cumulative for the arm across resumed invocations, includes transport failures and retries; different protocol versions use separate result roots.",
+  "specimen_regeneration": "Committed specimens.json bytes and SHA-256 are authoritative. Regeneration checks floats at relative tolerance 1e-12 for cross-platform exp/log rounding; all labels, seeds and other fields remain exact. No specimen values are regenerated or substituted for evaluation."
+}
