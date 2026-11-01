@@ -202,3 +202,37 @@ def test_physical_cli_missing_review_cannot_construct_provider_or_bench(monkeypa
     args=SimpleNamespace(bench='physical',execute=True,provider='meta',publish_freeze=True,protocol='frozen.json',
         initial_report='fresh.json',previous_boot_id='a'*32,reviewed_design=None,vision_record=None,fault='none')
     with pytest.raises(ValueError,match='Physical execution needs'):runner.run(args)
+
+
+def test_source_freeze_covers_all_runtime_imports_but_not_presentation():
+    import ast
+    seen=set();queue=[]
+    def imports(path):
+        dependencies=[]
+        for node in ast.walk(ast.parse(path.read_text())):
+            if isinstance(node,ast.ImportFrom):
+                if node.level==1:dependencies.extend([node.module.split('.')[0]] if node.module else [a.name for a in node.names])
+                elif node.module and node.module.startswith('benchmate.'):dependencies.append(node.module.split('.')[1])
+            elif isinstance(node,ast.Import):dependencies.extend(a.name.split('.')[1] for a in node.names if a.name.startswith('benchmate.'))
+        return dependencies
+    queue=imports(ROOT/'scripts/physical_d01_repair.py')
+    while queue:
+        name=queue.pop()
+        if name in seen:continue
+        seen.add(name);queue.extend(imports(ROOT/'src/benchmate'/(name+'.py')))
+    assert seen|{'__init__'}==set(runner.EXPERIMENT_MODULES)
+    frozen=runner.source_hashes()
+    assert len(frozen)==len(seen)+2
+    assert 'src/benchmate/viewer.py' not in frozen and 'src/benchmate/physical_bench.py' in frozen
+
+def test_vision_record_read_is_independent_of_unrelated_display_sidecar(tmp_path):
+    import shutil
+    source=ROOT/runner.VISION;run=tmp_path/'vision';run.mkdir()
+    for name in ['events.jsonl','result.json']:shutil.copyfile(source/name,run/name)
+    (run/'translations.json').write_text('invalid presentation-only draft')
+    actual,digest=runner.vision_design(run)
+    assert actual==json.loads((source/'result.json').read_text())
+    assert digest==hashlib.sha256((source/'events.jsonl').read_bytes()).hexdigest()
+    data=json.loads((run/'result.json').read_text());data['candidate']['summary']='tampered'
+    (run/'result.json').write_text(json.dumps(data))
+    with pytest.raises(ValueError):runner.vision_design(run)

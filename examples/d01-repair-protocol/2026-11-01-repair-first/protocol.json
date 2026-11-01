@@ -1,0 +1,103 @@
+{
+  "configuration": {
+    "vref_v": 4.9,
+    "ref_v": 1.646,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "voltage_conversion": {
+    "reported_supply_ratio": 1.0020491803278688,
+    "channels": {
+      "A1": {
+        "gain_v_per_count": 0.00029892616894548675,
+        "offset_v": -0.00355042361205783
+      },
+      "A2": {
+        "gain_v_per_count": 0.00029916840557073676,
+        "offset_v": -0.004936687554625794
+      },
+      "A3": {
+        "gain_v_per_count": 0.00029908485085008795,
+        "offset_v": -0.005288341646810059
+      }
+    }
+  },
+  "guard_limits": {
+    "REF_mean_delta_v_max": 0.1,
+    "REF_any_sample_delta_v_max": 0.15,
+    "REF_channel_mean_spread_v_max": 0.05,
+    "signal_envelope_v": 0.95,
+    "A4_envelope_v": 0.15,
+    "raw_rails_exclusive": [
+      16,
+      16367
+    ]
+  },
+  "USB_identity": [
+    9025,
+    105,
+    "3612211F36323632E4B233334B572F52"
+  ],
+  "calibration_provenance": {
+    "source": "examples/hardware-b5-preparation/2026-10-30/plan-freeze/20261030T033824-73cfdedc30/plan.json",
+    "sha256": "c2608faa15ce38db1497b13b7cb0fce3d58bc7e4c9e3409d09fe8d845bd6507a",
+    "voltage_estimates": "Last reported 4.90V supply / 1.646V REF on October 30, not new measurements.",
+    "ADC_gain_policy": "Old provisional gains scaled once by 4.90/4.89; no waveform-derived gain fit.",
+    "A4_policy": "Loose electrical plausibility and same-boot block-change guard, never an absolute voltage anchor."
+  },
+  "repair_policy": {
+    "version": "d01-reviewed-design-repair-v1",
+    "nominal_design": {
+      "R_ohm": 10000.0,
+      "C_f": 1e-06,
+      "tau_s": 0.01
+    },
+    "load_ohm": 9990.0,
+    "repair_action": "restore_nominal_capacitance",
+    "repair_checks": [
+      {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2
+      },
+      {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.1,
+        "frequency_hz": 4.0
+      }
+    ],
+    "RMS_mV_allowance": 9.0,
+    "whole_and_every_region": true,
+    "scored_OUT_refit": false,
+    "verdict_basis": "Both restored-model measured-IN conditional checks pass; unchanged model fails at least one.",
+    "command_forecast": "Before-measurement incremental forecast, commanded DAC and nominal timing assumed; retained and scored separately.",
+    "repair_new_boot_required": true,
+    "post_repair_checks_same_boot": true,
+    "automatic_retry": false,
+    "supported_scope": "Known passive RC development fixture with provisional calibration; no general topology or unique component identification."
+  },
+  "source_sha256": {
+    "src/benchmate/__init__.py": "3762ba97ca26d3267a3613949a24f8d4261cf7a2ce67d3bfb5f99d69c6944805",
+    "src/benchmate/agent.py": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "src/benchmate/d01_repair.py": "c9ab44409100757b988192d728327552366adeff541f2e1f39a2c1ab27d66fc4",
+    "src/benchmate/d01_repair_bench.py": "4fda20427011321ae49ff7e6f66dde5c2b6f130603f4cacce4b162d262ccb7af",
+    "src/benchmate/engine.py": "012bf9230cc9dc1f5290c853dfc549ff82969cb2bd508e111e699bbc8960b77e",
+    "src/benchmate/instrument.py": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780",
+    "src/benchmate/known_design.py": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab",
+    "src/benchmate/measured_input.py": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221",
+    "src/benchmate/menu.py": "097aac2f7f25dbf951665361b1c5a768f5260da30e192523f86c6c1768696433",
+    "src/benchmate/physical_bench.py": "4dbb3fb04fe8b3b6f65ff055f8a1c9df507898ac3656a9c4b7e3a4991ad53fbc",
+    "src/benchmate/physical_rc.py": "104b7f01a36e35aee49a5caa696534aa6fa73a07a179ebc9c5beb3771ed82a8d",
+    "src/benchmate/physics.py": "c5895c1312925da6a32b90026bf51eafdfae0f8f8f7f38bf03ed9c9ebe937683",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/recommendations.py": "bc75944c41e4f5e5e6ccd2a579fe9a206a012d596ae2a7e29f389724f4cb861b",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "scripts/physical_d01_repair.py": "ebd9f5446cd8351a217ce69607eca4a948a83feef571ec26da79cdc390ffa4f3"
+  },
+  "calibration_is_new": false,
+  "source_scope": "Runner and complete local experiment import closure; read-only presentation files are excluded."
+}

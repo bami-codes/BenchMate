@@ -8,8 +8,9 @@ engineering check. Neither record may be relabelled as Spark-directed repair.
 Target: complete and retain one real Spark-directed diagnosis → repair request
 → pre-repair prediction freeze/publication → operator repair → new measurement
 → reserved verification by November 1 evening, before November 2 (Asia/Seoul).
-October 31 morning is unavailable. B5 remains first; do not disturb its fixture
-or same-boot validation to make the repair footage.
+The November 1 final sprint supersedes the earlier B5-first order: D01 repair
+first, then B5 with a three-hour/two-attempt cap. Hardware freezes November 2 at
+23:00 KST. Once B5 starts, preserve its same-boot training/verification.
 
 1. After B5 ends, explicitly prepare and confirm the known D01 fixture with
    original and added parallel capacitors. Do not assume the old D01 assembly

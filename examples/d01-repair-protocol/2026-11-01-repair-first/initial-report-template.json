@@ -1,0 +1,9 @@
+{
+  "fixture": "unloaded",
+  "USB_connected": false,
+  "USB_off_wiring_confirmed": false,
+  "nominal_design_confirmed": false,
+  "reviewed_design_sha256": "REPLACE_WITH_CANONICAL_REVIEW_HASH",
+  "verbatim": "",
+  "template_only": true
+}

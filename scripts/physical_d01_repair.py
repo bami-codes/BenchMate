@@ -21,29 +21,32 @@ from benchmate.d01_repair import D01RepairSession,POLICY,PROMPT,TOOLS,reviewed_d
 from benchmate.d01_repair_bench import PhysicalRepairBench,MockRepairBench,validate_initial
 from benchmate.known_design import confirm_design
 from benchmate.providers import MetaToolSession,ProviderError
-from benchmate.records import Recorder,canonical
-from benchmate.viewer import load_record
+from benchmate.records import Recorder,canonical,decode_events
 
 VISION='examples/vision-spark/2026-10-31/20261031T060049-13a656638d/attempts/20261031T060050-8f3ccccdc9'
 CALIBRATION='examples/b5-unloaded-protocol/2026-10-31-after-design-replay/protocol.json'
+# Complete local import closure, verified by test; presentation is read-only and independent.
+EXPERIMENT_MODULES=('__init__','agent','config','d01_repair','d01_repair_bench','engine','instrument',
+    'known_design','measured_input','menu','physical_bench','physical_rc','physics','providers','recommendations','records')
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
 def source_hashes():
-    paths=sorted((ROOT/'src/benchmate').glob('*.py'))+[Path(__file__)]
+    paths=[ROOT/'src/benchmate'/(name+'.py') for name in EXPERIMENT_MODULES]+[Path(__file__)]
     return {str(p.relative_to(ROOT)):sha(p.read_bytes()) for p in paths}
 
 def vision_design(path):
-    path=Path(path);record=load_record(path);result=json.loads((path/'result.json').read_text())
+    path=Path(path);raw=(path/'events.jsonl').read_bytes();events=decode_events(raw);result=json.loads((path/'result.json').read_text())
     if (result.get('source_kind')!='intended_schematic' or result.get('status')!='unverified_visual_candidate'
-        or record['events'][-1]['payload']!=result):raise ValueError('Completed intended-schematic record required')
-    return result,record['source_sha256']
+        or events[-1]['kind']!='run_completed' or events[-1]['payload']!=result):raise ValueError('Completed intended-schematic record required')
+    return result,sha(raw)
 
 def prepare(output):
     out=Path(output);out.mkdir(parents=True,exist_ok=False)
     base=json.loads((ROOT/CALIBRATION).read_text())
     protocol={key:base[key] for key in ('configuration','voltage_conversion','guard_limits','USB_identity','calibration_provenance')}
-    protocol.update(repair_policy=POLICY,source_sha256=source_hashes(),calibration_is_new=False)
+    protocol.update(repair_policy=POLICY,source_sha256=source_hashes(),calibration_is_new=False,
+        source_scope="Runner and complete local experiment import closure; read-only presentation files are excluded.")
     save(out/'protocol.json',protocol)
     candidate,digest=vision_design(ROOT/VISION)
     save(out/'design-to-review.json',{'schema':'benchmate.review_required.v1','source_record':VISION,

@@ -1,8 +1,8 @@
-# D01 수리 실행 안내 — B5 종료 뒤
+# D01 수리 실행 안내 — 최종 스프린트의 첫 실물 작업
 
 **실행기와 모의 검증은 준비됐다. 실제 Spark 수리 실행은 아직 하지 않았다.**
-오늘 16시 작업은 [B5](b5-operator.md)가 먼저다. 이 문서를 읽거나 예정 시각이
-되는 것만으로 배선을 바꾸거나 장치를 실행하지 않는다.
+[최종 스프린트](final-sprint.md)에 따라 **D01 수리를 먼저, B5를 다음**에 한다.
+이 문서나 이전 완료 보고만으로 현재 배선·USB 상태를 가정하지 않는다.
 
 ## 1. 명목 설계 확인
 
@@ -15,11 +15,11 @@
 받아 사용한다. 이는 새 비전 호출이나 전기적 검증이 아니다. 현재 수리 실행기는
 이 고정된 10 kΩ / 1 µF 개발용 시편만 지원한다.
 
-## 2. B5 종료 후 D01 준비
+## 2. D01 시작 준비
 
 실행 담당자의 요청이 오면 USB를 빼고 LED가 꺼진 뒤 작업한다.
 
-1. B5의 다이오드를 양쪽 다리 모두 제거한다.
+1. 다이오드가 설치돼 있다면 양쪽 다리 모두 제거한다. 아직 회로 밖이라면 그대로 둔다.
 2. 미니보드의 원래 C를 **D8–D13**, 추가 C를 **I8–I13**에 설치한다.
    원래 R **B3–B8**, E8–F8·E13–F13, IN·OUT·REF 연결선은 유지한다.
 3. 큰 보드의 **11번 B28–B35**, **14번 B50–B23**, D55–D60 9.99 kΩ,
@@ -75,19 +75,19 @@ USB를 빼고 LED가 꺼진 뒤 **큰 E30–A55 OUT 부하 점퍼만 연결**한
 ## 실행 담당자용 파일
 
 - 고정 프로토콜·API 범위·검토할 판독·빈 초기 보고:
-  `examples/d01-repair-protocol/2026-11-01/`
+  `examples/d01-repair-protocol/2026-11-01-repair-first/`
 - 실행기: `scripts/physical_d01_repair.py`
 - [정상 및 실패 모의 기록](../examples/d01-repair-rehearsal/2026-11-01/README.md)
 
 초기 보고는 `fixture=unloaded`, `USB_connected=true`, `USB_off_wiring_confirmed=true`,
 `nominal_design_confirmed=true`, 실제 검토 JSON의 canonical SHA-256와 `verbatim`이
 필요하다. 빈 템플릿의 `template_only`를 실제 확인 없이 바꾸지 않는다. 직전 부팅은
-B5 종료 때 실제로 기록한 값으로 넣는다.
+마지막 실제 계측 기록의 값으로 넣는다. 예정됐지만 하지 않은 B5의 부팅을 만들지 않는다.
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/physical_d01_repair.py run \
   --bench physical --provider meta --execute --publish-freeze \
-  --protocol examples/d01-repair-protocol/2026-11-01/protocol.json \
+  --protocol examples/d01-repair-protocol/2026-11-01-repair-first/protocol.json \
   --reviewed-design PATH_TO_ACTUAL_CONFIRMED_DESIGN \
   --vision-record examples/vision-spark/2026-10-31/20261031T060049-13a656638d/attempts/20261031T060050-8f3ccccdc9 \
   --initial-report PATH_TO_FRESH_REPORT --previous-boot-id ACTUAL_LAST_BOOT_ID
@@ -102,3 +102,16 @@ Meta는 `muse-spark-1.3`, medium, 최대 8회다. 명목 R/C와 새 시정수·�
 요약만 보낸다. 원시 ADC, 이미지, 구멍 안내, 이전 시편 결과, 로컬 파일은 보내지
 않는다. 이 새 실물 실행 범위를 시작 전에 승인받는다. 준비와 모의 검증에는
 유료 요청이나 하드웨어 명령이 없었다.
+
+## 촬영과 다음 작업
+
+부하 점퍼 연결과 추가 C 제거를 실제로 하는 순간을 촬영한다. 폰은 가로로 고정하고,
+맥 화면 녹화도 측정 전에 시작한다. 화면은 읽기 전용 `benchmate watch RUN_PATH`로
+본다. 원본 영상은 `video/raw/`에 두고 공개하지 않는다.
+
+수리가 실제로 끝난 뒤 남은 배선을 확인한다. USB를 빼고 LED가 꺼지면 원래 C
+D8–D13과 OUT 점퍼 E30–A55를 양쪽 끝 모두 제거한다. 추가 C가 이미 빠졌는지도
+확인하고 B5 시작 상태 전체와 대조한다. 수리가 중단됐다면 남은 실제 배선부터 확인한다.
+
+B5는 첫 실물 실행 시작부터 3시간 또는 실물 실행 기록 2회 중 먼저 도달하는 한도로
+멈춘다. 통신·가드 실패도 횟수에 포함한다. 전체 하드웨어 동결은 11/2 23:00 KST다.
