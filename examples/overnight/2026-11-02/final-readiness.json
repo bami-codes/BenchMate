@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-11-01T19:51:04.593986+00:00",
+  "source_code_tested_at_commit": "a328dc7f7c7bcbcf417d3b099dfcfbc1a21eec0d",
+  "source_code_changed_since_CI": [],
+  "tests": {
+    "passed": 409,
+    "skipped": 1,
+    "environment": "GitHub Ubuntu CI",
+    "code_commit": "a328dc7f7c7bcbcf417d3b099dfcfbc1a21eec0d",
+    "url": "https://github.com/bami-codes/BenchMate/actions/runs/41340777825"
+  },
+  "physical_protocol_dependencies_unchanged": 17,
+  "protected_files_unchanged": 51,
+  "documented_presentation_exception": [
+    "src/benchmate/design_replay.py"
+  ],
+  "B5_selection_source_hashes_match": true,
+  "selection_archive_decompressed_hashes_match": true,
+  "selection_archive_files": 17,
+  "selection_classification_matches_original_bytes": true,
+  "selection_rule_relaxed": false,
+  "final_variant_model_evaluation_run": false,
+  "hardware_commands": 0,
+  "all_model_costs_settled": true,
+  "untouched_existing_local_change": "docs/fixture-assembly.md",
+  "public_site_verified_receipt": "web/publication.json",
+  "backup_video_technical_review": "video/backup-qa.json",
+  "human_audio_review": false,
+  "submission_uploaded": false
+}

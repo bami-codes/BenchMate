@@ -10,8 +10,11 @@
   "local_only_failed_probe_attempts": 6,
   "dashboard_invoice_verified": false,
   "tests": {
-    "passed": 400,
-    "skipped": 1
+    "passed": 409,
+    "skipped": 1,
+    "environment": "GitHub Ubuntu CI",
+    "code_commit": "a328dc7f7c7bcbcf417d3b099dfcfbc1a21eec0d",
+    "url": "https://github.com/bami-codes/BenchMate/actions/runs/41340777825"
   },
   "physical_protocol_dependencies_unchanged": 17,
   "protected_sources_unchanged": 51,
@@ -58,5 +61,8 @@
   "physical_repair": "pending operator",
   "physical_B5": "pending operator",
   "participant_session": "not run",
-  "X1_X2": "unopened and excluded from this submission"
+  "X1_X2": "unopened and excluded from this submission",
+  "finished_at_utc": "2026-11-01T19:51:04.593986+00:00",
+  "all_overnight_jobs_finished": true,
+  "final_status_includes_editor_review_tests": true
 }
