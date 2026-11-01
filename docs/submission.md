@@ -16,7 +16,7 @@ On a real circuit with a fault I deliberately planted (designed τ 10 ms, measur
 
 **How we use Meta models:** Muse Spark 1.3 runs the experiment loop through tool calls: medium effort for physical diagnosis and repair, max effort for structure discovery, where it writes literal netlists that run in ngspice. Spark vision reads a schematic image into a design candidate the user confirms. SAM 3.1 was evaluated for highlighting the faulty part in a bench photo. Measured findings: in one qualitative no-tool case, all five replies led with a timing-definition hypothesis and recommended re-measuring; at the key decision, medium chose the same experiment as max 5/5 in a third of the time.
 
-**What was built during the hackathon:** everything in the repository (first commit Oct 27, 2026): firmware, instrument protocol, engine, Spark tool loop, viewer, all experiments and this video.
+**What was built during the hackathon:** BenchMate firmware, instrument protocol, engine, Spark tool loop, viewers, experiments and video (first commit Oct 27, 2026). Third-party libraries, model weights and the bundled font retain their own licenses and credits.
 
 **Links:** [GitHub](https://github.com/bami-codes/BenchMate) · [Public interactive replay and 51-second diagnosis film](https://bami-codes.github.io/BenchMate/) · Final submission video: not uploaded. A 2:36 editing backup is ready locally.
 

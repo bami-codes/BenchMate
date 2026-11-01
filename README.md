@@ -182,8 +182,10 @@ Full history: [evidence index](docs/evidence-index.md) · [protocol commitments]
 
 ## Built during the hackathon
 
-Everything in this repository was written during the event, starting Oct 27, 2026
-(see the commit history). Development used Codex and Claude as coding assistants;
+The BenchMate firmware, engine, agent workflow, viewers and experiment records were
+built during the event, starting Oct 27, 2026 (see the commit history). Third-party
+dependencies and the bundled font retain their own credits and licenses. Development
+used Codex and Claude as coding assistants;
 Muse Spark is the runtime agent. Core dependencies: NumPy, SciPy, HTTPX, pySerial,
 ngspice, Arduino UNO R4 toolchain; Pillow for optional vision preprocessing. UI font:
 IBM Plex Sans (OFL, included). [MIT license](LICENSE).

@@ -53,3 +53,19 @@ Rebuild the backup with `voice_backup.py` (offline Kokoro) and `render_backup.py
 `backup-narration.json` and `data/backup-timeline.json` are separate from the older
 full-edit script. All 18 backup contact-sheet frames were inspected; the audio decodes
 cleanly with peak −1.5 dB. This is technical QA, not a human listening pass.
+
+Before replacing a mock scene with a new physical record, build a read-only editing packet:
+
+```sh
+.venv/bin/python video/review_run.py ACTUAL_RUN_DIRECTORY --require-physical --output runs/video-review/NEW_RUN_ID.json
+```
+
+The packet verifies the event chain, frozen-model digest and sidecar, publication before
+observations, repair confirmation order and model links on both checks. It carries the
+run's actual reason verbatim, separate conditional/command scores, source label and
+failures. A mock record is rejected with `--require-physical`; incomplete and failed
+records stay visibly incomplete/failed. It makes no API or board calls and overwrites
+neither an evidence file nor an existing output. It does not automatically rewrite
+the narration, translate the reason, or certify sensor calibration. Nine focused checks
+passed, including a valid-chain/wrong-model link and passing conditional checks with a
+failing command forecast. Both retained mock records also produced reviewed packets.
