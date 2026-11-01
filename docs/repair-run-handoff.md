@@ -31,8 +31,6 @@ Actual run directory will be added when one exists.
 - Lead README with supported outcome and user benefit. Keep physical/mock labels
   by their examples; detailed limitations can move into one section. A working
   development fixture alone does not establish time saved or general accuracy.
-- EE305's reported 14.1% discrepancy is motivation, not a real coursework case
-  already measured and solved by BenchMate.
 - TTS rough cut followed by a short same-script human reading comparison is
   sensible. Clarity, pacing and synchronization with actual decisions matter.
 

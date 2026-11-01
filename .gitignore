@@ -18,7 +18,7 @@ runs/
 BenchMate_plan*.md
 BenchMate_plan*.pdf
 # Private coursework reports; not part of the public hackathon submission.
-/[[]EE305]*.pdf
+/*.pdf
 .impeccable/review/
 .impeccable/mocks/
 .impeccable/build/
@@ -30,3 +30,8 @@ BenchMate_plan*.pdf
 # Keep the local photo collection private; publish selected canonical inputs in examples.
 /pictures-clean/
 video/raw/
+video/out/
+video/frames/
+video/audio/
+video/data/*.png
+video/data/*.jpg
