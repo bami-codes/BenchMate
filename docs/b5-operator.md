@@ -1,7 +1,7 @@
 > 일정 갱신(11/1): 사진 시험 3회는 완료됐다. 실물은 예정된 **오늘 16시 작업에서
 > B5부터** 진행한다. 시간만으로 실행하지 않고 작업자의 시작 확인을 받는다. 새 USB·배선
 > 상태를 확인한 뒤 시작한다. 현재 소스에 맞는 준비 파일은
-> `examples/b5-unloaded-protocol/2026-10-31-after-design-replay/protocol.json`이다.
+> `examples/b5-unloaded-protocol/2026-11-01-after-repair/protocol.json`이다.
 > 이는 새 측정이나 보정 완료를 뜻하지 않는다.
 
 # B5 무부하 실물 실행 안내 — ADC v2

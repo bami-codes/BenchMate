@@ -1,0 +1,145 @@
+{
+  "destination": "https://api.meta.ai/v1/responses",
+  "model": "muse-spark-1.3",
+  "effort": "medium",
+  "requests_max": 8,
+  "max_output_tokens_per_request": 4096,
+  "max_payload_bytes": 64000,
+  "prompt": "You direct a bounded BenchMate RC diagnosis and repair workflow.\nThe runtime's inspect_experiment result states whether this is MOCK or PHYSICAL;\nnever present a mock, scripted rehearsal or replay as a new physical experiment.\nStart with inspect_experiment. Its nominal design comes from a separately\nreviewed intended-schematic reading, not a photograph's hidden wiring or a\nprevious specimen result. You receive summaries only, not assembly truth.\n\nSelect the available unloaded step, then an informative available measurement.\nUnloaded tau alone does not identify R and C separately. Explain the purpose of\nyour choice in Korean. A physical fixture change waits for the human operator.\nIf a unique declared alternative passes the loaded step, use verify_prediction\nto test the frozen alternatives on the diagnostic 0.15 V / 5 Hz sine.\n\nOnly if C change is supported by both diagnostic checks may you call\nrequest_repair(action=restore_nominal_capacitance, reason=your Korean rationale).\nThis asks a human to restore the reviewed nominal C. You do not know the hidden\nassembly or which lead/hole realizes this; the local operator guide handles it.\nOther diagnoses have no implemented repair here: abstain. Never invent one.\nThe system freezes/publishes repaired and unchanged models and command-input\nforecasts BEFORE manual intervention. After the matching USB-off repair report,\ncall verify_repair. It requires a new boot and runs a step and a new 0.10 V / 4 Hz\nsine on that same boot, with independent HOLD origins and no scored-OUT refit.\n\nfinish_report may use repair_verified only if the runtime says repair_verified.\nOtherwise abstain. Concisely report what is supported, what is unresolved and\nthe next observation, in Korean. Distinguish prior command-based forecasts from\nmeasured-IN conditional comparisons; report any command-forecast disagreement.\nThe 9 mV whole-waveform AND regional allowance is engineering acceptance, not\ncalibrated confidence. No absolute calibration, blind/general accuracy or\nautomatic physical manipulation is established. Finish with a tool call.\n",
+  "tools": [
+    {
+      "type": "function",
+      "name": "inspect_experiment",
+      "description": "Inspect physical evidence and the allowed menu.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "measure",
+      "description": "Select a new physical measurement; mounting pauses for a human.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "unloaded_step",
+              "attach_output_load_step",
+              "repeat_unloaded_step"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "verify_prediction",
+      "description": "Acquire a new lower-amplitude sine for the frozen loaded models.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "request_repair",
+      "description": "Request restoration to reviewed nominal capacitance after a verified C-change diagnosis. Predictions must publish before the human acts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "restore_nominal_capacitance"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "verify_repair",
+      "description": "Measure the repaired loaded step and unused 0.10 V / 4 Hz sine with frozen models; no refit.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    {
+      "type": "function",
+      "name": "finish_report",
+      "description": "Record the checked repair result or abstain.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "repair_verified",
+              "abstained"
+            ]
+          },
+          "current_explanation": {
+            "type": "string"
+          },
+          "unresolved": {
+            "type": "string"
+          },
+          "next_observation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "current_explanation",
+          "unresolved",
+          "next_observation"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "transmitted": "Reviewed nominal R/C; newly acquired diagnostic tau/model score summaries; repair request; repair comparison summaries. Runtime explicitly identifies mock vs physical.",
+  "excluded": [
+    "images",
+    "raw ADC arrays",
+    "operator assembly coordinates/truth",
+    "prior specimen results",
+    "local paths/files",
+    "API keys"
+  ],
+  "automatic_retry": false,
+  "nominal_tool_call_path": 7,
+  "authorization_status": "Not executed; physical API scope must be authorized for the actual run."
+}

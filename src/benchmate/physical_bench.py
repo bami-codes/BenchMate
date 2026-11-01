@@ -16,10 +16,11 @@ from .physical_rc import STEP,SINE
 
 class PhysicalBench:
     def __init__(self,protocol,log,confirm_wiring,*,initial_report,previous_boot_id,
-                 serial_factory=None,ports=None,sleep=time.sleep):
+                 serial_factory=None,ports=None,sleep=time.sleep,settings_menu=None):
         self.p=protocol;self.config=InstrumentConfig(**protocol['configuration']);self.log=log
         self.confirm_wiring=confirm_wiring;self.initial_report=initial_report;self.boot_id=previous_boot_id
         self.serial_factory=serial_factory or serial.Serial;self.ports=ports or list_ports.comports;self.sleep=sleep
+        self.settings_menu=tuple(dict(s) for s in ((STEP,SINE) if settings_menu is None else settings_menu))
         self.fixture=None;self.reference_means=[];self.capture_attempts=0;self.frames=0;self.human_interventions=0
         self.stopped=False;self.acquisitions=0
 
@@ -91,10 +92,10 @@ class PhysicalBench:
 
     def acquire(self,settings,models,fixture,phase):
         if self.stopped:raise RuntimeError('Hardware adapter stopped; no retry')
-        if settings not in (STEP,SINE) or fixture not in ('unloaded','output_load'):
+        if settings not in self.settings_menu or fixture not in ('unloaded','output_load'):
             raise ValueError('Only the frozen physical menu is allowed')
         fresh=fixture!=self.fixture
-        if settings==SINE and (fresh or fixture!='output_load'):
+        if settings['kind']=='sine' and (fresh or fixture!='output_load'):
             raise ValueError('Reserved sine requires the already measured loaded fixture')
         try:
             if fresh:

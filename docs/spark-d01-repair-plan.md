@@ -26,10 +26,15 @@ or same-boot validation to make the repair footage.
 5. Measure the response and an unused waveform. Preserve both forecast and
    conditional scores, failures, abstentions and actual Spark wording.
 
-Before physical execution, implement and test the repair state machine (including
-wrong/missing intervention confirmation, unexpected boot, failed repair and held-out
-failure), freeze its protocol, and make the Meta payload/request bound reviewable.
-The existing `physical_spark_rc.py` does not yet perform these repair stages.
+Implemented November 1: `scripts/physical_d01_repair.py` now composes the shared
+diagnosis tools with a published prediction, a matching USB-off repair report,
+a required new boot and two fixed repair checks. The scripted mock and injected
+failures are retained in [the rehearsal archive](../examples/d01-repair-rehearsal/2026-11-01/README.md).
+This is zero-API software validation, not an actual Spark repair.
+The [operator guide](d01-repair-operator.md) and frozen 8-request medium plan are ready.
+An actual reviewed intended schematic, fresh D01 hookup report and authorization
+for the new physical Meta scope remain necessary before running.
+The older `physical_spark_rc.py` remains diagnosis-only.
 
 Video may show the existing D01 diagnosis now. Reserve the repair scene until
 this new record exists. Claude's script is separate; the artifact link could not

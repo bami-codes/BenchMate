@@ -1,0 +1,95 @@
+{
+  "source": "mock",
+  "decision_actor": "scripted_controller",
+  "real_API_calls": 0,
+  "real_serial_commands": 0,
+  "initial_and_final_success_note": "Final repetition only verifies the corrected source/actor summary label; initial run is retained. No parameter or acceptance change.",
+  "runs": [
+    {
+      "case": "initial_success",
+      "run": "initial_success/20261101T003506-8d2816e16b",
+      "repair_verified": true,
+      "http_requests": 0,
+      "events_sha256": "56fa7bef79ac210d102a226dfd4a4af984ce65ef47e67cb6e8a5a12b96b8d052"
+    },
+    {
+      "case": "final_success",
+      "run": "final_success/20261101T003829-400778438d",
+      "repair_verified": true,
+      "http_requests": 0,
+      "events_sha256": "33b4726cd762de863c494219e526c33d267aab7ba7e4be069eae73f2e5ce584a"
+    },
+    {
+      "fault": "repair_failed",
+      "exit_code": 0,
+      "stage": "completed",
+      "http_requests": 0,
+      "run": "repair_failed/20261101T003750-d5ef5f2f84",
+      "events_sha256": "b92fe8782010267e53fe1e645f0a353290d68ca435a6afdf200f1b0989e166b7"
+    },
+    {
+      "fault": "reserved_failure",
+      "exit_code": 0,
+      "stage": "completed",
+      "http_requests": 0,
+      "run": "reserved_failure/20261101T003750-8d07745a10",
+      "events_sha256": "70874afd7cdc76f3f5ed2a59b819b00db71b0db08d93186492b7db8198a80ba0"
+    },
+    {
+      "fault": "publication_failure",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "publication_failure/20261101T003751-9152565c8c",
+      "events_sha256": "33caf326d6446a7d9c77f503e8cbb7d9749c8a5e13c1a4a53aea4b6681d72dc4"
+    },
+    {
+      "fault": "stale_boot",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "stale_boot/20261101T003751-4f27e917f1",
+      "events_sha256": "86c478fa1658c0a23b608bc5948cf2852c65e3776bf724f57ddc206d1db72979"
+    },
+    {
+      "fault": "missing_confirmation",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "missing_confirmation/20261101T003751-b2e0d860cb",
+      "events_sha256": "0bcca0c9b82098b6586047f9556766535444f9b4e2e962bf4880f5f8da099c90"
+    },
+    {
+      "fault": "wrong_confirmation",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "wrong_confirmation/20261101T003751-91aeaa4aed",
+      "events_sha256": "000c9051e180a82eec69144a21c5d6a251a33131f9340f09fdf22d2ad71989d5"
+    },
+    {
+      "fault": "cancelled",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "cancelled/20261101T003752-cfff21599b",
+      "events_sha256": "62c9056053b46d4ff3f37bbfdca73bad118ef2258fdb9f60fe31da00689cbbd4"
+    },
+    {
+      "fault": "timeout",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "timeout/20261101T003752-331395be91",
+      "events_sha256": "300a007b428159cf6a9945fd3ba26690b030ef36ac7760df3b6cb8e762c0d55f"
+    },
+    {
+      "fault": "reset_during_reserved",
+      "exit_code": 1,
+      "stage": "failed",
+      "http_requests": 0,
+      "run": "reset_during_reserved/20261101T003752-c4b3b50e1c",
+      "events_sha256": "47250cc7569544dd23fd4d9354554144555ebdccf5bb32b8f8b4fe210d0be70c"
+    }
+  ]
+}

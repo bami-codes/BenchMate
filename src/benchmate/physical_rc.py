@@ -121,7 +121,10 @@ def compact_scores(scores):
 
 class PhysicalRCSession:
     """The acquisition callback is trusted local code; Spark only chooses enums."""
-    def __init__(self,acquire,log):
+    def __init__(self,acquire,log,*,source="physical",actor="muse_spark"):
+        if source not in ("physical","mock") or actor not in ("muse_spark","scripted_controller"):raise ValueError("Explicit source and actor required")
+        self.source=source;self.actor=actor
+        self.scope=SCOPE if source=="physical" else "Mock RC rehearsal only; no physical evidence, no calibration or hardware repair claim."
         self.acquire=acquire;self.log=log;self.tools=TOOLS;self.report=None;self.inspected=False
         self.training=None;self.models=None;self.loaded=False;self.verified=False;self.verification_attempted=False
         self.supported=[];self.observations=[];self.actions=[];self.diagnostic_used=0;self.fatal=False
@@ -131,7 +134,7 @@ class PhysicalRCSession:
         elif self.training['training_adequate'] and not self.loaded and self.diagnostic_used<2:
             allowed=['attach_output_load_step','repeat_unloaded_step']
         else:allowed=[]
-        return {'source':'physical','scope':SCOPE,'nominal_design':{'R_ohm':10000.,'C_f':1e-6},
+        return {'source':self.source,'scope':self.scope,'nominal_design':{'R_ohm':10000.,'C_f':1e-6},
                 'training':self.training,'observations':self.observations,'supported_candidates':self.supported,
                 'allowed_measurements':allowed,'load_ohm':9990.,'diagnostic_remaining':2-self.diagnostic_used,
                 'verification_available':self.loaded and len(self.supported)==1 and not self.verification_attempted,
@@ -139,10 +142,10 @@ class PhysicalRCSession:
 
     def _observe(self,settings,models,fixture,reason,phase):
         self.log.add('physical_measurement_selected',{'settings':settings,'fixture':fixture,'reason':reason,
-                     'phase':phase,'selected_by':'muse_spark','models_frozen':models,'scope':SCOPE})
+                     'phase':phase,'selected_by':self.actor,'models_frozen':models,'scope':self.scope})
         try:
             observation=self.acquire(deepcopy(settings),deepcopy(models),fixture,phase)
-            if (observation.get('source')!='physical' or observation.get('settings')!=settings
+            if (observation.get('source')!=self.source or observation.get('settings')!=settings
                 or observation.get('fixture')!=fixture or observation.get('all_guards_passed') is not True
                 or observation.get('fresh_measurement') is not True):
                 raise ValueError('Expected a fresh guarded physical capture matching the request')
@@ -204,11 +207,11 @@ class PhysicalRCSession:
         if not all(s.strip() for s in [current_explanation,unresolved,next_observation]):
             raise ToolRejected('All report fields are required')
         self.report={'verdict':verdict,'candidate':candidate,'current_explanation':current_explanation,
-                     'unresolved':unresolved,'next_observation':next_observation,'scope':SCOPE,'repair_performed':False}
+                     'unresolved':unresolved,'next_observation':next_observation,'scope':self.scope,'repair_performed':False}
         self.log.add('agent_report',self.report);return {'accepted':True,'verified':self.verified}
 
     def summary(self):
-        return {'source':'physical','llm_used':True,'mode':'live_spark_with_physical_RC','scope':SCOPE,
+        return {'source':self.source,'llm_used':self.actor=='muse_spark','mode':'live_spark_with_physical_RC' if self.source=='physical' and self.actor=='muse_spark' else f'{self.actor}_with_{self.source}_RC','scope':self.scope,
                 'agent_report':self.report,'selected_actions':self.actions,'observations':self.observations,
                 'training':self.training,'reserved_check_passed':self.verified,'scored_capture_count':len(self.actions),
                 'repair_performed':False,'absolute_voltage_validation':False,'full_D2_accepted':False}

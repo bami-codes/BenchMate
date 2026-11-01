@@ -1,0 +1,385 @@
+{
+  "source": "mock",
+  "llm_used": false,
+  "agent_report": {
+    "verdict": "abstained",
+    "current_explanation": "SOFTWARE REHEARSAL ONLY: repair not verified",
+    "unresolved": "No real Spark decision or physical repair in a scripted mock.",
+    "next_observation": "Run the separately authorized physical protocol with a human operator.",
+    "source": "mock",
+    "decision_actor": "scripted_controller",
+    "repair_intervention_reported": true,
+    "repair_verified": false,
+    "scope": "Known passive RC development fixture with provisional calibration; no general topology or unique component identification.",
+    "physical_repair_demonstrated": false
+  },
+  "diagnosis_verified": true,
+  "repair_verified": false,
+  "checks": [
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2
+      },
+      "conditional": {
+        "restored_nominal": {
+          "RMS_mV": 0.489916209354189,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 0.44199454810084243
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 0.45413700464275863
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 0.5663323328083679
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 0.49743061934265465
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 0.4875493076337272
+            }
+          ],
+          "passed": true,
+          "scored_OUT_refitted": false
+        },
+        "unchanged": {
+          "RMS_mV": 11.388042989318778,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 0.44025096016051657
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 32.83973348394876
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 40.53219344206347
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 7.216085287061968
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 0.4865583259481733
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        }
+      },
+      "command_forecast": {
+        "restored_nominal": {
+          "RMS_mV": 0.5630751424816369,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 0.514502568118837
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 0.47853508589596916
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 0.5808205342886128
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 0.5473810512433619
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 0.5777302334162833
+            }
+          ],
+          "passed": true,
+          "refitted": false,
+          "baseline": "Independent new-boot HOLD output origin; no scored OUT used"
+        },
+        "unchanged": {
+          "RMS_mV": 11.351228911262323,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 0.514502568118837
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 32.948064314994404
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 40.42708263601101
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 7.054590206029526
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 0.5752781275920235
+            }
+          ],
+          "passed": false,
+          "refitted": false,
+          "baseline": "Independent new-boot HOLD output origin; no scored OUT used"
+        }
+      }
+    },
+    {
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.1,
+        "frequency_hz": 4.0
+      },
+      "conditional": {
+        "restored_nominal": {
+          "RMS_mV": 28.30964848317743,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 76,
+              "RMS_mV": 28.937088317589495
+            },
+            {
+              "name": "phase_1",
+              "samples": 64,
+              "RMS_mV": 28.23032266139099
+            },
+            {
+              "name": "phase_2",
+              "samples": 60,
+              "RMS_mV": 28.299512418430567
+            },
+            {
+              "name": "phase_3",
+              "samples": 64,
+              "RMS_mV": 28.23530889050235
+            },
+            {
+              "name": "phase_4",
+              "samples": 64,
+              "RMS_mV": 28.293298012547556
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 28.027062623325648
+            },
+            {
+              "name": "phase_6",
+              "samples": 64,
+              "RMS_mV": 28.221892939564917
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 28.070971076099127
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        },
+        "unchanged": {
+          "RMS_mV": 28.654658350524954,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 76,
+              "RMS_mV": 29.182329704108366
+            },
+            {
+              "name": "phase_1",
+              "samples": 64,
+              "RMS_mV": 29.125599967131397
+            },
+            {
+              "name": "phase_2",
+              "samples": 60,
+              "RMS_mV": 28.177299814766837
+            },
+            {
+              "name": "phase_3",
+              "samples": 64,
+              "RMS_mV": 28.77670643826582
+            },
+            {
+              "name": "phase_4",
+              "samples": 64,
+              "RMS_mV": 28.569949339357933
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 27.772829476928905
+            },
+            {
+              "name": "phase_6",
+              "samples": 64,
+              "RMS_mV": 29.467160738486104
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 27.885786338173254
+            }
+          ],
+          "passed": false,
+          "scored_OUT_refitted": false
+        }
+      },
+      "command_forecast": {
+        "restored_nominal": {
+          "RMS_mV": 28.305108313175914,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 76,
+              "RMS_mV": 28.916547707279708
+            },
+            {
+              "name": "phase_1",
+              "samples": 64,
+              "RMS_mV": 28.240270125299606
+            },
+            {
+              "name": "phase_2",
+              "samples": 60,
+              "RMS_mV": 28.305616109089357
+            },
+            {
+              "name": "phase_3",
+              "samples": 64,
+              "RMS_mV": 28.19171022932143
+            },
+            {
+              "name": "phase_4",
+              "samples": 64,
+              "RMS_mV": 28.32389488555005
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 28.023561436373644
+            },
+            {
+              "name": "phase_6",
+              "samples": 64,
+              "RMS_mV": 28.20119049168757
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 28.08140177479043
+            }
+          ],
+          "passed": false,
+          "refitted": false,
+          "baseline": "Independent new-boot HOLD output origin; no scored OUT used"
+        },
+        "unchanged": {
+          "RMS_mV": 28.64926009424798,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 76,
+              "RMS_mV": 29.16580038364001
+            },
+            {
+              "name": "phase_1",
+              "samples": 64,
+              "RMS_mV": 29.138697555950326
+            },
+            {
+              "name": "phase_2",
+              "samples": 60,
+              "RMS_mV": 28.1725935149537
+            },
+            {
+              "name": "phase_3",
+              "samples": 64,
+              "RMS_mV": 28.73209349661785
+            },
+            {
+              "name": "phase_4",
+              "samples": 64,
+              "RMS_mV": 28.60295078052197
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 27.77595640123511
+            },
+            {
+              "name": "phase_6",
+              "samples": 64,
+              "RMS_mV": 29.446044562047568
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 27.884181508529906
+            }
+          ],
+          "passed": false,
+          "refitted": false,
+          "baseline": "Independent new-boot HOLD output origin; no scored OUT used"
+        }
+      }
+    }
+  ],
+  "publication": {
+    "sha256": "d8a0210a13f6bf7d46df3fdfcd34e8238208b981384fd6e71bc72b8811304142",
+    "published": true,
+    "remote": false,
+    "scope": "Local mock only"
+  },
+  "instrument": {
+    "source": "mock",
+    "waveforms": 5,
+    "physical_measurements": 0,
+    "real_serial_commands": 0,
+    "operator_actions_simulated": true,
+    "simulated_interventions": 2,
+    "latest_boot_id": "00000000000000000000000000000003"
+  },
+  "scored_OUT_refitted": false,
+  "provider": "scripted",
+  "http_requests": 0,
+  "Spark_authored": false,
+  "scripted_tool_calls": 7
+}
