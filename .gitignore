@@ -23,3 +23,9 @@ BenchMate_plan*.pdf
 .impeccable/mocks/
 .impeccable/build/
 
+
+# Original phone photos keep GPS location; commit only sanitized copies.
+/pictures/
+
+# Keep the local photo collection private; publish selected canonical inputs in examples.
+/pictures-clean/

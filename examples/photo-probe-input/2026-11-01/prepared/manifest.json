@@ -1,0 +1,24 @@
+{
+  "schema": "benchmate.vision_manifest.v1",
+  "images": [
+    {
+      "id": "image-01",
+      "file": "image-01.png",
+      "source_kind": "assembly_photo",
+      "info": {
+        "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34",
+        "width": 1200,
+        "height": 1600,
+        "bytes": 1486256,
+        "metadata_removed": true,
+        "orientation_applied": true,
+        "resize_max_edge": 1600,
+        "source_sha256": "efc76ca6edded07e1d1f380315182cb425544d488c985a1b1e88cd82fdb37b96"
+      }
+    }
+  ],
+  "max_paid_requests": 1,
+  "automatic_retry": false,
+  "hardware_IO": false,
+  "all_outputs_retained": true
+}
