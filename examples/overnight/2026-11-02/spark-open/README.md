@@ -18,10 +18,11 @@ accepted final report followed. This measures the full interface and model toget
 not isolated reasoning quality. Baseten used provider-default reasoning while Meta
 used medium. Tool descriptions, task, engine and the eight-call budget were unchanged.
 
-Baseten documents `parallel_tool_calls` as true by default in its
-[Chat Completions API](https://docs.baseten.co/reference/inference-api/chat-completions).
-A future explicit-false transport test must be a separate development experiment;
-it cannot replace these first attempts or be called another set of independent circuits.
+The frozen adapter already sends `parallel_tool_calls: false`; these multiple-call
+responses occurred despite that setting. Baseten documents a true default, but it was
+explicitly overridden here. A later [development probe](../open-transport-probe/README.md)
+incorrectly assumed the field was absent and failed locally; it did not establish a fix.
+Neither the probe nor a future adapter change replaces these first attempts.
 
 **120 requests including development, $0.92318245 from token usage**, no unsettled
 reservation. Baseten credits are separate from Meta. This is a local cost calculation,

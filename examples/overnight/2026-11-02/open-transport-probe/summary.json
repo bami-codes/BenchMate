@@ -1,0 +1,23 @@
+{
+  "study": "invalid paired development probe; implementation mismatch preserved",
+  "preregistered_commit": "f1258666a01c2cbe46418ddb2a101c0733615dfa",
+  "original_evaluation_changed": false,
+  "actual_requests": 23,
+  "usage_calculated_usd": 0.17465835,
+  "unsettled": 0,
+  "original_adapter_condition": {
+    "development_cases": 6,
+    "correct": 5,
+    "incomplete": 1,
+    "parallel_tool_calls_sent": false
+  },
+  "single_condition": {
+    "development_cases": 6,
+    "completed": 0,
+    "actual_http_requests": 0,
+    "reason": "Wrapper refused an already-present parallel_tool_calls field before cost reservation or HTTP. The original provider already sends false.",
+    "reported_provider_requests_per_case": 1,
+    "counter_note": "Provider counter increments before client transport; these six increments are local attempted calls, not billed HTTP requests."
+  },
+  "scope": "No evidence of a setting fix or improved accuracy. Original 21/24 evaluation remains unchanged. Stop this probe; do not use as a model comparison."
+}

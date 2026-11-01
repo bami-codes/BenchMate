@@ -1,0 +1,27 @@
+{
+  "offline_file_scheme": true,
+  "external_requests": [],
+  "b5_conditions_checked": 5,
+  "video": {
+    "duration": 51.366667,
+    "width": 1920,
+    "height": 1080,
+    "tracks": 1
+  },
+  "video_played": true,
+  "conditional_curve_order_checks": [
+    {
+      "phase": "before_loaded_capture",
+      "conditional_curve_visible": false
+    },
+    {
+      "phase": "loaded_capture_before_overlay",
+      "conditional_curve_visible": false
+    },
+    {
+      "phase": "reserved_capture_before_overlay",
+      "conditional_curve_visible": false
+    }
+  ],
+  "javascript_errors": []
+}

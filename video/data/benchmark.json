@@ -35,7 +35,52 @@
     {
      "arm": "no_tool",
      "label": "Spark, no measurements",
-     "status": "not run"
+     "strips": [
+      [
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained"
+      ]
+     ],
+     "outside": [
+      [
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained",
+       "abstained"
+      ]
+     ],
+     "status": "complete",
+     "independent_circuits": 24,
+     "repetitions": 1,
+     "correct_abstentions": 0,
+     "correct": 8,
+     "of": 24,
+     "wrong": 0,
+     "mean_wiring_changes": null
     },
     {
      "arm": "random",
@@ -258,7 +303,52 @@
     {
      "arm": "spark",
      "label": "Spark + bench",
-     "status": "not run"
+     "strips": [
+      [
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct"
+      ]
+     ],
+     "outside": [
+      [
+       "rejected",
+       "rejected",
+       "rejected",
+       "incomplete",
+       "rejected",
+       "rejected"
+      ]
+     ],
+     "status": "complete",
+     "independent_circuits": 24,
+     "repetitions": 1,
+     "correct_abstentions": 5,
+     "correct": 24,
+     "of": 24,
+     "wrong": 0,
+     "mean_wiring_changes": 1.0
     },
     {
      "arm": "spark_hidden",
@@ -268,7 +358,52 @@
     {
      "arm": "spark_open",
      "label": "Spark Open + bench",
-     "status": "not run"
+     "strips": [
+      [
+       "correct",
+       "incomplete",
+       "correct",
+       "incomplete",
+       "correct",
+       "incomplete",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct",
+       "correct"
+      ]
+     ],
+     "outside": [
+      [
+       "incomplete",
+       "incomplete",
+       "incomplete",
+       "incomplete",
+       "incomplete",
+       "rejected"
+      ]
+     ],
+     "status": "complete",
+     "independent_circuits": 24,
+     "repetitions": 1,
+     "correct_abstentions": 1,
+     "correct": 21,
+     "of": 24,
+     "wrong": 0,
+     "mean_wiring_changes": 0.9
     }
    ]
   },

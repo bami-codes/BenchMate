@@ -25,3 +25,15 @@ Desktop (1440 px) and mobile (390 px) checks: `browser-check.json`.
 After future physical records are available, update the builder's explicit source list
 and all matching labels, then regenerate and review before publishing. Do not merely
 remove a mock label from the existing record.
+
+Optional record-based highlight:
+
+```sh
+.venv/bin/python web/build.py --output /tmp/benchmate-site \
+  --highlight-video video/out/d01-physical-highlight.mp4
+```
+
+The optional clip must match its export receipt, narration, plotted-data, timeline and
+physical-record hashes. Captions are provided both in the render and as an optional
+English VTT track. The default build omits the video section. This is generated record
+animation, not raw footage. Publishing the reviewed site is a separate explicit step.

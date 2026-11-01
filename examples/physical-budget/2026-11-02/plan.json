@@ -1,0 +1,24 @@
+{
+  "name": "bounded physical cost guard v1",
+  "prepared_only": true,
+  "executed": false,
+  "reason": "Original shared ledger is 93/120 dollar-labelled request reservations, not actual billing. Preserve it; use separate usage-based cap for next bounded physical runs.",
+  "planned_scope": "D01 repair, up to two B5 attempts, and one operator D01 completion; at most eight requests per original runner, total at most 32 new requests.",
+  "cost_cap_usd": 10,
+  "request_cap": 32,
+  "reserve_per_request_usd": 1,
+  "cost_rates": "Same official standard rates as reviewed night guard; returned input/cache/output usage settles reservation. Unknown/error usage keeps reservation.",
+  "endpoint": "https://api.meta.ai/v1/responses",
+  "model": "muse-spark-1.3",
+  "data_scope": "Only existing physical runner nominal design, tools and new bounded measurement summaries; no raw ADC, photographs, assembly details or local file contents.",
+  "hardware_execution_this_night": false,
+  "activation": "Later explicit run --bench physical --provider meta --execute plus all original fresh operator, reviewed-design, boot and publication guards. No automatic hardware execution.",
+  "changes": "Declared HTTP client and separate accounting paths only. No source changes to physical runners, firmware, fitting or model prompts. No retries.",
+  "source_sha256": {
+    "experiments/physical_budget.py": "29667297fda19dafea99915405ac27b048e080c9c90591ec86236801f175ccd8",
+    "experiments/night_budget.py": "fb0114c513e71ecaf5510244f1ff26c3833b68deb1a381a78c9a43153c5682d2",
+    "scripts/physical_d01_repair.py": "ebd9f5446cd8351a217ce69607eca4a948a83feef571ec26da79cdc390ffa4f3",
+    "scripts/b5_unloaded.py": "e78c1d5dd06f71035b4715b125004dcf695a73ef4f392ff49fcefcc3c930a81d",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839"
+  }
+}

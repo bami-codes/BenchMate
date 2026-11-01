@@ -14,7 +14,7 @@ with no oscilloscope, no function generator and nobody to ask, it turns an Ardui
 into a signal source and recorder, lets Spark choose the experiments, and makes every
 explanation earn its place with a measurement it has not seen yet.
 
-**[Open the interactive replay](https://bami-codes.github.io/BenchMate/) · No installation or API key.**
+**[Open the interactive replay](https://bami-codes.github.io/BenchMate/) · [Watch the 51-second physical diagnosis](https://bami-codes.github.io/BenchMate/#watch) · No installation or API key.**
 
 Built solo during the Meta Global AI Developer Hackathon (first commit Oct 27, 2026).
 
@@ -85,6 +85,7 @@ flowchart LR
 | Muse Spark 1.3 · medium | Runs the physical diagnosis: picks measurements, requests the load, chooses the reserved check | [Physical D01 run](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md) |
 | Muse Spark 1.3 · max | Discovers structure outside the starting models and writes the literal netlist | [B5 run](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md) |
 | Muse Spark 1.3 · vision | Reads a schematic image into an editable design candidate the user confirms | [Known-design intake](docs/known-design.md) |
+| Muse Spark Open · Baseten | Runs the same synthetic Task A through the bench; all first attempts retained | [30-case result](examples/overnight/2026-11-02/spark-open/README.md) |
 | SAM 3.1 | Optional highlight of a component in a bench photo; one of three preregistered prompts segmented the capacitor body | [SAM probe](examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/README.md) |
 
 Two measured findings about Spark from this project:
@@ -98,6 +99,21 @@ Two measured findings about Spark from this project:
   [Ten-call comparison](examples/effort-comparison/2026-10-31/20261031T113227-558da839f7/README.md)
 
 ## Registered evaluation, including what did not improve
+
+**What measurement access adds:** on 30 preregistered synthetic cases, Spark with the
+bench identified all **24/24 in-family cases**; without measurements it identified
+**8/24** and left 22 of the full 30 cases unresolved. The latter is appropriate
+uncertainty, not 22 wrong answers. Engine and fixed-plan baselines also reached 24/24.
+When both R and C changed, Spark submitted 5/6 justified rejection reports (one
+incomplete), versus 6/6 for both deterministic baselines.
+[Task A: every response and the different information conditions](examples/overnight/2026-11-02/task-a/README.md).
+
+Spark Open also ran all 30 cases through the same bench: **21/24** in-family,
+**1/6** completed out-of-family rejections, **8 incomplete**, no wrong IDs.
+All eight failures returned multiple tools to an adapter requiring one per turn.
+This is system performance including a transport mismatch, not a clean ranking of
+model reasoning. The first results stay unchanged; any connection fix is a separate
+development check. [Spark Open records and limitations](examples/overnight/2026-11-02/spark-open/README.md).
 
 On 16 synthetic circuit-identification cases, Spark with the engine ranking hidden
 finished **15/16**, versus **16/16** for the engine and fixed expert plan. Random
@@ -154,6 +170,8 @@ spares), wiring, firmware and the first communication check.
   Repeatability across sessions and builders is not yet established.
 - The operator still changes wires by hand; Spark only requests changes.
 - The diode discovery result above is from a simulated bench until the physical run completes.
+
+Final evaluation scope: [included and deliberately excluded work](docs/final-evaluation-scope.md).
 
 Full history: [evidence index](docs/evidence-index.md) · [protocol commitments](docs/preregistration.md)
 · [physical experiment scope](docs/physical-agent.md)

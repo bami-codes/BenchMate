@@ -12,7 +12,9 @@ async def main():
   ff=subprocess.Popen(['ffmpeg','-y','-loglevel','error','-f','image2pipe','-framerate','30','-i','-','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p',str(target)],stdin=subprocess.PIPE)
   for frame in range(270):
    await page.evaluate('t=>window.frame(t)',frame/30);ff.stdin.write(await page.screenshot(type='jpeg',quality=92))
-  ff.stdin.close();code=ff.wait();await b.close()
+  ff.stdin.close();code=ff.wait()
+  await page.screenshot(path=str(root/'video/out/benchmark-evaluation.png'))
+  await b.close()
   if code:raise RuntimeError('Video encoder failed')
   print(json.dumps({'clip':str(target),'seconds':9,'data':'actual evaluation, synthetic bench, no physical claims'}))
 asyncio.run(main())

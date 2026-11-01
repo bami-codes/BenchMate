@@ -131,17 +131,15 @@ SCENES.numbers=(C,D)=>{
     return {tag,symbols,count,mounts,at:.3+k*.7};
   });
   const A=B.tasks.A.rows;
-  const available=A.filter(r=>r.status==='complete').map(r=>`${r.label}: ${r.correct}/${r.of}`).join(' · ');
-  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'848px',fontSize:'22px'}},stage,'Task A · which part changed? '+(available||'not run'));
-  const aa=A.find(r=>r.arm==='engine'&&r.status==='complete');
-  if(aa&&aa.outside){
-    E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'891px',fontSize:'22px'}},stage,'Task A · both parts changed · engine:');
-    aa.outside[0].forEach((o,i)=>symbol(o,560+i*35,904,8,true));
-  }
-  const paidA=A.filter(r=>['no_tool','spark','spark_hidden','spark_open'].includes(r.arm)&&r.status==='not run').map(r=>r.label);
-  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'934px',fontSize:'20px'}},stage,'Not run in Task A: '+(paidA.join(' · ')||'none'));
-  E('div',{cls:'soft',style:{position:'absolute',right:'90px',top:'891px',fontSize:'22px'}},stage,'B5 variants: final evaluation not run');
-  E('div',{cls:'soft',style:{position:'absolute',right:'90px',top:'934px',fontSize:'20px'}},stage,'Mounts are simulated fixture settings, not physical rewiring.');
+  const short={no_tool:'No measurements',random:'Random (3×)',fixed:'Fixed plan',engine:'Engine',spark:'Spark + bench',spark_hidden:'Spark hidden',spark_open:'Spark Open + bench'};
+  const available=A.filter(r=>r.status==='complete').map(r=>`${short[r.arm]} ${r.correct}/${r.of}`);
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'832px',width:'1700px',fontSize:'22px',lineHeight:1.5}},stage,'Task A · identify the part · '+(available.join(' · ')||'not run'));
+  const aa=A.find(r=>r.arm==='engine'&&r.status==='complete'),as=A.find(r=>r.arm==='spark'&&r.status==='complete'),an=A.find(r=>r.arm==='no_tool'&&r.status==='complete');
+  const outsideCount=r=>r.outside.flat().length, pending=r=>r.outside.flat().filter(o=>o==='incomplete').length;
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'905px',fontSize:'21px'}},stage,
+    `Both parts changed: engine ${aa?aa.correct_abstentions+'/'+outsideCount(aa):'not run'} correctly held off`+(as?` · Spark ${as.correct_abstentions}/${outsideCount(as)}; ${pending(as)} incomplete`:''));
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'945px',fontSize:'20px'}},stage,an?`No measurements: ${an.correct} identified; ${[...an.strips.flat(),...an.outside.flat()].filter(o=>o==='abstained').length} left unresolved. Different information access.`:'Task A without measurements: not run. Different information access.');
+  E('div',{cls:'soft',style:{position:'absolute',left:'100px',top:'983px',fontSize:'19px'}},stage,'B5 variants: final evaluation not run · Mounts are simulated fixture settings, not physical rewiring.');
   return t=>rows.forEach(r=>{stick(r.tag,t,r.at);r.count.style.opacity=r.mounts.style.opacity=tw(t,r.at+.3,.3);r.symbols.forEach((s,i)=>s.style.opacity=tw(t,r.at+.15+(i%16)*.025,.15));});
 };
 let update=null,cues={},dur=0,fx={};

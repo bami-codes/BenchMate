@@ -66,3 +66,14 @@ original `$1 reserved` fields in provider metadata are bookkeeping, not charges.
 The separate B5 variant bench and selection implementation are frozen. Selection
 results are a feasibility screen, not Spark evaluation results. Final variant
 model evaluation waits until the physical B5 attempt as registered.
+
+## Later supplements — original snapshot above retained
+
+- [Full Task A information-access comparison](task-a/README.md).
+- [Spark Open development gate and all 30 evaluation cases](spark-open/README.md).
+- [Retired transport probe and its local implementation failures](open-transport-probe/README.md).
+
+Across these and the original batch: **465 actual requests, $4.08661535 calculated
+from returned usage**, all settled locally. Meta $2.98877455; Baseten $1.09784080.
+The six local pre-HTTP guard failures in the retired probe are not charged requests.
+These totals are not provider invoices. Original per-batch cost files are preserved.

@@ -1,0 +1,62 @@
+{
+  "name": "diagnose",
+  "duration": 51.359,
+  "cues": {
+    "L9": {
+      "start": 0.6,
+      "end": 4.996,
+      "cap": "First, a fault I planted, in a circuit designed for 10 ms."
+    },
+    "L10": {
+      "start": 5.696,
+      "end": 9.547,
+      "cap": "Measured time constant: 21.4 ms. Twice as slow."
+    },
+    "L11": {
+      "start": 10.547,
+      "end": 16.236,
+      "cap": "The first measurement fits two explanations: a larger R or a larger C."
+    },
+    "L12": {
+      "start": 17.436,
+      "end": 20.239,
+      "cap": "Repeating the unloaded test cannot separate them."
+    },
+    "L13": {
+      "start": 20.839,
+      "end": 22.776,
+      "cap": "So Spark asks for a known load."
+    },
+    "L14": {
+      "start": 25.976,
+      "end": 28.724,
+      "cap": "Both models are locked before the next measurement."
+    },
+    "L15": {
+      "start": 29.824,
+      "end": 31.154,
+      "cap": "Only one survives."
+    },
+    "L16": {
+      "start": 34.654,
+      "end": 37.121,
+      "cap": "Then it passes a waveform it never saw."
+    },
+    "L17": {
+      "start": 40.621,
+      "end": 45.744,
+      "cap": "Capacitance \u2248 2.1\u00d7 design, assuming R = 10 k\u03a9."
+    },
+    "L18": {
+      "start": 46.744,
+      "end": 48.559,
+      "cap": "And it says what it still doesn't know."
+    }
+  },
+  "narration_sha256": "ebb84835d96e5315a385ca0ea61f93b1c5abc277aab7266dcbd93ae0164908c8",
+  "voice": "am_michael",
+  "model": "hexgrad/Kokoro-82M",
+  "voice_generated_locally": true,
+  "physical_record_sha256": "12ae389d77876283f62f520239ea4806a5dc77925c8bbe25708833922d29603f",
+  "speech_seconds": 32.159
+}

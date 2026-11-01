@@ -172,7 +172,7 @@ SCENES.diagnose=(C,D)=>{
   const locks=E('div',{style:{position:'absolute',left:'1250px',top:'240px',width:'598px'}});
   const lR=box(0,0,598,180,{padding:'22px 26px'});locks.appendChild(lR);lR.innerHTML=`<div style="display:flex;justify-content:space-between"><span class="label">“R changed” predicts</span><span style="color:#55635e">${lock()}</span></div><div class="mono" style="font-size:34px;margin-top:8px">gain ${d.models.r_changed.gain.toFixed(2)} · τ ${(d.models.r_changed.tau_s*1000).toFixed(1)} ms</div><div id="lRs" class="mono" style="font-size:28px;margin-top:10px;height:36px"></div>`;
   const lC=box(0,200,598,180,{padding:'22px 26px'});locks.appendChild(lC);lC.innerHTML=`<div style="display:flex;justify-content:space-between"><span class="label">“C changed” predicts</span><span style="color:#315e91">${lock()}</span></div><div class="mono" style="font-size:34px;margin-top:8px">gain ${d.models.c_changed.gain.toFixed(2)} · τ ${(d.models.c_changed.tau_s*1000).toFixed(1)} ms</div><div id="lCs" class="mono" style="font-size:28px;margin-top:10px;height:36px"></div>`;
-  const lockNote=E('div',{style:{position:'absolute',left:0,top:'402px',width:'598px',fontSize:'21px',color:'#55635e',lineHeight:1.4}},locks,'Parameters locked before the loaded measurement. Curves are computed from the input measured during it.');
+  const lockNote=E('div',{style:{position:'absolute',left:0,top:'402px',width:'598px',fontSize:'21px',color:'#55635e',lineHeight:1.4}},locks,'Parameters locked before both validation measurements. Curves use the input from the displayed capture.');
   const verdict=box(1250,240,598,null,{padding:'26px 30px',borderColor:'#bcd8c8'});
   verdict.innerHTML=`<span class="badge pass">Verdict</span><div style="font-size:38px;font-weight:600;line-height:1.25;margin:16px 0 8px">Capacitance ≈ 2.1× design</div><div class="label">assuming R = 10 kΩ · within the declared RC alternatives</div><div class="mono" style="font-size:24px;margin-top:18px;line-height:1.6">load step&nbsp;&nbsp; ${d.loaded_scores.c_changed.rms.toFixed(1)} mV ${check}<br>unseen sine ${d.reserved_scores.c_changed.rms.toFixed(1)} mV ${check}</div>`;
   const unknown=box(1250,640,598,null,{padding:'22px 28px'});
@@ -203,7 +203,7 @@ SCENES.diagnose=(C,D)=>{
     cr.svg.style.opacity=phaseR?1:0;
     ptitle.textContent=phaseU?'Unloaded step response':phaseL?'With the 9.99 kΩ load: which explanation survives?':'A waveform it never saw: 5 Hz sine, reserved';
     pnote.textContent=phaseU?'Measured on the real circuit. Design curve computed from the measured input.':phaseL?'Model parameters locked before this measurement · curves use the measured input · 9 mV allowance, whole and every region':'Reserved condition: never used to fit anything · same frozen models';
-    cu.reveal(pu.nom,tw(t,c.L9.start+0.3,1.6,ease));cu.reveal(pu.obs,tw(t,c.L10.start,1.6,ease));
+    cu.reveal(pu.obs,tw(t,c.L10.start,1.6,ease));cu.reveal(pu.nom,tw(t,c.L10.start+1.7,1.0,ease));
     cl.reveal(pl.obs,tw(t,tLoadObs,1.2,ease));cl.reveal(pl.r,tw(t,tLoadObs+1.3,0.9,ease));cl.reveal(pl.c,tw(t,tLoadObs+2.0,0.9,ease));
     cr.reveal(pr.obs,tw(t,tRes+0.3,1.3,ease));cr.reveal(pr.c,tw(t,tRes+1.6,1.0,ease));cr.reveal(pr.r,tw(t,tRes+1.6,1.0,ease));
     // right column sequencing
