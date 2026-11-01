@@ -1,0 +1,52 @@
+{
+  "protocol": "overnight-spark-open-v1",
+  "authorization": "Autonomous overnight preparation requested by user, with Spark Open already in the final sprint; bounded separate-provider synthetic work.",
+  "scientific_protocol": "Frozen linear-benchmark-v1.1. No prompt, tool, truth table, scoring or engine changes.",
+  "endpoint": "https://inference.baseten.co/v1/chat/completions",
+  "model": "meta-models/muse-spark-open-1026",
+  "no_silent_model_substitution": true,
+  "sequence": [
+    {
+      "phase": "development",
+      "task": "A",
+      "specimens": "first registered development specimen only",
+      "max_requests": 8
+    },
+    {
+      "phase": "development",
+      "task": "B",
+      "specimens": "first registered development specimen only",
+      "max_requests": 8
+    },
+    {
+      "phase": "evaluation",
+      "task": "A",
+      "specimens": "all 30 registered evaluation specimens, only if both development first attempts pass",
+      "max_requests": 240
+    }
+  ],
+  "request_cap": 256,
+  "cost_cap_usd": 10.0,
+  "budget_provider": "Baseten, separate from Meta and original shared ledger",
+  "rates_per_million_tokens": {
+    "input": 1.25,
+    "cached_input": 0.15,
+    "output": 4.25
+  },
+  "pricing_source": "https://www.baseten.co/pricing/",
+  "accounting": "Reserve $1 before each bounded request, settle prompt/completion/cache usage. Missing usage/errors keep reservation. Local calculation is not an invoice.",
+  "data_sent": "Synthetic nominal design, allowed tools, generated waveform summaries and engine ranking/verification. No assembly truth, physical records, photographs or local files.",
+  "hardware_commands": 0,
+  "automatic_retries": 0,
+  "physical_B5_variants_evaluated": false,
+  "reasoning_settings": "Baseten provider default, Meta comparison medium. Same bench task and budget, not identical inference settings.",
+  "failure_handling": "Keep every first attempt and partial report. No evaluation if both development tasks do not finish correctly. No model replacement after failure.",
+  "time_limit_s": {
+    "development_run": 1800,
+    "evaluation_batch": 5400
+  },
+  "wrapper_sha256": {
+    "experiments/open_benchmark.py": "dd9d1ec613ecc5ab1c28e0e536d5ec0eb6bed7500c85bf073f42fec657452cc9",
+    "experiments/night_budget.py": "fb0114c513e71ecaf5510244f1ff26c3833b68deb1a381a78c9a43153c5682d2"
+  }
+}

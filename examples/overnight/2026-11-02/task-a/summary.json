@@ -1,0 +1,35 @@
+{
+  "source": "synthetic only",
+  "protocol": "linear-benchmark-v1.1",
+  "physical_measurements": 0,
+  "outcomes": {
+    "no_tool": {
+      "correct": 8,
+      "wrong": 0,
+      "rejected": 0,
+      "abstained": 22,
+      "incomplete": 0
+    },
+    "spark": {
+      "correct": 24,
+      "wrong": 0,
+      "rejected": 5,
+      "abstained": 0,
+      "incomplete": 1
+    }
+  },
+  "requests": 162,
+  "usage_calculated_usd": 1.23982715,
+  "unsettled": 0,
+  "failures": [
+    {
+      "specimen": "A19",
+      "outcome": "incomplete",
+      "error": "Agent HTTP request budget exhausted",
+      "status": "all_candidates_inadequate",
+      "report_accepted": false,
+      "provider_requests": 8
+    }
+  ],
+  "interpretation": "Measured information access, not intrinsic-model accuracy. No-tool appropriately left overlapping explanations unresolved; no wrong identifications in either arm. Engine and fixed plan also identify 24/24 in-family and reject 6/6 dual-change cases."
+}
