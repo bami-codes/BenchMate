@@ -22,7 +22,7 @@ test('scope includes every 512-point sample, including the final output delay',(
   assert.ok(value.window>=value.last);assert.equal(value.points,512);
 });
 test('regional failure is not described as an RMS allowance failure',()=>{
-  const e=env();assert.match(e.run('verdictHTML({passed:false,RMS_mV:8.54})'),/regional check failed/);
+  const e=env();assert.match(e.run('verdictHTML({passed:false,RMS_mV:8.54})'),/fails a regional check/);
 });
 test('run lookup cannot overwrite a newly selected case',async()=>{
   const e=env(), d=defer();e.c.fake=()=>d.promise;e.run('api=fake');

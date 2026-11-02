@@ -4,6 +4,40 @@
 [계획 v3.0](photo-bench-implementation-plan.md)과 [최종 스프린트](final-sprint.md)에서 이 문서와 겹치는 부분은 이 문서가 우선한다.
 마감은 11/5(목) 11:00 KST, 제출 목표는 11/4(수) 22:00 KST다.
 
+## 21:55 수정 결정: 사례마다 다른 실제 회로 (아래 "사례" 표와 사전 확인의 A안보다 우선)
+
+범수 결정: 값만 다른 RC 여섯 개(A안)는 심사위원 눈에 같은 회로라서 쓰지 않는다.
+모든 사례를 원인이 확인된 포럼 글에 맞춘다. 회로도도, 미니보드 실물 회로도 사례마다 다르다.
+SAM 3.1이 서로 다른 보드에서 실제로 부품을 잡아내야 한다.
+
+| 사례 | 포럼 원문 | 원문에서 확인된 원인 | 미니보드 실물 회로 | 숨긴 고장 |
+|---|---|---|---|---|
+| 핀 출력 저항 | [Arduino Forum 1098926: Oscilloscope low pass filter help (2023-03-07)](https://forum.arduino.cc/t/oscilloscope-low-pass-filter-help/1098926) | 10Ω·10µF 필터 출력이 시뮬레이션보다 낮음. 응답자(MrMark)가 핀 출력 저항 약 40Ω을 원인으로 지목했고, 시뮬레이션에 50Ω을 넣자 측정과 일치. 부품을 바꾼 뒤 글쓴이가 동작 확인 | 직렬 R + C (2개) | 미니보드 밖 직렬 R |
+| 센서 보드 필터 | [Arduino Forum 380339: MPU6050 Breakout Board GY-521 - Wrong Capacitor Results in Erratic Data (2016-04-18)](https://forum.arduino.cc/t/mpu6050-breakout-board-gy-521-wrong-capacitor-results-in-erratic-data/380339) | "the Regulator Filter Capacitor should be 0.1 uF, but the one on the board is around 2 nF". 다른 사용자가 떼어 재고 교체: "this has fixed the problem" | 출력 R + 필터 C + 바이패스 C(104) + 부하 R (4개) | 필터 C 자리에 474 |
+| 555 타이밍 | [All About Circuits 55255: 555 Blinking LED -- One cycle and stops](https://forum.allaboutcircuits.com/threads/555-blinking-led-one-cycle-and-stops.55255/) | 56k·22k 자리에 56Ω·22Ω. 다른 회원이 사진 색띠로 발견. 글쓴이: "you are right ... the resistors are 22 and 56 ohms", 교체 후 "it works wonderfully" | R_A + R_B + C 타이밍 사슬 (3개) | R 값이 너무 작음 (측정 범위에 맞게 축소) |
+| 꺼진 칩 입력 | [Arduino Forum 884099: Voltage divider is not giving correct voltage, 3쪽](https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099?page=3) | 46번(2021-07-17) 글쓴이 재시험: ESP32 전원이 없으면 분압이 틀리고 전원을 넣으면 맞음, "@Wawa you are correct". 57번: "Real life testing was the correct way to find the issue." 중간 27번(7/12)의 반대 결과도 기록에 남긴다 | 분압 R1·R2 (2개) | 미니보드 밖 다이오드 (칩 내부 보호 다이오드 역할) |
+| 접촉 저항 | [EEVblog Forum: Voltage Drop at Breadboard (2019-03-09)](https://eevblog.com/forum/beginners/voltage-drop-at-breadboard) | **반쯤 확인.** 브레드보드·점퍼를 거치면 약 0.4V가 떨어지고, 납땜하자 5.04V로 정상. 글쓴이: "pre made jumper cable's are too thin". 점퍼 탓인지 접촉 탓인지는 끝내 못 가림 | 부하 R ∥ 디커플링 C (2개, 병렬 모양) | 미니보드 밖 직렬 R |
+| 흐린 LED | [Arduino Forum 384293: BC547 Base Resistor checking.... (2016-05-06)](https://forum.arduino.cc/t/bc547-base-resistor-checking/384293) | BC547 하나로 LED 5개를 켬. 베이스 저항 4.7k에서 "my LEDs are very dim". 470Ω으로 바꾸자 "looks waaaay better"(글쓴이는 "stab in the dark"라고 함). 응답자(MarkT): "Make the base current 5 to 10% of the load ... so a 470 ohm is plausible." | BC547 + LED + 베이스 R + LED R (+ 아두이노 5V 선) | 베이스 저항 과다 |
+
+- 인용은 웹 도구가 가져온 원문 문장이다. 사이트·영상·README에 넣기 전에 원문을 다시 열어 한 글자씩 확인한다.
+- 각 사례는 수리한 뒤 다시 돌린다. 그 재실행이 정상 대조군이다.
+- 10/30 D01은 "첫 실물 실행" 기록으로 따로 남긴다. 사례 목록에는 넣지 않는다.
+- **555의 의도**: 측정은 "저항 사슬 합이 너무 작다"까지만 말할 수 있다. 어느 저항인지는 SAM과 Spark가 사진의 색띠로 집는다.
+  원래 포럼에서도 사진으로 찾은 사례라, 측정과 사진의 대질이 가장 잘 보인다.
+- **필요한 새 엔진**: 회로도에서 읽은 부품 목록으로 "설계 그대로 / 부품 k가 바뀜" 가설을 만든다.
+  측정한 IN을 넣어 ngspice로 각 가설의 OUT을 예측하고, 바뀐 크기를 학습 측정에서 맞춘다.
+  Spark는 메뉴(무부하 스텝, 부하 스텝, 사인 주파수·진폭)에서 실험을 고른다. 실행기가 순서를 대신 정하지 않는다.
+  예측은 측정 전에 고정하고, 예약 입력으로 검증한다. 모든 가설이 실패하면 Spark가 구조를 새로 제안한다(B5 방식, 884099).
+  측정만으로 못 가리는 부품은 "구분 불가"로 낸다.
+  기존 ngspice 시뮬레이션(`physical_netlist`), 맞추기(`b5_models`), 채점, Spark 도구 루프를 재사용한다. 기존 동결 실행기는 그대로 둔다.
+- **LED 사례**: 미니보드에 5V 선 1개, 측정 전압 한계(기준 ±1.1V) 확대와 펌웨어 재업로드, ngspice BJT 모델이 필요하다.
+  하드웨어 위험이 가장 크므로 마지막 순서로 두고 시간 상한을 둔다.
+- **일정**
+  - 11/2 밤: 엔진, 영어 전환, 모의 검증(Codex). 회로도와 Pages 뼈대(Claude).
+  - 11/3 오전: 사례별 파일럿. 11/3 오후: 본시험과 사진. 11/3 밤: LED.
+  - 11/4: 영상, 제출.
+  - 엔진이 11/2 밤 안에 모의 검증까지 안 되면 일정이 밀리므로, Codex의 시간 견적이 갈림길이다.
+
 ## 왜 바꾸나
 
 경쟁작 MuseCell, LastSeen, Say-and-Grasp를 직접 비교했다. 세 팀 모두 숫자가 크다(38개 화합물, 200개 시나리오, 10회 시도).
@@ -169,6 +203,6 @@ Claude 소유 파일은 Codex가 고치지 않고 요청으로 남긴다. 유료
 
 ## 커밋 대기
 
-case_review 화면 3개 파일과 tests/test_case_ui.cjs는 Claude가 692c590 위에 고친 것이다.
-흰 띠를 없애고 재생 안내를 상단 바로 옮겼고, 저장된 질문 드롭다운을 뺐다. 파형 전체 표시, 판정 문구, 실행 목록 표시도 고쳤다.
-docs/final-sprint.md와 이 문서도 함께 검토해서 커밋한다.
+case_review 화면 3개 파일과 tests/test_case_ui.cjs는 Claude가 692c590 위에 고친 것이다. 검토할 필요 없이 그대로 커밋해서 작업 트리만 비운다.
+제출 데모는 GitHub Pages용 정적 사이트로 Claude가 새로 만든다. 이 파일들에서는 오실로스코프 그림, 로그, 디자인 토큰만 가져다 쓴다.
+docs/final-sprint.md와 이 문서도 같이 커밋한다.

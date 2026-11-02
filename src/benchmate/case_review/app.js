@@ -67,11 +67,10 @@ const STYLE = {
 
 /* ---------- oscilloscope ---------- */
 const NICE_V = [.005, .01, .02, .025, .03, .04, .05, .06, .08, .1, .2, .25, .4, .5];
-const NICE_T = [.05, .1, .2, .25, .3, .5, .6, 1, 1.2, 2, 4];
 function scaleFor(series) {
   let tmax = 0;
   for (const s of series) for (const t of s.t) tmax = Math.max(tmax, t);
-  const win = NICE_T.find(w => w >= tmax) || tmax || NICE_T[0];
+  const win = tmax > 0 ? tmax : .1; // the whole capture spans ten divisions; nothing is cut off
   let lo = Infinity, hi = -Infinity;
   for (const s of series) s.v.forEach((v, i) => { if (s.t[i] <= win) { lo = Math.min(lo, v); hi = Math.max(hi, v); } });
   if (!Number.isFinite(lo)) { lo = -.1; hi = .1; }
@@ -81,7 +80,7 @@ function scaleFor(series) {
 }
 function readout(sc) {
   const td = sc.win / 10;
-  return `<span>${Math.round(sc.vdiv * 1000)} mV/div</span><span>${td >= 1 ? td + ' s' : +(td * 1000).toFixed(1) + ' ms'}/div</span>`;
+  return `<span>${Math.round(sc.vdiv * 1000)} mV/div</span><span>${td >= 1 ? +td.toPrecision(3) + ' s' : +(td * 1000).toPrecision(3) + ' ms'}/div</span>`;
 }
 function pathOf(s, sc) {
   const X = t => t / sc.win * 500, Y = v => 200 - (v - sc.center) / sc.vdiv * 50;
@@ -132,7 +131,7 @@ function overlay(el, html) { el.hidden = !html; el.innerHTML = html || ''; }
 function verdictHTML(score, words) {
   if (!score) return '';
   const pass = score.passed, w = words || { pass: 'survives', fail: 'ruled out' };
-  if (!pass && score.RMS_mV <= 9) return `${GLYPH.fail}<span><b>${mv(score.RMS_mV)} mV RMS</b> <span class="why">regional check failed</span></span>`;
+  if (!pass && score.RMS_mV <= 9) return `${GLYPH.fail}<span><b>${mv(score.RMS_mV)} mV</b> <span class="why">fails a regional check</span></span>`;
   return pass ? `${GLYPH.pass}<span><b>Within ${mv(score.RMS_mV)} mV</b> <span class="why">${w.pass}</span></span>`
               : `${GLYPH.fail}<span><b>Misses by ${mv(score.RMS_mV)} mV</b> <span class="why">${w.fail}</span></span>`;
 }
@@ -149,19 +148,13 @@ const cache = new Map();
 let playing = false, timer = null, loading = false, caseEpoch = 0;
 
 /* ---------- library and routing ---------- */
-async function refreshLibrary() {
-  const state = await api('/api/state');
-  const picker = $('case-picker');
-  picker.replaceChildren(new Option('Saved questions', ''));
-  state.cases.forEach(c => picker.add(new Option(c.question.length > 60 ? c.question.slice(0, 58) + '…' : c.question, c.case_id)));
-  picker.value = current?.manifest.case_id || '';
-}
+async function refreshLibrary() { /* saved cases stay reachable by link; the bar only offers a new question */ }
 function showAsk() {
   caseEpoch++; stopPlay(); stopMock(); resetMockView(); loading = false;
   current = null; snap = null; outline = null; cache.clear();
   $('ask').hidden = false; $('case').hidden = true;
   history.replaceState(null, '', '/');
-  $('case-picker').value = '';
+  $('replay-note').hidden = true;
   notice('');
   document.title = 'BenchMate';
 }
@@ -189,10 +182,10 @@ async function openCase(id, cursor = 0) {
   $('ask').hidden = true; $('case').hidden = false;
   $('q').textContent = m.question.text;
   document.title = 'BenchMate: ' + m.question.text.slice(0, 60);
-  $('case-picker').value = m.case_id;
   renderReview();
   renderProvenance(); loadBoardPhoto();
   $('replay').hidden = !linked();
+  $('replay-note').hidden = !linked();
   $('mock').hidden = !linked();
   if (linked()) {
     if (!await loadOutline(epoch)) return;
@@ -285,7 +278,7 @@ async function loadBoardPhoto() {
     img.alt = p.label + '. Reference only; specimen state unconfirmed.';
     // Use the verified source endpoint. /board.jpg is also available for registered photo IDs.
     img.src = p.image_url;
-    $('board-caption').textContent = (p.role === 'operator_supplied_reference' ? 'Photo reference' : 'Historical reference') + ' · state unconfirmed';
+    $('board-caption').textContent = p.role === 'operator_supplied_reference' ? 'Board photo. Not confirmed as this run’s state.' : 'Earlier photo. Not confirmed as this run’s board.';
   } catch { $('board-ph').textContent = 'Photo evidence is unavailable on this server.'; }
 }
 function renderPhotoEvidence() {
@@ -474,7 +467,6 @@ const LOG_SUMMARIES = {
   7: 'Measure an unloaded step to find the time constant.',
   49: 'R and C both explain the first response. Freeze both models before the load test.',
   52: 'Repeating the step cannot separate R from C. A 9.99 kΩ load changes the gain and separates them.',
-  54: 'The bench requested USB-off load connection and retained wiring. Historical instruction only.',
   97: 'Spark requested the reserved check. The protocol specified a 5 Hz sine.'
 };
 function renderLog() {
@@ -484,7 +476,7 @@ function renderLog() {
   let prevT = null, nowEl = null;
   list.forEach((m, i) => {
     const t = timeOf(m.sequence);
-    if (prevT !== null && t - prevT > 60) ol.append(E('li', 'gap', `${duration(t - prevT)} ${m.kind === 'op' ? 'until the operator report' : 'between recorded steps'}`));
+    if (prevT !== null && t - prevT > 60) ol.append(E('li', 'gap', `${duration(t - prevT)} until ${m.kind === 'op' ? 'the wiring was reported' : 'the next recorded step'}`));
     prevT = t;
     const last = i === list.length - 1;
     const li = E('li', `entry k-${m.kind} ${last ? 'now' : 'past'} jump`);
@@ -492,14 +484,13 @@ function renderLog() {
     const bd = E('div', 'bd');
     bd.append(E('span', 'who', m.actor));
     if (m.emphasis) { bd.append(E('br')); bd.append(E('span', 'tape small', m.title)); }
-    else bd.append(E('div', 'ttl', m.title));
+    else bd.append(E('div', 'ttl', m.title.replace(' · ', ': ')));
     const short = LOG_SUMMARIES[m.sequence], text = short || m.text;
     if (m.request) {
       const req = E('div', 'req', text);
       req.append(E('p', null, m.operator_confirmed ? 'Historical request. The operator reported it done.' : 'Historical request. Nothing to do now.'));
       bd.append(req);
     } else bd.append(E('div', 'txt', text));
-    if (short) { const d = E('details'); d.append(E('summary', null, 'Full explanation'), E('p', null, m.text)); d.addEventListener('click', e => e.stopPropagation()); bd.append(d); }
     if (m.frozen_models) {
       const f = m.frozen_models;
       bd.append(E('div', 'txt', `More resistance: gain ${gain(f.r_changed.gain)}, τ ${msOf(f.r_changed.tau_s)} ms. More capacitance: gain ${gain(f.c_changed.gain)}, τ ${msOf(f.c_changed.tau_s)} ms.`));
@@ -513,8 +504,13 @@ function renderLog() {
     (m.refs || [m.sequence]).forEach(seq => src.append(button(`event ${seq}`, e => { e.stopPropagation(); showEvent(seq); })));
     bd.append(src);
     const orig = originalText(m.original);
-    if (orig && (m.source === 'screen_translation' || m.source === 'runner_instruction_translation' || m.actor === 'Operator')) {
-      const d = E('details'); d.append(E('summary', null, 'Original'), E('p', null, orig)); d.addEventListener('click', e => e.stopPropagation()); bd.append(d);
+    const showOrig = orig && (m.source === 'screen_translation' || m.source === 'runner_instruction_translation' || m.actor === 'Operator');
+    if (short || showOrig) {
+      const d = E('details', 'more-text');
+      d.append(E('summary', null, short && showOrig ? 'Full text and original' : short ? 'Full text' : 'Original'));
+      if (short) d.append(E('p', null, m.text));
+      if (showOrig) { const o = E('p', 'orig', orig); o.lang = 'ko'; d.append(o); }
+      d.addEventListener('click', e => e.stopPropagation()); bd.append(d);
     }
     li.append(E('span', 'tm', clock(t)), bd);
     li.addEventListener('click', () => { const target = snap.steps.find(n => n >= m.sequence) ?? m.sequence; if (target !== snap.cursor) go(target, { user: true }); });
@@ -529,7 +525,7 @@ function renderRail() {
   for (let i = 0; i < n; i++) {
     const gapS = steps[i + 1].t - steps[i].t, seg = E('div', 'seg' + (gapS > 60 ? ' wire' : ''));
     seg.style.left = (i / n * 100) + '%'; seg.style.width = (100 / n) + '%'; r.append(seg);
-    if (gapS > 60) { const lab = E('div', 'seglabel', `${steps[i + 1].kind === 'op' ? 'operator interval' : 'interval'}, ${duration(gapS)}`); lab.style.left = ((i + .5) / n * 100) + '%'; r.append(lab); }
+    if (gapS > 60) { const lab = E('div', 'seglabel', `${duration(gapS)} until ${steps[i + 1].kind === 'op' ? 'the wiring was reported' : 'the next step'}`); lab.style.left = ((i + .5) / n * 100) + '%'; r.append(lab); }
   }
   steps.forEach((s, i) => {
     const state = s.seq < snap.cursor ? 'done' : s.seq === snap.cursor ? 'now' : '';
@@ -547,7 +543,9 @@ function renderAnswerLine(animate = false) {
   if (!snap?.answer) { a.append(E('span', 'pending', 'The answer appears when the run reaches it.')); return; }
   const tape = E('span', 'tape big' + (animate && !reduce ? ' stick' : ''), snap.answer.title);
   const changes = snap.messages.filter(m => m.request).length;
-  a.append(tape, E('span', 'note', snap.answer.assumption), E('span', 'facts', `Muse Spark reported it after ${ONE[changes] || changes} wiring change${changes === 1 ? '' : 's'}, ${duration(timeOf(137))} into the run.`));
+  const facts = E('span', 'facts');
+  facts.append(E('span', 'assume', snap.answer.assumption + ' '), `Muse Spark reported it ${duration(timeOf(137))} in, after ${ONE[changes] || changes} wiring change${changes === 1 ? '' : 's'}.`);
+  a.append(tape, facts);
 }
 const LEDGER = { nominal_rc: 'Design unchanged', r_changed: 'More resistance', c_changed: 'More capacitance' };
 function renderMore() {
@@ -669,10 +667,11 @@ async function initMock() {
 }
 function renderRunPicker() {
   const sel = $('mock-runs'); sel.replaceChildren(); sel.hidden = M.runs.length < 2;
-  M.runs.forEach((r, i) => sel.add(new Option(`Simulated run ${i + 1}: ${r.status.replaceAll('_', ' ')}`, r.run_id)));
+  M.runs.forEach(r => sel.add(new Option(`Simulated run ${r.run_id.slice(0, 6)}: ${r.status.replaceAll('_', ' ')}`, r.run_id)));
   if (M.run) sel.value = M.run.run_id;
 }
 async function selectRun(runId) {
+  if (M.run?.run_id !== runId) M.view = 'repair_step';
   stopMock(); resetMockView();
   const c = mockContext();
   const run = await api(`/api/runs/${runId}`);
@@ -783,7 +782,7 @@ async function cancelRun() {
 const cap = t => t ? t[0].toUpperCase() + t.slice(1) : t;
 const clockFine = s => { s = Math.max(0, s); return s < 60 ? `${s.toFixed(1)} s` : clock(s); };
 function mockStart() { const e = M.events.find(x => x.kind === 'run_started'); return e ? ts(e.timestamp) : null; }
-const verb = s => s.passed ? `passes at ${mv(s.RMS_mV)} mV RMS` : `${mv(s.RMS_mV)} mV RMS; ${s.RMS_mV <= 9 ? 'regional check failed' : 'fails'}`;
+const verb = s => s.passed ? `within ${mv(s.RMS_mV)} mV` : s.RMS_mV <= 9 ? `${mv(s.RMS_mV)} mV, fails a regional check` : `misses by ${mv(s.RMS_mV)} mV`;
 function mockLine(e) {
   const p = e.payload;
   switch (e.kind) {
@@ -866,8 +865,9 @@ function renderMockCard() {
   const lines = [];
   if (good) lines.push('Both repaired checks matched the restored design, and the unchanged circuit was ruled out. This is a software rehearsal, not a physical repair.');
   else if (r.status === 'completed') lines.push('The run finished, but the repair check did not pass. Nothing is relabelled as a success.');
-  if (res?.error) lines.push(res.error);
-  if (r.publication_label) lines.push(`Forecast: ${r.publication_label}.`);
+  if (r.status === 'cancelled') lines.push('You cancelled the simulated run. Nothing on a real board was touched.');
+  else if (res?.error) lines.push(res.error);
+  if (r.publication_label) lines.push(/local/i.test(r.publication_label) ? 'The repair forecast was frozen on this computer before the simulated repair. It was not published.' : `Forecast: ${r.publication_label}.`);
   lines.forEach(t => card.append(E('p', null, t)));
   holder.append(card);
 }
@@ -901,19 +901,20 @@ function renderMockScopes() {
       setVerdict(v, ''); $('f' + side).textContent = ''; continue;
     }
     overlay(ov, ''); if (state !== 'scored') $('f' + side).textContent = '';
-    const label = pm ? (key === 'restored_nominal' ? `Restored, C ${valueText({ kind: 'C', value_si: pm.restored_nominal.C_f })}` : `Unchanged, C ${(pm.unchanged.C_f * 1e6).toFixed(1)} µF`) : '';
+    const label = pm ? (key === 'restored_nominal' ? `Forecast if restored, C ${valueText({ kind: 'C', value_si: pm.restored_nominal.C_f })}` : `Forecast if unchanged, C ${(pm.unchanged.C_f * 1e6).toFixed(1)} µF`) : '';
     const layers = [{ ...d.series[key], style: STYLE[sty] }];
     if (d.obs) layers.push({ ...d.obs, style: STYLE.red, sweep: true });
     const sc = sharedScale;
     drawScope(svg, sc, layers, sweep); ro.innerHTML = readout(sc);
-    keyEl.innerHTML = `<span>${SAMPLE[sty]}${label} · forecast</span>` + (d.obs ? `<span>${SAMPLE.red}Measured</span>` : '');
+    keyEl.innerHTML = `<span>${SAMPLE[sty]}${label}</span>` + (d.obs ? `<span>${SAMPLE.red}Measured</span>` : '');
     if (state === 'locked') { setVerdict(fcEl, `${GLYPH.lock}<span>Frozen ${d.frozenAt && t0 ? 'at ' + clockFine(ts(d.frozenAt.timestamp) - t0) + ', ' : ''}before the repair</span>`); continue; }
     if (state === 'captured') { setVerdict(fcEl, '<span class="why">Captured. Scoring next.</span>', sweep); continue; }
-    const words = key === 'restored_nominal' ? { pass: 'repair holds', fail: 'repair not confirmed' } : { pass: 'cannot tell them apart here', fail: 'ruled out' };
-    const html = '<span class="metric-label">Using measured IN</span>' + verdictHTML(d.cmp.conditional[key], words);
+    const both = d.cmp.conditional.restored_nominal.passed && d.cmp.conditional.unchanged.passed;
+    const words = both ? { pass: 'both fit, no separation here', fail: '' }
+      : key === 'restored_nominal' ? { pass: 'repair holds', fail: 'repair not confirmed' } : { pass: 'circuit still unchanged', fail: 'ruled out' };
     const f = d.cmp.command_forecast[key];
-    setVerdict(fcEl, html, sweep);
-    $('f' + side).textContent = f ? `Plotted forecast: ${verb(f)}.` : '';
+    setVerdict(fcEl, verdictHTML(d.cmp.conditional[key], words), sweep);
+    $('f' + side).textContent = f ? `Checked with the measured input. The drawn forecast: ${verb(f)}.` : '';
   }
 }
 function renderMock() {
@@ -966,7 +967,6 @@ document.querySelectorAll('.cond[data-m]').forEach(b => b.addEventListener('clic
 $('mock-start').addEventListener('click', startRun);
 $('mock-runs').addEventListener('change', e => guarded(() => selectRun(e.target.value)));
 $('new-case').addEventListener('click', showAsk);
-$('case-picker').addEventListener('change', e => { const id = e.target.value; if (!id) showAsk(); else guarded(() => openCase(id)); });
 document.addEventListener('keydown', e => {
   if (!snap || $('replay').hidden || e.target.closest('input,textarea,select,button,summary,[contenteditable]')) return;
   if (e.key === 'ArrowRight') guarded(() => go(stepAfter(1), { user: true }));

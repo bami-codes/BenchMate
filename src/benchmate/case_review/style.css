@@ -43,8 +43,8 @@ textarea{resize:vertical;font-size:18px;line-height:1.4;padding:12px 14px}
 .bar{border-bottom:1px solid var(--rule)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:10px 40px}
 .word{font-weight:800;font-stretch:112%;font-size:19px;letter-spacing:-.01em;text-decoration:none}
-.library{display:flex;gap:8px;align-items:center}
-.library select{max-width:340px}
+.bar-note{margin:0;flex:1;min-width:0;text-align:center;font-size:13.5px;color:var(--graphite)}
+.bar-note b{color:var(--ink);font-weight:600}
 .notice{margin-top:14px;padding:10px 40px;border-left:4px solid var(--red);background:#f6e7e4}
 
 /* ask */
@@ -77,6 +77,8 @@ textarea{resize:vertical;font-size:18px;line-height:1.4;padding:12px 14px}
 .tape.stick{animation:stick .32s cubic-bezier(.2,.9,.3,1.2)}
 @keyframes stick{from{opacity:0;transform:rotate(-4deg) scale(1.08)}to{opacity:1;transform:rotate(-.8deg) scale(1)}}
 .facts{font-size:15px;color:var(--graphite)}
+.facts .assume{color:var(--quiet)}
+.facts{text-wrap:pretty}
 .pending{font-size:16px;color:var(--quiet)}
 
 .boardslot{margin:0}
@@ -274,6 +276,10 @@ textarea{resize:vertical;font-size:18px;line-height:1.4;padding:12px 14px}
   .review-image{max-width:620px}
   .mock-head{grid-template-columns:1fr}
 }
+@media (max-width:1100px){
+  .bar .wrap{flex-wrap:wrap}
+  .bar-note{order:3;flex-basis:100%;text-align:left}
+}
 @media (max-width:860px){
   .head{grid-template-columns:1fr;gap:18px}
   .schem{max-width:400px}
@@ -282,7 +288,7 @@ textarea{resize:vertical;font-size:18px;line-height:1.4;padding:12px 14px}
 @media (max-width:700px){
   .bar .wrap,.head,.instrument,.log,.more,.foot,.ask,.review-in,.strip-in,.mock-head,.records{padding-left:16px;padding-right:16px}
   .bar .wrap{flex-wrap:wrap}
-  .library select{max-width:180px}
+  .bar-note{order:3;flex-basis:100%;text-align:left;font-size:12.5px}
   .ask{padding-top:32px}
   .ask h1{font-size:34px}
   .question{font-size:25px}
@@ -318,6 +324,7 @@ textarea{resize:vertical;font-size:18px;line-height:1.4;padding:12px 14px}
 .photo-tools select{max-width:100%}
 #photo-evidence-image{display:block;max-width:100%;max-height:58vh;object-fit:contain;margin:auto}
 #photo-hash{overflow-wrap:anywhere}
-.metric-label{font-size:11px;color:var(--quiet);display:block;flex-basis:100%}
-.verdict:has(.metric-label){flex-wrap:wrap;gap:3px 8px}
 @media(max-width:600px){.photo-tools{display:grid;grid-template-columns:minmax(0,1fr)}#photo-dialog{padding:16px}}
+.entry .more-text summary{font-size:12px;color:var(--quiet)}
+.entry .more-text p{margin:6px 0 0}
+.entry .more-text .orig{color:var(--graphite)}

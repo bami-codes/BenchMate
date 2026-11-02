@@ -12,11 +12,8 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
   <a class="word" href="/">BenchMate</a>
-  <div class="library">
-    <label for="case-picker" class="sr">Saved questions</label>
-    <select id="case-picker"><option value="">Saved questions</option></select>
-    <button id="new-case" class="btn" type="button">New question</button>
-  </div>
+  <p class="bar-note" id="replay-note" hidden><b>Replay of the Oct 30 physical run.</b> Muse Spark's decisions and every measurement are recorded. Your question is new.</p>
+  <button id="new-case" class="btn" type="button">New question</button>
 </div></header>
 
 <main id="main">
@@ -83,7 +80,6 @@
 
   <!-- Replay -->
   <div id="replay" hidden>
-    <div class="strip"><div class="wrap strip-in"><b>Replay of the Oct 30 physical run</b><span>Muse Spark's decisions and every measurement are recorded. Your question is new.</span></div></div>
     <div class="stagewrap">
     <section class="stage wrap" aria-label="Recorded experiment">
       <div class="instrument">
@@ -188,7 +184,7 @@
         <div class="conds" role="group" aria-label="Repair check shown">
           <button class="cond" type="button" data-m="repair_step">Repaired step</button>
           <button class="cond" type="button" data-m="repair_reserved_sine">Unused 4 Hz sine</button>
-          <span class="allow" id="mock-allow">Dashed curves are the forecast frozen before the repair. Verdicts use measured IN on both repair checks. The plotted forecast is scored separately.</span>
+          <span class="allow" id="mock-allow">The curves are forecasts frozen before the repair. Each verdict checks the capture with its measured input; the line under it scores the drawn forecast itself.</span>
         </div>
       </div>
       <aside class="log" aria-label="Simulated run log">
