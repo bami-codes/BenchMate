@@ -1,0 +1,81 @@
+{
+  "comparison": "same trained weights and one local image on CPU versus native MPS",
+  "geometric_accuracy_evaluation": false,
+  "arrays": {
+    "pose_enc": {
+      "shape": [
+        1,
+        1,
+        9
+      ],
+      "cpu_finite": true,
+      "mps_finite": true,
+      "rms_difference": 3.3590550829523334e-07,
+      "relative_rms_difference": 6.747331700862236e-07,
+      "maximum_absolute_difference": 6.556510925292969e-07
+    },
+    "depth": {
+      "shape": [
+        1,
+        1,
+        416,
+        320,
+        1
+      ],
+      "cpu_finite": true,
+      "mps_finite": true,
+      "rms_difference": 8.119916806906548e-07,
+      "relative_rms_difference": 8.631985935891915e-07,
+      "maximum_absolute_difference": 2.7954578399658203e-05
+    },
+    "depth_conf": {
+      "shape": [
+        1,
+        1,
+        416,
+        320
+      ],
+      "cpu_finite": true,
+      "mps_finite": true,
+      "rms_difference": 1.0993536961345408e-05,
+      "relative_rms_difference": 3.3164382762660705e-06,
+      "maximum_absolute_difference": 5.054473876953125e-05
+    },
+    "extrinsics": {
+      "shape": [
+        1,
+        1,
+        3,
+        4
+      ],
+      "cpu_finite": true,
+      "mps_finite": true,
+      "rms_difference": 1.0236292052875108e-07,
+      "relative_rms_difference": 2.0472584072142045e-07,
+      "maximum_absolute_difference": 1.4691613614559174e-07
+    },
+    "intrinsics": {
+      "shape": [
+        1,
+        1,
+        3,
+        3
+      ],
+      "cpu_finite": true,
+      "mps_finite": true,
+      "rms_difference": 0.00021579186437577745,
+      "relative_rms_difference": 9.461903524430288e-07,
+      "maximum_absolute_difference": 0.000457763671875
+    }
+  },
+  "mps_depth_positive_fraction": 1.0,
+  "mps_focal_lengths_positive": true,
+  "depth_percentiles": [
+    0.44907212257385254,
+    0.6716464561223984,
+    0.936356782913208,
+    1.0712955009937286,
+    1.0947208404541016
+  ],
+  "depth_units": "unvalidated model output; not a calibrated distance measurement"
+}

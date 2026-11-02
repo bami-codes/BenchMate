@@ -1,0 +1,81 @@
+{
+  "schema": "benchmate.vggt_compatibility.v1",
+  "device": "mps",
+  "source_commit": "48b23c8ce72c9a8fcf987f0d7f43d8e4870759f6",
+  "torch": "2.15.0",
+  "dtype": "float32",
+  "autocast": false,
+  "cpu_fallback_enabled": false,
+  "weights": "random initialization; NOT pretrained",
+  "input": "seeded synthetic RGB, NOT user photographs",
+  "frames": 6,
+  "resolution": 512,
+  "architecture_reduced": false,
+  "claims": "operator/device compatibility only; no geometric accuracy claim",
+  "external_requests": 0,
+  "hardware_commands": 0,
+  "user_photos_uploaded": 0,
+  "adapter_sha256": "85e66d9620c0127012325affc496e20dccf64696eed5c2ba2a00575128815c09",
+  "parameter_count": 1143814185,
+  "preprocessed_shape": [
+    6,
+    3,
+    512,
+    512
+  ],
+  "initialization_seconds": 9.909,
+  "mps_driver_allocated_bytes_after_forward": 6619414528,
+  "forward_seconds": 7.527,
+  "outputs": {
+    "camera_and_register_tokens": {
+      "shape": [
+        1,
+        6,
+        17,
+        2048
+      ],
+      "finite": true
+    },
+    "pose_enc": {
+      "shape": [
+        1,
+        6,
+        9
+      ],
+      "finite": true
+    },
+    "depth": {
+      "shape": [
+        1,
+        6,
+        512,
+        512,
+        1
+      ],
+      "finite": true
+    },
+    "depth_conf": {
+      "shape": [
+        1,
+        6,
+        512,
+        512
+      ],
+      "finite": true
+    },
+    "images": {
+      "shape": [
+        1,
+        6,
+        3,
+        512,
+        512
+      ],
+      "finite": true
+    }
+  },
+  "camera_decode_finite": true,
+  "status": "passed",
+  "total_seconds": 17.443,
+  "peak_rss_bytes": 4159504384
+}

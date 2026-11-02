@@ -1,0 +1,17 @@
+{
+  "related_tests_passed": 19,
+  "related_tests_skipped": 1,
+  "skip_reason": "optional SAM parser is not installed in the original bench environment",
+  "grid_cli_reproduces_first_result_byte_for_byte": true,
+  "viewer_javascript_syntax_passed": true,
+  "viewer_grid_initial_chrome_render_verified": true,
+  "viewer_all_controls_tested": false,
+  "protected_files_checked": 80,
+  "protected_files_changed": [],
+  "original_photos_checked": 33,
+  "original_photos_changed": [],
+  "physical_bench_environment_unchanged": true,
+  "photo_files_published": 0,
+  "paid_api_calls": 0,
+  "hardware_commands": 0
+}

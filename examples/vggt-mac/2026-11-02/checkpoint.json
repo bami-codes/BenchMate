@@ -1,0 +1,13 @@
+{
+  "repo": "facebook/VGGT-Omega",
+  "revision": "1041e80fc0e911235d3426b0a3d9a81075111a53",
+  "filename": "vggt_omega_1b_416_reproduce.pt",
+  "sha256": "e900833330eb0e570e10543e6108d0dd704fa7c8dbc32738a645987875298896",
+  "official_linked_etag": "e900833330eb0e570e10543e6108d0dd704fa7c8dbc32738a645987875298896",
+  "checksum_matches_official": true,
+  "bytes": 4576703488,
+  "method": "official HTTP ranges after Xet stall",
+  "user_photos_uploaded": 0,
+  "final_transport_seconds": 849.15,
+  "excludes_earlier_transport_attempts": true
+}

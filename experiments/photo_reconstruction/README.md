@@ -2,8 +2,9 @@
 
 This environment prepares the crowded-board photo workflow without changing the
 physical bench environment. It does not open serial ports or call a paid API.
-The product's next step is per-photo board registration and terminal candidates;
-photo reconstruction and electrical fault diagnosis are not implemented yet.
+The first photo-local grid check has passed on the crowded IMG_8887 board.
+Electrical addresses, wire endpoints, circuit graphs and fault inference remain
+separate subsequent steps.
 
 ## Install separately
 
@@ -84,10 +85,11 @@ not breadboard tracking accuracy. Each device gets one first attempt; results
 are never overwritten. A caller should enforce a six-minute process timeout.
 If native MPS fails, the CPU result remains a distinct run; no hidden fallback.
 
-VGGT-Omega's official reproduction checkpoint returned HTTP 401 to an anonymous
-HEAD request on 2026-11-02. No VGGT inference has run. Approved checkpoint
-access is needed before testing CPU/MPS; this is not evidence that Mac cannot
-run the model. No photos were sent to Hugging Face or the public demo.
+VGGT-Omega's official trained reproduction checkpoint now runs on this Mac
+on CPU and native MPS, using FP32 and `autocast=False`. This followed the user's
+approved model access and official download checksum verification.
+[Exact runs, source/checkpoint pins and commands](../../examples/vggt-mac/2026-11-02/README.md).
+No photos were sent to Hugging Face or the public demo.
 
 ## First results — 2026-11-02
 
@@ -101,7 +103,10 @@ run the model. No photos were sent to Hugging Face or the public demo.
   points, default internal 384×512 resolution. CPU inference: **2.032s**; MPS:
   **3.171s**. These are first-run microtests, not speed or real-video accuracy
   benchmarks. No conclusion about crowded-wire performance yet.
-- VGGT-Omega reproduction weights: anonymous access **401**; no inference run.
+- VGGT-Omega: initial anonymous **401** and authenticated **403** were followed
+  by user-approved access. **Trained CPU/MPS inference passed** on one cleaned
+  local photo. A separate untrained six-frame 512×512 MPS capacity check also
+  passed in 7.527s. These are compatibility checks, not wire reconstruction scores.
 - **416 tests passed across runs, 1 skipped**. Three loopback-server tests first
   hit sandbox socket restrictions and passed when rerun with loopback permission.
   All seven new media tests also passed in the isolated photo environment.
@@ -120,8 +125,11 @@ frozen evidence. See the preservation report in the results directory.
 
 ## Next work
 
-1. Register the 830-hole board in individual full-resolution photos. Use held-out
-   visible holes to measure projection error before assigning terminals.
+1. Confirm the photo-local grid's absolute address convention before assigning
+   electrical terminal names. The first development fit used eight anchors and
+   forty withheld holes; p95 errors were 0.0683 and 0.0387 local pitch, below 0.25.
+   [Design, full first result and reproduction](../../examples/photo-grid/2026-11-02/README.md).
+   This does not establish occupied holes or wire connections.
 2. Add Spark endpoint candidates and SAM location prompts with a concrete,
    reviewed image-input/call budget. No paid requests were made in this step.
 3. Evaluate CoTracker on a real, continuous video of **unchanged wiring**, when
