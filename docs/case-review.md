@@ -3,7 +3,8 @@
 P0 and the recorded-conversation part of P1 are implemented. The screen connects a new local
 question and schematic review to the Oct 30 physical D01 record, then walks through Spark’s
 choice, the bench’s wiring request, model comparison and sourced answer. It makes **zero new
-model requests** and has **no hardware execution routes**. The new-run bridge is still pending.
+model requests** and has **no hardware execution routes**. A separate scripted mock backend is now
+available; its frontend controls are not yet connected. See [the runner API contract](case-runner.md).
 
 ## Start
 
@@ -75,7 +76,8 @@ or mismatched reviews are saved but remain blocked, and can be corrected without
 Confirmation always submits the current form; unsaved changes cannot reuse an older review.
 
 The loopback service keeps the local Host/Origin and per-server mutation-token requirements.
-Mutation routes: create, review, link-replay and confirm. Read-only timeline/event routes require
+Recorded-case mutations: create, review, link-replay and confirm. Separate run routes start, confirm or
+cancel a scripted mock (see the runner contract). Read-only timeline/event routes require
 an eligible linked case and a bounded cursor; original-event reads cannot exceed it. There is no
 upload, free-form model-response, serial/DAC, arbitrary command or live-run endpoint. A client
 request timeout never automatically retries a mutation. Reload the saved case before retrying.
@@ -98,9 +100,14 @@ checked against the original event and hash. Local QA cases are software fixture
 or new physical evidence. Original physical runners, shared engine, firmware and experiment bytes
 are unchanged. Font and OFL license are bundled locally.
 
-## Next: the remaining P1 bridge
+## P1 bridge backend; frontend integration next
 
-Connect the existing reviewed-design and supported CLI contract through a separate runner bridge.
-First validate mock request IDs, stale/duplicate confirmations, cancellation, boot changes, prediction
-publication gates and failures. Keep Live unavailable until that path is verified. Fresh image intake,
-photo/component matching, SAM repair highlights and real repair execution remain separate steps.
+The [interactive mock bridge](case-runner.md) now transfers the exact reviewed design into the frozen
+D01 repair session and uses the existing runner’s operator request/response channel. Thirteen new
+subprocess/HTTP checks cover both confirmations, stale/duplicate input, cancellation, timeout, boot
+changes, local prediction freezes and numerical failures. The combined related suite has 84 passes.
+These are scripted simulated captures, with zero new Spark or hardware use.
+
+Claude owns the frontend redesign. Its controls still need to connect to the new mock endpoints and
+be tested in the browser; P1 is not yet complete end to end. Live remains unavailable. Fresh image
+intake, photo/component matching, SAM repair highlights and real repair execution remain separate steps.

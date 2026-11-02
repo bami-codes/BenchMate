@@ -1,4 +1,4 @@
-"""Loopback-only recorded conversation UI. Deliberately has no API, serial, upload or live-run routes."""
+"""Loopback recorded conversation and supervised scripted mocks; no paid API or hardware routes."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 import json
@@ -7,6 +7,8 @@ from urllib.parse import urlsplit, parse_qs
 
 from ..live_viewer import allowed_origin
 from .service import CaseStore, Conflict
+from .runner_bridge import RunnerBridge
+from .runner_contract import CAPABILITIES as RUNNER_CAPABILITIES
 
 
 def _exact(data, keys):
@@ -21,6 +23,7 @@ def _constant(value):
 def make_server(*, root, output, port=8770):
     store = CaseStore(root, output)
     token = secrets.token_urlsafe(24)
+    bridge = RunnerBridge(root, store)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -65,10 +68,27 @@ def make_server(*, root, output, port=8770):
                 elif parts == ['api', 'state']:
                     self.send(200, {'mode': 'recorded_walkthrough', 'paid_api_calls': 0, 'hardware_IO': False,
                                    'cases': store.summaries(), 'original_candidate': store.demo['result']['candidate']})
+                elif parts == ['api', 'runner-capabilities']:
+                    self.send(200, RUNNER_CAPABILITIES)
+                elif len(parts) in (3, 4) and parts[:2] == ['api', 'runs']:
+                    if len(parts) == 3:
+                        self.send(200, bridge.snapshot(parts[2]))
+                    elif parts[3] == 'events':
+                        query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                        raw = query.get('after', ['-1'])
+                        if set(query) - {'after'} or len(raw) != 1 or len(raw[0]) > 5 or not raw[0].isascii():
+                            raise ValueError('Invalid event cursor')
+                        self.send(200, bridge.events(parts[2], int(raw[0])))
+                    elif parts[3] == 'predictions':
+                        self.send(200, bridge.predictions(parts[2]))
+                    else:
+                        self.send(404, {'error': 'Not found'})
                 elif len(parts) in (3, 4) and parts[:2] == ['api', 'cases']:
                     identity = parts[2]
                     if len(parts) == 3:
                         self.send(200, store.get(identity))
+                    elif parts[3] == 'runs':
+                        self.send(200, bridge.list_runs(identity))
                     elif parts[3] == 'replay':
                         self.send(200, store.replay(identity), 'text/html; charset=utf-8', replay=True)
                     elif parts[3] in ('timeline', 'event'):
@@ -105,7 +125,9 @@ def make_server(*, root, output, port=8770):
                     _exact(data, ['question', 'scope'])
                     self.send(201, store.create(data['question'], data['scope']))
                 elif len(parts) == 4 and parts[:2] == ['api', 'cases']:
-                    if parts[3] == 'review':
+                    if parts[3] == 'runs':
+                        self.send(200, bridge.launch(parts[2], data))
+                    elif parts[3] == 'review':
                         _exact(data, ['revision', 'candidate', 'review_note'])
                         self.send(200, store.review(parts[2], data['revision'], data['candidate'], data['review_note']))
                     elif parts[3] == 'confirm':
@@ -116,6 +138,14 @@ def make_server(*, root, output, port=8770):
                         self.send(200, store.link_replay(parts[2], data['revision']))
                     else:
                         self.send(404, {'error': 'No such action in recorded mode'})
+                elif len(parts) == 4 and parts[:2] == ['api', 'runs']:
+                    if parts[3] == 'respond':
+                        self.send(200, bridge.respond(parts[2], data))
+                    elif parts[3] == 'cancel':
+                        _exact(data, ['reason'])
+                        self.send(200, bridge.cancel(parts[2], data['reason']))
+                    else:
+                        self.send(404, {'error': 'No such action'})
                 else:
                     self.send(404, {'error': 'No such action in recorded mode'})
             except Conflict as error:
@@ -127,6 +157,12 @@ def make_server(*, root, output, port=8770):
             except (TypeError, OSError):
                 self.send(400, {'error': 'Invalid request; no action performed'})
 
-    server = ThreadingHTTPServer(('127.0.0.1', port), Handler)
+    class Server(ThreadingHTTPServer):
+        def server_close(self):
+            bridge.close()
+            super().server_close()
+
+    server = Server(('127.0.0.1', port), Handler)
+    server.runner_bridge = bridge
     server.case_store = store
     return server
