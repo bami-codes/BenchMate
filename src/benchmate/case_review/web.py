@@ -1,9 +1,9 @@
-"""Loopback-only P0 UI. Deliberately has no API, serial, upload or live-run routes."""
+"""Loopback-only recorded conversation UI. Deliberately has no API, serial, upload or live-run routes."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 import json
 import secrets
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
 
 from ..live_viewer import allowed_origin
 from .service import CaseStore, Conflict
@@ -40,7 +40,7 @@ def make_server(*, root, output, port=8770):
             self.send_header('Referrer-Policy', 'no-referrer')
             self.send_header('Content-Security-Policy',
                 "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; frame-ancestors 'self'; base-uri 'none'" if replay else
-                "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")
+                "default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")
             if download:
                 self.send_header('Content-Disposition', f'attachment; filename="{download}"')
             self.end_headers()
@@ -57,6 +57,9 @@ def make_server(*, root, output, port=8770):
                 elif parts in (['app.js'], ['style.css']):
                     name = parts[0]
                     self.send(200, files(__package__).joinpath(name).read_bytes(), 'text/javascript' if name.endswith('.js') else 'text/css')
+                elif parts in (['Archivo-var.woff2'], ['archivo-OFL.txt']):
+                    self.send(200, files(__package__).joinpath(parts[0]).read_bytes(),
+                              'font/woff2' if parts[0].endswith('.woff2') else 'text/plain')
                 elif parts == ['schematic.png']:
                     self.send(200, store.demo['image'], 'image/png')
                 elif parts == ['api', 'state']:
@@ -68,6 +71,14 @@ def make_server(*, root, output, port=8770):
                         self.send(200, store.get(identity))
                     elif parts[3] == 'replay':
                         self.send(200, store.replay(identity), 'text/html; charset=utf-8', replay=True)
+                    elif parts[3] in ('timeline', 'event'):
+                        query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                        keys = {'cursor'} if parts[3] == 'timeline' else {'cursor', 'sequence'}
+                        if set(query) != keys or any(len(v) != 1 or not v[0].isascii() or not v[0].isdigit() or len(v[0]) > 3 for v in query.values()):
+                            raise ValueError('Invalid replay position')
+                        cursor = int(query['cursor'][0])
+                        self.send(200, store.conversation_snapshot(identity, cursor) if parts[3] == 'timeline'
+                                  else store.conversation_event(identity, int(query['sequence'][0]), cursor))
                     elif parts[3] == 'export':
                         self.send(200, store.get(identity), download=f'benchmate-case-{identity}.json')
                     else:
@@ -97,6 +108,9 @@ def make_server(*, root, output, port=8770):
                     if parts[3] == 'review':
                         _exact(data, ['revision', 'candidate', 'review_note'])
                         self.send(200, store.review(parts[2], data['revision'], data['candidate'], data['review_note']))
+                    elif parts[3] == 'confirm':
+                        _exact(data, ['revision', 'candidate'])
+                        self.send(200, store.confirm_for_replay(parts[2], data['revision'], data['candidate']))
                     elif parts[3] == 'link-replay':
                         _exact(data, ['revision'])
                         self.send(200, store.link_replay(parts[2], data['revision']))

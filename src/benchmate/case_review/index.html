@@ -1,45 +1,20 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="benchmate-session" content="SESSION_TOKEN">
-<title>BenchMate · Design to evidence</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
-</head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="benchmate-session" content="SESSION_TOKEN"><title>BenchMate · Ask the bench</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
 <body>
-<header class="masthead"><a class="brand" href="/">BenchMate<span>DESIGN → EVIDENCE</span></a><span class="badge">Recorded example · Local</span></header>
-<main>
-<div class="intro"><p class="eyebrow">FROM A CIRCUIT QUESTION TO EVIDENCE</p><h1>What changed between<br>the design and the bench?</h1><p>Review a circuit’s intended design, then explore how Spark chose an experiment to explain its unexpected response.</p></div>
-<div id="notice" class="notice" role="alert" hidden></div>
-<noscript><p>Enable JavaScript to review this local example. No hardware or API connection is active.</p></noscript>
-<nav class="steps" aria-label="Workflow"><span id="step1" class="current">1 <b>Your question</b></span><span id="step2">2 <b>Review the design</b></span><span id="step3">3 <b>Explore the evidence</b></span></nav>
-<div class="library"><label for="case-picker">Saved locally</label><select id="case-picker"><option value="">Start a question</option></select><button id="new-case" class="quiet" type="button">New question</button></div>
-<section id="question-panel" class="panel">
-<div class="section-heading"><div><p class="eyebrow">01 / QUESTION</p><h2>Start with the mismatch.</h2></div><span class="subtle">D01 · RC low-pass example</span></div>
-<form id="question-form">
-<label for="question">What would you like to understand?</label><textarea id="question" maxlength="2000" required rows="3">Why is this 10 kΩ, 1 µF circuit responding more slowly than its design predicts?</textarea>
-<fieldset class="choice"><legend>Which circuit are you reviewing?</legend><label><input type="radio" name="scope" value="recorded_walkthrough" checked> The recorded D01 example</label><label><input type="radio" name="scope" value="different_specimen"> A different circuit of my own</label></fieldset>
-<div class="action-row"><button type="submit">Save question & review design <span aria-hidden="true">→</span></button><p class="subtle">Saved on this Mac. This step uses recorded Spark output.</p></div>
-</form>
-</section>
-<section id="case-panel" hidden>
-<div class="question-saved"><div><p class="eyebrow">YOUR QUESTION · LOCAL ENTRY</p><h2 id="saved-question"></h2><p id="scope-note" class="subtle"></p></div><span class="badge">Local case</span></div>
-<section id="design-panel" class="panel">
-<div class="section-heading"><div><p class="eyebrow">02 / INTENDED DESIGN</p><h2>Check what the circuit should do.</h2></div><span class="badge">Recorded Spark reading</span></div>
-<div class="design-grid"><figure class="schematic"><img src="/schematic.png" alt="Synthetic intended schematic: R1 from IN to OUT, C1 from OUT to REF. Review the pictured values below."><figcaption>Synthetic schematic · read by Spark on Oct 31, 2026</figcaption></figure>
-<div class="design-review"><p id="reading-summary"></p><form id="review-form"><fieldset id="review-fields"><legend class="sr-only">Review schematic values and connections</legend><div id="components"></div><p class="hint">Leave an unreadable value blank. Choose “Unknown” when a connection is unclear.</p><label for="review-note">Your review note</label><input id="review-note" maxlength="2000" required placeholder="e.g. Values and IN / OUT / REF connections checked."><label class="check"><input id="review-confirm" type="checkbox" required> I checked the schematic and recorded any uncertainty.</label><button id="save-review" type="submit">Save design review</button></fieldset></form></div></div>
-<div id="gate" class="gate" role="status"></div>
-<div class="action-row"><button id="link-replay" type="button" disabled>Open matching recorded experiment <span aria-hidden="true">→</span></button><p class="subtle">Physical D01 experiment · Oct 30, 2026</p></div>
-</section>
-<section id="record-panel" class="panel record" hidden>
-<div class="section-heading"><div><p class="eyebrow">03 / EXPERIMENT EVIDENCE</p><h2>See how the bench separated the explanations.</h2></div><span class="badge">Physical · Replay</span></div>
-<p class="record-context">This earlier D01 experiment shares the reviewed nominal design. Your question and review are new; they were not inputs to that run. The schematic reading and experiment are separate records.</p>
-<nav id="scene-nav" class="scene-nav" aria-label="Recorded experiment scenes"></nav>
-<p class="hint">Work requests below belong to the recorded run. This screen is not asking you to change wiring now.</p>
-<iframe id="replay" title="Recorded D01 experiment with Spark decisions and measured curves" referrerpolicy="no-referrer"></iframe>
-</section>
-<details class="evidence"><summary>Evidence & local case record</summary><p>Source records retain their original hashes. Each saved question, review and link has a separate local revision.</p><dl id="provenance"></dl><a id="export" class="text-link">Download case JSON</a><pre id="manifest"></pre></details>
-</section>
-<footer><span>BenchMate · Circuit questions, experiments, evidence.</span><span>No live measurement · No new model request</span></footer>
-</main>
-</body>
-</html>
+<a class="skip" href="#main">Skip to conversation</a>
+<header><a class="wordmark" href="/">BenchMate<span>Ask the bench.</span></a><div class="library"><label for="case-picker" class="sr-only">Saved questions</label><select id="case-picker"><option value="">Start a question</option></select><button id="new-case" type="button">New question</button></div></header>
+<div class="provenance-line">Replay of the Oct 30 physical run. Spark’s decisions and the measurements are recorded. Your question is new.</div>
+<main id="main">
+<div id="notice" role="alert" hidden></div>
+<section id="question-panel" class="welcome"><p class="eyebrow">A design. A real circuit. A difference to explain.</p><h1>Ask why reality<br>differs from the design.</h1><form id="question-form"><label for="question">Your question</label><textarea id="question" rows="3" maxlength="2000" required>My 10 kΩ, 1 µF low-pass responds more slowly than designed. Why?</textarea><label for="scope">Explore with</label><select id="scope"><option value="recorded_walkthrough">The recorded D01 example</option><option value="different_specimen">A different circuit</option></select><button class="primary" type="submit">Review the design <span aria-hidden="true">→</span></button></form><p class="subtle">This walkthrough connects your question to an existing experiment. No board or API key needed.</p></section>
+<div id="case-panel" hidden>
+<div class="workspace"><div class="conversation">
+<section class="message question-message"><p class="actor">You <span>New local question</span></p><h1 id="saved-question"></h1><p id="scope-note" class="subtle"></p></section>
+<section id="design-panel" class="message"><p class="actor">BenchMate <span>Understanding the intended design</span></p><h2>A low-pass filter, as designed.</h2><div class="design-layout"><a href="/schematic.png" target="_blank" rel="noopener" aria-label="Open the recorded schematic"><img src="/schematic.png" alt="Recorded schematic: R1 from IN to OUT; C1 from OUT to REF."></a><form id="review-form"><fieldset id="review-fields"><legend class="sr-only">Review component values and connections</legend><div id="components"></div><button id="confirm-design" class="primary" type="submit">Confirm design & explore record</button></fieldset></form></div><p id="design-origin" class="subtle">Read from this schematic by Muse Spark on Oct 31. The Oct 30 run was given the same design, 10 kΩ and 1 µF, in its protocol.</p><p id="gate" role="status"></p></section>
+<div id="record-panel" hidden><nav class="playback" aria-label="Recorded conversation playback"><button id="back" type="button" aria-label="Previous recorded step">← Back</button><button id="play" type="button">Play replay</button><button id="next" type="button">Next step →</button><output id="position"></output><label class="sr-only" for="cursor">Recorded event</label><input id="cursor" type="range" min="0" max="139" value="0"><p id="step-status" class="sr-only" aria-live="polite"></p></nav><div id="messages"></div><section id="answer" class="message answer" hidden></section><section id="followups" class="message" hidden><p class="actor">Ask about the evidence</p><div id="followup-buttons" class="followup-buttons"></div><div id="followup-answer" hidden></div></section></div>
+<details class="evidence" id="evidence"><summary>Evidence & sources</summary><p class="subtle">Original events and local review history. The schematic reading and physical experiment are separate records; no common assembly-photo state is established.</p><div class="evidence-links"><a id="export">Download case history</a><a id="original-viewer" target="_blank" rel="noopener" hidden>Open full archived viewer</a></div><dl id="provenance"></dl><div id="event-list"></div><pre id="event-original" tabindex="0" hidden></pre><details><summary>Local case manifest</summary><pre id="manifest"></pre></details></details>
+</div>
+<aside id="bench-panel" aria-label="Current evidence"><div class="bench-sticky"><p class="eyebrow">What the evidence supports</p><h2>Explanation ledger</h2><ul id="hypotheses"></ul><div class="figure-head"><h2 id="plot-title">Waiting for a measurement</h2><label class="sr-only" for="plot-select">Recorded waveform</label><select id="plot-select" hidden></select></div><div id="chart"><p class="empty">Step through the recorded run. The measurements and comparisons will appear here.</p></div><div id="legend" class="legend" hidden><span class="observed">Measured OUT</span><span class="r-model">A · R changed</span><span class="c-model">B · C changed</span></div><p id="plot-caption" class="subtle"></p><div id="score-links"></div><details id="plot-details" hidden><summary>Baseline & regional checks</summary><pre id="plot-metadata"></pre></details></div></aside>
+</div></div></main>
+<footer>BenchMate · Design, observation, and measurement — with a source for each.</footer>
+</body></html>

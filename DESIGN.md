@@ -275,3 +275,22 @@ Expanded-protocol records use “Best tested linear model” and “Frozen linea
 The recorded amplitude check now has a small observation-only plot beside the main waveform on desktop, with a (1.9:1) column ratio. Mobile stacks the plots. The inset labels small output times the amplitude ratio and large output, with DC means removed and the recorded RMS difference. Its gray dashed curve is a scaled observation, not a fitted model. It appears only on matching training conditions after the diagnostic is recorded. Reserved verification retains the full-width main plot.
 
 The next-measurement field shows the engine-generated instruction from a validated menu choice, or an explicit unavailable-equipment requirement. A compact engine-status line separates the model's choice from the menu check and states the future-run/D2 scope. The entire instruction remains visible. Unvalidated historical suggestions are replaced in the operating view by a notice; their original tool arguments remain available in Evidence alongside the separate engine check. The model's rationale never acts as instrument settings.
+
+
+## Recorded conversation surface (2026-11-02)
+
+The case-review product surface follows the user-approved P1 conversation mock: Archivo,
+neutral paper (#f3f4ef), charcoal (#121412), fine rules and yellow tape for the selected
+experiment and answer. It does not inherit the older evidence viewer’s green masthead.
+Question, compact editable schematic review, model alternatives, Spark’s recorded reasoning,
+BenchMate’s operator instruction, measurement comparison and answer form one conversation.
+The separate evidence viewer remains available through a link, never a nested iframe.
+
+A sticky desktop evidence column follows the selected event prefix. At mobile widths it stacks
+below the conversation; numerical waveform links bring it into view. Measured OUT is solid red,
+R-change dotted gray, C-change dashed blue. All 512 samples are shown. Parameters appear when
+frozen; measured-IN conditional curves appear only once recorded, never as pre-acquisition traces.
+Shape and text distinguish unresolved, rejected and supported hypotheses. Original source events,
+hashes, HOLD origins and regional scores stay under disclosures. English translations are labeled
+“Translated for this screen”; follow-ups are prepared record questions. Replay cannot request a
+physical repair. Font and OFL license are bundled locally.

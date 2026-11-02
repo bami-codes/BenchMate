@@ -84,7 +84,7 @@ flowchart LR
 
 | Model | Role | Evidence |
 | --- | --- | --- |
-| Muse Spark 1.3 · medium | Runs the physical diagnosis: picks measurements, requests the load, chooses the reserved check | [Physical D01 run](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md) |
+| Muse Spark 1.3 · medium | Runs the physical diagnosis: picks measurements, requests the load, asks for the reserved check | [Physical D01 run](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md) |
 | Muse Spark 1.3 · max | Discovers structure outside the starting models and writes the literal netlist | [B5 run](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md) |
 | Muse Spark 1.3 · vision | Reads a schematic image into an editable design candidate the user confirms | [Known-design intake](docs/known-design.md) |
 | Muse Spark Open · Baseten | Runs the same synthetic Task A through the bench; all first attempts retained | [30-case result](examples/overnight/2026-11-02/spark-open/README.md) |

@@ -11,6 +11,7 @@ import uuid
 from ..design_replay import D01, VISION, IMAGE_SHA, RESULT_SHA, load_demo, matches_d01
 from ..known_design import confirm_design, validate_candidate, candidate_netlist
 from ..records import canonical
+from .evidence import RecordedConversation
 
 SCHEMA = 'benchmate.case_session.v1'
 SCOPES = ('recorded_walkthrough', 'different_specimen')
@@ -58,6 +59,7 @@ def eligibility(case):
 class CaseStore:
     def __init__(self, root, output):
         self.demo = load_demo(Path(root))  # Verify pinned archive bytes and event chains once, then serve that snapshot.
+        self.conversation = RecordedConversation(root)
         self.output = Path(output).resolve()
         self.output.mkdir(parents=True, exist_ok=True)
         self.lock = RLock()
@@ -211,3 +213,22 @@ class CaseStore:
             if not case['experiment_link'] or not eligibility(case)['allowed']:
                 raise Conflict('Review and link this case before opening its recorded experiment')
             return self.demo['viewer']
+
+    def conversation_snapshot(self, case_id, cursor):
+        with self.lock:
+            self.replay(case_id)  # Same case-specific design/link gate as the evidence viewer.
+            return self.conversation.snapshot(cursor)
+
+    def conversation_event(self, case_id, sequence, cursor):
+        with self.lock:
+            self.replay(case_id)
+            return self.conversation.event(sequence, cursor)
+
+    def confirm_for_replay(self, case_id, expected_revision, candidate):
+        with self.lock:
+            # Explicit button confirmation; this generated note is not user prose.
+            result = self.review(case_id, expected_revision, candidate,
+                'Design confirmed via the review button; generated action note, no free-text note supplied.')
+            if result['replay_eligibility']['allowed']:
+                return self.link_replay(case_id, result['manifest']['revision'])
+            return result

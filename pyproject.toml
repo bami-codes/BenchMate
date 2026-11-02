@@ -22,7 +22,7 @@ where = ["src"]
 [tool.setuptools.package-data]
 benchmate = ["*.html", "*.css", "*.js", "assets/*"]
 "benchmate.photo_bench" = ["*.html"]
-"benchmate.case_review" = ["*.html", "*.css", "*.js"]
+"benchmate.case_review" = ["*.html", "*.css", "*.js", "*.woff2", "*-OFL.txt"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
