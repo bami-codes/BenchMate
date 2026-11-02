@@ -1,0 +1,1040 @@
+{
+  "scope": "Shared-ngspice finite-menu development checks, no physical qualification or optical measurement.",
+  "equivalent_models": [
+    {
+      "profile": "BC547B_red_LED_v1",
+      "Rbase_ohm": 1000000.0,
+      "Rled_ohm": 1000.0,
+      "Q1_BF": 290.0,
+      "LED_Vf_1mA_v": 2.0,
+      "harness": {
+        "version": "led-attenuated-collector-v1",
+        "supply_v": 5.0,
+        "reference_v": 1.646,
+        "collector_to_OUT_ohm": 47000.0,
+        "OUT_to_REF_ohm": 10000.0,
+        "max_supply_current_a": 0.005,
+        "max_input_current_a": 0.003,
+        "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+        "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+        "required_connections": [
+          "IN",
+          "OUT",
+          "REF",
+          "5V",
+          "GND"
+        ],
+        "old_firmware_range_expansion_required": false,
+        "physical_calibration_and_wiring_approved": false
+      }
+    },
+    {
+      "profile": "BC547B_red_LED_v1",
+      "Rbase_ohm": 4700.0,
+      "Rled_ohm": 1000.0,
+      "Q1_BF": 1.363,
+      "LED_Vf_1mA_v": 2.0,
+      "harness": {
+        "version": "led-attenuated-collector-v1",
+        "supply_v": 5.0,
+        "reference_v": 1.646,
+        "collector_to_OUT_ohm": 47000.0,
+        "OUT_to_REF_ohm": 10000.0,
+        "max_supply_current_a": 0.005,
+        "max_input_current_a": 0.003,
+        "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+        "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+        "required_connections": [
+          "IN",
+          "OUT",
+          "REF",
+          "5V",
+          "GND"
+        ],
+        "old_firmware_range_expansion_required": false,
+        "physical_calibration_and_wiring_approved": false
+      }
+    }
+  ],
+  "equivalence": [
+    {
+      "action": "unloaded_step_small",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 9.096862907398418e-05,
+      "RMS_difference_mV": 8.038351256233961e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.827266774803826,
+          1.849967945048715
+        ],
+        [
+          1.827266853929349,
+          1.84996803601717
+        ]
+      ]
+    },
+    {
+      "action": "loaded_step_small",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2,
+        "load_ohm": 9990.0
+      },
+      "maximum_difference_mV": 4.96051570930689e-05,
+      "RMS_difference_mV": 4.38648214331153e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.745116079339536,
+          1.757518383917206
+        ],
+        [
+          1.745116122522499,
+          1.757518433522298
+        ]
+      ]
+    },
+    {
+      "action": "unloaded_step_large",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.5,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 0.00010373150693965272,
+      "RMS_difference_mV": 7.571093699947776e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.810704384589716,
+          1.867813065224118
+        ],
+        [
+          1.810704456533303,
+          1.867813168955531
+        ]
+      ]
+    },
+    {
+      "action": "loaded_step_large",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.5,
+        "load_ohm": 9990.0
+      },
+      "maximum_difference_mV": 5.6473600018591696e-05,
+      "RMS_difference_mV": 4.131072798113282e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.736063540258657,
+          1.767257442718189
+        ],
+        [
+          1.736063579533938,
+          1.767257499191745
+        ]
+      ]
+    },
+    {
+      "action": "unloaded_sine_1hz_small",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.2,
+        "frequency_hz": 1,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 9.096797559671188e-05,
+      "RMS_difference_mV": 8.489729601438416e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.827267655255432,
+          1.849967028987259
+        ],
+        [
+          1.827267734381471,
+          1.849967119955165
+        ]
+      ]
+    },
+    {
+      "action": "unloaded_sine_1hz_large",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 4000,
+        "amplitude_v": 0.8,
+        "frequency_hz": 1,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 0.00012629705548050651,
+      "RMS_difference_mV": 9.167210386703203e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.794398071635403,
+          1.88714598230358
+        ],
+        [
+          1.79439813715831,
+          1.88714610860062
+        ]
+      ]
+    },
+    {
+      "action": "unloaded_sine_5hz_small",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.15,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 8.926495320693562e-05,
+      "RMS_difference_mV": 8.474196927466535e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.830059164010443,
+          1.847076932716037
+        ],
+        [
+          1.830059244440191,
+          1.847077021980889
+        ]
+      ]
+    },
+    {
+      "action": "loaded_sine_5hz_small",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.15,
+        "frequency_hz": 5,
+        "load_ohm": 9990.0
+      },
+      "maximum_difference_mV": 4.868357517118227e-05,
+      "RMS_difference_mV": 4.623147442720637e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.746642069783195,
+          1.755939497651223
+        ],
+        [
+          1.746642113674837,
+          1.755939546334767
+        ]
+      ]
+    },
+    {
+      "action": "reserved_0",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.35,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 9.66889315279218e-05,
+      "RMS_difference_mV": 7.779433531230861e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.818948015009514,
+          1.858767847609281
+        ],
+        [
+          1.818948090423359,
+          1.858767944298071
+        ]
+      ]
+    },
+    {
+      "action": "reserved_1",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.65,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "maximum_difference_mV": 0.0001130065814258785,
+      "RMS_difference_mV": 8.858100518309312e-05,
+      "both_measurement_output_range_v": [
+        [
+          1.802523188180384,
+          1.877211655474749
+        ],
+        [
+          1.802523256839941,
+          1.877211768481285
+        ]
+      ]
+    }
+  ],
+  "envelope": [
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.363959018881529,
+        1.37578113288767
+      ],
+      "collector_range_v": [
+        0.038366407629848914,
+        0.10575245745970227
+      ],
+      "mean_LED_supply_current_a": 0.0031748234950996213,
+      "peak_supply_current_a": 0.003195152684767711,
+      "peak_input_current_a": 0.0003726016861267605,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.491839214550108,
+        1.494476171822203
+      ],
+      "collector_range_v": [
+        0.042002550356429115,
+        0.06943931208360088
+      ],
+      "mean_LED_supply_current_a": 0.0031888976290436345,
+      "peak_supply_current_a": 0.003191581533960502,
+      "peak_input_current_a": 0.0003090913597008158,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.876862841299092,
+        1.944126345151516
+      ],
+      "collector_range_v": [
+        2.961918195412129,
+        3.345320167363542
+      ],
+      "mean_LED_supply_current_a": 0.00023408158950058205,
+      "peak_supply_current_a": 0.00038648677026855,
+      "peak_input_current_a": 1.81700069676941e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.778602501372404,
+        1.801171948123095
+      ],
+      "collector_range_v": [
+        3.025689890192953,
+        3.2605182986745276
+      ],
+      "mean_LED_supply_current_a": 0.0003119187059713644,
+      "peak_supply_current_a": 0.0003308645451817078,
+      "peak_input_current_a": 1.521652047433146e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.363315113631739,
+        1.374030602235586
+      ],
+      "collector_range_v": [
+        0.03469614770576156,
+        0.09577443274282177
+      ],
+      "mean_LED_supply_current_a": 0.0025917492833811865,
+      "peak_supply_current_a": 0.002610447834387011,
+      "peak_input_current_a": 0.0003733265621236578,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.491460857519247,
+        1.493923081705597
+      ],
+      "collector_range_v": [
+        0.038065857175313134,
+        0.0636845727452273
+      ],
+      "mean_LED_supply_current_a": 0.0026046530265007874,
+      "peak_supply_current_a": 0.002607150110882007,
+      "peak_input_current_a": 0.0003098600667343909,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.773659581565038,
+        1.841852053181563
+      ],
+      "collector_range_v": [
+        2.373659614928414,
+        2.7623567031348104
+      ],
+      "mean_LED_supply_current_a": 0.00022379018246952248,
+      "peak_supply_current_a": 0.0003761663271180522,
+      "peak_input_current_a": 1.817000705025705e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 200.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.722195843359235,
+        1.745002198479957
+      ],
+      "collector_range_v": [
+        2.438795274364905,
+        2.6760886403003217
+      ],
+      "mean_LED_supply_current_a": 0.0003006363339380932,
+      "peak_supply_current_a": 0.0003195774507563946,
+      "peak_input_current_a": 1.521652057242393e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.36384760294182,
+        1.374042514034637
+      ],
+      "collector_range_v": [
+        0.03773133677323988,
+        0.09584232999742245
+      ],
+      "mean_LED_supply_current_a": 0.003177244636531594,
+      "peak_supply_current_a": 0.003195776410969031,
+      "peak_input_current_a": 0.0003725409522477943,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.491765211843564,
+        1.49422294530216
+      ],
+      "collector_range_v": [
+        0.0412325740437068,
+        0.06680456491916587
+      ],
+      "mean_LED_supply_current_a": 0.003189836231210236,
+      "peak_supply_current_a": 0.003192337742514673,
+      "peak_input_current_a": 0.0003090304325912391,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.793255414929714,
+        1.929454293633099
+      ],
+      "collector_range_v": [
+        2.4853558651038323,
+        3.2616894737085453
+      ],
+      "mean_LED_supply_current_a": 0.00047972824155944976,
+      "peak_supply_current_a": 0.0008230710295658011,
+      "peak_input_current_a": 1.796322107730555e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 1.7,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.739922010944885,
+        1.785976197991398
+      ],
+      "collector_range_v": [
+        2.6232308134047675,
+        3.1024110057875154
+      ],
+      "mean_LED_supply_current_a": 0.0006515630218724202,
+      "peak_supply_current_a": 0.0006942580610978633,
+      "peak_input_current_a": 1.501030334981613e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.36322474534256,
+        1.372794032253276
+      ],
+      "collector_range_v": [
+        0.03418104845722634,
+        0.08872598384366363
+      ],
+      "mean_LED_supply_current_a": 0.00259358300694893,
+      "peak_supply_current_a": 0.002610951936868324,
+      "peak_input_current_a": 0.0003732659254216761,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 4700.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.491400951632608,
+        1.493723739385159
+      ],
+      "collector_range_v": [
+        0.037442554112387054,
+        0.061610474765921595
+      ],
+      "mean_LED_supply_current_a": 0.0026054043952242504,
+      "peak_supply_current_a": 0.002607760092430928,
+      "peak_input_current_a": 0.0003097992529410892,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "unloaded_sine_1hz_large",
+      "measurement_output_range_v": [
+        1.689923466640861,
+        1.826690566153989
+      ],
+      "collector_range_v": [
+        1.896363759858902,
+        2.6759362270774685
+      ],
+      "mean_LED_supply_current_a": 0.0004694112375011545,
+      "peak_supply_current_a": 0.0008127375722737415,
+      "peak_input_current_a": 1.796322116090997e-06,
+      "within_original_development_window": true
+    },
+    {
+      "model": {
+        "profile": "BC547B_red_LED_v1",
+        "Rbase_ohm": 1000000.0,
+        "Rled_ohm": 1000.0,
+        "Q1_BF": 450.0,
+        "LED_Vf_1mA_v": 2.3,
+        "harness": {
+          "version": "led-attenuated-collector-v1",
+          "supply_v": 5.0,
+          "reference_v": 1.646,
+          "collector_to_OUT_ohm": 47000.0,
+          "OUT_to_REF_ohm": 10000.0,
+          "max_supply_current_a": 0.005,
+          "max_input_current_a": 0.003,
+          "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+          "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+          "required_connections": [
+            "IN",
+            "OUT",
+            "REF",
+            "5V",
+            "GND"
+          ],
+          "old_firmware_range_expansion_required": false,
+          "physical_calibration_and_wiring_approved": false
+        }
+      },
+      "action": "loaded_step_large",
+      "measurement_output_range_v": [
+        1.683426144036745,
+        1.729611883783497
+      ],
+      "collector_range_v": [
+        2.0354080038432194,
+        2.5159569605710446
+      ],
+      "mean_LED_supply_current_a": 0.0006402605550101066,
+      "peak_supply_current_a": 0.0006829529713095708,
+      "peak_input_current_a": 1.50103034493908e-06,
+      "within_original_development_window": true
+    }
+  ],
+  "all_equivalence_differences_below_1mV": true,
+  "all_envelope_checks_passed": true,
+  "source_sha256": {
+    "firmware/bringup/bringup.ino": "ff39fb76fe690ab513c159c42bd78c754352c85ee9d8ab2e261ad0b8a51a2221",
+    "firmware/dac_loopback/dac_loopback.ino": "05ef15400c2e50162d0dc2b45973068ba27236250464545db671c448f5670f6a",
+    "firmware/instrument/boot_identity.h": "2257b7727032747711ed7473b1ad7b79d77c5565d05cf53f8bc262b703051ee8",
+    "firmware/instrument/instrument.ino": "51b16b75ee98c986dbb3e8f6d22a386d67f23f61a1e8002cfe6120ed4b07895c",
+    "scripts/b5_unloaded.py": "e78c1d5dd06f71035b4715b125004dcf695a73ef4f392ff49fcefcc3c930a81d",
+    "scripts/benchmark_linear.py": "642aabc9fd45e308b6c41e6571efe3f29b46acef1493ed76dc384d78c9514ca2",
+    "scripts/netlist_diagnosis.py": "e2705e78485c8d3042a5b683edc7ad3ee9b7ca5ecc6be5485b2942c5de82973b",
+    "scripts/netlist_diagnosis_v2.py": "8f3fe806b025ed3ac244f5c897ab265e627b89461f4838b981bf7c6a5b35cbe8",
+    "scripts/physical_d01_repair.py": "ebd9f5446cd8351a217ce69607eca4a948a83feef571ec26da79cdc390ffa4f3",
+    "scripts/physical_spark_rc.py": "5d05257696b58b5c96b7fbafd89ab5a5af07248ccb4dff8926595ade0230dea9",
+    "src/benchmate/__init__.py": "3762ba97ca26d3267a3613949a24f8d4261cf7a2ce67d3bfb5f99d69c6944805",
+    "src/benchmate/agent.py": "9f5d2ba7ecbe002a80aea65b28a4dc803eb44719bb45e980b846feb56f6d2194",
+    "src/benchmate/b5_bench.py": "dabed36d718f32f4c723759b4d8c58ff42ad32e62384535d6ad6c4de1b6aec0a",
+    "src/benchmate/b5_models.py": "6effdadd51f74613ac0dabba7dbcde1389492cc607705efa536e215aa5caabbd",
+    "src/benchmate/b5_session.py": "1383f190abc4e7a3ce2e5628f5b0f63695e2b7ba193dca26fd964ea5a87cc808",
+    "src/benchmate/branch_gate.py": "9cc7516154972d7c3460998be65c3465a9481f64641fdbd98e3794db2d075c77",
+    "src/benchmate/cli.py": "934d53a7fc0ba86472fbc32c8906d359017aecf68866a6e5c0f1976fcba46ccb",
+    "src/benchmate/comparison.py": "cd46e9cf0e7098aa4be4c0183e9992b320431dcda9a00aa9c21a562d17f0377c",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+    "src/benchmate/continuous_agent.py": "9acc864e925d18763226aa8307172520268505967aa187ad337c72d3227a3708",
+    "src/benchmate/d01_repair.py": "c9ab44409100757b988192d728327552366adeff541f2e1f39a2c1ab27d66fc4",
+    "src/benchmate/d01_repair_bench.py": "4fda20427011321ae49ff7e6f66dde5c2b6f130603f4cacce4b162d262ccb7af",
+    "src/benchmate/dac_loopback.py": "560eed8dfcf9e736c41c1d9ea01a8f95a06d79cba2bca093b2dff034aca1c8c6",
+    "src/benchmate/design_replay.py": "761fe120a60927c10a1c0b9a7e5e1390304beb15717584d101c3bcfcb8f3ce83",
+    "src/benchmate/discovery.py": "8866833e30f1c57c70c5c5a3fb4c6eb6af77f776159668085db514e6993b9487",
+    "src/benchmate/engine.py": "012bf9230cc9dc1f5290c853dfc549ff82969cb2bd508e111e699bbc8960b77e",
+    "src/benchmate/experiments.py": "1c6321c77ac80819d942911edb5b07e94a20f8e851132529eeecc37814e1921c",
+    "src/benchmate/hardware.py": "5363da1433ec44e13c1dde6aa65a6a72f0c4de607549485bc08f220bed91e078",
+    "src/benchmate/inference.py": "af6d342e60438fd97a99e57cd1c91557438452c840869ac84b32cbfd7deaa4ba",
+    "src/benchmate/instrument.py": "0227884e0c329d8ba5591491bb155753f6198bee421f17d0023e51d86460a780",
+    "src/benchmate/known_design.py": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab",
+    "src/benchmate/known_design_web.py": "8c784d603010bd2276e61fdec035f35a434f156b54aff3d224b6067deb1c99a7",
+    "src/benchmate/linearity.py": "32af27d449a749445cc521b330ffc9bdcb05368aee3723486337bfabd3b7f996",
+    "src/benchmate/live_viewer.py": "300c12205f7850502766ac9788973dc8d71e0cc614647289bc55bc148786145c",
+    "src/benchmate/measured_input.py": "1915a7d7e903c9bca2932999bd118b258cb063f902f756a2d34b36c2d0857221",
+    "src/benchmate/menu.py": "097aac2f7f25dbf951665361b1c5a768f5260da30e192523f86c6c1768696433",
+    "src/benchmate/netlist.py": "076c3bbc8167da2dece0836cedec349879e835a4aca3e2bc92399e1c6843aa29",
+    "src/benchmate/netlist_diagnosis/__init__.py": "674abe60cc9f10c0fb97a82f068753c5530fe5c7a8e91e3375d9822d1634eb11",
+    "src/benchmate/netlist_diagnosis/bench.py": "6638d0b667a7fc1871f9f26fbe274b4d5b10854d93e1edc056163eee3ec90c18",
+    "src/benchmate/netlist_diagnosis/cases.py": "f454fc238042b0ebd2ba9c75832be2b6017e1b96b461815c1167645cde63af5f",
+    "src/benchmate/netlist_diagnosis/controller.py": "aa685ffaf97c1c2a9d4c5c15674e3263c82acddb697e63227d94ef14e3f52470",
+    "src/benchmate/netlist_diagnosis/design.py": "d5e589a641a399f643f814f6f9ac7878522b85900cd6843d3c8844db93b9c189",
+    "src/benchmate/netlist_diagnosis/identifiability.py": "7c7399d7332f665d4b464b6c4167e59ca431bc204af4b98b33e683f3698d87fa",
+    "src/benchmate/netlist_diagnosis/menu.py": "712a269cb64f00d57a7f6f09cf7bc54d4569aa821bfd85d7739edc18d9b051fa",
+    "src/benchmate/netlist_diagnosis/models.py": "748d097856948a8aa59a0781293ac7af588f9300d6f923c2a4ce953ca36f44ee",
+    "src/benchmate/netlist_diagnosis/physical.py": "3062d4e93311f170ace86fa6fc24796d0f54c561ee035e0bb4324033f5b8c5cd",
+    "src/benchmate/netlist_diagnosis/protocol.py": "49addc0070464190972a5c69113903f37597e6ae22559a5ceebd8cf54ad86dc7",
+    "src/benchmate/netlist_diagnosis/session.py": "13414f5a0257a3bac35dd2f0a0419677f8e02c6706672a3088510f5a421746c1",
+    "src/benchmate/netlist_diagnosis/simulation.py": "f6c81858343c3552e821dd1accc78b74f162507da0a9fe1480a532664e4e826f",
+    "src/benchmate/netlist_diagnosis_v2/__init__.py": "2d4f78a8373bdf9de357be288d03a31fa441975efd55000f0c91200ac9aa61ce",
+    "src/benchmate/netlist_diagnosis_v2/bench.py": "c05e6b469d33a4196bbb6dac1784af00eeb088f25314357c88762b43113087ae",
+    "src/benchmate/netlist_diagnosis_v2/cases.py": "e2cac12d30651a510946b655332ee84a556deb62fe49035c92299d056ba2222a",
+    "src/benchmate/netlist_diagnosis_v2/led.py": "106918593d24e55f93f76bf5f83a2be0cb9f924913c9b3244acdc0297a6981be",
+    "src/benchmate/netlist_diagnosis_v2/protocol.py": "3ff89fd8d7d6cc0acd65e6fe9aec4e53d2528e38d68a4d92285362ec6b8bc734",
+    "src/benchmate/netlist_diagnosis_v2/session.py": "a9329f1dcbb044409620ce9cdc221561d3167fb22242183e182a652e0b3faabf",
+    "src/benchmate/noise.py": "5f122cbef4d1c869ae9ddefa4ecf133dc45a694269af463aed7685f57c02d503",
+    "src/benchmate/nonlinear_simulation.py": "df7fac7e8154e1fa935543d9f61dae274595b028f891a0e15dc0e2e18695bd2a",
+    "src/benchmate/physical_bench.py": "4dbb3fb04fe8b3b6f65ff055f8a1c9df507898ac3656a9c4b7e3a4991ad53fbc",
+    "src/benchmate/physical_fitting.py": "8cb8da1c424edc3631c1f815f0490dd93a01f2e2628dd5d98041fbd643612f95",
+    "src/benchmate/physical_netlist.py": "533da5fbf9642b64b34ef2677b63710b4bd61af03af96bc7541a98debd32a3f1",
+    "src/benchmate/physical_rc.py": "104b7f01a36e35aee49a5caa696534aa6fa73a07a179ebc9c5beb3771ed82a8d",
+    "src/benchmate/physics.py": "c5895c1312925da6a32b90026bf51eafdfae0f8f8f7f38bf03ed9c9ebe937683",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/providers_baseten.py": "093be451312f54a0efa05251567cd7e36604f3a4095a79bb881b15f84f494320",
+    "src/benchmate/range_control.py": "e2a0ab7adb18129b892d13d4bf758b21d9d159154b54f23f3d9db9f552645f1a",
+    "src/benchmate/recommendations.py": "bc75944c41e4f5e5e6ccd2a579fe9a206a012d596ae2a7e29f389724f4cb861b",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "src/benchmate/repair.py": "15795a64381d3fa561d607cfd0ff286eb23dd2a8e90a3d2e0022765267bc5120",
+    "src/benchmate/simulation.py": "7c69c35baaa22a7d4a58969ae2f1f53173c714fc6dd175e945f367287288edcc",
+    "src/benchmate/stimulus.py": "bdbfff3c4256f4908f81f8bb763267bd3221bdbfb3aeb0d5f915154ed20822c5",
+    "src/benchmate/vector.py": "54d664958189925c0e27311c542587a9e6e95e89a07fcbac8e5c60aa71714574",
+    "src/benchmate/viewer.py": "85e2245e0d11c50a6a4483312119cbdbda606ad5f807504ee83753f15ececb40",
+    "src/benchmate/workflow.py": "7a66ba2ac4409429a48a513e5d34601c7324a0204b174e264c7f481eb7882046"
+  },
+  "evidence_producer_sha256": "71f450657a93e8fc5ad75183574cac0081180885cf093d46ea0ea2699564c47c",
+  "paid_requests": 0,
+  "hardware_commands": 0
+}
