@@ -1,0 +1,19 @@
+{
+  "schema": "benchmate.reference_comparison_request_correction.v1",
+  "recorded_utc": "2026-11-02T16:39:35.582831+00:00",
+  "supersedes": "examples/passive-pilot-operator/2026-11-03/design-01-fault-recovery02/A3-REF-comparison-request.json",
+  "reason": "Operator corrected the report: E50 is obstructed.",
+  "E50_completion_claim_withdrawn": true,
+  "comparison_acquisition_started": false,
+  "status": "awaiting_operator",
+  "operator_confirmed": false,
+  "fixed_English_completion": "I disconnected USB, connected the source end of the A45 monitor lead to J50, retained its A45 end and I50-to-Arduino-A4, retained D50-to-G50 and all other wiring, removed probes and reconnected the same USB port.",
+  "source_contact_to": "J50",
+  "other_end_retained": "A45",
+  "temporary_A3_role": "REF via the lower column-50 node and existing protection path",
+  "QA_only": true,
+  "diagnosis_configuration_adopted": false,
+  "max_HOLD_blocks": 10,
+  "STEP_or_SINE_commands": 0,
+  "paid_calls": 0
+}
