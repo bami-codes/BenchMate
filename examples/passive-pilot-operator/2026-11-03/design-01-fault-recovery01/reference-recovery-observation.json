@@ -1,0 +1,17 @@
+{
+  "schema": "benchmate.physical_reference_recovery_observation.v1",
+  "recorded_utc": "2026-11-02T16:12:12.220788+00:00",
+  "run": "runs/passive-pilot/design-01-fault-recovery01/20261102T160841-eff2b65334",
+  "intervention": "H50-to-Arduino-A4 lead checked and reseated with USB off",
+  "REF_origin_A4_means_v": [
+    1.6301817838040917,
+    1.6301262884926415,
+    1.630221506763868
+  ],
+  "origin_blocks_passed": 3,
+  "small_step_captured": true,
+  "return_REF_guard_passed": true,
+  "guard_thresholds_changed": false,
+  "exact_original_contact_fault_established": false,
+  "next_action": "Actual Spark chose loaded_step_small; awaiting operator output-load connection."
+}
