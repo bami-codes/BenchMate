@@ -29,3 +29,21 @@ Before the comparison acquisition started, the operator corrected the E50
 completion report: that contact is obstructed. The proposed alternative is J50,
 the same lower column-50 REF node as G50/I50. J50–A45 completion is pending.
 No comparison PING, ARM or HOLD was sent on the withdrawn E50 report.
+
+## Actual A23 comparison: ten HOLD blocks passed
+
+The operator instead selected A23, connected to upper REF through B50–B23, to
+compare it with A4's D50–G50/I50 path. The actual A23–A45 route was committed
+before capture. Run `20261102T164218-ee4dbda508` completed all ten HOLD blocks
+(5,120 frames) with the existing guards unchanged. A3's nominal block-mean span
+was **0.204 mV** and A4's was **0.575 mV**. Both paths were stable in this capture;
+no unique bad contact or ADC mechanism is established. This is not new absolute
+DC calibration or validation of behavior under every signal.
+
+The passive fixture now retains A23–A45 as A3 REF monitoring and I50–Arduino A4
+as the existing REF guard. U1 pre-shunt DRIVE is no longer acquired on A3. The
+diagnostic A1/A2 paths and A4 guard limits are unchanged. The new common setting
+and limitation are recorded in the amended document before a new diagnostic
+attempt, and apply to all five passive cases and restored runs. October 30
+records retain their original channel roles. All QA calls cost zero paid model
+requests; cumulative Spark usage remains 13 calls, estimated $0.0961096.

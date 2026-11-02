@@ -1,0 +1,13 @@
+{
+  "HOLD_blocks": 10,
+  "frames": 5120,
+  "guard_thresholds_changed": false,
+  "passed": true,
+  "A3_mean_span_mV": 0.2044564106091773,
+  "A4_mean_span_mV": 0.5753987555663365,
+  "A3_source": "A23\u2013A45 via B50\u2013B23 upper REF",
+  "A4_source": "I50\u2013A4 via D50\u2013G50",
+  "no_unique_original_fault_established": true,
+  "not_absolute_DC_calibration": true,
+  "paid_requests": 0
+}

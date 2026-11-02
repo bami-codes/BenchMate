@@ -1,5 +1,31 @@
 # Passive pilot amendment: fixed 1 kΩ driver isolation
 
+## Current Nov 3 setting: A3 reads REF
+
+After the retained A4 guard failures, the operator replaced the A4 lead with a
+continuity-checked I50–Arduino A4 lead, retained D50–G50, and moved the C28 end
+of the C28–A45 monitor lead to **A23**. A23 reaches the upper REF node through
+the retained B50–B23 jumper 14. Thus **A23–A45 feeds REF through the existing
+A3 protection path**, while A4 reads REF through D50–G50 and I50. E50 was
+obstructed; the proposed J50 connection was not used.
+
+Ten fixed REF HOLD blocks passed with unchanged guards. Nominal ADC block-mean
+spans were approximately 0.20 mV on A3 and 0.58 mV on A4, both below 3 mV. This
+establishes stability for that QA capture, not an exact fault cause, absolute DC
+calibration, or stability under every waveform. The existing A4 drift/envelope
+guard remains active; no threshold was relaxed and prior failures remain failed.
+
+Keep this setting for all five passive cases and their restored runs. This
+supersedes the earlier pre-shunt A3 monitor description below. U1's pre-shunt
+analog output is no longer acquired directly. Firmware DAC-code/timing checks
+remain; command forecasts retain the declared ideal-buffer-plus-1k assumption.
+Diagnosis uses measured IN on A1 and OUT on A2, unchanged. A3's new role is REF;
+new plots must not label it DRIVE. The October 30 D01 channel roles are historical
+and remain unchanged in their recordings. The firmware and all frozen runtime
+sources are preserved. A new prepared protocol binds this amended document hash
+before the next physical diagnosis. Instrument-only QA data never becomes
+diagnostic training or reserved validation.
+
 The user authorized Spark and physical pilot work on Nov 2, with design-01 first.
 All tonight's runs are pilots, excluded from evaluation. No historical D01 run,
 source, calibration file or firmware is changed.

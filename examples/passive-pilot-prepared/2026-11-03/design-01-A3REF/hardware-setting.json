@@ -1,0 +1,19 @@
+{
+  "schema": "benchmate.passive_fixture_setting.v2_REF_comparison",
+  "common_for_all_five_passive_cases": true,
+  "driver_series_ohm": 1000.0,
+  "driver_series_contacts": [
+    "B28",
+    "B35"
+  ],
+  "A1": "measured IN",
+  "A2": "buffered OUT",
+  "A3": "REF via A23\u2013A45 and existing protection resistor",
+  "A4": "REF via D50\u2013G50 and I50\u2013Arduino A4",
+  "U1_pre_shunt_analog_output_acquired": false,
+  "A4_guard_limits_unchanged": true,
+  "amendment_sha256": "213d9178c85e76b6e604c340f6cc32fdf465c2834f70b8e6c0077d6920f25377",
+  "protocol_canonical_sha256": "8db0ea0b37e28c795b034d2447a75c3fe7454c2ce53de5c66f7e26eca012671f",
+  "old_firmware_and_runtime_unchanged": true,
+  "absolute_DC_calibration_established": false
+}
