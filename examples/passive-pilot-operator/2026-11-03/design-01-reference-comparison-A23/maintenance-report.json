@@ -1,0 +1,36 @@
+{
+  "schema": "benchmate.reference_path_comparison.v1",
+  "operator_confirmed": true,
+  "recorded_utc": "2026-11-02T16:42:02.390300+00:00",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "spare_lead_continuity_checked": true,
+  "old_lead_contacts": [
+    "H50",
+    "Arduino A4"
+  ],
+  "old_lead_removed": true,
+  "new_lead_contacts": [
+    "I50",
+    "Arduino A4"
+  ],
+  "short_REF_bridge_retained": [
+    "D50",
+    "G50"
+  ],
+  "specimen_or_instrument_values_changed": false,
+  "fixed_English_report": "I disconnected USB, connected the source end of the A45 monitor lead to A23 instead of the proposed J50, retained I50-to-Arduino-A4, D50-to-G50, B50-to-B23 and all other wiring, removed probes and reconnected the same USB port.",
+  "previous_observed_boot_id": "3fcfb6087b82f59335dfe8771a7db338",
+  "exact_original_fault_established": false,
+  "A3_lead_contacts": [
+    "A23",
+    "A45"
+  ],
+  "A3_role": "REF via upper column 50, B50\u2013B23 and the existing protected A3 path",
+  "A4_role": "REF via D50\u2013G50, I50 and Arduino A4",
+  "instrument_monitor_routing_changed": true,
+  "diagnosis_configuration_adopted": false,
+  "proposed_E50_and_J50_routes_not_used": true,
+  "comparison_limit": "A3 includes jumper 14 and its protection resistor; A4 includes the bridge and its direct sense path. Different readings do not uniquely identify the faulty contact or ADC.",
+  "source_previous_maintenance_report": "examples/passive-pilot-operator/2026-11-03/design-01-fault-recovery02/maintenance-report.json"
+}
