@@ -1,0 +1,29 @@
+{
+  "source_photos": 33,
+  "source_photos_unchanged": true,
+  "photo_files_published": 0,
+  "paid_api_calls": 0,
+  "hardware_commands": 0,
+  "new_media_unit_tests_passed": 7,
+  "existing_and_new_tests_passed_across_runs": 416,
+  "existing_tests_skipped": 1,
+  "initial_test_environment_failures": 3,
+  "initial_test_failure_reason": "Sandbox denied loopback socket bind; all three passed when rerun with loopback permission.",
+  "local_http_checks_passed": true,
+  "viewer_chrome_initial_render_verified": true,
+  "viewer_all_controls_tested": false,
+  "browser_interaction_note": "Initial page rendered; further UI actions stopped after user changed the browser.",
+  "frozen_source_files_changed_this_turn": [],
+  "preexisting_protocol_differences": [
+    {
+      "protocol": "examples/b5-unloaded-protocol/2026-11-01-after-repair/protocol.json",
+      "source": "src/benchmate/design_replay.py",
+      "already_present_at_start": true
+    },
+    {
+      "protocol": "examples/b5-unloaded-protocol/2026-11-01-after-repair/protocol.json",
+      "source": "src/benchmate/viewer.py",
+      "already_present_at_start": true
+    }
+  ]
+}

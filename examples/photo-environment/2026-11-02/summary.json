@@ -1,0 +1,39 @@
+{
+  "schema": "benchmate.photo_foundation_result.v1",
+  "date_kst": "2026-11-02",
+  "scope": "local development environment and photo preparation; not circuit reconstruction",
+  "images": {
+    "imported": 33,
+    "failed": 0,
+    "metadata_checks_passed": 33,
+    "originals_unchanged": 33,
+    "same_state_groups": 0,
+    "photos_uploaded_or_committed": 0
+  },
+  "cotracker": {
+    "weights": "official scaled offline",
+    "cpu_inference_seconds": 2.032,
+    "mps_inference_seconds": 3.171,
+    "both_runs": "passed",
+    "cpu_fallback": false,
+    "frames": 8,
+    "query_points": 4,
+    "input": "synthetic translated texture",
+    "not_a_real_video_accuracy_test": true,
+    "not_a_repeated_speed_benchmark": true
+  },
+  "vggt_omega": {
+    "anonymous_checkpoint_http_status": 401,
+    "inference_run": false,
+    "mac_compatibility": "not established"
+  },
+  "validation": {
+    "new_tests": 7,
+    "full_suite_passes_across_runs": 416,
+    "skipped": 1,
+    "original_environment_unchanged": true,
+    "physical_runner_files_unchanged": true,
+    "paid_api_calls": 0,
+    "hardware_commands": 0
+  }
+}

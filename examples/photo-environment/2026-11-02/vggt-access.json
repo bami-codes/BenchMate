@@ -1,0 +1,7 @@
+{
+  "model": "VGGT-Omega-1B-416-Reproduction",
+  "checkpoint_url": "https://huggingface.co/facebook/VGGT-Omega/resolve/main/vggt_omega_1b_416_reproduce.pt",
+  "anonymous_http_status": 401,
+  "inference_run": false,
+  "reason": "checkpoint access requires approved credentials"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "benchmate.photo_environment.v1",
+  "python": "3.11.9",
+  "os": "Darwin",
+  "os_version": "27.0.1",
+  "architecture": "arm64",
+  "packages": {
+    "torch": "2.15.0",
+    "torchvision": "0.29.2",
+    "numpy": "1.26.4",
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "4.11.0.86",
+    "einops": "0.8.2",
+    "safetensors": "0.8.0"
+  },
+  "mps_built": true,
+  "mps_available": true,
+  "cuda_available": false,
+  "devices": {
+    "cpu": {
+      "matrix_multiply_passed": true
+    },
+    "mps": {
+      "matrix_multiply_passed": true
+    }
+  },
+  "external_requests": 0,
+  "hardware_commands": 0,
+  "opencv_corner_detection_passed": true
+}

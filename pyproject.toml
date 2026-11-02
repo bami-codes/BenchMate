@@ -21,6 +21,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 benchmate = ["*.html", "*.css", "*.js", "assets/*"]
+"benchmate.photo_bench" = ["*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
