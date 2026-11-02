@@ -1,0 +1,68 @@
+{
+  "schema": "benchmate.six_schematic_approval.v1",
+  "recorded_utc": "2026-11-02T15:10:02.309181+00:00",
+  "operator_confirmation": "User confirmed all six subject to two raw-output checks; both checks passed.",
+  "checks": {
+    "05_R1_C1_nodes": "both OUT\u2013REF",
+    "06_R2_nodes": "VCC\u2013ANODE",
+    "06_LED_direction": "anode ANODE, cathode COL"
+  },
+  "operator_confirmed": true,
+  "physical_LED_qualified": false,
+  "hardware_IO": false,
+  "additional_paid_calls": 0,
+  "designs": [
+    {
+      "design": "design-01.json",
+      "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144807-adc20a1ab4",
+      "clean_input_sha256": "1dbefe2178eb98ed1b3a3527f0041d5089de902ce48d24faabf7948b059d8963",
+      "arguments_sha256": "77490d36b8deecfa8ef1f38eb281ccf072f53eb2ab90b56793d24d899fc4710f",
+      "operator_additions": []
+    },
+    {
+      "design": "design-02.json",
+      "reviewed_design_sha256": "477b933c2635ba399aa764a81a29e2ef57a07fb537e372de12392d6e027c03df",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144822-499d4ca4cd",
+      "clean_input_sha256": "c69d1e41d6dae45e3cf47c6267337a9c8af30dbe28c32b126a755704c9701407",
+      "arguments_sha256": "2730dc271193ae73d47069ade1d4678fa9f58cd1d1eaebcc3edff90b33265422",
+      "operator_additions": []
+    },
+    {
+      "design": "design-03.json",
+      "reviewed_design_sha256": "058f8da3e6912943a83e526909af1f1a882164b62667e8af1d78199f271a8790",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144839-6314230f1a",
+      "clean_input_sha256": "f8a9f893a572c0c96043e443bac13347a2cf9990ea860fb23a9744ef872ec577",
+      "arguments_sha256": "fa3f77e6135c3715cac732701327be9c35ab96baabd45805ad85cedf5dc1a54a",
+      "operator_additions": []
+    },
+    {
+      "design": "design-04.json",
+      "reviewed_design_sha256": "a6e3f050b7bbe005c9605b92a2fb0b22509f31994cae7b9b0d4fcf3b865e112d",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144850-ddeda63ec5",
+      "clean_input_sha256": "38241ddc197ffde24864f682902cbf578f82b578ddbae0c569bff9cb05c5eb03",
+      "arguments_sha256": "6fb998bcc06e5bae9593275bd4e22d7e32407f625a4dea80217e6695c78bb3d7",
+      "operator_additions": []
+    },
+    {
+      "design": "design-05.json",
+      "reviewed_design_sha256": "3db5cf0d4d6ec983b502ae2592239e07704c40c88c2763332e6b6d53dbaa972a",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144859-8b05221c2f",
+      "clean_input_sha256": "0e9384197011c98eb5c0c3105fb673c9712ae785c636ff2b18284514b078126f",
+      "arguments_sha256": "357e049e664d905cd71762674b0797368808f1c95a0cd9f90f0eb30822b30937",
+      "operator_additions": [
+        "visible direct wire W1"
+      ]
+    },
+    {
+      "design": "design-06.json",
+      "reviewed_design_sha256": "48d9278376055a7e547bb211dc96d5e3a4099b18cc501b2ba26efd84c0ab1bc9",
+      "reading_run": "examples/schematic-intake/2026-11-02-pilot/attempts/20261102T144911-c9ba582341",
+      "clean_input_sha256": "e8e969f47b4e4138f904fe6da49d0d40ea5e49528974962fc010c5b5800a04e3",
+      "arguments_sha256": "2bd2d03668cda5ce1afb32bf5bcf6af80a5dc0d7d6a581511653bfa8afbc98be",
+      "operator_additions": [
+        "R1=Rbase; R2=Rled; declared 47k/10k instrument harness"
+      ]
+    }
+  ]
+}

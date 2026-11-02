@@ -1,0 +1,11 @@
+{
+  "schema": "benchmate.initial_pilot_wiring_request.v1",
+  "status": "awaiting_operator",
+  "request_id": "design-01-initial-wiring-2026-11-03",
+  "USB_off_required_during_wiring": true,
+  "USB_reconnect_after_wiring_and_probe_removal": true,
+  "only_next_hardware_command": "PING",
+  "fixed_English_completion": "I wired the reviewed 4.7 kohm / 1 uF mini-board with two external 10 kohm series resistors after measured IN, retained the fixed B28\u2013B35 1 kohm instrument resistor, left the calibration bridge and both optional branch jumpers absent, removed probes and reconnected the same USB port.",
+  "model_receives_this_operator_record": false,
+  "operator_confirmed": false
+}

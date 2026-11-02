@@ -1,0 +1,90 @@
+{
+  "schema": "benchmate.reviewed_active_netlist.v2",
+  "source_kind": "intended_schematic",
+  "elements": [
+    {
+      "name": "Rbase",
+      "kind": "R",
+      "nodes": [
+        "IN",
+        "BASE"
+      ],
+      "value": 4700.0,
+      "model": "none"
+    },
+    {
+      "name": "Rled",
+      "kind": "R",
+      "nodes": [
+        "VCC",
+        "ANODE"
+      ],
+      "value": 1000.0,
+      "model": "none"
+    },
+    {
+      "name": "D1",
+      "kind": "D",
+      "nodes": [
+        "ANODE",
+        "COL"
+      ],
+      "value": null,
+      "model": "red_LED_uncharacterized"
+    },
+    {
+      "name": "Q1",
+      "kind": "Q",
+      "nodes": [
+        "COL",
+        "BASE",
+        "GND"
+      ],
+      "value": null,
+      "model": "BC547B_uncharacterized"
+    }
+  ],
+  "harness": {
+    "version": "led-attenuated-collector-v1",
+    "supply_v": 5.0,
+    "reference_v": 1.646,
+    "collector_to_OUT_ohm": 47000.0,
+    "OUT_to_REF_ohm": 10000.0,
+    "max_supply_current_a": 0.005,
+    "max_input_current_a": 0.003,
+    "measured_output": "OUT after the declared 47k/10k collector-to-REF divider",
+    "output_basis": "Calibrated A2 minus independently anchored physical REF; retain DC.",
+    "required_connections": [
+      "IN",
+      "OUT",
+      "REF",
+      "5V",
+      "GND"
+    ],
+    "old_firmware_range_expansion_required": false,
+    "physical_calibration_and_wiring_approved": false
+  },
+  "device_assumptions": {
+    "Q1_BF_healthy": [
+      200.0,
+      450.0
+    ],
+    "Q1_IS_a": 1e-14,
+    "Q1_BR": 3.0,
+    "LED_Vf_at_1mA_v": [
+      1.7,
+      2.3
+    ],
+    "LED_N": 2.0,
+    "LED_RS_ohm": 2.0,
+    "temperature_c": 27.0,
+    "junction_capacitances_modelled": false,
+    "bounds_are_device_characterization": false
+  },
+  "source_sha256": "e8e969f47b4e4138f904fe6da49d0d40ea5e49528974962fc010c5b5800a04e3",
+  "confirmation": "I confirm the intended components, values, connections and ports.",
+  "reviewer_note": "User confirmed all six schematics after explicit raw-output checks for image 05 branch nodes and image 06 LED polarity. Clean source image and original arguments are bound in approval.json. Operator-approved aliases: R1=Rbase; R2=Rled. Known 47k/10k bench harness is declared separately.",
+  "operator_review_simulated": false,
+  "measurement_verified": false,
+  "hardware_IO": false
+}

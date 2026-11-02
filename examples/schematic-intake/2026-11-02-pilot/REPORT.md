@@ -39,3 +39,15 @@ visible reply, original tool arguments, result and terminal event hash chain.
 All six chains and PNG chunk/CRC checks passed. The source snapshot and manifest
 pin the exact code used. Originals retain C2PA provenance; it is absent from the
 actual transmitted images, as confirmed by the chunk-aware verifier.
+
+## Operator confirmation, Nov 3 KST
+
+The user confirmed the six readings subject to two checks against the original
+tool arguments. Both passed: 05's R1 and C1 each have nodes OUT–REF; 06's R2 has
+nodes VCC–ANODE and its LED nodes are ANODE–COL in anode/cathode order.
+No additional model request or edited model output was used for these checks.
+The user authorized W1 and the active-profile aliases/harness upon those checks.
+The six reviewed designs and their image/argument hash bindings are retained in
+[the approval record](../../reviewed-designs/2026-11-03-pilot/approval.json).
+This approves the intended designs; it does not assert the design-01 specimen
+has been wired or that the LED hardware path is qualified.

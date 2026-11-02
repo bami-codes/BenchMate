@@ -1,0 +1,14 @@
+{
+  "schema": "benchmate.large_board_preparation.v1",
+  "recorded_utc": "2026-11-02T15:10:02.309298+00:00",
+  "operator_choice": "all_preparation_complete_USB_disconnected",
+  "fixed_English_report": "I preserved the existing D01 photo, disconnected USB and external power, replaced B28\u2013B35 with 1 kohm, disconnected the optional output load, retained A1\u2013A4 and U1 feedback, kept GND distinct from REF, and removed probes. USB remains disconnected.",
+  "operator_confirmed": true,
+  "USB_connected": false,
+  "instrument_series_ohm": 1000.0,
+  "optional_output_load_connected": false,
+  "D01_photo_preservation_reported": true,
+  "D01_photo_received_by_agent": false,
+  "design_01_specimen_wiring_confirmed": false,
+  "hardware_commands": 0
+}
