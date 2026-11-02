@@ -1,0 +1,25 @@
+{
+  "schema": "benchmate.A4_lead_maintenance.v1",
+  "operator_confirmed": true,
+  "recorded_utc": "2026-11-02T16:30:01.044196+00:00",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "spare_lead_continuity_checked": true,
+  "old_lead_contacts": [
+    "H50",
+    "Arduino A4"
+  ],
+  "old_lead_removed": true,
+  "new_lead_contacts": [
+    "I50",
+    "Arduino A4"
+  ],
+  "short_REF_bridge_retained": [
+    "D50",
+    "G50"
+  ],
+  "specimen_or_instrument_values_changed": false,
+  "fixed_English_report": "I disconnected USB, checked a spare jumper end-to-end, replaced the H50-to-A4 lead with I50-to-Arduino-A4, retained D50-to-G50 and all other wiring, removed probes and reconnected the same USB port.",
+  "previous_observed_boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+  "exact_original_fault_established": false
+}
