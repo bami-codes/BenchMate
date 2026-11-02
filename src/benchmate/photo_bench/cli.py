@@ -90,6 +90,10 @@ def main():
     crop.add_argument('--master', required=True)
     crop.add_argument('--box', type=int, nargs=4, required=True, metavar=('LEFT', 'TOP', 'RIGHT', 'BOTTOM'))
     crop.add_argument('--output', required=True)
+    calibrate = commands.add_parser('calibrate')
+    calibrate.add_argument('--design', required=True)
+    calibrate.add_argument('--master', required=True)
+    calibrate.add_argument('--output', required=True)
     serve = commands.add_parser('serve')
     serve.add_argument('--library', required=True)
     serve.add_argument('--port', type=int, default=8768)
@@ -107,6 +111,15 @@ def main():
         result = clean_derivative(private_path(args.master), out, tuple(args.box))
         out.with_suffix('.json').write_text(json.dumps(result, indent=2) + '\n')
         print(json.dumps(result))
+    elif args.command == 'calibrate':
+        from .geometry import evaluate_files
+        out = private_path(args.output)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        result = evaluate_files(Path(args.design), private_path(args.master), out)
+        print(json.dumps({'geometry_gate_passed': result['geometry_gate_passed'],
+                          'strips': {name: {'checks': len(strip['checks']), 'p95_error_pitch': strip['p95_error_pitch']}
+                                     for name, strip in result['strips'].items()},
+                          'electrical_addresses_confirmed': 0, 'external_requests': 0}))
     else:
         folder = private_path(args.library)
         if not (folder / 'manifest.json').is_file():
