@@ -1,0 +1,493 @@
+{
+  "scope": "Finite-menu, shared-ngspice numerical equivalence checks; not physical accuracy or a general identifiability proof.",
+  "results": [
+    {
+      "case": "pin-output",
+      "explanation": "External series R and increased R1 have the same terminal response.",
+      "models": [
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "N1",
+            "b": "OUT",
+            "value": 4700.0,
+            "model": "none"
+          },
+          {
+            "name": "Rhidden",
+            "kind": "R",
+            "a": "IN",
+            "b": "N1",
+            "value": 20000.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ],
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 24700.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ]
+      ],
+      "expected_relation": "all",
+      "menu_comparison": {
+        "unloaded_step_small": {
+          "maximum_difference_mV": 1.887379141862766e-11,
+          "RMS_difference_mV": 1.312909859271281e-11
+        },
+        "loaded_step_small": {
+          "maximum_difference_mV": 1.949829186997931e-12,
+          "RMS_difference_mV": 1.0544751404738534e-12
+        },
+        "unloaded_step_large": {
+          "maximum_difference_mV": 4.785061236134425e-11,
+          "RMS_difference_mV": 3.1356985375232565e-11
+        },
+        "loaded_step_large": {
+          "maximum_difference_mV": 6.106226635438361e-12,
+          "RMS_difference_mV": 2.7902754281941606e-12
+        },
+        "unloaded_sine_1hz_small": {
+          "maximum_difference_mV": 3.858025010572419e-12,
+          "RMS_difference_mV": 1.63916758188221e-12
+        },
+        "unloaded_sine_1hz_large": {
+          "maximum_difference_mV": 1.6209256159527285e-11,
+          "RMS_difference_mV": 6.95132858328412e-12
+        },
+        "unloaded_sine_5hz_small": {
+          "maximum_difference_mV": 3.0184188481996443e-12,
+          "RMS_difference_mV": 1.5764359405977708e-12
+        },
+        "loaded_sine_5hz_small": {
+          "maximum_difference_mV": 1.6306400674181987e-12,
+          "RMS_difference_mV": 3.3054042116206393e-13
+        }
+      },
+      "matches_expectation": true
+    },
+    {
+      "case": "sensor-filter",
+      "explanation": "Two parallel capacitors expose their sum, not individual changes in the overlapping positive range.",
+      "models": [
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "Cfilter",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1.2e-06,
+            "model": "none"
+          },
+          {
+            "name": "Cbypass",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-07,
+            "model": "none"
+          },
+          {
+            "name": "Rload",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 22000.0,
+            "model": "none"
+          }
+        ],
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "Cfilter",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          },
+          {
+            "name": "Cbypass",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 3e-07,
+            "model": "none"
+          },
+          {
+            "name": "Rload",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 22000.0,
+            "model": "none"
+          }
+        ]
+      ],
+      "expected_relation": "all",
+      "menu_comparison": {
+        "unloaded_step_small": {
+          "maximum_difference_mV": 1.7380428693480887e-09,
+          "RMS_difference_mV": 2.3608829853692107e-10
+        },
+        "loaded_step_small": {
+          "maximum_difference_mV": 2.5638088874124776e-08,
+          "RMS_difference_mV": 2.731042369959457e-09
+        },
+        "unloaded_step_large": {
+          "maximum_difference_mV": 1.8478100993757351e-09,
+          "RMS_difference_mV": 2.509100200664575e-10
+        },
+        "loaded_step_large": {
+          "maximum_difference_mV": 2.6068126823819426e-08,
+          "RMS_difference_mV": 2.776887742647379e-09
+        },
+        "unloaded_sine_1hz_small": {
+          "maximum_difference_mV": 4.152697283266171e-09,
+          "RMS_difference_mV": 5.315787702994548e-10
+        },
+        "unloaded_sine_1hz_large": {
+          "maximum_difference_mV": 1.2189277365237672e-08,
+          "RMS_difference_mV": 1.5639297985952793e-09
+        },
+        "unloaded_sine_5hz_small": {
+          "maximum_difference_mV": 1.0907869442758344e-08,
+          "RMS_difference_mV": 2.6556747220040693e-09
+        },
+        "loaded_sine_5hz_small": {
+          "maximum_difference_mV": 6.610540587148606e-08,
+          "RMS_difference_mV": 1.3304368385557932e-08
+        }
+      },
+      "matches_expectation": true
+    },
+    {
+      "case": "timing-chain",
+      "explanation": "RA and RB expose their series sum.",
+      "models": [
+        [
+          {
+            "name": "RA",
+            "kind": "R",
+            "a": "IN",
+            "b": "N1",
+            "value": 2200.0,
+            "model": "none"
+          },
+          {
+            "name": "RB",
+            "kind": "R",
+            "a": "N1",
+            "b": "OUT",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ],
+        [
+          {
+            "name": "RA",
+            "kind": "R",
+            "a": "IN",
+            "b": "N1",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "RB",
+            "kind": "R",
+            "a": "N1",
+            "b": "OUT",
+            "value": 2200.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ]
+      ],
+      "expected_relation": "all",
+      "menu_comparison": {
+        "unloaded_step_small": {
+          "maximum_difference_mV": 4.801714581503802e-12,
+          "RMS_difference_mV": 1.770794096321998e-12
+        },
+        "loaded_step_small": {
+          "maximum_difference_mV": 1.9845236565174673e-12,
+          "RMS_difference_mV": 6.108970706402788e-13
+        },
+        "unloaded_step_large": {
+          "maximum_difference_mV": 1.5654144647214707e-11,
+          "RMS_difference_mV": 5.168807571528806e-12
+        },
+        "loaded_step_large": {
+          "maximum_difference_mV": 4.496403249731884e-12,
+          "RMS_difference_mV": 1.3778741979914117e-12
+        },
+        "unloaded_sine_1hz_small": {
+          "maximum_difference_mV": 3.548376870110559e-12,
+          "RMS_difference_mV": 7.621738181970653e-13
+        },
+        "unloaded_sine_1hz_large": {
+          "maximum_difference_mV": 1.85268467234323e-11,
+          "RMS_difference_mV": 3.230310536736941e-12
+        },
+        "unloaded_sine_5hz_small": {
+          "maximum_difference_mV": 5.233660727022027e-12,
+          "RMS_difference_mV": 7.273676318228282e-13
+        },
+        "loaded_sine_5hz_small": {
+          "maximum_difference_mV": 1.807581861967833e-12,
+          "RMS_difference_mV": 3.210874863730421e-13
+        }
+      },
+      "matches_expectation": true
+    },
+    {
+      "case": "unpowered-input",
+      "explanation": "A divider ratio can tie unloaded; a known output load separates the scale.",
+      "models": [
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 9400.0,
+            "model": "none"
+          },
+          {
+            "name": "R2",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 22000.0,
+            "model": "none"
+          }
+        ],
+        [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 4700.0,
+            "model": "none"
+          },
+          {
+            "name": "R2",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 11000.0,
+            "model": "none"
+          }
+        ]
+      ],
+      "expected_relation": "unloaded_only",
+      "menu_comparison": {
+        "unloaded_step_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_step_small": {
+          "maximum_difference_mV": 20.936497934910523,
+          "RMS_difference_mV": 20.936497934910527
+        },
+        "unloaded_step_large": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_step_large": {
+          "maximum_difference_mV": 52.341244837276314,
+          "RMS_difference_mV": 52.34124483727631
+        },
+        "unloaded_sine_1hz_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_sine_1hz_large": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_sine_5hz_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_sine_5hz_small": {
+          "maximum_difference_mV": 15.702373451182902,
+          "RMS_difference_mV": 11.011794556821108
+        }
+      },
+      "matches_expectation": true
+    },
+    {
+      "case": "contact-resistance",
+      "explanation": "With an ideal IN-OUT connection, changing parallel R/C cannot change measured OUT conditional on IN.",
+      "models": [
+        [
+          {
+            "name": "W1",
+            "kind": "W",
+            "a": "IN",
+            "b": "OUT",
+            "value": 0.0,
+            "model": "none"
+          },
+          {
+            "name": "Rload",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "Cdecouple",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ],
+        [
+          {
+            "name": "W1",
+            "kind": "W",
+            "a": "IN",
+            "b": "OUT",
+            "value": 0.0,
+            "model": "none"
+          },
+          {
+            "name": "Rload",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 22000.0,
+            "model": "none"
+          },
+          {
+            "name": "Cdecouple",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 4.7e-07,
+            "model": "none"
+          }
+        ]
+      ],
+      "expected_relation": "all",
+      "menu_comparison": {
+        "unloaded_step_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_step_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_step_large": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_step_large": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_sine_1hz_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_sine_1hz_large": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "unloaded_sine_5hz_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        },
+        "loaded_sine_5hz_small": {
+          "maximum_difference_mV": 0.0,
+          "RMS_difference_mV": 0.0
+        }
+      },
+      "matches_expectation": true
+    }
+  ],
+  "all_expectations_met": true,
+  "deferred": {
+    "id": "dim-led",
+    "source": "https://forum.arduino.cc/t/bc547-base-resistor-checking/384293",
+    "status": "deferred_BJT_and_5V_harness",
+    "parts": [
+      "BC547",
+      "LED",
+      "Rbase",
+      "Rled"
+    ],
+    "required": [
+      "actual 5V/GND/REF boundaries",
+      "LM358 measurement range or attenuator",
+      "current limits and device pinout",
+      "BJT and LED model uncertainty",
+      "new firmware/protocol validation and separately approved upload"
+    ],
+    "estimate_hours": [
+      4,
+      8
+    ],
+    "simulated_accuracy_result": null
+  },
+  "paid_requests": 0,
+  "hardware_commands": 0
+}
