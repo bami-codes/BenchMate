@@ -1,0 +1,28 @@
+{
+  "pilot": true,
+  "excluded_from_evaluation": true,
+  "status": "stopped_at_initial_reference_guard",
+  "record": "20261102T154657-b43e7683e7",
+  "actual_Spark_requests": 2,
+  "requested_training_action": "unloaded_step_small",
+  "diagnostic_step_or_sine_commands_sent": 0,
+  "HOLD_blocks_captured": 1,
+  "HOLD_frames": 512,
+  "nominal_ADC_means_v": {
+    "A1": 1.6423148113707762,
+    "A2": 1.6406324271920583,
+    "A3": 1.6428849526757898,
+    "A4": 0.8699649479452776
+  },
+  "last_reported_park_code": 1376,
+  "automatic_retry": false,
+  "cause_established": false,
+  "input_tokens": 4903,
+  "cached_input_tokens": 1777,
+  "output_tokens": 466,
+  "estimated_usd": 0.00615455,
+  "session_cumulative_Spark_requests": 8,
+  "session_cumulative_estimated_usd": 0.06165445,
+  "cost_is_account_invoice": false,
+  "protocol_file_sha256": "e408db9fac00da728040dc0365ee0bb1a44bdeb8891df650a94abf8c218e5810"
+}

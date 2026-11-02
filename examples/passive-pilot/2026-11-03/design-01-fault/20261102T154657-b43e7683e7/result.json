@@ -1,0 +1,44 @@
+{
+  "error": "Electrical/reference guard failed; no next stimulus",
+  "instrument": {
+    "capture_attempts": 1,
+    "retained_frames": 512,
+    "scored_captures_completed": 0,
+    "requested_wiring_interventions_completed": 0,
+    "latest_boot_id": "87f3ec0c24b67f0b880bcc4d372f2bd4",
+    "output_state_confirmed": false,
+    "automatic_retry_or_rearm": false,
+    "automatic_A4_tracking": false
+  },
+  "automatic_retry": false,
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "medium",
+  "http_requests": 2,
+  "usage": [
+    {
+      "input_tokens": 1877,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 63,
+      "output_tokens_details": {
+        "reasoning_tokens": 7
+      },
+      "total_tokens": 1940
+    },
+    {
+      "input_tokens": 3026,
+      "input_tokens_details": {
+        "cached_tokens": 1777
+      },
+      "output_tokens": 403,
+      "output_tokens_details": {
+        "reasoning_tokens": 307
+      },
+      "total_tokens": 3429
+    }
+  ],
+  "api_elapsed_s": 5.020009875064716,
+  "reserved_allowance_usd": 2.0
+}
