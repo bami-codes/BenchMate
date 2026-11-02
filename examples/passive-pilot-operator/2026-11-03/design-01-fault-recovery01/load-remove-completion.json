@@ -1,0 +1,8 @@
+{
+  "request_id": "5f91498f05144c79a83e35e8ffafdff1",
+  "recorded_utc": "2026-11-02T16:19:20.351433+00:00",
+  "operator_confirmed": true,
+  "fixed_English_report": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port.",
+  "only_change": "Removed E30\u2013A55 output-load jumper with USB off; all specimen and common instrument parts retained; same USB port reconnected.",
+  "response_file": "runs/passive-pilot/design-01-fault-recovery01/20261102T160841-eff2b65334/operator-response-5f91498f05144c79a83e35e8ffafdff1.json"
+}

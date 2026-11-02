@@ -1,0 +1,18 @@
+{
+  "schema": "benchmate.reference_comparison_request.v1",
+  "status": "awaiting_operator",
+  "operator_confirmed": false,
+  "fixed_English_completion": "I disconnected USB, moved only the C28 end of the C28-to-A45 monitor lead to E50, retained its A45 end and I50-to-Arduino-A4, retained D50-to-G50 and all other wiring, removed probes and reconnected the same USB port.",
+  "temporary_A3_role": "REF through existing A3 protection path",
+  "A4_role": "same REF through I50 direct sense path",
+  "source_contact_from": "C28",
+  "source_contact_to": "E50",
+  "other_end_retained": "A45",
+  "numeric_component_values_changed": false,
+  "diagnosis_configuration_adopted": false,
+  "QA_only": true,
+  "max_HOLD_blocks": 10,
+  "STEP_or_SINE_commands": 0,
+  "paid_calls": 0,
+  "previous_observed_boot_id": "3fcfb6087b82f59335dfe8771a7db338"
+}

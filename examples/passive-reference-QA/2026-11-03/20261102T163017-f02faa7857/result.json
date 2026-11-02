@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "error": "Electrical/reference guard failed; no next stimulus",
+  "capture_attempts": 4,
+  "frames": 2048,
+  "means_v": [
+    {
+      "label": "reference_QA_HOLD_01",
+      "hold": true,
+      "means": [
+        1.6429404479872403,
+        1.6413147274423179,
+        1.6433604598707465,
+        1.6398595819599548
+      ]
+    },
+    {
+      "label": "reference_QA_HOLD_02",
+      "hold": true,
+      "means": [
+        1.64273949654367,
+        1.641285519383659,
+        1.6433762322224208,
+        1.640762695133673
+      ]
+    },
+    {
+      "label": "reference_QA_HOLD_03",
+      "hold": true,
+      "means": [
+        1.6425864463163005,
+        1.6413118066364507,
+        1.6433452716802432,
+        1.6404752878364746
+      ]
+    },
+    {
+      "label": "reference_QA_HOLD_04",
+      "hold": true,
+      "means": [
+        1.6429363588590287,
+        1.6412609846143873,
+        1.6433353409402989,
+        1.6437909866553717
+      ]
+    }
+  ],
+  "paid_requests": 0,
+  "automatic_retry": false,
+  "STEP_or_SINE_commands": 0
+}

@@ -48,3 +48,28 @@ The operator has been asked to disconnect USB, check and reseat only the
 H50-to-Arduino-A4 lead, retain D50–G50 and all remaining wiring, remove probes,
 and reconnect the same port. Completion is pending. The original failed attempt
 and guard limits remain unchanged.
+
+## Second attempt after reseating the A4 lead
+
+Run `20261102T160841-eff2b65334` is retained beside the original failed attempt.
+The fresh initial REF checks passed with A4 near 1.630 V. Spark chose, in order,
+an unloaded small step, a loaded small step, and an unloaded 1 Hz large sine.
+All three training captures and their guards passed. After two captures the
+joint-fit loaded-waveform RMS was 3.39 mV for the R1-change family and 70.04 mV
+for the C1-change family. After the third, only the R1-change family remained
+adequate, with effective R1 ≈25.2 kΩ assuming C1=1 µF. This does not locate the
+added series resistance or prove that the visible R1 changed.
+
+Spark requested verification. Models, values and both reserved forecasts were
+published in commit `443c9a67f4f43831f4417c1621887622a6cbe404` before either
+reserved acquisition. The first reserved step was physically captured, but its
+A4 block mean made the same-boot A4 mean span **4.368 mV**, above the unchanged
+3 mV limit. The capture was rejected and execution stopped. No reserved score
+or completed diagnosis report was produced; the second reserved sine was never
+sent. The first reserved condition has now been exposed in development and must
+not be described as never previously attempted. No reserved OUT was used to refit.
+
+This attempt used **5** real Spark requests, estimated **$0.03445515**. Cumulative
+including prior readings/attempts: **13 calls, $0.0961096**. All work remains pilot
+development, excluded from evaluation. There was no automatic retry or relaxed
+guard. Subsequent instrument-only QA is recorded separately.

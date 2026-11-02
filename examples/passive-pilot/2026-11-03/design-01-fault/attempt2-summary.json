@@ -1,0 +1,26 @@
+{
+  "pilot": true,
+  "excluded_from_evaluation": true,
+  "record": "20261102T160841-eff2b65334",
+  "status": "stopped_at_first_reserved_capture_A4_guard",
+  "training_actions_completed": [
+    "unloaded_step_small",
+    "loaded_step_small",
+    "unloaded_sine_1hz_large"
+  ],
+  "last_training_effective_R1_ohm": 25166.755555877196,
+  "nominal_C1_assumption_f": 1e-06,
+  "first_reserved_step_physically_captured": true,
+  "first_reserved_capture_accepted": false,
+  "second_reserved_sine_sent": false,
+  "completed_diagnosis_report": false,
+  "OUT_refitted_after_reserved_capture": false,
+  "failed_guard": "A4_block_mean_span",
+  "A4_mean_span_v": 0.0043677730917688,
+  "limit_v": 0.003,
+  "remote_prediction_commit": "443c9a67f4f43831f4417c1621887622a6cbe404",
+  "http_requests": 5,
+  "estimated_usd": 0.034455150000000004,
+  "session_cumulative_requests": 13,
+  "session_cumulative_estimated_usd": 0.0961096
+}
