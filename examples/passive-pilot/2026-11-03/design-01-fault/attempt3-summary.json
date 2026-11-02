@@ -1,0 +1,24 @@
+{
+  "pilot": true,
+  "excluded_from_evaluation": true,
+  "record": "20261102T164944-16f6a79a31",
+  "status": "training_hypothesis_narrowed_then_REF_guard_stop",
+  "accepted_training_actions": [
+    "loaded_step_small"
+  ],
+  "last_effective_R1_ohm": 24847.175892184463,
+  "nominal_C1_assumption_f": 1e-06,
+  "large_unloaded_step_physically_captured": true,
+  "large_capture_accepted": false,
+  "A3_block_mean_minus_center_HOLD_mV": 7.397427656207434,
+  "A4_block_mean_minus_center_HOLD_mV": 7.068350195322148,
+  "A3_block_mean_span_mV": 7.467916437770006,
+  "A4_block_mean_span_mV": 7.191608202862021,
+  "A4_limit_mV": 3.0,
+  "reserved_captures": 0,
+  "verified_diagnosis": false,
+  "http_requests": 3,
+  "estimated_usd": 0.0180317,
+  "session_cumulative_requests": 16,
+  "session_cumulative_estimated_usd": 0.1141413
+}

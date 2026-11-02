@@ -1,0 +1,26 @@
+{
+  "schema": "benchmate.operator_offline_only_instruction.v1",
+  "recorded_utc": "2026-11-02T17:18:00.672394+00:00",
+  "operator_asleep": true,
+  "allowed": [
+    "Analyze existing logs",
+    "Prepare a morning DMM procedure",
+    "Commit and push records"
+  ],
+  "prohibited_until_operator_returns": [
+    "Spark or other paid calls",
+    "Hardware commands",
+    "Wiring change requests"
+  ],
+  "U1_pin1_to_D50_continuity": "not measured: metal contact inaccessible",
+  "U1_pin1_to_pin2_continuity": "not measured: metal contact inaccessible",
+  "REF_pulldown_presence": "not confirmed in latest reply",
+  "guard_limit_mV": 3.0,
+  "guard_change_authorized": false,
+  "current_power_state": "Not newly confirmed; do not query hardware",
+  "two_substantive_diagnostic_pilots": [
+    "20261102T160841-eff2b65334",
+    "20261102T164944-16f6a79a31"
+  ],
+  "earlier_HOLD_only_startup_stop_retained_separately": "20261102T154657-b43e7683e7"
+}

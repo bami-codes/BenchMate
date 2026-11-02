@@ -1,0 +1,13 @@
+{
+  "request_id": "bf74fbdb0b7a4d608ab9b5e060a8c06e",
+  "recorded_utc": "2026-11-02T16:57:59.772176+00:00",
+  "operator_confirmed": true,
+  "fixed_English_report": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port.",
+  "ADC_roles_retained": {
+    "A3": "REF via A23\u2013A45",
+    "A4": "REF via I50 and bridge"
+  },
+  "preflight_record": "examples/passive-pilot-preflight/2026-11-03/design-01-A3REF-load-remove/20261102T165752-0d8be67347",
+  "new_unarmed_boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+  "prior_observed_boot_id": "1520bc1a84650c4bc4756ffca02586a1"
+}

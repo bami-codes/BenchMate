@@ -1,0 +1,62 @@
+{
+  "schema": "benchmate.morning_REF_DMM_plan.v1",
+  "status": "prepared_not_executed",
+  "automatic_execution": false,
+  "operator_must_return_before_execution": true,
+  "current_guard_limit_mV": 3.0,
+  "guard_change_proposed_now": false,
+  "model_requests_planned": 0,
+  "firmware_upload_required": false,
+  "existing_firmware_command": "DC <fresh_boot_id> <code>",
+  "keep_same_boot_and_wiring_within_comparison": true,
+  "levels": {
+    "C": {
+      "nominal_drive_v": 1.646,
+      "code": 1376
+    },
+    "L": {
+      "nominal_drive_v": 1.146,
+      "code": 958
+    },
+    "H": {
+      "nominal_drive_v": 2.146,
+      "code": 1793
+    }
+  },
+  "nominal_configuration": {
+    "vref_v": 4.9,
+    "ref_v": 1.646,
+    "settle_ms": 1200,
+    "stable_delta_counts": 20
+  },
+  "cycles": [
+    [
+      "C",
+      "L",
+      "C",
+      "H",
+      "C"
+    ],
+    [
+      "C",
+      "H",
+      "C",
+      "L",
+      "C"
+    ]
+  ],
+  "wait_after_ack_seconds": 5,
+  "DMM_readings_per_level": 3,
+  "spacing_seconds": 2,
+  "primary_DMM_point": "D50 vs existing blue GND",
+  "preferred_DMM_range": "DC 2 V with 1 mV display; record actual range",
+  "secondary_checks_if_D50_stable_but_ADC_changes": [
+    "G50 vs same ground",
+    "Arduino ground vs blue GND",
+    "ADC input contact if accessible"
+  ],
+  "data_are_instrument_QA_not_diagnostic_training_or_holdout": true,
+  "existing_Python_set_dc_level_scope_is_DUT_disconnected": "Do not use unchanged to claim retained-DUT QA. A truthful, bounded QA recorder must be prepared before execution.",
+  "slow_DMM_cannot_rule_out_fast_physical_transients": true,
+  "new_sampling_or_criterion_changes_require_new_version_timing_check_and_preexecution_amendment": true
+}

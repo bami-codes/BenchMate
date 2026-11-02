@@ -73,3 +73,29 @@ This attempt used **5** real Spark requests, estimated **$0.03445515**. Cumulati
 including prior readings/attempts: **13 calls, $0.0961096**. All work remains pilot
 development, excluded from evaluation. There was no automatic retry or relaxed
 guard. Subsequent instrument-only QA is recorded separately.
+
+## Third recorded start, second waveform-containing pilot
+
+Run `20261102T164944-16f6a79a31` used the documented A23–A45 A3 REF route and
+I50–Arduino A4 path. Spark chose a loaded small step first. The accepted training
+data supported the R1-change family only, effective R1 ≈24.85 kΩ with C1=1 µF.
+Spark then chose a large unloaded step. Its capture failed the REF guard before
+acceptance: relative to the center HOLDs, A3's block mean changed +7.397 mV and
+A4's +7.068 mV. A4's block-mean range was 7.192 mV, above the unchanged 3 mV limit.
+Both REF paths moved together; the cause remains unresolved. No reserved capture
+or completed verified diagnosis was produced in this attempt.
+
+At the operator's request the two waveform-containing attempts are recorded as
+**two diagnostic pilots, excluded from evaluation**. Both narrowed training to
+an increased effective series path and stopped because of reference protection.
+The earlier first-HOLD-only startup stop is retained separately; it had no R
+inference. No failed attempt has been erased or changed to a pass.
+
+The operator then requested offline log analysis only while asleep. All known
+control runs had terminated. No further model request, instrument command or
+wiring request was issued. The U1 continuity checks were not performed because
+metal contacts were inaccessible; REF pull-down presence was not newly confirmed.
+[Offline analysis and morning procedure](../../../../docs/2026-11-03-ref-investigation.md)
+preserve the 3 mV limit. Session cumulative: **16 Spark requests, $0.1141413
+estimated Standard token cost**, not an account invoice. Restoration and its
+normal rerun remain pending.

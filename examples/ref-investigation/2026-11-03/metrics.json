@@ -1,0 +1,1675 @@
+{
+  "scope": "Post-hoc descriptive instrument analysis of retained logs only.",
+  "paid_requests": 0,
+  "hardware_commands": 0,
+  "runtime_or_guard_changes": false,
+  "self_checks": {
+    "known_sine_amplitude_phase_and_trend_recovered": true,
+    "wrapped_phase_convention_checked": true
+  },
+  "no_failed_capture_reclassified_as_passed": true,
+  "linear_fit_R2_is_not_causal_evidence_or_statistical_confidence": true,
+  "nominal_ADC_volts_are_not_independent_DMM_readings": true,
+  "source_sha256": {
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T160841-eff2b65334/events.jsonl": "bbf139422be57e3a8d649fc8df2a54811e67d384ae076ef0c382faad9b5b8b00",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T160841-eff2b65334/result.json": "b9aebbbe7470475c2a6f689d33ca90f3d5b9d33d9e15f441adf254f9eb7585f9",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T160841-eff2b65334/protocol.json": "e408db9fac00da728040dc0365ee0bb1a44bdeb8891df650a94abf8c218e5810",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T164944-16f6a79a31/events.jsonl": "963f227644150ead58bd3aa15c2fa237d2c0a060dd90dfb160946c06219a59d9",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T164944-16f6a79a31/result.json": "2b8a233ce863ce90e579ab0fff032ad3bdcc8ecec9416169e5272f8341817f74",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T164944-16f6a79a31/protocol.json": "ceb0bf46e684c852277a1c7d7293799bb0f915ee3dd3fa92f4dbffa28d1c16a3",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T154657-b43e7683e7/events.jsonl": "6ac6b957124bdd5267514d9300de28383aececdb8d6aae51424a9f6089c1d7b4",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T154657-b43e7683e7/result.json": "1b2f78e6ce4e41dda19c539dd3f6613abf0427e791144971312dfe9d09b76870",
+    "examples/passive-pilot/2026-11-03/design-01-fault/20261102T154657-b43e7683e7/protocol.json": "e408db9fac00da728040dc0365ee0bb1a44bdeb8891df650a94abf8c218e5810",
+    "examples/passive-reference-QA/2026-11-03/20261102T163017-f02faa7857/events.jsonl": "c6c54e472becb55c19cda6f302ceeed49ae846687e9ac5eb800f17ed3f3ffd3b",
+    "examples/passive-reference-QA/2026-11-03/20261102T163017-f02faa7857/result.json": "df4a4b63008949b695d2e7bc13a7b013fe001f4efe316e19a7fe3d9e0ec9ab7a",
+    "examples/passive-reference-QA/2026-11-03/20261102T163017-f02faa7857/protocol.json": "e408db9fac00da728040dc0365ee0bb1a44bdeb8891df650a94abf8c218e5810",
+    "examples/passive-reference-QA/2026-11-03/20261102T164218-ee4dbda508/events.jsonl": "d82375f1c4483932cd818cf207d4ce4d6c990e9efd73578f66e0bf871243a7c2",
+    "examples/passive-reference-QA/2026-11-03/20261102T164218-ee4dbda508/result.json": "0554193a361a9cb96f2cca7a2a6403f78715d87ecb35cfa5b0137a1c0f0a6586",
+    "examples/passive-reference-QA/2026-11-03/20261102T164218-ee4dbda508/protocol.json": "e408db9fac00da728040dc0365ee0bb1a44bdeb8891df650a94abf8c218e5810",
+    "experiments/analyze_ref_coupling.py": "e5b25f89689bc838f4b2895ae30905b80879f8810b2191914dd2ce1d150a5845"
+  },
+  "diagnostic_pilots": [
+    {
+      "label": "pilot_1_A3_DRIVE",
+      "path": "examples/passive-pilot/2026-11-03/design-01-fault/20261102T160841-eff2b65334",
+      "pilot": true,
+      "excluded_from_evaluation": true,
+      "terminal_event": "run_failed",
+      "stop_reason": "Electrical/reference guard failed; no next stimulus",
+      "completed_diagnosis_report": false,
+      "Spark_requests": 5,
+      "last_adequate_families": [
+        "changed:R1"
+      ],
+      "last_effective_R1_ohm": 25166.755555877196,
+      "waves": [
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_1_raw_capture",
+          "kind": "STEP",
+          "boot_id": "3729f510b2b85ce6ea223d283d2b18fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": null,
+          "command_peak_amplitude_v": 0.19982905982905985,
+          "center_HOLD_means_nominal_v": [
+            1.642978418463496,
+            1.6413517243166174,
+            1.643350139690021,
+            1.6301765263535337
+          ],
+          "step_index": 51,
+          "pre_window_indices": [
+            5,
+            46
+          ],
+          "post_window_indices": [
+            412,
+            512
+          ],
+          "step_delta_nominal_v": [
+            0.3992858450833183,
+            0.3945896862154843,
+            0.39990496246108753,
+            0.001099121188977037
+          ],
+          "reference": {
+            "A4": {
+              "pre_minus_center_mV": -0.37392014215753555,
+              "post_tail_minus_center_mV": 0.7252010468195014,
+              "pre_to_post_tail_mV": 1.099121188977037,
+              "block_mean_minus_center_mV": 0.35575415446231773,
+              "apparent_mV_per_V_IN_step": 2.752717639533866,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    0.35901533770468924,
+                    1.320997245411712,
+                    1.7301232039348615
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.020862733594717464,
+                  "RMSE_mV": 1.836826977369006
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    0.35901533770468924,
+                    1.7712047306162766,
+                    0.744298946822586
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.0132644971898217,
+                  "RMSE_mV": 1.8439402158689084
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    0.35901533770468924,
+                    1.35637998093459,
+                    1.7294344210122463
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.02112503063673643,
+                  "RMSE_mV": 1.8365809308900345
+                },
+                "time_only": {
+                  "coefficients": [
+                    0.35901533770468924,
+                    2.789216733141764
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.012239004770828732,
+                  "RMSE_mV": 1.8448981502177846
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            }
+          }
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_2_raw_capture",
+          "kind": "STEP",
+          "boot_id": "242fda6f4c74302396cf81897dc196fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": 9990.0,
+          "command_peak_amplitude_v": 0.19982905982905985,
+          "center_HOLD_means_nominal_v": [
+            1.6426022186679763,
+            1.6432654363199106,
+            1.6430862935601411,
+            1.6456079226243137
+          ],
+          "step_index": 51,
+          "pre_window_indices": [
+            5,
+            46
+          ],
+          "post_window_indices": [
+            412,
+            512
+          ],
+          "step_delta_nominal_v": [
+            0.38805054614911616,
+            0.11183534389454852,
+            0.3996179085101599,
+            0.001422284849108113
+          ],
+          "reference": {
+            "A4": {
+              "pre_minus_center_mV": -0.7851363631237174,
+              "post_tail_minus_center_mV": 0.6371484859843957,
+              "pre_to_post_tail_mV": 1.422284849108113,
+              "block_mean_minus_center_mV": 0.5495009435614318,
+              "apparent_mV_per_V_IN_step": 3.665205121400787,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    0.5097641847033386,
+                    -1.208035588667377,
+                    3.819910985108701
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.025415600025525342,
+                  "RMSE_mV": 2.4697666704493497
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    0.5097641847033386,
+                    -2.332746406555714,
+                    15.05793058939201
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.03029974392517687,
+                  "RMSE_mV": 2.463570261549295
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    0.5097641847033386,
+                    -1.17473689654324,
+                    3.675518634334722
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.02501709553159459,
+                  "RMSE_mV": 2.4702715587521547
+                },
+                "time_only": {
+                  "coefficients": [
+                    0.5097641847033386,
+                    1.8738681157819725
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.003041306190584181,
+                  "RMSE_mV": 2.4979559769744886
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            }
+          }
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_3_raw_capture",
+          "kind": "SINE",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": null,
+          "command_peak_amplitude_v": 0.7993162393162394,
+          "center_HOLD_means_nominal_v": [
+            1.6427211928269125,
+            1.641251832756006,
+            1.6432775089841574,
+            1.6090273605197956
+          ],
+          "frequency_hz": 1.0,
+          "harmonic": {
+            "A1": {
+              "coefficients": [
+                -0.05680376755387532,
+                0.0889465139638202,
+                798.4691418782119,
+                -5.341630442172245
+              ],
+              "rank": 4,
+              "R2_descriptive": 0.9999766215538842,
+              "RMSE_mV": 2.699306200566587,
+              "amplitude_mV": 798.487009003596,
+              "phase_deg": -0.3832938537432665,
+              "linear_trend_mV_per_s": 0.0889465139638202
+            },
+            "A2": {
+              "coefficients": [
+                1.0356435268424409,
+                -0.08729892339273183,
+                776.1538223857561,
+                -135.4015060258222
+              ],
+              "rank": 4,
+              "R2_descriptive": 0.9999861276753857,
+              "RMSE_mV": 2.0510478321999286,
+              "amplitude_mV": 787.8758302157013,
+              "phase_deg": -9.895771806832437,
+              "linear_trend_mV_per_s": -0.08729892339273183
+            },
+            "A3": {
+              "coefficients": [
+                0.10576697558388054,
+                0.20926159377610526,
+                799.0254565872283,
+                -0.960131220742258
+              ],
+              "rank": 4,
+              "R2_descriptive": 0.999976975903184,
+              "RMSE_mV": 2.6805551906273966,
+              "amplitude_mV": 799.0260334472149,
+              "phase_deg": -0.06884816972549185,
+              "linear_trend_mV_per_s": 0.20926159377610526
+            },
+            "A4": {
+              "coefficients": [
+                0.16529795989037824,
+                0.31846037620627843,
+                9.240283971176147,
+                -0.37976779771169616
+              ],
+              "rank": 4,
+              "R2_descriptive": 0.9265382940811339,
+              "RMSE_mV": 1.8014366555021157,
+              "amplitude_mV": 9.248084744862236,
+              "phase_deg": -2.353483192658022,
+              "linear_trend_mV_per_s": 0.31846037620627843,
+              "phase_minus_IN_deg": -1.9701893389147642,
+              "phase_minus_OUT_deg": 7.542288614174424,
+              "phase_minus_A3_deg": -2.2846350229325196
+            }
+          }
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "verification_4_raw_capture",
+          "kind": "STEP",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": null,
+          "command_peak_amplitude_v": 0.34940170940170945,
+          "center_HOLD_means_nominal_v": [
+            1.6427505956059623,
+            1.6412689681504185,
+            1.6432794561880675,
+            1.610454466265842
+          ],
+          "step_index": 51,
+          "pre_window_indices": [
+            5,
+            46
+          ],
+          "post_window_indices": [
+            412,
+            512
+          ],
+          "step_delta_nominal_v": [
+            0.6985607805830851,
+            0.6926693538662172,
+            0.6982297384409477,
+            0.0076954531988089325
+          ],
+          "reference": {
+            "A4": {
+              "pre_minus_center_mV": -4.1049338087886245,
+              "post_tail_minus_center_mV": 3.590519390020308,
+              "pre_to_post_tail_mV": 7.6954531988089325,
+              "block_mean_minus_center_mV": 2.5138402485327394,
+              "apparent_mV_per_V_IN_step": 11.016154088103224,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    2.5471880320402036,
+                    1.3179640835455972,
+                    10.619910340709415
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.6457320297405345,
+                  "RMSE_mV": 1.6553184561216443
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    2.5471880320402036,
+                    -6.814307484483646,
+                    9.999328175571597
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.4587784668735658,
+                  "RMSE_mV": 2.0459883021884555
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    2.5471880320402036,
+                    1.9609125975728818,
+                    10.453835143024747
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.645134365548445,
+                  "RMSE_mV": 1.6567141618371513
+                },
+                "time_only": {
+                  "coefficients": [
+                    2.5471880320402036,
+                    17.096952493865185
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.20487109216786592,
+                  "RMSE_mV": 2.4799012314281574
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            }
+          }
+        }
+      ],
+      "holds": [
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_1_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "3729f510b2b85ce6ea223d283d2b18fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6428335464925508,
+            1.6413988466512541,
+            1.6433914204129245,
+            1.6301817838040917
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_1_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "3729f510b2b85ce6ea223d283d2b18fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6430169731009252,
+            1.6413439355009747,
+            1.6434796287500733,
+            1.6301262884926415
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_1_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "3729f510b2b85ce6ea223d283d2b18fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6430847357970118,
+            1.6413123907976228,
+            1.643179369907065,
+            1.630221506763868
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_1_return_REF_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "3729f510b2b85ce6ea223d283d2b18fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6429024775109835,
+            1.6414829658601893,
+            1.6434364008232587,
+            1.6302285166979469
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_2_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "242fda6f4c74302396cf81897dc196fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6425770997375297,
+            1.6434147868598505,
+            1.6431787857458942,
+            1.6455668366218013
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_2_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "242fda6f4c74302396cf81897dc196fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.642626169276075,
+            1.6430748050570683,
+            1.6430631218336038,
+            1.6454885590245958
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_2_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "242fda6f4c74302396cf81897dc196fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.642603386990324,
+            1.643306717042814,
+            1.6430169731009259,
+            1.6457683722265435
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_2_return_REF_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "242fda6f4c74302396cf81897dc196fe",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6425998820232834,
+            1.643217924544494,
+            1.6432780931453308,
+            1.64549089566929
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_3_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.642812516690318,
+            1.64135386624092,
+            1.6432202611891868,
+            1.6092618038706263
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_3_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.642775130375234,
+            1.6412656579037699,
+            1.6433242418780112,
+            1.608600533422603
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_3_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6425759314151858,
+            1.6411359741233282,
+            1.643288023885274,
+            1.6092197442661578
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "training_3_return_REF_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6427202192249573,
+            1.6413497771127086,
+            1.6434048561199075,
+            1.6097688557689356
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "verification_4_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6428177741408774,
+            1.6412802619330995,
+            1.6431595084271768,
+            1.6104605025979646
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "verification_4_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6426524565288694,
+            1.6413427671786276,
+            1.6433779847059418,
+            1.610598948796005
+          ]
+        },
+        {
+          "run": "pilot_1_A3_DRIVE",
+          "raw_label": "verification_4_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "eb0ffb5939bc129e865a8ed91a13cf24",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "pre-shunt DRIVE",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6427815561481405,
+            1.6411838753395278,
+            1.643300875431084,
+            1.6103039474035565
+          ]
+        }
+      ]
+    },
+    {
+      "label": "pilot_2_A3_REF",
+      "path": "examples/passive-pilot/2026-11-03/design-01-fault/20261102T164944-16f6a79a31",
+      "pilot": true,
+      "excluded_from_evaluation": true,
+      "terminal_event": "run_failed",
+      "stop_reason": "Electrical/reference guard failed; no next stimulus",
+      "completed_diagnosis_report": false,
+      "Spark_requests": 3,
+      "last_adequate_families": [
+        "changed:R1"
+      ],
+      "last_effective_R1_ohm": 24847.175892184463,
+      "waves": [
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_1_raw_capture",
+          "kind": "STEP",
+          "boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": 9990.0,
+          "command_peak_amplitude_v": 0.19982905982905985,
+          "center_HOLD_means_nominal_v": [
+            1.643631900095879,
+            1.6612971286928542,
+            1.6698023206537786,
+            1.6724962772640353
+          ],
+          "step_index": 51,
+          "pre_window_indices": [
+            5,
+            46
+          ],
+          "post_window_indices": [
+            412,
+            512
+          ],
+          "step_delta_nominal_v": [
+            0.388992170646848,
+            0.11353607472350213,
+            0.004690687699771656,
+            0.004394077441965294
+          ],
+          "reference": {
+            "A3": {
+              "pre_minus_center_mV": -3.5909147199062463,
+              "post_tail_minus_center_mV": 1.09977297986541,
+              "pre_to_post_tail_mV": 4.690687699771656,
+              "block_mean_minus_center_mV": 0.5469695784741102,
+              "apparent_mV_per_V_IN_step": 12.058565836869152,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    0.5640712417958006,
+                    -2.6878698703092194,
+                    12.313378505583653
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.1860963534335408,
+                  "RMSE_mV": 2.763614449479692
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    0.5640712417958006,
+                    -2.9036995968619386,
+                    35.79557827437317
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.13490477578879778,
+                  "RMSE_mV": 2.84919986319976
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    0.5640712417958006,
+                    -2.9036995968619386,
+                    35.79557827437317
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.13490477578879778,
+                  "RMSE_mV": 2.84919986319976
+                },
+                "time_only": {
+                  "coefficients": [
+                    0.5640712417958006,
+                    7.272937124601834
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.030557134672574704,
+                  "RMSE_mV": 3.016143963304432
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            },
+            "A4": {
+              "pre_minus_center_mV": -3.3742099217723975,
+              "post_tail_minus_center_mV": 1.0198675201928964,
+              "pre_to_post_tail_mV": 4.394077441965294,
+              "block_mean_minus_center_mV": 0.7340958742787507,
+              "apparent_mV_per_V_IN_step": 11.296056253930413,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    0.7544541211484025,
+                    -0.668150335110292,
+                    11.499176270594486
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.19088034731731807,
+                  "RMSE_mV": 2.6662605586070773
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    0.7544541211484025,
+                    -2.4878119445958222,
+                    39.17134857772641
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.1792822202920048,
+                  "RMSE_mV": 2.685301993913671
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    0.7544541211484025,
+                    7.5919823148230785,
+                    143.3178375688015
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.06361138113398335,
+                  "RMSE_mV": 2.868298043184205
+                },
+                "time_only": {
+                  "coefficients": [
+                    0.7544541211484025,
+                    8.634013473550654
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.04599467088446463,
+                  "RMSE_mV": 2.895153626039942
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            }
+          },
+          "paired_REF": {
+            "rowwise_correlation": 0.16066653968105774,
+            "common_std_mV": 2.2993296156504006,
+            "difference_std_mV": 3.9110036841886204,
+            "difference_step_delta_mV": -0.2966102578063623
+          }
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_2_raw_capture",
+          "kind": "STEP",
+          "boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "load_ohm": null,
+          "command_peak_amplitude_v": 0.49897435897435904,
+          "center_HOLD_means_nominal_v": [
+            1.6428987778235549,
+            1.6414689459920322,
+            1.6842749137190005,
+            1.6865615152711684
+          ],
+          "step_index": 51,
+          "pre_window_indices": [
+            5,
+            46
+          ],
+          "post_window_indices": [
+            412,
+            512
+          ],
+          "step_delta_nominal_v": [
+            0.9972539485457113,
+            0.9905686188687566,
+            0.01865923629937627,
+            0.019878869083508555
+          ],
+          "reference": {
+            "A3": {
+              "pre_minus_center_mV": -9.52848561014874,
+              "post_tail_minus_center_mV": 9.13075068922753,
+              "pre_to_post_tail_mV": 18.659236299376268,
+              "block_mean_minus_center_mV": 7.397427656205435,
+              "apparent_mV_per_V_IN_step": 18.710616615343472,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    7.469385273473399,
+                    1.7142291042092679,
+                    18.700799155413797
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.8876868492562042,
+                  "RMSE_mV": 1.975874478605741
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    7.469385273473399,
+                    -22.157632249182807,
+                    18.633540810450263
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.6688345277254153,
+                  "RMSE_mV": 3.392864936165118
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    7.469385273473399,
+                    -22.157632249182807,
+                    18.633540810450263
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.6688345277254153,
+                  "RMSE_mV": 3.392864936165118
+                },
+                "time_only": {
+                  "coefficients": [
+                    7.469385273473399,
+                    41.348561014040364
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.2666291338611133,
+                  "RMSE_mV": 5.049005838694468
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            },
+            "A4": {
+              "pre_minus_center_mV": -10.764622894626763,
+              "post_tail_minus_center_mV": 9.114246188881792,
+              "pre_to_post_tail_mV": 19.878869083508555,
+              "block_mean_minus_center_mV": 7.06835019532126,
+              "apparent_mV_per_V_IN_step": 19.933607796186493,
+              "linear_basis_fits_with_time_trend": {
+                "measured_IN_A1": {
+                  "coefficients": [
+                    7.129815909943596,
+                    1.6136147929286915,
+                    19.613926048253102
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.8722532063934646,
+                  "RMSE_mV": 2.2267880804704587
+                },
+                "measured_OUT_A2": {
+                  "coefficients": [
+                    7.129815909943596,
+                    -23.60893624128999,
+                    19.614231126146993
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.659422470591392,
+                  "RMSE_mV": 3.63589957356727
+                },
+                "preceding_ADC_channel": {
+                  "coefficients": [
+                    7.129815909943596,
+                    5.722593963109857,
+                    906.3785930388998
+                  ],
+                  "rank": 3,
+                  "R2_descriptive": 0.7834712292997686,
+                  "RMSE_mV": 2.899089940128947
+                },
+                "time_only": {
+                  "coefficients": [
+                    7.129815909943596,
+                    43.18111475568636
+                  ],
+                  "rank": 2,
+                  "R2_descriptive": 0.26040811370182193,
+                  "RMSE_mV": 5.357965993203952
+                }
+              },
+              "fit_edge_exclusion_ms": 1.0
+            }
+          },
+          "paired_REF": {
+            "rowwise_correlation": 0.877453117599806,
+            "common_std_mV": 5.948096237524842,
+            "difference_std_mV": 3.0535422124599605,
+            "difference_step_delta_mV": 1.2196327841322852
+          }
+        }
+      ],
+      "holds": [
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_1_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6435836094388963,
+            1.6610722266411853,
+            1.6694607810878659,
+            1.6720708132095772
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_1_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6437039466405698,
+            1.6612685047953681,
+            1.6696214254104877,
+            1.6723588046679487
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_1_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6436081442081711,
+            1.661550654642009,
+            1.6703247554629814,
+            1.6730592139145792
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_1_return_REF_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6434492523690691,
+            1.6601854699803154,
+            1.668149339254106,
+            1.6709147582478803
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_2_origin_0_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6427430015107103,
+            1.641522104658791,
+            1.6843615642930205,
+            1.686678931666976
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_2_origin_1_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6430526069324891,
+            1.6414514211568363,
+            1.684204424937438,
+            1.686567356882901
+          ]
+        },
+        {
+          "run": "pilot_2_A3_REF",
+          "raw_label": "training_2_origin_2_raw_capture",
+          "kind": "HOLD",
+          "boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+          "nominal_conversion_vref_v": 4.9,
+          "channel_roles": {
+            "A1": "IN",
+            "A2": "OUT",
+            "A3": "REF",
+            "A4": "REF"
+          },
+          "sample_delay_median_us": [
+            52.0,
+            105.0,
+            158.0,
+            215.0
+          ],
+          "sample_state_before": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "sample_state_after": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "timing_valid": true,
+          "overruns": 0,
+          "means_nominal_v": [
+            1.6429007250274654,
+            1.6414333121604696,
+            1.6842587519265428,
+            1.6864382572636287
+          ]
+        }
+      ]
+    }
+  ]
+}

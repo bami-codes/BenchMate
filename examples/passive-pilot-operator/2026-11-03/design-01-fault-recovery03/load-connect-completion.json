@@ -1,0 +1,13 @@
+{
+  "request_id": "dfd137a60c7c4976b8dabc31430e3d80",
+  "recorded_utc": "2026-11-02T16:54:05.643274+00:00",
+  "operator_confirmed": true,
+  "fixed_English_report": "USB was off; I connected only the known 9.99 kohm OUT-to-REF load, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port.",
+  "ADC_roles_retained": {
+    "A3": "REF via A23\u2013A45",
+    "A4": "REF via I50 and bridge"
+  },
+  "preflight_record": "examples/passive-pilot-preflight/2026-11-03/design-01-A3REF-load-connect/20261102T165357-b853701bbd",
+  "new_unarmed_boot_id": "1520bc1a84650c4bc4756ffca02586a1",
+  "prior_observed_boot_id": "e610e36c4ad646f8548f96248ae2591e"
+}

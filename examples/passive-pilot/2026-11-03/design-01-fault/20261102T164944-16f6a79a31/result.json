@@ -1,0 +1,55 @@
+{
+  "error": "Electrical/reference guard failed; no next stimulus",
+  "instrument": {
+    "capture_attempts": 9,
+    "retained_frames": 4608,
+    "scored_captures_completed": 1,
+    "requested_wiring_interventions_completed": 2,
+    "latest_boot_id": "1e5886656f7c02f1547a50b9a00eff05",
+    "output_state_confirmed": false,
+    "automatic_retry_or_rearm": false,
+    "automatic_A4_tracking": false
+  },
+  "automatic_retry": false,
+  "provider": "meta",
+  "model": "muse-spark-1.3",
+  "reasoning_effort": "medium",
+  "http_requests": 3,
+  "usage": [
+    {
+      "input_tokens": 1877,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 62,
+      "output_tokens_details": {
+        "reasoning_tokens": 7
+      },
+      "total_tokens": 1939
+    },
+    {
+      "input_tokens": 3025,
+      "input_tokens_details": {
+        "cached_tokens": 1777
+      },
+      "output_tokens": 902,
+      "output_tokens_details": {
+        "reasoning_tokens": 800
+      },
+      "total_tokens": 3927
+    },
+    {
+      "input_tokens": 5863,
+      "input_tokens_details": {
+        "cached_tokens": 113
+      },
+      "output_tokens": 631,
+      "output_tokens_details": {
+        "reasoning_tokens": 529
+      },
+      "total_tokens": 6494
+    }
+  ],
+  "api_elapsed_s": 12.019293623743579,
+  "reserved_allowance_usd": 3.0
+}

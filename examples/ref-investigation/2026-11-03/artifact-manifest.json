@@ -1,0 +1,9 @@
+{
+  "metrics.json": "e4edac4c6a1ecb2cad01a694ca6fb86a8bb2937d8564620358d43e8acd727a8b",
+  "sine-reference.png": "952e079f08f32a25eeb405354c80c7ce0d967f79d1ab8d7027c7971afdf26752",
+  "REPORT.md": "cd8d3808f3bf5b5a2cf61b70479f3bd88f218ac67bdb8f7b7e0a7d2f37de4423",
+  "large-step-reference.png": "a8fad581ce8152521256f5d063d4ea9a6fa0817ef825c1bcc353f66d54d60245",
+  "validation.json": "eac212ea9222807e9c4483aa1aad11e1abbf16ec1c702dafcd5d128f6b7d3b50",
+  "morning-plan.json": "f3c069c0d48973c679497e3841a40da58af9b67bd24bf944f5ff1818dfe8634e",
+  "source/experiments/analyze_ref_coupling.py": "e5b25f89689bc838f4b2895ae30905b80879f8810b2191914dd2ce1d150a5845"
+}

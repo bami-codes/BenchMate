@@ -1,0 +1,15 @@
+{
+  "request_id": "bf74fbdb0b7a4d608ab9b5e060a8c06e",
+  "fixture": "unloaded",
+  "choice": "remove_output_load",
+  "instruction": "Disconnect USB and wait for the power LED to go out. Remove only the large-board E30\u2013A55 OUT-load jumper. Keep A55\u2013C35 absent, the B28\u2013B35 1 kohm resistor, B50\u2013B23, D55\u2013D60 load and C23\u2013A60 REF return, and all specimen wiring unchanged. Remove probes and reconnect the same USB port.",
+  "response_file": "runs/passive-pilot/design-01-fault-A3REF/20261102T164944-16f6a79a31/operator-response-bf74fbdb0b7a4d608ab9b5e060a8c06e.json",
+  "fixed_response": {
+    "choice": "remove_output_load",
+    "fixture": "unloaded",
+    "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  }
+}

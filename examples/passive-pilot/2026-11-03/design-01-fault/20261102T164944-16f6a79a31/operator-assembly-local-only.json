@@ -1,0 +1,73 @@
+{
+  "schema": "benchmate.operator_assembly_record.v1",
+  "operator_confirmed": true,
+  "recorded_utc": "2026-11-02T16:47:50.697403+00:00",
+  "request_id": "design-01-initial-wiring-2026-11-03",
+  "fixed_English_report": "I wired the reviewed 4.7 kohm / 1 uF mini-board with two external 10 kohm series resistors after measured IN, retained the fixed B28\u2013B35 1 kohm instrument resistor, left the calibration bridge and both optional branch jumpers absent, removed probes and reconnected the same USB port.",
+  "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+  "instrument_series_ohm": 1000.0,
+  "USB_off_wiring_confirmed": true,
+  "USB_connected_after_completion": true,
+  "part_values_are": "Operator-reported nominal markings, not newly measured component values",
+  "specimen_truth": [
+    {
+      "name": "R1",
+      "kind": "R",
+      "nodes": [
+        "MINI_IN",
+        "OUT"
+      ],
+      "value_ohm": 4700.0,
+      "contacts": "mini B3\u2013B8"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "nodes": [
+        "OUT",
+        "REF"
+      ],
+      "value_f": 1e-06,
+      "contacts": "mini D8\u2013D13"
+    },
+    {
+      "name": "Rextra1",
+      "kind": "R",
+      "nodes": [
+        "MEASURED_IN",
+        "EXTRA_MID"
+      ],
+      "value_ohm": 10000.0,
+      "contacts": "large E35\u2013E31"
+    },
+    {
+      "name": "Rextra2",
+      "kind": "R",
+      "nodes": [
+        "EXTRA_MID",
+        "MINI_IN"
+      ],
+      "value_ohm": 10000.0,
+      "contacts": "large D31\u2013D37"
+    }
+  ],
+  "green_IN_route": "large A37 \u2192 mini A3; large A35 bypass absent",
+  "absent_jumpers": [
+    "C35\u2013C30",
+    "A55\u2013C35",
+    "E30\u2013A55"
+  ],
+  "transmitted_to_model": false,
+  "pilot": true,
+  "excluded_from_evaluation": true,
+  "source_previous_assembly_record": "examples/passive-pilot-operator/2026-11-03/design-01-fault-recovery01/assembly-record.json",
+  "recovery_action": "Continuity-checked I50-to-A4 lead; A23-to-A45 REF comparison setting adopted after ten HOLDs passed; wiring retained through confirmed USB-off/reconnect.",
+  "previous_observed_boot_id": "ca1ea819804fa6b82f49965b00512fb5",
+  "ADC_roles": {
+    "A1": "measured IN",
+    "A2": "buffered OUT",
+    "A3": "REF via A23 and existing protection resistor",
+    "A4": "REF via D50\u2013G50 and I50"
+  },
+  "source_reference_QA": "examples/passive-reference-QA/2026-11-03/20261102T164218-ee4dbda508/result.json"
+}
