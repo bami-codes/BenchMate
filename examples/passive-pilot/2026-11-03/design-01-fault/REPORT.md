@@ -35,3 +35,16 @@ Session cumulative including six schematic readings: **8 calls, $0.06165445**.
 These are estimates, not account invoices. All terminal events, original tool
 calls, raw HOLD rows, source copies and failure metadata are preserved in the
 adjacent run directory. Its terminal event chain and secret scan passed.
+
+## Operator DMM follow-up
+
+The operator reported D50 and G50 each at **1.63 V**. No Arduino A4 contact
+voltage or meter range was provided. Thus both measured REF distribution points
+are near the intended reference, while the earlier A4 nominal ADC conversion was
+0.870 V. This narrows the next check to the A4 sensing path; it does not establish
+a connector or ADC fault. No additional command or Spark call was made.
+
+The operator has been asked to disconnect USB, check and reseat only the
+H50-to-Arduino-A4 lead, retain D50–G50 and all remaining wiring, remove probes,
+and reconnect the same port. Completion is pending. The original failed attempt
+and guard limits remain unchanged.

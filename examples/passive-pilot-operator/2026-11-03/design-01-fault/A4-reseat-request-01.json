@@ -1,0 +1,10 @@
+{
+  "schema": "benchmate.operator_recovery_request.v1",
+  "status": "awaiting_operator",
+  "request_id": "design-01-A4-reseat-01",
+  "USB_off_required": true,
+  "fixed_English_completion": "I disconnected USB, checked and reseated only the H50-to-Arduino-A4 lead at both ends, retained the D50-to-G50 short jumper and all other wiring, removed probes and reconnected the same USB port.",
+  "specimen_or_instrument_values_changed": false,
+  "operator_confirmed": false,
+  "next_scope": "Fresh boot preflight; no guard thresholds or firmware changes."
+}

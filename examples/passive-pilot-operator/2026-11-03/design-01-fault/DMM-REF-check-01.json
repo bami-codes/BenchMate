@@ -1,0 +1,17 @@
+{
+  "schema": "benchmate.operator_DMM_observation.v1",
+  "recorded_utc": "2026-11-02T16:03:37.581637+00:00",
+  "normalized_English_report": "D50 and G50 each read 1.63 V relative to the instructed existing blue GND rail. Arduino A4 contact voltage was not provided.",
+  "D50_v": 1.63,
+  "G50_v": 1.63,
+  "Arduino_A4_contact_v": null,
+  "reported_meter_range": null,
+  "meter_accuracy_established": false,
+  "relative_to": "Existing blue GND rail, as instructed",
+  "associated_failed_run": "runs/passive-pilot/design-01-fault/20261102T154657-b43e7683e7",
+  "failed_run_A4_nominal_ADC_mean_v": 0.8699649479452776,
+  "USB_or_wiring_change_reported_since_failed_capture": false,
+  "cause_established": false,
+  "additional_hardware_commands": 0,
+  "additional_paid_calls": 0
+}
