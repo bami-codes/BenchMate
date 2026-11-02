@@ -111,3 +111,13 @@ These are scripted simulated captures, with zero new Spark or hardware use.
 Claude owns the frontend redesign. Its controls still need to connect to the new mock endpoints and
 be tested in the browser; P1 is not yet complete end to end. Live remains unavailable. Fresh image
 intake, photo/component matching, SAM repair highlights and real repair execution remain separate steps.
+
+
+## P2 photo references — backend available
+
+The [photo evidence API](photo-evidence.md) supplies separate historical fixture photos, the
+photo-local grid, all five previous SAM trial outcomes, and the two masks on their exact input.
+Local photo observations are saved in their own revision history; the sealed case manifest and
+runner confirmations stay unchanged. No photo is asserted to show the Oct 30 or current specimen.
+The new frontend can consume these endpoints; its photo controls have not yet been connected.
+This adds no new model/API call, measurement or automatic wire-recognition accuracy result.

@@ -9,6 +9,7 @@ from ..live_viewer import allowed_origin
 from .service import CaseStore, Conflict
 from .runner_bridge import RunnerBridge
 from .runner_contract import CAPABILITIES as RUNNER_CAPABILITIES
+from .photo_service import PhotoReviewStore
 
 
 def _exact(data, keys):
@@ -24,6 +25,7 @@ def make_server(*, root, output, port=8770):
     store = CaseStore(root, output)
     token = secrets.token_urlsafe(24)
     bridge = RunnerBridge(root, store)
+    photos = PhotoReviewStore(root, store)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -68,6 +70,24 @@ def make_server(*, root, output, port=8770):
                 elif parts == ['api', 'state']:
                     self.send(200, {'mode': 'recorded_walkthrough', 'paid_api_calls': 0, 'hardware_IO': False,
                                    'cases': store.summaries(), 'original_candidate': store.demo['result']['candidate']})
+                elif parts == ['api', 'photo-evidence']:
+                    self.send(200, photos.catalog.list())
+                elif len(parts) >= 3 and parts[:2] == ['api', 'photo-evidence']:
+                    photo_id = parts[2]
+                    if len(parts) == 3:
+                        self.send(200, photos.catalog.describe(photo_id))
+                    elif len(parts) == 4 and parts[3] == 'grid':
+                        self.send(200, photos.catalog.grid(photo_id))
+                    elif len(parts) == 4 and parts[3] == 'image':
+                        query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                        view = query.get('view', ['overview'])
+                        if set(query) - {'view'} or len(view) != 1:
+                            raise ValueError('Invalid photo view')
+                        self.send(200, photos.catalog.image(photo_id, view[0]), 'image/png')
+                    elif len(parts) == 6 and parts[3] in ('masks', 'overlays'):
+                        self.send(200, photos.catalog.mask(photo_id, parts[4], parts[5], overlay=parts[3] == 'overlays'), 'image/png')
+                    else:
+                        self.send(404, {'error': 'Not found'})
                 elif parts == ['api', 'runner-capabilities']:
                     self.send(200, RUNNER_CAPABILITIES)
                 elif len(parts) in (3, 4) and parts[:2] == ['api', 'runs']:
@@ -87,6 +107,8 @@ def make_server(*, root, output, port=8770):
                     identity = parts[2]
                     if len(parts) == 3:
                         self.send(200, store.get(identity))
+                    elif parts[3] == 'photo-reviews':
+                        self.send(200, photos.list(identity))
                     elif parts[3] == 'runs':
                         self.send(200, bridge.list_runs(identity))
                     elif parts[3] == 'replay':
@@ -125,7 +147,9 @@ def make_server(*, root, output, port=8770):
                     _exact(data, ['question', 'scope'])
                     self.send(201, store.create(data['question'], data['scope']))
                 elif len(parts) == 4 and parts[:2] == ['api', 'cases']:
-                    if parts[3] == 'runs':
+                    if parts[3] == 'photo-reviews':
+                        self.send(200, photos.review(parts[2], data))
+                    elif parts[3] == 'runs':
                         self.send(200, bridge.launch(parts[2], data))
                     elif parts[3] == 'review':
                         _exact(data, ['revision', 'candidate', 'review_note'])
@@ -164,5 +188,6 @@ def make_server(*, root, output, port=8770):
 
     server = Server(('127.0.0.1', port), Handler)
     server.runner_bridge = bridge
+    server.photo_store = photos
     server.case_store = store
     return server

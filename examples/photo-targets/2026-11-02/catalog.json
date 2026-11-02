@@ -1,0 +1,335 @@
+{
+  "schema": "benchmate.photo_evidence_catalog.v1",
+  "photos": [
+    {
+      "id": "img_8886",
+      "label": "IMG_8886 \u00b7 historical fixture photograph",
+      "private": true,
+      "coordinate_system": "oriented-master pixel edges",
+      "master": {
+        "path": ".private/photo-bench/library-20261102/photo-2338c122b0cdbd4d/master.png",
+        "sha256": "7eceb3f897e752090cf27ca83098e67b0bed0c1dab216cd46b7c5f3ac61ea41d",
+        "width": 3024,
+        "height": 4032
+      },
+      "overview": {
+        "path": ".private/photo-bench/library-20261102/photo-2338c122b0cdbd4d/overview.png",
+        "sha256": "c4bc9c5bc79f459baecd993a61c2a991163c72a85333b5a778c0e01d3e4b2911",
+        "width": 1200,
+        "height": 1600,
+        "transform": {
+          "left": 0,
+          "top": 0,
+          "right": 3024,
+          "bottom": 4032,
+          "output_width": 1200,
+          "output_height": 1600
+        }
+      },
+      "state_id": null,
+      "same_state_verified": false,
+      "role": "historical_development_reference",
+      "sam_trials": [],
+      "targets": []
+    },
+    {
+      "id": "img_8887",
+      "label": "IMG_8887 \u00b7 historical fixture photograph",
+      "private": true,
+      "coordinate_system": "oriented-master pixel edges",
+      "master": {
+        "path": ".private/photo-bench/library-20261102/photo-1dfbb3d87b87add3/master.png",
+        "sha256": "628e8d620831ed4b3806958a687a434db5817e69398a3d6732b7486e78d13159",
+        "width": 3024,
+        "height": 4032
+      },
+      "overview": {
+        "path": ".private/photo-bench/library-20261102/photo-1dfbb3d87b87add3/overview.png",
+        "sha256": "0a348836eb9527ff9f8c11f011fa19342b80c41c8213bd19a0c793b4a15fda31",
+        "width": 1200,
+        "height": 1600,
+        "transform": {
+          "left": 0,
+          "top": 0,
+          "right": 3024,
+          "bottom": 4032,
+          "output_width": 1200,
+          "output_height": 1600
+        }
+      },
+      "state_id": null,
+      "same_state_verified": false,
+      "role": "historical_development_reference",
+      "sam_trials": [],
+      "targets": [
+        {
+          "id": "lower-orange",
+          "description": "Orange wire connector in lower terminal strip, left of purple wire",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "lower-purple",
+          "description": "Purple wire connector in lower terminal strip",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "lower-white",
+          "description": "White wire connector in lower terminal strip, right of green crossing",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "lower-green-occlusion",
+          "description": "Lower terminal area behind the thick green crossing wire",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "upper-blue",
+          "description": "Blue wire connector in upper terminal strip near centre-right",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "upper-gray",
+          "description": "Gray wire connector at the right of upper terminal strip",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "upper-black",
+          "description": "Short black connector behind the gray connector at upper right",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "axial-upper-lead",
+          "description": "Upper visible lead of the small vertical axial component near upper-right gray connector",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "axial-lower-lead",
+          "description": "Lower lead of that vertical axial component near the centre trench",
+          "kind": "endpoint_check"
+        },
+        {
+          "id": "loose-metal-tip",
+          "description": "Exposed copper-colored tip above the board, left of centre",
+          "kind": "endpoint_check"
+        }
+      ],
+      "grid": {
+        "path": "examples/photo-grid/2026-11-02/first-result.json",
+        "sha256": "017b68558fc75e3b043d2be2e23aca52852b14de416504e15b6aff03ebce6ce3"
+      }
+    },
+    {
+      "id": "img_8892",
+      "label": "IMG_8892 \u00b7 historical fixture photograph",
+      "private": true,
+      "coordinate_system": "oriented-master pixel edges",
+      "master": {
+        "path": ".private/photo-bench/library-20261102/photo-616e1a5a83fc4ca0/master.png",
+        "sha256": "abf458416c456c35a4f52b2dbd18f40177f28365e6f0e8a4b10ff2adefd92787",
+        "width": 3024,
+        "height": 4032
+      },
+      "overview": {
+        "path": ".private/photo-bench/library-20261102/photo-616e1a5a83fc4ca0/overview.png",
+        "sha256": "da8993f98856368b69a732a13577d2028999f2d8838fa06137b9a26d30480c58",
+        "width": 1200,
+        "height": 1600,
+        "transform": {
+          "left": 0,
+          "top": 0,
+          "right": 3024,
+          "bottom": 4032,
+          "output_width": 1200,
+          "output_height": 1600
+        }
+      },
+      "state_id": null,
+      "same_state_verified": false,
+      "role": "historical_development_reference",
+      "sam_trials": [],
+      "targets": []
+    },
+    {
+      "id": "img_8885",
+      "label": "IMG_8885 \u00b7 archived SAM probe",
+      "private": false,
+      "coordinate_system": "archived-input pixel edges",
+      "master": {
+        "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+        "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34",
+        "width": 1200,
+        "height": 1600
+      },
+      "overview": {
+        "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+        "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34",
+        "width": 1200,
+        "height": 1600,
+        "transform": {
+          "left": 0,
+          "top": 0,
+          "right": 1200,
+          "bottom": 1600,
+          "output_width": 1200,
+          "output_height": 1600
+        }
+      },
+      "state_id": null,
+      "same_state_verified": false,
+      "role": "historical_development_reference",
+      "sam_trials": [
+        {
+          "id": "sam-1",
+          "concept": "capacitor",
+          "match_count": 0,
+          "source_actor": "SAM 3.1, recorded Nov 1",
+          "input": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+            "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+          },
+          "events": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/events.jsonl",
+            "sha256": "d88f2590d83f6e959d3f83a9afb4029244936a230e789e3c3746c160540b56b0"
+          },
+          "decoded": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/capacitor-decoded.json",
+            "sha256": "22248bd3d6f6e1829a2714cac211ba93d997cfe170d1de117dd53cf0cfab4911"
+          },
+          "masks": []
+        },
+        {
+          "id": "sam-2",
+          "concept": "resistor",
+          "match_count": 1,
+          "source_actor": "SAM 3.1, recorded Nov 1",
+          "input": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+            "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+          },
+          "events": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/events.jsonl",
+            "sha256": "d88f2590d83f6e959d3f83a9afb4029244936a230e789e3c3746c160540b56b0"
+          },
+          "decoded": {
+            "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/resistor-decoded.json",
+            "sha256": "007de9b8d2900f5a0a322228c05a434a3197ed7f2b1935b36d993fd436b9efc9"
+          },
+          "masks": [
+            {
+              "id": "0",
+              "bounds_half_open": [
+                277,
+                663,
+                478,
+                724
+              ],
+              "confidence": 0.5631399154663086,
+              "confidence_is_accuracy": false,
+              "mask": {
+                "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/resistor-object-0-mask.png",
+                "sha256": "da50e6fb530514283ff4d2addc85c161c16f2363ea410884b4f64d1d56605288"
+              },
+              "overlay": {
+                "path": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/resistor-object-0-overlay.png",
+                "sha256": "1bec0cbccbff68fe9ff6bda03ab7f90d76487ef7cbe431ab2373e8923ae4a9b3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sam-3",
+          "concept": "blue capacitor",
+          "match_count": 0,
+          "source_actor": "SAM 3.1, recorded Nov 1",
+          "input": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/input.png",
+            "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+          },
+          "events": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/events.jsonl",
+            "sha256": "b2ff44380e8cdf9f5c6a50786adb8853d0bcf2139ef238e4a94ccfecddfe5301"
+          },
+          "decoded": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/render/blue capacitor-decoded.json",
+            "sha256": "c79707a27404a0805fb0aa79714cc3dc06226a73e9b39eb929c2ca7a54d0cb08"
+          },
+          "masks": []
+        },
+        {
+          "id": "sam-4",
+          "concept": "blue rectangular component",
+          "match_count": 1,
+          "source_actor": "SAM 3.1, recorded Nov 1",
+          "input": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/input.png",
+            "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+          },
+          "events": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/events.jsonl",
+            "sha256": "b2ff44380e8cdf9f5c6a50786adb8853d0bcf2139ef238e4a94ccfecddfe5301"
+          },
+          "decoded": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/render/blue rectangular component-decoded.json",
+            "sha256": "8ca668d181df05e560a8c0091835fe9ecfa60b2fc80b93fdeeec81b4fc9a14a7"
+          },
+          "masks": [
+            {
+              "id": "0",
+              "bounds_half_open": [
+                534,
+                535,
+                696,
+                766
+              ],
+              "confidence": 0.9532163739204407,
+              "confidence_is_accuracy": false,
+              "mask": {
+                "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/render/blue rectangular component-object-0-mask.png",
+                "sha256": "b91d3cef39ff43b4e11b5f292e2a9bc131cbb1466778929b54df0a1cfccb1dd9"
+              },
+              "overlay": {
+                "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/render/blue rectangular component-object-0-overlay.png",
+                "sha256": "2d5866c72cd36f4e69b46bf595fa80fe90fa5ff1692445f4ed2042bd02a19db3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sam-5",
+          "concept": "film capacitor",
+          "match_count": 0,
+          "source_actor": "SAM 3.1, recorded Nov 1",
+          "input": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/input.png",
+            "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+          },
+          "events": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/events.jsonl",
+            "sha256": "b2ff44380e8cdf9f5c6a50786adb8853d0bcf2139ef238e4a94ccfecddfe5301"
+          },
+          "decoded": {
+            "path": "examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/render/film capacitor-decoded.json",
+            "sha256": "9cfa02267011985559553193c4976ebfab76e26c7921866164198eed84c921bc"
+          },
+          "masks": []
+        }
+      ],
+      "targets": [
+        {
+          "id": "visible-resistor",
+          "description": "Visible resistor in archived SAM photo; circuit reference unverified",
+          "kind": "body_check"
+        },
+        {
+          "id": "blue-body",
+          "description": "Visible blue box body; not identified as the D01 extra capacitor",
+          "kind": "body_check"
+        }
+      ]
+    }
+  ],
+  "external_requests": 0,
+  "hardware_IO": false,
+  "selection_note": "Development targets selected after visual inspection; not blind ground truth. No new Spark/SAM trial or endpoint accuracy score.",
+  "state_groups": []
+}
