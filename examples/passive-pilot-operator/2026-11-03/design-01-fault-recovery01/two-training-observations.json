@@ -1,0 +1,57 @@
+{
+  "run": "runs/passive-pilot/design-01-fault-recovery01/20261102T160841-eff2b65334",
+  "scope": "Two training measurements only; reserved verification not yet acquired.",
+  "completed_actions": [
+    "unloaded_step_small",
+    "loaded_step_small"
+  ],
+  "surviving_value_hypotheses": [
+    "changed:R1"
+  ],
+  "scores": [
+    {
+      "id": "nominal",
+      "status": "inadequate",
+      "fitted_parameters": {},
+      "training_RMS_mV": [
+        66.9473247534103,
+        77.28433344206704
+      ],
+      "training_worst_region_RMS_mV": [
+        203.08313782707953,
+        88.2477456493884
+      ]
+    },
+    {
+      "id": "changed:R1",
+      "status": "adequate",
+      "fitted_parameters": {
+        "R1": 25973.560943422683
+      },
+      "training_RMS_mV": [
+        4.482618565146048,
+        3.3925228238249727
+      ],
+      "training_worst_region_RMS_mV": [
+        5.536695049844978,
+        4.245177455354237
+      ]
+    },
+    {
+      "id": "changed:C1",
+      "status": "inadequate",
+      "fitted_parameters": {
+        "C1": 6.1285451697801645e-06
+      },
+      "training_RMS_mV": [
+        7.314262391528198,
+        70.03670781135271
+      ],
+      "training_worst_region_RMS_mV": [
+        12.326747102977539,
+        76.65191492900635
+      ]
+    }
+  ],
+  "interpretation_limit": "An effective series-path increase is not proof that the visible R1 itself changed or of an exact hidden-part location."
+}
