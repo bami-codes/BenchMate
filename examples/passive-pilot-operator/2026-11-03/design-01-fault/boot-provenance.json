@@ -1,0 +1,8 @@
+{
+  "last_retained_historical_boot_id": "32edea4b481494f595ac2d2bf5cd3a17",
+  "source": "examples/hardware-d01-repair/2026-10-30/conditional-capture/result.json",
+  "scope": "Retained historical identity, not a direct observation immediately before the latest USB-off intervention.",
+  "new_unarmed_preflight_boot_id": "87f3ec0c24b67f0b880bcc4d372f2bd4",
+  "preflight": "examples/passive-pilot-preflight/2026-11-03/design-01/20261102T154541-cfc32afb4a/result.json",
+  "operator_confirmed_USB_off_then_reconnect": true
+}
