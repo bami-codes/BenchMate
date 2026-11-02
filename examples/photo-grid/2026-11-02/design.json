@@ -1,0 +1,610 @@
+{
+  "schema": "benchmate.grid_calibration_design.v1",
+  "photo": "IMG_8887.HEIC",
+  "master_sha256": "628e8d620831ed4b3806958a687a434db5817e69398a3d6732b7486e78d13159",
+  "purpose": "development geometry on one photo, not blind circuit reconstruction",
+  "coordinates": "oriented master pixel centres expressed in pixel-edge coordinates",
+  "grid_axes": "column 0 = rightmost terminal column; increasing left; row 0 = image-top row of each strip",
+  "electrical_address_mapping": "unconfirmed; opposite printed legends are not treated as a safe absolute address map",
+  "method": "separate normalized DLT homography for each five-row terminal strip; four anchors each",
+  "candidate_centres": "8-connected dark components, threshold 95; manually reviewed IDs; add 0.5 to OpenCV pixel-index centroids",
+  "threshold_p95_pitch": 0.25,
+  "minimum_checks_per_strip": 20,
+  "new_tuning_on_check_errors": false,
+  "strips": {
+    "upper": {
+      "fit": [
+        {
+          "grid": [
+            0,
+            0
+          ],
+          "image_xy": [
+            2291.0548387096774,
+            1507.1
+          ],
+          "candidate_id": 37,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            29,
+            0
+          ],
+          "image_xy": [
+            1037.7905982905984,
+            1593.940170940171
+          ],
+          "candidate_id": 60,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            4
+          ],
+          "image_xy": [
+            2314.205882352941,
+            1673.8823529411766
+          ],
+          "candidate_id": 124,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            29,
+            4
+          ],
+          "image_xy": [
+            1048.4259259259259,
+            1764.5925925925926
+          ],
+          "candidate_id": 131,
+          "annotation": "visually reviewed candidate centroid"
+        }
+      ],
+      "check": [
+        {
+          "grid": [
+            2,
+            0
+          ],
+          "image_xy": [
+            2204.8586206896553,
+            1512.5620689655173
+          ],
+          "candidate_id": 35,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            18,
+            0
+          ],
+          "image_xy": [
+            1516.3682926829267,
+            1562.2414634146342
+          ],
+          "candidate_id": 42,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            22,
+            0
+          ],
+          "image_xy": [
+            1343.287610619469,
+            1573.2079646017698
+          ],
+          "candidate_id": 40,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            27,
+            0
+          ],
+          "image_xy": [
+            1125.2363636363636,
+            1588.0772727272727
+          ],
+          "candidate_id": 38,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            2,
+            1
+          ],
+          "image_xy": [
+            2210.6301369863013,
+            1554.4109589041095
+          ],
+          "candidate_id": 55,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            1
+          ],
+          "image_xy": [
+            2081.12091503268,
+            1563.8333333333333
+          ],
+          "candidate_id": 53,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            8,
+            1
+          ],
+          "image_xy": [
+            1952.335294117647,
+            1573.4352941176471
+          ],
+          "candidate_id": 50,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            27,
+            1
+          ],
+          "image_xy": [
+            1128.07805907173,
+            1630.5886075949368
+          ],
+          "candidate_id": 62,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            2
+          ],
+          "image_xy": [
+            2303.1363636363635,
+            1589.1233766233765
+          ],
+          "candidate_id": 58,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            2,
+            2
+          ],
+          "image_xy": [
+            2215.784722222222,
+            1596.4375
+          ],
+          "candidate_id": 85,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            2
+          ],
+          "image_xy": [
+            2086.1866666666665,
+            1606.0933333333332
+          ],
+          "candidate_id": 81,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            8,
+            2
+          ],
+          "image_xy": [
+            1956.932098765432,
+            1615.4938271604938
+          ],
+          "candidate_id": 78,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            3
+          ],
+          "image_xy": [
+            2308.5581395348836,
+            1631.6627906976744
+          ],
+          "candidate_id": 89,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            2,
+            3
+          ],
+          "image_xy": [
+            2221.6466666666665,
+            1638.4933333333333
+          ],
+          "candidate_id": 86,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            3
+          ],
+          "image_xy": [
+            2091.2608695652175,
+            1648.6666666666667
+          ],
+          "candidate_id": 82,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            8,
+            3
+          ],
+          "image_xy": [
+            1962.078313253012,
+            1657.7590361445782
+          ],
+          "candidate_id": 114,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            2,
+            4
+          ],
+          "image_xy": [
+            2226.9901960784314,
+            1680.5653594771243
+          ],
+          "candidate_id": 122,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            17,
+            4
+          ],
+          "image_xy": [
+            1575.6375,
+            1728.0791666666667
+          ],
+          "candidate_id": 142,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            24,
+            4
+          ],
+          "image_xy": [
+            1268.6921568627452,
+            1749.1666666666667
+          ],
+          "candidate_id": 138,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            28,
+            4
+          ],
+          "image_xy": [
+            1092.7420634920634,
+            1761.4563492063492
+          ],
+          "candidate_id": 133,
+          "annotation": "visually reviewed candidate centroid"
+        }
+      ],
+      "columns": 63,
+      "rows": 5,
+      "rails": "excluded; not calibrated"
+    },
+    "lower": {
+      "fit": [
+        {
+          "grid": [
+            0,
+            0
+          ],
+          "image_xy": [
+            2332.097989949749,
+            1799.640703517588
+          ],
+          "candidate_id": 162,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            27,
+            0
+          ],
+          "image_xy": [
+            1145.0434782608695,
+            1887.2934782608695
+          ],
+          "candidate_id": 165,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            4
+          ],
+          "image_xy": [
+            2356.896226415094,
+            1972.4150943396226
+          ],
+          "candidate_id": 273,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            27,
+            4
+          ],
+          "image_xy": [
+            1157.0071428571428,
+            2062.1178571428572
+          ],
+          "candidate_id": 284,
+          "annotation": "visually reviewed candidate centroid"
+        }
+      ],
+      "check": [
+        {
+          "grid": [
+            3,
+            0
+          ],
+          "image_xy": [
+            2201.2736842105264,
+            1810.2631578947369
+          ],
+          "candidate_id": 159,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            0
+          ],
+          "image_xy": [
+            2114.1378378378377,
+            1817.2513513513513
+          ],
+          "candidate_id": 157,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            22,
+            0
+          ],
+          "image_xy": [
+            1366.6875,
+            1870.8970588235295
+          ],
+          "candidate_id": 169,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            24,
+            0
+          ],
+          "image_xy": [
+            1278.0285171102662,
+            1877.4809885931559
+          ],
+          "candidate_id": 167,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            1
+          ],
+          "image_xy": [
+            2338.4375,
+            1842.389423076923
+          ],
+          "candidate_id": 189,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            3,
+            1
+          ],
+          "image_xy": [
+            2206.314207650273,
+            1853.2814207650274
+          ],
+          "candidate_id": 185,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            1
+          ],
+          "image_xy": [
+            2119.245,
+            1859.845
+          ],
+          "candidate_id": 183,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            25,
+            1
+          ],
+          "image_xy": [
+            1236.9928571428572,
+            1924.2142857142858
+          ],
+          "candidate_id": 206,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            2,
+            2
+          ],
+          "image_xy": [
+            2256.0895953757226,
+            1893.263005780347
+          ],
+          "candidate_id": 230,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            5,
+            2
+          ],
+          "image_xy": [
+            2124.740837696335,
+            1903.3638743455497
+          ],
+          "candidate_id": 224,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            9,
+            2
+          ],
+          "image_xy": [
+            1948.7623762376238,
+            1916.3267326732673
+          ],
+          "candidate_id": 220,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            25,
+            2
+          ],
+          "image_xy": [
+            1240.0693950177936,
+            1967.9199288256227
+          ],
+          "candidate_id": 242,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            0,
+            3
+          ],
+          "image_xy": [
+            2350.9433497536947,
+            1928.9187192118227
+          ],
+          "candidate_id": 233,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            4,
+            3
+          ],
+          "image_xy": [
+            2173.8197674418607,
+            1943.75
+          ],
+          "candidate_id": 227,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            7,
+            3
+          ],
+          "image_xy": [
+            2042.086387434555,
+            1953.5
+          ],
+          "candidate_id": 265,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            25,
+            3
+          ],
+          "image_xy": [
+            1243.173611111111,
+            2011.6284722222222
+          ],
+          "candidate_id": 287,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            3,
+            4
+          ],
+          "image_xy": [
+            2224.222513089005,
+            1984.0287958115184
+          ],
+          "candidate_id": 270,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            6,
+            4
+          ],
+          "image_xy": [
+            2091.849753694581,
+            1993.7660098522167
+          ],
+          "candidate_id": 267,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            19,
+            4
+          ],
+          "image_xy": [
+            1515.1315789473683,
+            2035.6353383458647
+          ],
+          "candidate_id": 294,
+          "annotation": "visually reviewed candidate centroid"
+        },
+        {
+          "grid": [
+            24,
+            4
+          ],
+          "image_xy": [
+            1291.3447653429603,
+            2051.9548736462093
+          ],
+          "candidate_id": 289,
+          "annotation": "visually reviewed candidate centroid"
+        }
+      ],
+      "columns": 63,
+      "rows": 5,
+      "rails": "excluded; not calibrated"
+    }
+  }
+}
