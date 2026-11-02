@@ -1,20 +1,225 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="benchmate-session" content="SESSION_TOKEN"><title>BenchMate · Ask the bench</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="benchmate-session" content="SESSION_TOKEN">
+<title>BenchMate</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
 <body>
-<a class="skip" href="#main">Skip to conversation</a>
-<header><a class="wordmark" href="/">BenchMate<span>Ask the bench.</span></a><div class="library"><label for="case-picker" class="sr-only">Saved questions</label><select id="case-picker"><option value="">Start a question</option></select><button id="new-case" type="button">New question</button></div></header>
-<div class="provenance-line">Replay of the Oct 30 physical run. Spark’s decisions and the measurements are recorded. Your question is new.</div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap">
+  <a class="word" href="/">BenchMate</a>
+  <div class="library">
+    <label for="case-picker" class="sr">Saved questions</label>
+    <select id="case-picker"><option value="">Saved questions</option></select>
+    <button id="new-case" class="btn" type="button">New question</button>
+  </div>
+</div></header>
+
 <main id="main">
-<div id="notice" role="alert" hidden></div>
-<section id="question-panel" class="welcome"><p class="eyebrow">A design. A real circuit. A difference to explain.</p><h1>Ask why reality<br>differs from the design.</h1><form id="question-form"><label for="question">Your question</label><textarea id="question" rows="3" maxlength="2000" required>My 10 kΩ, 1 µF low-pass responds more slowly than designed. Why?</textarea><label for="scope">Explore with</label><select id="scope"><option value="recorded_walkthrough">The recorded D01 example</option><option value="different_specimen">A different circuit</option></select><button class="primary" type="submit">Review the design <span aria-hidden="true">→</span></button></form><p class="subtle">This walkthrough connects your question to an existing experiment. No board or API key needed.</p></section>
-<div id="case-panel" hidden>
-<div class="workspace"><div class="conversation">
-<section class="message question-message"><p class="actor">You <span>New local question</span></p><h1 id="saved-question"></h1><p id="scope-note" class="subtle"></p></section>
-<section id="design-panel" class="message"><p class="actor">BenchMate <span>Understanding the intended design</span></p><h2>A low-pass filter, as designed.</h2><div class="design-layout"><a href="/schematic.png" target="_blank" rel="noopener" aria-label="Open the recorded schematic"><img src="/schematic.png" alt="Recorded schematic: R1 from IN to OUT; C1 from OUT to REF."></a><form id="review-form"><fieldset id="review-fields"><legend class="sr-only">Review component values and connections</legend><div id="components"></div><button id="confirm-design" class="primary" type="submit">Confirm design & explore record</button></fieldset></form></div><p id="design-origin" class="subtle">Read from this schematic by Muse Spark on Oct 31. The Oct 30 run was given the same design, 10 kΩ and 1 µF, in its protocol.</p><p id="gate" role="status"></p></section>
-<div id="record-panel" hidden><nav class="playback" aria-label="Recorded conversation playback"><button id="back" type="button" aria-label="Previous recorded step">← Back</button><button id="play" type="button">Play replay</button><button id="next" type="button">Next step →</button><output id="position"></output><label class="sr-only" for="cursor">Recorded event</label><input id="cursor" type="range" min="0" max="139" value="0"><p id="step-status" class="sr-only" aria-live="polite"></p></nav><div id="messages"></div><section id="answer" class="message answer" hidden></section><section id="followups" class="message" hidden><p class="actor">Ask about the evidence</p><div id="followup-buttons" class="followup-buttons"></div><div id="followup-answer" hidden></div></section></div>
-<details class="evidence" id="evidence"><summary>Evidence & sources</summary><p class="subtle">Original events and local review history. The schematic reading and physical experiment are separate records; no common assembly-photo state is established.</p><div class="evidence-links"><a id="export">Download case history</a><a id="original-viewer" target="_blank" rel="noopener" hidden>Open full archived viewer</a></div><dl id="provenance"></dl><div id="event-list"></div><pre id="event-original" tabindex="0" hidden></pre><details><summary>Local case manifest</summary><pre id="manifest"></pre></details></details>
+<div id="notice" class="notice wrap" role="alert" hidden></div>
+
+<!-- Ask -->
+<section id="ask" class="ask wrap" aria-labelledby="ask-title">
+  <div class="ask-main">
+    <h1 id="ask-title">Ask why your circuit behaves differently from its design.</h1>
+    <p class="lead">BenchMate starts from the schematic, lets Muse Spark choose experiments on a real bench, and answers with measurements you can check.</p>
+    <form id="ask-form">
+      <label class="field-label" for="question">Your question</label>
+      <textarea id="question" rows="3" maxlength="2000" required>My 10 kΩ, 1 µF low-pass responds more slowly than designed. Why?</textarea>
+      <fieldset class="scope-pick">
+        <legend class="field-label">Circuit</legend>
+        <label class="radio"><input type="radio" name="scope" value="recorded_walkthrough" checked><span><b>The recorded example</b>A 10 kΩ, 1 µF low-pass measured on Oct 30</span></label>
+        <label class="radio"><input type="radio" name="scope" value="different_specimen"><span><b>A different circuit</b>Needs its own measurements; the recorded run cannot answer for it</span></label>
+      </fieldset>
+      <button class="primary" type="submit">Review the design</button>
+    </form>
+    <p class="note">The example replays a recorded physical run. No board or API key is needed to explore it.</p>
+  </div>
+  <figure class="ask-figure">
+    <img src="/schematic.png" alt="The example schematic: R1 10 kΩ from IN to OUT, C1 1 µF from OUT to REF">
+    <figcaption>The example's schematic</figcaption>
+  </figure>
+</section>
+
+<!-- A case -->
+<div id="case" hidden>
+  <section class="head wrap" aria-labelledby="q">
+    <div class="head-text">
+      <p class="asked">You asked</p>
+      <h1 id="q" class="question"></h1>
+      <div class="answerline" id="answerline" aria-live="polite"></div>
+    </div>
+    <figure class="boardslot" id="boardslot">
+      <button id="board-open" class="photo-open" type="button" aria-label="Open photo evidence" disabled><img id="board-photo" alt="Historical board reference" hidden></button>
+      <div class="ph" id="board-ph">No board photo linked to this case</div>
+      <figcaption id="board-caption">No specimen photo linked</figcaption>
+    </figure>
+    <figure class="schem" id="schem" aria-label="The design"></figure>
+  </section>
+
+  <!-- Design review -->
+  <section id="review" class="review" aria-labelledby="review-title" hidden>
+    <div class="wrap review-in">
+      <div class="review-image">
+        <div class="readimg"><img src="/schematic.png" alt="The schematic Muse Spark read"></div>
+        <p class="note">Muse Spark read these parts, values and connections from this schematic on Oct 31.</p>
+      </div>
+      <form id="review-form" class="review-form">
+        <h2 id="review-title">Confirm the design to explore the record</h2>
+        <p class="sub">The archived run used these same nominal values. Your confirmation is new; it does not change the Oct 30 record.</p>
+        <fieldset id="review-fields">
+          <legend class="sr">Component values and connections</legend>
+          <div id="components"></div>
+          <button id="confirm-design" class="primary" type="submit">Confirm design</button>
+        </fieldset>
+        <p id="gate" class="gate" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Replay -->
+  <div id="replay" hidden>
+    <div class="strip"><div class="wrap strip-in"><b>Replay of the Oct 30 physical run</b><span>Muse Spark's decisions and every measurement are recorded. Your question is new.</span></div></div>
+    <div class="stagewrap">
+    <section class="stage wrap" aria-label="Recorded experiment">
+      <div class="instrument">
+        <div class="scopes">
+          <figure class="scope">
+            <h2>If the resistance grew</h2>
+            <div class="screen"><div class="key" id="keyA"></div><svg id="scrA" viewBox="0 0 500 400" preserveAspectRatio="none" role="img" aria-label="Resistance explanation against the measurement"></svg><div class="overlay" id="ovA" hidden></div></div>
+            <div class="under"><div class="verdict" id="vA"></div><div class="readout" id="roA"></div></div>
+          </figure>
+          <figure class="scope">
+            <h2>If the capacitance grew</h2>
+            <div class="screen"><div class="key" id="keyB"></div><svg id="scrB" viewBox="0 0 500 400" preserveAspectRatio="none" role="img" aria-label="Capacitance explanation against the measurement"></svg><div class="overlay" id="ovB" hidden></div></div>
+            <div class="under"><div class="verdict" id="vB"></div><div class="readout" id="roB"></div></div>
+          </figure>
+        </div>
+        <div class="conds" role="group" aria-label="Measurement shown">
+          <button class="cond" type="button" data-c="unloaded_step">Unloaded step</button>
+          <button class="cond" type="button" data-c="attach_output_load_step">With the 9.99 kΩ load</button>
+          <button class="cond" type="button" data-c="reserved_sine">Reserved 5 Hz sine</button>
+          <span class="allow">Curves use the locked values and the measured input. Pass: within 9 mV RMS overall and in every region.</span>
+        </div>
+        <div class="transport">
+          <div class="keys">
+            <button class="btn sq" id="back" type="button" aria-label="Previous step"><svg width="12" height="12" aria-hidden="true"><path d="M10 1L3 6l7 5z"/></svg></button>
+            <button class="btn play" id="play" type="button"><svg width="11" height="12" aria-hidden="true" id="playicon"><path d="M1 .5l9 5.5-9 5.5z"/></svg><span id="playlabel">Play the run</span></button>
+            <button class="btn sq" id="fwd" type="button" aria-label="Next step"><svg width="12" height="12" aria-hidden="true"><path d="M2 1l7 5-7 5z"/></svg></button>
+          </div>
+          <div class="rail" id="rail" role="group" aria-label="Steps of the run"></div>
+          <div class="clock" id="clock" aria-live="off"></div>
+        </div>
+      </div>
+      <aside class="log" aria-label="Run log">
+        <h2>Run log</h2>
+        <p class="sub">Time since the run started</p>
+        <div class="logscroll" id="logscroll"><ol class="entries" id="entries"></ol></div>
+      </aside>
+    </section>
+    </div>
+
+    <section class="more wrap">
+      <div>
+        <h3>How the answer holds up</h3>
+        <div class="holds" id="holds"></div>
+        <ul class="ledger" id="ledger"></ul>
+        <div class="act"><button class="primary" type="button" disabled>Restore the design and re-test</button><span class="note">Needs the live bench. This replay has no repair. Rehearse it below on a simulated bench.</span></div>
+        <div id="ask-more" hidden>
+          <h3>Ask about this result</h3>
+          <div class="asks" id="asks"></div>
+          <div class="reply" id="reply" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="source">
+        <h3>Where the design came from</h3>
+        <img src="/schematic.png" alt="The schematic file Muse Spark read">
+        <p>The schematic file. Muse Spark read R1 10 kΩ and C1 1 µF from it on Oct 31, and you confirmed them. The Oct 30 run received the same values from its protocol.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripted mock -->
+  <section id="mock" class="mock" aria-labelledby="mock-title" hidden>
+    <div class="strip sim"><div class="wrap strip-in"><b>Scripted mock on a simulated bench</b><span>A script, not Muse Spark, makes the choices. No board, no API calls.</span></div></div>
+    <div class="wrap mock-head">
+      <div>
+        <h2 id="mock-title">Rehearse the repair</h2>
+        <p class="sub">The same protocol runs again on a simulated circuit, then tries the repair: remove the extra capacitance and check that the frozen forecast holds. You confirm each simulated wiring step.</p>
+      </div>
+      <div class="mock-controls" id="mock-controls">
+        <label class="field-label" for="fault">Simulated scenario</label>
+        <select id="fault">
+          <option value="none">The repair works</option>
+          <option value="repair_failed">The capacitor stays in</option>
+          <option value="reserved_failure">Disturbance on the repaired sine</option>
+          <option value="stale_boot">The board does not restart</option>
+          <option value="reset_during_reserved">Reset during the repaired sine</option>
+          <option value="publication_failure">The forecast cannot be frozen</option>
+        </select>
+        <button class="primary" id="mock-start" type="button">Start a simulated run</button>
+        <select id="mock-runs" aria-label="Earlier simulated runs" hidden></select>
+        <p id="mock-error" class="mock-error" role="alert" hidden></p>
+      </div>
+    </div>
+    <div class="stagewrap" id="mock-stage" hidden>
+    <section class="stage wrap" aria-label="Simulated run">
+      <div class="instrument">
+        <div id="mock-status" class="mock-status" aria-live="polite"></div>
+        <div id="mock-card"></div>
+        <div class="scopes">
+          <figure class="scope">
+            <h2>If the repair worked</h2>
+            <div class="screen simscreen"><div class="key" id="keyR"></div><svg id="scrR" viewBox="0 0 500 400" preserveAspectRatio="none" role="img" aria-label="Restored design against the simulated measurement"></svg><div class="overlay" id="ovR" hidden></div></div>
+            <div class="under"><div class="verdict" id="vR"></div><div class="readout" id="roR"></div></div>
+            <div class="fcast" id="fR"></div>
+          </figure>
+          <figure class="scope">
+            <h2>If nothing changed</h2>
+            <div class="screen simscreen"><div class="key" id="keyU"></div><svg id="scrU" viewBox="0 0 500 400" preserveAspectRatio="none" role="img" aria-label="Unchanged circuit against the simulated measurement"></svg><div class="overlay" id="ovU" hidden></div></div>
+            <div class="under"><div class="verdict" id="vU"></div><div class="readout" id="roU"></div></div>
+            <div class="fcast" id="fU"></div>
+          </figure>
+        </div>
+        <div class="conds" role="group" aria-label="Repair check shown">
+          <button class="cond" type="button" data-m="repair_step">Repaired step</button>
+          <button class="cond" type="button" data-m="repair_reserved_sine">Unused 4 Hz sine</button>
+          <span class="allow" id="mock-allow">Dashed curves are the forecast frozen before the repair. Verdicts use measured IN on both repair checks. The plotted forecast is scored separately.</span>
+        </div>
+      </div>
+      <aside class="log" aria-label="Simulated run log">
+        <h2>Simulated run log</h2>
+        <p class="sub">Time since this simulated run started</p>
+        <div class="logscroll" id="mocklogscroll"><ol class="entries" id="mockentries"></ol></div>
+      </aside>
+    </section>
+    </div>
+  </section>
+
+  <section class="wrap records" aria-label="Records">
+    <details id="evidence">
+      <summary>Records and sources</summary>
+      <dl id="provenance"></dl>
+      <div class="links"><a id="export">Download this case</a><a id="original-viewer" target="_blank" rel="noopener" hidden>Open the archived viewer</a></div>
+      <p class="note" id="event-label" hidden></p>
+      <pre id="event-original" tabindex="0" hidden></pre>
+    </details>
+  </section>
 </div>
-<aside id="bench-panel" aria-label="Current evidence"><div class="bench-sticky"><p class="eyebrow">What the evidence supports</p><h2>Explanation ledger</h2><ul id="hypotheses"></ul><div class="figure-head"><h2 id="plot-title">Waiting for a measurement</h2><label class="sr-only" for="plot-select">Recorded waveform</label><select id="plot-select" hidden></select></div><div id="chart"><p class="empty">Step through the recorded run. The measurements and comparisons will appear here.</p></div><div id="legend" class="legend" hidden><span class="observed">Measured OUT</span><span class="r-model">A · R changed</span><span class="c-model">B · C changed</span></div><p id="plot-caption" class="subtle"></p><div id="score-links"></div><details id="plot-details" hidden><summary>Baseline & regional checks</summary><pre id="plot-metadata"></pre></details></div></aside>
-</div></div></main>
-<footer>BenchMate · Design, observation, and measurement — with a source for each.</footer>
-</body></html>
+</main>
+<dialog id="photo-dialog" aria-labelledby="photo-title">
+  <div class="photo-dialog-head"><h2 id="photo-title">Photo evidence</h2><button id="photo-close" class="btn" type="button">Close</button></div>
+  <p id="photo-state" class="note"></p>
+  <div class="photo-tools"><label>Photograph<select id="photo-picker"></select></label><label>Display<select id="photo-mask"></select></label></div>
+  <img id="photo-evidence-image" alt="Historical circuit reference">
+  <p id="photo-mask-note" class="note"></p>
+  <details><summary>Source and all recorded SAM outcomes</summary><ul id="photo-trials"></ul><p class="note">Photo SHA-256: <code id="photo-hash"></code></p></details>
+  <a id="photo-full" target="_blank" rel="noopener">Open verified full-resolution image</a>
+</dialog>
+<footer class="foot wrap">Recorded lines come from the hash-chained record of the Oct 30 run. Muse Spark and the operator wrote in Korean; their words are translated for this screen, and each original is one click away.</footer>
+</body>
+</html>

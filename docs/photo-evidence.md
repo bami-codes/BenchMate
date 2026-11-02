@@ -1,10 +1,11 @@
-# P2 photo evidence backend — frontend handoff
+# Photo evidence and local board references
 
 The case server now exposes four independently identified historical photographs, their exact
 image planes, the existing IMG_8887 grid, and **all five archived SAM trials**. A case can also
 save a local operator's photo observation, correct it without deleting the earlier observation,
 and request a better view when a contact is hidden. No new model/API call or hardware operation
-is part of this feature. Claude's three frontend files are unchanged.
+is part of this feature. The case screen now opens these references and their exact-image SAM
+overlays in a source-labeled photo dialog. It does not yet edit endpoint observations.
 
 This is P2's data/observation backend, **not completed automatic wiring recognition**. Ten
 endpoint targets on the crowded large board are declared for development. They are not ten
@@ -36,14 +37,15 @@ evidence of absence or removal.
 All paths use the existing loopback Host/Origin rules. Image URLs are relative to the same server.
 The previous replay and runner contracts remain unchanged.
 
-A separate QA server with these routes is running at `http://127.0.0.1:8772`, using
-`.private/case-review/p2-qa`. Ports 8770/8771 were not restarted during Claude’s active frontend
-editing; restart the intended server after integration to load the new backend routes.
-Saved cases are separate per output directory.
+The integrated review server is at `http://127.0.0.1:8774`, using
+`.private/case-review/integrated-ui-qa`. Older server processes need a restart to load new
+backend routes. Saved cases are separate per output directory.
 
 | GET route | Response |
 | --- | --- |
-| `/api/photo-evidence` | Four photo descriptors, independent state groups, no-new-API notice |
+| `/api/photo-evidence` | Historical and registered photo descriptors, independent state groups, default reference ID |
+| `/board.jpg?photo={photo_id}` | Pixel-only JPEG of that verified reference |
+| `/board.jpg` | Explicitly registered default reference, or 404 if none |
 | `/api/photo-evidence/{photo_id}` | Dimensions, transform, target list, SAM trials, image availability |
 | `/api/photo-evidence/{photo_id}/image?view=overview` | Verified metadata-free overview PNG |
 | `/api/photo-evidence/{photo_id}/image?view=master` | Exact full-resolution coordinate plane PNG |
@@ -138,3 +140,31 @@ capture state. The ten targets here were chosen after seeing the development pho
 using the fixture wiring table as model input; they are not a blind benchmark. Address orientation,
 actual terminal visibility and the additional D01 capacitor still require their own evidence.
 New images/paid trials, physical action and case-state assertions are not enabled by this backend.
+
+## Register a new local board photograph
+
+From the project root, after the operator supplies an actual capture:
+
+```sh
+.venv/bin/python -m benchmate.photo_bench.board_reference \
+  --source /absolute/path/to/board-photo.HEIC \
+  --label "Before repair — operator reference" \
+  --capture-note "Operator's description of when this picture was taken"
+```
+
+This uses the existing native HEIC/Pillow decoder to preserve orientation, create pixel-only
+RGB PNGs, and remove EXIF/GPS/ICC metadata. Originals remain untouched. New masters, overviews,
+registration records and the default-reference pointer stay in git-excluded `.private/`.
+The server discovers registrations without restarting; reload the page to refresh its photo list.
+The JPEG route re-encodes verified RGB pixels and includes no inherited metadata.
+
+Registration is an explicit **reference**, not proof that the picture matches the Oct 30 replay
+or a current measured state. The caption keeps that distinction even when the operator supplies
+a new repair photograph. State linking and component identification require separate evidence.
+No picture is sent to an external API or committed by this command. A repeated source is rejected
+instead of overwriting its earlier registration. New registrations preserve the previous images.
+
+Four new software checks cover original preservation, metadata stripping, separate registrations,
+arbitrary-path rejection and the JPEG route's origin/query guards. Together with the related suites,
+**121 Python checks passed on 2026-11-02**. The registration tests use synthetic software fixtures;
+no new user repair photograph was supplied or registered during this integration.

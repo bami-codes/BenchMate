@@ -65,6 +65,14 @@ def make_server(*, root, output, port=8770):
                 elif parts in (['Archivo-var.woff2'], ['archivo-OFL.txt']):
                     self.send(200, files(__package__).joinpath(parts[0]).read_bytes(),
                               'font/woff2' if parts[0].endswith('.woff2') else 'text/plain')
+                elif parts == ['board.jpg']:
+                    query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+                    if set(query) - {'photo'} or ('photo' in query and len(query['photo']) != 1):
+                        raise ValueError('One registered photo ID required')
+                    photo_id = query['photo'][0] if 'photo' in query else photos.catalog.default_reference()
+                    if not photo_id:
+                        self.send(404, {'error': 'No board reference registered'}); return
+                    self.send(200, photos.catalog.jpeg(photo_id), 'image/jpeg')
                 elif parts == ['schematic.png']:
                     self.send(200, store.demo['image'], 'image/png')
                 elif parts == ['api', 'state']:

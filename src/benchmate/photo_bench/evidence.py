@@ -3,6 +3,7 @@ from copy import deepcopy
 import hashlib
 import io
 import json
+import re
 from pathlib import Path
 
 from PIL import Image
@@ -106,7 +107,51 @@ class PhotoCatalog:
                 raise ValueError('Image dimensions mismatch')
             return raw, image.size
 
+    def _refresh_registered(self):
+        folder = self.root / '.private/photo-bench/board-captures'
+        if folder.is_symlink():
+            raise ValueError('Invalid reference directory')
+        paths = sorted(folder.glob('capture-*/catalog-entry.json'))
+        if len(paths) > 100:
+            raise ValueError('Local reference limit reached')
+        for path in paths:
+            if (path.is_symlink() or path.parent.is_symlink() or path.stat().st_size > 64000
+                or not re.fullmatch(r'capture-[0-9a-f]{16}', path.parent.name)):
+                raise ValueError('Invalid local photo registration')
+            p = json.loads(path.read_bytes())
+            if (p['id'] != path.parent.name or p['role'] != 'operator_supplied_reference'
+                or p['private'] is not True or p['same_state_verified'] is not False or p['state_id'] is not None
+                or p['targets'] or p['sam_trials'] or 'grid' in p
+                or not isinstance(p['label'], str) or not 1 <= len(p['label']) <= 160
+                or not isinstance(p.get('capture_note', ''), str) or len(p.get('capture_note', '')) > 1000):
+                raise ValueError('Invalid reference provenance')
+            for view in ('master', 'overview'):
+                if p[view]['path'] != str((path.parent / (view + '.png')).relative_to(self.root)):
+                    raise ValueError('Registration cannot serve arbitrary files')
+            self.photos[p['id']] = p
+
+    def default_reference(self):
+        self._refresh_registered()
+        path = self.root / '.private/photo-bench/board-reference.json'
+        if not path.exists():
+            return None
+        if path.is_symlink() or path.stat().st_size > 1000:
+            raise ValueError('Invalid board reference pointer')
+        value = json.loads(path.read_bytes())
+        if set(value) != {'photo_id'} or value['photo_id'] not in self.photos:
+            raise ValueError('Unknown default reference')
+        return value['photo_id']
+
+    def jpeg(self, photo_id):
+        raw = self.image(photo_id, 'overview')
+        with Image.open(io.BytesIO(raw)) as source:
+            clean = Image.frombytes('RGB', source.size, source.tobytes())
+            out = io.BytesIO()
+            clean.save(out, format='JPEG', quality=92, subsampling=0)
+        return out.getvalue()
+
     def internal(self, photo_id):
+        self._refresh_registered()
         if photo_id not in self.photos:
             raise KeyError('Unknown photo')
         return self.photos[photo_id]
@@ -186,12 +231,16 @@ class PhotoCatalog:
                 'master_url': f'/api/photo-evidence/{photo_id}/image?view=master' if available else None,
                 'overview_to_master': deepcopy(photo['overview']['transform']),
                 'same_state_verified': False, 'capture_state_id': None, 'electrical_address_mapping': 'unconfirmed',
-                'role': 'historical_development_reference', 'can_authorize_repair': False,
+                'role': photo['role'], 'can_authorize_repair': False,
                 'targets': deepcopy(photo['targets']), 'sam_trials': self.trials(photo_id),
                 'grid_available': 'grid' in photo and available,
-                'notice': 'Historical photo; not established as the Oct 30 specimen or the current live board.'}
+                'capture_note': photo.get('capture_note', ''),
+                'notice': ('Operator-supplied reference; capture state is unverified and not linked to replay or live measurements.'
+                           if photo['role'] == 'operator_supplied_reference' else
+                           'Historical photo; not established as the Oct 30 specimen or the current live board.')}
 
     def list(self):
+        self._refresh_registered()
         return {'schema': self.manifest['schema'], 'photos': [self.describe(k) for k in self.photos],
-                'same_state_groups': [], 'new_API_calls': 0, 'hardware_IO': False,
+                'same_state_groups': [], 'default_reference_id': self.default_reference(), 'new_API_calls': 0, 'hardware_IO': False,
                 'selection_note': self.manifest['selection_note']}

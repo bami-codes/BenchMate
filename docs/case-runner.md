@@ -7,13 +7,13 @@ It composes the frozen D01 repair session, numerical model, and the existing run
 
 **This is software verification, not a new Spark or physical result.** No provider or physical
 bench is constructed. API calls, serial commands and physical measurements are all zero.
-The local question is not passed to a model. The frontend currently remains a recorded viewer;
-connecting these endpoints is separate work. Do not enable or label this mode “Live”.
+The local question is not passed to a model. The frontend now connects these endpoints in a
+separate simulated-repair section. Do not enable or label this mode “Live”.
 
 ## Frontend ownership and display
 
-Claude owns `case_review/index.html`, `app.js`, and `style.css`. This backend change does not
-modify those files or the existing replay/timeline/event response shapes.
+Claude supplied the three frontend files; the user then explicitly authorized Codex to review,
+fix, verify and commit them. The replay/timeline/event response shapes remain unchanged.
 
 - Keep `Replay · Oct 30 · Physical record` distinct from `Scripted mock · Simulated`.
 - Use `pending_request.instruction` for an actionable mock card. It explicitly says simulation
@@ -149,6 +149,19 @@ simulated waveforms and no new API/hardware use. The first development test run 
 error-code mismatch for a stale load response sent at the repair stage; it was fixed before
 these checks passed. These are software tests, not experimental benchmark trials.
 
-Next: wire the redesigned frontend to this explicitly labeled mock mode, exercise its actual
-buttons, then separately validate/authorize any future real-model or physical-run integration.
-No UI repair button should claim a live repair based on this backend test.
+The integrated frontend keeps case/run generations around asynchronous operations, rejects late
+responses after navigation, disables duplicate submissions, and recovers lost launches only after
+an explicit click. Loading a page never posts a confirmation or a replacement launch. Seven pure
+JavaScript state/plot checks passed alongside 121 Python checks. These are not browser tests.
+
+Both repair panels label their displayed command forecasts separately from the measured-IN
+conditional verdict. A failed regional check is not described as an overall-RMS failure when RMS
+is below 9 mV. Paired panels share a scale and include all samples, including output-channel delay.
+
+Codex inspected the desktop replay and completed the new-question → design mismatch/recovery →
+scripted mock → both explicit confirmations → verified result → reload flow in native Safari.
+The reference-photo dialog was also inspected. Browser tooling then prevented a fresh mobile and
+failure/cancel UI pass; their software guards remain covered by automated tests. See
+[UI integration verification](case-ui-verification.md) for exact coverage.
+Future real-model/physical-run integration still requires its own validation. No UI repair button
+claims a live repair based on this software check.
