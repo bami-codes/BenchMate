@@ -1,0 +1,62 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [
+      "IN and OUT are directly joined by continuous top wire; OUT used as shared node, IN is alias."
+    ],
+    "components": [
+      {
+        "bbox": [
+          0.33,
+          0.445,
+          0.38,
+          0.695
+        ],
+        "evidence": "vertical resistor symbol between top and bottom wires labeled R1 10 kOhm",
+        "kind": "R",
+        "marking": "10 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 10000.0
+      },
+      {
+        "bbox": [
+          0.62,
+          0.49,
+          0.715,
+          0.535
+        ],
+        "evidence": "capacitor symbol with horizontal plates between top and bottom wires labeled C1 1 uF",
+        "kind": "C",
+        "marking": "1 \u00b5F",
+        "name": "C1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-06
+      }
+    ],
+    "status": "needs_review",
+    "summary": "R1 10k and C1 1uF in parallel between shared IN/OUT top wire and REF bottom wire."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1243,
+    "output_tokens_details": {
+      "reasoning_tokens": 913
+    },
+    "total_tokens": 3334
+  }
+}

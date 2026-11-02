@@ -1,0 +1,8 @@
+{
+  "src/benchmate/netlist_intake.py": "dad0f93cea6b4aa0f6e53910e168fb8c47d01e4de256865c578f9dfb470556fb",
+  "src/benchmate/known_design.py": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab",
+  "src/benchmate/image_archive.py": "efbcc25c48e4ca2b41978b4ed06f9bdde601c21cb73b8604a35230c2a24197f7",
+  "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64",
+  "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+  "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf"
+}

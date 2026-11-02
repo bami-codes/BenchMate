@@ -73,3 +73,33 @@ pixels and then checks PNG chunks/CRCs with `verify_clean_png`, accepting only
 IHDR/IDAT/IEND. No original SVG/PNG metadata or local filenames reach Spark.
 The new R/C/D/Q reader and operator handoff passed nine local boundary checks
 before the first paid call. The original frozen reader is unchanged.
+
+## New runner readiness
+
+`scripts/passive_pilot.py` connects the preserved physical adapter to the real
+Spark tool loop. `prepare` is offline. `probe --execute` accepts only the pinned
+Minima USB identity and sends PING only; ARM and stimulus belong to a confirmed
+`run --execute`. Missing/ambiguous USB identity stops before a paid diagnostic
+call. The source manifest preserves all 73 archived runtime files and adds only
+the new intake, pilot session and runner, for 76 files total.
+
+Command forecasts insert the known resistor upstream of DUT IN and retain all
+DUT input-loading branches. Measured-IN conditional prediction does not insert
+it a second time. Independent RC step solutions check both unloaded and loaded
+direct-wire DUT behavior. The common runtime suite passed 66 checks; four further
+runner checks passed after adding assembly gating and PING-only preflight.
+Unconfirmed assembly, a bypassed instrument resistor, a different reviewed design,
+or an absent USB device stops before opening serial or using a paid provider.
+
+Every run requires a separately retained, operator-confirmed structured assembly
+record with the 1 kΩ instrument setting, matching reviewed design digest, USB-off
+wiring assertion and actual specimen truth. That record is never transmitted to
+Spark. Load changes use only the preserved fixed English choices and explicit
+matching pending request IDs. Predictions and the common instrument/source
+envelope are committed, pushed and remotely verified before reserved captures.
+
+No prepared real-design approval, assembly confirmation or initial wiring report
+has been fabricated. At this revision's creation the user's schematic confirmation
+and large-board preparation reports are pending; real hardware commands remain
+zero. The six actual vision calls are retained in
+[the intake report](../examples/schematic-intake/2026-11-02-pilot/REPORT.md).

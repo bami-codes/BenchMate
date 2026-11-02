@@ -1,0 +1,95 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "bbox": [
+          0.195,
+          0.63,
+          0.385,
+          0.723
+        ],
+        "evidence": "Horizontal rectangle labeled R1 4.7 kOhm, left to IN wire, right to B wire to Q1 base",
+        "kind": "R",
+        "marking": "4.7 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "IN",
+          "BASE"
+        ],
+        "value_si": 4700.0
+      },
+      {
+        "bbox": [
+          0.526,
+          0.125,
+          0.569,
+          0.358
+        ],
+        "evidence": "Vertical rectangle labeled R2 1 kOhm, top to 5V, bottom to D1 triangle",
+        "kind": "R",
+        "marking": "1 k\u03a9",
+        "name": "R2",
+        "nodes": [
+          "VCC",
+          "ANODE"
+        ],
+        "value_si": 1000.0
+      },
+      {
+        "bbox": [
+          0.523,
+          0.358,
+          0.625,
+          0.49
+        ],
+        "evidence": "LED symbol labeled D1 red LED, triangle top to R2, bar bottom to COL dot and Q1 C",
+        "kind": "D",
+        "marking": "red LED",
+        "name": "D1",
+        "nodes": [
+          "ANODE",
+          "COL"
+        ],
+        "value_si": null
+      },
+      {
+        "bbox": [
+          0.41,
+          0.56,
+          0.528,
+          0.808
+        ],
+        "evidence": "NPN circle labeled Q1 BC547B, arrow out on E to GND, C top to COL/D1, B left to R1",
+        "kind": "Q",
+        "marking": "BC547B",
+        "name": "Q1",
+        "nodes": [
+          "COL",
+          "BASE",
+          "GND"
+        ],
+        "value_si": null
+      }
+    ],
+    "status": "needs_review",
+    "summary": "4 parts: R1 R2 D1 Q1 NPN switch with LED to VCC, IN via base resistor, emitter to GND."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 2808,
+    "output_tokens_details": {
+      "reasoning_tokens": 2290
+    },
+    "total_tokens": 4899
+  }
+}

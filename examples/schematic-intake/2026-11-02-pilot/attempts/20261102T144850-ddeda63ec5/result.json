@@ -1,0 +1,60 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "bbox": [
+          0.22,
+          0.355,
+          0.435,
+          0.44
+        ],
+        "evidence": "Horizontal resistor between IN wire and OUT junction labeled R1 4.7 kOhm",
+        "kind": "R",
+        "marking": "4.7 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "IN",
+          "OUT"
+        ],
+        "value_si": 4700.0
+      },
+      {
+        "bbox": [
+          0.589,
+          0.508,
+          0.637,
+          0.735
+        ],
+        "evidence": "Vertical resistor between OUT junction and REF wire labeled R2 22 kOhm",
+        "kind": "R",
+        "marking": "22 k\u03a9",
+        "name": "R2",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 22000.0
+      }
+    ],
+    "status": "needs_review",
+    "summary": "Divider with R1 4.7k IN to OUT and R2 22k OUT to REF."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1175,
+    "output_tokens_details": {
+      "reasoning_tokens": 857
+    },
+    "total_tokens": 3266
+  }
+}

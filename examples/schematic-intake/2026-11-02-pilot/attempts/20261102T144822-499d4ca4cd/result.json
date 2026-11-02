@@ -1,0 +1,94 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "bbox": [
+          0.115,
+          0.335,
+          0.325,
+          0.405
+        ],
+        "evidence": "Horizontal rectangle labeled R1 10 kOhm with left to IN and right to OUT wire.",
+        "kind": "R",
+        "marking": "10 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "IN",
+          "OUT"
+        ],
+        "value_si": 10000.0
+      },
+      {
+        "bbox": [
+          0.33,
+          0.515,
+          0.42,
+          0.56
+        ],
+        "evidence": "Capacitor symbol labeled C1 1 uF with top to OUT wire and bottom to REF wire.",
+        "kind": "C",
+        "marking": "1 \u00b5F",
+        "name": "C1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-06
+      },
+      {
+        "bbox": [
+          0.525,
+          0.515,
+          0.615,
+          0.56
+        ],
+        "evidence": "Capacitor symbol labeled C2 0.1 uF with top to OUT wire and bottom to REF wire.",
+        "kind": "C",
+        "marking": "0.1 \u00b5F",
+        "name": "C2",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-07
+      },
+      {
+        "bbox": [
+          0.786,
+          0.44,
+          0.831,
+          0.685
+        ],
+        "evidence": "Vertical rectangle labeled R2 22 kOhm with top to OUT wire and bottom to REF wire.",
+        "kind": "R",
+        "marking": "22 k\u03a9",
+        "name": "R2",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 22000.0
+      }
+    ],
+    "status": "needs_review",
+    "summary": "R1 in series IN to OUT, C1 C2 R2 in parallel OUT to REF."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 2043,
+    "output_tokens_details": {
+      "reasoning_tokens": 1553
+    },
+    "total_tokens": 4134
+  }
+}

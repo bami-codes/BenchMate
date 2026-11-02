@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6ae8a2d23d07dafb15e54458",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1290,
+    "output_tokens_details": {
+      "reasoning_tokens": 883
+    },
+    "total_tokens": 3381
+  },
+  "elapsed_s": 10.698797499993816,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_15d51a5a-bb69-407c-96bd-08c65338d8de",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Transcribing visible resistors and capacitors \u2014 recording values and nodes.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_76e118e0-6224-4125-8e9b-8466bd097b24",
+      "call_id": "call_76e118e0-6224-4125-8e9b-8466bd097b24",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[],\"components\":[{\"bbox\":[0.132,0.334,0.318,0.41],\"evidence\":\"Rectangle labeled R1 10 k\u03a9 with left to IN wire and right to N1 wire\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R1\",\"nodes\":[\"IN\",\"N1\"],\"value_si\":10000.0},{\"bbox\":[0.332,0.334,0.554,0.41],\"evidence\":\"Rectangle labeled R2 10 k\u03a9 with left to N1 wire and right to OUT wire\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R2\",\"nodes\":[\"N1\",\"OUT\"],\"value_si\":10000.0},{\"bbox\":[0.608,0.51,0.687,0.567],\"evidence\":\"Capacitor symbol labeled C1 1 \u00b5F with top to OUT wire and bottom to REF wire\",\"kind\":\"C\",\"marking\":\"1 \u00b5F\",\"name\":\"C1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":0.000001}],\"status\":\"needs_review\",\"summary\":\"R1 and R2 10k in series from IN to OUT via N1, C1 1uF from OUT to REF.\"}",
+      "status": "completed"
+    }
+  ]
+}

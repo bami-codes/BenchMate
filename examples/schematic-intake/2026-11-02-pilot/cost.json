@@ -1,0 +1,14 @@
+{
+  "actual_requests": 6,
+  "input_tokens": 12546,
+  "cached_input_tokens": 3366,
+  "output_tokens": 10240,
+  "rates_usd_per_million": {
+    "input": 1.25,
+    "cached_input": 0.15,
+    "output": 4.25
+  },
+  "estimated_usd": 0.055499900000000005,
+  "is_account_invoice": false,
+  "local_reserved_usd": 6.0
+}
