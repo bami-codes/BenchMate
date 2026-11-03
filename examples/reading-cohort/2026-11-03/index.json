@@ -1,0 +1,15 @@
+{
+  "schema": "benchmate.reading_cohort_index.v1",
+  "cohort": "reading-assisted-v1",
+  "policy_sha256": "7b67a2cac2b485f44c152fc5f35acba9741dbc00d162fe9bc20c2b00676fb724",
+  "attempts": [
+    {
+      "run_id": "20261103T125924-bf8f64512b",
+      "case_id": "01",
+      "attempt": 1,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": true
+    }
+  ]
+}
