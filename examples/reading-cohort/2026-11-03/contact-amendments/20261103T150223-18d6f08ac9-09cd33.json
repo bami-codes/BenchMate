@@ -1,0 +1,18 @@
+{
+  "schema": "benchmate.operator_contact_clarification.v1",
+  "request_id": "09cd33a820c6436d8670eb95276b0367",
+  "request_event_sha256": "fdbbb2826dbec51915e6cd1f45cc114b80a2c99b780c2e483b62d9b8b48a5872",
+  "recorded_utc": "2026-11-03T15:08:02.418627+00:00",
+  "operator_statement": "e30에 다이오드 있잖아 제발",
+  "actual_diode_anode_reported": "large E30",
+  "cathode_corrected_earlier": "large E25",
+  "original_generic_load_instruction": "large E30-A55",
+  "actual_load_instruction": "large C30-A55",
+  "electrical_equivalence": "Upper A30-E30 strip is the same OUT node; known load remains 9990 ohm OUT-to-REF",
+  "preserve_existing_diode": true,
+  "changes_waveform_load_or_guards": false,
+  "new_API_calls": 0,
+  "new_stimuli": 0,
+  "operator_load_completion_received": false,
+  "future_case04_load_removal_contact": "C30-A55"
+}
