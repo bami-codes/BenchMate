@@ -1,0 +1,14 @@
+{
+  "new_tests_passed": 18,
+  "preserved_adapter_and_pilot_regression_tests_passed": 16,
+  "total_tests_passed": 34,
+  "mock_two_phase_workflow_tested": true,
+  "validation_failure_stops_without_retry_tested": true,
+  "per_capture_k_refit_forbidden_tested": true,
+  "diagnostic_IN_OUT_unchanged_tested": true,
+  "OUT_not_used_in_k_fit_tested": true,
+  "physical_QA_started": false,
+  "preserved_sources": 76,
+  "new_source_manifest_count": 82,
+  "plan_sha256": "2651a91c23f4ebc4101c823d9ee5e81215486e28b60d1d730457eba4233b98ba"
+}

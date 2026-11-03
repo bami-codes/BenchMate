@@ -1,0 +1,8 @@
+{
+  "fixed_k_QA_authorized": true,
+  "verbatim": "수정안대로 진행해. 수동 mV 판독이 필요 없게 QA를 짜줘. k가 스텝과 사인에서 다르게 나온 걸 고정 k로 어떻게 다룰지 QA 계획에 포함해줘. 구현 끝날 때와 QA 결과 나올 때 각각 보고해줘. QA가 실패하면 반복하기 전에 선택지를 먼저 줘.",
+  "recorded_utc": "2026-11-03T03:25:04.110643+00:00",
+  "scope": "No manual DMM, rewiring or firmware upload. Train one shared fixed k, remotely freeze before reserved validation. Stop and present options after any QA failure. Current unloaded fixture only.",
+  "GND_lead_replacement_confirmed": false,
+  "new_paid_requests": 0
+}
