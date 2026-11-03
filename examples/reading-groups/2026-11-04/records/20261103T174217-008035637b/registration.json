@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.unordered_reading_supplement.v1",
+  "case_id": "02",
+  "run_id": "20261103T174217-008035637b",
+  "parent_record": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7",
+  "parent_head_sha256": "0d0ec3edf91379cd43a017986d0c9ca5fd0feed67d3aea2cdbc04b771a9137f8",
+  "parent_status_unchanged": "run_failed",
+  "counted_new_physical_attempt": false,
+  "selected_first_attempt_changed": false,
+  "blind_test": false,
+  "extra_reading_requested_by": "operator_requested_amendment",
+  "source_sha256": {
+    "src/benchmate/reading_group_experiment.py": "a1c1fe4f32140de3176d07c321707cb4b01080d90c7e4dc841f39c4ee5402c56",
+    "src/benchmate/reading_binding_v2.py": "24ccd8e4ca6610fc8ff7dac03e2e3ac6a6b907439e537e5879f0ff72fa688eef",
+    "src/benchmate/reading_unordered.py": "c34d31c4eb0201a071242ed20c9db988d2180847b6268a51caca733396422e46",
+    "tests/test_reading_binding_v2.py": "5f2b422126659b8eba0acf2c07cf2aa48f03e85d6ad3010454c79e2279d8fd43",
+    "tests/test_reading_group_experiment.py": "b9576cb61caff19ec7f126125bfcfbf3ea17f6fe907a292e5bcc61c6dbe42d85",
+    "docs/2026-11-04-parallel-reading-amendment.md": "88e8a95a999dff000cff97ef20ae291b5cf22f9887f7f452e334094a6ebefdbe"
+  },
+  "paid_calls": 0,
+  "hardware_commands": 0,
+  "public_record": "examples/reading-groups/2026-11-04/records/20261103T174217-008035637b"
+}

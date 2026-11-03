@@ -1,0 +1,25 @@
+{
+  "components": [
+    "C1",
+    "C2"
+  ],
+  "sam_bodies": [
+    "sam-2",
+    "sam-3"
+  ],
+  "correspondence": "unresolved",
+  "individual_bindings": null,
+  "candidate_group_chosen_by": "Codex_visual_review_requested_by_operator",
+  "Spark_chose_group": false,
+  "Spark_abstention_reason": "Both box-geometry capacitors are wired as identical parallel shunts to the same two nodes, so layout/wiring cannot distinguish C1 from C2.",
+  "topology_conditioned": "Two capacitors on the intended OUT-REF parallel branch.",
+  "earlier_single_body_confirmation_question_withdrawn": true,
+  "already_received_report": {
+    "body": "sam-2",
+    "raw_text": "그게 474야.",
+    "source": "operator_marking",
+    "actual_capacitance_measured": false,
+    "C1_identity_confirmed": false,
+    "received_before_this_forecast": true
+  }
+}

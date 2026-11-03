@@ -1,0 +1,13 @@
+{
+  "post_hoc_review": true,
+  "original_failure_unchanged": true,
+  "sam_body": null,
+  "reason": "Both box-geometry capacitors are wired as identical parallel shunts to the same two nodes, so layout/wiring cannot distinguish C1 from C2.",
+  "raw_arguments": {
+    "reason": "Both box-geometry capacitors are wired as identical parallel shunts to the same two nodes, so layout/wiring cannot distinguish C1 from C2.",
+    "sam_body": "null"
+  },
+  "normalization": "exact_string_null_to_JSON_null_abstention",
+  "correspondence": "unresolved",
+  "operator_confirmed": false
+}

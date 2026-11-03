@@ -1,0 +1,59 @@
+{
+  "schema": "benchmate.unordered_capacitance_forecast.v1",
+  "bodies": [
+    "sam-2",
+    "sam-3"
+  ],
+  "components": [
+    "C1",
+    "C2"
+  ],
+  "source": "operator_dmm",
+  "unit": "F",
+  "meter": {
+    "available": true,
+    "range_F": 2e-06,
+    "resolution_F": 1e-09,
+    "relative_allowance": 0.05,
+    "digits_allowance": 2,
+    "basis": "Operator reports capacitance mode: dial 2u, open display 0.000uF.",
+    "accuracy_calibrated": false,
+    "allowance_is_engineering_acceptance_not_manufacturer_accuracy": true
+  },
+  "explanations": [
+    {
+      "id": "changed:C1",
+      "role": "active",
+      "intervals": {
+        "C1": [
+          3.986116782571531e-07,
+          5.924583914498666e-07
+        ],
+        "C2": [
+          8.824999999999999e-08,
+          1.1225000000000002e-07
+        ]
+      }
+    },
+    {
+      "id": "nominal",
+      "role": "reference",
+      "intervals": {
+        "C1": [
+          9.004999999999998e-07,
+          1.1045e-06
+        ],
+        "C2": [
+          8.824999999999999e-08,
+          1.1225000000000002e-07
+        ]
+      }
+    }
+  ],
+  "observation_received": false,
+  "printed_474_report_already_received": true,
+  "new_blind_test": false,
+  "matching": "All interval-compatible bijections; never nearest-value assignment.",
+  "catalog_sha256": "6af9661817251032ad59bf65d395d1a342326f5b1b13aa5dc0d2ec45d86f21b2",
+  "scope": "Non-blind isolated-reading supplement to existing bounded changed:C1 diagnosis; nominal is a rejected reference, not a survivor. Does not complete the repair pair."
+}

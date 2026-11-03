@@ -1,0 +1,20 @@
+{
+  "source": {
+    "file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/prepared/input.png",
+    "sha256": "c085b67b76aebd8861a4fec67bfd5ad8339015a4989761d517615c9fd16af3a5"
+  },
+  "masks": [
+    {
+      "file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/decoded/sam-2-body-mask.png",
+      "sha256": "95ea27f4ac13d3d65cf5570c36e04ab1e0ebf935ef05b82f636dd000b2e6e19b"
+    },
+    {
+      "file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/decoded/sam-3-body-mask.png",
+      "sha256": "c3bd1ef1c04b8bce4c1c9d1615b4ee152fe2c11c2aab9e9cd233d3ec43048938"
+    }
+  ],
+  "recipe": "Nearest-neighbor existing full-size derived SAM masks to 1200x1600; Max7-Min5 outline; same green on both; labels outside body.",
+  "annotation_only": true,
+  "new_capture": false,
+  "native_masks_changed": false
+}
