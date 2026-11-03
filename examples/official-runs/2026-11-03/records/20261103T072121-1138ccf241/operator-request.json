@@ -1,0 +1,15 @@
+{
+  "request_id": "3f4de42f2edc47639d9c0f0f22eda8ba",
+  "fixture": "output_load",
+  "choice": "connect_output_load",
+  "instruction": "Disconnect USB and wait for the power LED to go out. Connect only the large-board E30–A55 OUT-load jumper. Keep A55–C35 absent, B28–B35 1 kohm, A23–A45, I50–A4, D50–G50, B50–B23, the renewed GND return and the specimen unchanged. Remove probes and reconnect the same USB port.",
+  "response_file": "runs/official/20261103T072121-1138ccf241/operator-response-3f4de42f2edc47639d9c0f0f22eda8ba.json",
+  "fixed_response": {
+    "choice": "connect_output_load",
+    "fixture": "output_load",
+    "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I connected only the known 9.99 kohm OUT-to-REF load, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  }
+}

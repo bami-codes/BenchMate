@@ -12,12 +12,13 @@
       "order": 1,
       "required": true,
       "run_id": "20261103T072121-1138ccf241",
-      "status": "registered",
+      "status": "failed",
       "selected_for_case_demo": true,
       "selection": "first_started_official_attempt_for_this_case_and_state",
       "counted": true,
       "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T072121-1138ccf241.json",
-      "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86"
+      "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86",
+      "error": "Electrical/reference guard failed; no next stimulus"
     },
     {
       "slot_id": "01-R01",

@@ -1,0 +1,213 @@
+{
+  "schema": "benchmate.official_guard_failure_analysis.v1",
+  "slot_id": "01-F01",
+  "run_id": "20261103T072121-1138ccf241",
+  "official_counted": true,
+  "run_status": "run_failed",
+  "failure_stage": "Loaded third pre-stimulus HOLD; loaded STEP never sent",
+  "source_events_sha256": "d9e5583adf87fbada2efe18ff790b6eecbcc4fdfdd66447e3ea2578789072f00",
+  "raw_event_sequence": 75,
+  "raw_event_kind": "training_2_origin_2_raw_capture",
+  "conversion": "Uncorrected raw counts *4.9/16383; same nominal guard coordinates, not independent voltage calibration",
+  "sample_count": 512,
+  "anomalous_indices": [
+    477
+  ],
+  "worst_frame_index": 477,
+  "worst_frame_time_s": 0.953998,
+  "worst_frame_raw": [
+    953998,
+    1376,
+    5369,
+    2174,
+    2128,
+    2196,
+    52,
+    105,
+    157,
+    215
+  ],
+  "worst_frame_nominal_v": {
+    "A1": 1.6058170054324605,
+    "A2": 0.6502227919184521,
+    "A3": 0.6364646279680156,
+    "A4": 0.6568027833730087
+  },
+  "medians_nominal_v": {
+    "A1": 1.6429042299945065,
+    "A2": 1.6387169627052434,
+    "A3": 1.63811878166392,
+    "A4": 1.6393151437465667
+  },
+  "bounds_violation_counts": {
+    "A1": 0,
+    "A2": 1,
+    "A3": 1,
+    "A4": 1
+  },
+  "guards": [
+    {
+      "sequence": 24,
+      "label": "training_1_origin_0",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6426542090123892,
+        1.6405488921442943,
+        1.6344531703022922,
+        1.635752928912589
+      ]
+    },
+    {
+      "sequence": 29,
+      "label": "training_1_origin_1",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.64263960498306,
+        1.6406149023568621,
+        1.6342276840894512,
+        1.6355735914324288
+      ]
+    },
+    {
+      "sequence": 34,
+      "label": "training_1_origin_2",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6424252178325065,
+        1.640608476583957,
+        1.634161673876883,
+        1.6354661057765651
+      ]
+    },
+    {
+      "sequence": 40,
+      "label": "training_1",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "signal_envelope": true
+      },
+      "means_v": [
+        1.8006312517167165,
+        1.7546881437694544,
+        1.6341412282358223,
+        1.635800830128791
+      ]
+    },
+    {
+      "sequence": 46,
+      "label": "training_1_return_REF",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6425046637520582,
+        1.6405243573750206,
+        1.6340798913126406,
+        1.6354281353003082
+      ]
+    },
+    {
+      "sequence": 68,
+      "label": "training_2_origin_0",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6430339137749466,
+        1.6389658153650117,
+        1.638881696156074,
+        1.639895215791519
+      ]
+    },
+    {
+      "sequence": 73,
+      "label": "training_2_origin_1",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6428884576428289,
+        1.6381217024697858,
+        1.63763392789019,
+        1.638968736170874
+      ]
+    },
+    {
+      "sequence": 78,
+      "label": "training_2_origin_2",
+      "checks": {
+        "rails": true,
+        "A4_envelope": false,
+        "A4_block_mean_span": false,
+        "stationary_path_mean_span": false,
+        "path_means": true,
+        "path_samples": false,
+        "path_spread": true
+      },
+      "means_v": [
+        1.642890210126347,
+        1.6363195652505618,
+        1.6355928687511412,
+        1.6367033591413351
+      ]
+    }
+  ],
+  "interpretation": "A common A2/A3/A4 collapse is present during constant HOLD. Existing logs do not identify actual REF/contact/power behavior versus acquisition corruption. No sample deletion, k correction or guard relaxation.",
+  "loaded_step_acquired": false,
+  "reserved_inputs_acquired": false,
+  "agent_final_report_exists": false,
+  "http_requests": 3,
+  "estimated_usd": 0.015367,
+  "rates_usd_per_million": {
+    "input": 1.25,
+    "cached_input": 0.15,
+    "output": 4.25
+  },
+  "cost_note": "Pinned historical rate estimate; not an account bill",
+  "new_hardware_commands_for_analysis": 0,
+  "new_API_calls_for_analysis": 0
+}
