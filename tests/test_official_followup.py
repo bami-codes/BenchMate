@@ -3,6 +3,7 @@ from copy import deepcopy
 import importlib.util
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -77,3 +78,40 @@ def test_actual_original_model_prompt_bench_and_protocol_are_reused():
     assert p == prepare(design)
     sources = m.full_sources(p)
     assert len(sources) == 82 and all(sources[k] == v for k, v in p['official_source_sha256'].items())
+
+
+def test_ten_second_wait_once_per_new_unarmed_boot(monkeypatch):
+    m = module(); calls = []; now = [100.]
+    monkeypatch.setattr(m.base.Bench, '_ping', lambda *a: calls.append(('PING', a[-1])))
+    monkeypatch.setattr(m.time, 'monotonic', lambda: now[0])
+    b = m.SettledBench.__new__(m.SettledBench)
+    b.startup_waited_boot = None
+    b.log = SimpleNamespace(add=lambda kind, payload: calls.append((kind, payload)))
+    def sleep(seconds):
+        calls.append(('WAIT', seconds)); now[0] += seconds
+    b.sleep = sleep
+    continuity = SimpleNamespace(boot_id='2' * 32)
+    b._ping(None, continuity, 'initial', False)
+    assert ('WAIT', 10.) in calls
+    assert calls[-1][0] == 'usb_startup_wait_completed'
+    before = len(calls)
+    b._ping(None, continuity, 'still_unarmed', False)
+    assert len(calls) == before + 1
+    b._ping(None, continuity, 'armed', True)
+    assert sum(c[0] == 'WAIT' for c in calls) == 1
+    continuity.boot_id = '3' * 32
+    b._ping(None, continuity, 'new_boot', False)
+    assert sum(c[0] == 'WAIT' for c in calls) == 2
+
+
+def test_early_sleep_return_stops_before_ARM(monkeypatch):
+    m = module()
+    monkeypatch.setattr(m.base.Bench, '_ping', lambda *a: None)
+    monkeypatch.setattr(m.time, 'monotonic', lambda: 100.)
+    b = m.SettledBench.__new__(m.SettledBench)
+    b.startup_waited_boot = None
+    b.log = SimpleNamespace(add=lambda *a: None)
+    b.sleep = lambda s: None
+    with pytest.raises(ValueError, match='wait not reached'):
+        b._ping(None, SimpleNamespace(boot_id='2' * 32), 'initial', False)
+    assert b.startup_waited_boot is None

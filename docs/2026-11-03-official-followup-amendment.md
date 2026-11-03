@@ -16,7 +16,8 @@ follow-up completes reserved verification. The original failure stays failed.
 
 The model, prompt, intended netlist, menu, initial unloaded fixture, physical
 adapter, original guards, numerical fitting, scoring and prediction publisher
-are reused unchanged. No QA OUT or prior result is sent to the fresh model.
+are reused unchanged. A thin adapter adds the prospective USB startup wait
+described below; no QA OUT or prior result is sent to the fresh model.
 The follow-up wrapper and this document are additional pinned source files in
 the pre-run binding. The original 80 files remain byte-for-byte preserved.
 Registration is committed/pushed before paid requests/stimuli. Forecasts are
@@ -29,3 +30,17 @@ increased prospectively from 16 to 19 reserved request units without resetting
 its used counter or the historical ledger. This is an allowance, not billed
 dollars. Photo calls are separately disclosed. Each diagnosis retains its
 8-request limit and no automatic retry.
+
+Before 01-F02 is registered, the operator added a common startup rule: wait
+at least 10 seconds after USB reconnection before measurement. The wrapper
+implements a conservative 10-second host wait after the first verified
+unarmed PING on each new boot, then confirms the same unarmed boot again
+before ARM. It records start, completion and elapsed monotonic duration.
+This applies to the initial hookup and every USB-off fixture intervention in
+this version, including restored runs. Original voltage/reference thresholds
+and scoring remain unchanged. The pre-run binding records the wait explicitly.
+
+01-F01's original device times show its first post-intervention PING at
+10.958 s uptime and the failing HOLD completion at 21.556 s. The new rule is
+an operating consistency rule, not evidence that USB startup caused or fixes
+that failure. Existing records are not retroactively changed.

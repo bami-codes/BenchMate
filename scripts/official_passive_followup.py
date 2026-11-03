@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import re
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -22,6 +23,30 @@ from benchmate.netlist_diagnosis.design import checked, digest
 from benchmate.records import Recorder, read_events
 
 EXTRA = ('scripts/official_passive_followup.py', 'docs/2026-11-03-official-followup-amendment.md')
+USB_WAIT_SECONDS = 10.
+
+
+class SettledBench(base.Bench):
+    """After observing a new unarmed boot, wait >=10 s before ARM/capture."""
+    def __init__(self, *args, **kwargs):
+        self.startup_waited_boot = None
+        super().__init__(*args, **kwargs)
+
+    def _ping(self, board, continuity, label, armed):
+        super()._ping(board, continuity, label, armed)
+        if not armed and continuity.boot_id != self.startup_waited_boot:
+            self.log.add('usb_startup_wait_started', {'boot_id': continuity.boot_id,
+                'minimum_s': USB_WAIT_SECONDS, 'anchor': 'Observed unarmed PING after operator-confirmed USB reconnect',
+                'ARM_or_CAPTURE_during_wait': False})
+            start = time.monotonic()
+            self.sleep(USB_WAIT_SECONDS)
+            super()._ping(board, continuity, label + '_after_USB_wait', False)
+            elapsed = time.monotonic() - start
+            if elapsed < USB_WAIT_SECONDS:
+                raise ValueError('Minimum USB startup wait not reached; no ARM.')
+            self.startup_waited_boot = continuity.boot_id
+            self.log.add('usb_startup_wait_completed', {'boot_id': continuity.boot_id,
+                'minimum_s': USB_WAIT_SECONDS, 'elapsed_monotonic_s': elapsed})
 
 
 def entries(index):
@@ -120,6 +145,7 @@ def register(args):
              'selected_for_case_demo': slot['selected_for_case_demo'], 'followup_of': slot.get('followup_of'),
              'attempt_ordinal': slot.get('attempt_ordinal', 1),
              'orchestration_version': 'official-passive-followup-v2',
+             'minimum_USB_reconnect_wait_s': USB_WAIT_SECONDS,
              'selection_policy_sha256': digest(policy), 'reviewed_design_sha256': digest(design),
              'protocol_sha256': digest(protocol), 'source_sha256': full_sources(protocol),
              'source_commit': base.git('rev-parse', 'HEAD'), 'assigned_utc': datetime.now(timezone.utc).isoformat(),
@@ -176,7 +202,7 @@ def run(args):
         if len(ports) != 1:
             raise ValueError('Expected Minima absent or ambiguous; no paid request or serial opened.')
         preflight = json.loads((record / 'preflight.json').read_text())
-        bench = base.Bench(protocol, log, lambda f: base.intervention(log, design, f), design=design,
+        bench = SettledBench(protocol, log, lambda f: base.intervention(log, design, f), design=design,
             initial_report=initial, approved=True, previous_boot_id=preflight['previous_boot_id'],
             preflight_boot_id=preflight['observed_unarmed_boot_id'])
         def publish(frozen, sha):
