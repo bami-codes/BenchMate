@@ -1,0 +1,54 @@
+{
+ "note": "Read from the official reading-assisted cohort records (docs/2026-11-03-reading-cohort-policy.json). Development runs before the pipeline freeze never appear here.",
+ "updated_utc": "2026-11-03T14:50:00+00:00",
+ "cohort": "reading-assisted-v1",
+ "official_runs": [
+  "20261103T125924-bf8f64512b",
+  "20261103T142003-2b176faa91"
+ ],
+ "metrics": [
+  {
+   "id": "cases",
+   "label": "forum cases run on the bench",
+   "value": 1
+  },
+  {
+   "id": "fault_runs",
+   "label": "fault diagnoses completed, held-back checks passed",
+   "value": 1
+  },
+  {
+   "id": "readings",
+   "label": "readings asked for, bands frozen first",
+   "value": 1
+  },
+  {
+   "id": "matched",
+   "label": "sealed faults matched after the reading",
+   "value": 1
+  },
+  {
+   "id": "restored",
+   "label": "restored reruns: no mismatch in the tests Spark chose",
+   "value": 1
+  },
+  {
+   "id": "spark_calls",
+   "label": "Muse Spark calls (incl. the schematic read)",
+   "value": 17
+  },
+  {
+   "id": "sam_calls",
+   "label": "SAM 3.1 calls",
+   "value": 1
+  },
+  {
+   "id": "cost",
+   "label": "estimated API cost (USD)",
+   "value": 0.152
+  }
+ ],
+ "sources": [
+  "docs/2026-11-03-reading-case01-followup-result.md: new reading-cohort cumulative usage 17 Spark requests and one SAM request, estimated $0.15204580"
+ ]
+}

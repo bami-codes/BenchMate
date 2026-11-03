@@ -1,0 +1,730 @@
+{
+  "schema": "benchmate.site_contract_example.v1",
+  "example_only": true,
+  "counted": false,
+  "source": "mock",
+  "actor": "scripted_controller",
+  "warning": "Retained development mock. Not a physical Spark run or official result. Events are excerpts, not a standalone hash chain.",
+  "source_archive": "examples/netlist-diagnosis-v2/2026-11-02/development-records.tar.gz",
+  "source_archive_sha256": "b311d4dd8ba1dda8c5a4043c981784fc2252051263e7dd30566ecc7f84162dc4",
+  "source_member": "first-six/records/20261102T135730-f18003aad6/events.jsonl",
+  "source_event_log_sha256": "e997d85ecc28592f4f7dbe312951b87a5f780e14deb83804afd9be79f79496b4",
+  "events": [
+    {
+      "sequence": 19,
+      "timestamp": "2026-11-02T13:57:36.549373+00:00",
+      "kind": "component_hypotheses_fitted",
+      "payload": {
+        "hypotheses": [
+          {
+            "id": "nominal",
+            "changed_component": null,
+            "model": {
+              "elements": [
+                {
+                  "name": "R1",
+                  "kind": "R",
+                  "a": "IN",
+                  "b": "OUT",
+                  "value": 4700.0,
+                  "model": "none"
+                },
+                {
+                  "name": "R2",
+                  "kind": "R",
+                  "a": "OUT",
+                  "b": "REF",
+                  "value": 22000.0,
+                  "model": "none"
+                }
+              ],
+              "diode": {
+                "is_a": 1e-09,
+                "n": 1.8
+              }
+            },
+            "status": "inadequate",
+            "training_checks": [
+              {
+                "RMS_mV": 0.5928275744771667,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 0.4967144788189326
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 0.5791383027613527
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 0.5182525267271476
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 0.6036696998915215
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 0.6105794236581218
+                  }
+                ],
+                "passed": true,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 0.46678041498862083,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 0.49421467556750504
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 0.4800294955525757
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 0.5150185008544318
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 0.47101853255316506
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 0.45463763870870055
+                  }
+                ],
+                "passed": true,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 70.58544293364837,
+                "regions": [
+                  {
+                    "name": "phase_0",
+                    "samples": 76,
+                    "RMS_mV": 16.18693325887424
+                  },
+                  {
+                    "name": "phase_1",
+                    "samples": 62,
+                    "RMS_mV": 142.33075310654291
+                  },
+                  {
+                    "name": "phase_2",
+                    "samples": 62,
+                    "RMS_mV": 142.2893422599345
+                  },
+                  {
+                    "name": "phase_3",
+                    "samples": 62,
+                    "RMS_mV": 17.830680957239906
+                  },
+                  {
+                    "name": "phase_4",
+                    "samples": 64,
+                    "RMS_mV": 0.40961376168536023
+                  },
+                  {
+                    "name": "phase_5",
+                    "samples": 62,
+                    "RMS_mV": 0.4369264994838979
+                  },
+                  {
+                    "name": "phase_6",
+                    "samples": 62,
+                    "RMS_mV": 0.5070081423139322
+                  },
+                  {
+                    "name": "phase_7",
+                    "samples": 62,
+                    "RMS_mV": 0.39706769719290247
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              }
+            ],
+            "optimizer_converged": true,
+            "parameter_at_bound": false,
+            "fitted_parameters": {},
+            "local_parameter_rank": 0,
+            "fitted_parameter_count": 0,
+            "parameters_identifiable": true,
+            "unique_physical_parameters_claimed": false,
+            "training_observations": 3,
+            "verification_outputs_used": 0
+          },
+          {
+            "id": "changed:R1",
+            "changed_component": "R1",
+            "model": {
+              "elements": [
+                {
+                  "name": "R1",
+                  "kind": "R",
+                  "a": "IN",
+                  "b": "OUT",
+                  "value": 6761.539558111051,
+                  "model": "none"
+                },
+                {
+                  "name": "R2",
+                  "kind": "R",
+                  "a": "OUT",
+                  "b": "REF",
+                  "value": 22000.0,
+                  "model": "none"
+                }
+              ],
+              "diode": {
+                "is_a": 1e-09,
+                "n": 1.8
+              }
+            },
+            "status": "inadequate",
+            "training_checks": [
+              {
+                "RMS_mV": 11.539301814851001,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 11.879381429191165
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 11.382229501264279
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 11.630969786515337
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 11.436519450056231
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 11.517614947570516
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 17.8896078838252,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 17.980593413511855
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 17.848935018804493
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 17.84416163470512
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 17.87480982310789
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 17.88592276268185
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 55.05669120567579,
+                "regions": [
+                  {
+                    "name": "phase_0",
+                    "samples": 76,
+                    "RMS_mV": 10.834559115401447
+                  },
+                  {
+                    "name": "phase_1",
+                    "samples": 62,
+                    "RMS_mV": 100.63457622617588
+                  },
+                  {
+                    "name": "phase_2",
+                    "samples": 62,
+                    "RMS_mV": 100.58644331774859
+                  },
+                  {
+                    "name": "phase_3",
+                    "samples": 62,
+                    "RMS_mV": 11.70733331920835
+                  },
+                  {
+                    "name": "phase_4",
+                    "samples": 64,
+                    "RMS_mV": 20.120275488259058
+                  },
+                  {
+                    "name": "phase_5",
+                    "samples": 62,
+                    "RMS_mV": 42.77081936257959
+                  },
+                  {
+                    "name": "phase_6",
+                    "samples": 62,
+                    "RMS_mV": 42.893897536436796
+                  },
+                  {
+                    "name": "phase_7",
+                    "samples": 62,
+                    "RMS_mV": 20.473122006112586
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              }
+            ],
+            "optimizer_converged": true,
+            "parameter_at_bound": false,
+            "fitted_parameters": {
+              "R1": 6761.539558111051
+            },
+            "local_parameter_rank": 1,
+            "fitted_parameter_count": 1,
+            "parameters_identifiable": true,
+            "unique_physical_parameters_claimed": false,
+            "training_observations": 3,
+            "verification_outputs_used": 0
+          },
+          {
+            "id": "changed:R2",
+            "changed_component": "R2",
+            "model": {
+              "elements": [
+                {
+                  "name": "R1",
+                  "kind": "R",
+                  "a": "IN",
+                  "b": "OUT",
+                  "value": 4700.0,
+                  "model": "none"
+                },
+                {
+                  "name": "R2",
+                  "kind": "R",
+                  "a": "OUT",
+                  "b": "REF",
+                  "value": 14338.010713339174,
+                  "model": "none"
+                }
+              ],
+              "diode": {
+                "is_a": 1e-09,
+                "n": 1.8
+              }
+            },
+            "status": "inadequate",
+            "training_checks": [
+              {
+                "RMS_mV": 13.8942935487761,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 14.234665606556137
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 13.738116191136989
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 13.986269028162388
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 13.79188435825557
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 13.872538358643906
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 7.477537889012293,
+                "regions": [
+                  {
+                    "name": "pre_step",
+                    "samples": 51,
+                    "RMS_mV": 7.569605904397997
+                  },
+                  {
+                    "name": "0_to_5ms",
+                    "samples": 10,
+                    "RMS_mV": 7.437112708804392
+                  },
+                  {
+                    "name": "5_to_20ms",
+                    "samples": 30,
+                    "RMS_mV": 7.433661470854087
+                  },
+                  {
+                    "name": "20_to_80ms",
+                    "samples": 120,
+                    "RMS_mV": 7.4628215998517655
+                  },
+                  {
+                    "name": "after_80ms",
+                    "samples": 301,
+                    "RMS_mV": 7.473401965065684
+                  }
+                ],
+                "passed": true,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              },
+              {
+                "RMS_mV": 53.88090762990119,
+                "regions": [
+                  {
+                    "name": "phase_0",
+                    "samples": 76,
+                    "RMS_mV": 13.127460478212505
+                  },
+                  {
+                    "name": "phase_1",
+                    "samples": 62,
+                    "RMS_mV": 92.43611543990218
+                  },
+                  {
+                    "name": "phase_2",
+                    "samples": 62,
+                    "RMS_mV": 92.38598012985494
+                  },
+                  {
+                    "name": "phase_3",
+                    "samples": 62,
+                    "RMS_mV": 14.176963227297424
+                  },
+                  {
+                    "name": "phase_4",
+                    "samples": 64,
+                    "RMS_mV": 24.134260453188748
+                  },
+                  {
+                    "name": "phase_5",
+                    "samples": 62,
+                    "RMS_mV": 51.31240850598019
+                  },
+                  {
+                    "name": "phase_6",
+                    "samples": 62,
+                    "RMS_mV": 51.43537100270775
+                  },
+                  {
+                    "name": "phase_7",
+                    "samples": 62,
+                    "RMS_mV": 24.551402916021487
+                  }
+                ],
+                "passed": false,
+                "refitted": false,
+                "baseline": "Independent REF; no scored OUT origin fit.",
+                "source": "mock",
+                "purpose": "training"
+              }
+            ],
+            "optimizer_converged": true,
+            "parameter_at_bound": false,
+            "fitted_parameters": {
+              "R2": 14338.010713339174
+            },
+            "local_parameter_rank": 1,
+            "fitted_parameter_count": 1,
+            "parameters_identifiable": true,
+            "unique_physical_parameters_claimed": false,
+            "training_observations": 3,
+            "verification_outputs_used": 0
+          }
+        ],
+        "simulator_calls": 57,
+        "all_inadequate": true,
+        "fitting_complete": true
+      },
+      "previous_sha256": "343a7f02fab467166b51319c58744683da7ce2f0890b104d83d709f57e3dcb2b",
+      "sha256": "50444967566bf21c24e58bca8f788d1c2c9fcf14b9f77351c970634b33ed418b"
+    },
+    {
+      "sequence": 22,
+      "timestamp": "2026-11-02T13:57:36.550693+00:00",
+      "kind": "structure_proposed",
+      "payload": {
+        "id": "proposal:1",
+        "elements": [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 4700.0,
+            "model": "none"
+          },
+          {
+            "name": "R2",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 22000.0,
+            "model": "none"
+          },
+          {
+            "name": "Dextra",
+            "kind": "D",
+            "a": "OUT",
+            "b": "REF",
+            "value": 0.0,
+            "model": "generic_diode"
+          }
+        ],
+        "rationale": "SOFTWARE SCRIPT ONLY: development proposal from the public circuit shape; no hidden assembly input.",
+        "topology_sha256": "13172805959fc5aae665b2becddc6ad6d877111dea6b1053e932cba007e3fd4f",
+        "selected_by": "scripted_controller"
+      },
+      "previous_sha256": "7e0d4c24b2e218c82d053dd17df32563492cc13a5f8cc2a4e58637a991e628c0",
+      "sha256": "539fe276834c517073013988bacce4cd339c5331387e4ff843cda267f426d0f3"
+    },
+    {
+      "sequence": 23,
+      "timestamp": "2026-11-02T13:57:41.410879+00:00",
+      "kind": "structure_fit",
+      "payload": {
+        "id": "proposal:1",
+        "changed_component": null,
+        "model": {
+          "elements": [
+            {
+              "name": "R1",
+              "kind": "R",
+              "a": "IN",
+              "b": "OUT",
+              "value": 4700.0,
+              "model": "none"
+            },
+            {
+              "name": "R2",
+              "kind": "R",
+              "a": "OUT",
+              "b": "REF",
+              "value": 22000.0,
+              "model": "none"
+            },
+            {
+              "name": "Dextra",
+              "kind": "D",
+              "a": "OUT",
+              "b": "REF",
+              "value": 0.0,
+              "model": "generic_diode"
+            }
+          ],
+          "diode": {
+            "is_a": 3.0248375122258387e-09,
+            "n": 1.9018631514532844
+          }
+        },
+        "status": "adequate",
+        "training_checks": [
+          {
+            "RMS_mV": 0.5080830725828064,
+            "regions": [
+              {
+                "name": "pre_step",
+                "samples": 51,
+                "RMS_mV": 0.49814161093765885
+              },
+              {
+                "name": "0_to_5ms",
+                "samples": 10,
+                "RMS_mV": 0.3983739520867866
+              },
+              {
+                "name": "5_to_20ms",
+                "samples": 30,
+                "RMS_mV": 0.4987847038052903
+              },
+              {
+                "name": "20_to_80ms",
+                "samples": 120,
+                "RMS_mV": 0.4695693628014003
+              },
+              {
+                "name": "after_80ms",
+                "samples": 301,
+                "RMS_mV": 0.528291099022061
+              }
+            ],
+            "passed": true,
+            "refitted": false,
+            "baseline": "Independent REF; no scored OUT origin fit.",
+            "source": "mock",
+            "purpose": "training"
+          },
+          {
+            "RMS_mV": 0.4596274912565331,
+            "regions": [
+              {
+                "name": "pre_step",
+                "samples": 51,
+                "RMS_mV": 0.4944941719042099
+              },
+              {
+                "name": "0_to_5ms",
+                "samples": 10,
+                "RMS_mV": 0.4666328531113102
+              },
+              {
+                "name": "5_to_20ms",
+                "samples": 30,
+                "RMS_mV": 0.5015794390828284
+              },
+              {
+                "name": "20_to_80ms",
+                "samples": 120,
+                "RMS_mV": 0.46220350343305516
+              },
+              {
+                "name": "after_80ms",
+                "samples": 301,
+                "RMS_mV": 0.44770468917673373
+              }
+            ],
+            "passed": true,
+            "refitted": false,
+            "baseline": "Independent REF; no scored OUT origin fit.",
+            "source": "mock",
+            "purpose": "training"
+          },
+          {
+            "RMS_mV": 0.4785884389796604,
+            "regions": [
+              {
+                "name": "phase_0",
+                "samples": 76,
+                "RMS_mV": 0.4447554100958391
+              },
+              {
+                "name": "phase_1",
+                "samples": 62,
+                "RMS_mV": 0.5143766708202075
+              },
+              {
+                "name": "phase_2",
+                "samples": 62,
+                "RMS_mV": 0.5298183593206222
+              },
+              {
+                "name": "phase_3",
+                "samples": 62,
+                "RMS_mV": 0.5680969826581405
+              },
+              {
+                "name": "phase_4",
+                "samples": 64,
+                "RMS_mV": 0.4100601874979628
+              },
+              {
+                "name": "phase_5",
+                "samples": 62,
+                "RMS_mV": 0.43619874279081317
+              },
+              {
+                "name": "phase_6",
+                "samples": 62,
+                "RMS_mV": 0.50874681385904
+              },
+              {
+                "name": "phase_7",
+                "samples": 62,
+                "RMS_mV": 0.3978935057996631
+              }
+            ],
+            "passed": true,
+            "refitted": false,
+            "baseline": "Independent REF; no scored OUT origin fit.",
+            "source": "mock",
+            "purpose": "training"
+          }
+        ],
+        "optimizer_converged": true,
+        "parameter_at_bound": false,
+        "fitted_parameters": {
+          "diode_IS": 3.0248375122258387e-09,
+          "diode_N": 1.9018631514532844
+        },
+        "local_parameter_rank": 2,
+        "fitted_parameter_count": 2,
+        "parameters_identifiable": true,
+        "unique_physical_parameters_claimed": false,
+        "training_observations": 3,
+        "verification_outputs_used": 0,
+        "simulator_calls": 81
+      },
+      "previous_sha256": "539fe276834c517073013988bacce4cd339c5331387e4ff843cda267f426d0f3",
+      "sha256": "55bfe38bae2049ca986e00ba6e3193df78ed33f38ab5f8bea0f57d956b33e30a"
+    }
+  ]
+}

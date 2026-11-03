@@ -1,0 +1,7 @@
+# These replay exports are public inputs, not ignored runtime capture folders.
+!data/runs/
+!data/runs/**
+
+# Staging and browser QA stay outside the published site.
+_stage/
+_shots/

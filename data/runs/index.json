@@ -1,0 +1,84 @@
+{
+ "runs": [
+  {
+   "id": "20261102T160841-eff2b65334",
+   "case": "01",
+   "label": "Pilot A",
+   "pilot": true,
+   "counted": false,
+   "class_label": "Pilot run — not counted",
+   "started_utc": "2026-11-02T16:08:41.690164+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 5,
+   "spark_cost": 0.034454,
+   "outcome": "stopped",
+   "verdict": null,
+   "pair_of": null
+  },
+  {
+   "id": "20261102T164944-16f6a79a31",
+   "case": "01",
+   "label": "Pilot B",
+   "pilot": true,
+   "counted": false,
+   "class_label": "Pilot run — not counted",
+   "started_utc": "2026-11-02T16:49:44.634533+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 2,
+   "spark_calls": 3,
+   "spark_cost": 0.018031,
+   "outcome": "stopped",
+   "verdict": null,
+   "pair_of": null
+  },
+  {
+   "id": "20261103T125924-bf8f64512b",
+   "case": "01",
+   "label": "Fault run",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
+   "started_utc": "2026-11-03T13:08:26.773001+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 8,
+   "spark_cost": 0.070553,
+   "sam_calls": 1,
+   "outcome": "report",
+   "verdict": "changed",
+   "survivors": [
+    "external_equivalent:changed:R1"
+   ],
+   "state": "faulted",
+   "display_caption": null,
+   "pair_of": null
+  },
+  {
+   "id": "20261103T142003-2b176faa91",
+   "case": "01",
+   "label": "Restored rerun",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
+   "started_utc": "2026-11-03T14:20:03.563614+00:00",
+   "model": null,
+   "steps": 3,
+   "spark_calls": 6,
+   "spark_cost": 0.058001,
+   "sam_calls": 0,
+   "outcome": "report",
+   "verdict": "consistent",
+   "survivors": [
+    "nominal",
+    "changed:R1",
+    "changed:C1"
+   ],
+   "state": "restored",
+   "display_caption": "No mismatch in the tests Spark chose",
+   "pair_of": "20261103T125924-bf8f64512b"
+  }
+ ]
+}

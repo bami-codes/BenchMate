@@ -1,10 +1,95 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Muse Spark chooses experiments on a real Arduino circuit. Explore the retained measurements, model decisions and verification in BenchMate."><title>BenchMate · Ask the circuit</title><link rel="stylesheet" href="site.css"></head><body>
-<header><a class="brand" href="./">Bench<span>Mate</span></a><nav aria-label="Main"><a href="#runs">Explore runs</a><a href="https://github.com/bami-codes/BenchMate">GitHub ↗</a></nav></header>
-<main><section class="hero"><p class="eyebrow">Meta Global AI Developer Hackathon · Push the Frontier</p><h1>Make the explanation<br>face the circuit.</h1><p class="lede">Muse Spark chooses the experiment. An Arduino bench measures what happens. A prediction has to survive a test it has not seen.</p><div class="actions"><a class="button" href="d01.html">Replay the real experiment →</a><span class="small">No installation. No API key. Read-only records.</span></div></section>
-<section class="surface" aria-labelledby="physical-title"><span class="badge">PHYSICAL CIRCUIT · RECORDED OCT 30</span><h2 id="physical-title">One slow response. Two possible causes.<br>Spark asks for the test that separates them.</h2><p>A planted fault doubled an RC circuit’s time constant. One trace could not distinguish a larger resistor from a larger capacitor. Spark asked a person to connect a known load, then checked both frozen models against the new measurement.</p><div class="metrics"><div class="metric"><strong>21.4 ms</strong><span>measured · designed for ≈10 ms</span></div><div class="metric"><strong>32.5 vs 3.0</strong><span>mV error · R-change vs C-change</span></div><div class="metric"><strong>3.04 mV</strong><span>reserved sine · same C-change model</span></div></div><a href="d01.html"><img class="preview" src="d01-story.png" alt="BenchMate Story view with Spark’s explanation, recorded waveform and conditional predictions" width="1440" height="1000" style="height:auto" loading="lazy"></a><p class="small">Model parameters were fixed before measurement. Displayed comparison curves use the newly measured input. Capacitance estimate ≈2.1× design assumes nominal 10 kΩ resistance.</p><div class="actions"><a class="button" href="d01.html">Open Story & Evidence</a><a href="https://github.com/bami-codes/BenchMate/tree/main/examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612">Read the original run ↗</a></div></section>
-<section class="section" id="watch"><p class="eyebrow">51-second record-based highlight</p><h2>Watch Spark ask the circuit.</h2><video controls playsinline preload="metadata" poster="d01-highlight-poster.png" style="width:100%;border-radius:16px" aria-label="Recorded physical D01 diagnosis, with English synthetic narration"><source src="d01-highlight.mp4" type="video/mp4"><track kind="captions" src="d01-highlight.vtt" srclang="en" label="English"></video><p class="small">Animated replay of one retained physical diagnosis, Oct 30. Synthetic narration; not live footage. Both models were fixed before testing; plotted conditional curves use the measured input. <a href="d01.html">Inspect the full record.</a></p></section>
-<section class="section" id="runs"><p class="eyebrow">Two further capabilities · simulated benches</p><div class="grid"><article class="surface"><span class="badge mock">SIMULATED BENCH · ACTUAL SPARK</span><h2>When every starting model fails, propose a new structure.</h2><p>Spark chose different signal amplitudes, then wrote a resistor–diode netlist outside the five starting models. Two reserved inputs checked the frozen model.</p><a class="button secondary" href="b5.html">Explore B5 discovery →</a><p class="small">Physical B5 remains pending. A forum-inspired simplified clamp, not an ESP32.</p></article><article class="surface"><span class="badge mock">SIMULATED BENCH · ACTUAL SPARK</span><h2>Predict the repair.<br>Then test its effect.</h2><p>In the full repair rehearsal, Spark requested the load, checked its diagnosis, requested restoration of nominal capacitance and verified two post-repair waveforms.</p><a class="button secondary" href="repair.html">Replay the repair rehearsal →</a><p class="small">Physical repair remains pending. Operator actions and waveforms here are simulated; decisions are actual API responses.</p></article></div></section>
-<section class="section"><p class="eyebrow">Measurement access · registered synthetic Task A</p><h2>Move from plausible alternatives<br>to a tested answer.</h2><p>Without measuring, Spark left overlapping explanations unresolved. With the bench’s noisy waveforms, fitting tools and experiment ranking, it identified every in-family case.</p><table><caption class="visually-hidden">Task A, 24 in-family and six dual-change synthetic circuits</caption><thead><tr><th>System</th><th>Identify · 24 cases</th><th>Reject · 6 dual changes</th></tr></thead><tbody><tr><td>Spark, no measurements</td><td>8 / 24</td><td>0 / 6; held off</td></tr><tr><td>Spark + bench</td><td>24 / 24</td><td>5 / 6; one incomplete</td></tr><tr><td>Engine / fixed plan</td><td>24 / 24</td><td>6 / 6</td></tr><tr><td>Spark Open + bench</td><td>21 / 24</td><td>1 / 6</td></tr></tbody></table><p class="small">Different information access, not isolated reasoning accuracy. No-tool Spark gave 22 cannot-tell replies across all 30 cases; those are not wrong answers. Spark Open stopped eight times after returning multiple tools to a one-tool adapter. Every first attempt remains. All executed arms had zero wrong identifications.</p><a href="https://github.com/bami-codes/BenchMate/tree/main/examples/overnight/2026-11-02/task-a">Information-access comparison ↗</a> · <a href="https://github.com/bami-codes/BenchMate/tree/main/examples/overnight/2026-11-02/spark-open">Open-model results and interface failures ↗</a></section>
-<section class="section"><p class="eyebrow">Registered synthetic evaluation</p><h2>The simple baseline matters.</h2><p>Hiding the engine ranking did not improve Spark’s performance on the linear identification task. The fixed expert plan completed all 16 cases with fewer simulated mountings.</p><table><caption class="visually-hidden">Task B, 16 synthetic circuits; random selection repeated three times per circuit</caption><thead><tr><th>Strategy</th><th>Completed correctly</th><th>Mean mountings</th></tr></thead><tbody><tr><td>Engine</td><td>16 / 16</td><td>1.00</td></tr><tr><td>Fixed expert plan</td><td>16 / 16</td><td>1.00</td></tr><tr><td>Spark · ranking hidden</td><td>15 / 16</td><td>2.88</td></tr><tr><td>Random · 3 repeats</td><td>30 / 48 runs</td><td>2.81</td></tr></tbody></table><p class="small">No executed arm named a wrong circuit. One Spark run verified a model but ran out of calls before submitting its final report. Repeats are not independent circuits. This supports retaining engine ranking in the linear workflow.</p><a href="https://github.com/bami-codes/BenchMate/tree/main/examples/overnight/2026-11-02">Inspect every first attempt, including the incomplete run ↗</a></section>
-<section class="section"><h2>A bench you can build. A record you can inspect.</h2><p>The development parts basket cost ₩55,980, including spares and excluding the multimeter. The current evidence covers small RC fixtures and one simulated diode case. Cross-builder reliability and broader circuit diagnosis remain untested.</p><div class="actions"><a class="button secondary" href="https://github.com/bami-codes/BenchMate/blob/main/docs/build-your-own.md">Build guide ↗</a><a href="https://github.com/bami-codes/BenchMate/blob/main/docs/evidence-index.md">Evidence index ↗</a><a href="manifest.json">Record hashes</a></div></section></main>
-<footer>Built during the hackathon. Runtime agent: Muse Spark 1.3. Coding assistance: Codex & Claude.<br>These pages replay retained records. They never connect to a board or a model API.</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BenchMate</title>
+<meta name="description" content="BenchMate: a first-power-on diagnostic for real hardware. Muse Spark reads the drawing, designs experiments on the real circuit, freezes every forecast before the bench measures, and finds where the board and the drawing disagree.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
+<link rel="icon" href="assets/mark.svg">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
+  <nav><a href="#replays">Replays</a><a href="#cases">Cases</a><a href="#how" class="lng">How it works</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+</header>
+
+<section class="claim claim-top" aria-label="What this is">
+  <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
+  <p>BenchMate finds where a real circuit disagrees with its schematic. Muse Spark reads the drawing and designs experiments on the real board until only one explanation is left.</p>
+  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the cases</a></div>
+</section>
+
+<section class="hero" aria-label="The scope">
+  <div class="scope-col"><div class="scope" id="hero-scope"><div class="legend"><span class="fc">– – forecast, frozen before measuring</span><span class="ms">— measured</span></div></div><p class="under" id="hero-under"></p></div>
+  <div class="hero-side">
+    <div class="tile"><h3>Drawn <small>the schematic the model read</small></h3><div class="schem" id="hero-schem"></div></div>
+    <div class="tile"><h3>Built <small>the mini board</small></h3><div class="schem" id="hero-board"></div><p class="small muted" id="hero-board-note"></p></div>
+  </div>
+</section>
+
+<section class="claim claim-under"><div class="small" id="hero-caption" style="opacity:.9"></div></section>
+
+<section class="section" id="replays">
+  <div class="paper">
+    <h2>Watch a diagnosis</h2>
+    <p class="lede">Recorded runs on the real bench, replayed from their logs in order. Before each measurement the dashed forecasts are drawn; then the measured trace sweeps over them and the needles move. Click any number for the log event behind it.</p>
+    <div class="cases" id="replay-list"></div>
+  </div>
+</section>
+
+<section class="section" id="cases">
+  <div class="paper">
+    <h2 id="cases-h">Cases from real forum threads</h2>
+    <p class="small muted" id="cases-count"></p>
+    <p class="lede">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench: the first power-on moment, when the drawing is right and the board still misbehaves. Every case has its own circuit on the mini board and its own drawing; all use the same procedure, the same test menu and the same fixture.</p>
+    <div class="cases" id="case-list"></div>
+    <div id="policy" class="small muted" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="paper">
+    <h2>How a run works</h2>
+    <p class="lede">The same order every time. Only the drawing changes.</p>
+    <div class="steps-how">
+      <div><h3><span class="n">1</span>Read the drawing</h3><p>Muse Spark vision turns the schematic image into parts and connections. A person confirms the reading. The model gets this drawing and the shared bench description, nothing else.</p></div>
+      <div><h3><span class="n">2</span>Choose an experiment</h3><p>Muse Spark picks from a fixed menu of steps and sines, with or without a 9.99 kΩ load, and says why. The runner never picks for it.</p></div>
+      <div><h3><span class="n">3</span>Forecast first</h3><p>Every explanation still standing predicts the next measurement. The forecast is hashed before the board is touched.</p></div>
+      <div><h3><span class="n">4</span>Measure and cross out</h3><p>The Arduino UNO R4 fixture measures the real circuit. Explanations that miss by more than 9 mV, on the whole step or any region of it, are ruled out. If none survive, Spark may propose a part the drawing does not show.</p></div>
+      <div><h3><span class="n">5</span>Check on held-back inputs</h3><p>The final forecast is pushed to GitHub, then two reserved inputs that were never used for fitting are measured.</p></div>
+      <div><h3><span class="n">6</span>One reading at the bench</h3><p>When two explanations give the same waveforms, Spark names one part to read. Its expected range under each explanation is frozen first; the operator types one value; the same rule rules out.</p></div>
+      <div><h3><span class="n">7</span>Open the seal</h3><p>The hidden fault, committed as a digest before the first measurement, is compared with the result by code. SAM 3.1 outlines the bodies in the board photo; Spark vision points at the part.</p></div>
+    </div>
+    <div class="verify" id="verify-short"></div>
+  </div>
+</section>
+
+<section class="section" id="who">
+  <div class="paper">
+    <h2>Who does what</h2>
+    <dl class="who">
+      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts, values and connections, with a box per part.</dd>
+      <dt>Muse Spark 1.3</dt><dd>Chooses every experiment from the fixed menu and says why; asks for the bench to be rewired; decides when to ask for the check; may propose a part the drawing lacks.</dd>
+      <dt>Fit engine, ngspice</dt><dd>Fits each explanation to the measurements and forecasts the next one. Compares forecasts with the bench by RMS miss.</dd>
+      <dt>Bench, Arduino UNO R4</dt><dd>Two LM358 buffers, a 1 kΩ drive resistor, a 1.63 V reference and four ADC channels. A reference guard stops a run when the bench itself drifts.</dd>
+      <dt>SAM 3.1 + Muse Spark vision</dt><dd>After the diagnosis: SAM 3.1 segments the mini board photo; Spark vision says which body is which drawn part, and a person confirms. No part values are read from the photo; values come from one reading at the bench, forecast first.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="section" id="score" hidden>
+  <div class="paper">
+    <h2>Measured, not claimed</h2>
+    <p class="lede" id="score-note"></p>
+    <div class="score" id="score-grid"></div>
+  </div>
+</section>
+
+<footer>BenchMate · built for the Meta Global AI Developer Hackathon · <a href="https://github.com/bami-codes/BenchMate">github.com/bami-codes/BenchMate</a>. Forum cases are paraphrased with links to the original threads; no posts are quoted.</footer>
+<script src="assets/common.js"></script>
+<script src="assets/landing.js"></script>
+</body>
+</html>

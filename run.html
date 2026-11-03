@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replay · BenchMate</title>
+<meta name="description" content="A recorded BenchMate diagnosis, replayed from its log: forecasts frozen first, then the bench measures.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css">
+<link rel="icon" href="assets/mark.svg">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
+  <nav><a href="index.html#replays">Replays</a><a href="index.html#cases">Cases</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+</header>
+
+<div class="shelf">
+  <div class="shelf-in">
+    <div class="scope-wrap">
+      <div class="scope" id="scope" aria-label="Oscilloscope: forecasts dashed, measured IN and OUT solid"></div>
+      <div class="scope-idle" id="scope-idle"></div>
+    </div>
+    <div class="meters">
+      <div class="meter-row" id="meters" aria-live="polite" aria-label="Explanations and their misses"></div>
+    </div>
+    <div class="transport">
+      <span class="small" id="shelf-title" style="opacity:.9"></span>
+      <button class="btn sm" id="play" aria-pressed="false">Play</button>
+      <button class="btn ghost onmat sm" id="speed" aria-label="Replay speed">4×</button>
+      <div class="scrub"><input type="range" id="scrub" min="0" max="1" step="0.1" value="0" aria-label="Replay position"><span class="clock num" id="clock">0:00</span></div>
+      <span class="seal" id="seal">Hidden fault sealed</span>
+      <div class="counters"><span><b class="num" id="c-exp">0</b> experiments</span><span><b class="num" id="c-calls">0</b> Spark calls</span><span><b class="num" id="c-cost">$0</b> est.</span></div>
+      <a class="btn ghost onmat sm" id="report-link" href="#">Report</a>
+    </div>
+  </div>
+</div>
+
+<main class="book-wrap">
+  <div class="sheet" id="sheet">
+    <div class="sheet-head">
+      <h1 id="case-title">…</h1>
+      <span class="badge" id="badge">Counted run</span>
+      <span class="small muted" id="case-n"></span>
+      <span class="small faint" id="replay-of" style="flex-basis:100%"></span>
+    </div>
+    <div id="book" tabindex="0" aria-label="Lab notebook, filled as the replay plays"></div>
+  </div>
+  <aside class="rail" id="rail" aria-label="The drawing and the bench state">
+    <div class="rail-card"><h4>The drawing Spark read</h4><div class="rail-schem" id="rail-schem"></div><p class="small muted" id="rail-schem-note">Given to the model with the shared bench description. Nothing else.</p></div>
+    <div class="rail-card"><h4>Bench state</h4><dl class="kv small" id="bench-state"><dt>Load</dt><dd id="bs-load">not connected</dd><dt>Last change</dt><dd id="bs-last">—</dd><dt>Seal</dt><dd id="bs-seal">hidden fault sealed</dd></dl></div>
+  </aside>
+</main>
+<footer>Replays are recorded runs on the real bench, played back from their logs. Waits for rewiring are shortened and labelled. Nothing here calls a model or touches hardware. Click any number for the log event behind it.</footer>
+<script src="assets/common.js"></script>
+<script src="assets/replay.js"></script>
+</body>
+</html>
