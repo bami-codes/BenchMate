@@ -187,6 +187,22 @@
       "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T082308-07da0eb2ec.json",
       "protocol_sha256": "68a543bc0ba1290afbdf916b0640a2efc7c02f5cbc2b4f24949333e6f785223e",
       "error": "Agent payload exceeds the local bound"
+    },
+    {
+      "slot_id": "01-F04",
+      "case_id": "01",
+      "state": "faulted",
+      "order": 1,
+      "required": false,
+      "run_id": "20261103T083824-7be77b51da",
+      "status": "registered",
+      "selected_for_case_demo": false,
+      "selection": "followup_never_replaces_primary",
+      "counted": true,
+      "followup_of": "01-F01",
+      "attempt_ordinal": 4,
+      "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T083824-7be77b51da.json",
+      "protocol_sha256": "daace662dd771ece88410cfb9378c99fc1a151ad4efa9a71cb84ca66180d00d1"
     }
   ]
 }
