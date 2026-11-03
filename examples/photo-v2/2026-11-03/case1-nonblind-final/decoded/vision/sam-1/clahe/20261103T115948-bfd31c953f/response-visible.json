@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9cce36728e2b2e5e742b3",
+  "usage": {
+    "input_tokens": 1275,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 3842,
+    "output_tokens_details": {
+      "reasoning_tokens": 3569
+    },
+    "total_tokens": 5117
+  },
+  "elapsed_s": 47.81453166715801,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_175633cf-79db-4f44-8c90-c48f73dfef5c",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Seeing a blurry blue part \u2014 transcribing its visible text without inferring values.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_38197270-d10a-4337-8f05-ddb4a78b5751",
+      "call_id": "call_38197270-d10a-4337-8f05-ddb4a78b5751",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"square blue upper body with lighter gray lower edge, black printed alphanumeric text centered on blue area, background masked, image blurry/low resolution\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"unknown\",\"kind_confidence\":0.2,\"markings\":[{\"alternatives\":[\"105/100\",\"105J1OO\",\"10SJ100\"],\"confidence\":0.6,\"text\":\"105J100\"}],\"uncertainties\":[\"low resolution/blur limits character certainty\",\"fourth character ambiguous between J and slash\",\"digits 0 vs letter O ambiguous\",\"no color bands visible\",\"component kind not determinable from visible surface alone\"]}",
+      "status": "completed"
+    }
+  ]
+}

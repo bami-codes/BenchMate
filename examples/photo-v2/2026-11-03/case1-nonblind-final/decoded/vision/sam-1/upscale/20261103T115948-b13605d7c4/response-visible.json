@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9cccb8f40beb078ba4b0d",
+  "usage": {
+    "input_tokens": 2562,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1711,
+    "output_tokens_details": {
+      "reasoning_tokens": 1449
+    },
+    "total_tokens": 4273
+  },
+  "elapsed_s": 23.31837237509899,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_8726de5e-daf7-4c1d-b942-e1b0d35fd6dd",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Reading the printed surface code and checking for color bands.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_8d18b0f5-0dd1-4a8b-8fb3-b2681c77acd1",
+      "call_id": "call_8d18b0f5-0dd1-4a8b-8fb3-b2681c77acd1",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"matte dark blue rectangular block body filling frame with dark printed characters centered, and lighter gray horizontal strip along bottom edge\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"C\",\"kind_confidence\":0.6,\"markings\":[{\"alternatives\":[\"105J100\",\"105U100\",\"105J10O\"],\"confidence\":0.65,\"text\":\"105J100\"}],\"uncertainties\":[\"image is low-resolution and blurry so character edges are indistinct\",\"color/lighting uncalibrated\",\"leads or terminals not visible in this crop\",\"function of gray bottom strip unclear from surface view\"]}",
+      "status": "completed"
+    }
+  ]
+}

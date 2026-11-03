@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9ccceb3594ef2626a4dd1",
+  "usage": {
+    "input_tokens": 1275,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 2091,
+    "output_tokens_details": {
+      "reasoning_tokens": 1822
+    },
+    "total_tokens": 3366
+  },
+  "elapsed_s": 26.4296954581514,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_21305431-afb8-4d13-878d-d3fabb78b22b",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Reading the visible surface text for literal transcription.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_34258f0d-b4d0-4c52-9145-c1c98407d710",
+      "call_id": "call_34258f0d-b4d0-4c52-9145-c1c98407d710",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"Rectangular block object with matte blue upper face bearing black printed characters and a solid gray region along the bottom edge; image is low-resolution and blurry with background masked.\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"unknown\",\"kind_confidence\":0.2,\"markings\":[{\"alternatives\":[\"105J100\",\"105J 100\",\"105J1O0\"],\"confidence\":0.7,\"text\":\"105J100\"}],\"uncertainties\":[\"Low resolution and blur reduce character edge certainty\",\"Component kind not determinable from surface shape and color alone\",\"Nature of gray lower region ambiguous due to blur and masking\",\"No color bands visible\"]}",
+      "status": "completed"
+    }
+  ]
+}

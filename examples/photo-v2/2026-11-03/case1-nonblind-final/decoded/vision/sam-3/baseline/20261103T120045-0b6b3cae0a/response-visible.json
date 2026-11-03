@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9ccffdb21c2b69aa24ca0",
+  "usage": {
+    "input_tokens": 1169,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1532,
+    "output_tokens_details": {
+      "reasoning_tokens": 1256
+    },
+    "total_tokens": 2701
+  },
+  "elapsed_s": 18.027068875031546,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_dbfd6974-48c3-48c8-b1cf-3df23ba44bce",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "An unresolvable blur \u2014 calling the surface reporter with unknown kind and no markings or bands.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_1bfd28e9-bb90-4af0-bc78-7f565ec325ed",
+      "call_id": "call_1bfd28e9-bb90-4af0-bc78-7f565ec325ed",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"Very low-resolution heavily pixelated close-up of a dark near-black blocky object filling most of frame; top center shows an out-of-focus lighter gray blurred area; front face shows two darker indistinct rectangular recesses; edges, surface texture and finish not resolvable; no legible characters or color bands discernible\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"unknown\",\"kind_confidence\":0.05,\"markings\":[],\"uncertainties\":[\"Image extremely low resolution, dark and blurred preventing surface detail discrimination\",\"No legible text characters observable\",\"No color bands observable\",\"Object shape and extent cropped and indistinct, kind cannot be determined from visible pixels\"]}",
+      "status": "completed"
+    }
+  ]
+}

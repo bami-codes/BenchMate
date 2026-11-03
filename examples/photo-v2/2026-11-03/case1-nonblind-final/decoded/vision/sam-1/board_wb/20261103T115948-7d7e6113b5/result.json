@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "blue rectangular block viewed from top, matte blue top face with dark printed characters, narrow gray region visible along bottom edge; image low-resolution and blurry",
+    "band_axis": "unknown",
+    "bands": [],
+    "kind": "C",
+    "kind_confidence": 0.6,
+    "markings": [
+      {
+        "alternatives": [
+          "105J10O",
+          "105V100",
+          "105J1OO"
+        ],
+        "confidence": 0.75,
+        "text": "105J100"
+      }
+    ],
+    "uncertainties": [
+      "image is low-resolution and blurry causing character edge uncertainty",
+      "only top face visible",
+      "nature of gray region at bottom edge unclear"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

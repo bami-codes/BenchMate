@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "small blurry dark block, roughly rectangular black to dark gray plastic body with lighter gray protrusion at top center, two darker square-like recesses on front face; heavily pixelated, edges and surface texture indistinct, isolated on masked white background",
+    "band_axis": "unknown",
+    "bands": [],
+    "kind": "unknown",
+    "kind_confidence": 0.05,
+    "markings": [],
+    "uncertainties": [
+      "image extremely low resolution, heavily pixelated and blurred",
+      "surface texture and edge shape not clearly resolvable",
+      "object kind cannot be determined from visible features",
+      "no legible alphanumeric markings discernible",
+      "no color bands discernible",
+      "protrusion shape and recess depth obscured by blur"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

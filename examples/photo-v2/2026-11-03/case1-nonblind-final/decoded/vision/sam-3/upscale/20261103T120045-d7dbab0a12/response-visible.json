@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9ccfbc499100a66bd4715",
+  "usage": {
+    "input_tokens": 1511,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1101,
+    "output_tokens_details": {
+      "reasoning_tokens": 835
+    },
+    "total_tokens": 2612
+  },
+  "elapsed_s": 14.52564466604963,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_817a0940-9cc3-4ed7-aa16-c09dd1fe7030",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "I see only an indistinct dark surface, so I\u2019ll record the lack of legible detail.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_78a80fc9-7087-4bd6-8c0d-2c8af57a2ca7",
+      "call_id": "call_78a80fc9-7087-4bd6-8c0d-2c8af57a2ca7",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"Very low-resolution blurry dark blocky object, predominantly black to dark gray, with a lighter gray indistinct area at top center and darker recess-like areas near top and bottom; edges pixelated from masking; no legible text or bands discernible\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"unknown\",\"kind_confidence\":0.05,\"markings\":[],\"uncertainties\":[\"image extremely blurry and pixelated preventing detail resolution\",\"no legible alphanumeric markings visible\",\"no color bands distinguishable\",\"component kind indeterminate from visible surfaces\",\"surface color and shape uncertain due to blur and low contrast\"]}",
+      "status": "completed"
+    }
+  ]
+}

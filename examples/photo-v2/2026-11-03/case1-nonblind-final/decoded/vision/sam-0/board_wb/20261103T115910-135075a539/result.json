@@ -1,0 +1,60 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "horizontal light blue-gray cylindrical body with tapered ends to thin axial leads left and right; five vertical bands across body; image low-resolution and blurry",
+    "band_axis": "horizontal",
+    "bands": [
+      {
+        "alternatives": [
+          "green"
+        ],
+        "color": "yellow",
+        "confidence": 0.45
+      },
+      {
+        "alternatives": [
+          "violet",
+          "black"
+        ],
+        "color": "blue",
+        "confidence": 0.5
+      },
+      {
+        "alternatives": [
+          "brown",
+          "blue"
+        ],
+        "color": "black",
+        "confidence": 0.55
+      },
+      {
+        "alternatives": [
+          "brown",
+          "black"
+        ],
+        "color": "red",
+        "confidence": 0.5
+      },
+      {
+        "alternatives": [
+          "red",
+          "black"
+        ],
+        "color": "brown",
+        "confidence": 0.35
+      }
+    ],
+    "kind": "R",
+    "kind_confidence": 0.85,
+    "markings": [],
+    "uncertainties": [
+      "low-resolution blurry image",
+      "band colors approximate due to blur and lighting",
+      "rightmost band faint near tapered end",
+      "no alphanumeric text discernible"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

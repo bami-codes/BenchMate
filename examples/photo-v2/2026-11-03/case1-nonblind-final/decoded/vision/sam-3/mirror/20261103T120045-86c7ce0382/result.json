@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "Heavily pixelated/blurred dark isolated object, predominantly black to dark gray rectangular body with a lighter gray area at the top edge; surface texture and edges indistinct; small darker spot near bottom center of body, nature unclear due to blur.",
+    "band_axis": "unknown",
+    "bands": [],
+    "kind": "unknown",
+    "kind_confidence": 0.0,
+    "markings": [],
+    "uncertainties": [
+      "Image extremely low-resolution, pixelated and blurred",
+      "No legible text or markings visible",
+      "No color bands visible",
+      "Component kind cannot be determined from visible surface",
+      "Surface details, edges and recesses indistinct"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9cca9ca2e8007b989455c",
+  "usage": {
+    "input_tokens": 1179,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 2051,
+    "output_tokens_details": {
+      "reasoning_tokens": 1712
+    },
+    "total_tokens": 3230
+  },
+  "elapsed_s": 26.75629145791754,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_6f35149b-d6a9-4dda-9540-c484ba9898fa",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Transcribing only the visible bands and markings \u2014 no calculations.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_33c7af91-e240-4276-aac3-4d40818c3482",
+      "call_id": "call_33c7af91-e240-4276-aac3-4d40818c3482",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"horizontal light blue-gray cylindrical body with tapered ends to thin axial leads left and right; five vertical bands across body; image low-resolution and blurry\",\"band_axis\":\"horizontal\",\"bands\":[{\"alternatives\":[\"green\"],\"color\":\"yellow\",\"confidence\":0.45},{\"alternatives\":[\"violet\",\"black\"],\"color\":\"blue\",\"confidence\":0.5},{\"alternatives\":[\"brown\",\"blue\"],\"color\":\"black\",\"confidence\":0.55},{\"alternatives\":[\"brown\",\"black\"],\"color\":\"red\",\"confidence\":0.5},{\"alternatives\":[\"red\",\"black\"],\"color\":\"brown\",\"confidence\":0.35}],\"kind\":\"R\",\"kind_confidence\":0.85,\"markings\":[],\"uncertainties\":[\"low-resolution blurry image\",\"band colors approximate due to blur and lighting\",\"rightmost band faint near tapered end\",\"no alphanumeric text discernible\"]}",
+      "status": "completed"
+    }
+  ]
+}

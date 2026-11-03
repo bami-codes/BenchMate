@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "Rectangular block object with matte blue upper face bearing black printed characters and a solid gray region along the bottom edge; image is low-resolution and blurry with background masked.",
+    "band_axis": "unknown",
+    "bands": [],
+    "kind": "unknown",
+    "kind_confidence": 0.2,
+    "markings": [
+      {
+        "alternatives": [
+          "105J100",
+          "105J 100",
+          "105J1O0"
+        ],
+        "confidence": 0.7,
+        "text": "105J100"
+      }
+    ],
+    "uncertainties": [
+      "Low resolution and blur reduce character edge certainty",
+      "Component kind not determinable from surface shape and color alone",
+      "Nature of gray lower region ambiguous due to blur and masking",
+      "No color bands visible"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

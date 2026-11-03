@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9ccb1382cea749ef64bfb",
+  "usage": {
+    "input_tokens": 1179,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 2620,
+    "output_tokens_details": {
+      "reasoning_tokens": 2252
+    },
+    "total_tokens": 3799
+  },
+  "elapsed_s": 35.12638245918788,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_65e4e0d9-2e3c-4f71-8a05-5f57a3edf6dd",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Transcribing visible bands and markings \u2014 reporting literal surface evidence only.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_4cec54a7-77a1-4db6-875e-ebe9bd41da98",
+      "call_id": "call_4cec54a7-77a1-4db6-875e-ebe9bd41da98",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"horizontal small axial cylindrical body with light blue coating, tapered ends, lead stub visible on left; five transverse bands encircling body; image low-resolution, pixelated and blurred\",\"band_axis\":\"horizontal\",\"bands\":[{\"alternatives\":[\"green\",\"gold\"],\"color\":\"yellow\",\"confidence\":0.5},{\"alternatives\":[\"blue\",\"black\"],\"color\":\"violet\",\"confidence\":0.45},{\"alternatives\":[\"brown\",\"violet\"],\"color\":\"black\",\"confidence\":0.6},{\"alternatives\":[\"red\",\"black\"],\"color\":\"brown\",\"confidence\":0.4},{\"alternatives\":[\"violet\",\"gray\"],\"color\":\"blue\",\"confidence\":0.45}],\"kind\":\"R\",\"kind_confidence\":0.75,\"markings\":[],\"uncertainties\":[\"image low resolution pixelated with blurred band edges\",\"color fidelity and white balance unknown; yellow/green and blue/violet/brown distinction uncertain\",\"rightmost blue band low contrast against light blue body\",\"no alphanumeric markings legible\"]}",
+      "status": "completed"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "blue cylindrical body in horizontal orientation, matte blue surface, left end truncated at image edge, right end tapering to small light tip, four transverse bands visible, low-resolution heavily pixelated, background masked",
+    "band_axis": "horizontal",
+    "bands": [
+      {
+        "color": "brown",
+        "alternatives": [
+          "red",
+          "black"
+        ],
+        "confidence": 0.45
+      },
+      {
+        "color": "brown",
+        "alternatives": [
+          "black",
+          "red"
+        ],
+        "confidence": 0.4
+      },
+      {
+        "color": "black",
+        "alternatives": [
+          "blue",
+          "brown"
+        ],
+        "confidence": 0.4
+      },
+      {
+        "color": "green",
+        "alternatives": [
+          "yellow",
+          "gold"
+        ],
+        "confidence": 0.35
+      }
+    ],
+    "kind": "R",
+    "kind_confidence": 0.8,
+    "markings": [],
+    "uncertainties": [
+      "low resolution and heavy pixelation",
+      "color ambiguity from compression artifacts and lighting",
+      "band edges blurred",
+      "no legible text visible"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

@@ -1,0 +1,20 @@
+{
+  "pipeline": "v2",
+  "final_policy": "frozen-v2-final/policy.json",
+  "final_source_commit": "8d2002d",
+  "offline_tests": {
+    "main_suite": 61,
+    "image_suite": 2,
+    "paid_calls": 0,
+    "hardware_commands": 0
+  },
+  "nonblind_reconfirmation": "case1-nonblind-final/decoded/review.json",
+  "nonblind_calls": {
+    "SAM": 1,
+    "Spark": 15
+  },
+  "prospective_photos": 0,
+  "source_hashes_verified": 13,
+  "original_official_source_hashes_preserved": 87,
+  "first_prospective_photo_requires_new_capture_after_final_freeze": true
+}

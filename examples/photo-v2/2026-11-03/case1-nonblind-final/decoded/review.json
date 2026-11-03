@@ -1,0 +1,162 @@
+{
+  "schema": "benchmate.photo_v2_nonblind_review.v1",
+  "evaluation": "nonblind",
+  "first_prospective_test_completed": false,
+  "source_freeze_commit": "8d2002d",
+  "initial_freeze_commit": "abe752d",
+  "source_policy": "../../frozen-v2-final/policy.json",
+  "SAM_calls": 1,
+  "Spark_calls": 15,
+  "raw_surface_successes": 14,
+  "failed_views": [
+    {
+      "file": "vision/sam-1/mirror/20261103T115948-743b7661f3/events.jsonl",
+      "status": "failed",
+      "error": "Unexpected surface response retained",
+      "requests": 1,
+      "automatic_retry": false
+    }
+  ],
+  "no_retries": true,
+  "components": [
+    {
+      "id": "sam-0",
+      "localizer": "SAM-derived body mask",
+      "kind": "R",
+      "value_si_candidate": 46000.0,
+      "support": 2,
+      "views": 5,
+      "ties": false,
+      "measurement_verified": false,
+      "other_candidates_retained": true
+    },
+    {
+      "id": "sam-1",
+      "localizer": "SAM-derived body mask",
+      "kind": "C",
+      "value_si_candidate": 1e-06,
+      "support": 4,
+      "views": 5,
+      "ties": false,
+      "measurement_verified": false,
+      "other_candidates_retained": true
+    },
+    {
+      "id": "sam-3",
+      "localizer": "SAM-derived body mask",
+      "kind": "unknown",
+      "value_si_candidate": null,
+      "support": 0,
+      "views": 5,
+      "ties": false,
+      "measurement_verified": false,
+      "other_candidates_retained": true
+    }
+  ],
+  "observer_review": {
+    "R": "Leading 46k candidate has only 2/5 support and differs from operator-declared R1. 4.7k has 1/5 primary support plus alternatives; no selection was changed to match truth.",
+    "C": "1 uF candidate has 4/5 support; the mirrored fifth request exhausted its output token limit without a surface. All five requests remain in denominator.",
+    "connector": "No decoded numeric value.",
+    "agreement_is_not_accuracy": true,
+    "no_definitive_external_20k_claim_from_this_photo": true
+  },
+  "estimated_usd": {
+    "Spark": 0.15268140000000002,
+    "SAM": 0.0025,
+    "v2_total": 0.15518140000000002,
+    "rate_source": "https://dev.meta.ai/docs/pricing-rate-limits"
+  },
+  "event_chains": [
+    {
+      "file": "vision/sam-0/baseline/20261103T115910-0648441d7f/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "cd904169bc86931fa5a67e724bb48011a07a697e55c1593b899a8659249d0314"
+    },
+    {
+      "file": "vision/sam-0/board_wb/20261103T115910-135075a539/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "792c0d2fbafee40e4d0ac26290a9cd6e02b3ff7584a9a5e3bd6059ad58450954"
+    },
+    {
+      "file": "vision/sam-0/clahe/20261103T115910-abd3fd7d21/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "b920953236fe14c0018ac4436901719db9e93ae3048d6aec1e74590088e25548"
+    },
+    {
+      "file": "vision/sam-0/mirror/20261103T115910-4b4160caf3/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "697c93ca2e92e48ff80104e4e22f13a607bea51d6eef226ab8faf2764361fcd2"
+    },
+    {
+      "file": "vision/sam-0/upscale/20261103T115910-da84889d54/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "1555ed9cf1725e6d42ee9a470936bb0dac8c326307c8a652fe29daffcede812c"
+    },
+    {
+      "file": "vision/sam-1/baseline/20261103T115948-45caf85e8a/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "221dd9078c402bc8ecdec2fcc3471efa705be7ca43f0c720145b37b9b177530f"
+    },
+    {
+      "file": "vision/sam-1/board_wb/20261103T115948-7d7e6113b5/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "1c4b1f0912c23696ebe693fd85be7684b363fbd9c180b52563d6e9f7523ffffe"
+    },
+    {
+      "file": "vision/sam-1/clahe/20261103T115948-bfd31c953f/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "1503b9b846798109baa332303393bee09bdd8f4f0b9021eec6ea3756501c0a3d"
+    },
+    {
+      "file": "vision/sam-1/mirror/20261103T115948-743b7661f3/events.jsonl",
+      "events": 5,
+      "status": "run_failed",
+      "head_sha256": "b1edd4c87184472d2d49b092f148d5426f82b4243d12d8c2b01fecaab06d02e1"
+    },
+    {
+      "file": "vision/sam-1/upscale/20261103T115948-b13605d7c4/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "f639c64b23d79332c7690992fbb613da5cd359488f595052afe3f103e79254e2"
+    },
+    {
+      "file": "vision/sam-3/baseline/20261103T120045-0b6b3cae0a/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "131681a37ad32b1ca7069e6dd4b48f0f43dafd97bac6bd18bf2edcc504fe7972"
+    },
+    {
+      "file": "vision/sam-3/board_wb/20261103T120045-3ff8bb57ef/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "ec2248f518af82e3c43a875adf8c477f1082addd5d235d50e65db0c9fc2c4277"
+    },
+    {
+      "file": "vision/sam-3/clahe/20261103T120045-d9bba7e82f/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "007adc053d2cbac25035fe79ae370c980ad6cd486b9361015d93563606e2df15"
+    },
+    {
+      "file": "vision/sam-3/mirror/20261103T120045-86c7ce0382/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "ce2e1738a95559cdeda0643bf47d8e54d736a45c4e15c7464cda8e3b265724dc"
+    },
+    {
+      "file": "vision/sam-3/upscale/20261103T120045-d7dbab0a12/events.jsonl",
+      "events": 5,
+      "status": "run_completed",
+      "head_sha256": "45817f9bbe9fc832364a935d03931603c53f065a259ed3cef5c61e28ff76609b"
+    }
+  ],
+  "finished_utc": "2026-11-03T12:06:13.165184+00:00"
+}

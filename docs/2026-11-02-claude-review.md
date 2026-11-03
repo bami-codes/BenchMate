@@ -323,3 +323,13 @@ A3 범위 1.115 mV, A4 보조 범위 1.868 mV, A4 보조 경고 0건이다. API 
 고정한다. F03은 새로운 Spark 문맥의 별도 후속 시도이며 F01·F02를 바꾸지 않는다.
 새 기록의 guard_version=primary-REF-A3-v1, primary_REF_channel=A3, A4=보조 기록을 표시해 달라.
 이전 실행의 A4 가드 역할은 그대로다. 원본 수치 엔진·모델 메뉴·9mV 채점·예약 검증은 유지한다.
+
+
+## 11/3 21시 이후 Codex 인계: R01 완료·photo v2
+
+- 01-R01 완료: `consistent`, 문구는 **No mismatch in the tests Spark chose**. F01/F02/F03 실패와 첫 실행 선택은 그대로다. `docs/2026-11-03-01-R01-result.md`와 `analysis/01-R01/restoration-pair.json` 참조.
+- photo v2 최종 동결: `8d2002d`, 63개 오프라인 테스트. generic SAM → 파생 몸통 마스크 → 관찰 전용 Spark 5뷰 → 코드 해석. 기존 v1 판독을 바꾸지 않았다.
+- case1은 **nonblind 재확인**이다. 저항 대표 후보 **46kΩ 2/5**(4.7k 등 대안 보존), 커패시터 **1µF 4/5**(거울 뷰 1회 토큰 한도 미완료), 커넥터 수치 없음. R1=4.7kΩ 확정이나 외부 20kΩ 확정으로 쓰지 말아 달라.
+- 새 UI는 `decoded.value_si`, `vote_count/view_count`, **photo candidate**, 동률 표시를 사용한다. 5/5는 정답률이 아니다. 표시값은 코드 파생이며 Spark native numeric 값이 아니다. 허용 띠 색·방향 규칙만 검사하며 E24/E96로 값을 강제하지 않는다.
+- 원문/뷰별 해시·대안·신뢰도는 모두 보존한다. 값 득표수를 tolerance/voltage 예시 필드에 붙이지 않는다. `schematic_ref`는 자동 확정되지 않는다.
+- 자세한 파일·화면 요청: `docs/2026-11-03-photo-v2-result-and-handoff.md`. 일정: `docs/2026-11-03-remaining-official-schedule.md`. 첫 prospective 검증은 최종 동결 뒤 새로 찍는 다음 사례 사진이며 아직 0건이다.

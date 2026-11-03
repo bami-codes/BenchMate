@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "square blue upper body with lighter gray lower edge, black printed alphanumeric text centered on blue area, background masked, image blurry/low resolution",
+    "band_axis": "unknown",
+    "bands": [],
+    "kind": "unknown",
+    "kind_confidence": 0.2,
+    "markings": [
+      {
+        "alternatives": [
+          "105/100",
+          "105J1OO",
+          "10SJ100"
+        ],
+        "confidence": 0.6,
+        "text": "105J100"
+      }
+    ],
+    "uncertainties": [
+      "low resolution/blur limits character certainty",
+      "fourth character ambiguous between J and slash",
+      "digits 0 vs letter O ambiguous",
+      "no color bands visible",
+      "component kind not determinable from visible surface alone"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

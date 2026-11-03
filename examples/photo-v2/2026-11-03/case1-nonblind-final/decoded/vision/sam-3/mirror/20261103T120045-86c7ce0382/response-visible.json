@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "response_id": "resp_6ae9ccfcacd41de064a949e8",
+  "usage": {
+    "input_tokens": 1169,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1127,
+    "output_tokens_details": {
+      "reasoning_tokens": 870
+    },
+    "total_tokens": 2296
+  },
+  "elapsed_s": 15.308717792155221,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_e15dffca-d90a-4909-8585-474833428cf9",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Low-resolution surface is ambiguous \u2014 I'll transcribe only what's visible.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_dca24714-490c-47da-b4f1-aec4e50a1424",
+      "call_id": "call_dca24714-490c-47da-b4f1-aec4e50a1424",
+      "name": "report_surface",
+      "arguments": "{\"appearance\":\"Heavily pixelated/blurred dark isolated object, predominantly black to dark gray rectangular body with a lighter gray area at the top edge; surface texture and edges indistinct; small darker spot near bottom center of body, nature unclear due to blur.\",\"band_axis\":\"unknown\",\"bands\":[],\"kind\":\"unknown\",\"kind_confidence\":0.0,\"markings\":[],\"uncertainties\":[\"Image extremely low-resolution, pixelated and blurred\",\"No legible text or markings visible\",\"No color bands visible\",\"Component kind cannot be determined from visible surface\",\"Surface details, edges and recesses indistinct\"]}",
+      "status": "completed"
+    }
+  ]
+}

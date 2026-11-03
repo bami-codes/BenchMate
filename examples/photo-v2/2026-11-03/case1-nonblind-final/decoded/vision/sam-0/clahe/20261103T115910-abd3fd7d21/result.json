@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "surface": {
+    "appearance": "horizontal small axial cylindrical body with light blue coating, tapered ends, lead stub visible on left; five transverse bands encircling body; image low-resolution, pixelated and blurred",
+    "band_axis": "horizontal",
+    "bands": [
+      {
+        "alternatives": [
+          "green",
+          "gold"
+        ],
+        "color": "yellow",
+        "confidence": 0.5
+      },
+      {
+        "alternatives": [
+          "blue",
+          "black"
+        ],
+        "color": "violet",
+        "confidence": 0.45
+      },
+      {
+        "alternatives": [
+          "brown",
+          "violet"
+        ],
+        "color": "black",
+        "confidence": 0.6
+      },
+      {
+        "alternatives": [
+          "red",
+          "black"
+        ],
+        "color": "brown",
+        "confidence": 0.4
+      },
+      {
+        "alternatives": [
+          "violet",
+          "gray"
+        ],
+        "color": "blue",
+        "confidence": 0.45
+      }
+    ],
+    "kind": "R",
+    "kind_confidence": 0.75,
+    "markings": [],
+    "uncertainties": [
+      "image low resolution pixelated with blurred band edges",
+      "color fidelity and white balance unknown; yellow/green and blue/violet/brown distinction uncertain",
+      "rightmost blue band low contrast against light blue body",
+      "no alphanumeric markings legible"
+    ]
+  },
+  "requests": 1,
+  "measurement_verified": false,
+  "numeric_value_requested": false
+}

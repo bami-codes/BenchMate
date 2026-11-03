@@ -1,0 +1,17 @@
+{
+  "status": "incomplete",
+  "response_id": "resp_6ae9ccec82c7931590da418a",
+  "usage": {
+    "input_tokens": 1275,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 4096,
+    "output_tokens_details": {
+      "reasoning_tokens": 4094
+    },
+    "total_tokens": 5371
+  },
+  "elapsed_s": 57.02867120807059,
+  "visible_output": []
+}
