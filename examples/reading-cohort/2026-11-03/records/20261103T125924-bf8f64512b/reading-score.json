@@ -1,0 +1,17 @@
+{
+  "component": "R1",
+  "source": "operator_dmm",
+  "normalized_value": 4710.0,
+  "unit": "ohm",
+  "fits": [
+    "external_equivalent:changed:R1"
+  ],
+  "ruled_out_by_reading": [
+    "changed:R1"
+  ],
+  "outcome": "one_explanation_remains",
+  "forecast_sha256": "7215419b175836b4134cbb73a3e165c0d312534f90bc40783ac53eccf182dd38",
+  "observation_sha256": "beedf78ee19ae746789af4ff23f8600df01fc7b8e033a0b7648776f76ad98d13",
+  "refitted": false,
+  "scope": "Bounded explanations; engineering intervals, not probabilities or a universal diagnosis."
+}
