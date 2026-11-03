@@ -1,0 +1,7 @@
+{
+  "verbatim": "I checked the restored R1 input/output columns with USB off, retained the unloaded fixture and remaining instrument wiring, removed probes, and reconnected the same USB port. I selected one bounded HOLD-only recovery QA.",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "fixture": "unloaded",
+  "recovery_QA_selected": true
+}

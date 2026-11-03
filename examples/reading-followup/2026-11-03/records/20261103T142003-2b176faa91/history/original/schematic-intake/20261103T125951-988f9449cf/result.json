@@ -1,0 +1,60 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "bbox": [
+          0.245,
+          0.315,
+          0.475,
+          0.395
+        ],
+        "evidence": "Rectangle resistor symbol labeled R1 4.7 kOhm between IN wire and OUT junction.",
+        "kind": "R",
+        "marking": "4.7 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "IN",
+          "OUT"
+        ],
+        "value_si": 4700.0
+      },
+      {
+        "bbox": [
+          0.53,
+          0.485,
+          0.655,
+          0.575
+        ],
+        "evidence": "Capacitor symbol labeled C1 1 uF between OUT junction and REF wire.",
+        "kind": "C",
+        "marking": "1 \u00b5F",
+        "name": "C1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-06
+      }
+    ],
+    "status": "needs_review",
+    "summary": "R1 connects IN to OUT, C1 connects OUT to REF."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1701,
+    "output_tokens_details": {
+      "reasoning_tokens": 1401
+    },
+    "total_tokens": 3792
+  }
+}

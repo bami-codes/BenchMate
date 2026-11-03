@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "blocks": 3,
+  "frames": 1536,
+  "boot_id": "486f508b205ce288c00f6c38bc6df969",
+  "guard_version": "primary-REF-A3-v1",
+  "raw_mean_spans_mV": [
+    0.34582341451394605,
+    0.06776269608743668,
+    0.2178921175914894,
+    0.08879249832283165
+  ],
+  "output_at_REF_confirmed": true,
+  "SPARK_requests": 0,
+  "SAM_requests": 0,
+  "automatic_retry": false,
+  "diagnostic_waveforms": 0,
+  "scope": "Restored unloaded HOLD repeatability on one new boot, not diagnostic waveform validation."
+}

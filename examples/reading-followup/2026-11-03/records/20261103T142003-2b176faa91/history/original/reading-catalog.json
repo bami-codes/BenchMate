@@ -1,0 +1,224 @@
+{
+  "schema": "benchmate.reading_catalog.v1",
+  "components": {
+    "R1": {
+      "name": "R1",
+      "kind": "R",
+      "a": "IN",
+      "b": "OUT",
+      "value": 4700.0,
+      "model": "none"
+    },
+    "C1": {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  },
+  "explanations": [
+    {
+      "id": "changed:R1",
+      "basis_model_id": "changed:R1",
+      "description": "Actual component value changed; damage and replacement are not distinguished.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            23713.737056616552,
+            27384.196342643612
+          ],
+          "interval_rule": {
+            "kind": "training_only_bounded_grid_envelope",
+            "grid": [
+              1000.0,
+              1154.781984689458,
+              1333.521432163324,
+              1539.926526059492,
+              1778.2794100389228,
+              2053.525026457146,
+              2371.373705661655,
+              2738.4196342643613,
+              3162.2776601683795,
+              3651.741272548377,
+              4216.965034285822,
+              4869.675251658631,
+              5623.413251903491,
+              6493.816315762113,
+              7498.942093324558,
+              8659.643233600653,
+              10000.0,
+              11547.819846894581,
+              13335.21432163324,
+              15399.26526059492,
+              17782.794100389227,
+              20535.25026457146,
+              23713.737056616552,
+              25278.988197500606,
+              27384.196342643612,
+              31622.776601683792,
+              36517.41272548377,
+              42169.65034285822,
+              48696.75251658631,
+              56234.13251903491,
+              64938.16315762113,
+              74989.42093324558,
+              86596.43233600653,
+              100000.0
+            ],
+            "passed": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "whole_and_region_limit_mV": 9.0,
+            "reserved_OUT_used": 0,
+            "other_parameters_held_fixed": true,
+            "statistical_confidence_interval": false,
+            "disjoint_regions_enclosed": false,
+            "boundary_pass_uses_open_end": false
+          },
+          "printed_nominal": null
+        },
+        "C1": {
+          "electrical_interval": [
+            9.499999999999999e-07,
+            1.05e-06
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-06
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 25278.988197500606,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      }
+    },
+    {
+      "id": "external_equivalent:changed:R1",
+      "basis_model_id": "changed:R1",
+      "description": "Intended component unchanged plus series resistance outside the photographed board. This is an explanation, not observed truth.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            4465.0,
+            4935.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 4700.0
+        },
+        "C1": {
+          "electrical_interval": [
+            9.499999999999999e-07,
+            1.05e-06
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-06
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "N1",
+            "b": "OUT",
+            "value": 4700.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-06,
+            "model": "none"
+          },
+          {
+            "name": "Rx0",
+            "kind": "R",
+            "a": "IN",
+            "b": "N1",
+            "value": 20578.988197500606,
+            "model": "none"
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      },
+      "equivalence": {
+        "algebra": "series_sum",
+        "training_max_difference_v": 3.758104938356155e-14,
+        "new_parameters_fitted": 0
+      }
+    }
+  ],
+  "training_only_intervals": true,
+  "terminal_verification_sha256": "8cbe2778bcdeb93dd38bfc7ab0a97648965085220de794f1b8e0ba0b9d88f36c",
+  "photograph_received": false,
+  "operator_reading_received": false,
+  "scope": "Bounded single-value and exact-equivalent explanations; no claim of exhaustive physical causes."
+}

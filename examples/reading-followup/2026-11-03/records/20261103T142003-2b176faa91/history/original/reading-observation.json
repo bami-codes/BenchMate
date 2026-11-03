@@ -1,0 +1,15 @@
+{
+  "component": "R1",
+  "quantity": "resistance",
+  "value": 4.71,
+  "unit": "kohm",
+  "source": "operator_dmm",
+  "power_off_confirmed": true,
+  "component_isolated_confirmed": true,
+  "meter_range": 20000.0,
+  "meter_resolution": 10.0,
+  "photo": {
+    "file": "reading-evidence.png",
+    "sha256": "489a5894e4018658844bdbce1f6ab7797b71636cc71d6fbf34490341d8b84915"
+  }
+}

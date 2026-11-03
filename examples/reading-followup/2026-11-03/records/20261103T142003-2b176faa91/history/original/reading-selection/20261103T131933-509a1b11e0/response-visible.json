@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6ae9df6c6d0ef605888e4702",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 1615,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1134,
+    "output_tokens_details": {
+      "reasoning_tokens": 985
+    },
+    "total_tokens": 2749
+  },
+  "elapsed_s": 7.940498417010531,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_5f0fd4fb-3eaa-4aa2-a3e9-33302eb2e021",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Choosing the reading that separates an internal change from an external mimic.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_b5b002c8-cd55-4724-9ca3-1e4d481f9464",
+      "call_id": "call_b5b002c8-cd55-4724-9ca3-1e4d481f9464",
+      "name": "request_reading",
+      "arguments": "{\"component\":\"R1\",\"quantity\":\"resistance\",\"reason\":\"Distinguishes changed R1 ~24-27k vs unchanged R1 ~4.7k plus external series resistance with same terminal behavior; isolated power-off DMM resistance separates them, marking cannot as damaged part can retain old label.\"}",
+      "status": "completed"
+    }
+  ]
+}

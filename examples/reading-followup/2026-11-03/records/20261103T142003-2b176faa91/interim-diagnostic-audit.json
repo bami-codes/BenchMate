@@ -1,0 +1,16 @@
+{
+  "diagnostic_forecasts": 4,
+  "diagnostic_measurements": 5,
+  "diagnostic_order_checks": 19,
+  "current_prefix_events": 241,
+  "parent_terminal": false,
+  "awaiting": "new_restored_photo_and_body_confirmation",
+  "original_first_attempt_status": "failed",
+  "original_head_unchanged": true,
+  "diagnostic_Spark_requests": 6,
+  "diagnostic_estimated_usd": 0.05800195,
+  "new_cohort_Spark_requests": 17,
+  "new_cohort_SAM_requests": 1,
+  "new_cohort_estimated_usd": 0.1520458,
+  "scope": "Interim numerical audit only, not a completed compound-case verification."
+}

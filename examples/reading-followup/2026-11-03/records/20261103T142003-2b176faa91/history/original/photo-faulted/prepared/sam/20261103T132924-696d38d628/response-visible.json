@@ -1,0 +1,33 @@
+{
+  "response_id": "resp_6ae9e1b62e243fe19ef14f50",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 0,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 0,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 0,
+    "images_processed": 1
+  },
+  "elapsed_s": 2.065304874908179,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "msg_f335233e-ba36-4b8b-839f-0c54f0885726",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "<0f>0<|box;x1=730;y1=464;x2=782;y2=579;w=1200;h=1600;c=0.5276752710342407|><|mask;x=0;y=0;c=0.5276752710342407;data=116,53,!!!!!_DjdS[WU-rXQ4!VvO(V^Q#'dYCJZOI:#9R0K4TPqj60X%2VbAGP*@c+&d/SyKE-S!UNmM*Y|>,1<|box;x1=349;y1=569;x2=536;y2=612;w=1200;h=1600;c=0.6012461185455322|><|mask;x=0;y=0;c=0.6012461185455322;data=44,188,!!!!#!CM5Y{(Bax:fC+wXFc0!kZT.F@ONFpVKebVJ=gVS=KVq0?QS$=*@mc28tncai_EdKuI$[z2^eao_p6*mAV2&TCM[1$8gk8*ck%Xu_(#dm@!!|>,2<|box;x1=209;y1=495;x2=1006;y2=1084;w=1200;h=1600;c=0.5857605338096619|><|mask;x=0;y=0;c=0.5857605338096619;data=590,798,!!!!'x?mzZu+SSQe&18_MDM$uqs4oylky#c7l(W&?Qc6@btgOb9.@74dW9{m=XL{:1u1o9se2gBp@sgYs_PmZWoh&FSqkcpI:J-q0EqFp%(yiXPkhcRn`b+qML!XAmV%Y'-e98A`*TIk'[CrV%.$Vy1mKZ4G+62mONW0Yw3H/=5N&HQNB76klJIm{vVb3&T_iNe!GHwW9pTM_Jg+Da67`chvU4#7Rio#0An!i`NJ@tvXbjMF?T9w!_^k#zn?WImXO.[^*OZF3ogjesB-y(c(_LXC6M&xHp^JI_!H[RrHESUW:oDV@YJWk3@$ClaK4?efmooStA7W[U1Gi=/oQ:ar3-_O9TCU*)xmmT3+wgcl'X{=q]P^YZJ%Lq/jQYIKu.gs$.(uGgftEwUes!+_B#r%HKb:oE8W#CpC/E%d7?u%WORKKQsY)R+2Qe$?X6TtNH4^1B_-TYIyuM8POx/)@^RI[^Dj&HVfiRXNt5nINlYHg'0th.4(X[8cSYZi`armjt`h37f1eVYV1]=Drvlq%6s@0KWvtTKYjo3a9-mGo+A)b-5ojic7)5pXdum_+9@Y^X)*x?PVu.%ij_I'MJ.vIKVYqsR$KRIf!UlvC%?iX81R#?jhlB]lC#4=Fz26m1qA6hf|>,3<|box;x1=590;y1=606;x2=718;y2=733;w=1200;h=1600;c=0.7928802371025085|><|mask;x=0;y=0;c=0.7928802371025085;data=128,129,!!!!!`G+.?NqWrD/2vd-Qj]gBWZ*xv4='fB6%2Y%MK#2:ifRT/Qho!!g!iv-i+`B@_x{1syXN8:9!!|>\n",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}
