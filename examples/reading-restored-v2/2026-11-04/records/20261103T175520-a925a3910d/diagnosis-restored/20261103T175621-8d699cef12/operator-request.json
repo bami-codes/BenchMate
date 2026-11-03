@@ -1,0 +1,15 @@
+{
+  "request_id": "43b6b9d470de462a86cfb76353edf5cc",
+  "fixture": "unloaded",
+  "choice": "remove_output_load",
+  "instruction": "Disconnect USB and wait for the power LED to go out. Remove only the large-board E30–A55 OUT-load jumper. Keep A55–C35 absent, B28–B35 1 kohm, A23–A45, I50–A4, D50–G50, B50–B23, the renewed GND return and the specimen unchanged. Remove probes and reconnect the same USB port.",
+  "response_file": "/Users/bami/Documents/metaai/runs/reading-cohort/20261103T175520-a925a3910d/diagnosis-restored/20261103T175621-8d699cef12/operator-response-43b6b9d470de462a86cfb76353edf5cc.json",
+  "fixed_response": {
+    "choice": "remove_output_load",
+    "fixture": "unloaded",
+    "reviewed_design_sha256": "844ab095d1816b538e7d069743d2b78708e4caaf10cd681d33db27e179db95fa",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  }
+}

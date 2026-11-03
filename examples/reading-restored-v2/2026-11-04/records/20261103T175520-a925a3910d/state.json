@@ -2,5 +2,6 @@
   "case_id": "02",
   "requested_component": "C1",
   "last_boot": "4d8bc48a47e4cb411d5f5096a47b270f",
-  "phase": "awaiting_restored_preflight"
+  "phase": "awaiting_restored_setup",
+  "preflight_record": "preflight/20261103T175604-ead8c0356c"
 }
