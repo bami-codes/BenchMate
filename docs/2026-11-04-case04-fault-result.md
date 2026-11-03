@@ -2,8 +2,10 @@
 
 The active pair is `runs/reading-cohort/20261103T150223-18d6f08ac9`.
 Its fault child `diagnosis-faulted/20261103T150415-dad7112413` completed.
-The pair itself is not complete: photograph/SAM/correspondence, operator reading,
-seal reveal, external restoration and fresh-context rerun still follow.
+This fault-stage snapshot originally expected an extra R1 reading. That request
+was later withdrawn as non-discriminating. The external restoration and fresh
+rerun are now complete; see [completion](2026-11-04-case04-completion.md).
+No R1 observation/score or case04 SAM/body-binding call was performed.
 
 The reviewed image is Claude's stock revision: R1=4.7k IN–OUT and R2=20k
 OUT–REF. The completed 20k extraction was reused, not re-requested. The previous
@@ -57,4 +59,5 @@ No picture or operator value has been used to tune these intervals.
 This successful diagnosis used8 Spark requests, estimated$0.07352435; reading
 selection used1, estimated$0.00807645. Case04 cumulative including earlier failed
 stages:13 Spark,0 SAM,$0.10993050. Reading-cohort cumulative:30 Spark +1 SAM,
-$0.26197630. Future photo stage:1 SAM +1 Spark correspondence, estimated$0.01–0.03.
+$0.26197630 at that snapshot. The previously proposed SAM/body-binding stage was
+not executed; the uploaded photo received only a fixed documentary conversion.

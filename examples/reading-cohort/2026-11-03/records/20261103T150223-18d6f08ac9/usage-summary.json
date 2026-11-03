@@ -1,0 +1,25 @@
+{
+  "schema": "benchmate.actual_usage_summary.v1",
+  "case_id": "04",
+  "case_Spark_requests": 19,
+  "case_SAM_requests": 0,
+  "case_estimated_usd": 0.1583053,
+  "new_reading_cohort_Spark_requests": 36,
+  "new_reading_cohort_SAM_requests": 1,
+  "new_reading_cohort_estimated_usd": 0.3103511,
+  "unnecessary_reading_selection_included": {
+    "Spark_requests": 1,
+    "estimated_usd": 0.00807645,
+    "observation_performed": false
+  },
+  "restored_diagnosis": {
+    "Spark_requests": 6,
+    "estimated_usd": 0.0483748
+  },
+  "photo_conversion": {
+    "Meta_API_requests": 0,
+    "estimated_usd": 0.0
+  },
+  "old_development_cohort_not_included": true,
+  "SDK_dollar_reservations_are_not_billed_cost": true
+}

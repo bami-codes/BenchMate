@@ -1,0 +1,14 @@
+{
+  "request_id": "9a80b213890a40b48e1375d423369d07",
+  "report": {
+    "choice": "connect_output_load",
+    "fixture": "output_load",
+    "reviewed_design_sha256": "889c8053ef582fa525e4a2b8150d8e423ddcae3c4640ab6cc8bbcdf41bc1abe8",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I connected only the known 9.99 kohm OUT-to-REF load, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  },
+  "actual_contacts": "large C30-A55",
+  "diode_state": "removed; not reinstalled",
+  "operator_statement": "완료"
+}

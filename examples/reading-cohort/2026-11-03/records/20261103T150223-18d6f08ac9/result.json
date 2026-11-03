@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.terminal_pair_reading_withdrawn.v1",
+  "cohort": "reading-assisted-v1",
+  "source": "physical",
+  "official": true,
+  "counted": true,
+  "case_id": "04",
+  "blind_test": false,
+  "faulted_diagnosis": "diagnosis-faulted/20261103T150415-dad7112413",
+  "restored_diagnosis": "diagnosis-restored/20261103T153249-a9b088954a",
+  "reading_outcome": "not_performed_no_discriminating_numeric_reading",
+  "reading_performed": false,
+  "reading_forecast_exercised": false,
+  "reading_request_and_forecast_preserved": true,
+  "reading_selection_Spark_requests_spent": 1,
+  "post_diagnosis_workflow_correction": true,
+  "restored_verdict": "consistent",
+  "restored_caption": "No mismatch in the tests Spark chose",
+  "operator_restored_and_rerun_consistent": true,
+  "native_diagnostic_repair_claim_overwritten": false,
+  "both_state_photos_recorded": false,
+  "photo_scope": "Uploaded private documentary image; not used for diagnosis or reading score."
+}

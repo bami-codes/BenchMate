@@ -48,9 +48,11 @@
       "run_id": "20261103T150223-18d6f08ac9",
       "case_id": "04",
       "attempt": 3,
-      "status": "registered",
+      "status": "completed",
       "counted": true,
-      "selected_first_attempt": false
+      "selected_first_attempt": false,
+      "reading_outcome": "not_performed_no_discriminating_numeric_reading",
+      "restored_verdict": "consistent"
     }
   ]
 }
