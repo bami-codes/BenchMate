@@ -1,0 +1,33 @@
+{
+  "response_id": "resp_6aea171b9ee28ddd80344d80",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 0,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 0,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 0,
+    "images_processed": 1
+  },
+  "elapsed_s": 2.86187925003469,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "msg_d6150d03-6a84-44bc-af0c-e0313a6cdd50",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "<0f>0<|box;x1=291;y1=493;x2=346;y2=581;w=1200;h=1600;c=0.5936508178710938|><|mask;x=0;y=0;c=0.5936508178710938;data=89,56,!!!!!XIbi&oDNe1hF.=hJT&1sDPrg0JRil62.3^3yhzP^d2rq@`_-mt*W$kz?An#Hz)=0|>,1<|box;x1=723;y1=467;x2=787;y2=587;w=1200;h=1600;c=0.7104072570800781|><|mask;x=0;y=0;c=0.7104072570800781;data=121,65,!!!!!eFa/`n=01(dPWf(yBG+F@6jZ)PM#9'TGJCjFdBWUvSGG1URw#SB+CMGt_5On^+kMV*w/6_ql*%cY!!!|>,2<|box;x1=590;y1=567;x2=717;y2=673;w=1200;h=1600;c=0.8787879347801208|><|mask;x=0;y=0;c=0.8787879347801208;data=107,128,!!!!!YHOYL0+Z)`TGbS/wUjm/IfO`M3HL6$5*#_xQUW336nXHNNA8sES%aO67[{gCl$Nym|>,3<|box;x1=602;y1=717;x2=741;y2=770;w=1200;h=1600;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=54,140,!!!!!ZGO/w8w$Ej%xfFkK)[ta^1EEt!Q9PA)u/I-M&aQjYq&`]nlF5OdL7L'5+@^kQIpV^l|>,4<|box;x1=591;y1=674;x2=714;y2=718;w=1200;h=1600;c=0.6363636255264282|><|mask;x=0;y=0;c=0.6363636255264282;data=45,124,!!!!!fF?+{=4V(rb0CuB4OVaHTxj8^H&@0$&')b*q_ABqVH/R./^46Ph3]0+R9g-bZQ.5`R?cD$yK6i'5MDcI|>,5<|box;x1=522;y1=478;x2=576;y2=583;w=1200;h=1600;c=0.7142857313156128|><|mask;x=0;y=0;c=0.7142857313156128;data=106,55,!!!!!_Eg*X3=aMt_Oebcqp*UCnLA/Y]'`hl3.P^be%@j[vO:RlRas$prozuI/g[0dyC-EGB[qO@9|>,6<|box;x1=341;y1=592;x2=545;y2=633;w=1200;h=1600;c=0.7730495929718018|><|mask;x=0;y=0;c=0.7730495929718018;data=42,205,!!!!!zC^p!#'=yRi5f$a*aWEv`'wnhcZOL%jXCu%^BtXQ`5b.Qku?2s3oodo[fMAFBrv]!/+E5'4pqUeif.a7lkQNW?vkFgSf^Z-[Xv[J?x`I3|>\n",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

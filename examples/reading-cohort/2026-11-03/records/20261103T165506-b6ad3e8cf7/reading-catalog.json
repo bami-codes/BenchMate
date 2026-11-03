@@ -1,0 +1,212 @@
+{
+  "schema": "benchmate.reading_catalog.v1",
+  "components": {
+    "R1": {
+      "name": "R1",
+      "kind": "R",
+      "a": "IN",
+      "b": "OUT",
+      "value": 10000.0,
+      "model": "none"
+    },
+    "C1": {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    },
+    "C2": {
+      "name": "C2",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-07,
+      "model": "none"
+    },
+    "R2": {
+      "name": "R2",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 20000.0,
+      "model": "none"
+    }
+  },
+  "explanations": [
+    {
+      "id": "changed:C1",
+      "basis_model_id": "changed:C1",
+      "description": "Actual component value changed; damage and replacement are not distinguished.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            9500.0,
+            10500.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 10000.0
+        },
+        "C1": {
+          "electrical_interval": [
+            4.2169650342858225e-07,
+            5.62341325190349e-07
+          ],
+          "interval_rule": {
+            "kind": "training_only_bounded_grid_envelope",
+            "grid": [
+              1e-09,
+              1.333521432163324e-09,
+              1.7782794100389228e-09,
+              2.3713737056616553e-09,
+              3.1622776601683795e-09,
+              4.216965034285823e-09,
+              5.623413251903491e-09,
+              7.498942093324558e-09,
+              1e-08,
+              1.333521432163324e-08,
+              1.7782794100389228e-08,
+              2.371373705661655e-08,
+              3.162277660168379e-08,
+              4.2169650342858225e-08,
+              5.6234132519034905e-08,
+              7.498942093324559e-08,
+              1e-07,
+              1.333521432163324e-07,
+              1.7782794100389227e-07,
+              2.3713737056616554e-07,
+              3.162277660168379e-07,
+              4.2169650342858225e-07,
+              4.717739307063732e-07,
+              5.62341325190349e-07,
+              7.498942093324558e-07,
+              1e-06,
+              1.333521432163324e-06,
+              1.778279410038923e-06,
+              2.3713737056616552e-06,
+              3.162277660168379e-06,
+              4.216965034285822e-06,
+              5.623413251903491e-06,
+              7.498942093324558e-06,
+              1e-05
+            ],
+            "passed": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "whole_and_region_limit_mV": 9.0,
+            "reserved_OUT_used": 0,
+            "other_parameters_held_fixed": true,
+            "statistical_confidence_interval": false,
+            "disjoint_regions_enclosed": false,
+            "boundary_pass_uses_open_end": false
+          },
+          "printed_nominal": null
+        },
+        "C2": {
+          "electrical_interval": [
+            9.499999999999999e-08,
+            1.05e-07
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-07
+        },
+        "R2": {
+          "electrical_interval": [
+            19000.0,
+            21000.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 20000.0
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "name": "R1",
+            "kind": "R",
+            "a": "IN",
+            "b": "OUT",
+            "value": 10000.0,
+            "model": "none"
+          },
+          {
+            "name": "C1",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 4.717739307063732e-07,
+            "model": "none"
+          },
+          {
+            "name": "C2",
+            "kind": "C",
+            "a": "OUT",
+            "b": "REF",
+            "value": 1e-07,
+            "model": "none"
+          },
+          {
+            "name": "R2",
+            "kind": "R",
+            "a": "OUT",
+            "b": "REF",
+            "value": 20000.0,
+            "model": "none"
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      }
+    }
+  ],
+  "training_only_intervals": true,
+  "terminal_verification_sha256": "a7c6ae0e6575f52d8344c55f8e54236e4adfbccd11555f4019a8f1d962d70501",
+  "photograph_received": false,
+  "operator_reading_received": false,
+  "scope": "Bounded single-value and exact-equivalent explanations; no claim of exhaustive physical causes."
+}

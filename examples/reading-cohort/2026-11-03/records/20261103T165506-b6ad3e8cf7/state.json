@@ -1,0 +1,10 @@
+{
+  "case_id": "02",
+  "phase": "awaiting_faulted_binding",
+  "schematic_intake": "schematic-intake/20261103T165602-8691324978",
+  "faulted_diagnosis": "diagnosis-faulted/20261103T165737-23bd08387e",
+  "last_boot": "4d8bc48a47e4cb411d5f5096a47b270f",
+  "requested_component": "C1",
+  "reading_forecast_sha256": "849495903bd1840275f113582bf20a636a97b8e65eb7423afd28ba16848a6860",
+  "current_photo": "faulted"
+}

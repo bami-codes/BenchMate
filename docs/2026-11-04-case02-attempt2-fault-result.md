@@ -1,10 +1,14 @@
 # Case 02 attempt 2: C1 change passed reserved validation
 
+Later photo-stage status: the parent became terminal `run_failed` on the binding
+response format. The completed fault diagnosis below remains valid and unchanged.
+See [photo-stage record](2026-11-04-case02-photo-binding-format-stop.md).
+
 Attempt2: `runs/reading-cohort/20261103T165506-b6ad3e8cf7/`.
 The complete, terminal fault diagnostic child is exported at
 `examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/diagnosis-faulted/20261103T165737-23bd08387e/`.
-The parent pair is still open, awaiting a new corrected-state photograph;
-this child export is not a completed fault/restoration pair.
+At this fault-result publication the parent was awaiting a new corrected-state
+photograph. This child export is not a completed fault/restoration pair.
 
 The operator confirmed moving474 from C3–C8 to C8–C13 with USB off, retaining
 the other components and reconnecting USB. Attempt1 remains counted, failed and

@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "arguments": {
+    "component": "C1",
+    "quantity": "capacitance",
+    "reason": "Tests the only surviving bounded claim that C1 actual is ~0.42-0.56uF vs nominal 1uF; marking can retain nominal if damaged so only electrical capacitance resolves it."
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 1709,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 2276,
+    "output_tokens_details": {
+      "reasoning_tokens": 2127
+    },
+    "total_tokens": 3985
+  },
+  "model": "muse-spark-1.3"
+}
