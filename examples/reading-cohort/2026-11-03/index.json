@@ -105,7 +105,9 @@
       "qualifying_QA": "examples/reference-step-QA/2026-11-04/session01/stages/20261103T181948-1a4c8ff1d2",
       "previous_failure_preserved": true,
       "reason": "operator_selected_new_restored_diagnosis_after_single_unchanged_wiring_step_QA_pass",
-      "previous_restored_failure": "20261103T175520-a925a3910d"
+      "previous_restored_failure": "20261103T175520-a925a3910d",
+      "restored_verdict": "consistent",
+      "pending_stage": "restored_photo"
     }
   ]
 }
