@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6ae9dadb6d62add2d0c34977",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1701,
+    "output_tokens_details": {
+      "reasoning_tokens": 1401
+    },
+    "total_tokens": 3792
+  },
+  "elapsed_s": 19.90447362489067,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_188ee7d2-bf56-48a5-a057-8c572a89ab84",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Transcribing the visible RC schematic \u2014 recording nodes and values.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_07bf4340-fb7b-493f-999c-1ca2af006e37",
+      "call_id": "call_07bf4340-fb7b-493f-999c-1ca2af006e37",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[],\"components\":[{\"bbox\":[0.245,0.315,0.475,0.395],\"evidence\":\"Rectangle resistor symbol labeled R1 4.7 kOhm between IN wire and OUT junction.\",\"kind\":\"R\",\"marking\":\"4.7 k\u03a9\",\"name\":\"R1\",\"nodes\":[\"IN\",\"OUT\"],\"value_si\":4700.0},{\"bbox\":[0.53,0.485,0.655,0.575],\"evidence\":\"Capacitor symbol labeled C1 1 uF between OUT junction and REF wire.\",\"kind\":\"C\",\"marking\":\"1 \u00b5F\",\"name\":\"C1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":1e-06}],\"status\":\"needs_review\",\"summary\":\"R1 connects IN to OUT, C1 connects OUT to REF.\"}",
+      "status": "completed"
+    }
+  ]
+}
