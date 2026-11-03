@@ -1,0 +1,8 @@
+{
+  "choice": "initial_unloaded",
+  "fixture": "unloaded",
+  "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+  "USB_connected": true,
+  "USB_off_wiring_confirmed": true,
+  "verbatim": "USB was off; I checked the intended circuit and IN/OUT/REF wiring, left the output load disconnected, removed probes, and reconnected the same USB port."
+}

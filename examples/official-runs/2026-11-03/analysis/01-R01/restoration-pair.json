@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.operator_restoration_pair.v1",
+  "case_id": "01",
+  "primary_faulted_run": "20261103T072121-1138ccf241",
+  "primary_faulted_status": "failed",
+  "completed_faulted_followup": "20261103T083824-7be77b51da",
+  "restored_run": "20261103T113619-34ff2352b1",
+  "faulted_followup_verdict": "changed",
+  "restored_verdict": "consistent",
+  "operator_restored_and_rerun_consistent": true,
+  "native_physical_repair_demonstrated_field_changed": false,
+  "display_caption": "No mismatch in the tests Spark chose",
+  "demo_selection_changed": false,
+  "faulted_followup_is_not_primary_demo": true,
+  "all_failed_attempts_retained": true,
+  "operator_restoration": [
+    "Removed external E35\u2013E31 resistor",
+    "Removed external D31\u2013D37 resistor",
+    "Moved large-board green lead A37 to A35; mini-board end retained"
+  ],
+  "known_instrument_1k_retained": true,
+  "photo_reading_limit": "v1 and OpenCV follow-up values remained unreadable/unsupported; no value was backfilled."
+}
