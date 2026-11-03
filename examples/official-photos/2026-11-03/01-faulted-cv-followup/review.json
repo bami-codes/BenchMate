@@ -1,0 +1,64 @@
+{
+  "schema": "benchmate.photo_cv_followup_review.v1",
+  "is_model_native_output": false,
+  "previous_attempt_retained": true,
+  "photo_work_finished": true,
+  "started_utc": "2026-11-03T11:22:08+00:00",
+  "finished_utc": "2026-11-03T11:26:31.267813+00:00",
+  "deadline_utc": "2026-11-03T11:37:08+00:00",
+  "within_timebox": true,
+  "requests": 2,
+  "estimated_usd": 0.0194572,
+  "results": [
+    {
+      "crop": "crop-1.png",
+      "candidate_status": "incomplete",
+      "components": [
+        {
+          "a": "N1",
+          "b": "N2",
+          "bbox": [
+            0.31,
+            0.01,
+            0.98,
+            0.98
+          ],
+          "evidence": "Light blue cylindrical axial body with wire lead extending left out of frame and short stub to right edge; 5 transverse bands visible across body but blurred",
+          "kind": "R",
+          "marking": "5 bands left-to-right appearance approx: yellow-green, violet, black, brown, brown - colors and order uncertain due to blur",
+          "name": "R1",
+          "value_si": null
+        }
+      ],
+      "summary": "Provisional visual transcription of assembly_photo crop showing one axial resistor-like body with 5 blurry color bands. No port labels visible, leads go off-frame/truncated, band colors and resistance unreadable, no connectivity inferable.",
+      "raw_run": "vision/20261103T112436-d8e1f60cfd"
+    },
+    {
+      "crop": "crop-2.png",
+      "candidate_status": "unsupported",
+      "components": [],
+      "summary": "Provisional visual transcription of assembly_photo: single blue rectangular package centered in frame with 6 visible edge solder terminals and blurred central marking resembling '105J100'. No IN/OUT/REF labels visible. Package does not present as a legible 2-terminal R/C/D; cannot map to supported R/C/D model with observed facts only.",
+      "raw_run": "vision/20261103T112507-210dcc98e1"
+    }
+  ],
+  "resistance_value_read": false,
+  "capacitance_value_read": false,
+  "known_values_filled_in": false,
+  "capacitor_localizer": "OpenCV, not SAM",
+  "observer_note": "Second response tentatively mentions 105J100 but calls package unsupported and returns no component/value; do not turn this into a 1 uF model reading.",
+  "event_chains": [
+    {
+      "file": "vision/20261103T112436-d8e1f60cfd/events.jsonl",
+      "events": 6,
+      "terminal": "run_completed",
+      "head_sha256": "55eb54250156a830b4506cb94d056f9f01a2ae52b1b2d0de25ee4d2c036b5533"
+    },
+    {
+      "file": "vision/20261103T112507-210dcc98e1/events.jsonl",
+      "events": 6,
+      "terminal": "run_completed",
+      "head_sha256": "3f5ae73a36d0e4fa487c7a694a557a8c5f703743c226b7292f1d63c34a9b93e0"
+    }
+  ],
+  "next": "Operator restoration, then fresh 01-R01. No more photo calls."
+}

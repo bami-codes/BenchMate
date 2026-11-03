@@ -1,0 +1,24 @@
+{
+  "source_kind": "assembly_photo",
+  "candidate": {
+    "ambiguities": [
+      "Marking text is blurred/low-resolution and appears as '105J100' but characters are uncertain - operator must confirm exact marking with higher-resolution view",
+      "Component type cannot be determined as R, C, or D from image alone - visible package is blue rectangular body with 6 solder terminals (3 left, 3 right), not a legible 2-terminal resistor/capacitor/diode",
+      "No explicitly labelled IN/OUT/REF ports visible in image - port mapping to N1/N2 or UNKNOWN would require assumption of pin functions",
+      "Pin functions and internal connections of the 6-terminal package are not visible - operator must confirm datasheet/pinout if needed",
+      "PCB traces, wiring, and destination of terminals are not visible/occluded outside crop - all connections remain UNKNOWN",
+      "Visible physical assembly does not specify intended design - no schematic intent can be inferred",
+      "Value in ohms/farads cannot be derived from legible markings - marking decode would require assumption of coding scheme and component type"
+    ],
+    "components": [],
+    "status": "unsupported",
+    "summary": "Provisional visual transcription of assembly_photo: single blue rectangular package centered in frame with 6 visible edge solder terminals and blurred central marking resembling '105J100'. No IN/OUT/REF labels visible. Package does not present as a legible 2-terminal R/C/D; cannot map to supported R/C/D model with observed facts only."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\n",
+  "nominal_rc_candidate": null,
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}

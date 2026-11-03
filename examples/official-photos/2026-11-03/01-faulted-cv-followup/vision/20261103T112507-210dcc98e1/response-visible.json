@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6ae9c4ab2e403ebdc67e495b",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2584,
+    "input_tokens_details": {
+      "cached_tokens": 1009
+    },
+    "output_tokens": 1680,
+    "output_tokens_details": {
+      "reasoning_tokens": 1282
+    },
+    "total_tokens": 4264
+  },
+  "elapsed_s": 25.055966958170757,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_d25df888-3944-4449-bd25-e1412b90a5c5",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "I'll report this assembly photo as an unsupported provisional transcription since the visible component can't be mapped to the R/C/D model.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_0f866a9a-c2a6-4d8b-98b5-2c0c2b1eeb24",
+      "call_id": "call_0f866a9a-c2a6-4d8b-98b5-2c0c2b1eeb24",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[\"Marking text is blurred/low-resolution and appears as '105J100' but characters are uncertain - operator must confirm exact marking with higher-resolution view\",\"Component type cannot be determined as R, C, or D from image alone - visible package is blue rectangular body with 6 solder terminals (3 left, 3 right), not a legible 2-terminal resistor/capacitor/diode\",\"No explicitly labelled IN/OUT/REF ports visible in image - port mapping to N1/N2 or UNKNOWN would require assumption of pin functions\",\"Pin functions and internal connections of the 6-terminal package are not visible - operator must confirm datasheet/pinout if needed\",\"PCB traces, wiring, and destination of terminals are not visible/occluded outside crop - all connections remain UNKNOWN\",\"Visible physical assembly does not specify intended design - no schematic intent can be inferred\",\"Value in ohms/farads cannot be derived from legible markings - marking decode would require assumption of coding scheme and component type\"],\"components\":[],\"status\":\"unsupported\",\"summary\":\"Provisional visual transcription of assembly_photo: single blue rectangular package centered in frame with 6 visible edge solder terminals and blurred central marking resembling '105J100'. No IN/OUT/REF labels visible. Package does not present as a legible 2-terminal R/C/D; cannot map to supported R/C/D model with observed facts only.\"}",
+      "status": "completed"
+    }
+  ]
+}
