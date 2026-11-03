@@ -114,7 +114,10 @@ verification_outputs_used(0), simulator_calls
 보존된 개발용 **mock / scripted_controller** 이벤트 발췌다. 새 실물·Spark 구조 제안으로 쓰면 안 된다.
 원본 archive/member와 event-log 해시를 같이 넣었다. 발췌 자체는 완전한 hash chain 파일이 아니다.
 
-## 3. 사진 결과: 현재 생성되는 파일
+## 3. 사진 결과: 보존된 기존 probe 형식
+
+이 절은 11/1 probe의 원본 형식이다. 11/3에 추가한 SAM-first 부품별 producer는
+아래 7절을 따른다. 아직 새 공식 사례 사진 호출 결과를 확보했다는 뜻은 아니다.
 
 현재 실행기 `scripts/photo_model_probe.py`의 저장 구조:
 
@@ -280,3 +283,61 @@ fit_error나 미완료도 그대로 보여준다. 둘 다 제안하지 않았으
 **No mismatch in the tests Spark chose**로 통일한다. 모든 부품의 정상 확정이 아니다.
 Spark는 훈련 실험을 고르고 예약 입력 두 개는 프로토콜이 사전 고정한다. 다른 판정이나
 중단·mock에 이 문구를 붙이지 않는다. 원본 enum과 physical_repair_demonstrated는 보존한다.
+
+## 7. 새 SAM-first producer: `scripts/photo_parts.py`
+
+11/3 소프트웨어 구현과 오프라인 확인을 추가했다. **새 공식 사례 사진의 실호출은 아직 0회**다.
+11/1 보존 SAM 응답 재생에서 저항 마스크 1개와 커패시터 match 0을 모두 보존했고,
+새 저항 마스크 픽셀이 보존된 원본 마스크와 정확히 같음을 확인했다. 이 재생은 개발 검증이다.
+
+```text
+<prepared>/
+  plan.json                         # 고정된 concept/순서/한도/이미지·소스 해시
+  input.png                         # SAM 입력, 방향 보정·metadata 제거, 최대 1600px
+  clean-full.png                    # 방향 보정·metadata 제거한 전체 해상도
+  sam-outcomes.json                 # concept별 상태와 상대 run 경로
+  sam/<concept>/<run>/
+    events.jsonl, response-visible.json, output-text.txt, result.json
+<decoded>/
+  crop-manifest.json                # 모든 object 및 원본 이미지/계획 연결
+  <concept>-decoded.json            # masks[], match_count, diagnostics
+  <concept>-object-<id>-record-<n>-raster.png
+  <concept>-object-<id>-record-<n>-mask.png
+  <concept>-object-<id>-record-<n>-overlay.png
+  <concept>-object-<id>-record-<n>-crop.png
+  components.json                   # 각 SAM object와 독립 비전 판독의 연결
+  vision/<run>/
+    input.png, plan.json, events.jsonl, response-visible.json, arguments.txt, result.json
+```
+
+순서는 resistor SAM 1회 → capacitor SAM 1회 → 오프라인 decode/crop → crop별 새 Spark
+판독이다. 반환된 모든 mask와 실패·match 0·파서 진단을 남긴다. 품질로 골라내지 않고,
+concept 순서와 원본 record 순서상 첫 8개 crop까지만 판독한다. 초과분은
+`vision_status:not_read_budget`으로 남긴다. 호출 전에 실제 mask 수와 예정 판독 수를 알린다.
+기존 probe와 달리 전체 사진 비전을 먼저 부르지 않는다. 자동 재호출은 없다.
+
+`crop-manifest.json.objects[]`의 연결 키는 `photo_component_id`다. 이 값은 입력 이미지 해시,
+concept, SAM object ID와 record index를 포함한다. `schematic_ref:null`,
+`association_status:unassigned`가 기본이며, 회로도 R1과 자동으로 같은 부품이라고 정하지 않는다.
+
+좌표는 `bounds_half_open`이 정확한 SAM `input.png` 기준 픽셀이다. `raster_size`가 box 크기와
+같을 때만 `source_mask_file`을 만들며, 전체 입력 크기의 마스크에 그대로 붙인다.
+`mask_mapping_status:exact_no_resize`이며 마스크를 늘리지 않는다. 크기가 다르면
+`raster_bounds_mismatch`, mask 파일은 null이고 원래 raster와 진단을 보존한다.
+`full_pixel_crop_box`는 `clean-full.png` 좌표다. 고정 15% 여백과 두 이미지의 크기 비율로
+계산하며, crop은 최대 1600px로 줄인다. crop의 해시·최종 크기도 저장한다.
+
+`components.json.components[]`는 object 정보와 `vision_run`, `vision_status`,
+`vision_components[]`를 연결한다. R/C의 `value_si:null`은 `reading_status:unreadable`,
+수치가 있으면 `readable`이다. 이 표기는 모델이 수치를 제안했다는 뜻이며 정확성 검증은 아니다.
+D의 null은 `observed_without_numeric_value`다. 실패에는 빈 목록과 실제 상태를 남긴다.
+`records_processed`, `expected_mask_records`, `completed`는 처리 진행 상태이며
+모든 부품의 판독 성공을 뜻하지 않는다. 원본 candidate의 불완전/검토 필요 상태도 유지한다.
+
+각 비전 `bbox`는 **그 crop PNG**의 정규화 좌표다. SAM 입력 좌표와 바로 섞지 않는다.
+새 producer도 Q/LED 사진 스키마와 자동 회로도 ID 대응·전기적 연결 복원을 제공하지 않는다.
+이들은 후속 작업이며, 표시나 값이 안 보이면 unreadable 그대로 남긴다.
+
+진단·설계값·ADC·정답표·파일명·원본 metadata는 비전 입력에서 제외한다. 기존 사진 판독기와
+분할 호출기를 재사용하며, 이벤트는 각 자식 `events.jsonl`에 남긴다. 진단 실행의 chain 안에
+없는 `photo_read` 이벤트를 만들어 원본 모델 이벤트인 것처럼 표시하지 않는다.
