@@ -18,7 +18,9 @@ responses, misses and parsing errors remain untouched.
 Each valid native mask is refined by binary opening with radius 8% of its
 short bounding dimension, keeping the largest surviving contour's convex hull.
 This is a **derived body mask**, not a native SAM mask. Native masks remain.
-Masks below 80 native pixels or over 25% of the photo are not read. The body
+Masks below 80 native pixels or over 25% of the photo are not read. The same
+25% bound is checked again on the derived hull, so a perforated board cannot
+pass merely because holes reduced its native foreground area. The body
 mask is explicitly mapped to full-source coordinates with nearest-neighbor
 scaling. Foreground source pixels remain, and outside pixels become neutral
 white. No text is inpainted. The hull may retain previously masked interior

@@ -1,0 +1,12 @@
+[
+  {
+    "concept": "electronic component",
+    "run": "sam/20261103T115554-345398ba41",
+    "status": "completed",
+    "requests": 1,
+    "elapsed_s": 2.682852250058204,
+    "empty_output": false,
+    "hardware_IO": false,
+    "visual_quality": "not_yet_reviewed"
+  }
+]

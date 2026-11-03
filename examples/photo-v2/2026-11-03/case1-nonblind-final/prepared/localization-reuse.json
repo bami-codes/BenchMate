@@ -1,0 +1,6 @@
+{
+  "source_record": "examples/photo-v2/2026-11-03/case1-nonblind/prepared",
+  "source_outcomes_sha256": "0a7743ef9b0eba305547370503622b9daa0eac9428024c6563bb378c5466fd04",
+  "reason": "Geometry-only hull bound correction before first surface calls; identical input and generic concept. Not a new SAM call.",
+  "evaluation": "nonblind"
+}

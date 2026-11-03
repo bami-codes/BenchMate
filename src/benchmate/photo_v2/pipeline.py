@@ -149,6 +149,8 @@ def decode(prepared,output):
         contours,_=cv2.findContours(opened,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
         if not contours:notes.append({'source':'SAM','object':o['photo_component_id'],'skipped':'No body survives opening'});continue
         selected=max(contours,key=cv2.contourArea);body=np.zeros_like(original);cv2.drawContours(body,[cv2.convexHull(selected)],-1,255,-1)
+        if np.count_nonzero(body)>.25*sw*sh:
+            notes.append({'source':'SAM','object':o['photo_component_id'],'skipped':'Derived body hull exceeds 25% photo area; native mask retained'});continue
         full=cv2.resize(body,(w,h),interpolation=cv2.INTER_NEAREST)
         c=body_and_views(rgb,full,gains,out,'sam-'+str(i))
         if c:components.append({**c,'localizer':'SAM-derived body mask','native_object':o,'mask_derived_not_native':True,'native_mask_unchanged':True,'mask_coordinate_upsampling':'nearest-neighbor to full source'})
