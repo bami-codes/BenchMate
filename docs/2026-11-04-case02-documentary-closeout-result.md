@@ -73,3 +73,13 @@ The old full-binding parent auditor is not used for this expressly waived branch
 the original diagnostic child/prefix still pass their original audits. PASS checks
 retained integrity/order, not creation time, physical truth, authenticity or stable
 instrument behavior on future boots.
+
+## Separate post-result display revision (2026-11-04)
+
+The original comparison and completed record above remain unchanged. A new
+[display-only revision](2026-11-04-case02-SAM-display-revision.md) applies the same
+bounding-box containment filter to both photos and draws each mask's external
+contours separately. The faulted image displays7/7 regions; the restored image
+displays7/8, excluding object5 because its bounding box fully contains4 others.
+All native masks are preserved. This rule was chosen after viewing the results;
+it changes no diagnosis or identification claim and adds0 calls/$0.
