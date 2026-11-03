@@ -1,0 +1,14 @@
+{
+  "schema": "benchmate.operator-confirmation.v1",
+  "recorded_utc": "2026-11-03T02:33:57.229366+00:00",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "only_D50_G50_replaced": true,
+  "new_jumper_continuity_checked": true,
+  "new_jumper_contacts": [
+    "D50",
+    "G50"
+  ],
+  "verbatim": "\uc644\ub8cc",
+  "confirmed_question_scope": "USB off, LED off; replace only D50\u2013G50 with new out-of-circuit continuity-checked short jumper; retain A23\u2013A45, I50\u2013A4, B50\u2013B23, 1 kohm, DUT; E30\u2013A55 absent; remove probes and reconnect same USB port."
+}

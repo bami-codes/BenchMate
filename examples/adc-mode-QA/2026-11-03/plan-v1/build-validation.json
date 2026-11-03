@@ -1,0 +1,18 @@
+{
+  "fqbn": "arduino:renesas_uno:minima",
+  "core_version": "1.6.0",
+  "QA_compile_passed": true,
+  "QA_program_bytes": 67244,
+  "QA_static_RAM_bytes": 15920,
+  "original_restore_compile_passed": true,
+  "original_program_bytes": 66476,
+  "original_static_RAM_bytes": 15920,
+  "related_tests_passed": 20,
+  "native_tests_are_not_hardware_accuracy_tests": true,
+  "uploads_performed": 0,
+  "new_Spark_requests": 0,
+  "installed_source_sha256": {
+    "cores/arduino/analog.cpp": "e6fb547a5969831b38af4b635d51070d7336c34800722de328791b4fa64b130c",
+    "variants/MINIMA/includes/ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/R7FA4M1AB.h": "613c00dab32b2e6f58f34a8f729098e4e13f81dbfb16ba559e206cbc644ac8a3"
+  }
+}

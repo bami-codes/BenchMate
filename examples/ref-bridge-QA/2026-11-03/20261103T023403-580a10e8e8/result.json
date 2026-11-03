@@ -1,0 +1,71 @@
+{
+  "passed": false,
+  "error": "Electrical/reference guard failed; no next stimulus",
+  "capture_attempts": 6,
+  "frames": 3072,
+  "means_v": [
+    {
+      "label": "bridge_QA_center_1",
+      "hold": true,
+      "means": [
+        1.642807843400932,
+        1.6412802619330995,
+        1.655398853327383,
+        1.6567389190586301
+      ]
+    },
+    {
+      "label": "bridge_QA_center_2",
+      "hold": true,
+      "means": [
+        1.6429918541704784,
+        1.6412557271638266,
+        1.655232951554205,
+        1.6567278199963422
+      ]
+    },
+    {
+      "label": "bridge_QA_center_3",
+      "hold": true,
+      "means": [
+        1.6427780511810997,
+        1.6413380938892415,
+        1.655128970865383,
+        1.656723146706955
+      ]
+    },
+    {
+      "label": "bridge_QA_small_step",
+      "hold": false,
+      "means": [
+        1.8010717092412845,
+        1.755898525720256,
+        1.6563831649041716,
+        1.6579422910753545
+      ]
+    },
+    {
+      "label": "bridge_QA_small_return_REF",
+      "hold": true,
+      "means": [
+        1.6428253682361276,
+        1.6414210447758324,
+        1.6552574863234808,
+        1.656480719820093
+      ]
+    },
+    {
+      "label": "bridge_QA_large_step",
+      "hold": false,
+      "means": [
+        2.038076996257546,
+        1.93477159774995,
+        1.6583447781236706,
+        1.6598501614669203
+      ]
+    }
+  ],
+  "paid_requests": 0,
+  "automatic_retry_or_rearm": false,
+  "output_state_confirmed": false
+}
