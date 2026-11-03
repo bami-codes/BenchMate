@@ -1,0 +1,12 @@
+{
+  "fixed_k_QA_authorized": true,
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "existing_GND_lead_replaced": true,
+  "parallel_GND_lead_added": false,
+  "other_wiring_unchanged": true,
+  "verbatim": "기존 GND선만 새 선으로 교체 / 새 배선에서 고정 k QA 처음부터 (추천)",
+  "recorded_utc": "2026-11-03T03:42:28.922337+00:00",
+  "scope": "Start a new fixed-k QA on the confirmed single-replaced-ground unloaded fixture; no manual DMM, additional wiring or firmware; stop with options after any failure.",
+  "new_paid_requests": 0
+}
