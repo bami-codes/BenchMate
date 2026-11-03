@@ -1,0 +1,246 @@
+{
+  "schema": "benchmate.official_completed_analysis.v1",
+  "run_id": "20261103T083824-7be77b51da",
+  "slot_id": "01-F04",
+  "source": "physical",
+  "actor": "muse_spark",
+  "selected_for_case_demo": false,
+  "guard_blocks": 25,
+  "all_primary_guards_passed": true,
+  "waveform_checks": 5,
+  "retained_frames": 12800,
+  "selected_actions": [
+    "unloaded_step_small",
+    "loaded_step_small",
+    "unloaded_sine_5hz_small"
+  ],
+  "fitted_effective_series_ohm": 25158.074644360007,
+  "physical_location_identified": false,
+  "agent_report": {
+    "verdict": "changed",
+    "components": [
+      "R1"
+    ],
+    "explanation": "Nominal failed training. R1 fit passed all training and both reserved conditional checks. C1 failed loaded training. Training choices were mine; reserved inputs fixed by protocol.",
+    "limits": "Conditional terminal behavior only; no unique topology or general accuracy claim. Physical run with 1 kohm instrument series resistor.",
+    "source": "physical",
+    "actor": "muse_spark",
+    "physical_repair_demonstrated": false
+  },
+  "reserved_checks": [
+    {
+      "prediction_sha256": "6413a46fe0cc9230b441334bd4997cfca8557b06b317ae9f42995de861b3ee5f",
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.35,
+        "load_ohm": null
+      },
+      "conditional": {
+        "changed:R1": {
+          "RMS_mV": 5.681342614363227,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 3.5011184490537612
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 3.1083373977687416
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 3.4055318616562507
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 4.091388128741314
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 6.684073299449024
+            }
+          ],
+          "passed": true,
+          "refitted": false,
+          "baseline": "Independent REF; no scored OUT origin fit.",
+          "source": "physical",
+          "purpose": "verification"
+        }
+      },
+      "command_forecast": {
+        "changed:R1": {
+          "RMS_mV": 6.3980684170805135,
+          "regions": [
+            {
+              "name": "pre_step",
+              "samples": 51,
+              "RMS_mV": 3.4883946966585775
+            },
+            {
+              "name": "0_to_5ms",
+              "samples": 10,
+              "RMS_mV": 3.205610461260118
+            },
+            {
+              "name": "5_to_20ms",
+              "samples": 30,
+              "RMS_mV": 3.2889881877466633
+            },
+            {
+              "name": "20_to_80ms",
+              "samples": 120,
+              "RMS_mV": 4.722210948568573
+            },
+            {
+              "name": "after_80ms",
+              "samples": 301,
+              "RMS_mV": 7.5669884292726515
+            }
+          ],
+          "passed": true,
+          "refitted": false,
+          "baseline": "Independent REF; no scored OUT origin fit.",
+          "source": "physical",
+          "purpose": "verification"
+        }
+      },
+      "OUT_refitted": false
+    },
+    {
+      "prediction_sha256": "6413a46fe0cc9230b441334bd4997cfca8557b06b317ae9f42995de861b3ee5f",
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.65,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "conditional": {
+        "changed:R1": {
+          "RMS_mV": 4.4651116948546825,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 4.898182219629432
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 5.822939319404799
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 3.733788498242367
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 3.5741228640543135
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 4.653381591269763
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 5.252329120002113
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 3.5870557895978816
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 3.5457631510671392
+            }
+          ],
+          "passed": true,
+          "refitted": false,
+          "baseline": "Independent REF; no scored OUT origin fit.",
+          "source": "physical",
+          "purpose": "verification"
+        }
+      },
+      "command_forecast": {
+        "changed:R1": {
+          "RMS_mV": 4.074656316754747,
+          "regions": [
+            {
+              "name": "phase_0",
+              "samples": 77,
+              "RMS_mV": 4.6636709554460545
+            },
+            {
+              "name": "phase_1",
+              "samples": 60,
+              "RMS_mV": 4.945966445972605
+            },
+            {
+              "name": "phase_2",
+              "samples": 65,
+              "RMS_mV": 2.6854324018279887
+            },
+            {
+              "name": "phase_3",
+              "samples": 60,
+              "RMS_mV": 3.753207364094525
+            },
+            {
+              "name": "phase_4",
+              "samples": 65,
+              "RMS_mV": 4.645625791022094
+            },
+            {
+              "name": "phase_5",
+              "samples": 60,
+              "RMS_mV": 4.673033950550018
+            },
+            {
+              "name": "phase_6",
+              "samples": 65,
+              "RMS_mV": 2.8452982893349694
+            },
+            {
+              "name": "phase_7",
+              "samples": 60,
+              "RMS_mV": 3.6627254609006625
+            }
+          ],
+          "passed": true,
+          "refitted": false,
+          "baseline": "Independent REF; no scored OUT origin fit.",
+          "source": "physical",
+          "purpose": "verification"
+        }
+      },
+      "OUT_refitted": false
+    }
+  ],
+  "source_files_verified": 87,
+  "http_requests": 6,
+  "estimated_usd": 0.047236299999999995,
+  "event_head_sha256": "ac06923f31d9f4513d8b315310208b96ff6f290a9051ea8db9f17f5539c4ef61",
+  "plot": "reserved-checks.png",
+  "plot_note": "Derived after the run from retained measurements and the unchanged frozen model; measured IN conditions prediction, reserved OUT is not fitted.",
+  "forecast_publication": {
+    "sha256": "6413a46fe0cc9230b441334bd4997cfca8557b06b317ae9f42995de861b3ee5f",
+    "published": true,
+    "remote": true,
+    "commit": "4cc5a234a7d1ea05c808f155ae85fb3da784d0a7",
+    "url": "https://github.com/bami-codes/BenchMate/blob/4cc5a234a7d1ea05c808f155ae85fb3da784d0a7/examples/official-freezes/2026-11-03/20261103T083824-7be77b51da/predictions.json"
+  }
+}
