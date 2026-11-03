@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6aea07f2f8504594d43b47af",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1230,
+    "output_tokens_details": {
+      "reasoning_tokens": 751
+    },
+    "total_tokens": 3321
+  },
+  "elapsed_s": 8.998250334057957,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_f402a984-75b9-4c26-8a49-1489d60e2fbe",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Reading your schematic \u2014 transcribing visible parts only.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_26168af9-dc08-41bb-ac3d-25527e2c66a3",
+      "call_id": "call_26168af9-dc08-41bb-ac3d-25527e2c66a3",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[],\"components\":[{\"bbox\":[0.135,0.325,0.327,0.415],\"evidence\":\"horizontal rectangle labeled R1 10 k\u03a9 between IN wire and OUT wire\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R1\",\"nodes\":[\"IN\",\"OUT\"],\"value_si\":10000.0},{\"bbox\":[0.328,0.532,0.424,0.605],\"evidence\":\"capacitor symbol labeled C1 1 \u00b5F between OUT top wire and REF bottom wire\",\"kind\":\"C\",\"marking\":\"1 \u00b5F\",\"name\":\"C1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":1e-06},{\"bbox\":[0.523,0.532,0.617,0.605],\"evidence\":\"capacitor symbol labeled C2 0.1 \u00b5F between OUT top wire and REF bottom wire\",\"kind\":\"C\",\"marking\":\"0.1 \u00b5F\",\"name\":\"C2\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":1e-07},{\"bbox\":[0.808,0.5,0.855,0.725],\"evidence\":\"vertical rectangle labeled R2 20 k\u03a9 between OUT top wire and REF bottom wire\",\"kind\":\"R\",\"marking\":\"20 k\u03a9\",\"name\":\"R2\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":20000.0}],\"status\":\"needs_review\",\"summary\":\"IN via R1 to OUT; C1, C2, R2 in parallel between OUT and REF.\"}",
+      "status": "completed"
+    }
+  ]
+}

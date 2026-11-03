@@ -1,0 +1,94 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [],
+    "components": [
+      {
+        "bbox": [
+          0.135,
+          0.325,
+          0.327,
+          0.415
+        ],
+        "evidence": "horizontal rectangle labeled R1 10 k\u03a9 between IN wire and OUT wire",
+        "kind": "R",
+        "marking": "10 k\u03a9",
+        "name": "R1",
+        "nodes": [
+          "IN",
+          "OUT"
+        ],
+        "value_si": 10000.0
+      },
+      {
+        "bbox": [
+          0.328,
+          0.532,
+          0.424,
+          0.605
+        ],
+        "evidence": "capacitor symbol labeled C1 1 \u00b5F between OUT top wire and REF bottom wire",
+        "kind": "C",
+        "marking": "1 \u00b5F",
+        "name": "C1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-06
+      },
+      {
+        "bbox": [
+          0.523,
+          0.532,
+          0.617,
+          0.605
+        ],
+        "evidence": "capacitor symbol labeled C2 0.1 \u00b5F between OUT top wire and REF bottom wire",
+        "kind": "C",
+        "marking": "0.1 \u00b5F",
+        "name": "C2",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-07
+      },
+      {
+        "bbox": [
+          0.808,
+          0.5,
+          0.855,
+          0.725
+        ],
+        "evidence": "vertical rectangle labeled R2 20 k\u03a9 between OUT top wire and REF bottom wire",
+        "kind": "R",
+        "marking": "20 k\u03a9",
+        "name": "R2",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 20000.0
+      }
+    ],
+    "status": "needs_review",
+    "summary": "IN via R1 to OUT; C1, C2, R2 in parallel between OUT and REF."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1230,
+    "output_tokens_details": {
+      "reasoning_tokens": 751
+    },
+    "total_tokens": 3321
+  }
+}

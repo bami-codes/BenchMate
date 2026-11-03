@@ -58,9 +58,10 @@
       "run_id": "20261103T161130-f20340dd0b",
       "case_id": "02",
       "attempt": 1,
-      "status": "registered",
+      "status": "failed",
       "counted": true,
-      "selected_first_attempt": true
+      "selected_first_attempt": true,
+      "failed_stage": "diagnose"
     }
   ]
 }
