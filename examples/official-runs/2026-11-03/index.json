@@ -161,14 +161,15 @@
       "order": 1,
       "required": false,
       "run_id": "20261103T074537-7424df4144",
-      "status": "registered",
+      "status": "failed",
       "selected_for_case_demo": false,
       "selection": "followup_never_replaces_primary",
       "counted": true,
       "followup_of": "01-F01",
       "attempt_ordinal": 2,
       "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T074537-7424df4144.json",
-      "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86"
+      "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86",
+      "error": "Electrical/reference guard failed; no next stimulus"
     }
   ]
 }

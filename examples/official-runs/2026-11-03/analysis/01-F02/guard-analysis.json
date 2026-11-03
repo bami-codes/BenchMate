@@ -1,0 +1,99 @@
+{
+  "schema": "benchmate.official_guard_failure_analysis.v1",
+  "slot_id": "01-F02",
+  "primary_replacement": false,
+  "event_count": 142,
+  "source_files": 82,
+  "events_file_sha256": "fa9372feb17d4934c240bbfcb7c7e20a8983836fca2744d4ea5e939073bfb027",
+  "failure_stage": "Third chosen training waveform, unloaded 5Hz 0.15V sine, A4 raw block mean span",
+  "training_3_guards": [
+    {
+      "label": "training_3_origin_0",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6429433687931068,
+        1.6412049051417628,
+        1.6422412070629582,
+        1.6465482273927223
+      ]
+    },
+    {
+      "label": "training_3_origin_1",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6429895175257874,
+        1.6412382023286327,
+        1.6421156124107266,
+        1.646417375289932
+      ]
+    },
+    {
+      "label": "training_3_origin_2",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": true,
+        "stationary_path_mean_span": true,
+        "path_means": true,
+        "path_samples": true,
+        "path_spread": true
+      },
+      "means_v": [
+        1.6430193097456185,
+        1.6411114393540551,
+        1.6422552269311117,
+        1.6470371702946653
+      ]
+    },
+    {
+      "label": "training_3",
+      "checks": {
+        "rails": true,
+        "A4_envelope": true,
+        "A4_block_mean_span": false,
+        "signal_envelope": true
+      },
+      "means_v": [
+        1.6438312937763233,
+        1.6400763057552035,
+        1.6420262357512319,
+        1.650744257099591
+      ]
+    }
+  ],
+  "channel_block_mean_span_mV": {
+    "A1": 0.8879249832165481,
+    "A2": 1.1618965734292441,
+    "A3": 0.22899117987984496,
+    "A4": 4.3268818096589
+  },
+  "last_HOLD_to_signal_mean_delta_mV": {
+    "A1": 0.8119840307048154,
+    "A2": -1.0351335988516563,
+    "A3": -0.22899117987984496,
+    "A4": 3.7070868049255967
+  },
+  "http_requests": 4,
+  "estimated_usd": 0.03199065,
+  "cost_basis": "Pinned historical 1.25/0.15/4.25 USD per million input/cached/output tokens",
+  "reserved_inputs_acquired": false,
+  "final_report_exists": false,
+  "interpretation": "A4 changes while A3 remains comparatively steady. Both nominally sense REF through different routes; existing logs do not establish the cause. Pull-up-like board path and contact resistance are a supported hypothesis, not identified components.",
+  "new_measurements_during_analysis": 0
+}
