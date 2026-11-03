@@ -1,0 +1,20 @@
+{
+  "protocol": "benchmate-instrument-v2",
+  "type": "pong",
+  "boot_id": "db55b9f4e370d6c12b356af69c40a024",
+  "armed": false,
+  "current_code": 0,
+  "ref_code": 0,
+  "adc_sample_states_readback": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "hardware_commands": [
+    "PING"
+  ],
+  "stimuli": 0,
+  "paid_requests": 0,
+  "record": "runs/fixed-k-repro/2026-11-03/ground-rewire-observation/20261103T033221-6c8af18062"
+}

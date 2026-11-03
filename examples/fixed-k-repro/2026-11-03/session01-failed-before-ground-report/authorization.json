@@ -1,0 +1,8 @@
+{
+  "fixed_k_QA_authorized": true,
+  "verbatim": "\uc218\uc815\uc548\ub300\ub85c \uc9c4\ud589\ud574. \uc218\ub3d9 mV \ud310\ub3c5\uc774 \ud544\uc694 \uc5c6\uac8c QA\ub97c \uc9dc\uc918. k\uac00 \uc2a4\ud15d\uacfc \uc0ac\uc778\uc5d0\uc11c \ub2e4\ub974\uac8c \ub098\uc628 \uac78 \uace0\uc815 k\ub85c \uc5b4\ub5bb\uac8c \ub2e4\ub8f0\uc9c0 QA \uacc4\ud68d\uc5d0 \ud3ec\ud568\ud574\uc918. \uad6c\ud604 \ub05d\ub0a0 \ub54c\uc640 QA \uacb0\uacfc \ub098\uc62c \ub54c \uac01\uac01 \ubcf4\uace0\ud574\uc918. QA\uac00 \uc2e4\ud328\ud558\uba74 \ubc18\ubcf5\ud558\uae30 \uc804\uc5d0 \uc120\ud0dd\uc9c0\ub97c \uba3c\uc800 \uc918.",
+  "recorded_utc": "2026-11-03T03:25:04.110643+00:00",
+  "scope": "No manual DMM, rewiring or firmware upload. Train one shared fixed k, remotely freeze before reserved validation. Stop and present options after any QA failure. Current unloaded fixture only.",
+  "GND_lead_replacement_confirmed": false,
+  "new_paid_requests": 0
+}

@@ -1,0 +1,11 @@
+{
+  "stage": "QA_failed",
+  "phase": "train",
+  "error": "Unexpected instrument protocol",
+  "capture_attempts": 17,
+  "frames": 8192,
+  "paid_requests": 0,
+  "output_at_REF_confirmed": false,
+  "no_retry": true,
+  "root": "runs/fixed-k-repro/2026-11-03/session01"
+}
