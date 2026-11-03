@@ -1,0 +1,16 @@
+{
+  "schema": "benchmate.public_intended_design_amendment.v1",
+  "status": "proposed_pending_operator_confirmation",
+  "component": "R2",
+  "nodes": [
+    "OUT",
+    "REF"
+  ],
+  "schematic_value_ohm": 22000.0,
+  "proposed_intended_value_ohm": 20000.0,
+  "why": "Operator inventory contains 20k but no 22k; public design change before measurements, not a specimen fault",
+  "Spark_original_extraction_unchanged": true,
+  "new_reviewed_design_operator_confirmation_required": true,
+  "physical_measurements_so_far": 0,
+  "DUT_input_or_guard_rule_changed": false
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "benchmate.schematic_revision.v1",
+  "reason": "Original 22k unavailable; revised Claude schematic makes intended 20k explicit",
+  "original_registered_schematic_retained": {
+    "file": "schematic-versions/v1-22k.png",
+    "sha256": "38241ddc197ffde24864f682902cbf578f82b578ddbae0c569bff9cb05c5eb03"
+  },
+  "revision": {
+    "file": "schematic-versions/v2-20k.png",
+    "sha256": "ee209f10a9bb38c7ea5f45bd3cb065ad84107a08eefd16c8e5b8934ba637d8bd"
+  },
+  "active_input_alias": "schematic.png",
+  "image_info": {
+    "sha256": "ee209f10a9bb38c7ea5f45bd3cb065ad84107a08eefd16c8e5b8934ba637d8bd",
+    "width": 1200,
+    "height": 650,
+    "bytes": 15864,
+    "metadata_removed": true,
+    "orientation_applied": true,
+    "resize_max_edge": 1600,
+    "source_sha256": "8508d4a79362b677a68c9815bc2970ff4cbb2b76811fc27cafe27ea6428e0950"
+  },
+  "prior_intake_unchanged": true,
+  "physical_measurements_before_revision": 0,
+  "manual_value_override_used": false,
+  "public_file": "examples/reading-cohort/2026-11-03/registrations/20261103T143624-44d6e5850c-schematic-v2.json"
+}
