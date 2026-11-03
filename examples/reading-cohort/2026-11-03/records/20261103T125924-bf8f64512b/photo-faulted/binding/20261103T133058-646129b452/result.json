@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "arguments": {
+    "reason": "Small axial two-lead cylindrical body spanning breadboard holes, distinct from boxy two-lead body, fits series position.",
+    "sam_body": "sam-1"
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 7285,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 737,
+    "output_tokens_details": {
+      "reasoning_tokens": 624
+    },
+    "total_tokens": 8022
+  },
+  "model": "muse-spark-1.3"
+}

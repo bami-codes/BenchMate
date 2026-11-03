@@ -1,0 +1,9 @@
+{
+  "sam_body": "sam-1",
+  "component": "R1",
+  "chosen_by": "muse_spark",
+  "reason": "Small axial two-lead cylindrical body spanning breadboard holes, distinct from boxy two-lead body, fits series position.",
+  "operator_confirmed": true,
+  "localizer": "SAM-derived body mask",
+  "surface_values_used_for_scoring": false
+}
