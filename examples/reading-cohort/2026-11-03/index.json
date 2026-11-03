@@ -11,6 +11,28 @@
       "counted": true,
       "selected_first_attempt": true,
       "failed_stage": "diagnose"
+    },
+    {
+      "run_id": "20261103T142003-2b176faa91",
+      "case_id": "01",
+      "attempt": 2,
+      "status": "completed",
+      "counted": true,
+      "selected_first_attempt": false,
+      "execution_scope": "restored_only_followup",
+      "followup_of": "20261103T125924-bf8f64512b",
+      "original_primary_status": "failed",
+      "record": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91",
+      "completion_method": "preserved_original_fault_reading_plus_restored_followup_explicit_photo_waiver",
+      "verified_head_sha256": "cbb2c64ba42250775d91a6d0144b00fd73dbdc24a87a05f50496219c52427027"
+    },
+    {
+      "run_id": "20261103T143624-44d6e5850c",
+      "case_id": "04",
+      "attempt": 1,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": true
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "schema": "benchmate.reading_pair_registration.v1",
+  "cohort": "reading-assisted-v1",
+  "case_id": "04",
+  "run_id": "20261103T143624-44d6e5850c",
+  "attempt": 1,
+  "official": true,
+  "counted": true,
+  "selected_first_attempt": true,
+  "freeze_sha256": "89718da1f949fd8dd455518885e4deb0eb229f57cb8a0bb141c9a64fc41c168d",
+  "freeze_commit": "ec9d23fc6c4f8c9b29a2c52d27aa06c0fee75ef8",
+  "schematic": {
+    "sha256": "38241ddc197ffde24864f682902cbf578f82b578ddbae0c569bff9cb05c5eb03",
+    "width": 1200,
+    "height": 650,
+    "bytes": 15754,
+    "metadata_removed": true,
+    "orientation_applied": true,
+    "resize_max_edge": 1600,
+    "source_sha256": "bf8e7a4a7c27d87ab1ccc9b83f06f2d4384fbad0e0e82ac6eb041430d9e87f9b"
+  },
+  "policy_sha256": "7b67a2cac2b485f44c152fc5f35acba9741dbc00d162fe9bc20c2b00676fb724",
+  "blind_test": false,
+  "known_case_development": false,
+  "paid_calls_before_assignment": 0,
+  "stimuli_before_assignment": 0
+}

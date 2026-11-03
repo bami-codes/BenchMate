@@ -1,0 +1,13 @@
+{
+  "schema": "benchmate.case_workflow_scope.v1",
+  "case_id": "04",
+  "file": "case-workflow.md",
+  "sha256": "6fe6ee3af178c2b26352e9224888e080afa5024c492419b97573a51a5c40ea01",
+  "frozen_before_schematic_intake": true,
+  "frozen_before_hardware_measurements": true,
+  "optional_restored_photo": "No repeat for unchanged mini-board configuration after external repair; original image keeps original capture state",
+  "original_runtime_sources_changed": false,
+  "model_visible": false,
+  "paid_calls": 0,
+  "hardware_commands": 0
+}
