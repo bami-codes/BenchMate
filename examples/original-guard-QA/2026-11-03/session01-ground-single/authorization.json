@@ -1,0 +1,8 @@
+{
+  "original_uncorrected_QA_authorized": true,
+  "verbatim": "\uc6d0\ub798 \uac00\ub4dc\u00b7\ubb34\ubcf4\uc815 \uc0c8 QA (\ucd94\ucc9c, \uc57d 10\u201320\ubd84)",
+  "recorded_utc": "2026-11-03T03:49:59.955750+00:00",
+  "scope": "New original-guard QA on current unchanged single-GND-replaced unloaded wiring; no k fit/correction, no additional sample-RMS threshold, no firmware or manual DMM, stop with choices on first failure.",
+  "GND_parallel_added": false,
+  "new_paid_requests": 0
+}

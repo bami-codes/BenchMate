@@ -1,0 +1,188 @@
+{
+  "source_record": "examples/original-guard-QA/2026-11-03/session01-ground-single",
+  "original_sources_unchanged": 76,
+  "verified_source_files": 78,
+  "hash_chain_verified": true,
+  "raw_blocks": 17,
+  "all_original_guard_checks_passed": true,
+  "waveforms_checked": 7,
+  "ARM_commands": 0,
+  "k_fitted": false,
+  "k_correction": false,
+  "paid_requests": 0,
+  "raw_A3_span_mV": 0.367437377924551,
+  "raw_A4_span_mV": 0.47667551730024016,
+  "metrics": [
+    {
+      "label": "original_guard_origin_1_raw_capture",
+      "sample_SD_mV": [
+        2.8661492180186383,
+        1.9832319146888953,
+        2.421476236608491,
+        2.3057317324217697
+      ]
+    },
+    {
+      "label": "original_guard_origin_2_raw_capture",
+      "sample_SD_mV": [
+        3.502626448590557,
+        2.173686253357148,
+        3.344493215673413,
+        2.7288808939509606
+      ]
+    },
+    {
+      "label": "original_guard_origin_3_raw_capture",
+      "sample_SD_mV": [
+        3.1356272160596683,
+        2.852311080248971,
+        3.0685713972408992,
+        2.33860190820211
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_small_raw_capture",
+      "sample_SD_mV": [
+        119.42526762330188,
+        131.18312309091056,
+        3.1178404038318486,
+        2.2831732264527176
+      ],
+      "negative_to_positive_plateau_delta_mV": [
+        400.8190122717934,
+        394.38185477807883,
+        -0.002626160669594313,
+        0.8002495150380984
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_small_return_raw_capture",
+      "sample_SD_mV": [
+        2.5168516184631473,
+        2.4077997582935255,
+        2.3428087362643746,
+        2.287833432461867
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_large_raw_capture",
+      "sample_SD_mV": [
+        558.2129283758762,
+        550.8993455487716,
+        1.714175251363538,
+        2.1711747879460592
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_large_return_raw_capture",
+      "sample_SD_mV": [
+        3.382791307219233,
+        2.4255486180190653,
+        3.092525140488201,
+        2.1532681637260676
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_large_raw_capture",
+      "sample_SD_mV": [
+        297.51291286717856,
+        329.37800664082175,
+        2.3816172941151708,
+        1.7424429154114784
+      ],
+      "negative_to_positive_plateau_delta_mV": [
+        996.9994298075193,
+        991.0500087092054,
+        0.5924180776324395,
+        0.11817723011509074
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_large_return_raw_capture",
+      "sample_SD_mV": [
+        2.5335263363200506,
+        1.53041442403885,
+        3.106433346247019,
+        1.6051537304881074
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_small_raw_capture",
+      "sample_SD_mV": [
+        139.54975992972177,
+        137.78914540712006,
+        1.7552603689329687,
+        1.602501781959024
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_small_return_raw_capture",
+      "sample_SD_mV": [
+        2.9561717860149503,
+        2.3760344791571057,
+        2.233703315115239,
+        2.0714628663893
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_5hz_small_raw_capture",
+      "sample_SD_mV": [
+        103.61949099256401,
+        81.24401410271976,
+        2.02463613590162,
+        1.8962702193880916
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_5hz_small_return_raw_capture",
+      "sample_SD_mV": [
+        2.8672210950883352,
+        1.8272920057558273,
+        2.72136358845866,
+        2.0619826145864337
+      ]
+    },
+    {
+      "label": "original_guard_validation_1_raw_capture",
+      "sample_SD_mV": [
+        208.43826116707544,
+        230.2819416984061,
+        2.415318692794504,
+        2.115826204996924
+      ],
+      "negative_to_positive_plateau_delta_mV": [
+        698.830399745127,
+        692.3662511556439,
+        0.23912651871471624,
+        -0.4697909641608877
+      ]
+    },
+    {
+      "label": "original_guard_validation_1_return_raw_capture",
+      "sample_SD_mV": [
+        2.8663435176661056,
+        1.7315024952212965,
+        2.3263850363231025,
+        2.026471864919598
+      ]
+    },
+    {
+      "label": "original_guard_validation_2_raw_capture",
+      "sample_SD_mV": [
+        448.1016790154412,
+        352.46538936644646,
+        2.1057615875671294,
+        1.5712757419476318
+      ]
+    },
+    {
+      "label": "original_guard_validation_2_return_raw_capture",
+      "sample_SD_mV": [
+        2.6066907329968414,
+        2.089117742854873,
+        2.505523794016361,
+        2.444413965781903
+      ]
+    }
+  ]
+}

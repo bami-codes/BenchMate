@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Before GND lead replacement",
+    "path": "examples/ref-bridge-QA/2026-11-03/20261103T023403-580a10e8e8/events.jsonl",
+    "sha256": "6700369d00c72c665ccc6c0758444813691d6c1fd0b29acd4a8906147181ba31",
+    "boot_id": "a65c15bbe82e1cbe9a9f4f8c6620f74d",
+    "negative_to_positive_plateau_delta_mV": [
+      998.3365832816,
+      991.8266227782216,
+      7.9825800986452755,
+      7.953692331283291
+    ],
+    "pre_frames": [
+      5,
+      46
+    ],
+    "late_frames": 100,
+    "statistics_use_raw_samples": true
+  },
+  {
+    "name": "After GND lead replacement",
+    "path": "examples/original-guard-QA/2026-11-03/session01-ground-single/stages/20261103T035023-cf3444baee/events.jsonl",
+    "sha256": "ae3b823e04abb7fc5d86382f2a4735d615d65d6ecdffc270ecefa1bd37d5024c",
+    "boot_id": "db55b9f4e370d6c12b356af69c40a024",
+    "negative_to_positive_plateau_delta_mV": [
+      996.9994298075193,
+      991.0500087092054,
+      0.5924180776324395,
+      0.11817723011509074
+    ],
+    "pre_frames": [
+      5,
+      46
+    ],
+    "late_frames": 100,
+    "statistics_use_raw_samples": true
+  }
+]

@@ -1,0 +1,189 @@
+{
+  "passed": true,
+  "reference_guard": "original raw A4 block mean span <=3 mV",
+  "raw_A3_block_mean_span_mV": 0.367437377924551,
+  "raw_A4_block_mean_span_mV": 0.47667551730024016,
+  "frames": 8704,
+  "capture_attempts": 17,
+  "means_v": [
+    {
+      "label": "original_guard_origin_1",
+      "hold": true,
+      "means": [
+        1.6432669940830416,
+        1.6411517464750052,
+        1.6336148990187984,
+        1.6350449255707125
+      ]
+    },
+    {
+      "label": "original_guard_origin_2",
+      "hold": true,
+      "means": [
+        1.643146656881368,
+        1.6411213700939982,
+        1.633677404264329,
+        1.6352774217176342
+      ]
+    },
+    {
+      "label": "original_guard_origin_3",
+      "hold": true,
+      "means": [
+        1.643297954625218,
+        1.641422797259354,
+        1.6337393253486847,
+        1.6350338265084245
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_small",
+      "hold": false,
+      "means": [
+        1.8011897097982608,
+        1.7552156413088251,
+        1.633827533685831,
+        1.6352955307140022
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_small_return",
+      "hold": true,
+      "means": [
+        1.6429976957822094,
+        1.6413579553691318,
+        1.633600294989469,
+        1.6352511344648404
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_large",
+      "hold": false,
+      "means": [
+        1.6454464994201297,
+        1.641474787603766,
+        1.6336552061397482,
+        1.635134302230205
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_large_return",
+      "hold": true,
+      "means": [
+        1.6430800625076258,
+        1.6411961427241648,
+        1.6336925924548302,
+        1.6352271838567405
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_large",
+      "hold": false,
+      "means": [
+        2.038095105253917,
+        1.9335699782167475,
+        1.6339677323673936,
+        1.635337590318469
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_step_large_return",
+      "hold": true,
+      "means": [
+        1.64314724104254,
+        1.6413702227537679,
+        1.6339116528947668,
+        1.6350589454388682
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_small",
+      "hold": false,
+      "means": [
+        1.6437162140252073,
+        1.641886621230849,
+        1.633739909509859,
+        1.6351734410288086
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_1hz_small_return",
+      "hold": true,
+      "means": [
+        1.6429398638260657,
+        1.6413176482481846,
+        1.6338164346235402,
+        1.6351816192852338
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_5hz_small",
+      "hold": false,
+      "means": [
+        1.6442092460553623,
+        1.6400482660188898,
+        1.6337486719274557,
+        1.6351927183475243
+      ]
+    },
+    {
+      "label": "original_guard_unloaded_sine_5hz_small_return",
+      "hold": true,
+      "means": [
+        1.6430934982146084,
+        1.6411704396325457,
+        1.63373523622047,
+        1.6352301046626068
+      ]
+    },
+    {
+      "label": "original_guard_validation_1",
+      "hold": false,
+      "means": [
+        1.9197761804347513,
+        1.8443452006271759,
+        1.6339169103453273,
+        1.635399511402825
+      ]
+    },
+    {
+      "label": "original_guard_validation_1_return",
+      "hold": true,
+      "means": [
+        1.6431209537897482,
+        1.6412972026071218,
+        1.6336849983595778,
+        1.635303124809251
+      ]
+    },
+    {
+      "label": "original_guard_validation_2",
+      "hold": false,
+      "means": [
+        1.6477118764496734,
+        1.6370889055156246,
+        1.633866088323261,
+        1.6354766206776832
+      ]
+    },
+    {
+      "label": "original_guard_validation_2_return",
+      "hold": true,
+      "means": [
+        1.6433219052333172,
+        1.6412095784311487,
+        1.6338374644257758,
+        1.6355105020257248
+      ]
+    }
+  ],
+  "qualified_scope": "Current unloaded design-01; per-run guards remain required",
+  "k_fitted": false,
+  "k_correction": false,
+  "physical_REF_stability_independently_established": false,
+  "OUT_model_fitting_or_diagnostic_verification": false,
+  "raw_OUT_safety_checks_retained": true,
+  "boot_id": "db55b9f4e370d6c12b356af69c40a024",
+  "output_at_REF_confirmed": true,
+  "paid_requests": 0
+}
