@@ -1,6 +1,6 @@
 {
   "case_id": "01",
-  "phase": "awaiting_restoration_confirmation",
+  "phase": "awaiting_restored_setup",
   "schematic_intake": "schematic-intake/20261103T125951-988f9449cf",
   "faulted_diagnosis": "diagnosis-faulted/20261103T130826-26d83af2df",
   "last_boot": "1e29c874bb1332675312e7dba21dbdce",
