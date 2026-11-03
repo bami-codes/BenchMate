@@ -263,3 +263,14 @@ README와 사이트에 다음 범위 설명을 한 줄로 붙여 달라:
 이내). 동결된 enum/코드는 유지한다. 실제 actor=muse_spark인 해당 판정에만 쓰고,
 중단·다른 판정·mock에는 이 문구를 붙이지 말아 달라. 예약 입력 두 개는 프로토콜이 미리
 정했다는 설명도 유지한다. verify PASS를 이 정상 판정으로 변환하면 안 된다.
+
+## Nov 3 공식 실물 실행 재개
+
+사용자가 하드웨어 재개와 필요한 유료 호출의 반복 승인 생략을 명시했다. 단계별 최대 호출 수와
+실제 사용량·비용은 계속 보고한다. [공식 passive amendment](2026-11-03-official-passive-amendment.md)에
+변경 범위를 고정했다. 기존 76개 소스와 파일럿은 유지하고 새 official wrapper를 쓴다.
+새 공식 표식은 `official_run_bound`, `official_protocol_frozen` 및 결과의 `official_run`이다.
+`official:true / pilot:false / excluded_from_evaluation:false`이며 사전 등록된 slot_id/run_id가 근거다.
+`examples/official-runs/2026-11-03/index.json`에 등록 전/실행 중/완료/실패 상태를 기록한다.
+01-F01부터 시작하며 고장 진단→사진→작업자 복원→01-R01을 끝낸 뒤 다음 사례로 간다.
+사이트 파일은 Codex가 수정하지 않았다. 기존 pilot의 메타데이터는 바꾸지 않는다.

@@ -1,0 +1,28 @@
+{
+  "schema": "benchmate.reviewed_netlist.v1",
+  "source_kind": "intended_schematic",
+  "elements": [
+    {
+      "name": "R1",
+      "kind": "R",
+      "a": "IN",
+      "b": "OUT",
+      "value": 4700.0,
+      "model": "none"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  ],
+  "source_sha256": "1dbefe2178eb98ed1b3a3527f0041d5089de902ce48d24faabf7948b059d8963",
+  "confirmation": "I confirm the intended components, values, connections and ports.",
+  "reviewer_note": "User confirmed all six schematics after explicit raw-output checks for image 05 branch nodes and image 06 LED polarity. Clean source image and original arguments are bound in approval.json.",
+  "operator_review_simulated": false,
+  "measurement_verified": false,
+  "hardware_IO": false
+}
