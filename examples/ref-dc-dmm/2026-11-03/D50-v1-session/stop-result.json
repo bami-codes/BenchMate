@@ -1,0 +1,10 @@
+{
+  "stopped": true,
+  "planned_levels": 10,
+  "ADC_DMM_pairs_collected": 5,
+  "last_confirmed_code": 1376,
+  "boot_id": "9d25327ba5060ae5ed2e41c10c614745",
+  "only_hardware_command": "PING",
+  "new_DC_or_CAPTURE_commands": 0,
+  "paid_requests": 0
+}

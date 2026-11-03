@@ -1,0 +1,11 @@
+{
+  "kind": "displayed_range",
+  "display_strings": [
+    "1.629",
+    "1.629"
+  ],
+  "operator_reply_original": "1.629",
+  "single_display_value_reported": true,
+  "individual_reading_times_and_count_not_reported": true,
+  "representation_note": "Singleton interval of the one reported displayed value; not a repeated-reading stability claim."
+}

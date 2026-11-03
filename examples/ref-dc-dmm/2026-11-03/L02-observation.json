@@ -1,0 +1,12 @@
+{
+  "kind": "displayed_range",
+  "display_strings": [
+    "1.630",
+    "1.630"
+  ],
+  "operator_reply_original": "1.630 근데 d50 점퍼쪽이 좀 닳은거같아서 이거 교체를 해볼까 아니면?",
+  "single_display_value_reported": true,
+  "individual_reading_times_and_count_not_reported": true,
+  "representation_note": "Singleton interval of the one reported displayed value; not a repeated-reading stability claim.",
+  "operator_contact_observation": "D50 jumper appears worn; no replacement performed during comparison."
+}

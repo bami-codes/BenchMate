@@ -1,0 +1,12 @@
+{
+  "schema": "benchmate.operator-confirmation.v1",
+  "operator_confirmed": true,
+  "USB_off_then_reconnected": true,
+  "DUT_retained_unloaded_A3REF": true,
+  "DMM_range": "DC2V",
+  "DMM_display_resolution_v": 0.001,
+  "operator_reply_original": "USB \uc7ac\uc5f0\uacb0 \uc644\ub8cc, DC 2V\u00b71mV \ud45c\uc2dc \uc900\ube44\ub428",
+  "confirmed_question_scope": "A23\u2013A45, I50\u2013A4, D50\u2013G50, instrument 1 kohm and design-01 DUT retained; E30\u2013A55 output load absent; USB off and reconnected to same port; probes wait for C output.",
+  "task_authorization_original": "\ud574\ubcf4\uc790 \uadf8\ub7ec\uba74",
+  "scope": "Retained-DUT persistent DC and DMM instrument QA only. No Spark or firmware upload."
+}

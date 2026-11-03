@@ -1,0 +1,12 @@
+{
+  "stage": "awaiting_DMM",
+  "level": "C",
+  "index": 1,
+  "nominal_drive_v": 1.646,
+  "held_code": 1376,
+  "output_remains_held": true,
+  "state": "runs/ref-dc-dmm/2026-11-03/D50-v1/state.json",
+  "record": "runs/ref-dc-dmm/2026-11-03/D50-v1/stages/20261103T021551-8630613da1",
+  "paid_requests": 0,
+  "reference_summary": {}
+}

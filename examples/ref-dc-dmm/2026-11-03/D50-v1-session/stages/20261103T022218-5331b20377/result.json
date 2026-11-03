@@ -1,0 +1,57 @@
+{
+  "stage": "awaiting_DMM",
+  "level": "C",
+  "index": 3,
+  "nominal_drive_v": 1.646,
+  "held_code": 1376,
+  "output_remains_held": true,
+  "state": "runs/ref-dc-dmm/2026-11-03/D50-v1/state.json",
+  "record": "runs/ref-dc-dmm/2026-11-03/D50-v1/stages/20261103T022218-5331b20377",
+  "paid_requests": 0,
+  "last_sample": {
+    "level": "L",
+    "DMM_observation": {
+      "kind": "displayed_range",
+      "display_strings": [
+        "1.630",
+        "1.630"
+      ],
+      "operator_reply_original": "1.630 \uadfc\ub370 d50 \uc810\ud37c\ucabd\uc774 \uc880 \ub2f3\uc740\uac70\uac19\uc544\uc11c \uc774\uac70 \uad50\uccb4\ub97c \ud574\ubcfc\uae4c \uc544\ub2c8\uba74?",
+      "single_display_value_reported": true,
+      "individual_reading_times_and_count_not_reported": true,
+      "representation_note": "Singleton interval of the one reported displayed value; not a repeated-reading stability claim.",
+      "operator_contact_observation": "D50 jumper appears worn; no replacement performed during comparison.",
+      "volts": [
+        1.63,
+        1.63
+      ],
+      "range_v": [
+        1.63,
+        1.63
+      ],
+      "individual_readings_known": false,
+      "spacing_independently_verified": false,
+      "DMM_range": "DC2V",
+      "point": "D50 vs blue GND"
+    },
+    "ADC_means_nominal_v": [
+      1.1423441148026905,
+      1.1415882102446129,
+      1.636910152196637,
+      1.6528887127662826
+    ],
+    "DMM_precedes_ADC_at_same_level": true,
+    "simultaneous_measurement": false,
+    "stage": "runs/ref-dc-dmm/2026-11-03/D50-v1/stages/20261103T022218-5331b20377"
+  },
+  "reference_summary": {
+    "REF_block_mean_span_mV": {
+      "A3": 9.475094228770686,
+      "A4": 59.36187425608486
+    },
+    "existing_limit_mV": 3.0,
+    "A4_within_existing_3mV_limit": false,
+    "diagnosis_use_allowed": false,
+    "scope": "Instrument QA only; no rejected trial is reclassified."
+  }
+}

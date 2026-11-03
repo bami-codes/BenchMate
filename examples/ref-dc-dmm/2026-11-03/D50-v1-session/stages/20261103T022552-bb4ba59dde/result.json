@@ -1,0 +1,55 @@
+{
+  "stage": "awaiting_DMM",
+  "level": "C",
+  "index": 6,
+  "nominal_drive_v": 1.646,
+  "held_code": 1376,
+  "output_remains_held": true,
+  "state": "runs/ref-dc-dmm/2026-11-03/D50-v1/state.json",
+  "record": "runs/ref-dc-dmm/2026-11-03/D50-v1/stages/20261103T022552-bb4ba59dde",
+  "paid_requests": 0,
+  "last_sample": {
+    "level": "C",
+    "DMM_observation": {
+      "kind": "displayed_range",
+      "display_strings": [
+        "1.637",
+        "1.638"
+      ],
+      "operator_reply_original": "1.637~1/638",
+      "normalization_note": "Interpreted 1/638 as decimal typo for 1.638 V; original text retained.",
+      "individual_reading_times_and_count_not_reported": true,
+      "volts": [
+        1.637,
+        1.638
+      ],
+      "range_v": [
+        1.637,
+        1.638
+      ],
+      "individual_readings_known": false,
+      "spacing_independently_verified": false,
+      "DMM_range": "DC2V",
+      "point": "D50 vs blue GND"
+    },
+    "ADC_means_nominal_v": [
+      1.6430140522950616,
+      1.6411897169512595,
+      1.6460890767106113,
+      1.6483970975057978
+    ],
+    "DMM_precedes_ADC_at_same_level": true,
+    "simultaneous_measurement": false,
+    "stage": "runs/ref-dc-dmm/2026-11-03/D50-v1/stages/20261103T022552-bb4ba59dde"
+  },
+  "reference_summary": {
+    "REF_block_mean_span_mV": {
+      "A3": 41.58993888481688,
+      "A4": 103.84341094808214
+    },
+    "existing_limit_mV": 3.0,
+    "A4_within_existing_3mV_limit": false,
+    "diagnosis_use_allowed": false,
+    "scope": "Instrument QA only; no rejected trial is reclassified."
+  }
+}
