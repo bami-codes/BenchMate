@@ -1,0 +1,11 @@
+{
+  "request_id": "c7093bbf9af84dbeab7dc533e6e75d01",
+  "report": {
+    "choice": "remove_output_load",
+    "fixture": "unloaded",
+    "reviewed_design_sha256": "da756ada2f4a8c16b216b19dca5ca1eafc74008b711afab8182849798adcdafa",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  }
+}

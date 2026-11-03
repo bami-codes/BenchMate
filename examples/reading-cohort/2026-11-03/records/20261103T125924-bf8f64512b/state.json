@@ -1,5 +1,9 @@
 {
   "case_id": "01",
-  "phase": "awaiting_design_confirmation",
-  "schematic_intake": "schematic-intake/20261103T125951-988f9449cf"
+  "phase": "awaiting_faulted_photo",
+  "schematic_intake": "schematic-intake/20261103T125951-988f9449cf",
+  "faulted_diagnosis": "diagnosis-faulted/20261103T130826-26d83af2df",
+  "last_boot": "1e29c874bb1332675312e7dba21dbdce",
+  "requested_component": "R1",
+  "reading_forecast_sha256": "7215419b175836b4134cbb73a3e165c0d312534f90bc40783ac53eccf182dd38"
 }
