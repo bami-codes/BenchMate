@@ -269,3 +269,14 @@ fit_error나 미완료도 그대로 보여준다. 둘 다 제안하지 않았으
 
 이 사전 등록은 direction 문서의 과거 “본시험 중 가장 잘된 실행” 데모 선택 규칙을 사용자의
 11/3 새 요청에 따라 대체한다. 기존 direction 파일의 다른 내용이나 Claude 작업은 수정하지 않았다.
+
+## 6. 오프라인 확인과 복원 판정 문구
+
+`python -m benchmate verify <run-folder>`의 명령·지원 이벤트·검사 한계·실제 출력은
+[오프라인 검증 규격](2026-11-03-offline-verification.md)을 따른다. PASS는 기록 감사이며
+실험 성공 판정이 아니다. 기록 내 동결→측정 순서를 검사하지만 작성 시각은 증명하지 않는다.
+
+실제 Spark의 복원 재실행이 `consistent`이면 사이트·영상 문구는
+**No mismatch in the tests Spark chose**로 통일한다. 모든 부품의 정상 확정이 아니다.
+Spark는 훈련 실험을 고르고 예약 입력 두 개는 프로토콜이 사전 고정한다. 다른 판정이나
+중단·mock에 이 문구를 붙이지 않는다. 원본 enum과 physical_repair_demonstrated는 보존한다.

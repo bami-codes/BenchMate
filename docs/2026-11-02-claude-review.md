@@ -234,3 +234,32 @@ SAM→crop→Spark·마스크/설계 ID 연결·Q/LED 사진 schema는 아직 pr
 사전 공식 cohort binding이 근거이며, 기존 파일럿·QA·mock·미분류 기록은 집계에서 제외한다.
 복원 재실행도 원본의 physical_repair_demonstrated:false를 바꾸지 말고 두 run과 작업자 복원
 기록을 연결한 별도 상태로 표시해 달라. 사용자 보고에 따라 현재 USB는 분리돼 있다.
+
+## Nov 3 직접 확인하기 명령·복원 문구 인계
+
+`python -m benchmate verify <run-folder>`를 구현했다. 새 clone 루트에서 Python 3.11+만으로
+동작하며 설치·키·네트워크·시리얼 접근이 없다. stdout 한 줄에 PASS/FAIL, 이벤트 수,
+동결 예측 수, 측정·순서 검사 수, 보조 예측 파일 수, run_status와 head_sha256이 나온다.
+PASS=exit 0, FAIL=exit 1. 동결된 cli.py를 보존했으므로 기존 `benchmate verify` 콘솔
+명령 대신 위 `python -m` 명령을 그대로 사용해 달라.
+
+[명령·검사 범위·실제 출력](2026-11-03-offline-verification.md)에 README에 복사할 명령과
+보존된 **mock 복원 리허설**의 출력 한 줄을 넣었다. 공식 실물 출력으로 오인하지 말고,
+공식 기록이 생기면 동일 명령의 실제 출력으로 교체해 달라. 전체 사슬·내부 동결 예측 해시·
+예측→공개→측정→채점 순서를 검사한다. 실물 netlist는 예측→취득 계획→serial CAPTURE→
+관측 순서도 검사하므로 처리된 관측 이벤트만 뒤로 옮겨서는 통과하지 않는다.
+
+README와 사이트에 다음 범위 설명을 한 줄로 붙여 달라:
+
+> Checks internal record integrity, frozen-prediction hashes and recorded predict-before-measure order; it does not prove creation time or rule out a fully rewritten hash chain. Timing is supported separately by the frozen protocol and published preregistration commit history.
+
+출력에도 `scope=internal_integrity+recorded_order creation_time=unproven`이 붙는다. 감사 PASS는
+실험 성공이 아니다. run_failed 파일럿도 기록 검사는 통과할 수 있다. 전체 기록을 다시
+해시하면 자체 사슬 검사는 통과하므로 별도로 보존한 마지막 해시와 비교하려면
+`--expected-head <sha256>`을 쓴다. URL 조회나 원격 커밋 시각 인증은 하지 않는다.
+
+사이트·영상의 정상 복원 재실행 문구는 **No mismatch in the tests Spark chose**로 통일해 달라.
+엔진의 `consistent`가 같은 뜻임을 확인했다(명목 모델이 훈련 및 두 예약 조건에서 허용오차
+이내). 동결된 enum/코드는 유지한다. 실제 actor=muse_spark인 해당 판정에만 쓰고,
+중단·다른 판정·mock에는 이 문구를 붙이지 말아 달라. 예약 입력 두 개는 프로토콜이 미리
+정했다는 설명도 유지한다. verify PASS를 이 정상 판정으로 변환하면 안 된다.
