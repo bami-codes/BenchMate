@@ -1,0 +1,22 @@
+[
+  {
+    "concept": "resistor",
+    "run": "sam/resistor/20261103T111556-1ffbea3b4b",
+    "status": "completed",
+    "requests": 1,
+    "elapsed_s": 2.7474572078790516,
+    "empty_output": false,
+    "hardware_IO": false,
+    "visual_quality": "not_yet_reviewed"
+  },
+  {
+    "concept": "capacitor",
+    "run": "sam/capacitor/20261103T111559-032d3166a5",
+    "status": "completed",
+    "requests": 1,
+    "elapsed_s": 2.208941000048071,
+    "empty_output": false,
+    "hardware_IO": false,
+    "visual_quality": "not_yet_reviewed"
+  }
+]

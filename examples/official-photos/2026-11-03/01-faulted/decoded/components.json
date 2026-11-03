@@ -1,0 +1,120 @@
+{
+  "schema": "benchmate.photo_parts_readings.v1",
+  "input_image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+  "components": [
+    {
+      "photo_component_id": "60dfa149e7b0:resistor-object-0-record-0",
+      "concept": "resistor",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+      "bounds_half_open": [
+        339,
+        580,
+        520,
+        625
+      ],
+      "confidence": 0.7770034670829773,
+      "raster_size": [
+        181,
+        45
+      ],
+      "source_mask_file": "resistor-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        785,
+        1444,
+        1379,
+        1593
+      ],
+      "crop_file": "resistor-object-0-record-0-crop.png",
+      "crop_sha256": "6b356d27a32bb2e4f74a03288f359c30a5f4d84ab22299f765b16603f4aca2fa",
+      "crop_size": [
+        594,
+        149
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned",
+      "vision_run": "vision/20261103T111700-8ce6182847",
+      "vision_components": [
+        {
+          "a": "N1",
+          "b": "N2",
+          "bbox": [
+            0.08,
+            0.28,
+            1.0,
+            0.78
+          ],
+          "evidence": "Blue axial resistor body with transverse color bands, left and right axial leads bent down into white breadboard holes",
+          "kind": "R",
+          "marking": "5 bands blurry, appears green / blue-violet / black / black / brown (?) order uncertain",
+          "name": "R1",
+          "value_si": null,
+          "reading_status": "unreadable"
+        }
+      ],
+      "vision_status": "unverified_visual_candidate"
+    },
+    {
+      "photo_component_id": "60dfa149e7b0:capacitor-object-0-record-0",
+      "concept": "capacitor",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+      "bounds_half_open": [
+        339,
+        580,
+        521,
+        625
+      ],
+      "confidence": 0.5151515007019043,
+      "raster_size": [
+        182,
+        45
+      ],
+      "source_mask_file": "capacitor-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        785,
+        1444,
+        1382,
+        1593
+      ],
+      "crop_file": "capacitor-object-0-record-0-crop.png",
+      "crop_sha256": "2adb4d9a0965bbd34df1efb0aa657edf74cbbca86bf1d3691ac0d3dc9ad663bd",
+      "crop_size": [
+        597,
+        149
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned",
+      "vision_run": "vision/20261103T111724-960927eb1a",
+      "vision_components": [
+        {
+          "a": "N1",
+          "b": "N2",
+          "bbox": [
+            0.07,
+            0.3,
+            1.0,
+            0.75
+          ],
+          "evidence": "Blue-bodied axial resistor with bent leads inserted into white breadboard holes; body centered horizontally, bands visible but blurry",
+          "kind": "R",
+          "marking": "color bands blurry: left ambiguous green/yellow then blue black red/brown black/brown; exact colors/count/direction uncertain",
+          "name": "R1",
+          "value_si": null,
+          "reading_status": "unreadable"
+        }
+      ],
+      "vision_status": "unverified_visual_candidate"
+    }
+  ],
+  "expected_mask_records": 2,
+  "records_processed": 2,
+  "completed": true,
+  "intended_design_received": false,
+  "diagnosis_received": false,
+  "hardware_IO": false
+}

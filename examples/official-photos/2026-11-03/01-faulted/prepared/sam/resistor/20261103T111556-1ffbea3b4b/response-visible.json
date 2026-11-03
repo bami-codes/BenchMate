@@ -1,0 +1,33 @@
+{
+  "response_id": "resp_6ae9c26e36a9f64498a543a2",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 0,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 0,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 0,
+    "images_processed": 1
+  },
+  "elapsed_s": 2.7474572078790516,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "msg_937bf285-1329-47fb-a612-fe16de6eed64",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "<0f>0<|box;x1=339;y1=580;x2=519;y2=624;w=1200;h=1600;c=0.7770034670829773|><|mask;x=0;y=0;c=0.7770034670829773;data=45,181,!!!!!tCH9-Z`5Yiiojymlld'l7qwXf'OkgPR8@vN[P(Ir5YP[p'pATz(auuk2+V@Gy`T]uw3DCb$1Iv+-Y.GbXkC(8rY*`yTril4Vjl|>\n",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

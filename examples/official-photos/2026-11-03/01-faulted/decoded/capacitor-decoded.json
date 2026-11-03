@@ -1,0 +1,42 @@
+{
+  "concept": "capacitor",
+  "parser_version": "0.1.0",
+  "diagnostics": [],
+  "masks": [
+    {
+      "photo_component_id": "60dfa149e7b0:capacitor-object-0-record-0",
+      "concept": "capacitor",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+      "bounds_half_open": [
+        339,
+        580,
+        521,
+        625
+      ],
+      "confidence": 0.5151515007019043,
+      "raster_size": [
+        182,
+        45
+      ],
+      "source_mask_file": "capacitor-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        785,
+        1444,
+        1382,
+        1593
+      ],
+      "crop_file": "capacitor-object-0-record-0-crop.png",
+      "crop_sha256": "2adb4d9a0965bbd34df1efb0aa657edf74cbbca86bf1d3691ac0d3dc9ad663bd",
+      "crop_size": [
+        597,
+        149
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    }
+  ],
+  "match_count": 1
+}

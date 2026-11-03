@@ -1,0 +1,42 @@
+{
+  "concept": "resistor",
+  "parser_version": "0.1.0",
+  "diagnostics": [],
+  "masks": [
+    {
+      "photo_component_id": "60dfa149e7b0:resistor-object-0-record-0",
+      "concept": "resistor",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+      "bounds_half_open": [
+        339,
+        580,
+        520,
+        625
+      ],
+      "confidence": 0.7770034670829773,
+      "raster_size": [
+        181,
+        45
+      ],
+      "source_mask_file": "resistor-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        785,
+        1444,
+        1379,
+        1593
+      ],
+      "crop_file": "resistor-object-0-record-0-crop.png",
+      "crop_sha256": "6b356d27a32bb2e4f74a03288f359c30a5f4d84ab22299f765b16603f4aca2fa",
+      "crop_size": [
+        594,
+        149
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    }
+  ],
+  "match_count": 1
+}

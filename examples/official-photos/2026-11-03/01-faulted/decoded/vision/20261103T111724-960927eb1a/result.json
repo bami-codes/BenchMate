@@ -1,0 +1,40 @@
+{
+  "source_kind": "assembly_photo",
+  "candidate": {
+    "ambiguities": [
+      "Resistor color bands are blurry/low-resolution; leftmost band(s) green-yellow ambiguous, subsequent bands appear blue-black-red/brown-black/brown but colors and count uncertain",
+      "Band reading direction (left-to-right vs right-to-left) cannot be determined from image",
+      "Resistor value in ohms cannot be derived from legible markings; must remain null",
+      "No IN/OUT/REF port labels visible; lead nets assigned as N1/N2 only as distinct insertion points",
+      "Breadboard hole continuity / row-column connectivity is not visible and must not be assumed; connections beyond resistor leads into breadboard are occluded/UNKNOWN",
+      "Breadboard hole positions/nets not labeled; operator must confirm where each lead connects electrically",
+      "Visible physical assembly does not specify intended design; no schematic intent inferrable"
+    ],
+    "components": [
+      {
+        "a": "N1",
+        "b": "N2",
+        "bbox": [
+          0.07,
+          0.3,
+          1.0,
+          0.75
+        ],
+        "evidence": "Blue-bodied axial resistor with bent leads inserted into white breadboard holes; body centered horizontally, bands visible but blurry",
+        "kind": "R",
+        "marking": "color bands blurry: left ambiguous green/yellow then blue black red/brown black/brown; exact colors/count/direction uncertain",
+        "name": "R1",
+        "value_si": null
+      }
+    ],
+    "status": "incomplete",
+    "summary": "Provisional transcription of assembly_photo showing one blue-bodied resistor (R1) with leads inserted into breadboard. Band colors/value illegible so value_si null. No labelled IN/OUT/REF ports; terminals coded N1/N2 for left/right insertion points with beyond-lead connectivity UNKNOWN."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\n* R1: unresolved connection or value\n",
+  "nominal_rc_candidate": null,
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}

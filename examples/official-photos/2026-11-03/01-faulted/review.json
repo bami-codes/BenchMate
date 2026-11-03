@@ -1,0 +1,103 @@
+{
+  "schema": "benchmate.independent_photo_review.v1",
+  "photo_attempt": 1,
+  "reviewer": "Codex visual review of retained masks/crops and native responses",
+  "is_model_native_output": false,
+  "status": "value_transcription_incomplete",
+  "same_original_photograph": true,
+  "separate_closeups": false,
+  "image_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+  "raw_model_results_modified": false,
+  "SAM_concept_outcomes": [
+    {
+      "concept": "resistor",
+      "masks": 1,
+      "review": "Localizes visible axial resistor."
+    },
+    {
+      "concept": "capacitor",
+      "masks": 1,
+      "review": "Returns the same visible axial resistor; misses visible box capacitor."
+    }
+  ],
+  "Spark_crop_outcomes": [
+    {
+      "photo_component_id": "60dfa149e7b0:resistor-object-0-record-0",
+      "SAM_concept": "resistor",
+      "reported_kinds": [
+        "R"
+      ],
+      "reported_values_si": [
+        null
+      ],
+      "reading_statuses": [
+        "unreadable"
+      ],
+      "raw_result": "vision/20261103T111700-8ce6182847/result.json"
+    },
+    {
+      "photo_component_id": "60dfa149e7b0:capacitor-object-0-record-0",
+      "SAM_concept": "capacitor",
+      "reported_kinds": [
+        "R"
+      ],
+      "reported_values_si": [
+        null
+      ],
+      "reading_statuses": [
+        "unreadable"
+      ],
+      "raw_result": "vision/20261103T111724-960927eb1a/result.json"
+    }
+  ],
+  "nominal_values_used_to_fill_unreadable": false,
+  "capacitor_marking_transcribed": false,
+  "SAM_masks_manually_fixed": false,
+  "automatic_retry": false,
+  "restoration_started": false,
+  "event_chains": [
+    {
+      "file": "decoded/vision/20261103T111700-8ce6182847/events.jsonl",
+      "events": 6,
+      "terminal": "run_completed",
+      "head_sha256": "95feab94018c60f3a66cbafdcae5f0c4926aa881ca91a706f02385b49fc1fb1c"
+    },
+    {
+      "file": "decoded/vision/20261103T111724-960927eb1a/events.jsonl",
+      "events": 6,
+      "terminal": "run_completed",
+      "head_sha256": "add6bb855b45672342553b6fca70c41a783f9ad62cb42ce21b9ccf82d4499309"
+    },
+    {
+      "file": "prepared/sam/capacitor/20261103T111559-032d3166a5/events.jsonl",
+      "events": 5,
+      "terminal": "run_completed",
+      "head_sha256": "157152eff545a2870f42c66b1762f9a3bf436a4fd011a2e25cf09a9c1c98048f"
+    },
+    {
+      "file": "prepared/sam/resistor/20261103T111556-1ffbea3b4b/events.jsonl",
+      "events": 5,
+      "terminal": "run_completed",
+      "head_sha256": "3c4fe044aa16a3e034eeb9b00d19c9753c27eb8483eb707bd41b963d944f326a"
+    }
+  ],
+  "requests": {
+    "SAM": 2,
+    "Spark_vision": 2,
+    "total": 4
+  },
+  "estimated_cost_usd": {
+    "SAM": 0.005,
+    "Spark_vision": 0.017558400000000002,
+    "photo_total": 0.022558400000000003,
+    "pricing_source": "https://dev.meta.ai/docs/pricing-rate-limits",
+    "SAM_per_image": 0.0025,
+    "Spark_per_million_tokens": {
+      "input": 1.25,
+      "cached_input": 0.15,
+      "output": 4.25
+    },
+    "note": "Public standard rates applied to request/usage records; not an invoice."
+  },
+  "next": "Operator chooses an improved single board photograph or retaining unreadable results before restoration. No automatic repeat."
+}

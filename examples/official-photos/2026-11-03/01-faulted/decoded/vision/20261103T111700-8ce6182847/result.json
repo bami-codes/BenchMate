@@ -1,0 +1,38 @@
+{
+  "source_kind": "assembly_photo",
+  "candidate": {
+    "ambiguities": [
+      "Color-band colors and reading direction are blurry/low-resolution and illegible - resistance value cannot be derived from image; operator must confirm bands in-hand.",
+      "Lead destinations beyond breadboard insertion points are occluded; breadboard internal connectivity not visible and not assumed; operator must confirm where each lead connects.",
+      "No explicitly labelled IN/OUT/REF ports visible in image; provisional nets N1/N2 used for the two resistor leads only.",
+      "Visible physical assembly does not specify intended design; no schematic or netlist can be inferred.",
+      "Possible additional circuit beyond cropped view unknown; operator must confirm if other parts exist."
+    ],
+    "components": [
+      {
+        "a": "N1",
+        "b": "N2",
+        "bbox": [
+          0.08,
+          0.28,
+          1.0,
+          0.78
+        ],
+        "evidence": "Blue axial resistor body with transverse color bands, left and right axial leads bent down into white breadboard holes",
+        "kind": "R",
+        "marking": "5 bands blurry, appears green / blue-violet / black / black / brown (?) order uncertain",
+        "name": "R1",
+        "value_si": null
+      }
+    ],
+    "status": "incomplete",
+    "summary": "Provisional transcription of assembly_photo: one axial blue-bodied resistor (R1) with illegible color bands inserted into breadboard. No IN/OUT/REF labels visible so terminals assigned provisional nets N1 (left lead) and N2 (right lead). Value null due to unreadable markings; connections beyond insertion occluded."
+  },
+  "netlist": "* Unverified image transcription. Not an executable experiment.\n* R1: unresolved connection or value\n",
+  "nominal_rc_candidate": null,
+  "status": "unverified_visual_candidate",
+  "measurement_verified": false,
+  "operator_confirmed": false,
+  "requests": 1,
+  "hardware_IO": false
+}
