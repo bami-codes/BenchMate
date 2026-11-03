@@ -1,0 +1,379 @@
+{
+  "scope": "Post-hoc fixed planned-assembly comparison only; not a new official fit, accepted explanation or reserved validation",
+  "record": "runs/reading-cohort/20261103T161130-f20340dd0b",
+  "child_events_sha256": "480f966263029cc8e97a4e769373bb532f2d27537b6df3868efc277c39bcbd80",
+  "source_manifest_checked_unchanged": 107,
+  "rows": [
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2,
+        "load_ohm": null
+      },
+      "fixed_C1_F": 4.7e-07,
+      "score": {
+        "RMS_mV": 28.213576116787838,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 1.2211219019435975
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 192.43264693571484
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 34.24743293258851
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 2.1825013118745273
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 2.1701139218796706
+          }
+        ],
+        "passed": false,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "timing_us": {
+        "A1_median": 52.0,
+        "A2_median": 104.99999999999999,
+        "A2_minus_A1_min_median_max": [
+          51.99999999999999,
+          52.99999999999999,
+          52.99999999999999
+        ]
+      }
+    },
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.5,
+        "load_ohm": 9990.0
+      },
+      "fixed_C1_F": 4.7e-07,
+      "score": {
+        "RMS_mV": 52.290098790304135,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 3.203027235231842
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 369.55068939275594
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 31.10427937812571
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 3.1572754441575754
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 3.418450819549277
+          }
+        ],
+        "passed": false,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "timing_us": {
+        "A1_median": 52.0,
+        "A2_median": 104.99999999999999,
+        "A2_minus_A1_min_median_max": [
+          51.99999999999999,
+          52.99999999999999,
+          53.0
+        ]
+      }
+    },
+    {
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.15,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "fixed_C1_F": 4.7e-07,
+      "score": {
+        "RMS_mV": 14.038131289705037,
+        "regions": [
+          {
+            "name": "phase_0",
+            "samples": 77,
+            "RMS_mV": 18.95480637148118
+          },
+          {
+            "name": "phase_1",
+            "samples": 60,
+            "RMS_mV": 12.226163275821833
+          },
+          {
+            "name": "phase_2",
+            "samples": 65,
+            "RMS_mV": 6.411892774412353
+          },
+          {
+            "name": "phase_3",
+            "samples": 60,
+            "RMS_mV": 15.570156315359629
+          },
+          {
+            "name": "phase_4",
+            "samples": 65,
+            "RMS_mV": 18.391961405455934
+          },
+          {
+            "name": "phase_5",
+            "samples": 60,
+            "RMS_mV": 10.759018270521953
+          },
+          {
+            "name": "phase_6",
+            "samples": 65,
+            "RMS_mV": 5.862425477674539
+          },
+          {
+            "name": "phase_7",
+            "samples": 60,
+            "RMS_mV": 16.269169877566277
+          }
+        ],
+        "passed": false,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "timing_us": {
+        "A1_median": 52.0,
+        "A2_median": 104.99999999999999,
+        "A2_minus_A1_min_median_max": [
+          51.99999999999999,
+          52.99999999999999,
+          53.0
+        ]
+      }
+    }
+  ],
+  "operator_photo_attestation": "배선 그대로 촬영 · USB 분리",
+  "photo_review": {
+    "reviewed_by": "Codex visual review, not SAM or Spark request",
+    "C1": "474J100 at C3-C8, IN-OUT, parallel to R1",
+    "C2": "104J100 at E8-E13, OUT-REF",
+    "R1": "B3-B8, IN-OUT",
+    "R2": "D8-D13, OUT-REF",
+    "unknowns": "Photo does not verify hidden breadboard continuity, actual capacitance or unpowered large-board contacts"
+  },
+  "new_paid_calls": 0,
+  "new_hardware_commands": 0,
+  "photo_evidence": {
+    "file": "board-photo.png",
+    "sha256": "5f6a6de49069516e2aa3678f53b46101c4415adab128417172063de3ebb0f028",
+    "preview_conversion": {
+      "sha256": "5f6a6de49069516e2aa3678f53b46101c4415adab128417172063de3ebb0f028",
+      "width": 1200,
+      "height": 1600,
+      "bytes": 2003566,
+      "metadata_removed": true,
+      "orientation_applied": true,
+      "resize_max_edge": 1600,
+      "source_sha256": "a091801d7d178a40cc2c8e08c2c731997bae8214b1bc1bea4de0aec8f3406886"
+    },
+    "full_resolution_clean_derivatives_retained_privately": true,
+    "DNG_exported": false,
+    "metadata_exported": false,
+    "purpose": "post-diagnosis wiring/debug review; not an official SAM/body-binding or operator-value event"
+  },
+  "parent_terminal_head_sha256": "2bc748cbbae5f8392b3ab567e3c77013058b8ac8ead7409d810dc0a068303efe",
+  "operator_attestation_recorded_utc": "2026-11-03T16:52:01.310760+00:00",
+  "native_verdict_unchanged": "abstained",
+  "native_pair_status_unchanged": "run_failed",
+  "posthoc_sine_phase_inspection": {
+    "scope": "Post-hoc descriptive sine fit to existing training capture, not a new model prediction or reserved validation. No hardware/API calls.",
+    "frequency_hz": 5,
+    "IN": {
+      "offset_v": 0.00011753564805332679,
+      "amplitude_v": 0.1434268915749262,
+      "phase_rad": -0.05053316597592312
+    },
+    "OUT": {
+      "offset_v": 0.00018384677313988993,
+      "amplitude_v": 0.09655865684173297,
+      "phase_rad": 0.000901545082354593
+    },
+    "OUT_relative_to_IN_phase_deg": 2.946991864114169,
+    "amplitude_ratio": 0.6732256118880658,
+    "interpretation": "A positive phase difference is lead, inconsistent with the intended single-pole passive low-pass path alone. Not proof of a particular wiring fault or component."
+  },
+  "prior_record_comparisons": {
+    "case01_restored_first_failure": {
+      "file": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-restored/20261103T135220-d19cb17641/events.jsonl",
+      "sha256": "784283689a0fdd49fc6929ec1cbf93575b441f51a64504fbdaf4c6528d974089",
+      "native_terminal_kind": "run_failed",
+      "qualified_waveforms": 0,
+      "failure_error": "Unexpected instrument protocol"
+    },
+    "case04_first_HOLD_failure": {
+      "file": "examples/reading-cohort/2026-11-03/records/20261103T145152-e948c2e475/diagnosis-faulted/20261103T145652-46ec15c997/events.jsonl",
+      "sha256": "01436691b7979455a6c6ea16a97b042f521a60e426f794d11a6979d00d5bbae1",
+      "native_terminal_kind": "run_failed",
+      "qualified_waveforms": 0,
+      "failure_error": "Primary A3 electrical/reference guard failed; no next stimulus.",
+      "first_HOLD_guard": {
+        "guard_version": "primary-REF-A3-v1",
+        "primary_REF_channel": "A3",
+        "trusted_channels": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "label": "training_1_origin_0",
+        "checks": {
+          "rails_A1_A2_A3": true,
+          "REF_A3_envelope": true,
+          "REF_A3_block_mean_span": true,
+          "stationary_path_mean_span_A1_A2_A3": true,
+          "path_means_A1_A2_A3": false,
+          "path_samples_A1_A2_A3": false,
+          "path_spread_A1_A2_A3": false
+        },
+        "means_v": [
+          1.4519670614165643,
+          0.5547404798419066,
+          1.6476809159074925,
+          1.6484210481138974
+        ],
+        "A4_auxiliary": {
+          "channel": "A4",
+          "role": "record_and_report_only",
+          "rails_ok": true,
+          "REF_envelope_ok": true,
+          "block_mean_span_mV": 0.0,
+          "block_mean_span_3mV_ok": true,
+          "A4_minus_A3_block_mean_mV": 0.7401322064048976
+        }
+      }
+    },
+    "case01_restored_completed": {
+      "file": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91/events.jsonl",
+      "sha256": "fb9650039f202bcd95d3fc1d736ced0dd6697a0895a8c8ab1926a80e36ea4130",
+      "native_terminal_kind": "run_completed",
+      "qualified_waveforms": 5,
+      "failure_error": null,
+      "nominal_reserved_checks": [
+        {
+          "settings": {
+            "kind": "step",
+            "samples": 512,
+            "period_us": 500,
+            "amplitude_v": 0.35,
+            "load_ohm": null
+          },
+          "whole_RMS_mV": 5.06883053058054,
+          "worst_region_RMS_mV": 5.181744822606723,
+          "passed": true
+        },
+        {
+          "settings": {
+            "kind": "sine",
+            "samples": 512,
+            "period_us": 2000,
+            "amplitude_v": 0.65,
+            "frequency_hz": 5,
+            "load_ohm": null
+          },
+          "whole_RMS_mV": 3.2613983156037047,
+          "worst_region_RMS_mV": 4.237562728974688,
+          "passed": true
+        }
+      ]
+    },
+    "case04_restored_completed": {
+      "file": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/diagnosis-restored/20261103T153249-a9b088954a/events.jsonl",
+      "sha256": "752f75b172ad9d220cb97e1be827060d1c7b78e64b065a28c03c7ae3875d9bfd",
+      "native_terminal_kind": "run_completed",
+      "qualified_waveforms": 5,
+      "failure_error": null,
+      "nominal_reserved_checks": [
+        {
+          "settings": {
+            "kind": "step",
+            "samples": 512,
+            "period_us": 500,
+            "amplitude_v": 0.35,
+            "load_ohm": null
+          },
+          "whole_RMS_mV": 2.9751231184086957,
+          "worst_region_RMS_mV": 4.427598396851945,
+          "passed": true
+        },
+        {
+          "settings": {
+            "kind": "sine",
+            "samples": 512,
+            "period_us": 2000,
+            "amplitude_v": 0.65,
+            "frequency_hz": 5,
+            "load_ohm": null
+          },
+          "whole_RMS_mV": 3.4485533590550483,
+          "worst_region_RMS_mV": 5.1078355168018446,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "timing_interpretation": {
+    "completion_times_not_calibrated_apertures": true,
+    "simulator_uses_recorded_A2_completion_delay": true,
+    "simulator_treats_A1_value_as_held_command_frame_level": true,
+    "IN_analog_transition_between_samples_measured": false,
+    "53us_phase_equivalent_at_5Hz_deg": 0.0954,
+    "time_constant_planned_fault_ms": {
+      "unloaded": 3.8,
+      "loaded": 2.2790874524714826
+    },
+    "three_ms_guidance_is_old_D01_planning_heuristic_not_a_calibrated_universal_failure_threshold": true
+  },
+  "simulator_limitation": {
+    "source": "src/benchmate/physical_netlist.py",
+    "PWL_edge_seconds": 1e-08,
+    "source_current_rejection_ampere": 0.01,
+    "physical_source_current_observed": false,
+    "caution": "Direct feedthrough capacitors differentiate artificially reconstructed voltage edges. Source-current rejection here does not show measured physical overcurrent or absence of such a branch. No guard/source change or bypass was made.",
+    "Spark_full_topology_correctly_identified": false,
+    "Spark_candidate1_kept_intended_C1_C2_OUT_REF_and_added_C3_IN_OUT": true,
+    "candidate1_reserved_validation_performed": false
+  },
+  "operator_cause_acknowledgement": "내 배선 실수니까 ... 바로 다시 진행하자. 474는 위치 내가 옮겼어.",
+  "operator_corrected_state_confirmation": "474 C8–C13 수정 완료 · USB 재연결",
+  "cause_classification": "operator_wiring_error_474_C3_C8_confirmed_posthoc_photo"
+}

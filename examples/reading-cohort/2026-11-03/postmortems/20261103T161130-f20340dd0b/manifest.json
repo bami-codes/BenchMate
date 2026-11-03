@@ -1,0 +1,30 @@
+{
+  "schema": "benchmate.posthoc_wiring_review.v1",
+  "physical_record": "runs/reading-cohort/20261103T161130-f20340dd0b",
+  "original_terminal_head_sha256": "2bc748cbbae5f8392b3ab567e3c77013058b8ac8ead7409d810dc0a068303efe",
+  "scope": "Separate post-hoc documentary review; no original chain reopened, no result rescoring, no model claim converted to a success",
+  "operator_statement": "배선 그대로 촬영 · USB 분리",
+  "artifacts": [
+    {
+      "file": "analysis.json",
+      "sha256": "3bd321b88103bed7e7a425b6b451a27b2ea74421fb37a9ad2e1b4b7634127529",
+      "bytes": 12568
+    },
+    {
+      "file": "board-photo.png",
+      "sha256": "5f6a6de49069516e2aa3678f53b46101c4415adab128417172063de3ebb0f028",
+      "bytes": 2003566
+    },
+    {
+      "file": "conversion.json",
+      "sha256": "455ea32977fc66820f60318d24ff321df051857e60e1d57a45ec1073899b0708",
+      "bytes": 2468
+    }
+  ],
+  "source_code_changes": 0,
+  "new_hardware_commands": 0,
+  "new_Spark_calls": 0,
+  "new_SAM_calls": 0,
+  "new_API_cost_USD": 0,
+  "operator_correction_statement": "474 C8–C13 수정 완료 · USB 재연결"
+}

@@ -61,7 +61,23 @@
       "status": "failed",
       "counted": true,
       "selected_first_attempt": true,
-      "failed_stage": "diagnose"
+      "failed_stage": "diagnose",
+      "native_diagnostic_verdict": "abstained",
+      "posthoc_cause": "operator_wiring_error_474_C3_C8",
+      "posthoc_cause_evidence": "examples/reading-cohort/2026-11-03/postmortems/20261103T161130-f20340dd0b",
+      "cause_confirmed_after_diagnosis": true,
+      "original_result_unchanged": true
+    },
+    {
+      "run_id": "20261103T165506-b6ad3e8cf7",
+      "case_id": "02",
+      "attempt": 2,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": false,
+      "followup_of": "20261103T161130-f20340dd0b",
+      "original_primary_status": "failed",
+      "reason": "operator_corrected_474_C3_C8_to_C8_C13_after_photo_review"
     }
   ]
 }
