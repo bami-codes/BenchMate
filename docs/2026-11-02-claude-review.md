@@ -209,3 +209,28 @@ A3 원시 블록 평균 범위 0.367 mV, A4 0.477 mV이며 전압·레일·HOLD�
 안정성 확정이나 DUT 진단·예약 예측·수리 성공으로 표시하면 안 된다. 앞선 두 진단 파일럿과
 새 고정 k QA 실패는 그대로 보존한다. 새 RMS 조건·고정 k는 채택하지 않았고 원본 펌웨어다.
 현재 출력은 REF/1376 복귀가 확인됐으며 A3=REF, A4=REF 역할은 유지한다.
+
+## Nov 3 사이트 이벤트 포맷·공식 데모 선택 인계
+
+요청한 포맷은 [사이트 연동 규격](2026-11-03-site-evidence-contract.md)에 코드 기준으로 정리했다.
+구조 이벤트는 `structure_proposed` → `structure_fit`이고 `payload.id`로 연결한다. 제안은 전체
+넷리스트이며 `a/b`가 노드 위치다. 05는 W1 제거를 포함한 전체 교체로 그려야 한다.
+`fit_error`에는 model이 없을 수 있다. 현재 사이트 추출기에는 두 구조 이벤트 처리가 없으므로
+규격 4절의 변경을 반영해 달라. Codex는 사이트 파일을 직접 수정하지 않았다.
+
+사진은 실제 SAM decoded/mask 파일과 vision result의 경로·좌표·null 규칙을 적었다.
+`unreadable`은 현재 R/C의 `value_si:null`에서 UI가 파생할 상태다. D의 null에는 적용하지 않는다.
+보존된 mock 구조 이벤트 및 11/1 사진 결과를 `examples/site-contracts/2026-11-03/`에 예시로 뒀다.
+둘 다 example_only/counting 제외이며 여섯 공식 사례의 실제 결과가 아니다.
+SAM→crop→Spark·마스크/설계 ID 연결·Q/LED 사진 schema는 아직 producer 연결이 필요하다고 명시했다.
+
+[공식 순서·선택 정책](2026-11-03-official-run-policy.json)은 01→04→02→05→03→06, 각 고장 직후
+복원 재실행의 12개 필수 슬롯이다. 사례별 대표는 상태별 **첫 공식 시도**, 구조 spotlight는
+04-F01의 실제 Spark 제안 우선, 없으면 05-F01이다. 점수·성공 여부로 고르지 않는다.
+둘 다 제안이 없으면 coverage_not_observed 및 요구 미충족으로 표시하고 후속 성공으로 대체하지 않는다.
+이 새 사전 규칙이 과거 “가장 잘된 본시험 실행” 선택 규칙을 대체한다. 새 공식 실행은 아직 안 했다.
+
+현재 추출기의 `--pilot` 생략을 공식 실행의 근거로 쓰지 말아 달라. source pilot/excluded와
+사전 공식 cohort binding이 근거이며, 기존 파일럿·QA·mock·미분류 기록은 집계에서 제외한다.
+복원 재실행도 원본의 physical_repair_demonstrated:false를 바꾸지 말고 두 run과 작업자 복원
+기록을 연결한 별도 상태로 표시해 달라. 사용자 보고에 따라 현재 USB는 분리돼 있다.

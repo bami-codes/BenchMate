@@ -1,0 +1,288 @@
+{
+  "schema": "benchmate.official_run_selection_policy.v1",
+  "cohort_plan_id": "forum-six-first-official-v1",
+  "created_local_date": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "status": "preregistered_not_activated",
+  "execution_authorized_by_this_file": false,
+  "official_results_exist_at_registration": false,
+  "model_visible": false,
+  "supersedes": {
+    "document": "docs/2026-11-02-direction.md",
+    "scope": "demo selection only",
+    "previous_rule": "best official run",
+    "authority": "2026-11-03 explicit user request: decide selection before outcomes"
+  },
+  "case_order": [
+    "01",
+    "04",
+    "02",
+    "05",
+    "03",
+    "06"
+  ],
+  "cases": [
+    {
+      "case_id": "01",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-01.json",
+      "reviewed_design_sha256": "3a0c964ac45e3cd1ea531fba9068274bb27c8f64ad1e6b4860546c6c9924f789",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "passive_case",
+      "readiness": "requires_frozen_official_protocol_and_fixture_preflight"
+    },
+    {
+      "case_id": "04",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-04.json",
+      "reviewed_design_sha256": "a6e3f050b7bbe005c9605b92a2fb0b22509f31994cae7b9b0d4fcf3b865e112d",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "primary_structure_case",
+      "readiness": "requires_frozen_official_protocol_and_fixture_preflight"
+    },
+    {
+      "case_id": "02",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-02.json",
+      "reviewed_design_sha256": "477b933c2635ba399aa764a81a29e2ef57a07fb537e372de12392d6e027c03df",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "passive_case",
+      "readiness": "requires_frozen_official_protocol_and_fixture_preflight"
+    },
+    {
+      "case_id": "05",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-05.json",
+      "reviewed_design_sha256": "3db5cf0d4d6ec983b502ae2592239e07704c40c88c2763332e6b6d53dbaa972a",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "secondary_structure_case",
+      "readiness": "requires_frozen_official_protocol_and_fixture_preflight"
+    },
+    {
+      "case_id": "03",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-03.json",
+      "reviewed_design_sha256": "058f8da3e6912943a83e526909af1f1a882164b62667e8af1d78199f271a8790",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "passive_case",
+      "readiness": "requires_frozen_official_protocol_and_fixture_preflight"
+    },
+    {
+      "case_id": "06",
+      "reviewed_design_file": "examples/reviewed-designs/2026-11-03-pilot/design-06.json",
+      "reviewed_design_sha256": "48d9278376055a7e547bb211dc96d5e3a4099b18cc501b2ba26efd84c0ab1bc9",
+      "required_states": [
+        "faulted",
+        "restored"
+      ],
+      "role": "active_LED_case",
+      "readiness": "requires_active_absolute_DC_qualification_and_adapter"
+    }
+  ],
+  "planned_case_count": 6,
+  "planned_primary_runs": 12,
+  "ordered_slots": [
+    {
+      "slot_id": "01-F01",
+      "case_id": "01",
+      "state": "faulted",
+      "order": 1,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "01-R01",
+      "case_id": "01",
+      "state": "restored",
+      "order": 2,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "04-F01",
+      "case_id": "04",
+      "state": "faulted",
+      "order": 3,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "04-R01",
+      "case_id": "04",
+      "state": "restored",
+      "order": 4,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "02-F01",
+      "case_id": "02",
+      "state": "faulted",
+      "order": 5,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "02-R01",
+      "case_id": "02",
+      "state": "restored",
+      "order": 6,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "05-F01",
+      "case_id": "05",
+      "state": "faulted",
+      "order": 7,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "05-R01",
+      "case_id": "05",
+      "state": "restored",
+      "order": 8,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "03-F01",
+      "case_id": "03",
+      "state": "faulted",
+      "order": 9,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "03-R01",
+      "case_id": "03",
+      "state": "restored",
+      "order": 10,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "06-F01",
+      "case_id": "06",
+      "state": "faulted",
+      "order": 11,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    },
+    {
+      "slot_id": "06-R01",
+      "case_id": "06",
+      "state": "restored",
+      "order": 12,
+      "required": true,
+      "run_id": null,
+      "status": "not_started",
+      "selected_for_case_demo": true,
+      "selection": "first_started_official_attempt_for_this_case_and_state"
+    }
+  ],
+  "inclusion": {
+    "every_case_restored_rerun_required": true,
+    "restored_context_is_fresh": true,
+    "same_reviewed_design_within_pair": true,
+    "diagnosis_does_not_receive_previous_run_or_photo_or_assembly_truth": true,
+    "safety_failure_stops_before_more_stimuli": true,
+    "unfinished_slots_remain_visible": true
+  },
+  "selection": {
+    "case_page": "first_started_official_attempt_per_case_and_state_regardless_of_outcome",
+    "failure_does_not_advance_primary_to_later_success": true,
+    "structure_spotlight": {
+      "priority": [
+        "04-F01",
+        "05-F01"
+      ],
+      "eligible_if": "first official attempt contains a genuine structure_proposed event selected_by muse_spark",
+      "score_or_verdict_used_for_selection": false,
+      "fit_missing_or_failed_is_displayed_as_such": true,
+      "if_neither": "coverage_not_observed; do not manufacture or force proposal; do not substitute a later attempt"
+    },
+    "followups": "Keep all attempts, label separately, never replace the preselected first official run; include official attempts in attempt-level accounting",
+    "ranking_by_RMS_or_success_or_photographic_legibility": false
+  },
+  "classification": {
+    "primary_and_counted_are_distinct": true,
+    "official_attempts_require_explicit_pre_run_cohort_binding": true,
+    "CLI_pilot_flag_cannot_override_source_metadata": true,
+    "pilot_QA_mock_and_schema_examples_counted": false,
+    "unknown_classification_counted": false,
+    "old_runs_reclassified": false,
+    "planned_started_completed_failed_not_started_counts_reported_separately": true,
+    "attempt_start_definition": "Explicit official slot/run ledger assignment before the first paid request or stimulus; failures after assignment remain the first attempt",
+    "ledger_assigned_before_outcome_and_committed": true
+  },
+  "activation_requirements": [
+    "Freeze actual source/protocol/hardware revision and run budgets before official execution",
+    "Use a runner that explicitly records official cohort metadata; the preserved passive_pilot runner remains pilot-only",
+    "Assign slot/run ordinal before first paid request or stimulus",
+    "Record specimen truth privately and keep case mapping JSON out of model input",
+    "Obtain user authorization and qualify each measurement profile; LED remains blocked until absolute DC qualification",
+    "Use original uncorrected reference guard; fixed-k QA failures are not qualification"
+  ],
+  "restoration_evidence": [
+    "Operator power-off restoration record",
+    "New independent Spark context",
+    "Linked first restored run and its guards/reserved outcome"
+  ],
+  "repair_claim": "Do not overwrite runtime physical_repair_demonstrated:false. Display pair-level operator restoration and rerun consistency separately.",
+  "no_hardware_or_paid_calls_during_registration": true,
+  "required_capability_coverage": {
+    "structure_proposal": {
+      "target_first_slots": [
+        "04-F01",
+        "05-F01"
+      ],
+      "minimum_genuine_Spark_proposal_events": 1,
+      "if_missing": "demo_requirement_unmet; report coverage_not_observed; do not force a proposal or substitute later attempts"
+    }
+  }
+}
