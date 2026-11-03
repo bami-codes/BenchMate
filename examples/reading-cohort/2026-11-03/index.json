@@ -53,6 +53,14 @@
       "selected_first_attempt": false,
       "reading_outcome": "not_performed_no_discriminating_numeric_reading",
       "restored_verdict": "consistent"
+    },
+    {
+      "run_id": "20261103T161130-f20340dd0b",
+      "case_id": "02",
+      "attempt": 1,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": true
     }
   ]
 }
