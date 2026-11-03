@@ -1,0 +1,8 @@
+{
+  "verbatim": "With USB off I retained the restored unloaded case02 specimen and all instrument/GND/REF wiring unchanged, removed probes, and reconnected the same USB port for the selected single fresh-boot step QA.",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "fixture": "unloaded",
+  "wiring_unchanged": true,
+  "single_step_QA_selected": true
+}

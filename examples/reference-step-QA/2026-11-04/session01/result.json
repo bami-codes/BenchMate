@@ -1,0 +1,23 @@
+{
+  "record": "examples/reference-step-QA/2026-11-04/session01/stages/20261103T181948-1a4c8ff1d2",
+  "head_sha256": "f31a59a7945e10b6fa26c6adbde88c1c36b16edc3497f6bfc6f1502da88cf191",
+  "passed": true,
+  "error": null,
+  "blocks_attempted": 5,
+  "frames": 2560,
+  "boot_id": "8ac568f48501d20bc0c1178c3c4d8024",
+  "guard_version": "primary-REF-A3-v1",
+  "raw_mean_spans_mV": [
+    269.0056360823778,
+    162.5790644265408,
+    0.35400167093846413,
+    0.41241778825629183
+  ],
+  "output_at_REF_confirmed": true,
+  "SPARK_requests": 0,
+  "SAM_requests": 0,
+  "estimated_USD": 0.0,
+  "wiring_changed": false,
+  "automatic_retry": false,
+  "scope": "Single new-boot unchanged-wiring reproducibility QA, not diagnosis, not full sine-then-step replay or proof of root-cause repair."
+}
