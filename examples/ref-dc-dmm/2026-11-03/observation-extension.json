@@ -1,0 +1,13 @@
+{
+  "schema": "benchmate.DMM_range_reporting_extension.v1",
+  "prior_state_sha256": "2454db6c74c22525a44100951060f47724d0ff0a41d9b39b3ee2599e87b222a3",
+  "original_plan_sha256": "412c04b6bcb829819733a1271750cedb73745231d675b52a6d9012028e49e8c4",
+  "adopted_after_first_operator_range_report": true,
+  "hardware_commands": 0,
+  "paid_requests": 0,
+  "levels_sequence_firmware_thresholds_unchanged": true,
+  "new_sources": {
+    "experiments/ref_dc_dmm_observed.py": "856c9dfb274ca32643bbcec881a6c560670cad63fb34d7072f5ce52ed4829444",
+    "docs/2026-11-03-ref-dc-dmm-observation-amendment.md": "cea67398ccd9fda645494d282830c193a1b248f7d7bb7cd02d74b3330dc97486"
+  }
+}
