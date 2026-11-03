@@ -1,0 +1,7 @@
+{
+  "instruction": "USB off: install 1uF/105 at mini C8-C13; reinstall the same measured 104 at E8-E13; retain R1 10k B3-B8, R2 20k D8-D13, large A35 to mini A3 and the instrument wiring. No output load, bypass or external diode. Remove probes and reconnect the same USB port.",
+  "operator_verbatim": "완료",
+  "USB_off_wiring_confirmed": true,
+  "USB_reconnected": true,
+  "fixture": "unloaded"
+}

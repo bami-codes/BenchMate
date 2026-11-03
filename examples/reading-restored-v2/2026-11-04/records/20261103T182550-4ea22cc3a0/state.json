@@ -2,7 +2,7 @@
   "case_id": "02",
   "requested_component": "C1",
   "last_boot": "0b9429bc77088ec5da04aae4d4511cfb",
-  "phase": "awaiting_restored_photo",
+  "phase": "documentary_awaiting_photo",
   "preflight_record": "preflight/20261103T182844-73d9ed3f12",
   "restored_diagnosis": "diagnosis-restored/20261103T182908-a2c37df9e3",
   "restored_verdict": "consistent"

@@ -1,0 +1,126 @@
+{
+  "schema": "benchmate.restored_documentary_photo.v1",
+  "case_id": "02",
+  "restored_verdict": "consistent",
+  "requested_by": "operator",
+  "after_diagnostic_result_known": true,
+  "photo_already_uploaded": true,
+  "before_photo_inspection": true,
+  "before_photo_intake": true,
+  "before_photo_capture": false,
+  "reason": "No suspect after consistent rerun; previous Spark already abstained on parallel C1/C2 geometry. A further binding request is redundant.",
+  "prior_binding_requirement_waived": true,
+  "prior_binding_requirement_satisfied": false,
+  "SAM_requests_max": 1,
+  "Spark_binding_requests_max": 0,
+  "Spark_value_requests_max": 0,
+  "SAM_scope": "Before/after documentary visualization only; never component identity, value, absence, or diagnosis evidence.",
+  "restored_component_identification_used": false,
+  "restored_body_group_confirmation_required": false,
+  "core_record": "documentary-core",
+  "core_head_sha256": "bc7d4b8f1e74b8baee12fa4c86c6c4f3c345a8733bb29dbcfcdc162da61f86f6",
+  "core_inventory": [
+    {
+      "file": "PING-started.json",
+      "sha256": "e25992b85e84458fd09e22dfeca4749e3b05bd0cb7af8c39605959328f469726"
+    },
+    {
+      "file": "additive-source/docs/2026-11-04-case02-restored-continuation.md",
+      "sha256": "d6ba35880f6872b3224c27a4c8ea7d146a81dcce9fb10148bc161a91ba5b7806"
+    },
+    {
+      "file": "additive-source/src/benchmate/reading_binding_v2.py",
+      "sha256": "24ccd8e4ca6610fc8ff7dac03e2e3ac6a6b907439e537e5879f0ff72fa688eef"
+    },
+    {
+      "file": "additive-source/src/benchmate/reading_group_experiment.py",
+      "sha256": "a1c1fe4f32140de3176d07c321707cb4b01080d90c7e4dc841f39c4ee5402c56"
+    },
+    {
+      "file": "additive-source/src/benchmate/reading_restored_v2.py",
+      "sha256": "541c3fbdbd3f08f396ed4877dd93e424d32db247d3795d88e2fead04b16c404f"
+    },
+    {
+      "file": "additive-source/src/benchmate/reading_unordered.py",
+      "sha256": "c34d31c4eb0201a071242ed20c9db988d2180847b6268a51caca733396422e46"
+    },
+    {
+      "file": "additive-source/tests/test_reading_restored_v2.py",
+      "sha256": "24890afa7a1c99d8bd26d64a0c8a7585544b617fb47972308496e3fd0f859bcb"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/events.jsonl",
+      "sha256": "296db71bd7e41cef58f1792a5d327f208dc9cc417599d8b7e3ed1ca5f3014d50"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/operator-request.json",
+      "sha256": "9385894c447e307cd54a035520e19d0cf28a33c7a2b367553a43f9a6a654b062"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/operator-response-04bdb1ba65e44786b98836408bc399a2.json",
+      "sha256": "18ab3d08ef606e346aed2cd5a7d247785d904e23c1abf3c055252cde61a3421a"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/operator-response-04d24cd1244341e384cb4e395342ed6e.json",
+      "sha256": "a8bd370fd5168eaeaaca4d96e324e7ffbd4ae7d5c27f6b3c6cc7d92fc0f14332"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/predictions-frozen.json",
+      "sha256": "063db57686861588b3fb37ccfc61ec166354093c148c7ee694f7bf258c8e4dc1"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/protocol.json",
+      "sha256": "8e4acf9522d6f97bab6c14da3869477d14cd2014908fcc453fd0e01fc75d51e7"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/result.json",
+      "sha256": "b73f8354a3c1a709dd0986f11485dbeeb1388ed4865a897f728c0b5c2ab5b0a8"
+    },
+    {
+      "file": "diagnosis-restored/20261103T182908-a2c37df9e3/reviewed-design.json",
+      "sha256": "fde3f38ec0f5e539b922d0bad1694e93dea823ffbf285f2f92de4ef1fac9a729"
+    },
+    {
+      "file": "operator-restoration-report.json",
+      "sha256": "9759c2f79c2113fd7360534b2ebd14db6b7998a831d4120514c7652526b2c9b8"
+    },
+    {
+      "file": "preflight/20261103T182844-73d9ed3f12/events.jsonl",
+      "sha256": "a55365fae45cb07a1b0e5a6d4d6d8676b13818c77a2e73bde6e1a50b9848c00d"
+    },
+    {
+      "file": "preflight/20261103T182844-73d9ed3f12/result.json",
+      "sha256": "937a24d6b60b8eacfd989adb701c6ca758a740d05094d3c18b6dd6115a76a06e"
+    },
+    {
+      "file": "prepared/protocol.json",
+      "sha256": "8e4acf9522d6f97bab6c14da3869477d14cd2014908fcc453fd0e01fc75d51e7"
+    },
+    {
+      "file": "prepared/reviewed-design.json",
+      "sha256": "fde3f38ec0f5e539b922d0bad1694e93dea823ffbf285f2f92de4ef1fac9a729"
+    },
+    {
+      "file": "registration.json",
+      "sha256": "7682cd31d3e5292a6a80768a752c97b82a0428a3866c6c008df2d44389998b3e"
+    },
+    {
+      "file": "restored-diagnosis-started.json",
+      "sha256": "758db55f26afd3e143277b45d9bab1c843d42c916d9c9cd4787e9cac6e66c7e9"
+    },
+    {
+      "file": "reviewed-design.json",
+      "sha256": "fde3f38ec0f5e539b922d0bad1694e93dea823ffbf285f2f92de4ef1fac9a729"
+    },
+    {
+      "file": "schematic.png",
+      "sha256": "b0928c1644b168c43e460419ec8f76333f3751fa75e1452594eb9fe1e531cf55"
+    }
+  ],
+  "source_sha256": {
+    "src/benchmate/reading_restored_sam_closeout.py": "15dac92805da5b7f9bcdfefec26b733067956fbcaae00097ebe33c60e474d8c9",
+    "tests/test_reading_restored_sam_closeout.py": "f17f7ca0a06d6070fbd900e42e9c43509a684f2436b32c98fa0c7a9ab8e55b9e",
+    "docs/2026-11-04-case02-restored-documentary-photo.md": "5f339a5ca47f30f1ba0744ffd6ef291887d29c6b3b4adcd530c14bd9bcb3faf0"
+  },
+  "public_policy": "examples/restored-documentary/2026-11-04/policies/20261103T182550-4ea22cc3a0/scope.json"
+}
