@@ -1,0 +1,41 @@
+{
+  "schema": "benchmate.operator_reading_rules.v1",
+  "nominal_tolerance_fraction": 0.05,
+  "dmm": {
+    "ohm": {
+      "available": true,
+      "meter_operator_description": "DM950?; operator reports 2k, 20k and higher resistance ranges; exact manufacturer accuracy not established",
+      "relative_allowance": 0.02,
+      "digits_allowance": 2,
+      "ranges": [[2000.0, 1.0], [20000.0, 10.0], [200000.0, 100.0], [2000000.0, 1000.0]],
+      "scope": "Prospective engineering acceptance allowance, NOT verified instrument accuracy. Operator records selected full-scale range and confirms displayed resolution is no coarser than this table. Otherwise stop before scoring; do not enlarge after seeing value."
+    },
+    "F": {
+      "available": false,
+      "relative_allowance": 0.05,
+      "digits_allowance": 2,
+      "ranges": [[0.00002, 0.00000001]],
+      "scope": "Unavailable: capacitance measurement capability has not been confirmed. Placeholder cannot authorize a DMM capacitance observation."
+    }
+  },
+  "interval_profile": {
+    "training_only": true,
+    "grid_points": 33,
+    "R_bounds_ohm": [1000.0, 100000.0],
+    "C_bounds_F": [1e-9, 1e-5],
+    "include_fitted_value": true,
+    "acceptance": "Existing 9mV whole AND each region score on every training capture",
+    "envelope": "Enclose passing points and nearest rejected grid brackets; open end if parameter bound passes",
+    "other_parameters_held_fixed": true,
+    "statistical_confidence_interval": false,
+    "reserved_OUT_used": 0
+  },
+  "source_semantics": {
+    "operator_dmm": "Power-off isolated actual electrical quantity; range-specific allowance frozen before observation",
+    "operator_marking": "Decoded printed nominal value only. Actual-value-change explanation has unconstrained printed nominal [0, null]. It cannot be rejected by a correct-looking label."
+  },
+  "outcomes": ["one_explanation_remains", "indistinguishable", "all_explanations_rejected"],
+  "operator_value_is_free_numeric_input": true,
+  "no_photo_value_candidates_or_votes": true,
+  "no_refit_after_reading": true
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "benchmate.reading_cohort_policy.v1",
+  "cohort": "reading-assisted-v1",
+  "timezone": "Asia/Seoul",
+  "authority": "2026-11-03 user: 그 원칙 포함해서 파이프라인 고정하고 사례 01 시작하자.",
+  "case_order": ["01", "04", "02", "05", "03", "06"],
+  "required_states": ["faulted", "restored"],
+  "official_start": "A pair registration committed and pushed after the final new pipeline freeze; before its fresh schematic request or any stimulus",
+  "selection": "First started new-cohort attempt per case; preserve and count all failures and followups, never silently substitute a later success",
+  "case01_is_blind": false,
+  "operator_reading_selection": "Spark chooses one intended component and quantity. Operator chooses a permitted source only after every source-specific forecast is frozen and pushed.",
+  "body_binding": "Spark sees schematic, full clean photo and SAM-derived crops. Operator confirms yes/no. Explicit operator override is labelled chosen_by=operator, never Spark.",
+  "markings_are_not_actual_values": true,
+  "surface_value_vision_calls": 0,
+  "preserved_electrical_guards": "A3 primary raw 3mV block-mean span; A4 auxiliary record/report; no k or offset correction; all other trusted guard checks unchanged",
+  "USB_reconnect_wait_seconds": 10,
+  "per_diagnosis_max_Spark_requests": 8,
+  "per_pair_planned_calls": {"Spark_max": 20, "SAM": 2, "hardware_diagnostic_runs": 2},
+  "no_automatic_retry_after_failure": true,
+  "all_explanations_fail": "Record all_explanations_rejected; no positive location claim or range refit. Stop/abstain or explicitly register later work.",
+  "restored_caption": "No mismatch in the tests Spark chose",
+  "repair_claim": "Operator restoration plus a fresh-context rerun. Do not overwrite a native diagnostic physical_repair_demonstrated:false.",
+  "prior_development": {
+    "reporting_group": "development before reading-assisted-v1 freeze",
+    "original_records_and_labels_preserved": true,
+    "note": "Old runs called official under the previous protocol keep those original registrations. They are development history relative to this materially different pipeline; they do not become nonexistent successes or failures.",
+    "records": [
+      "examples/official-runs/2026-11-03/records/20261103T072121-1138ccf241",
+      "examples/official-runs/2026-11-03/records/20261103T074537-7424df4144",
+      "examples/official-runs/2026-11-03/records/20261103T082308-07da0eb2ec",
+      "examples/official-runs/2026-11-03/records/20261103T083824-7be77b51da",
+      "examples/official-runs/2026-11-03/records/20261103T113619-34ff2352b1"
+    ]
+  },
+  "scope": {
+    "initial_qualified_case": "01",
+    "reading_implementation": "Numeric R/C quantity and source-aware intervals. DMM resistance is enabled with explicit range/resolution/isolation; DMM capacitance disabled pending capability confirmation.",
+    "future_presence_continuity": "Requires a separately qualified categorical/continuity observable; a missing SAM mask is never proof of component absence.",
+    "LED": "Physical active path remains disabled until separate absolute-DC qualification"
+  },
+  "model_exclusions": ["docs/2026-11-02-design-cases.json", "private specimen assembly", "case labels", "previous runs", "operator values before freeze", "original phone metadata"]
+}

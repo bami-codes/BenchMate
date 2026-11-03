@@ -1,0 +1,28 @@
+{
+  "schema": "benchmate.reading_cohort_validation.v1",
+  "source_manifest_sha256": "89718da1f949fd8dd455518885e4deb0eb229f57cb8a0bb141c9a64fc41c168d",
+  "main_tests": {
+    "passed": 117,
+    "command": ".venv/bin/python -m pytest -q tests/test_reading_rules.py tests/test_reading_catalog.py tests/test_reading_verify.py tests/test_reading_transport.py tests/test_reading_orchestration.py tests/test_verify.py tests/test_official_A3.py tests/test_official_transport_v2.py tests/test_photo_v2.py tests/test_netlist_diagnosis_v2.py"
+  },
+  "photo_binding_tests": {
+    "passed": 2,
+    "command": ".venv/bin/python -m pytest -q tests/test_reading_photo.py"
+  },
+  "pinned_image_tests": {
+    "passed": 2,
+    "command": "uv --cache-dir .uv-cache run --offline --isolated --no-project --with opencv-python-headless==4.12.0.88 --with Pillow==12.3.0 --with pytest python -m pytest -q tests/test_photo_v2_images.py"
+  },
+  "total_distinct_tests_passed": 121,
+  "preserved_physical_sources": 87,
+  "preserved_photo_v2_sources": 13,
+  "earlier_test_failures_resolved": [
+    "Stage resume now uses validated parent chain, not the preserved single-stage registration helper.",
+    "Image checks run in the pinned offline OpenCV environment, absent from the base venv."
+  ],
+  "paid_calls": 0,
+  "hardware_commands": 0,
+  "source_snapshots_match": true,
+  "secret_scan_passed": true,
+  "blind_test": false
+}
