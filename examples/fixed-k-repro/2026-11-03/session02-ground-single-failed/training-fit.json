@@ -1,0 +1,5442 @@
+{
+  "passed": false,
+  "reason": "No common fixed k satisfies every training constraint",
+  "intersection": [
+    1.0,
+    -1.0
+  ],
+  "constraints": [
+    {
+      "label": "origin_1:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_1:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_1:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_1:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_2:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_2:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_2:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_2:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_3:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_3:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_3:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "origin_3:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A3:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_unloaded_step_small:A4:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_1_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_2_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A3:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_unloaded_step_large:A4:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_3_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_4_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_5_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_6_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_7_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A3:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_unloaded_step_large:A4:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_8_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A3:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A3:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A3:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A3:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A4:quarter1",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A4:quarter2",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A4:quarter3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large:A4:quarter4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_9_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A3:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:before_step",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:0_to_5ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:5_to_20ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:20_to_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_unloaded_step_small:A4:after_80ms",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_return:A3:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_return:A3:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_return:A4:RMS",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "train_10_return:A4:whole",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:1:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:1:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:2:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:2:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:2:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:2:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:3:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:4:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:5:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:6:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:7:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:8:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:9:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:10:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:11:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:12:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:13:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:14:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:15:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:16:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:17:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:17:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:18:17:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:17:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:17:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:18:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:19:18:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:17:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:17:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:18:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:18:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:19:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:20:19:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:17:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:17:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:18:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:18:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:19:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:19:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:20:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:21:20:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:0:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:0:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:1:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:1:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:2:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:2:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:3:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:3:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:4:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:4:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:5:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:5:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:6:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:6:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:7:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:7:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:8:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:8:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:9:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:9:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:10:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:10:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:11:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:11:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:12:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:12:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:13:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:13:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:14:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:14:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:15:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:15:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:16:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:16:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:17:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:17:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:18:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:18:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:19:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:19:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:20:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:20:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:21:A3",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    },
+    {
+      "label": "block_mean_span:22:21:A4",
+      "interval": [
+        1.0,
+        -1.0
+      ],
+      "compatible": false
+    }
+  ],
+  "descriptive_k": [
+    {
+      "label": "train_1_unloaded_step_small",
+      "kind": "step",
+      "frequency_hz": null,
+      "fixed_origin_descriptive_k_A3_A4": [
+        -0.0004515104751140031,
+        -0.00018483603501464688
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_2_unloaded_sine_1hz_large",
+      "kind": "sine",
+      "frequency_hz": 1,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.00023315060156689997,
+        0.00011104277900334723
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_3_unloaded_step_large",
+      "kind": "step",
+      "frequency_hz": null,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.0007726196084958295,
+        0.0009042985138577969
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_4_unloaded_sine_1hz_small",
+      "kind": "sine",
+      "frequency_hz": 1,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.0010836147855277265,
+        0.0013473413602238522
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_5_unloaded_sine_5hz_small",
+      "kind": "sine",
+      "frequency_hz": 5,
+      "fixed_origin_descriptive_k_A3_A4": [
+        -0.000695472203275136,
+        0.0005865863143782317
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_6_unloaded_sine_5hz_small",
+      "kind": "sine",
+      "frequency_hz": 5,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.00031125464262168786,
+        -0.0007137181640026791
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_7_unloaded_sine_1hz_small",
+      "kind": "sine",
+      "frequency_hz": 1,
+      "fixed_origin_descriptive_k_A3_A4": [
+        -0.00014222235669445057,
+        0.0004613966325595863
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_8_unloaded_step_large",
+      "kind": "step",
+      "frequency_hz": null,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.00254284826551388,
+        0.0024017105789027465
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_9_unloaded_sine_1hz_large",
+      "kind": "sine",
+      "frequency_hz": 1,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.00031732603010715824,
+        0.00024686049022023285
+      ],
+      "used_as_per_capture_correction": false
+    },
+    {
+      "label": "train_10_unloaded_step_small",
+      "kind": "step",
+      "frequency_hz": null,
+      "fixed_origin_descriptive_k_A3_A4": [
+        0.006725918501353723,
+        0.005408930420960493
+      ],
+      "used_as_per_capture_correction": false
+    }
+  ],
+  "fit_OUT_used": false,
+  "automatic_retry": false
+}

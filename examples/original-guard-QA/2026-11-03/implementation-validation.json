@@ -1,0 +1,8 @@
+{
+  "new_sequence_tests_passed": 3,
+  "original_PhysicalBench_tests_passed": 8,
+  "total_tests_passed": 11,
+  "original_sources_unchanged": 76,
+  "hardware_commands_during_preparation": 0,
+  "coefficient_fitting": false
+}

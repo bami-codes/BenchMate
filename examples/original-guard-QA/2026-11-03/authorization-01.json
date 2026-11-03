@@ -1,0 +1,8 @@
+{
+  "original_uncorrected_QA_authorized": true,
+  "verbatim": "원래 가드·무보정 새 QA (추천, 약 10–20분)",
+  "recorded_utc": "2026-11-03T03:49:59.955750+00:00",
+  "scope": "New original-guard QA on current unchanged single-GND-replaced unloaded wiring; no k fit/correction, no additional sample-RMS threshold, no firmware or manual DMM, stop with choices on first failure.",
+  "GND_parallel_added": false,
+  "new_paid_requests": 0
+}
