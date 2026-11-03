@@ -1,0 +1,18 @@
+{
+  "schema": "benchmate.restored_followup_photo_waived.v1",
+  "source": "physical",
+  "original_pair": "20261103T125924-bf8f64512b",
+  "original_pair_status": "failed",
+  "original_failure_counted": true,
+  "restored_followup_counted": true,
+  "original_first_selection_unchanged": true,
+  "blind_test": false,
+  "restored_verdict": "consistent",
+  "operator_restored_and_rerun_consistent": true,
+  "display_caption": "No mismatch in the tests Spark chose",
+  "native_diagnostic_repair_claim_overwritten": false,
+  "restored_photo_and_correspondence_recorded": false,
+  "post_diagnosis_photo_requirement_waived": true,
+  "fault_and_reading_evidence": "history/original",
+  "existing_photo_relabelled_as_restored": false
+}

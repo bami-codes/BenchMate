@@ -1,4 +1,4 @@
-# Case 01: restored follow-up, diagnostic stage complete
+# Case 01: restored follow-up closed without redundant new photograph
 
 This is counted restored-only attempt 2 after the operator corrected the green
 IN end from large A37 to A35 and the separately frozen three-HOLD QA passed.
@@ -7,8 +7,11 @@ first attempt. Neither its terminal event nor its failure status was changed.
 
 Follow-up registration/source freeze: `ca97828`. Record:
 `examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91/`.
-This interim prefix is **not terminal**: the new restored photograph, SAM
-localization and operator-confirmed correspondence are still pending.
+The diagnostic prefix was initially published non-terminal, awaiting another
+photograph. That redundant requirement was subsequently withdrawn in the
+explicit post-diagnosis amendment `docs/2026-11-03-reading-photo-closeout.md`.
+The record is now closed. No new restored photograph, SAM call or correspondence
+was made. The earlier photo/SAM/R1 binding retains its fault-state capture scope.
 
 Fresh Spark context received the reviewed intended circuit and new observations,
 without the prior diagnosis, DMM reading, QA output or private assembly record.
@@ -36,9 +39,16 @@ from reported tokens. New reading-cohort cumulative usage at this point is
 17 Spark requests and one SAM request, estimated $0.15204580. The completed
 HOLD-only recovery and USB setup PINGs added zero paid requests.
 
-The interim numerical audit checks four frozen forecasts, five measured
-waveforms and 19 order relationships. It is not a compound-case PASS while the
-record lacks its terminal photo/correspondence steps. Once complete, use
-`python -m benchmate.reading_followup verify <record folder>` for the root
-diagnosis plus embedded original failure, QA and photo/binding artifacts.
-Integrity and recorded-order checks do not establish record creation time.
+The final numerical audit checks four frozen forecasts, five measured waveforms
+and 19 order relationships. Use `python -m benchmate verify <record folder>` for
+the root numerical record, or `python -m benchmate.reading_closeout verify
+<record folder>` for the compound record, embedded original failure/QA, and the
+explicit waived-photo closeout. Both passed without keys or network. The
+original frozen follow-up verifier retains its original photograph requirement;
+it was not changed to make this amended closeout pass. Integrity and
+recorded-order checks do not establish record creation time.
+
+Restoration evidence is the operator's wiring reports and physical re-execution,
+not an inferred present state from the old picture. R1's earlier isolation and
+reinstallation remain recorded. This documentation closeout added zero hardware
+actions, zero paid calls and $0; cumulative cost remains $0.15204580.

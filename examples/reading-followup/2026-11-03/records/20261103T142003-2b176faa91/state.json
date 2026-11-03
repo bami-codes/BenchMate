@@ -1,5 +1,4 @@
 {
-  "phase": "awaiting_restored_photo",
-  "restored_verdict": "consistent",
-  "last_boot": "ccc080ea09f068cb66063b3c46537829"
+  "phase": "completed_with_explicit_photo_waiver",
+  "restored_verdict": "consistent"
 }
