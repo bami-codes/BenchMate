@@ -1,0 +1,17 @@
+{
+  "command": [
+    "sh",
+    "scripts/arduino.sh",
+    "upload",
+    "--fqbn",
+    "arduino:renesas_uno:minima",
+    "--port",
+    "/dev/cu.usbmodem3101",
+    "--input-dir",
+    ".arduino/instrument-rollback",
+    "firmware/instrument"
+  ],
+  "binary_sha256": "d95999d0ac7254438fc1b693bb98e844b876d41ee28d05f38342296ce48fb9a1",
+  "attempt": 1,
+  "purpose": "Explicitly authorized original firmware restoration after completed ADC comparison"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "mode": 0,
+    "label": "cycle1_mode0_step0.5_raw_capture",
+    "negative_to_positive_plateau_delta_mV": [
+      997.3862778638769,
+      990.8244506872827,
+      10.162731147546067,
+      9.91879000093765
+    ],
+    "scan_mask_registers_after_capture": [
+      7,
+      33
+    ],
+    "read_completion_median_us": [
+      53.0,
+      107.0,
+      160.0,
+      219.0
+    ]
+  },
+  {
+    "mode": 1,
+    "label": "cycle2_mode1_step0.5_raw_capture",
+    "negative_to_positive_plateau_delta_mV": [
+      997.2043432886279,
+      991.906137087372,
+      9.49495684848678,
+      9.401946991452137
+    ],
+    "scan_mask_registers_after_capture": [
+      0,
+      32
+    ],
+    "read_completion_median_us": [
+      15.0,
+      30.0,
+      46.0,
+      61.0
+    ]
+  },
+  {
+    "mode": 2,
+    "label": "cycle3_mode2_step0.5_raw_capture",
+    "negative_to_positive_plateau_delta_mV": [
+      997.0282446259739,
+      991.5485415429138,
+      9.334542200942986,
+      8.492857706457135
+    ],
+    "scan_mask_registers_after_capture": [
+      0,
+      32
+    ],
+    "read_completion_median_us": [
+      26.0,
+      53.0,
+      80.0,
+      106.5
+    ]
+  },
+  {
+    "mode": 0,
+    "label": "cycle4_mode0_step0.5_raw_capture",
+    "negative_to_positive_plateau_delta_mV": [
+      997.1172422930972,
+      991.6081408003237,
+      9.195793378919292,
+      9.122625624716996
+    ],
+    "scan_mask_registers_after_capture": [
+      7,
+      33
+    ],
+    "read_completion_median_us": [
+      53.0,
+      107.0,
+      160.0,
+      219.0
+    ]
+  }
+]

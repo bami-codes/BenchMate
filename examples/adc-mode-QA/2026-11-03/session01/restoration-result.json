@@ -1,0 +1,11 @@
+{
+  "restored_original_protocol": "benchmate-instrument-v2",
+  "boot_id": "0a0407ad0328479e71ae52e59eb45a3e",
+  "new_boot_after_QA": true,
+  "armed": false,
+  "current_code": 0,
+  "ref_code": 0,
+  "no_ARM_after_restore": true,
+  "paid_requests": 0,
+  "post_restore_record": "runs/adc-mode-QA/2026-11-03/session01/post-restore/20261103T024908-c792f15fc7"
+}

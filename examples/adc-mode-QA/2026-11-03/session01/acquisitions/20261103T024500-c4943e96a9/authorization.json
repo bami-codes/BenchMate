@@ -1,0 +1,8 @@
+{
+  "ADC_QA_upload_and_drive_authorized": true,
+  "original_firmware_restore_authorized": true,
+  "verbatim": "\uc2dc\ud5d8 \uc5c5\ub85c\ub4dc\u00b7\uc790\ub3d9 \ub300\uc870\u00b7\uc6d0\ubcf8 \ubcf5\uc6d0 \uc2b9\uc778",
+  "recorded_utc": "2026-11-03T02:44:32.481270+00:00",
+  "scope": "One separate ADC-QA firmware upload, fixed automatic 0/1/2/0 mode comparison on current retained unloaded design-01 wiring, then original firmware restoration. 3 mV failures remain failures while planned QA comparison continues within other bounds. No Spark or paid requests.",
+  "planned_uploads_including_restore": 2
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "sh",
+    "scripts/arduino.sh",
+    "upload",
+    "--fqbn",
+    "arduino:renesas_uno:minima",
+    "--port",
+    "/dev/cu.usbmodem3101",
+    "--input-dir",
+    ".arduino/adcqa-build",
+    "firmware/instrument_adcqa"
+  ],
+  "binary_sha256": "758ac8ea6e2258f2bc611b68e301080ae7773b57974bc9fc138182682dd7835f",
+  "attempt": 1
+}
