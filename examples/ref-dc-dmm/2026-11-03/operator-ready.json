@@ -1,0 +1,12 @@
+{
+  "schema": "benchmate.operator-confirmation.v1",
+  "operator_confirmed": true,
+  "USB_off_then_reconnected": true,
+  "DUT_retained_unloaded_A3REF": true,
+  "DMM_range": "DC2V",
+  "DMM_display_resolution_v": 0.001,
+  "operator_reply_original": "USB 재연결 완료, DC 2V·1mV 표시 준비됨",
+  "confirmed_question_scope": "A23–A45, I50–A4, D50–G50, instrument 1 kohm and design-01 DUT retained; E30–A55 output load absent; USB off and reconnected to same port; probes wait for C output.",
+  "task_authorization_original": "해보자 그러면",
+  "scope": "Retained-DUT persistent DC and DMM instrument QA only. No Spark or firmware upload."
+}
