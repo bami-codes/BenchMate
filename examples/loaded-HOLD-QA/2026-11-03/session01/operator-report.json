@@ -1,0 +1,8 @@
+{
+  "verbatim": "I retained the loaded wiring with E30\u2013A55 installed, kept the specimen and remaining instrument wiring unchanged, removed probes, and reconnected the same USB port after power off.",
+  "USB_off_wiring_confirmed": true,
+  "USB_connected": true,
+  "loaded_HOLD_QA_selected": true,
+  "operator_reply": "\uc790\ub3d9 QA \uc120\ud0dd \u00b7 USB \uc7ac\uc5f0\uacb0 \uc644\ub8cc",
+  "REF_pulldown_presence": "Both I10\u2013I16 resistor and H16\u2013H13 jumper confirmed installed"
+}

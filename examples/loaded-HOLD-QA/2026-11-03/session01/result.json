@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "blocks": 12,
+  "frames": 6144,
+  "raw_channel_block_mean_spans_mV": [
+    0.13377290865634883,
+    0.4007345647918381,
+    0.25118930446232923,
+    0.24242688686548775
+  ],
+  "boot_id": "9d874027b29d263f410dafa4842bc3f5",
+  "output_at_REF_confirmed": true,
+  "scope": "Loaded constant-HOLD repeatability on this boot; no waveform/model validation",
+  "k_correction": false,
+  "SPARK_requests": 0,
+  "official_01_F01_failure_preserved": true
+}
