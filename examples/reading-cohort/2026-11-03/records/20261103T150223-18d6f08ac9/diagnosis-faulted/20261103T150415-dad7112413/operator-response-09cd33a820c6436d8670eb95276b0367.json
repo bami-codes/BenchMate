@@ -1,0 +1,14 @@
+{
+  "request_id": "09cd33a820c6436d8670eb95276b0367",
+  "report": {
+    "choice": "connect_output_load",
+    "fixture": "output_load",
+    "reviewed_design_sha256": "889c8053ef582fa525e4a2b8150d8e423ddcae3c4640ab6cc8bbcdf41bc1abe8",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I connected only the known 9.99 kohm OUT-to-REF load, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  },
+  "actual_contacts": "large C30-A55",
+  "contact_only_correction": "C30 and E30 share OUT; diode retained at E30",
+  "operator_statement": "C30–A55 연결·USB 재연결"
+}

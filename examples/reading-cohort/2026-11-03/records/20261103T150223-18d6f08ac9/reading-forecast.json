@@ -1,0 +1,98 @@
+{
+  "schema": "operator-reading-v1",
+  "request": {
+    "component": "R1",
+    "quantity": "resistance",
+    "reason": "Terminal model verified but internal physical distribution remains ambiguous; isolated R1 resistance measures actual electrical value against its interval, while marking shows only printed nominal and can retain old label.",
+    "chosen_by": "muse_spark"
+  },
+  "forecasts": [
+    {
+      "explanation": "proposal:1",
+      "source": "operator_dmm",
+      "low": 2375.7,
+      "high": 7033.7,
+      "unit": "ohm",
+      "observable": "isolated electrical value",
+      "rule": {
+        "electrical_interval_rule": {
+          "kind": "unchanged_design_tolerance",
+          "fraction": 0.05
+        },
+        "meter_allowance": {
+          "available": true,
+          "meter_operator_description": "DM950?; operator reports 2k, 20k and higher resistance ranges; exact manufacturer accuracy not established",
+          "relative_allowance": 0.02,
+          "digits_allowance": 2,
+          "ranges": [
+            [
+              2000.0,
+              1.0
+            ],
+            [
+              20000.0,
+              10.0
+            ],
+            [
+              200000.0,
+              100.0
+            ],
+            [
+              2000000.0,
+              1000.0
+            ]
+          ],
+          "scope": "Prospective engineering acceptance allowance, NOT verified instrument accuracy. Operator records selected full-scale range and confirms displayed resolution is no coarser than this table. Otherwise stop before scoring; do not enlarge after seeing value."
+        },
+        "intervals_by_meter_range": [
+          {
+            "meter_range": 2000.0,
+            "resolution": 1.0,
+            "low": 4373.7,
+            "high": 5035.7
+          },
+          {
+            "meter_range": 20000.0,
+            "resolution": 10.0,
+            "low": 4355.7,
+            "high": 5053.7
+          },
+          {
+            "meter_range": 200000.0,
+            "resolution": 100.0,
+            "low": 4175.7,
+            "high": 5233.7
+          },
+          {
+            "meter_range": 2000000.0,
+            "resolution": 1000.0,
+            "low": 2375.7,
+            "high": 7033.7
+          }
+        ],
+        "power_off": true,
+        "isolation_required": true,
+        "confidence_interval": false
+      }
+    },
+    {
+      "explanation": "proposal:1",
+      "source": "operator_marking",
+      "low": 4465.0,
+      "high": 4935.0,
+      "unit": "ohm",
+      "observable": "printed nominal value, not electrical value",
+      "rule": {
+        "nominal_tolerance_fraction": 0.05,
+        "printed_value_unconstrained": false,
+        "actual_value_not_measured": true,
+        "why": "Unchanged intended component under this bounded explanation; nominal matching allowance only."
+      }
+    }
+  ],
+  "catalog_sha256": "8f79d4521fb863beccc5d2605586a5737ef2c98c4d5f9058648e427755b3f0d1",
+  "rules_sha256": "b3e3002b0d00d7b2b9e0d88544262c7547672152482991d7ec3a63b051b86b23",
+  "observation_received": false,
+  "photo_received": false,
+  "scope": "Bounded explanations; engineering intervals, not probabilities or a universal diagnosis."
+}

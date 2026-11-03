@@ -1,6 +1,9 @@
 {
   "case_id": "04",
-  "phase": "awaiting_faulted_setup",
+  "phase": "awaiting_faulted_photo",
   "prior_guard_failure": "20261103T145152-e948c2e475",
-  "last_boot": "f8faeaa5a4e8f354c19d93212597a35e"
+  "last_boot": "549727f25890e5cc4db6e6b965d9c4db",
+  "faulted_diagnosis": "diagnosis-faulted/20261103T150415-dad7112413",
+  "requested_component": "R1",
+  "reading_forecast_sha256": "d2fe5561b8095e55f2721f9dc252f3cb132d7e99f6b57f1d9ec266337f2cfc78"
 }

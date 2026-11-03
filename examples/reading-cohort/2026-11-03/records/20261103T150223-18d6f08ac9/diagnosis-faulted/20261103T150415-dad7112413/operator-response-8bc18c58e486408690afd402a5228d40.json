@@ -1,0 +1,15 @@
+{
+  "request_id": "8bc18c58e486408690afd402a5228d40",
+  "report": {
+    "choice": "remove_output_load",
+    "fixture": "unloaded",
+    "reviewed_design_sha256": "889c8053ef582fa525e4a2b8150d8e423ddcae3c4640ab6cc8bbcdf41bc1abe8",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I disconnected only the known output-load jumper, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  },
+  "actual_removed_contacts": "large C30-A55",
+  "diode_retained": "large E30-E25, cathode E25",
+  "operator_statement": "연결했어",
+  "reply_interpretation": "USB reconnected after the requested C30-A55 removal; instructions ended with USB reconnect confirmation."
+}
