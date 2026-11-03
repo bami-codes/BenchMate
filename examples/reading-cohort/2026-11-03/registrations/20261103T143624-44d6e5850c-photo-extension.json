@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.prospective_photo_scope_extension.v1",
+  "physical_measurements_before_freeze": 0,
+  "changes_diagnostic_or_reading_scoring": false,
+  "public_manifest": "examples/reading-cohort/2026-11-03/registrations/20261103T143624-44d6e5850c-photo-extension.json",
+  "artifacts": [
+    {
+      "source": "src/benchmate/reading_pair_audit.py",
+      "file": "photo-scope-extension/reading_pair_audit.py",
+      "sha256": "96729481624fcded2c4e696aab207eb0a79c9cefe08e157791d3370a556ee3e9"
+    },
+    {
+      "source": "src/benchmate/reading_pair_closeout.py",
+      "file": "photo-scope-extension/reading_pair_closeout.py",
+      "sha256": "2cc6f60c33479af52d0e4af923495596c7d50f1c1a2c7a0a9ba32f59d4db1194"
+    },
+    {
+      "source": "docs/2026-11-03-prospective-photo-scope.md",
+      "file": "photo-scope-extension/2026-11-03-prospective-photo-scope.md",
+      "sha256": "10bb7b5bb962a68869b31b327d32bfd7667859bd68645bf094419b6379f27949"
+    }
+  ]
+}
