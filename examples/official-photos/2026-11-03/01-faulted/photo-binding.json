@@ -1,0 +1,30 @@
+{
+  "schema": "benchmate.official_photo_binding.v1",
+  "run_id": "20261103T083824-7be77b51da",
+  "case_id": "01",
+  "assembly_state": "faulted_before_restoration",
+  "source_sha256": "2979a89e2511e0fda256ef917c98053e56f06dd04fab0301b8e32ae24325dd84",
+  "original_DNG_private_and_not_transmitted": true,
+  "conversion_file": "conversion/conversion.json",
+  "conversion_sha256": "17583bd909ffd664f7dd310ec627dffe3d3a1e82410e350e854dbbf1afd1969f",
+  "prepared_plan_file": "prepared/plan.json",
+  "prepared_plan_sha256": "b17d809dd3a09ee76e53cdbf47818ca7f733347713508ac8c7e5a294a258faad",
+  "SAM_input_sha256": "60dfa149e7b0314594b7e228ed051beea96a55d276e8ec5884e775e018cc821d",
+  "photograph_count": 1,
+  "separate_closeups": false,
+  "photo_taken_after_diagnosis": true,
+  "operator_supplied_capture_info": {
+    "app": "ProCamera",
+    "format": "ProRAW 12MP",
+    "ISO": 80,
+    "109mm": "Operator-reported; meaning not independently verified from metadata"
+  },
+  "not_transmitted_to_photo_models": [
+    "diagnosis",
+    "reviewed schematic",
+    "assembly truth",
+    "case mapping",
+    "capture metadata",
+    "this binding"
+  ]
+}

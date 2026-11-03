@@ -1,0 +1,101 @@
+{
+  "schema": "benchmate.raw_photo_conversion.v1",
+  "source_sha256": "2979a89e2511e0fda256ef917c98053e56f06dd04fab0301b8e32ae24325dd84",
+  "source_original_is_private": true,
+  "source_metadata_copied": false,
+  "source_file_name_recorded": false,
+  "source_GPS_or_EXIF_recorded": false,
+  "orientation": "RAW stored orientation, applied by LibRaw",
+  "postprocess": {
+    "use_camera_wb": true,
+    "use_auto_wb": false,
+    "no_auto_bright": true,
+    "bright": 1.0,
+    "adjust_maximum_thr": 0.0,
+    "output_color": "rawpy.ColorSpace.sRGB",
+    "output_bps": 8,
+    "gamma": [
+      2.222,
+      4.5
+    ],
+    "half_size": false,
+    "median_filter_passes": 0,
+    "noise_thr": null
+  },
+  "transfer_curve": "Fixed gamma power 2.222, slope 4.5; no adaptive tone curve",
+  "sharpening": {
+    "method": "Pillow.UnsharpMask",
+    "radius": 0.8,
+    "percent": 50,
+    "threshold": 3
+  },
+  "white_balance_scope": "As-shot camera coefficients, not a color calibration",
+  "automatic_brightness_or_WB": false,
+  "manual_local_adjustments": false,
+  "libraries": {
+    "rawpy": "0.27.1",
+    "LibRaw": [
+      0,
+      22,
+      1
+    ],
+    "Pillow": "12.3.0",
+    "numpy": "2.4.6",
+    "Python": "3.11.9"
+  },
+  "converter_sha256": "dbfb00431239770f2fe194a0cca2ce28c77223c9a79a978c745b63a906448eae",
+  "raw_info": {
+    "raw_sizes": {
+      "raw_height": 3024,
+      "raw_width": 4032,
+      "height": 3024,
+      "width": 4032,
+      "top_margin": 0,
+      "left_margin": 0,
+      "iheight": 3024,
+      "iwidth": 4032,
+      "pixel_aspect": 1.0,
+      "flip": 6,
+      "crop_left_margin": 0,
+      "crop_top_margin": 0,
+      "crop_width": 0,
+      "crop_height": 0
+    },
+    "raw_type": "RawType.Stack",
+    "camera_whitebalance": [
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    "color_description": "RGBG"
+  },
+  "images": {
+    "render-unsharpened.png": {
+      "sha256": "c3287e8bc9c23372f14aa74895d13101e23121f8101763e87c8e23c785bb88e6",
+      "width": 3024,
+      "height": 4032,
+      "bytes": 8294231,
+      "chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    },
+    "render.png": {
+      "sha256": "c794b7d070376e2817e55064340701527a2e4de6c4b714bde06ecf49334ab35c",
+      "width": 3024,
+      "height": 4032,
+      "bytes": 8307305,
+      "chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    }
+  },
+  "hardware_IO": false,
+  "API_calls": 0
+}
