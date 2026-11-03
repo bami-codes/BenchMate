@@ -1,0 +1,16 @@
+{
+  "schema": "benchmate.operator_recovery_wiring_check.v1",
+  "source": "operator_report",
+  "failed_pair": "20261103T125924-bf8f64512b",
+  "operator_verbatim": "끝 한쪽 A35로 A37에서. 그냥 다시 진행해. 저거 문제였으니까.",
+  "reported_correction": {
+    "wire": "green IN, large-board end",
+    "from": "A37",
+    "to": "A35"
+  },
+  "previous_USB_report": "USB 분리 완료 · 복원 배선 유지",
+  "USB_reconnect_confirmed_after_correction": false,
+  "other_restored_wiring_retained": true,
+  "causal_interpretation": "Consistent with missing input connection after external series resistors were removed; no ADC block was obtained on the failed attempt.",
+  "recorded_utc": "2026-11-03T14:05:35.460902+00:00"
+}
