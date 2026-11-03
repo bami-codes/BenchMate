@@ -1,0 +1,369 @@
+{
+ "note": "Site content. Forum facts paraphrased; every thread re-opened and checked on 3 Nov by the main session. No usernames, no quotes. This file is never model input.",
+ "model_name": "Muse Spark",
+ "repo_url": "https://github.com/bami-codes/BenchMate",
+ "cases": [
+  {
+   "id": "01",
+   "design": "design-01",
+   "title": "Filter output too small",
+   "problem": "A low-pass filter driven from an Arduino PWM pin never charged fully; its output stayed smaller than expected.",
+   "cause": "The pin's own output resistance, about 40 Ω, sat in series with the filter's 10 Ω resistor. With 50 Ω in the simulation instead of 10 Ω, the simulation matched the scope.",
+   "source": {
+    "site": "Arduino Forum",
+    "title": "Oscilloscope low pass filter help",
+    "date": "2023-03-07",
+    "url": "https://forum.arduino.cc/t/oscilloscope-low-pass-filter-help/1098926"
+   },
+   "context": {
+    "in": "Arduino output pin",
+    "out": "Oscilloscope probe"
+   },
+   "kept": "Resistance nobody drew, in series with the drawn resistor, upstream of the board.",
+   "changed": "10 Ω plus about 40 Ω became 4.7 kΩ plus 20 kΩ, keeping the ratio near 4×. The pin's resistance is played by two 10 kΩ resistors off the mini board.",
+   "hidden": "Two 10 kΩ resistors in series between the measured IN point and R1, off the mini board.",
+   "limits": "Terminal measurements can show that the series path grew. They cannot show whether R1 changed or a resistor was added. One isolated reading of R1 settles that.",
+   "photo_shows_fault": false,
+   "status": "official",
+   "board": {
+    "parts": [
+     {
+      "name": "R1",
+      "kind": "R",
+      "from": "B3",
+      "to": "B8",
+      "label": "R1 4.7 kΩ"
+     },
+     {
+      "name": "C1",
+      "kind": "C",
+      "from": "D8",
+      "to": "D13",
+      "label": "C1 105"
+     }
+    ],
+    "leads": [
+     {
+      "net": "IN",
+      "hole": "A3"
+     },
+     {
+      "net": "OUT",
+      "hole": "A8"
+     },
+     {
+      "net": "REF",
+      "hole": "A13"
+     }
+    ],
+    "record": "mini board B3–B8 and D8–D13; leads at A3, A8, A13"
+   },
+   "overlay": [
+    {
+     "type": "resistor",
+     "x": 150,
+     "y": 230,
+     "w": 120,
+     "h": 40
+    },
+    {
+     "type": "text",
+     "x": 210,
+     "y": 304,
+     "anchor": "middle",
+     "text": "hidden 10 kΩ + 10 kΩ"
+    },
+    {
+     "type": "text",
+     "x": 210,
+     "y": 336,
+     "anchor": "middle",
+     "text": "off the mini board",
+     "size": 22
+    }
+   ],
+   "truth": {
+    "measured_ohm": {
+     "R1": 4710,
+     "hidden_a": 10000,
+     "hidden_b": 9990
+    },
+    "series_total_ohm": 24700,
+    "source": "Operator multimeter readings reported 3 Nov, 00:42 KST, before the pilot runs."
+   },
+   "forum_line": "An RC filter driven from an Arduino pin gave a smaller output than the simulation. The cause was the pin's own output resistance, about 40 Ω, which nobody had drawn.",
+   "symptom": "An RC filter driven from an Arduino pin gave a smaller output than its simulation.",
+   "title_after_reveal": "Pin output resistance"
+  },
+  {
+   "id": "02",
+   "design": "design-02",
+   "title": "Erratic sensor board",
+   "problem": "A GY-521 sensor board gave erratic data. One of its capacitors was about 2 nF where 0.1 µF belonged.",
+   "cause": "A capacitor of the wrong value on the board, labelled in the thread as the regulator filter capacitor (0.1 µF expected, about 2 nF fitted). The poster replaced it and the noise fell from about ±0.5 g to about 0.01 g; another user fixed the same fault the same way.",
+   "source": {
+    "site": "Arduino Forum",
+    "title": "MPU6050 Breakout Board GY-521 - Wrong Capacitor Results in Erratic Data",
+    "date": "2016-04-18",
+    "url": "https://forum.arduino.cc/t/mpu6050-breakout-board-gy-521-wrong-capacitor-results-in-erratic-data/380339"
+   },
+   "context": {
+    "in": "On-board voltage regulator",
+    "out": "MPU-6050 sensor chip"
+   },
+   "kept": "A filter capacitor of the wrong value, with the value printed on the part.",
+   "changed": "The original was about 50× too small (100 nF to about 2 nF). Here 1 µF (marked 105) becomes 0.47 µF (marked 474), about 2×.",
+   "hidden": "C1 is a 0.47 µF part marked 474, not the 1 µF part marked 105.",
+   "limits": "Measurement points at the filter capacitance, not at which capacitor. The marking on C1, read at the bench, names it.",
+   "photo_shows_fault": true,
+   "status": "pending",
+   "overlay": [
+    {
+     "type": "box",
+     "x": 420,
+     "y": 330,
+     "w": 120,
+     "h": 52
+    },
+    {
+     "type": "text",
+     "x": 500,
+     "y": 436,
+     "anchor": "start",
+     "text": "is 0.47 µF (474)"
+    }
+   ],
+   "forum_line": "A GY-521 sensor board gave erratic data. It was traced to a part of about 2 nF where 0.1 µF belonged; replacing it fixed the board.",
+   "symptom": "A GY-521 sensor board gave erratic accelerometer data, jumping while the sensor sat still.",
+   "title_after_reveal": "Wrong filter capacitor"
+  },
+  {
+   "id": "03",
+   "design": "design-03",
+   "title": "Blinker stops after one cycle",
+   "problem": "A 555 blinker ran one cycle and stopped. Its timing resistors turned out to be 56 Ω and 22 Ω.",
+   "cause": "Far too little timing resistance. A reply read the colour bands in the poster's photo; the poster confirmed the resistors were 56 Ω and 22 Ω, added more resistance to the timing network, and reported the blinker then worked.",
+   "source": {
+    "site": "All About Circuits",
+    "title": "555 Blinking LED -- One cycle and stops",
+    "date": null,
+    "url": "https://forum.allaboutcircuits.com/threads/555-blinking-led-one-cycle-and-stops.55255/"
+   },
+   "context": {
+    "in": "Supply rail",
+    "out": "555 threshold and trigger pins"
+   },
+   "kept": "A timing resistor of the wrong value, visible in its colour bands.",
+   "changed": "The original timing resistance was far too small. Here 10 kΩ becomes 2.2 kΩ, so the faulty chain stays inside the bench's measuring range. There is no 555 chip on the bench, only its R–R–C timing chain.",
+   "hidden": "R1 is 2.2 kΩ, not 10 kΩ.",
+   "limits": "Measurement can say the chain's total resistance is too small, not which of the two resistors. One reading of either resistor decides.",
+   "photo_shows_fault": true,
+   "status": "pending",
+   "overlay": [
+    {
+     "type": "box",
+     "x": 182,
+     "y": 198,
+     "w": 204,
+     "h": 64
+    },
+    {
+     "type": "text",
+     "x": 284,
+     "y": 312,
+     "anchor": "middle",
+     "text": "is 2.2 kΩ"
+    }
+   ],
+   "forum_line": "A 555 blinker stopped after one cycle. A reply reading the colour bands in the poster's photo found 56 Ω and 22 Ω where kilohms were meant.",
+   "symptom": "A 555 blinker ran one cycle and stopped.",
+   "title_after_reveal": "555 timing resistor"
+  },
+  {
+   "id": "04",
+   "design": "design-04",
+   "title": "Divider reads wrong",
+   "problem": "A battery voltage divider read wrong while the ESP32 it fed was switched off. With the ESP32 powered, the reading was right.",
+   "cause": "The divider read correctly only when the ESP32 was powered; the poster's own retest, powered against unpowered, showed it. The thread doesn't name the mechanism.",
+   "source": {
+    "site": "Arduino Forum",
+    "title": "Voltage divider is not giving correct voltage",
+    "date": null,
+    "url": "https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099?page=3",
+    "date_label": "July 2021 (page 3)"
+   },
+   "context": {
+    "in": "Battery",
+    "out": "ESP32 input pin, unpowered"
+   },
+   "kept": "An extra path from the divider's output that the drawing doesn't show.",
+   "changed": "We play the unpowered ESP32 input with one diode off the mini board, the usual input-clamp explanation.",
+   "hidden": "A diode from OUT to REF, off the mini board.",
+   "limits": "No single part value explains this. The test is whether the model proposes a part that isn't in the drawing.",
+   "photo_shows_fault": false,
+   "status": "pending",
+   "overlay": [
+    {
+     "type": "dashed",
+     "points": [
+      [
+       860,
+       230
+      ],
+      [
+       860,
+       350
+      ]
+     ]
+    },
+    {
+     "type": "diode",
+     "x": 860,
+     "y": 350
+    },
+    {
+     "type": "dashed",
+     "points": [
+      [
+       860,
+       392
+      ],
+      [
+       860,
+       520
+      ],
+      [
+       650,
+       520
+      ]
+     ]
+    },
+    {
+     "type": "dot",
+     "x": 860,
+     "y": 230
+    },
+    {
+     "type": "text",
+     "x": 892,
+     "y": 382,
+     "anchor": "start",
+     "text": "hidden diode"
+    },
+    {
+     "type": "text",
+     "x": 892,
+     "y": 414,
+     "anchor": "start",
+     "text": "off the mini board",
+     "size": 22
+    }
+   ],
+   "forum_line": "A battery divider read wrong. The poster looked at the board for an hour and saw nothing, then found it read right only while the ESP32 it fed was powered.",
+   "symptom": "A battery divider read wrong. The poster looked at the board for an hour and saw nothing out of place.",
+   "title_after_reveal": "Unpowered chip input"
+  },
+  {
+   "id": "05",
+   "design": "design-05",
+   "title": "Volts lost on a breadboard",
+   "problem": "A circuit on a breadboard dropped from 5.07 V to about 4.68 V. Soldered together, it gave 5.04 V at the Arduino's 5 V input.",
+   "cause": "Only partly confirmed. The thread never settled whether the thin jumpers or the breadboard contacts were to blame.",
+   "source": {
+    "site": "EEVblog Forum",
+    "title": "Voltage drop at breadboard",
+    "date": "2019-03-09",
+    "url": "https://www.eevblog.com/forum/beginners/voltage-drop-at-breadboard/"
+   },
+   "context": {
+    "in": "5 V supply",
+    "out": "Load on the breadboard"
+   },
+   "kept": "Resistance in a connection that the drawing shows as a plain wire.",
+   "changed": "A 10 kΩ resistor off the mini board plays the bad contact, so the drop is large enough to measure.",
+   "hidden": "10 kΩ in series between the measured IN point and the board.",
+   "limits": "The drawing has no part to blame, so the test is whether the model proposes the missing resistance.",
+   "photo_shows_fault": false,
+   "status": "pending",
+   "overlay": [
+    {
+     "type": "resistor",
+     "x": 200,
+     "y": 230,
+     "w": 140,
+     "h": 40
+    },
+    {
+     "type": "text",
+     "x": 270,
+     "y": 304,
+     "anchor": "middle",
+     "text": "hidden 10 kΩ"
+    },
+    {
+     "type": "text",
+     "x": 270,
+     "y": 336,
+     "anchor": "middle",
+     "text": "off the mini board",
+     "size": 22
+    }
+   ],
+   "forum_line": "About 0.4 V vanished across a breadboard. Soldered, the same circuit gave 5.04 V. The thread never settled the cause.",
+   "symptom": "About 0.4 V vanished across a breadboard: 5.07 V in, about 4.68 V at the load.",
+   "title_after_reveal": "Breadboard contact resistance"
+  },
+  {
+   "id": "06",
+   "design": "design-06",
+   "title": "Dim LEDs",
+   "problem": "Five LEDs switched by one BC547 were very dim with the calculated base resistor of about 4.7 kΩ. A 470 Ω base resistor made them much brighter.",
+   "cause": "Too little base current for the load. A reply suggested sizing the base current to a fraction of the load current.",
+   "source": {
+    "site": "Arduino Forum",
+    "title": "BC547 Base Resistor checking....",
+    "date": "2016-05-06",
+    "url": "https://forum.arduino.cc/t/bc547-base-resistor-checking/384293"
+   },
+   "context": {
+    "in": "Arduino output pin",
+    "out": "Four more LEDs on the same transistor",
+    "supply": "Arduino 5 V rail"
+   },
+   "probe": {
+    "title": "Bench probe: declared with the bench, not drawn",
+    "lines": [
+     "COL → 47 kΩ → OUT",
+     "OUT → 10 kΩ → REF",
+     "GND and REF are separate nodes"
+    ]
+   },
+   "kept": "A base resistor too large for the current the LED needs.",
+   "changed": "One red LED instead of five. The fault is a 1 MΩ base resistor, because 4.7 kΩ is already enough for a single LED.",
+   "hidden": "R1 is 1 MΩ, not 4.7 kΩ.",
+   "limits": "Measurement cannot separate a larger base resistor from a low-gain transistor. One reading of R1 decides.",
+   "photo_shows_fault": true,
+   "status": "pending",
+   "pending_note": "Needs a DC calibration of the probe path before the first run.",
+   "overlay": [
+    {
+     "type": "box",
+     "x": 292,
+     "y": 388,
+     "w": 204,
+     "h": 64
+    },
+    {
+     "type": "text",
+     "x": 394,
+     "y": 500,
+     "anchor": "middle",
+     "text": "is 1 MΩ"
+    }
+   ],
+   "forum_line": "Five LEDs stayed dim behind the calculated 4.7 kΩ base resistor; 470 Ω made them much brighter.",
+   "symptom": "Five LEDs switched by one BC547 stayed very dim behind the calculated 4.7 kΩ base resistor.",
+   "title_after_reveal": "Dim LED driver"
+  }
+ ]
+}

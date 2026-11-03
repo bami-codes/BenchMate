@@ -1,0 +1,19 @@
+{
+ "note": "Context written after the runs, with its source. Shown next to the replay, never sent to the model.",
+ "runs": {
+  "20261102T160841-eff2b65334": {
+   "guard_detail": "The A4 reference reading's block-mean span was 4.37 mV, above the frozen 3 mV limit.",
+   "source": "docs/2026-11-03-ref-investigation.md"
+  },
+  "20261102T164944-16f6a79a31": {
+   "guard_detail": "During the ±0.5 V step both reference readings, A3 and A4, moved by about 7 mV together, above the frozen 3 mV limit.",
+   "source": "docs/2026-11-03-ref-investigation.md"
+  }
+ },
+ "ground_fix": {
+  "text": "The reference drift was traced to a bad ground return wire on the bench. It was replaced on 3 Nov. With the guard and firmware unchanged, the instrument QA then passed: block-mean span A3 0.37 mV and A4 0.48 mV against the 3 mV limit.",
+  "source": "docs/2026-11-03-original-guard-QA-result.md",
+  "A3_span_mV": 0.367,
+  "A4_span_mV": 0.477
+ }
+}

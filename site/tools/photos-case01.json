@@ -1,0 +1,20 @@
+{
+ "board": "assets/photos/case01-board.png",
+ "crop": "assets/photos/case01-board-crop.png",
+ "crop_r1": "assets/photos/case01-board-crop-r1.png",
+ "crop_box": [
+  180,
+  430,
+  1040,
+  790
+ ],
+ "evidence": "assets/photos/case01-reading-evidence.png",
+ "highlight_note": "assets/photos/case01-highlight.json",
+ "crop_full": "assets/photos/case01-board-crop-full.png",
+ "crop_full_box": [
+  454,
+  1084,
+  2621,
+  1991
+ ]
+}

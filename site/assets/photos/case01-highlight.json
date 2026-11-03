@@ -1,0 +1,24 @@
+{
+ "end_scene": {
+  "file": "case01-board-crop-r1.png",
+  "computed_on": "1200x1600 SAM input (sha256 36a5ed9d\u2026)",
+  "crop_box": [
+   180,
+   430,
+   1040,
+   790
+  ],
+  "outline": "native SAM 3.1 mask object-1 (R1), 2 px boundary; bound to R1 by Spark, operator-confirmed"
+ },
+ "hero": {
+  "file": "case01-board-crop-full.png",
+  "source": "photo-faulted/conversion/render.png 3024x4032 metadata-free render (not the DNG)",
+  "crop_box": [
+   454,
+   1084,
+   2621,
+   1991
+  ],
+  "edits": "none"
+ }
+}

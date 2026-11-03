@@ -1,0 +1,145 @@
+{
+  "schema": "benchmate.site_contract_example.v1",
+  "example_only": true,
+  "counted": false,
+  "source": "retained_development_photo_probe",
+  "case_id": null,
+  "warning": "Real November 1 development photo and model outputs; not any of the six official cases. UI-derived fields are separately marked.",
+  "photo_root": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe",
+  "image": {
+    "file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/input.png",
+    "width": 1200,
+    "height": 1600,
+    "sha256": "9c5482333974f097e1cdb4f7575f7f13eb6692b8db9b6d14d63296c2f6df9d34"
+  },
+  "root_result_file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/result.json",
+  "vision_result_file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/vision/20261101T001812-d60c32b5c5/result.json",
+  "render_summary_file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/render-summary.json",
+  "vision_native_result": {
+    "source_kind": "assembly_photo",
+    "candidate": {
+      "ambiguities": [
+        "No IN/OUT/REF port labels visible in image; all terminals set to UNKNOWN.",
+        "Breadboard internal connectivity / hole-to-hole wiring is not visible and must not be assumed; operator must confirm intended nodes.",
+        "Resistor color bands illegible due to resolution/focus; value cannot be transcribed, operator must confirm with direct inspection.",
+        "Capacitor top marking appears as '105J100' but is slightly blurry/low contrast; operator must confirm exact characters, value, tolerance and voltage.",
+        "Lead insertion holes/rows visible but electrical continuity beneath breadboard is occluded; remains UNKNOWN.",
+        "Background larger breadboard with out-of-focus black vertical parts and small orange part is blurred and occluded; not transcribed as components, operator must confirm if in scope.",
+        "Visible physical assembly does not specify intended design; operator must confirm schematic intent."
+      ],
+      "components": [
+        {
+          "a": "UNKNOWN",
+          "b": "UNKNOWN",
+          "bbox": [
+            0.205,
+            0.448,
+            0.375,
+            0.498
+          ],
+          "evidence": "Small axial component with leads inserted into top rows of foreground white mini-breadboard, left of blue box component",
+          "kind": "R",
+          "marking": "color bands illegible",
+          "name": "R1",
+          "value_si": null
+        },
+        {
+          "a": "UNKNOWN",
+          "b": "UNKNOWN",
+          "bbox": [
+            0.41,
+            0.36,
+            0.62,
+            0.54
+          ],
+          "evidence": "Blue rectangular box component with two wire leads inserted into top rows of foreground white mini-breadboard; top face shows text '105J100'",
+          "kind": "C",
+          "marking": "105J100",
+          "name": "C1",
+          "value_si": 1e-06
+        }
+      ],
+      "status": "incomplete",
+      "summary": "Provisional visual transcription of assembly_photo: foreground mini-breadboard holds one resistor (bands unreadable) and one blue box capacitor marked '105J100' (~1uF provisional). No labelled IN/OUT/REF ports; no assumed breadboard connectivity; all nodes UNKNOWN. Background breadboard blurred, not transcribed. Requires operator confirmation."
+    },
+    "netlist": "* Unverified image transcription. Not an executable experiment.\n* R1: unresolved connection or value\n* C1: unresolved connection or value\n",
+    "nominal_rc_candidate": null,
+    "status": "unverified_visual_candidate",
+    "measurement_verified": false,
+    "operator_confirmed": false,
+    "requests": 1,
+    "hardware_IO": false
+  },
+  "SAM_decoded_files": [
+    {
+      "file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/capacitor-decoded.json",
+      "concept": "capacitor",
+      "match_count": 0,
+      "masks": []
+    },
+    {
+      "file": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/render-v2/resistor-decoded.json",
+      "concept": "resistor",
+      "match_count": 1,
+      "masks": [
+        {
+          "object_id": "0",
+          "bounds_half_open": [
+            277,
+            663,
+            478,
+            724
+          ],
+          "confidence": 0.5631399154663086,
+          "raster_size": [
+            201,
+            61
+          ],
+          "source_mask_file": "resistor-object-0-mask.png",
+          "overlay_file": "resistor-object-0-overlay.png",
+          "resize_to_box": false,
+          "foreground_pixels": 4674
+        }
+      ]
+    }
+  ],
+  "ui_derived_components": [
+    {
+      "derived_from": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/vision/20261101T001812-d60c32b5c5/result.json#/candidate/components/0",
+      "vision_component_name": "R1",
+      "kind": "R",
+      "value_si": null,
+      "marking": "color bands illegible",
+      "bbox_normalized": [
+        0.205,
+        0.448,
+        0.375,
+        0.498
+      ],
+      "reading_status": "unreadable",
+      "derived_field_not_native_model_output": true,
+      "design_component_ref": null,
+      "SAM_instance_ref": null,
+      "association_status": "not_linked"
+    },
+    {
+      "derived_from": "examples/photo-model-probe/2026-11-01/20261101T001812-2e9c1094fe/vision/20261101T001812-d60c32b5c5/result.json#/candidate/components/1",
+      "vision_component_name": "C1",
+      "kind": "C",
+      "value_si": 1e-06,
+      "marking": "105J100",
+      "bbox_normalized": [
+        0.41,
+        0.36,
+        0.62,
+        0.54
+      ],
+      "reading_status": "readable",
+      "derived_field_not_native_model_output": true,
+      "design_component_ref": null,
+      "SAM_instance_ref": null,
+      "association_status": "not_linked"
+    }
+  ],
+  "SAM_to_vision_component_binding_implemented": false
+}
