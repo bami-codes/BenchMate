@@ -26,11 +26,13 @@
       "state": "restored",
       "order": 2,
       "required": true,
-      "run_id": null,
-      "status": "not_started",
+      "run_id": "20261103T113619-34ff2352b1",
+      "status": "registered",
       "selected_for_case_demo": true,
       "selection": "first_started_official_attempt_for_this_case_and_state",
-      "counted": false
+      "counted": true,
+      "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T113619-34ff2352b1.json",
+      "protocol_sha256": "daace662dd771ece88410cfb9378c99fc1a151ad4efa9a71cb84ca66180d00d1"
     },
     {
       "slot_id": "04-F01",
