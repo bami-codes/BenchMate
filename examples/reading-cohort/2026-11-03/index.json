@@ -96,7 +96,7 @@
       "run_id": "20261103T182550-4ea22cc3a0",
       "case_id": "02",
       "attempt": 4,
-      "status": "registered",
+      "status": "completed",
       "counted": true,
       "selected_first_attempt": false,
       "execution_scope": "restored_only_followup_after_unordered_reading",
@@ -107,7 +107,8 @@
       "reason": "operator_selected_new_restored_diagnosis_after_single_unchanged_wiring_step_QA_pass",
       "previous_restored_failure": "20261103T175520-a925a3910d",
       "restored_verdict": "consistent",
-      "pending_stage": "restored_photo"
+      "pending_stage": null,
+      "completion_method": "preserved_fault_reading_restored_rerun_plus_documentary_SAM_binding_omitted"
     }
   ]
 }

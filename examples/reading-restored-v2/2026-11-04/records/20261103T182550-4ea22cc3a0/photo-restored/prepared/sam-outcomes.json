@@ -1,0 +1,22 @@
+[
+  {
+    "concept": "electronic component",
+    "run": "sam/20261103T185521-e65384ead4",
+    "status": "completed",
+    "text_empty": false,
+    "requests": 1,
+    "usage": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 0,
+      "images_processed": 1
+    },
+    "model": "sam-3.1"
+  }
+]

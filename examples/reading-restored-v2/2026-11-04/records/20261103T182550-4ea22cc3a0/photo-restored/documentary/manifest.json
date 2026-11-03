@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.documentary_SAM_comparison.v1",
+  "purpose": "visualization_only",
+  "identification_evidence": false,
+  "component_assignments": [],
+  "values_read": [],
+  "restored_mask_records": 8,
+  "restored_masks_drawn": 8,
+  "faulted_mask_records": 7,
+  "faulted_masks_drawn": 7,
+  "all_native_records_retained": true,
+  "manual_mask_edits": false,
+  "OpenCV_fallback_masks": 0,
+  "method": "All exact-size native masks, same three-pixel green boundary; images are not spatially registered.",
+  "faulted_input": {
+    "repo_file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/prepared/input.png",
+    "sha256": "c085b67b76aebd8861a4fec67bfd5ad8339015a4989761d517615c9fd16af3a5"
+  },
+  "restored_input": {
+    "file": "photo-restored/prepared/input.png",
+    "sha256": "9385e2fc013e0f994284e4a584bdbe6c5f4d5efbaace65aa6c2b8345b9e3c91e"
+  }
+}

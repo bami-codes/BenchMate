@@ -1,0 +1,53 @@
+{
+  "schema": "benchmate.restored_documentary_input.v1",
+  "hardware_IO": false,
+  "order": "One generic SAM request, retain native masks and documentary overlays, no binding/value inference.",
+  "concepts": [
+    "electronic component"
+  ],
+  "SAM_requests_max": 1,
+  "Spark_reads_max": 0,
+  "read_selection": "First eight returned crop records in concept/record order; no quality/ranking filter",
+  "automatic_retry": false,
+  "input": {
+    "sha256": "9385e2fc013e0f994284e4a584bdbe6c5f4d5efbaace65aa6c2b8345b9e3c91e",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 1948593,
+    "metadata_removed": true,
+    "orientation_applied": true,
+    "resize_max_edge": 1600,
+    "source_sha256": "9385e2fc013e0f994284e4a584bdbe6c5f4d5efbaace65aa6c2b8345b9e3c91e"
+  },
+  "full": {
+    "sha256": "9385e2fc013e0f994284e4a584bdbe6c5f4d5efbaace65aa6c2b8345b9e3c91e",
+    "width": 1200,
+    "height": 1600
+  },
+  "crop_padding_fraction": 0.15,
+  "crop_edge_max": 1600,
+  "sources": {
+    "scripts/photo_parts.py": "26c6a9b18fdd0a0d7aae26a1932fe3c482b3898a9736286e0cf2abb695593d4c",
+    "scripts/photo_model_probe.py": "f7419c69a2a00d261957bc85f1c2a53e9886af4a88ce72f1d6fe0d4412ff6ecb",
+    "src/benchmate/known_design.py": "c695673023803410b25bf0296e9d1d31d47811170bdb52c71cfd5bf25e7cebab",
+    "src/benchmate/image_archive.py": "efbcc25c48e4ca2b41978b4ed06f9bdde601c21cb73b8604a35230c2a24197f7",
+    "src/benchmate/records.py": "bd39e0add51bd527fb7133e86e0f3b7a6291767b92119cb3efc2f2ecc5041caf",
+    "src/benchmate/providers.py": "f7043ca4b789e8b5e2fb63a91ec39d06d6f5131a67052e442b6a41e267d1b839",
+    "src/benchmate/config.py": "b0dba3a966462dbd7fb91b4d2766b025cb501a44810a6e1db5fae4c754283c64"
+  },
+  "excluded_from_model": [
+    "file paths/names",
+    "intended design",
+    "ADC data",
+    "diagnosis",
+    "operator assembly truth",
+    "case mapping",
+    "original metadata"
+  ],
+  "scope": "Before/after documentary visualization only; never component identity, value, absence, or diagnosis evidence.",
+  "Spark_binding_requests_max": 0,
+  "identification_evidence": false,
+  "surface_value_reading_enabled": false,
+  "policy_sha256": "1224ae769343066d2747b2eacef04b72b5ca020727b5335e239626926499803d",
+  "evaluation": "known_case_documentary_not_blind"
+}
