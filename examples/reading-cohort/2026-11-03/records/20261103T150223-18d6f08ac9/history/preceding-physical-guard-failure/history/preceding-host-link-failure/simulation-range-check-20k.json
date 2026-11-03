@@ -1,0 +1,141 @@
+{
+  "schema": "benchmate.offline_range_screen.v1",
+  "source": "simulation",
+  "physical_measurements": 0,
+  "paid_calls": 0,
+  "hardware_commands": 0,
+  "is_diagnostic_evidence": false,
+  "does_not_determine_training_order": true,
+  "nominal_diode_parameters_are_example_only": true,
+  "public_instrument_series_ohm": 1000,
+  "intended_R2_ohm": 20000,
+  "supersedes_planning_screen_only": "simulation-range-check.json",
+  "unloaded_gain": 0.8097165991902834,
+  "loaded_gain": 0.586348469419198,
+  "range_screen": [
+    -0.622518938025681,
+    0.622518938025681
+  ],
+  "rows": [
+    {
+      "topology": "intended_20k",
+      "action": "unloaded_step_small",
+      "predicted_OUT_delta_v_min": -0.1556420233463035,
+      "predicted_OUT_delta_v_max": 0.1556420233463035
+    },
+    {
+      "topology": "intended_20k",
+      "action": "loaded_step_small",
+      "predicted_OUT_delta_v_min": -0.107783558961329,
+      "predicted_OUT_delta_v_max": 0.107783558961329
+    },
+    {
+      "topology": "intended_20k",
+      "action": "unloaded_step_large",
+      "predicted_OUT_delta_v_min": -0.3891050583657588,
+      "predicted_OUT_delta_v_max": 0.3891050583657588
+    },
+    {
+      "topology": "intended_20k",
+      "action": "loaded_step_large",
+      "predicted_OUT_delta_v_min": -0.2694588974033225,
+      "predicted_OUT_delta_v_max": 0.2694588974033225
+    },
+    {
+      "topology": "intended_20k",
+      "action": "unloaded_sine_1hz_small",
+      "predicted_OUT_delta_v_min": -0.1556297345066148,
+      "predicted_OUT_delta_v_max": 0.1556297345066148
+    },
+    {
+      "topology": "intended_20k",
+      "action": "unloaded_sine_1hz_large",
+      "predicted_OUT_delta_v_min": -0.622518938025681,
+      "predicted_OUT_delta_v_max": 0.622518938025681
+    },
+    {
+      "topology": "intended_20k",
+      "action": "unloaded_sine_5hz_small",
+      "predicted_OUT_delta_v_min": -0.1167315175097276,
+      "predicted_OUT_delta_v_max": 0.1167315175097276
+    },
+    {
+      "topology": "intended_20k",
+      "action": "loaded_sine_5hz_small",
+      "predicted_OUT_delta_v_min": -0.08083766922099674,
+      "predicted_OUT_delta_v_max": 0.08083766922099674
+    },
+    {
+      "topology": "intended_20k",
+      "action": "reserved_0",
+      "predicted_OUT_delta_v_min": -0.2723735408560312,
+      "predicted_OUT_delta_v_max": 0.2723735408560312
+    },
+    {
+      "topology": "intended_20k",
+      "action": "reserved_1",
+      "predicted_OUT_delta_v_min": -0.5058365758754865,
+      "predicted_OUT_delta_v_max": 0.5058365758754865
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "unloaded_step_small",
+      "predicted_OUT_delta_v_min": -0.1556292785028311,
+      "predicted_OUT_delta_v_max": 0.1553413582512173
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "loaded_step_small",
+      "predicted_OUT_delta_v_min": -0.107775371330453,
+      "predicted_OUT_delta_v_max": 0.1077102869188501
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "unloaded_step_large",
+      "predicted_OUT_delta_v_min": -0.3890917852886972,
+      "predicted_OUT_delta_v_max": 0.36619700713444103
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "loaded_step_large",
+      "predicted_OUT_delta_v_min": -0.2694497562364389,
+      "predicted_OUT_delta_v_max": 0.2673443076319105
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "unloaded_sine_1hz_small",
+      "predicted_OUT_delta_v_min": -0.1556169897966939,
+      "predicted_OUT_delta_v_max": 0.1553291474155249
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "unloaded_sine_1hz_large",
+      "predicted_OUT_delta_v_min": -0.622505636671643,
+      "predicted_OUT_delta_v_max": 0.46190958613457844
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "unloaded_sine_5hz_small",
+      "predicted_OUT_delta_v_min": -0.1167194472783486,
+      "predicted_OUT_delta_v_max": 0.1166020861265538
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "loaded_sine_5hz_small",
+      "predicted_OUT_delta_v_min": -0.08083023256703972,
+      "predicted_OUT_delta_v_max": 0.0807991793298455
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "reserved_0",
+      "predicted_OUT_delta_v_min": -0.2723603373384821,
+      "predicted_OUT_delta_v_max": 0.26920188262402367
+    },
+    {
+      "topology": "engineering_diode_example_not_observed_truth",
+      "action": "reserved_1",
+      "predicted_OUT_delta_v_min": -0.5058232826433203,
+      "predicted_OUT_delta_v_max": 0.42695384117416424
+    }
+  ]
+}

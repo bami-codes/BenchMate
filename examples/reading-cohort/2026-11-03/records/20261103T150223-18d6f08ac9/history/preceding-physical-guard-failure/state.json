@@ -1,0 +1,6 @@
+{
+  "case_id": "04",
+  "phase": "awaiting_faulted_setup",
+  "schematic_intake": "schematic-intake/20261103T144919-80c4654879",
+  "prior_host_failure": "20261103T143624-44d6e5850c"
+}

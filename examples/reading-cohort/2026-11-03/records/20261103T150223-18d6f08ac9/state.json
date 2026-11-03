@@ -1,0 +1,6 @@
+{
+  "case_id": "04",
+  "phase": "awaiting_faulted_setup",
+  "prior_guard_failure": "20261103T145152-e948c2e475",
+  "last_boot": "f8faeaa5a4e8f354c19d93212597a35e"
+}

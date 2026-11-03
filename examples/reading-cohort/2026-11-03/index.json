@@ -39,6 +39,15 @@
       "run_id": "20261103T145152-e948c2e475",
       "case_id": "04",
       "attempt": 2,
+      "status": "failed",
+      "counted": true,
+      "selected_first_attempt": false,
+      "failed_stage": "diagnose"
+    },
+    {
+      "run_id": "20261103T150223-18d6f08ac9",
+      "case_id": "04",
+      "attempt": 3,
       "status": "registered",
       "counted": true,
       "selected_first_attempt": false
