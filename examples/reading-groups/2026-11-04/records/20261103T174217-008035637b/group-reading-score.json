@@ -1,0 +1,41 @@
+{
+  "fits": [
+    "changed:C1"
+  ],
+  "ruled_out_by_reading": [],
+  "reference_fits": [],
+  "matches": [
+    {
+      "explanation": "changed:C1",
+      "role": "active",
+      "assignments": [
+        {
+          "C1": "sam-2",
+          "C2": "sam-3"
+        }
+      ]
+    },
+    {
+      "explanation": "nominal",
+      "role": "reference",
+      "assignments": []
+    }
+  ],
+  "conditional_unique_binding": {
+    "C1": "sam-2",
+    "C2": "sam-3"
+  },
+  "outcome": "one_explanation_remains",
+  "body_identity_status": "unique_under_surviving_forecast",
+  "nearest_value_assignment": false,
+  "refitted": false,
+  "values_F": {
+    "sam-2": 4.51e-07,
+    "sam-3": 1.01e-07
+  },
+  "source": "operator_dmm",
+  "forecast_sha256": "cc8e70dca2a2dc70b1ac309bf5630a040e78215444dcbfd96ac5b16d784a8cdb",
+  "observation_sha256": "0b51e624fffc987b50f1d71ed8b0f14de1bc0ac06433aff1a30a23fbb087e2f8",
+  "scope": "Non-blind isolated-reading supplement to existing bounded changed:C1 diagnosis; nominal is a rejected reference, not a survivor. Does not complete the repair pair.",
+  "new_blind_test": false
+}

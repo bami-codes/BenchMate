@@ -1,0 +1,23 @@
+{
+  "source": "operator_dmm",
+  "power_off_confirmed": true,
+  "discharge_wait_confirmed": true,
+  "readings": [
+    {
+      "body": "sam-2",
+      "value": 0.451,
+      "unit": "uF",
+      "range_F": 2e-06,
+      "resolution_F": 1e-09,
+      "isolated_confirmed": true
+    },
+    {
+      "body": "sam-3",
+      "value": 0.101,
+      "unit": "uF",
+      "range_F": 2e-06,
+      "resolution_F": 1e-09,
+      "isolated_confirmed": true
+    }
+  ]
+}
