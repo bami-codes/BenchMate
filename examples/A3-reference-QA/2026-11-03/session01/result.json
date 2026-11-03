@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "guard_version": "primary-REF-A3-v1",
+  "primary_REF_channel": "A3",
+  "A4_role": "record_and_report_only",
+  "blocks": 17,
+  "frames": 8704,
+  "raw_block_mean_spans_mV": [
+    395.10033027756754,
+    296.70013314105705,
+    1.1145795184062113,
+    1.867563270613326
+  ],
+  "boot_id": "6f26caac8ef1d32373dd753753404215",
+  "output_at_REF_confirmed": true,
+  "SPARK_requests": 0,
+  "scope": "Current unloaded design-01; existing wiring and firmware unchanged",
+  "k_correction": false,
+  "OUT_used_for_fitting": false,
+  "A4_auxiliary_warning_blocks": 0
+}

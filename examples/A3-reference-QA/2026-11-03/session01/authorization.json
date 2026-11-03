@@ -1,0 +1,12 @@
+{
+  "A3_primary_QA_selected": true,
+  "wiring_unchanged": true,
+  "USB_connected_operator_report": true,
+  "user_reply": "A3 \uac00\ub4dc \ubcc0\uacbd \u00b7 \uc0c8 QA \ud6c4 F03",
+  "latest_operator_state": "USB still connected; board untouched",
+  "expected_armed_boot": "6f26caac8ef1d32373dd753753404215",
+  "maximum_blocks": 17,
+  "maximum_frames": 8704,
+  "paid_requests": 0,
+  "no_ARM_or_firmware_upload": true
+}
