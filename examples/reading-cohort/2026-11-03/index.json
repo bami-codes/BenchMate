@@ -79,6 +79,17 @@
       "original_primary_status": "failed",
       "reason": "operator_corrected_474_C3_C8_to_C8_C13_after_photo_review",
       "failed_stage": "bind"
+    },
+    {
+      "run_id": "20261103T175520-a925a3910d",
+      "case_id": "02",
+      "attempt": 3,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": false,
+      "execution_scope": "restored_only_followup_after_unordered_reading",
+      "followup_of": "20261103T165506-b6ad3e8cf7",
+      "original_primary_status": "failed"
     }
   ]
 }
