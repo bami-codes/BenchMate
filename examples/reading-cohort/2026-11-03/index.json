@@ -109,6 +109,14 @@
       "restored_verdict": "consistent",
       "pending_stage": null,
       "completion_method": "preserved_fault_reading_restored_rerun_plus_documentary_SAM_binding_omitted"
+    },
+    {
+      "run_id": "20261104T021333-c80ef3617e",
+      "case_id": "05",
+      "attempt": 1,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": true
     }
   ]
 }
