@@ -37,9 +37,13 @@ for shot, (scene, text, lead) in ANCHORS.items():
     elif text.startswith('+'): g = start[scene] + float(text[1:])
     else: g = spoken(scene, text) - lead
     plan[shot] = round(g, 3)
+# the close card's wide line rises when the narration reaches it (if the s7 clip has that sentence)
+try: plan['s27_wide'] = round(spoken('s7', 'Shown on five circuits') - 0.2, 3)
+except SystemExit: pass
 (VO / 'shot_plan.json').write_text(json.dumps(plan, indent=1) + '\n')
 prev = None
 for k, v in plan.items():
+    if k == 's27_wide': continue
     if prev is not None and v < prev: raise SystemExit(f'{k} starts before the shot before it ({v} < {prev})')
     prev = v
 print(json.dumps(plan)); print('total', round(t, 2))

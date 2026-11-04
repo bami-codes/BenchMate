@@ -10,6 +10,8 @@ V = pathlib.Path(__file__).resolve().parent; VO = V / 'voice'
 PLANNED = {'s1': 9, 's2': 16, 's3': 47, 's4': 43, 's5': 17, 's6': 21, 's7': 13}  # must match PLANNED in shots.js
 LEAD = {'s1': 2.2}  # picture before the clip starts; shots.js VOICE_LEAD must agree
 TAIL = {'s3': 2.5, 's4': 1.5, 's5': 1.5, 's7': 4.0}  # extra hold after the clip: the two seal reveals, the five cases, the close
+_t = VO / 'timings.json'
+if _t.exists() and 'Shown on five circuits' in _t.read_text(): TAIL.update({'s5': 0.8, 's7': 1.5})  # the longer s7 clip: keep the total under 3:00  # extra hold after the clip: the two seal reveals, the five cases, the close
 out = {}
 for sid, planned in PLANNED.items():
     f = next((p for p in [VO / f'{sid}.mp3', VO / f'{sid}.wav', VO / f'{sid}.m4a'] if p.exists()), None)
