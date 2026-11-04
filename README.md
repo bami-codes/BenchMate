@@ -2,13 +2,30 @@
 
 **The drawing is right. The board is right. The output is wrong.**
 
-Meta's Muse Spark reads the schematic and chooses its own experiments on a real board. Every forecast is frozen before the measurement and checked against it by code; the planted fault stays sealed until the verdict. Five faults were planted on five small circuits; the model narrowed each disagreement between board and drawing to one question, asking for one multimeter reading where the waveforms could not decide, and every step is a record you can verify offline.
+That is the first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check. BenchMate gives that question to Meta's Muse Spark on a real board. It reads the schematic and chooses its own experiments; every forecast is frozen before the measurement and checked against it by code; the planted fault stays sealed until the verdict. Five faults were planted on five small circuits; the model narrowed each disagreement between board and drawing to one question, asking for one multimeter reading where the waveforms could not decide, and every step is a record you can verify offline.
 
-Submitted to **Push the Frontier**: a model given a new capability on a physical system, the experiments designed, forecast and defended by the model itself. Who it is for: the first power-on of a new board, the repair bench, the teaching lab; and, with another simulator and another instrument, anywhere a model can be made to forecast before it measures.
+Where the model contributed, from the records:
+
+| Case | When the waveforms ran out | What Spark did | How it was checked | What the seal held |
+|---|---|---|---|---|
+| **04** [Divider reads wrong](https://bami-codes.github.io/BenchMate/run.html?run=20261103T150223-18d6f08ac9&play=1) | Every value explanation failed. | Proposed a part the drawing does not show: a diode from OUT to REF, as a netlist it wrote itself. | The proposal was fitted, its forecast frozen and pushed; the two held-back inputs then missed the frozen model by **5.19 mV** and **4.05 mV** at worst (allowance 9 mV). | A 1N4148 from OUT to REF, off the board. |
+| **05** [Volts lost on a breadboard](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e&play=1) | Every value explanation failed. | Proposed a resistor in place of the drawn wire W1. | Held-back checks passed; one extra reading of the isolated W1 path (**0 Ω**) placed the resistance off the board. | 20 kΩ off the board. |
+| **01** [Filter output too small](https://bami-codes.github.io/BenchMate/run.html?run=20261103T125924-bf8f64512b&play=1) | Two explanations gave the same waveforms (the engine's rule). | Recognised that the waveforms could not separate them and asked for one multimeter reading of R1. | Bands frozen first; R1 read **4.71 kΩ**, inside one band only. | R1 4.7 kΩ on the board, two 10 kΩ off it. |
+
+These rows show where the model contributed. They are not evidence that it beats every rule-based method: on the earlier synthetic linear benchmark, the engine with a fixed plan also reached 24/24 ([Earlier development results](#earlier-development-results-29-oct--2-nov)).
+
+Who does what:
+
+- **Muse Spark** chooses each experiment from the fixed menu, interprets the misses, proposes new circuit structure when every value explanation has failed, and asks for a reading when the waveforms cannot decide.
+- **ngspice and the engine** do the numerical fitting, the waveform forecasts, the miss against the 9 mV allowance and the rule-out.
+- **SAM 3.1 and Spark vision** say which body on the board photo is which part.
+- **The operator** moves jumpers, reads the multimeter, and never tells the model the fault.
+
+Submitted to **Push the Frontier**: a model given a real bench, where it chooses the experiments and proposes what the drawing lacks, while a simulator forecasts, code scores, and a person moves the wires. Who it is for: the first power-on of a new board, the repair bench, the teaching lab; and, with another simulator and another instrument, anywhere a model can be made to forecast before it measures.
 
 **[Open the live demo](https://bami-codes.github.io/BenchMate/)** — five recorded diagnoses replayed from their logs, every number clickable to the event behind it. No installation, no API key.
 
-[![The landing page: the first experiment on the scope with the forecast dashed and the measured input and output drawn over it, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
+[![The landing page: case 04's record in four lines (every value explanation failed; Spark proposed a diode from OUT to REF; frozen, pushed, two held-back inputs within the allowance; the seal opened), then experiment 3 on the scope with the drawing's forecast dashed and the measured input and output over it, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
 
 The experiments on that page did not exist until the model asked for them. That is the capability this project shows; a circuit on a $40 bench is the smallest honest place to show it.
 

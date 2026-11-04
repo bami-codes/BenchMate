@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BenchMate — forecast-first experiments on a real circuit</title>
-<meta name="description" content="BenchMate: a first-power-on diagnostic for real hardware. Muse Spark reads the drawing, designs experiments on the real circuit, freezes every forecast before the bench measures, and finds where the board and the drawing disagree.">
+<meta name="description" content="BenchMate: a first-power-on diagnostic for real hardware. Muse Spark reads the drawing and chooses experiments on the real circuit; every forecast is frozen before the bench measures; the model finds where the board and the drawing disagree.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/v3.css">
@@ -20,7 +20,11 @@
   <p class="eyebrow">Five real circuits · five hidden faults · every forecast made before the measurement</p>
   <h1 class="oneline"><span class="nw">The drawing is right.</span> <span class="nw">The board is right.</span> <span class="wrong nw">The output is wrong.</span></h1>
   <p class="sub"><span class="ln">Meta’s Muse Spark reads the schematic and chooses its own experiments on a real board.</span> <span class="ln">Every forecast is frozen before the measurement and checked against it by code; the fault stays sealed until the verdict.</span></p>
-  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
+  <div class="path" id="path" hidden>
+    <p class="path-h" id="path-h"></p>
+    <ol class="path-steps" id="path-steps"></ol>
+  </div>
+  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a><a class="jump" id="cta-jump" href="run.html" hidden>or jump to the proposal →</a></div>
 </section>
 
 <section class="hero" aria-label="The scope">
@@ -51,7 +55,7 @@
     <p class="deck" id="cases-count"></p>
     <ul class="facts" aria-label="How the cases were run">
       <li><b>Two runs per case</b>A diagnosis on the faulted board, then the same procedure again after the fault was repaired.</li>
-      <li><b>Spark was never told</b>which fault was planted. The seal was opened only after its verdict, and compared by code.</li>
+      <li><b>Spark was never told</b>which fault was planted. The seal was opened only after its verdict; code checks its digest against the one committed before the first measurement.</li>
       <li><b>Same procedure every time</b>Same test menu, same fixture, same rules; only the drawing changes.</li>
       <li><b>Replays are the logs</b>Each one is the recorded run played from its log, forecasts first. Click any number for the event behind it.</li>
     </ul>
@@ -145,30 +149,15 @@
 <section class="section" id="frontier">
   <div class="paper">
     <h2>Why this matters</h2>
-    <p class="deck">Not a circuit tester: a test of whether a model can do the basic move of experimental science on a real system.</p>
-    <ul class="facts" aria-label="The basic move">
-      <li><b>Say what it expects</b>before the measurement, with the forecast hashed so it cannot be changed afterwards.</li>
-      <li><b>Be held to it</b>by code: a miss above the allowance, against the measurement, crosses the explanation out. The fault stays sealed.</li>
-      <li><b>Keep going</b>until one explanation is left, proposing a part the drawing lacks when none survives.</li>
+    <p class="deck">The first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check.</p>
+    <ul class="facts" aria-label="Who did what">
+      <li><b>Muse Spark</b>chooses each experiment from the fixed menu, reads the misses, proposes new circuit structure when every value explanation has failed, and asks for a reading when the waveforms cannot decide.</li>
+      <li><b>ngspice and the engine</b>do the numerical fitting, the waveform forecasts, the miss against the 9 mV allowance and the rule-out. Every forecast is hashed before the bench moves.</li>
+      <li><b>SAM 3.1 and Spark vision</b>say which body on the board photo is which part, after the diagnosis. No value is read from a photo.</li>
+      <li><b>The operator</b>moves the jumper and reads the multimeter when asked, and never tells the model the fault.</li>
     </ul>
-    <p class="small muted" style="margin:-6px 0 14px">A circuit was the cheapest real system where that could be done honestly in one week.</p>
-    <h3 class="sub">The loop needs six things, none of them electronic</h3>
-    <ol class="needs">
-      <li><b>A description of what was intended</b><span>here: the schematic image</span></li>
-      <li><b>Explanations the model may propose</b><span>here: a changed value, or a part the drawing lacks</span></li>
-      <li><b>A simulator that turns one into a forecast</b><span>here: ngspice</span></li>
-      <li><b>An instrument with a fixed menu</b><span>here: steps and sines, with or without a load</span></li>
-      <li><b>A person for what the instrument cannot do</b><span>here: move one jumper, read one part</span></li>
-      <li><b>A sealed truth to score against</b><span>here: the assembly record, hashed first</span></li>
-    </ol>
-    <p class="small muted">Specific to this bench, and to be qualified again anywhere else: the 9 mV allowance, the menu, the calibration.</p>
-    <h3 class="sub">What it would take elsewhere <span class="muted" style="font-weight:400">— not done here; stated so the scale of the step is clear</span></h3>
-    <div class="elsewhere">
-      <div><b>A real PCB at first power-on</b><span>Schematic and layout as the description, SPICE as the simulator, a bench supply and scope as the menu. The reading stage is the probe in the operator's hand.</span></div>
-      <div><b>A thermal or mechanical rig</b><span>A CAD or thermal model, a finite-element solver, thermocouples and actuators. Forecast first, held-back check, sealed fault: unchanged.</span></div>
-      <div><b>A lab experiment</b><span>Candidate models of the phenomenon; the settings the apparatus allows as the menu; the forecast pushed before the run.</span></div>
-    </div>
-    <p class="frontier-line">The experiments on this page did not exist until the model asked for them. The circuit is the smallest honest place to show that.</p>
+    <p class="small muted" style="margin:-6px 0 14px" id="frontier-note">The rule for all four: say what to expect before the measurement, be held to it by code, keep going until one explanation is left. <span id="frontier-counts"></span>That shows where the model contributed. It is not evidence that the model beats every rule-based method: on the earlier synthetic linear benchmark, an engine with a fixed plan reached the same count (<a href="https://github.com/bami-codes/BenchMate#earlier-development-results-29-oct--2-nov">development results</a>).</p>
+    <p class="frontier-line">The loop needs six things and none of them is electronic — a description of what was intended, explanations the model may propose, a simulator, an instrument with a fixed menu, a person for what the instrument cannot do, a sealed truth — so the same loop could run on a real PCB at first power-on, a thermal rig or a lab experiment. Not done here: the 9 mV allowance, the menu and the calibration would have to be qualified again.</p>
   </div>
 </section>
 
@@ -196,7 +185,7 @@
     <div class="made" aria-label="What was built"><span>firmware</span><span>bench</span><span>fit engine</span><span>Spark tool loop</span><span>reading and seal protocol</span><span>photo stage</span><span>this site</span><span>five physical runs</span><em>The first commit is the start of the project.</em></div>
     <div class="built-grid">
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
-      <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is checked by code against the measurement; the fault it was never told stays sealed until the verdict. The experiments did not exist until the model asked for them.</p></div>
+      <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It chooses the measurement; the forecast is frozen first and code checks it against the measurement; the fault it was never told stays sealed until the verdict. The experiments did not exist until the model asked for them.</p></div>
       <div><h3>What is not claimed</h3><p class="small">Five completed cases are not an accuracy rate. Failed and abstained attempts are kept in the public ledger and named on the reports. Restored reruns show "no mismatch in the tests Spark chose", not a proof that every part is correct. The cases were known to the developers; this is not a blind test.</p></div>
       <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and the offline verifier.</p><a class="btn sm" href="https://github.com/bami-codes/BenchMate">Repository on GitHub</a></div>
     </div>
