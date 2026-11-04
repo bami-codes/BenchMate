@@ -1,0 +1,51 @@
+{
+ "width": 1200,
+ "height": 1600,
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "faulted_crop": "assets/photos/case03-faulted-crop.jpg",
+ "faulted_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "faulted_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+ "faulted_source": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86/photo-faulted/prepared/input.png (1200×1600 metadata-free SAM input, sha256 c6149b1f2f52…)",
+ "faulted_outline": "assets/photos/case03-faulted-outline.png",
+ "faulted_outlined": [
+  {
+   "object_id": "1",
+   "part": "R1",
+   "why": "body_binding: Spark named sam-1 as R1 (photo-v5 follow-up), operator-confirmed (history/reading/body-binding.json)",
+   "bounds_half_open": [
+    339,
+    605,
+    531,
+    646
+   ],
+   "mask_file": "electronic component-object-1-record-1-mask.png",
+   "mask_sha256": "74cb66993e5a3845c066014d46f467c1337fdfc313a83eb542cb09faffc7e56c",
+   "confidence": 0.7460317611694336
+  }
+ ],
+ "restored_crop": "assets/photos/case03-restored-crop.jpg",
+ "restored_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "restored_sha256": "d99153498a5e06505d4002a22d8c1eacf9efd090ca799bb5820ac0f1ee52dd7f",
+ "restored_source": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86/photo-restored/prepared/input.png (1200×1600 metadata-free SAM input, sha256 d99153498a5e…)",
+ "restored_outlined": [],
+ "restored_documentary": "assets/photos/case03-restored-documentary.jpg",
+ "restored_documentary_masks": {
+  "displayed": [
+   "0",
+   "1",
+   "2"
+  ],
+  "of": 3,
+  "rule": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86/documentary-display/manifest.json (3 of 3 shown)"
+ }
+}

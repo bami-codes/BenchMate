@@ -64,3 +64,23 @@ drawn only after the seal opens and was never part of the model input.
 - Dates: "3 Nov 2026, 01:08 KST" / "3 Nov 2026, 01:09:16 KST". Default run per page: first counted run for
   the case (`BM.defaultRun`), else the earliest pilot; pilots move under "Development records" once any
   counted run exists. Hero line templates: guard stop / check passed / check failed / several survivors.
+
+## Round 4 (4 Nov evening: five cases, one photo treatment)
+- Cases 05 and 03 ingested; case 06 (LED) removed from the site after the operator cancelled it (the frozen
+  six-case order stays in `data/official-run-policy.json` as a record; the landing names only the five cases
+  that ran). Extractor modes `--pair-wire` (05: structure proposal → the engine splits the one surviving
+  proposal into two placements of the same series resistance, Spark picks the W1 path reading, bands frozen,
+  Spark names the body, isolated reading, seal; restored rerun from the counted frame-timing follow-up, with
+  the pair's own abstained attempt 1 named on the report and in the end scene) and `--pair-chain` (03: one
+  restored root record carrying the original pair, the photo-binding follow-up and the reading continuation;
+  the pair's local stop before Spark's body call is a notebook entry, not hidden).
+- One photo treatment for every case (`tools/photo_derivatives.py`): the same 960×720 window of the 1200×1600
+  SAM input, pixels untouched; a transparent outline layer (3 px label-tape yellow, 1 px dark edge) drawn only
+  from native SAM 3.1 masks that a record ties to a part or a candidate; documentary images (every native
+  mask) behind a details toggle only. Case 01's yellow crop, case 02's green full-frame contours and Codex's
+  green context crops for 03/05 are replaced by this one rule. Provenance per case in `tools/photos-case0N.json`.
+- Verdict wording checked across all ten counted runs: fault runs end in a "Found: …" sentence from the data
+  (value, proposal, or placement); every restored rerun ends in "No mismatch in the tests Spark chose", and
+  where nearby value-change models also fit, the "What this does not say" card names them.
+- `tools/shots_all.js`: every counted run at 1440 and 390 played at 16× to the verdict, landing and all reports;
+  errors.txt must read "none".

@@ -1,5 +1,5 @@
 {
- "note": "Site content. Forum facts paraphrased; every thread re-opened and checked on 3 Nov by the main session. No usernames, no quotes. This file is never model input.",
+ "note": "Site content. Forum facts paraphrased; every thread re-opened and checked on 3 Nov by the main session. No usernames, no quotes. This file is never model input. Five cases: 01, 04, 02, 05, 03 (the order they were run).",
  "model_name": "Muse Spark",
  "repo_url": "https://github.com/bami-codes/BenchMate",
  "cases": [
@@ -156,9 +156,9 @@
    "kept": "A timing resistor of the wrong value, visible in its colour bands.",
    "changed": "The original timing resistance was far too small. Here 10 kΩ becomes 2.2 kΩ, so the faulty chain stays inside the bench's measuring range. There is no 555 chip on the bench, only its R–R–C timing chain.",
    "hidden": "R1 is 2.2 kΩ, not 10 kΩ.",
-   "limits": "Measurement can say the chain's total resistance is too small, not which of the two resistors. One reading of either resistor decides.",
+   "limits": "Measurement can say the chain's total resistance is too small, not which of the two resistors. One reading of either resistor, bands frozen first, decides. Here Spark asked for R1 and pointed at its body in the photo.",
    "photo_shows_fault": true,
-   "status": "pending",
+   "status": "official",
    "overlay": [
     {
      "type": "box",
@@ -282,9 +282,9 @@
    "kept": "Resistance in a connection that the drawing shows as a plain wire.",
    "changed": "A 10 kΩ resistor off the mini board plays the bad contact, so the drop is large enough to measure.",
    "hidden": "10 kΩ in series between the measured IN point and the board.",
-   "limits": "The drawing has no part to blame, so the test is whether the model proposes the missing resistance.",
+   "limits": "The drawing has no part to blame, so the first test is whether the model proposes the missing resistance. A terminal fit says what the series resistance is, not where it sits: the mini-board wire path or something outside it. One reading of the isolated wire path, bands frozen first, decides.",
    "photo_shows_fault": false,
-   "status": "pending",
+   "status": "official",
    "overlay": [
     {
      "type": "resistor",
@@ -312,58 +312,6 @@
    "forum_line": "About 0.4 V vanished across a breadboard. Soldered, the same circuit gave 5.04 V. The thread never settled the cause.",
    "symptom": "About 0.4 V vanished across a breadboard: 5.07 V in, about 4.68 V at the load.",
    "title_after_reveal": "Breadboard contact resistance"
-  },
-  {
-   "id": "06",
-   "design": "design-06",
-   "title": "Dim LEDs",
-   "problem": "Five LEDs switched by one BC547 were very dim with the calculated base resistor of about 4.7 kΩ. A 470 Ω base resistor made them much brighter.",
-   "cause": "Too little base current for the load. A reply suggested sizing the base current to a fraction of the load current.",
-   "source": {
-    "site": "Arduino Forum",
-    "title": "BC547 Base Resistor checking....",
-    "date": "2016-05-06",
-    "url": "https://forum.arduino.cc/t/bc547-base-resistor-checking/384293"
-   },
-   "context": {
-    "in": "Arduino output pin",
-    "out": "Four more LEDs on the same transistor",
-    "supply": "Arduino 5 V rail"
-   },
-   "probe": {
-    "title": "Bench probe: declared with the bench, not drawn",
-    "lines": [
-     "COL → 47 kΩ → OUT",
-     "OUT → 10 kΩ → REF",
-     "GND and REF are separate nodes"
-    ]
-   },
-   "kept": "A base resistor too large for the current the LED needs.",
-   "changed": "One red LED instead of five. The fault is a 1 MΩ base resistor, because 4.7 kΩ is already enough for a single LED.",
-   "hidden": "R1 is 1 MΩ, not 4.7 kΩ.",
-   "limits": "Measurement cannot separate a larger base resistor from a low-gain transistor. One reading of R1 decides.",
-   "photo_shows_fault": true,
-   "status": "pending",
-   "pending_note": "Needs a DC calibration of the probe path before the first run.",
-   "overlay": [
-    {
-     "type": "box",
-     "x": 292,
-     "y": 388,
-     "w": 204,
-     "h": 64
-    },
-    {
-     "type": "text",
-     "x": 394,
-     "y": 500,
-     "anchor": "middle",
-     "text": "is 1 MΩ"
-    }
-   ],
-   "forum_line": "Five LEDs stayed dim behind the calculated 4.7 kΩ base resistor; 470 Ω made them much brighter.",
-   "symptom": "Five LEDs switched by one BC547 stayed very dim behind the calculated 4.7 kΩ base resistor.",
-   "title_after_reveal": "Dim LED driver"
   }
  ]
 }

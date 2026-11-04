@@ -13,8 +13,19 @@
   2620,
   2900
  ],
- "width": 3024,
- "height": 4032,
+ "width": 1200,
+ "height": 1600,
  "sha256": "65287ee9f9a4aec2d72bc3da1b51a44c0a9bd7f3be5c111c876ab3c836c218e0",
- "source": "documentary-photo/conversion/render.png (metadata-free fixed RAW conversion); original DNG private"
+ "source": "documentary-photo/conversion/render.png (metadata-free fixed RAW conversion); original DNG private",
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "faulted_crop": "assets/photos/case04-faulted-crop.jpg",
+ "faulted_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "faulted_sha256": "65287ee9f9a4aec2d72bc3da1b51a44c0a9bd7f3be5c111c876ab3c836c218e0",
+ "faulted_source": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/documentary-photo/conversion/render.png (metadata-free RAW render 3024×4032, resized to 1200×1600 for the same framing, sha256 65287ee9f9a4…)",
+ "faulted_outlined": []
 }

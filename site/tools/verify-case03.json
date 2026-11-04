@@ -1,0 +1,11 @@
+{
+ "note": "Outputs of the keyless, network-free verifiers, run on 4 Nov 2026 on the public copies in examples/, copied as written.",
+ "fault": [
+  "# whole chain (original pair, photo-binding follow-up, reading continuation, restored rerun, documentary photo), PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86\nPASS events=583 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2 scope=internal_integrity+recorded_order creation_time=unproven",
+  "# fault diagnosis child, python -m benchmate verify\nPASS events=236 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=d56b19e6102b680a3d138298760e92d3f96d58afdd77585d703801587bfb5a98 scope=internal_integrity+recorded_order creation_time=unproven"
+ ],
+ "restored": [
+  "# whole chain, PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86\nPASS events=583 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2 scope=internal_integrity+recorded_order creation_time=unproven",
+  "# restored diagnosis child, python -m benchmate verify\nPASS events=236 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=ad6e5a1f458a10e574f7061135c837c4402d020211cc32c155c856214a8e8643 scope=internal_integrity+recorded_order creation_time=unproven"
+ ]
+}

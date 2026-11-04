@@ -1,12 +1,86 @@
 {
  "board": "assets/photos/case02-board.png",
- "faulted_sam": "assets/photos/case02-faulted-sam.png",
- "restored_sam": "assets/photos/case02-restored-sam.png",
  "width": 1200,
  "height": 1600,
- "source": "photo-faulted/prepared/input.png (metadata-free 1200x1600 SAM input) and examples/SAM-display/2026-11-04/case02-v2/*-SAM-overview.png (same pixels with native-mask contours); original DNGs private; case02-faulted-pair.png = the same SAM input with only the sam-2 and sam-3 body-mask outlines, per reading-groups/2026-11-04/records/20261103T174217-008035637b/overlay-provenance.json (outline pixels identical to that record's capacitor-candidates.png; its text labels left off)",
- "faulted_pair": "assets/photos/case02-faulted-pair.png",
- "restored_board": "assets/photos/case02-restored-board.png",
- "spark_candidates": "assets/photos/case02-spark-candidates.png",
- "spark_candidate_record": "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a"
+ "source": "faulted/restored inputs: prepared/input.png of each photo stage (metadata-free 1200x1600 SAM inputs); original DNGs private; derivatives by tools/photo_derivatives.py (see method)",
+ "spark_candidate_record": "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a",
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "faulted_crop": "assets/photos/case02-faulted-crop.jpg",
+ "faulted_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "faulted_sha256": "c085b67b76aebd8861a4fec67bfd5ad8339015a4989761d517615c9fd16af3a5",
+ "faulted_source": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/prepared/input.png (1200×1600 metadata-free SAM input, sha256 c085b67b76ae…)",
+ "faulted_outline": "assets/photos/case02-faulted-outline.png",
+ "faulted_outlined": [
+  {
+   "object_id": "2",
+   "part": "sam-2",
+   "why": "group reading: one of the two capacitor bodies read out of circuit; which is C1 followed from the frozen bands (reading-groups/2026-11-04/records/20261103T174217-008035637b)",
+   "bounds_half_open": [
+    590,
+    567,
+    718,
+    674
+   ],
+   "mask_file": "electronic component-object-2-record-2-mask.png",
+   "mask_sha256": "3e4b8090dd23672fe3ad7976c5b9ff274bc4a13065d752522177cb72e8891f5f",
+   "confidence": 0.8787879347801208
+  },
+  {
+   "object_id": "3",
+   "part": "sam-3",
+   "why": "group reading: the other capacitor body read out of circuit",
+   "bounds_half_open": [
+    602,
+    717,
+    742,
+    771
+   ],
+   "mask_file": "electronic component-object-3-record-3-mask.png",
+   "mask_sha256": "a50d7fdec61c5f4abfef1e914952006f9163f31f04c821a1988fdca78ec3a230",
+   "confidence": 0.7770034670829773
+  }
+ ],
+ "faulted_documentary": "assets/photos/case02-faulted-documentary.jpg",
+ "faulted_documentary_masks": {
+  "displayed": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "of": 7,
+  "rule": "every native mask"
+ },
+ "restored_crop": "assets/photos/case02-restored-crop.jpg",
+ "restored_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "restored_sha256": "9385e2fc013e0f994284e4a584bdbe6c5f4d5efbaace65aa6c2b8345b9e3c91e",
+ "restored_source": "examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0/photo-restored/prepared/input.png (1200×1600 metadata-free SAM input, sha256 9385e2fc013e…)",
+ "restored_outlined": [],
+ "restored_documentary": "assets/photos/case02-restored-documentary.jpg",
+ "restored_documentary_masks": {
+  "displayed": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4",
+   "6",
+   "7"
+  ],
+  "of": 8,
+  "rule": "examples/SAM-display/2026-11-04/case02-v2/manifest.json (containment rule; 7 of 8 shown)"
+ }
 }
