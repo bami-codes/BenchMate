@@ -238,7 +238,7 @@
     verification_scored(e) {
       state.scored = (state.scored || 0) + 1;
       const rows = Object.entries(e.conditional || {}).map(([id, v]) => el('tr', {}, el('td', {}, expName(id)), el('td', {}, num(fmtMiss(v.decided_mV ?? v.RMS_mV), e.ev, `held-back input ${e.index}`, { explanation: id, decided_by: v.worst_region ? `worst region ${v.worst_region}` : 'whole input', decided_mV: v.decided_mV, whole_RMS_mV: v.RMS_mV, regions: v.regions, passed: v.passed, OUT_refitted: e.OUT_refitted }), v.worst_region ? el('small', { class: 'muted' }, ` worst region: ${v.worst_region.replace(/_/g, ' ')}`) : null), el('td', {}, v.passed ? el('span', { class: 'tape grey' }, 'within allowance') : el('span', { class: 'tape red' }, 'outside allowance'))));
-      block(e, 'fit', `Fit engine · held-back input ${e.index ?? ''} scored, compared by code`, words.scored(e), el('table', { class: 'fit-table' }, el('tbody', {}, ...rows)), el('p', { class: 'small muted' }, e.dev_placeholder ? 'DEV PLACEHOLDER: numbers copied from a training fit to exercise this stage. Not a measurement.' : 'Scored against the frozen forecast with the measured input; nothing was re-fitted.'));
+      block(e, 'fit', `Fit engine · held-back input ${e.index ?? ''} scored against the frozen forecast`, words.scored(e), el('table', { class: 'fit-table' }, el('tbody', {}, ...rows)), el('p', { class: 'small muted' }, e.dev_placeholder ? 'DEV PLACEHOLDER: numbers copied from a training fit to exercise this stage. Not a measurement.' : 'Scored against the frozen forecast with the measured input; nothing was re-fitted.'));
       for (const [id, v] of Object.entries(e.conditional || {})) if (meters[id] && (v.decided_mV ?? v.RMS_mV) != null) meters[id].setValue(v.decided_mV ?? v.RMS_mV, undefined, v.passed, `check ${e.index ?? ''}`, v.worst_region);
     },
     verification_completed(e) { block(e, 'fit', 'Fit engine · check complete', null, el('p', { class: 'small muted' }, `Survivors after the check: ${(e.survivors || []).map(expName).join(', ') || 'none'}.`)); },
@@ -252,9 +252,10 @@
     probe_path(e) { block(e, 'bench', 'Bench · probe path declared', null, el('p', {}, e.text)); },
     spark_report(e) { // the engine's report after the measurements; the seal stays closed until the reading is scored
       const surv = e.survivors || [];
-      block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. The seal stays closed; one reading at the bench comes next.` : words.report(e, run),
+      const willRead = !!run.reading;
+      block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. ${willRead ? 'The seal stays closed; one reading at the bench comes next.' : 'Nothing is left to read; the seal opens next.'}` : words.report(e, run),
         el('p', { class: 'small muted' }, e.verdict === 'indistinguishable' ? `Verdict ${e.verdict}: ${(e.components || []).join(' and ')} give the same terminal waveforms. The seal stays closed until one of them is read.`
-          : e.verdict === 'structure_supported' ? `Verdict ${e.verdict}: the proposed circuit passed the held-back checks. Terminal measurements say what the series resistance is, not where it sits, so the engine does not open the seal yet.`
+          : e.verdict === 'structure_supported' ? (willRead ? `Verdict ${e.verdict}: the proposed circuit passed the held-back checks. Terminal measurements say what the series resistance is, not where it sits, so the engine does not open the seal yet.` : `Verdict ${e.verdict}: the proposed circuit passed the held-back checks on inputs it had never seen.`)
           : e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. ${run.reading?.group ? 'The part itself has not been read yet; the seal stays closed until it has.' : 'Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.'}` : ''));
     },
     seal_opened(e) { finale(e, 'verdict'); },
@@ -457,7 +458,7 @@
     inner.append(el('div', {}, schemWrap, el('p', { class: 'small muted', style: 'margin-top:6px' }, run.pair?.state === 'restored' ? 'The drawing the model read, with the fault that was restored before this rerun overlaid in red. The overlay was never part of the model input.' : 'The drawing the model read, with the hidden fault overlaid in red. The overlay was never part of the model input.'), photo ? el('div', { style: 'margin-top:10px' }, photo) : null, rd?.binding?.photo && !photo ? el('div', { class: 'photo', style: 'margin-top:10px;max-width:420px' }, el('img', { src: rd.binding.photo, alt: 'Board photo' }), rd.binding.overlay_file ? el('img', { class: 'mask', src: rd.binding.overlay_file, alt: 'SAM 3.1 outline' }) : null) : null), right);
     if (rd?.group?.bands?.length) wrap.append(tryAnyPair(rd)); else if (rd?.bands?.length) wrap.append(tryAnyValue(rd));
     wrap.append(el('span', { class: 'tape seal-tape' }, 'SEALED · hidden fault'), inner);
-    block(e, 'guard', kind === 'verdict' ? 'Verdict · compared by code' : 'End of the recording', kind === 'verdict' ? null : headline, wrap,
+    block(e, 'guard', kind === 'verdict' ? 'Verdict · from the engine’s report' : 'End of the recording', kind === 'verdict' ? null : headline, wrap,
       el('p', { style: 'margin-top:10px' }, el('a', { class: 'btn sm', href: `case.html?id=${run.case}&run=${run.id}` }, 'Open the report')));
     requestAnimationFrame(() => { fitOverlay(svg, ovs); setTimeout(() => wrap.classList.add('open'), REDUCED ? 0 : 500); });
   }

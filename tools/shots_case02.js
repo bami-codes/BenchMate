@@ -31,15 +31,15 @@ const base = 'http://127.0.0.1:8795'; const RUN = '20261103T165506-b6ad3e8cf7', 
       if (!shot.fc && /reading forecast for both bodies/.test(txt)) { shot.fc = 1; await scrollTo(p, /reading forecast for both bodies/); await p.screenshot({ path: `${OUT}/02-group-forecast-${w}.png` }); }
       if (!shot.read && /reads both bodies/.test(txt)) { shot.read = 1; await p.waitForTimeout(3200); await scrollTo(p, /reads both bodies/); await p.screenshot({ path: `${OUT}/02-reading-card-${w}.png` }); }
       if (!shot.score && /both readings scored/.test(txt)) { shot.score = 1; await p.waitForTimeout(400); await scrollTo(p, /both readings scored/); await p.screenshot({ path: `${OUT}/02-assignment-block-${w}.png` }); }
-      if (/Verdict · compared by code/.test(txt)) break;
+      if (/Verdict · from the engine’s report/.test(txt)) break;
     }
     await p.waitForTimeout(1800);
     // settled shots of each stage, after the play-through (the live shots above catch the typing mid-way)
     for (const [re, name] of [[/asked which body is C1/, '02-binding-abstained'], [/which is which unknown/, '02-body-group'], [/reading forecast for both bodies/, '02-group-forecast'], [/reads both bodies/, '02-reading-card'], [/both readings scored/, '02-assignment-block']]) { await scrollTo(p, re, 'center'); await p.screenshot({ path: `${OUT}/${name}-${w}.png` }); }
-    await scrollTo(p, /Verdict · compared by code/, 'start');
+    await scrollTo(p, /Verdict · from the engine’s report/, 'start');
     await p.screenshot({ path: `${OUT}/02-end-${w}.png` }); await p.screenshot({ path: `${OUT}/02-end-${w}-full.png`, fullPage: true });
     const txt = await p.evaluate(() => document.body.innerText); fs.writeFileSync(`${OUT}/02-end-${w}.txt`, txt);
-    if (!/Verdict · compared by code/.test(txt)) errs.push(`[${w}] fault replay did not reach the verdict`);
+    if (!/Verdict · from the engine’s report/.test(txt)) errs.push(`[${w}] fault replay did not reach the verdict`);
     for (const k of ['abst', 'group', 'fc', 'read', 'score']) if (!shot[k]) errs.push(`[${w}] stage not seen: ${k}`);
     if (await overflow(p)) errs.push(`[${w}] fault replay overflow`); await p.close();
   }
@@ -47,11 +47,11 @@ const base = 'http://127.0.0.1:8795'; const RUN = '20261103T165506-b6ad3e8cf7', 
   for (const [w, h] of [[1440, 900], [390, 844]]) {
     const p = await mk(w, h); await p.goto(`${base}/run.html?run=${RERUN}`, { waitUntil: 'networkidle' }); await p.waitForTimeout(1000);
     await to16(p); await p.locator('button', { hasText: 'Play' }).first().click(); const t0 = Date.now();
-    while (Date.now() - t0 < 120000) { await p.waitForTimeout(600); if (/Verdict · compared by code/.test(await p.evaluate(() => document.body.innerText))) break; }
-    await p.waitForTimeout(1800); await scrollTo(p, /Verdict · compared by code/, 'start');
+    while (Date.now() - t0 < 120000) { await p.waitForTimeout(600); if (/Verdict · from the engine’s report/.test(await p.evaluate(() => document.body.innerText))) break; }
+    await p.waitForTimeout(1800); await scrollTo(p, /Verdict · from the engine’s report/, 'start');
     await p.screenshot({ path: `${OUT}/02-restored-end-${w}.png` }); await p.screenshot({ path: `${OUT}/02-restored-end-${w}-full.png`, fullPage: true });
     const txt = await p.evaluate(() => document.body.innerText); fs.writeFileSync(`${OUT}/02-restored-end-${w}.txt`, txt);
-    if (!/Verdict · compared by code/.test(txt)) errs.push(`[${w}] restored replay did not reach the verdict`);
+    if (!/Verdict · from the engine’s report/.test(txt)) errs.push(`[${w}] restored replay did not reach the verdict`);
     if (await overflow(p)) errs.push(`[${w}] restored replay overflow`); await p.close();
   }
   // reports

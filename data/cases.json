@@ -280,8 +280,8 @@
     "out": "Load on the breadboard"
    },
    "kept": "Resistance in a connection that the drawing shows as a plain wire.",
-   "changed": "A 10 kΩ resistor off the mini board plays the bad contact, so the drop is large enough to measure.",
-   "hidden": "10 kΩ in series between the measured IN point and the board.",
+   "changed": "A 20 kΩ resistor off the mini board plays the bad contact, so the drop is large enough to measure.",
+   "hidden": "20 kΩ in series between the measured IN point and the board.",
    "limits": "The drawing has no part to blame, so the first test is whether the model proposes the missing resistance. A terminal fit says what the series resistance is, not where it sits: the mini-board wire path or something outside it. One reading of the isolated wire path, bands frozen first, decides.",
    "photo_shows_fault": false,
    "status": "official",
@@ -298,7 +298,7 @@
      "x": 270,
      "y": 304,
      "anchor": "middle",
-     "text": "hidden 10 kΩ"
+     "text": "hidden 20 kΩ"
     },
     {
      "type": "text",
