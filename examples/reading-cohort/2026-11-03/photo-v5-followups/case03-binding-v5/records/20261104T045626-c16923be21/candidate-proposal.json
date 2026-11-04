@@ -1,0 +1,40 @@
+{
+  "state": "faulted",
+  "component": "R1",
+  "chosen_by": "muse_spark",
+  "operator_confirmed": false,
+  "surface_values_read": false,
+  "candidate_bodies": [
+    {
+      "kind": "R",
+      "reason": "axial cylindrical blue body with axial leads, resistor shape in board photo upper row",
+      "sam_body": "sam-1"
+    },
+    {
+      "kind": "R",
+      "reason": "axial cylindrical blue body with axial leads, resistor shape in board photo middle row",
+      "sam_body": "sam-0"
+    }
+  ],
+  "mapping_status": "unique",
+  "reason": "Upper resistor sits in same row group as green IN connector on left, while lower resistor is central and blue box capacitor is on right near OUT, matching IN-R1-N1-R2-OUT chain so R1 is the upper body.",
+  "sam_body": "sam-1",
+  "raw_arguments": {
+    "candidate_bodies": [
+      {
+        "kind": "R",
+        "reason": "axial cylindrical blue body with axial leads, resistor shape in board photo upper row",
+        "sam_body": "sam-1"
+      },
+      {
+        "kind": "R",
+        "reason": "axial cylindrical blue body with axial leads, resistor shape in board photo middle row",
+        "sam_body": "sam-0"
+      }
+    ],
+    "mapping_status": "unique",
+    "reason": "Upper resistor sits in same row group as green IN connector on left, while lower resistor is central and blue box capacitor is on right near OUT, matching IN-R1-N1-R2-OUT chain so R1 is the upper body.",
+    "sam_body": "sam-1"
+  },
+  "normalization": null
+}
