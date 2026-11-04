@@ -13,12 +13,12 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
-  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#frontier">What it opens</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
   <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
-  <p>BenchMate gives Muse Spark a real bench. It reads the schematic, chooses experiments on the real circuit, must forecast each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing, and every step is a record you can check.</p>
+  <p>BenchMate gives Muse Spark a real bench. It reads the schematic, chooses experiments on the real circuit, must forecast each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing, and every step is a record you can check. It is built for the moment every lab prototype, repair bench and first production board goes through: the drawing is right, the board is right, the output is wrong.</p>
   <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
 </section>
 
@@ -112,6 +112,41 @@
         </dl>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section" id="frontier">
+  <div class="paper">
+    <h2>What this is a prototype of</h2>
+    <p class="lede">The thing being tested here is not a circuit. It is whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week.</p>
+    <div class="frontier-grid">
+      <div>
+        <h3>Why a circuit first</h3>
+        <p class="small">A circuit comes with a drawing, a simulator anyone can run (ngspice), an instrument that costs $40, and faults that can be planted and sealed. Every part of the loop could be checked by a stranger with the repository and a multimeter. Nothing else we could build in a week had all four.</p>
+      </div>
+      <div>
+        <h3>What the loop needs, and nothing more</h3>
+        <ul class="small plain">
+          <li>a description of what was intended (here: a schematic image),</li>
+          <li>a space of explanations the model may propose (here: a changed value, or a part the drawing lacks),</li>
+          <li>a simulator that turns an explanation into a forecast (here: ngspice),</li>
+          <li>an instrument with a fixed menu the model chooses from (here: steps and sines, with or without a load),</li>
+          <li>a person for what the instrument cannot do (here: move one jumper, read one part),</li>
+          <li>a sealed truth to score against (here: the operator's assembly record, hashed before the first measurement).</li>
+        </ul>
+        <p class="small muted">None of these six is specific to electronics. The 9 mV allowance, the menu and the calibration are specific to this bench, and would have to be qualified again anywhere else.</p>
+      </div>
+      <div>
+        <h3>What it would take elsewhere</h3>
+        <p class="small">Not done here; stated so the scale of the step is clear.</p>
+        <dl class="kv small frontier-kv">
+          <dt>A real PCB at first power-on</dt><dd>The same loop with the schematic and layout as the description, SPICE as the simulator, and a bench supply, scope and source-measure unit as the instrument menu. The reading stage already exists: it is the probe in the operator's hand.</dd>
+          <dt>A thermal or mechanical rig</dt><dd>The description is a CAD or thermal model, the simulator a finite-element solver, the instrument thermocouples and actuators. Forecast first, held-back check, sealed fault: unchanged.</dd>
+          <dt>A lab experiment</dt><dd>Explanations are candidate models of the phenomenon; the menu is the settings the apparatus allows; the forecast is pushed before the run. The model chooses the next experiment the way it chose the loaded step in case 01.</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="frontier-line">The experiments on this page did not exist until the model asked for them. That is the capability being shown; the circuit is the smallest honest place to show it.</p>
   </div>
 </section>
 
