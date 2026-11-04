@@ -2,7 +2,7 @@
 :root{
   --mat:#5c6b76; --mat-deep:#4f5d67; --mat-line:rgba(255,255,255,.07);
   --paper:#fbfbf8; --paper-2:#f0f0ea; --paper-3:#e6e6df;
-  --ink:#171b1e; --ink-2:#4b535a; --ink-3:#7b838a; --rule:#d7d8d1;
+  --ink:#171b1e; --ink-2:#4b535a; --ink-3:#687079; --rule:#d7d8d1;
   --in:#1f9a52; --out:#2b6bdc; --ref:#8b949b; --fc:#7a4fd6; --fault:#d5342c; --ok:#1f9a52;
   --tape:#f3d25a; --tape-ink:#5a4a08; --tape-red:#e04b3f;
   --scope:#0e1315; --scope-2:#141c1f; --grat:#27343a; --grat-2:#1a2528; --phosphor:#dfe9e3;
@@ -275,8 +275,8 @@ body.dev::after{content:"DEV FIXTURE · not a real run";position:fixed;left:50%;
 .hero-side .tile .schem svg{max-height:180px;margin:0 auto}
 .hero-side .tile:last-child .schem svg{max-height:150px;width:100%}
 .tile{background:var(--paper);border-radius:var(--radius);padding:12px 14px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 10px 30px -18px rgba(0,0,0,.6)}
-.tile h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.tile h3 small{font:400 12.5px/1.2 var(--sans);color:var(--ink-2)}
+.tile .tile-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tile .tile-h small{font:400 12.5px/1.2 var(--sans);color:var(--ink-2)}
 .tile .schem{margin-top:6px}
 .tile .schem svg{display:block;width:100%;height:auto}
 .claim{max-width:1240px;margin:22px auto 0;padding:0 16px;color:#fff;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:end}
@@ -660,7 +660,36 @@ footer a{color:#fff}
 /* round 4m: the replay before Play explains its meters and offers the play itself */
 .meters-head{margin:0 0 6px;font:500 12.5px/1.3 var(--narrow);color:#fff;opacity:.85}
 .shelf.compact .meters-head{display:none}
-.scope-idle .bigplay{margin-top:4px;background:#fff;color:var(--ink);border-color:#fff;font-size:15px;padding:10px 20px}
-.scope-idle .bigplay:hover{background:#e9ece8}
-.shelf.compact .scope-idle .bigplay{display:none}
-@media (max-width:900px){.shelf.compact .meters-head{display:block}#shelf.compact .scope-idle .bigplay{display:inline-flex}}
+@media (max-width:900px){.shelf.compact .meters-head{display:block}}
+/* round 4n: report tables breathe; ribbons wrap instead of clipping */
+.exp .fit-table td:nth-child(2){min-width:118px}
+.exp .fit-table td:nth-child(3) small{display:block;margin-top:1px}
+.fit-table .tape{white-space:normal;line-height:1.15;text-align:center;max-width:112px}
+@media (min-width:641px){.exp .grid{grid-template-columns:272px minmax(0,1fr)}}
+.exp .scope .title{display:none} /* the step number is the heading above; at 272 px the title collided with the legend */
+
+/* round 4n: score tiles without holes; eyebrow legible */
+.claim-top .eyebrow{color:var(--paper);opacity:.9}
+.score{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px}
+.score .k{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 12px;align-items:center;padding:10px 14px}
+.score .k b{font-size:28px;min-width:44px}
+.score .k span{line-height:1.3}
+.score .k:hover{transform:none}
+@media (max-width:640px){.score{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.score .k{grid-template-columns:1fr;padding:9px 11px}.score .k b{font-size:24px;min-width:0}}
+
+/* round 4o: review fixes — focus on paper, grids without orphans, one bar colour, legible small text, meters three across */
+.paper :focus-visible,.sheet :focus-visible,.note-tape :focus-visible{outline-color:var(--ink)}
+@media (max-width:1100px) and (min-width:641px){.facts,.built-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.elsewhere div{border-left-color:var(--ink-3)}
+.btn.sm{padding:7px 12px}
+.tape.red{background:var(--fault)}
+@media (prefers-reduced-motion:reduce){.thinking i,.meter.new{animation:none}}
+@media (max-width:640px){.scope-col .caption .it{display:block;white-space:normal}.scope-col .caption .it::before{content:none}.scope-col .caption .it:last-child{margin-top:3px}}
+#shelf .meter-row[data-n="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+#shelf .meter-row[data-n="3"] .meter .name{font-size:12px}
+#shelf .meter-row[data-n="3"] .meter .read{font-size:11px}
+@media (min-width:981px){#shelf .shelf-in:has(.meter-row[data-n="3"]){grid-template-columns:minmax(0,1fr) 440px}}
+@media (max-width:640px){.score .k:last-child:nth-child(odd){grid-column:1 / -1}}
+.run-line.dev{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
+.run-line.dev .acts{margin-left:auto;display:inline-flex;gap:12px;align-items:center}
+.run-line.dev .acts .rep{margin-left:0}
