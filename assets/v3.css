@@ -737,3 +737,9 @@ footer a{color:#fff}
 @media (max-width:560px){.claim-top .path-steps{grid-template-columns:1fr;gap:8px}}
 /* phones (stacked layout): the play button comes before the four-line strip, so it is on the first screen; ≥ 560 px is unchanged */
 @media (max-width:560px){.claim-top{display:flex;flex-direction:column;align-items:stretch;gap:0}.claim-top .path{order:1}}
+
+/* four or more explanations on trial (a proposal joins the drawing's three): the full player grows to the whole 2 × 2 / 3 × 2 grid instead of clipping its second row; the scope stretches with it */
+@media (min-width:981px){
+  #shelf.full .meters:has(.meter-row[data-n="4"]),#shelf.full .meters:has(.meter-row.many){max-height:none;overflow:visible}
+  #shelf.full .shelf-in:has(.meter-row[data-n="4"]) .scope-wrap,#shelf.full .shelf-in:has(.meter-row.many) .scope-wrap{height:auto;min-height:clamp(170px,calc((min(100vw,1240px) - 400px) * .34),calc(45vh - 86px))}
+}

@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "0d4d5448169163e530ab9f820f16ce5faf85a627",
-  "source_site_tree": "cbc4572958bd3c4731dc3314eca0e09dff37d874",
-  "previous_gh_pages_commit": "acf6e3b5f2cd2e577b3ac3fa6a3723dac6a33816",
+  "source_main_commit": "5fb8e7b11a1a1351aa07827a4bcc167c2572631c",
+  "source_site_tree": "bba1d48b05eb7a0e459898d02151087911b74e36",
+  "previous_gh_pages_commit": "d694ea7714d43164a5a3454e1487b4ea4205450a",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Stylesheet and script links carry ?v=4r so phones pick up the CTA-before-strip layout and the seek fix without a stale cache.",
+  "change": "Judge-review fixes: the full player's meter shelf grows to its grid (no clipping at the seal) and the proposal meter prints 'fitted diode'; hero sentence in run order; 'all still fit' for three survivors; report sections in the run's order (check before reading); score-tile denominators spelled out; 'the seal was opened' instead of a match claim; recorder sample period per experiment; case 04 classification string unified; the four-line strip heads in plain words.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20; rewind_check.js 10/10 (same site tree as acf6e3b plus the query strings)",
+    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20, errors none; rewind_check.js 10/10; landing 1440 and 390 no overflow, no console errors",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

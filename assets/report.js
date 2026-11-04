@@ -97,9 +97,11 @@
   }
 
   // a reading that was asked for and then withdrawn: one line, nothing else (the request and forecast stay in the repository record)
-  if (run.reading_withdrawn?.withdrawn && !run.reading?.observed) R.append(el('p', { class: 'small muted', style: 'margin-top:8px' }, EV(el('span', {}, run.reading_withdrawn.line), run.reading_withdrawn.ev, 'reading withdrawn', { reason: run.reading_withdrawn.reason, timing: run.reading_withdrawn.timing, forecast_exercised: run.reading_withdrawn.forecast_exercised })));
+  // the stages after the experiments (a withdrawn reading, the reading, the check) are rendered in the order of their events' timestamps, not a fixed order
+  const stages = []; const firstTs = (...evs) => evs.map(e => e?.ts).filter(Boolean).sort()[0] || '\uffff';
+  if (run.reading_withdrawn?.withdrawn && !run.reading?.observed) stages.push({ ts: firstTs(run.reading_withdrawn.ev), render: () => R.append(el('p', { class: 'small muted', style: 'margin-top:8px' }, EV(el('span', {}, run.reading_withdrawn.line), run.reading_withdrawn.ev, 'reading withdrawn', { reason: run.reading_withdrawn.reason, timing: run.reading_withdrawn.timing, forecast_exercised: run.reading_withdrawn.forecast_exercised }))) });
   // the one reading (only when the run has the stage)
-  if (run.reading?.component) {
+  if (run.reading?.component) stages.push({ ts: firstTs(run.reading.request_ev, run.reading.frozen_ev, run.reading.observed?.ev, run.reading.group?.frozen_ev, run.reading.group?.observed?.ev, ...(run.reading.groups || []).map(g => g.ev)), render: () => {
     const rd = run.reading; const bands = rd.bands || []; const srcs = [...new Set(bands.map(b => b.source))]; const exps = [...new Set(bands.map(b => b.explanation))];
     R.append(h2(rd.group ? 'The reading at the bench: two bodies, bands frozen first' : 'One reading at the bench'));
     for (const g of rd.groups || []) R.append(el('p', { class: 'small' }, el('span', { class: 'chip' }, el('i'), 'engine rule — electrically equivalent'), ` ${BM.words.equivalence(g)} ${expName(g.base_explanation)} and ${(g.members || []).map(m => m.words || m.label).join(', ')} give the same waveforms at the terminals.`, g.reason ? ` ${g.reason}` : ''));
@@ -132,9 +134,10 @@
         R.append(el('p', { class: 'small muted' }, `Engine result as written: fits ${(sc.fits || []).map(expName).join(', ') || 'none'}; body identity ${String(sc.body_identity_status || '').replace(/_/g, ' ')}; nearest-value assignment ${sc.nearest_value_assignment ? 'used' : 'not used'}; ${sc.refitted ? 're-fitted' : 'nothing re-fitted'}. The site never pairs a body with a part itself.`));
       }
     }
-  }
+  } });
 
   // check
+  stages.push({ ts: firstTs(run.verification?.frozen_ev, ...(run.verification?.scored || []).map(s => s.ev)), render: () => {
   R.append(h2('The check on held-back inputs'));
   if (run.verification?.sha) {
     const v = run.verification;
@@ -143,6 +146,8 @@
       el('p', { class: 'small muted', style: 'margin-top:6px' }, 'Frozen model · measured IN: the model frozen before the check is driven by the input the bench actually produced and compared with the measured OUT; nothing was re-fitted.'),
       v.survivors ? el('p', { class: 'small muted', style: 'margin-top:6px' }, `Survivors after the check: ${v.survivors.map(expName).join(', ') || 'none'}.`) : null));
   } else R.append(el('p', { class: 'muted' }, 'The run stopped before Spark asked for the check.'));
+  } });
+  for (const s of stages.sort((a, b) => a.ts < b.ts ? -1 : a.ts > b.ts ? 1 : 0)) s.render();
 
   // outcome and the seal
   R.append(h2(run.outcome?.kind === 'stopped' ? 'Outcome: stopped' : 'Outcome'));
