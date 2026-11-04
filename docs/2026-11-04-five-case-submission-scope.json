@@ -1,0 +1,84 @@
+{
+  "schema": "benchmate.current_submission_scope.v1",
+  "decision_date_KST": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "authority": "explicit_operator_instruction",
+  "operator_verbatim": "LED는 그냥 아얘 안하는걸로 없애버리자",
+  "decision_after_results_of_five_cases": true,
+  "not_original_preregistration": true,
+  "case_order": [
+    "01",
+    "04",
+    "02",
+    "05",
+    "03"
+  ],
+  "case_count": 5,
+  "cases": [
+    {
+      "case_id": "01",
+      "name": "Pin output resistance",
+      "completion_record": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91",
+      "result_sha256": "b12c8736b4f40dfaae56ec7dc970cd5d3b0145d6d364c119e0d097209fe11a7b",
+      "restored_verdict": "consistent",
+      "prior_failures_and_followups_preserved": true
+    },
+    {
+      "case_id": "04",
+      "name": "Unpowered-input diode path",
+      "completion_record": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9",
+      "result_sha256": "d3d2b22c34d87aad127dd8c2959c974c0dfada3c23e93949b7895d7e167905b3",
+      "restored_verdict": "consistent",
+      "prior_failures_and_followups_preserved": true
+    },
+    {
+      "case_id": "02",
+      "name": "Parallel filter capacitors",
+      "completion_record": "examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0",
+      "result_sha256": "65d2f637bc07e227b40be862d947e18978197b11a8318533b43e038c57878da7",
+      "restored_verdict": "consistent",
+      "prior_failures_and_followups_preserved": true
+    },
+    {
+      "case_id": "05",
+      "name": "External contact-resistance path",
+      "completion_record": "examples/channel-timing/2026-11-04/records/20261104T034748-10ab5af750",
+      "result_sha256": "a1e80122d297647d4aba9dd182dc6972fedc4298ccfe93b4e2f3fcd570245698",
+      "restored_verdict": "consistent",
+      "prior_failures_and_followups_preserved": true
+    },
+    {
+      "case_id": "03",
+      "name": "Two-resistor timing chain",
+      "completion_record": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86",
+      "result_sha256": "1c07e3e0cf6d2f849cbcf3428ae01c458f725bd3d11cd78030ee3970420888c8",
+      "restored_verdict": "consistent",
+      "prior_failures_and_followups_preserved": true
+    }
+  ],
+  "excluded_cases": [
+    {
+      "case_id": "06",
+      "name": "BC547B red LED",
+      "reason": "cancelled_by_operator",
+      "include_in_submission": false,
+      "planned_future_work": false,
+      "physical_attempts_in_reading_cohort": 0,
+      "excluded_from_success_and_failure_denominators": true,
+      "historical_software_and_schematic_records_preserved": true
+    }
+  ],
+  "LED_physical_execution_planned": false,
+  "LED_paid_calls_planned": 0,
+  "original_policy_file": "docs/2026-11-03-reading-cohort-policy.json",
+  "original_policy_sha256": "424ed81a457af3d9d1dbb520649c11e48a49210d849923541b80bbd7e70836de",
+  "original_policy_and_frozen_sources_unchanged": true,
+  "original_attempt_accounting_and_selection_unchanged": true,
+  "completed_case_count_is_not_an_accuracy_rate": true,
+  "restored_caption": "No mismatch in the tests Spark chose",
+  "amendment": "docs/2026-11-04-five-case-submission-scope.md",
+  "Claude_owned_material_request": "docs/requests/2026-11-04-five-case-submission-no-led.md",
+  "new_API_calls": 0,
+  "new_hardware_commands": 0,
+  "new_cost_USD": 0
+}

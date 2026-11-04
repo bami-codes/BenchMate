@@ -158,5 +158,22 @@
       "reading_outcome": "one_explanation_remains",
       "completion_method": "retained_faulted_diagnosis_and_confirmed_isolated_reading_plus_restored_v4_and_documentary_SAM"
     }
-  ]
+  ],
+  "current_submission_scope": {
+    "file": "docs/2026-11-04-five-case-submission-scope.json",
+    "sha256": "40c9b9b7759616c00aefa160cffbc0790c8994d54a494ed5c8b4077b74c9a299",
+    "included_case_ids": [
+      "01",
+      "04",
+      "02",
+      "05",
+      "03"
+    ],
+    "included_case_count": 5,
+    "excluded_case_ids": [
+      "06"
+    ],
+    "authority": "explicit_operator_instruction_2026-11-04",
+    "original_attempts_unchanged": true
+  }
 }
