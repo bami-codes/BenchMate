@@ -62,21 +62,23 @@
   // ---- the cases: one row per case with its recorded runs (fault run, restored rerun), in case order
   const cl = $('#case-list');
   const counted = runs.filter(r => r.counted);
-  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${counted.length} official runs: a fault run and a restored rerun for each case.`; }
-  const outcomeLine = (r) => r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one reading, bands frozen first, placed it; seal opened' : 'Spark proposed a part the drawing does not show; held-back checks passed; seal opened') : r.reading === 'group' ? 'one explanation left after the tests; two readings, bands frozen first, fixed which body; seal opened' : 'one explanation left after one reading; seal opened') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome;
-  const runLine = (r) => el('div', { class: 'run-line' },
-    el('a', { class: 'btn sm' + (r.state === 'restored' ? ' ghost' : ''), href: `run.html?run=${r.id}&play=1` }, r.state === 'restored' ? 'Restored rerun' : 'Replay the diagnosis'),
-    el('span', { class: 'small' }, el('b', {}, r.label), ` · ${fmtDate(r.started_utc)} · ${r.steps} experiments · ${r.spark_calls} Spark calls${r.sam_calls ? ` · ${r.sam_calls} SAM` : ''} · ${fmtUSD(r.spark_cost)} est.`, el('span', { class: 'muted' }, ` — ${outcomeLine(r)}`)),
-    el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'));
+  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${counted.length} official runs: a diagnosis on each faulted board, then the same procedure again after the fault was repaired. Spark was never told which fault was planted; the seal was opened only after its verdict.`; }
+  const cap1 = (t) => { if (!t) return t; t = t[0].toUpperCase() + t.slice(1); return /[.!?]$/.test(t) ? t : t + '.'; };
+  const outcomeLine = (r) => cap1(r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one multimeter reading, bands frozen first, placed it; the seal matched.' : 'Spark proposed a part the drawing does not show; held-back checks passed; the seal matched.') : r.reading === 'group' ? 'one explanation left after the tests; two multimeter readings, bands frozen first, fixed which body; the seal matched.' : 'one explanation left after one multimeter reading; the seal matched.') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome);
+  const runLine = (r) => { const restored = r.state === 'restored'; return el('div', { class: 'run-line ' + (restored ? 'restored' : 'fault') },
+    el('div', { class: 'res' }, el('b', {}, restored ? 'Fixed, then rerun.' : 'Found it.'), ' ', outcomeLine(r)),
+    el('div', { class: 'act' },
+      el('a', { class: 'btn sm' + (restored ? ' ghost' : ''), href: `run.html?run=${r.id}&play=1` }, restored ? 'Watch the rerun' : 'Watch the diagnosis'),
+      el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'),
+      el('span', { class: 'small meta' }, `${r.steps} experiments · ${fmtUSD(r.spark_cost)}`))); };
+  const monthYear = (c) => { if (c.source.date) { const d = new Date(c.source.date + 'T00:00:00Z'); return d.toLocaleString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } return (c.source.date_label || '').replace(/\s*\(.*\)\s*$/, ''); };
   for (const c of cases.cases) {
     const rs = counted.filter(r => r.case === c.id).sort((a, b) => a.started_utc < b.started_utc ? -1 : 1);
     const thumb = el('div', { class: 'thumb' }); thumb.append(await schematic(c.design));
-    const status = rs.length ? el('span', { class: 'badge live' }, rs[0].class_label || 'Official run') : el('span', { class: 'badge pending' }, 'Not run yet');
     cl.append(el('div', { class: 'case-row case-block' },
       el('div', { class: 'n' }, c.id), thumb,
-      el('div', {}, el('h3', {}, c.title), el('p', {}, c.symptom || c.problem), el('p', { class: 'src' }, 'Source: ', el('a', { href: c.source.url, target: '_blank', rel: 'noopener' }, `${c.source.site}: ${c.source.title}`), c.source.date ? `, ${c.source.date.slice(0, 7)}` : ''),
-        el('div', { class: 'runs' }, ...rs.map(runLine))),
-      el('div', { class: 'acts' }, status)));
+      el('div', {}, el('h3', {}, c.title), el('p', {}, c.symptom || c.problem), el('p', { class: 'src' }, 'Source: ', el('a', { href: c.source.url, target: '_blank', rel: 'noopener' }, `${c.source.site} · ${c.source.title}`), monthYear(c) ? ` · ${monthYear(c)}` : ''),
+        el('div', { class: 'runs' }, ...rs.map(runLine)))));
   }
   // development records: pilots and QA runs, not counted, kept in full
   const dev = runs.filter(r => !r.counted);
