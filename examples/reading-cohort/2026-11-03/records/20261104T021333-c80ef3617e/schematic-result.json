@@ -1,0 +1,62 @@
+{
+  "source_kind": "intended_schematic",
+  "status": "unverified_visual_candidate",
+  "candidate": {
+    "ambiguities": [
+      "IN and OUT joined by continuous top horizontal wire; shared branch node reported as OUT with IN aliased per rule."
+    ],
+    "components": [
+      {
+        "bbox": [
+          0.354,
+          0.468,
+          0.425,
+          0.69
+        ],
+        "evidence": "vertical rectangle between top wire and REF wire labeled R1 10 kOhm",
+        "kind": "R",
+        "marking": "10 kΩ",
+        "name": "R1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 10000.0
+      },
+      {
+        "bbox": [
+          0.665,
+          0.525,
+          0.74,
+          0.576
+        ],
+        "evidence": "capacitor symbol between top wire and REF wire labeled C1 1 uF",
+        "kind": "C",
+        "marking": "1 µF",
+        "name": "C1",
+        "nodes": [
+          "OUT",
+          "REF"
+        ],
+        "value_si": 1e-06
+      }
+    ],
+    "status": "needs_review",
+    "summary": "Top wire joins IN to OUT; R1 and C1 in parallel between OUT and REF."
+  },
+  "requests": 1,
+  "operator_confirmed": false,
+  "measurement_verified": false,
+  "hardware_IO": false,
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1110,
+    "output_tokens_details": {
+      "reasoning_tokens": 790
+    },
+    "total_tokens": 3201
+  }
+}

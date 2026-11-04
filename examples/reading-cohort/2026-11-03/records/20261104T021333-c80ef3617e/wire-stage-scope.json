@@ -1,0 +1,31 @@
+{
+  "schema": "benchmate.wire_path_reading_stage.v1",
+  "source_sha256": {
+    "src/benchmate/reading_wire_stage.py": "23842b16d59633451442297ea985870610abadd39f43f30d95069f5b03f682b1",
+    "src/benchmate/reading_wire_catalog.py": "c276cac874e1c1d99b7507536eabc122b368adbd5b84fc263a565c989635b27b",
+    "src/benchmate/reading_candidates_v3.py": "fff20a87422b30416510038e62e303f24e9b02cb85a6e7b64906c32087330dba",
+    "tests/test_reading_wire_catalog.py": "cfc2f136754d452d7a457cbcf13cbcd4456b5f0b75c4a39f661372f3e81abedd",
+    "tests/test_reading_wire_stage.py": "35aaedb2cbd4f52bc3416953ea996f2e321ccf6545d437070d094317927763a2",
+    "docs/2026-11-04-wire-path-observable.md": "8fff499cde80d576c8a9537fdda6617a40b0d137015abd58bdbbf91779ec0c5c"
+  },
+  "catalog_sha256": "39c88af969c5acd396474101dcb8d978aa124517eb02fb50a629627fb13e286c",
+  "parent_catalog_sha256": "f4639c00d7ae33f4afb705e535716dd338f81e69b3f81a181167601a61f1e84c",
+  "after_terminal_diagnosis": true,
+  "before_reading_selection": true,
+  "before_photo_or_operator_reading": true,
+  "measurement_isolation": {
+    "isolation": "Disconnect all three mini-board leads from the large fixture, keep their mini-board ends installed.",
+    "DMM_terminals": "Free metal ends of the disconnected IN and OUT leads.",
+    "W1_installed": true,
+    "parallel_R_C_installed": true,
+    "REF_lead": "Disconnected from the large fixture and left floating.",
+    "no_alternate_IN_OUT_path": "IN has only W1; the parallel OUT-REF branches end at the floating REF port.",
+    "included_contacts": "Mini-board wire, sockets and IN/OUT leads retained in the measured path.",
+    "USB_off": true,
+    "discharge_wait_s": 10
+  },
+  "candidate_binding_version": "candidate-kind-set-v3",
+  "restored_extra_reading": false,
+  "external_repair_unchanged_mini_photo_not_repeated": true,
+  "public_manifest": "examples/reading-cohort/2026-11-03/wire-qualifications/20261104T021333-c80ef3617e/scope.json"
+}

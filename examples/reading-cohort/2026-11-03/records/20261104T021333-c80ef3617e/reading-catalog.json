@@ -1,0 +1,89 @@
+{
+  "schema": "benchmate.reading_catalog.v1",
+  "components": {
+    "R1": {
+      "name": "R1",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 10000.0,
+      "model": "none"
+    },
+    "C1": {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  },
+  "explanations": [
+    {
+      "id": "proposal:1",
+      "basis_model_id": "proposal:1",
+      "description": "Verified terminal model; physical uniqueness is not established.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            9500.0,
+            10500.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 10000.0
+        },
+        "C1": {
+          "electrical_interval": [
+            9.499999999999999e-07,
+            1.05e-06
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-06
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "R",
+            "model": "none",
+            "name": "R1",
+            "value": 10000.0
+          },
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "C",
+            "model": "none",
+            "name": "C1",
+            "value": 1e-06
+          },
+          {
+            "a": "IN",
+            "b": "OUT",
+            "kind": "R",
+            "model": "none",
+            "name": "R2",
+            "value": 19851.78774353608
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      }
+    }
+  ],
+  "training_only_intervals": true,
+  "terminal_verification_sha256": "a4c74914682f3f62de1694e9d2b5965661ae9b135e45805cbb008d136cfb8700",
+  "photograph_received": false,
+  "operator_reading_received": false,
+  "scope": "Bounded single-value and exact-equivalent explanations; no claim of exhaustive physical causes."
+}

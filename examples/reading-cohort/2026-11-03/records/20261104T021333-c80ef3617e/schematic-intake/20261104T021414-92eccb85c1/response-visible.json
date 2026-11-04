@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6aea94ffbb6258fa41694e12",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1110,
+    "output_tokens_details": {
+      "reasoning_tokens": 790
+    },
+    "total_tokens": 3201
+  },
+  "elapsed_s": 8.9214314580895,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_82a27187-e99c-447b-add3-125cfd457e56",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Reading the schematic image and recording components.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_1a70ecb5-d4ff-419e-a430-03496325f3dd",
+      "call_id": "call_1a70ecb5-d4ff-419e-a430-03496325f3dd",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[\"IN and OUT joined by continuous top horizontal wire; shared branch node reported as OUT with IN aliased per rule.\"],\"components\":[{\"bbox\":[0.354,0.468,0.425,0.69],\"evidence\":\"vertical rectangle between top wire and REF wire labeled R1 10 kOhm\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":10000.0},{\"bbox\":[0.665,0.525,0.74,0.576],\"evidence\":\"capacitor symbol between top wire and REF wire labeled C1 1 uF\",\"kind\":\"C\",\"marking\":\"1 \u00b5F\",\"name\":\"C1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":1e-06}],\"status\":\"needs_review\",\"summary\":\"Top wire joins IN to OUT; R1 and C1 in parallel between OUT and REF.\"}",
+      "status": "completed"
+    }
+  ]
+}

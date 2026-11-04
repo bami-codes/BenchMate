@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "arguments": {
+    "component": "W1",
+    "quantity": "resistance",
+    "reason": "W1 intervals differ (17800-23700 ohm vs 0-10 ohm) to locate fitted series resistance; R1/C1 intervals are identical."
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 2064,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 844,
+    "output_tokens_details": {
+      "reasoning_tokens": 709
+    },
+    "total_tokens": 2908
+  },
+  "model": "muse-spark-1.3"
+}

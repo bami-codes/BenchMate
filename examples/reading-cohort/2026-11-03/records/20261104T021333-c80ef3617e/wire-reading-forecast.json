@@ -1,0 +1,260 @@
+{
+  "schema": "operator-reading-v1",
+  "request": {
+    "component": "W1",
+    "quantity": "resistance",
+    "reason": "W1 intervals differ (17800-23700 ohm vs 0-10 ohm) to locate fitted series resistance; R1/C1 intervals are identical.",
+    "chosen_by": "muse_spark"
+  },
+  "forecasts": [
+    {
+      "explanation": "on_board_path:proposal:1",
+      "source": "operator_dmm",
+      "low": 15427.138218381442,
+      "high": 26188.011797748884,
+      "unit": "ohm",
+      "observable": "isolated electrical value",
+      "rule": {
+        "electrical_interval_rule": {
+          "kind": "training_only_bounded_grid_envelope",
+          "grid": [
+            1000.0,
+            1154.781984689458,
+            1333.521432163324,
+            1539.926526059492,
+            1778.2794100389228,
+            2053.525026457146,
+            2371.373705661655,
+            2738.4196342643613,
+            3162.2776601683795,
+            3651.741272548377,
+            4216.965034285822,
+            4869.675251658631,
+            5623.413251903491,
+            6493.816315762113,
+            7498.942093324558,
+            8659.643233600653,
+            10000.0,
+            11547.819846894581,
+            13335.21432163324,
+            15399.26526059492,
+            17782.794100389227,
+            19851.78774353608,
+            20535.25026457146,
+            23713.737056616552,
+            27384.196342643612,
+            31622.776601683792,
+            36517.41272548377,
+            42169.65034285822,
+            48696.75251658631,
+            56234.13251903491,
+            64938.16315762113,
+            74989.42093324558,
+            86596.43233600653,
+            100000.0
+          ],
+          "passed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "whole_and_region_limit_mV": 9.0,
+          "reserved_OUT_used": 0,
+          "other_parameters_held_fixed": true,
+          "statistical_confidence_interval": false,
+          "disjoint_regions_enclosed": false,
+          "boundary_pass_uses_open_end": false
+        },
+        "meter_allowance": {
+          "available": true,
+          "meter_operator_description": "DM950?; operator reports 2k, 20k and higher resistance ranges; exact manufacturer accuracy not established",
+          "relative_allowance": 0.02,
+          "digits_allowance": 2,
+          "ranges": [
+            [
+              2000.0,
+              1.0
+            ],
+            [
+              20000.0,
+              10.0
+            ],
+            [
+              200000.0,
+              100.0
+            ],
+            [
+              2000000.0,
+              1000.0
+            ]
+          ],
+          "scope": "Prospective engineering acceptance allowance, NOT verified instrument accuracy. Operator records selected full-scale range and confirms displayed resolution is no coarser than this table. Otherwise stop before scoring; do not enlarge after seeing value."
+        },
+        "intervals_by_meter_range": [
+          {
+            "meter_range": 2000.0,
+            "resolution": 1.0,
+            "low": 17425.138218381442,
+            "high": 24190.011797748884
+          },
+          {
+            "meter_range": 20000.0,
+            "resolution": 10.0,
+            "low": 17407.138218381442,
+            "high": 24208.011797748884
+          },
+          {
+            "meter_range": 200000.0,
+            "resolution": 100.0,
+            "low": 17227.138218381442,
+            "high": 24388.011797748884
+          },
+          {
+            "meter_range": 2000000.0,
+            "resolution": 1000.0,
+            "low": 15427.138218381442,
+            "high": 26188.011797748884
+          }
+        ],
+        "power_off": true,
+        "isolation_required": true,
+        "confidence_interval": false
+      }
+    },
+    {
+      "explanation": "on_board_path:proposal:1",
+      "source": "operator_marking",
+      "low": 0.0,
+      "high": null,
+      "unit": "ohm",
+      "observable": "printed nominal value, not electrical value",
+      "rule": {
+        "nominal_tolerance_fraction": 0.05,
+        "printed_value_unconstrained": true,
+        "actual_value_not_measured": true,
+        "why": "Actual-value change can be damage or replacement; old label may remain."
+      }
+    },
+    {
+      "explanation": "external_path:proposal:1",
+      "source": "operator_dmm",
+      "low": 0.0,
+      "high": 2010.2,
+      "unit": "ohm",
+      "observable": "isolated electrical value",
+      "rule": {
+        "electrical_interval_rule": {
+          "kind": "declared_near_short_path_engineering_category",
+          "low_ohm": 0.0,
+          "high_ohm": 10.0,
+          "not_a_beeper_threshold": true,
+          "not_exact_zero_proof": true
+        },
+        "meter_allowance": {
+          "available": true,
+          "meter_operator_description": "DM950?; operator reports 2k, 20k and higher resistance ranges; exact manufacturer accuracy not established",
+          "relative_allowance": 0.02,
+          "digits_allowance": 2,
+          "ranges": [
+            [
+              2000.0,
+              1.0
+            ],
+            [
+              20000.0,
+              10.0
+            ],
+            [
+              200000.0,
+              100.0
+            ],
+            [
+              2000000.0,
+              1000.0
+            ]
+          ],
+          "scope": "Prospective engineering acceptance allowance, NOT verified instrument accuracy. Operator records selected full-scale range and confirms displayed resolution is no coarser than this table. Otherwise stop before scoring; do not enlarge after seeing value."
+        },
+        "intervals_by_meter_range": [
+          {
+            "meter_range": 2000.0,
+            "resolution": 1.0,
+            "low": 0.0,
+            "high": 12.2
+          },
+          {
+            "meter_range": 20000.0,
+            "resolution": 10.0,
+            "low": 0.0,
+            "high": 30.2
+          },
+          {
+            "meter_range": 200000.0,
+            "resolution": 100.0,
+            "low": 0.0,
+            "high": 210.2
+          },
+          {
+            "meter_range": 2000000.0,
+            "resolution": 1000.0,
+            "low": 0.0,
+            "high": 2010.2
+          }
+        ],
+        "power_off": true,
+        "isolation_required": true,
+        "confidence_interval": false
+      }
+    },
+    {
+      "explanation": "external_path:proposal:1",
+      "source": "operator_marking",
+      "low": 0.0,
+      "high": null,
+      "unit": "ohm",
+      "observable": "printed nominal value, not electrical value",
+      "rule": {
+        "nominal_tolerance_fraction": 0.05,
+        "printed_value_unconstrained": true,
+        "actual_value_not_measured": true,
+        "why": "Actual-value change can be damage or replacement; old label may remain."
+      }
+    }
+  ],
+  "catalog_sha256": "39c88af969c5acd396474101dcb8d978aa124517eb02fb50a629627fb13e286c",
+  "rules_sha256": "b3e3002b0d00d7b2b9e0d88544262c7547672152482991d7ec3a63b051b86b23",
+  "observation_received": false,
+  "photo_received": false,
+  "scope": "Bounded explanations; engineering intervals, not probabilities or a universal diagnosis."
+}

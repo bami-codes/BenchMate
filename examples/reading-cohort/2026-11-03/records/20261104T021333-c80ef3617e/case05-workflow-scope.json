@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.case05_workflow_scope.v1",
+  "before_schematic_intake": true,
+  "before_physical_stimulus": true,
+  "original_107_frozen_sources_unchanged": true,
+  "source_sha256": {
+    "src/benchmate/reading_case05_setup.py": "807efcc7d37f1975c5fe7ebe162dd24aaae8cc4b55e73c3c4a368ca44a01f7a2",
+    "src/benchmate/reading_candidates_v3.py": "fff20a87422b30416510038e62e303f24e9b02cb85a6e7b64906c32087330dba",
+    "docs/2026-11-04-reading-case05-start.md": "bad20be3339e7e13957eff6ec282f5412bf99d9993c5937e4a71b1d472875002"
+  },
+  "schematic_wire_adapter": "Operator confirms the visible IN-OUT direct connection as W1; never attributed to the R/C image reader.",
+  "physical": "Same raw A3 3mV guard, auxiliary A4, 1k instrument path, 9mV whole/region scores, >=10s after new unarmed boot.",
+  "followup_observable": "Only if a useful ambiguity remains: Spark chooses the component and quantity; isolated W1 path resistance needs a separately published numeric observable/profile before any operator reading.",
+  "wire_qualification_pending": true,
+  "photo": "One generic SAM call and the v3 candidate-kind/set plus nullable individual-binding contract; no surface-value reader.",
+  "stage_extensions": "Any new catalog, reading or compound-audit adapter is versioned and committed before its corresponding paid/observation stage, never silently edits the frozen runtime.",
+  "restored_photo": "No duplicate mini-board photo for operator-confirmed unchanged mini configuration and external-only repair; retain the original capture label.",
+  "calls_planned_max": {
+    "Spark": 19,
+    "SAM": 1
+  },
+  "no_automatic_retry_after_failure": true
+}
