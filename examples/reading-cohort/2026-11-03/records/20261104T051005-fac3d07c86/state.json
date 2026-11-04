@@ -1,0 +1,8 @@
+{
+  "case_id": "03",
+  "requested_component": "R1",
+  "reading_outcome": "one_explanation_remains",
+  "faulted_diagnosis": "history/reading/history/original/diagnosis-faulted/20261104T042909-7ee516eccf",
+  "last_boot": "c9c4bc80111236f68e1016f9c1630392",
+  "phase": "awaiting_restored_setup"
+}

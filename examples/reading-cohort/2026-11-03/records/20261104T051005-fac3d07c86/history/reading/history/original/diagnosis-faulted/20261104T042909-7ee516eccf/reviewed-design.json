@@ -1,0 +1,36 @@
+{
+  "schema": "benchmate.reviewed_netlist.v1",
+  "source_kind": "intended_schematic",
+  "elements": [
+    {
+      "name": "R1",
+      "kind": "R",
+      "a": "IN",
+      "b": "N1",
+      "value": 10000.0,
+      "model": "none"
+    },
+    {
+      "name": "R2",
+      "kind": "R",
+      "a": "N1",
+      "b": "OUT",
+      "value": 10000.0,
+      "model": "none"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  ],
+  "source_sha256": "f8a9f893a572c0c96043e443bac13347a2cf9990ea860fb23a9744ef872ec577",
+  "confirmation": "I confirm the intended components, values, connections and ports.",
+  "reviewer_note": "Operator confirmed this fresh schematic transcription; no assembly value supplied.",
+  "operator_review_simulated": false,
+  "measurement_verified": false,
+  "hardware_IO": false
+}

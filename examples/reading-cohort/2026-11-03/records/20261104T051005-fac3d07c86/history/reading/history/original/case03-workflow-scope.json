@@ -1,0 +1,23 @@
+{
+  "schema": "benchmate.case03_workflow_scope.v4",
+  "source_sha256": {
+    "src/benchmate/reading_case03_setup.py": "41bcbdd2ab4fc9a11d185f69b7368a0a47e64af7a64d882c171f75ab1ff04161",
+    "docs/2026-11-04-reading-case03-start.md": "0e33f8a2df182a60592249db2e531442ededaeb2939350588c6a5a6b1e5c0700",
+    "src/benchmate/channel_timing_v4.py": "317d37bccea42edfc70f360227b40e2da5e16be0e748404e59de3a32b3764221",
+    "src/benchmate/channel_timing_session_v4.py": "4952e087ef920085f475eb9dbc171149fa9fc5982db032e7cdb48e634ea135de",
+    "src/benchmate/reading_candidates_v3.py": "fff20a87422b30416510038e62e303f24e9b02cb85a6e7b64906c32087330dba"
+  },
+  "timing_qualification": "examples/channel-timing/2026-11-04/candidate02/manifest.json",
+  "timing_qualification_sha256": "e9ca785bfc7feeefe4a5955a52baf9c3ae08025e5fb08008c053138f72f7fe4b",
+  "before_schematic_intake": true,
+  "before_physical_stimulus": true,
+  "numerical_and_reading_profiles": "Same qualified v4 backend; staged adapter published before hardware.",
+  "photo_binding": "v3 candidate set/kind and nullable reference; no surface values; ambiguous bodies are not operator truth labels.",
+  "restored_consistent_binding": "Prospectively omit Spark reference/value request; restored SAM is visual only.",
+  "later_stage_extensions": "Version, qualify and publish before the corresponding paid/physical/observation stage.",
+  "calls_planned_max": {
+    "Spark": 19,
+    "SAM": 2
+  },
+  "automatic_retry": false
+}

@@ -1,0 +1,20 @@
+{
+  "audit": {
+    "passed": true,
+    "events": 319,
+    "forecasts": 0,
+    "measurements": 0,
+    "order_checks": 0,
+    "prediction_files": 0,
+    "run_status": "cohort_state",
+    "head_sha256": "21604bf23089fdf805ebcab5f8b59eef923defdc394a1cc3d178cd026dc32dbd",
+    "error": null
+  },
+  "incomplete_prefix": true,
+  "offline_tests_passed": 7,
+  "original_frozen_sources_unchanged": 107,
+  "new_model_calls": 0,
+  "new_hardware_commands": 0,
+  "operator_restored_actual_R1_nominal_ohm": 10000,
+  "meter_reading_of_replacement_not_claimed": true
+}

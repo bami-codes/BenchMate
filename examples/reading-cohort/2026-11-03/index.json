@@ -142,6 +142,17 @@
       "counted": true,
       "selected_first_attempt": true,
       "failed_stage": "bind"
+    },
+    {
+      "run_id": "20261104T051005-fac3d07c86",
+      "case_id": "03",
+      "attempt": 2,
+      "status": "registered",
+      "counted": true,
+      "selected_first_attempt": false,
+      "execution_scope": "restored_only_after_confirmed_photo_reading",
+      "followup_of": "20261104T041918-d1084cbeb4",
+      "original_primary_status": "failed"
     }
   ]
 }

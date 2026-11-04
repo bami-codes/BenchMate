@@ -1,0 +1,10 @@
+{
+  "case_id": "03",
+  "parent_run_id": "20261104T041918-d1084cbeb4",
+  "original_failed_status_preserved": true,
+  "reading_outcome": "one_explanation_remains",
+  "repair_completed": false,
+  "restored_diagnosis_completed": false,
+  "new_API_calls": 0,
+  "new_hardware_commands": 0
+}
