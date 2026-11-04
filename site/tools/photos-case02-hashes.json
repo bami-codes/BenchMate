@@ -1,0 +1,17 @@
+{
+ "assets/photos/case02-faulted-sam.png": {
+  "sha256": "dde2676761e0fd35f949c1cbf7a512c51abea5e5b4eb2db86656b963b0f31175",
+  "bytes": 1770205,
+  "src_sha256": "c73e0295066954f41cbfc76d2529c677d876f7dfe1515ef1574f8dd54aab5b64"
+ },
+ "assets/photos/case02-restored-sam.png": {
+  "sha256": "4b19fb56712ef85f68b1972abc0e2fced3214f37e6109090ced10825d52b46d1",
+  "bytes": 1849960,
+  "src_sha256": "685faf6ebbfbf0fc5534de6c4c77b33b25a23182fea12a5363ec76a1f8f122b7"
+ },
+ "assets/photos/case02-board.png": {
+  "sha256": "81f62687cabd2841e269d203ea08f66193f56bee476f2d90f9cfc6956fc07676",
+  "bytes": 1775032,
+  "src_sha256": "c085b67b76aebd8861a4fec67bfd5ad8339015a4989761d517615c9fd16af3a5"
+ }
+}

@@ -14,7 +14,8 @@
    "spark_cost": 0.034454,
    "outcome": "stopped",
    "verdict": null,
-   "pair_of": null
+   "pair_of": null,
+   "reading": null
   },
   {
    "id": "20261102T164944-16f6a79a31",
@@ -30,7 +31,8 @@
    "spark_cost": 0.018031,
    "outcome": "stopped",
    "verdict": null,
-   "pair_of": null
+   "pair_of": null,
+   "reading": null
   },
   {
    "id": "20261103T125924-bf8f64512b",
@@ -53,7 +55,8 @@
    ],
    "state": "faulted",
    "display_caption": null,
-   "pair_of": null
+   "pair_of": null,
+   "reading": "one"
   },
   {
    "id": "20261103T142003-2b176faa91",
@@ -78,7 +81,110 @@
    ],
    "state": "restored",
    "display_caption": "No mismatch in the tests Spark chose",
-   "pair_of": "20261103T125924-bf8f64512b"
+   "pair_of": "20261103T125924-bf8f64512b",
+   "reading": null
+  },
+  {
+   "id": "20261103T150223-18d6f08ac9",
+   "case": "04",
+   "label": "Fault run",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · not a blind test",
+   "started_utc": "2026-11-03T15:04:15.536057+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 9,
+   "spark_cost": 0.0816,
+   "sam_calls": 0,
+   "outcome": "report",
+   "verdict": "structure_supported",
+   "survivors": [
+    "proposal:1"
+   ],
+   "state": "faulted",
+   "display_caption": null,
+   "pair_of": null,
+   "reading": null
+  },
+  {
+   "id": "20261103T153249-a9b088954a",
+   "case": "04",
+   "label": "Restored rerun",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · not a blind test",
+   "started_utc": "2026-11-03T15:32:49.590982+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 6,
+   "spark_cost": 0.048374,
+   "sam_calls": 0,
+   "outcome": "report",
+   "verdict": "consistent",
+   "survivors": [
+    "nominal",
+    "changed:R1",
+    "changed:R2"
+   ],
+   "state": "restored",
+   "display_caption": "No mismatch in the tests Spark chose",
+   "pair_of": "20261103T150223-18d6f08ac9",
+   "reading": null
+  },
+  {
+   "id": "20261103T165506-b6ad3e8cf7",
+   "case": "02",
+   "label": "Fault run",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
+   "started_utc": "2026-11-03T16:57:37.449442+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 8,
+   "spark_cost": 0.102643,
+   "sam_calls": 1,
+   "outcome": "report",
+   "verdict": "changed",
+   "survivors": [
+    "changed:C1"
+   ],
+   "state": "faulted",
+   "display_caption": null,
+   "pair_of": null,
+   "reading": "group"
+  },
+  {
+   "id": "20261103T182550-4ea22cc3a0",
+   "case": "02",
+   "label": "Restored rerun",
+   "pilot": false,
+   "counted": true,
+   "class_label": "Official run · Spark did not know the fault",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
+   "started_utc": "2026-11-03T18:29:08.609107+00:00",
+   "model": "muse-spark-1.3",
+   "steps": 3,
+   "spark_calls": 6,
+   "spark_cost": 0.053127,
+   "sam_calls": 1,
+   "outcome": "report",
+   "verdict": "consistent",
+   "survivors": [
+    "nominal",
+    "changed:R1",
+    "changed:C1",
+    "changed:C2",
+    "changed:R2"
+   ],
+   "state": "restored",
+   "display_caption": "No mismatch in the tests Spark chose",
+   "pair_of": "20261103T165506-b6ad3e8cf7",
+   "reading": null
   }
  ]
 }

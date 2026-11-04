@@ -24,7 +24,7 @@ window.BM = (() => {
   const expName = (id) => names[id] ? names[id] : id === 'nominal' ? 'As drawn' : id.startsWith('changed:') ? `${id.slice(8)} changed`
     : id.startsWith('added:') ? `Added ${id.slice(6)}` : id;
   const fmtR = (v) => v >= 1e6 ? `${(v / 1e6).toFixed(2)} MΩ` : v >= 1e3 ? `${(v / 1e3).toFixed(2)} kΩ` : `${v.toFixed(0)} Ω`;
-  const fmtC = (v) => v >= 1e-6 ? `${(v * 1e6).toFixed(2)} µF` : v >= 1e-9 ? `${(v * 1e9).toFixed(0)} nF` : `${(v * 1e12).toFixed(0)} pF`;
+  const fmtC = (v) => v >= 1e-7 ? `${parseFloat((v * 1e6).toPrecision(2))} µF` : v >= 1e-9 ? `${(v * 1e9).toFixed(0)} nF` : `${(v * 1e12).toFixed(0)} pF`;
   const fmtVal = (kind, v) => v == null ? '' : kind === 'R' ? fmtR(v) : kind === 'C' ? fmtC(v) : String(v);
   // SI prefixes everywhere a value is shown: 20.5 kΩ, 0.47 µF, 3.02 nA — never 2.05e+4
   const SI = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
@@ -207,7 +207,7 @@ window.BM = (() => {
     band(low, high, unit, upto) {
       const top = Math.max(high * 1.25, upto || 0, low * 1.1);
       const step = Math.pow(10, Math.floor(Math.log10(top))); const fs = Math.ceil(top / (step / 2)) * (step / 2);
-      this.face({ fs, band: [low, high], unit, ticks: [0, low, high, fs], major: [0, fs], bandLabel: `${low}–${high}` });
+      const sig = (x) => String(parseFloat(Number(x).toPrecision(3))); this.face({ fs, band: [low, high], unit, ticks: [0, low, high, fs], major: [0, fs], bandLabel: `${sig(low)}–${sig(high)}` });
       this.root.classList.add('band'); this.bandOf = { low, high, unit };
     }
     setReading(value, unit, label) {
@@ -265,10 +265,16 @@ window.BM = (() => {
     published: () => 'The forecast is on GitHub. From here nothing can be re-fitted.',
     scored: (e) => { const vals = Object.values(e.conditional || {}); const ok = vals.every(v => v.passed); return `Held-back input ${e.index ?? ''}: ${ok ? 'within' : 'outside'} the frozen allowance.`; },
     // the reading stage: one operator reading, forecast per explanation before it is taken
-    readingReq: (e, live) => `${live === 2 ? 'Two explanations' : live > 2 ? `${live} explanations` : 'The explanations'} still fit. Spark asks for one reading.`,
+    readingReq: (e, live) => live === 1 ? `One explanation is left. Spark asks for one reading of ${e.component || 'the part'} itself.` : `${live === 2 ? 'Two explanations' : live > 2 ? `${live} explanations` : 'The explanations'} still fit. Spark asks for one reading.`,
     readingForecast: (e) => `Before the reading, each explanation says what ${e.component || 'the part'} should read.`,
     binding: (e) => `Spark says this body is ${e.component} — ${e.operator_confirmed ? 'confirmed by the operator' : e.chosen_by === 'operator' ? 'assigned by the operator' : 'not yet confirmed'}.`,
     readingObs: (e) => `${e.component} reads ${e.value} ${e.unit}, ${sourceWord(e.source)}.`,
+    // the unordered reading stage: two bodies read, every assignment tested against bands frozen first
+    bindingAbstained: (e) => `Asked which body is ${e.component}, Spark said the photo cannot tell them apart; the readings will.`,
+    bodyGroup: (e) => `Two capacitor bodies, ${(e.bodies || []).join(' and ')}. Nobody has said which is ${(e.components || []).join(' and which is ')}.`,
+    groupForecast: (e) => `Before the readings, each explanation says what ${(e.components || []).join(' and ')} should read, whichever body each turns out to be.`,
+    groupObs: (e) => `${(e.readings || []).map(r => `${r.body} reads ${r.value} ${r.unit}`).join('; ')}, ${sourceWord(e.source)}.`,
+    groupScored: (e, n) => Object.keys(e.binding || {}).length ? `Which body is ${Object.keys(e.binding)[0]} follows from the readings themselves: of the ${n === 2 ? 'two' : n} possible assignments, only one fits the frozen bands.` : `No assignment of bodies to parts fits the frozen bands.`,
     readingScored: (e, bands) => e.outcome === 'one' ? `Only ${expName(e.fits[0])} fits this reading. The rest are crossed out.` : e.outcome === 'none' ? 'No explanation fits this reading. All are crossed out.' : `The reading does not separate ${e.fits.map(expName).join(' and ')}.`,
     equivalence: (e) => `Same waveform: ${(e.members || []).map(m => m.words || m.label).join('; ')}.`,
     guard: () => 'The bench’s own reference moved too much. The run stops here.',
@@ -304,7 +310,8 @@ window.BM = (() => {
   const proposalName = (p) => { const a = (p.diff?.added || [])[0]; return a ? `Spark’s proposal: ${({ R: 'resistor', C: 'capacitor', D: 'diode', W: 'wire' })[a.kind] || a.kind}, ${a.a}→${a.b}` : 'Spark’s proposal'; };
   function verdictWords(e, run) {
     const v = e.verdict || ''; const surv = e.survivors || [];
-    if (v === 'nominal_consistent' || (surv.length === 1 && surv[0] === 'nominal')) return 'No mismatch in the tests Spark chose.';
+    // the engine's `consistent` verdict: the drawing survived the held-back checks (value-change siblings may fit too; the engine does not pick among them)
+    if (v === 'consistent' || v === 'nominal_consistent' || (surv.length === 1 && surv[0] === 'nominal')) return (run && run.display_caption) ? run.display_caption + '.' : 'No mismatch in the tests Spark chose.';
     if (surv.length > 1) return `${surv.length === 2 ? 'Two' : surv.length} explanations still fit: ${surv.map(expName).join(' and ')}. One reading at the bench decides.`;
     if (surv.length === 1 && names[surv[0]] && !surv[0].startsWith('proposal')) return `Found: ${names[surv[0]]}, not what the drawing says.`;
     if (surv.length === 1 && surv[0].startsWith('proposal')) { const pr = (run.structure || []).find(x => x.id === surv[0]); const a = pr?.diff?.added || []; return `Found: a part the drawing doesn’t show${a.length ? ', ' + a.map(x => `${kindWord(x.kind)} between ${x.a} and ${x.b}`).join(', ') : ''}.`; }
@@ -324,13 +331,17 @@ window.BM = (() => {
     if (run.outcome?.kind === 'report' && need && scored.length >= need) {
       const passed = scored.every(s => Object.values(s.conditional || {}).every(v => v.passed));
       const rd = run.reading;
+      if (rd?.group?.scored) {
+        const g = rd.group; const bind = g.scored.binding || {}; const n = (g.observed?.readings || []).length || 2;
+        return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'} and Spark named ${surv.map(expName).join(', ')}. ${n === 2 ? 'Two' : n} readings of the part bodies, out of circuit, fit the frozen bands ${Object.keys(bind).length ? 'only one way' : 'no way'}. Watch how.`;
+      }
       if (rd?.scored) {
         const o = rd.outcome;
         if (o === 'one') return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; one reading at the bench settled it. Watch how.`;
         if (o === 'none') return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; the reading fit no explanation. Watch how.`;
         return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; the reading did not separate the explanations. Watch how.`;
       }
-      if (surv.length === 1 && surv[0] === 'nominal') return `In ${e}, nothing disagreed with the drawing, and the held-back check passed. Watch how.`;
+      if ((run.outcome?.verdict === 'consistent') || (surv.length === 1 && surv[0] === 'nominal')) return `In ${e}, nothing disagreed with the drawing, and the held-back checks passed. Watch how.`;
       if (surv.length === 1) return `Spark narrowed it to one explanation in ${e}, and the held-back check ${passed ? 'passed' : 'failed'}. Watch how.`;
       if (surv.length > 1) return `Spark narrowed it to ${surv.length} explanations in ${e}; one reading at the bench decides. Watch how.`;
       return `After ${e}, no explanation survived the held-back check. Watch how.`;

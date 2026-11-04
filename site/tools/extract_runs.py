@@ -755,6 +755,354 @@ def extract_followup(rec, case, label, rates, pair_of):
     return run
 
 
+def seal_from_pair(run, pev, rd_fits):
+    """Copy the seal commitment and (if present) the seal opening into the run. The truth is copied only
+    from specimen_seal_opened; before that event only the digest exists."""
+    sealed = next((e for e in pev if e['kind'] == 'specimen_assembly_sealed' and e['payload'].get('state') == 'faulted'), None)
+    if sealed:
+        run['seal'] = {'sealed_sha256': sealed['payload']['sha256'], 'transmitted_to_model': sealed['payload'].get('transmitted_to_model'), 'sealed_ev': env(sealed)}
+    opened = next((e for e in pev if e['kind'] == 'specimen_seal_opened'), None)
+    if not opened:
+        return None
+    p = opened['payload']
+    a = p.get('assembly') or {}
+    truth = []
+    for x in a.get('specimen_truth', []):
+        loc = x.get('location')
+        if not loc and (x.get('anode_hole') or x.get('cathode_hole') or x.get('striped_cathode_hole')):
+            loc = f"anode at {x.get('anode_hole')}, cathode at {x.get('striped_cathode_hole') or x.get('cathode_hole')}"
+        clar = next((c for c in pev if c['kind'] == 'operator_fixture_contact_clarified'), None)
+        if clar and x.get('kind') == 'D':
+            loc = (loc or '') + ' (sealed record; the operator later clarified the anode sat at E30, the same OUT strip)'
+        truth.append({'component': x.get('component'), 'kind': x.get('kind'), 'type': x.get('type'),
+                      'value_nominal_ohm': x.get('value_nominal_ohm'), 'value_nominal_F': x.get('value_nominal_F'),
+                      'nodes': f"{x.get('anode')}→{x.get('cathode')}" if x.get('anode') else None, 'location': loc})
+    run['seal'] = {**(run.get('seal') or {}), 'opened_ev': env(opened), 'sealed_sha256_at_open': p.get('sealed_sha256'),
+                   'matches_commitment': p.get('sealed_sha256') == (run.get('seal') or {}).get('sealed_sha256'), 'truth': truth,
+                   'after_reading_score': p.get('after_reading_score'), 'after_reading_cancellation': p.get('after_reading_cancellation')}
+    found = rd_fits if rd_fits is not None else ((run.get('outcome') or {}).get('survivors') or [])
+    run['outcome'] = {'kind': 'report', 'verdict': (run.get('outcome') or {}).get('verdict'), 'components': (run.get('outcome') or {}).get('components'),
+                      'survivors': found, 'text': (run.get('outcome') or {}).get('text'), 'ev': (run.get('outcome') or {}).get('ev'),
+                      'seal_opened': True, 'found': found}
+    return opened, truth
+
+
+def extract_terminal_pair(pair, case, label, rates, photos, amendment=None):
+    """A completed reading-assisted pair whose numeric reading was withdrawn (Codex schema
+    benchmate.terminal_pair_reading_withdrawn.v1, case 04): both diagnosis children live inside the pair.
+    Returns (fault_run, restored_run). The fault story ends at the seal reveal; nothing about the withdrawn
+    reading is rendered (the request/forecast stay in the repository record). Earlier failed attempts under
+    history/ are not rendered."""
+    pair = pathlib.Path(pair)
+    res = json.load(open(pair / 'result.json'))
+    reg = json.load(open(pair / 'registration.json'))
+    pev = [json.loads(l) for l in open(pair / 'events.jsonl')]
+    intake = intake_from_pair(pair, rates)
+    label_full = 'Official run · reading-assisted cohort · known to developers, not blind'
+    if reg.get('blind_test') is False and not reg.get('known_case_development'):
+        label_full = 'Official run · reading-assisted cohort · not a blind test'
+    public = 'Official run · Spark did not know the fault'
+
+    def classify_pair(run, state):
+        run['pilot'], run['counted'] = False, bool(reg.get('counted'))
+        run['classification'] = {'pilot': False, 'counted': run['counted'], 'label': label_full, 'public_label': public,
+                                 'basis': 'pair registration committed before the first request (registration.json)',
+                                 'cohort': {'plan': reg.get('cohort'), 'slot': reg.get('run_id'), 'ordinal': reg.get('attempt'), 'state': state}}
+        run['pair_dir'] = pair.name
+        run['registration'] = {k: reg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'selected_first_attempt', 'freeze_commit', 'blind_test', 'known_case_development')}
+        if amendment:
+            run['design_amendment'] = amendment
+
+    fchild = pair / res['faulted_diagnosis']
+    fault = extract(fchild, case, label, intake, rates)
+    fault['id'] = pair.name; fault['child_id'] = fchild.name
+    classify_pair(fault, 'faulted')
+    t0 = ts(fault['started_utc'])
+    totals = dict(fault['totals'])
+    play, last_t = fault['play_length_s'], max((e['t'] for e in fault['events']), default=0.0)
+
+    def add(e, kind, **kw):
+        nonlocal play, last_t
+        t = ts(e['timestamp']) - t0
+        dt = max(0.0, t - last_t)
+        gap = None
+        if dt > GAP_S:
+            gap = round(dt, 1); dt = GAP_PLAY_S
+        play += dt; last_t = t
+        item = {'t': round(t, 3), 'play': round(play, 3), 'kind': kind, 'ev': env(e), **kw}
+        if gap:
+            item['gap_real_s'] = gap
+        item['totals'] = dict(totals)
+        fault['events'].append(item)
+        return item
+
+    # the withdrawn reading: its one selection request is spent and counted, nothing else is rendered
+    sel_ev = next((e for e in pev if e['kind'] == 'reading_requested'), None)
+    sel_dir = next(iter(sorted((pair / 'reading-selection').iterdir())), None) if (pair / 'reading-selection').exists() else None
+    if sel_ev and sel_dir and (sel_dir / 'result.json').exists():
+        u = (json.load(open(sel_dir / 'result.json')).get('usage') or {})
+        if u:
+            totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + cost(u, rates['rates']), 6)
+    cancel = next((e for e in pev if e['kind'] == 'operator_reading_cancelled'), None)
+    fault['reading_withdrawn'] = {
+        'withdrawn': True, 'ev': env(cancel) if cancel else None,
+        'reason': (cancel or {}).get('payload', {}).get('reason'),
+        'timing': (cancel or {}).get('payload', {}).get('timing'),
+        'line': 'No bench reading was needed: one bounded explanation remained and the repair was external.',
+        'selection_request_spent': bool(sel_ev), 'forecast_exercised': False}
+    got = seal_from_pair(fault, pev, None)
+    if got:
+        opened, truth = got
+        add(opened, 'seal_opened', truth=truth, matches=fault['seal']['matches_commitment'])
+    fault['totals'] = totals
+    fault['play_length_s'] = round(play, 2)
+    if photos.get('board'):
+        fault['photo'] = {'board': photos.get('board'), 'crop': photos.get('crop'), 'crop_full': photos.get('crop_full'), 'crop_r1': None,
+                          'crop_box': photos.get('crop_box'), 'crop_full_box': photos.get('crop_full_box'),
+                          'image': {'file': photos.get('crop_full') or photos.get('board'), 'width': photos.get('width'), 'height': photos.get('height'),
+                                    'sha256_render': photos.get('sha256')},
+                          'sam': [], 'vision': None, 'pairing': None, 'documentary': True,
+                          'note': 'Documentary photo of the faulted board, taken after the diagnosis and before the diode was removed. Not sent to any model; no SAM, no reading.'}
+    restore_ev = next((e for e in pev if e['kind'] == 'operator_restoration_confirmed'), None)
+
+    rchild = pair / res['restored_diagnosis']
+    restored = extract(rchild, case, 'Restored rerun', intake, rates)
+    classify_pair(restored, 'restored')
+    restored['pair'] = {'of': fault['id'], 'operator_restored': True, 'state': 'restored',
+                        'restore_ev': env(restore_ev) if restore_ev else None,
+                        'restored_what': (restore_ev or {}).get('payload', {}).get('external_fault_removed')}
+    restored['display_caption'] = res.get('restored_caption') or 'No mismatch in the tests Spark chose'
+    vt = pair / 'verification.txt'
+    if vt.exists():
+        fault['verify_output'] = vt.read_text().strip()
+        fault['verify_command'] = 'python -m benchmate.reading_terminal_pair verify <record folder>'
+        restored['verify_command'] = 'python -m benchmate verify <child folder>'
+    return fault, restored
+
+
+def _F_to_uF(x):
+    return None if x is None else float(f'{x * 1e6:.5g}')  # 5 significant figures, no coarser than the record
+
+
+def extract_group_pair(pair, group, restored, case, label, rates, photos, extra):
+    """Case 02 layout (Codex, 11/4): a reading-assisted pair whose photo stage ended at Spark's binding call
+    (no body named: the two capacitors are identical parallel shunts), an UNORDERED reading supplement
+    (benchmate.unordered_reading_supplement.v1: both capacitor bodies read, every assignment of bodies to
+    parts scored against the frozen bands), and a restored continuation
+    (benchmate.unordered_restored_continuation.v2: seal opened, operator restored, fresh-context rerun,
+    documentary SAM photo). Returns (fault_run, restored_run). Earlier miswired / failed attempts are
+    repository records only. The site never pairs bodies with parts: the assignment shown is the engine's
+    bijection test, copied from group-reading-score.json."""
+    pair, group, restored = pathlib.Path(pair), pathlib.Path(group), pathlib.Path(restored)
+    child = sorted((pair / 'diagnosis-faulted').iterdir())[0]
+    intake = intake_from_pair(pair, rates)
+    run = extract(child, case, label, intake, rates)
+    run['pair_dir'] = pair.name; run['id'] = pair.name; run['child_id'] = child.name
+    pev = [json.loads(l) for l in open(pair / 'events.jsonl')]
+    gev = [json.loads(l) for l in open(group / 'events.jsonl')]
+    rev = [json.loads(l) for l in open(restored / 'events.jsonl')]
+    reg = json.load(open(pair / 'registration.json'))
+    greg = json.load(open(group / 'registration.json'))
+    rreg = json.load(open(restored / 'registration.json'))
+    label_full = 'Official run · reading-assisted cohort · known to developers, not blind'
+    public = 'Official run · Spark did not know the fault'
+    run['registration'] = {k: reg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'selected_first_attempt', 'freeze_commit', 'blind_test', 'known_case_development')}
+    run['pilot'], run['counted'] = False, bool(reg.get('counted'))
+    run['classification'] = {'pilot': False, 'counted': run['counted'], 'label': label_full, 'public_label': public,
+                             'basis': 'pair registration committed before the first request (registration.json); the reading supplement and the restored continuation are registered separately and linked by head sha256',
+                             'cohort': {'plan': reg.get('cohort'), 'slot': reg.get('run_id'), 'ordinal': reg.get('attempt'), 'state': 'faulted'},
+                             'linked_records': {'reading_supplement': greg.get('run_id'), 'restored_continuation': rreg.get('run_id')}}
+    t0 = ts(run['started_utc'])
+    totals = dict(run['totals'])
+    play, last_t = run['play_length_s'], max((e['t'] for e in run['events']), default=0.0)
+
+    def add(e, kind, **kw):
+        nonlocal play, last_t
+        t = ts(e['timestamp']) - t0
+        dt = max(0.0, t - last_t)
+        gap = None
+        if dt > GAP_S:
+            gap = round(dt, 1); dt = GAP_PLAY_S
+        play += dt; last_t = t
+        item = {'t': round(t, 3), 'play': round(play, 3), 'kind': kind, 'ev': env(e), **kw}
+        if gap:
+            item['gap_real_s'] = gap
+        item['totals'] = dict(totals)
+        run['events'].append(item)
+        return item
+
+    fc = json.load(open(pair / 'reading-forecast.json'))
+    sel_dir = sorted((pair / 'reading-selection').iterdir())[0]
+    sel = json.load(open(sel_dir / 'result.json'))
+    manifest = json.load(open(pair / 'photo-faulted' / 'decoded' / 'body-manifest.json'))
+    plan = json.load(open(pair / 'photo-faulted' / 'prepared' / 'plan.json'))
+    binding = json.load(open(extra / 'binding-result.json')) if (extra / 'binding-result.json').exists() else {}
+    sam_dec = json.load(open(extra / 'faulted-sam-decoded.json')) if (extra / 'faulted-sam-decoded.json').exists() else {}
+    display = json.load(open(extra / 'sam-display-manifest.json')) if (extra / 'sam-display-manifest.json').exists() else {}
+    body_group = json.load(open(group / 'body-group.json'))
+    gfc = json.load(open(group / 'group-reading-forecast.json'))
+    gobs = json.load(open(group / 'group-reading-observation.json'))
+    gscore = json.load(open(group / 'group-reading-score.json'))
+    bodies = {c['id']: c for c in manifest['components']}
+    rd = run.setdefault('reading', {'bands': [], 'binding': None, 'observed': None, 'scored': None})
+    sealed = next((e for e in pev if e['kind'] == 'specimen_assembly_sealed' and e['payload'].get('state') == 'faulted'), None)
+    if sealed:
+        run['seal'] = {'sealed_sha256': sealed['payload']['sha256'], 'transmitted_to_model': sealed['payload'].get('transmitted_to_model'), 'sealed_ev': env(sealed)}
+
+    # ---- the pair's own events after the diagnosis: request, C1-only forecast, photo, SAM, Spark names no body
+    for e in pev:
+        k, p = e['kind'], e['payload']
+        if k == 'reading_requested':
+            u = sel.get('usage') or {}
+            c = round(cost(u, rates['rates']), 6) if u else None
+            if u:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            rd.update({'component': p['component'], 'quantity': p['quantity'], 'reason': p['reason'], 'chosen_by': p['chosen_by'], 'request_ev': env(e)})
+            add(e, 'reading_requested', component=p['component'], quantity=p['quantity'], reason=p['reason'], chosen_by=p['chosen_by'],
+                calls=[{'seconds': None, 'cost': c, 'out_tokens': u.get('output_tokens'), 'in_tokens': u.get('input_tokens'),
+                        'reasoning_tokens': (u.get('output_tokens_details') or {}).get('reasoning_tokens'), 'role': 'chose the reading', 'ev': env(e)}] if u else [])
+        elif k == 'reading_forecast_frozen':
+            bands = []
+            for b in fc['forecasts']:
+                rule = b.get('rule') or {}
+                if b['source'] == 'operator_dmm':
+                    rng = (rule.get('intervals_by_meter_range') or [{}])[0]
+                    bands.append({'explanation': b['explanation'], 'source': b['source'], 'component': fc['request']['component'],
+                                  'low': _F_to_uF(rng.get('low', b.get('low'))), 'high': _F_to_uF(rng.get('high', b.get('high'))), 'unit': 'µF', 'observable': b.get('observable'),
+                                  'rule': "fitted value's training envelope (every grid point whose waveforms stay within 9 mV); the meter's own allowance was not yet qualified at this point",
+                                  'note': None, 'rule_raw': {kk: vv for kk, vv in rule.items() if kk != 'electrical_interval_rule'}})
+                else:
+                    bands.append({'explanation': b['explanation'], 'source': b['source'], 'component': fc['request']['component'], 'low': None, 'high': None, 'unit': 'µF',
+                                  'observable': b.get('observable'), 'rule': 'printed nominal value only; a part whose actual value changed can keep its old label, so this band is open',
+                                  'note': 'A marking confirms the nominal value, not the capacitance today.', 'rule_raw': rule})
+            rd['bands'] = bands
+            rd['sha'] = (p.get('sha256') or '')[:10]; rd['sha_full'] = p.get('sha256'); rd['frozen_ev'] = env(e)
+            totals['forecasts_frozen'] += 1
+            add(e, 'reading_forecast_frozen', bands=bands, sha=rd['sha'], sha_full=rd['sha_full'])
+        elif k == 'reading_forecast_publication':
+            rd.update({'published': p.get('published'), 'commit': p.get('commit'), 'url': p.get('url'), 'publish_ev': env(e)})
+            add(e, 'reading_forecast_published', commit=p.get('commit'), url=p.get('url'), sha=rd['sha'])
+        elif k == 'board_photo_received':
+            add(e, 'board_photo', sha256=p.get('sha256'), new_capture=p.get('new_capture_operator_confirmed'))
+        elif k == 'sam_localization_finished':
+            totals['sam_calls'] = totals.get('sam_calls', 0) + int(p.get('requests') or 0)
+            totals['sam_cost'] = round(totals.get('sam_cost', 0.0) + 0.0025 * int(p.get('requests') or 0), 6)
+            add(e, 'sam_done', requests=p.get('requests'), masks=sam_dec.get('match_count') or len(sam_dec.get('masks', [])), bodies=len(manifest['components']))
+        elif k == 'run_failed' and p.get('stage') == 'bind':
+            # Spark, asked which body is C1, named none; its reply did not match the validator's JSON shape and the call was not retried
+            u = binding.get('usage') or {}
+            c = round(cost(u, rates['rates']), 6) if u else None
+            if u:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            args = binding.get('arguments') or {}
+            rd['binding'] = {'sam_body': None, 'component': rd.get('component'), 'chosen_by': 'none', 'reason': args.get('reason'),
+                             'operator_confirmed': False, 'abstained': True, 'format_stop': p.get('error'),
+                             'calls': [{'cost': c, 'role': 'asked which body is C1', 'out_tokens': u.get('output_tokens'), 'in_tokens': u.get('input_tokens'), 'ev': env(e)}] if u else [], 'ev': env(e)}
+            add(e, 'binding_abstained', component=rd.get('component'), reason=args.get('reason'), returned=args.get('sam_body'), format_stop=p.get('error'),
+                bodies=len(manifest['components']), calls=rd['binding']['calls'])
+    # ---- the unordered reading supplement: both capacitor bodies, every assignment scored
+    comps = gfc['components']; sam_bodies = gfc['bodies']
+    gbands = []
+    for x in gfc['explanations']:
+        for comp, iv in x['intervals'].items():
+            gbands.append({'explanation': x['id'], 'role': x['role'], 'component': comp, 'source': gfc['source'],
+                           'low': _F_to_uF(iv[0]), 'high': _F_to_uF(iv[1]), 'unit': 'µF',
+                           'rule': ('training envelope of the fitted value' if (comp == 'C1' and x['id'].startswith('changed')) else 'drawn value ± 5 % part tolerance') + f", plus the meter's allowance ({int(gfc['meter']['relative_allowance'] * 100)} % + {gfc['meter']['digits_allowance']} digits on the {_F_to_uF(gfc['meter']['range_F']):g} µF range)"})
+    rd['group'] = {'bodies': sam_bodies, 'components': comps, 'source': gfc['source'], 'bands': gbands,
+                   'meter': {'range_uF': _F_to_uF(gfc['meter']['range_F']), 'resolution_uF': _F_to_uF(gfc['meter']['resolution_F']), 'relative_allowance': gfc['meter']['relative_allowance'], 'digits_allowance': gfc['meter']['digits_allowance'], 'basis': gfc['meter'].get('basis'), 'calibrated': gfc['meter'].get('accuracy_calibrated')},
+                   'chosen_by': body_group.get('candidate_group_chosen_by'), 'spark_chose_group': body_group.get('Spark_chose_group'), 'spark_abstention_reason': body_group.get('Spark_abstention_reason'),
+                   'correspondence': body_group.get('correspondence'), 'matching': gfc.get('matching'), 'scope': gfc.get('scope'), 'new_blind_test': gfc.get('new_blind_test'),
+                   'body_boxes': {b: (bodies.get(b) or {}).get('native_object', {}).get('bounds_half_open') for b in sam_bodies},
+                   'registration': {'schema': greg.get('schema'), 'run_id': greg.get('run_id'), 'parent_head_sha256': greg.get('parent_head_sha256'), 'counted_new_physical_attempt': greg.get('counted_new_physical_attempt'), 'paid_calls': greg.get('paid_calls')}}
+    for e in gev:
+        k, p = e['kind'], e['payload']
+        if k == 'body_binding_ambiguity':
+            rd['group']['ambiguity_ev'] = env(e)
+            add(e, 'body_group', bodies=sam_bodies, components=comps, chosen_by=body_group.get('candidate_group_chosen_by'), spark_chose_group=body_group.get('Spark_chose_group'),
+                spark_abstention_reason=body_group.get('Spark_abstention_reason'), topology=body_group.get('topology_conditioned'), boxes=rd['group']['body_boxes'],
+                photo=photos.get('faulted_sam'), already_received={'body': (body_group.get('already_received_report') or {}).get('body'), 'source': (body_group.get('already_received_report') or {}).get('source'), 'actual_capacitance_measured': (body_group.get('already_received_report') or {}).get('actual_capacitance_measured')})
+        elif k == 'reading_forecast_frozen':
+            rd['group']['sha_full'] = p.get('sha256'); rd['group']['sha'] = (p.get('sha256') or '')[:10]; rd['group']['frozen_ev'] = env(e)
+            totals['forecasts_frozen'] += 1
+            add(e, 'group_reading_forecast', bands=gbands, bodies=sam_bodies, components=comps, source=gfc['source'], meter=rd['group']['meter'], sha=rd['group']['sha'], sha_full=p.get('sha256'), matching=gfc.get('matching'))
+        elif k == 'reading_forecast_publication':
+            rd['group'].update({'commit': p.get('commit'), 'remote': p.get('remote'), 'publish_ev': env(e)})
+            add(e, 'reading_forecast_published', commit=p.get('commit'), url=p.get('url'), sha=rd['group']['sha'], group=True)
+        elif k == 'group_reading_observed':
+            readings = [{'body': r['body'], 'value': r['value'], 'unit': {'uF': 'µF'}.get(r['unit'], r['unit']), 'range_uF': _F_to_uF(r.get('range_F')), 'isolated': r.get('isolated_confirmed')} for r in p['readings']]
+            rd['group']['observed'] = {'source': p['source'], 'power_off': p.get('power_off_confirmed'), 'discharge_wait': p.get('discharge_wait_confirmed'), 'readings': readings, 'ev': env(e)}
+            rd['observed'] = {'component': None, 'group': True, 'value': None, 'unit': 'µF', 'source': p['source'], 'readings': readings, 'ev': env(e)}
+            add(e, 'group_reading_observed', source=p['source'], readings=readings, power_off=p.get('power_off_confirmed'), discharge_wait=p.get('discharge_wait_confirmed'))
+        elif k == 'group_reading_scored':
+            if not any(b['source'] == (rd['group'].get('observed') or {}).get('source') for b in gbands):
+                sys.exit('group_reading_scored without a frozen band for the reported source')
+            rd['group']['scored'] = {'fits': p['fits'], 'ruled_out': p.get('ruled_out_by_reading') or [], 'reference_fits': p.get('reference_fits'), 'matches': p.get('matches'),
+                                     'binding': p.get('conditional_unique_binding'), 'outcome_raw': p.get('outcome'), 'body_identity_status': p.get('body_identity_status'),
+                                     'nearest_value_assignment': p.get('nearest_value_assignment'), 'refitted': p.get('refitted'), 'forecast_sha256': p.get('forecast_sha256'), 'observation_sha256': p.get('observation_sha256'), 'ev': env(e)}
+            rd['scored'] = {'fits': p['fits'], 'ruled_out': p.get('ruled_out_by_reading') or [], 'group': True, 'ev': env(e)}
+            rd['outcome'] = {'one_explanation_remains': 'one', 'indistinguishable': 'several', 'all_explanations_rejected': 'none'}.get(p.get('outcome'), 'one' if len(p['fits']) == 1 else ('none' if not p['fits'] else 'several'))
+            add(e, 'group_reading_scored', fits=p['fits'], ruled_out=rd['scored']['ruled_out'], matches=p.get('matches'), binding=p.get('conditional_unique_binding'), outcome=rd['outcome'],
+                body_identity_status=p.get('body_identity_status'), nearest_value_assignment=p.get('nearest_value_assignment'), refitted=p.get('refitted'))
+    # ---- the seal opens in the restored continuation's record (after the readings were scored)
+    opened = next((e for e in rev if e['kind'] == 'specimen_seal_opened'), None)
+    if opened:
+        p = opened['payload']; a = p.get('assembly') or {}
+        truth = [{'component': x.get('component'), 'kind': x.get('kind'), 'value_nominal_ohm': x.get('value_nominal_ohm'), 'value_nominal_F': x.get('value_nominal_F'),
+                  'marking': x.get('marking'), 'location': x.get('location')} for x in a.get('specimen_truth', [])]
+        run['seal'] = {**(run.get('seal') or {}), 'opened_ev': env(opened), 'sealed_sha256_at_open': p.get('sealed_sha256'),
+                       'matches_commitment': p.get('sealed_sha256') == (run.get('seal') or {}).get('sealed_sha256'), 'truth': truth,
+                       'after_group_reading_score': p.get('after_group_reading_score'), 'opened_in_record': rreg.get('run_id')}
+        run['outcome'] = {'kind': 'report', 'verdict': (run.get('outcome') or {}).get('verdict'), 'components': (run.get('outcome') or {}).get('components'),
+                          'survivors': rd['scored']['fits'], 'text': (run.get('outcome') or {}).get('text'), 'ev': (run.get('outcome') or {}).get('ev'), 'seal_opened': True, 'found': rd['scored']['fits']}
+        add(opened, 'seal_opened', truth=truth, matches=run['seal']['matches_commitment'])
+    run['totals'] = totals
+    run['play_length_s'] = round(play, 2)
+    disp = display.get('faulted') or {}
+    run['photo'] = {'board': photos.get('board'), 'image': {'file': photos.get('faulted_sam'), 'width': plan['input']['width'], 'height': plan['input']['height'], 'sha256_sam_input': plan['input']['sha256']},
+                    'sam': [{'concept': 'electronic component', 'match_count': sam_dec.get('match_count'), 'displayed': disp.get('displayed_mask_records'),
+                             'masks': [{'object_id': m.get('object_id'), 'bounds_half_open': m.get('bounds_half_open'), 'confidence': m.get('confidence'), 'overlay_file': None, 'source_mask_file': None, 'resize_to_box': m.get('resize_to_box')} for m in sam_dec.get('masks', [])]}],
+                    'vision': None, 'pairing': 'no model paired a body with a drawing part; which body is C1 followed from the readings (the engine’s assignment test)',
+                    'labels': [{'text': b, 'bounds': rd['group']['body_boxes'].get(b)} for b in sam_bodies],
+                    'contours_rule': display.get('rule'), 'contours_note': 'Contours drawn on the photo by a display-only rule chosen after the results: every native SAM 3.1 mask whose box does not contain two others. Not an identification; the masks themselves are unchanged (docs/2026-11-04-case02-SAM-display-revision.md).',
+                    'note': 'Photo untouched; the green outlines are the boundaries of the native SAM 3.1 masks (7 of 7 shown).'}
+    vt = child / 'verification.txt'
+    if vt.exists():
+        run['verify_outputs'] = [f"# diagnosis child, python -m benchmate verify\n{vt.read_text().strip()}"]
+    gvt = group / 'verification.txt'
+    if gvt.exists():
+        run['verify_outputs'].append(f"# reading supplement\n{gvt.read_text().strip()}")
+    run['verify_command'] = 'python -m benchmate verify <diagnosis child folder>'
+
+    # ---- restored continuation: a fresh-context rerun on the same drawing after the operator's restoration
+    rchild = sorted((restored / 'diagnosis-restored').iterdir())[0]
+    rrun = extract(rchild, case, 'Restored rerun', intake, rates)
+    rrun['id'] = restored.name; rrun['child_id'] = rchild.name; rrun['pair_dir'] = restored.name
+    rrun['pilot'], rrun['counted'] = False, bool(rreg.get('counted'))
+    rrun['classification'] = {'pilot': False, 'counted': rrun['counted'], 'label': label_full, 'public_label': public,
+                              'basis': 'restored continuation registered before its first request (registration.json), linked to the pair and the reading supplement by head sha256',
+                              'cohort': {'plan': rreg.get('cohort'), 'slot': rreg.get('run_id'), 'ordinal': rreg.get('attempt'), 'state': 'restored'}}
+    rrun['registration'] = {k: rreg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'state', 'followup_of', 'original_status', 'original_selection_unchanged')}
+    restore_ev = next((e for e in rev if e['kind'] == 'operator_restoration_confirmed'), None)
+    rres = json.load(open(restored / 'result.json')) if (restored / 'result.json').exists() else {}
+    rrun['pair'] = {'of': run['id'], 'operator_restored': True, 'state': 'restored', 'restore_ev': env(restore_ev) if restore_ev else None,
+                    'restored_what': (restore_ev or {}).get('payload', {}).get('instruction'), 'closeout': {k: rres.get(k) for k in ('restored_verdict', 'restored_photo_documentary_only', 'restored_binding_performed', 'prior_restored_binding_requirement_waived', 'SAM_used_as_identification_evidence', 'restored_mask_records', 'photo_SAM_requests', 'photo_Spark_requests')}}
+    rrun['display_caption'] = rres.get('display_caption') or 'No mismatch in the tests Spark chose'
+    rdisp = display.get('restored') or {}
+    rsam = json.load(open(restored / 'photo-restored' / 'sam-decoded.json')) if (restored / 'photo-restored' / 'sam-decoded.json').exists() else {}
+    if photos.get('restored_sam'):
+        rrun['totals']['sam_calls'] = rrun['totals'].get('sam_calls', 0) + int(rres.get('photo_SAM_requests') or 0)
+        rrun['totals']['sam_cost'] = round(rrun['totals'].get('sam_cost', 0.0) + 0.0025 * int(rres.get('photo_SAM_requests') or 0), 6)
+        rrun['photo'] = {'board': None, 'image': {'file': photos.get('restored_sam'), 'width': 1200, 'height': 1600},
+                         'sam': [{'concept': 'electronic component', 'match_count': rsam.get('match_count') or len(rsam.get('masks', [])), 'displayed': rdisp.get('displayed_mask_records'), 'masks': []}],
+                         'vision': None, 'pairing': None, 'documentary': True,
+                         'note': f"Documentary photo of the restored board. SAM 3.1 returned {rsam.get('match_count') or len(rsam.get('masks', []))} masks; {rdisp.get('displayed_mask_records')} are outlined under the same display-only rule as the faulted photo. Nothing was identified or read from it; the native masks are unchanged."}
+    for vt, head in ((rchild / 'verification.txt', '# diagnosis child, python -m benchmate verify'), (restored / 'verification.txt', '# whole restored continuation, python -m benchmate.reading_restored_sam_closeout verify')):
+        if vt.exists():
+            rrun.setdefault('verify_outputs', []).append(f"{head}\n{vt.read_text().strip()}")
+    rrun['verify_command'] = 'python -m benchmate verify <diagnosis child folder>'
+    return run, rrun
+
+
 def timeline_pair(run):
     """Timeline for a pair run: the v2 timeline plus the reading-stage events the pair extractor adds.
     The diagnosis child's report comes BEFORE the reading, so it is shown as Spark's report after the
@@ -769,7 +1117,8 @@ def timeline_pair(run):
     seen = {(x['ev'] or {}).get('seq') for x in out if x.get('ev')}
     extra = []
     for e in run['events']:
-        if e['kind'] in ('reading_forecast_published', 'board_photo', 'sam_done', 'seal_opened') and e['ev']['seq'] not in seen:
+        if e['kind'] in ('reading_forecast_published', 'board_photo', 'sam_done', 'seal_opened', 'binding_abstained', 'body_group',
+                         'group_reading_forecast', 'group_reading_observed', 'group_reading_scored') and (e['ev']['seq'], e['ev']['kind']) not in {(x['ev']['seq'], x['ev']['kind']) for x in out if x.get('ev')}:
             item = {'t_log': e['t'], 't_play': e['play'], 'kind': e['kind'], 'totals': e.get('totals'), 'ev': e.get('ev'),
                     **{a: b for a, b in e.items() if a not in ('t', 'play', 'kind', 'totals', 'ev')}}
             if e['kind'] == 'seal_opened':
@@ -803,8 +1152,9 @@ def write_run(run, case, label, pair_of=None):
                         'sam_calls': run['totals'].get('sam_calls', 0),
                         'outcome': run['outcome'] and run['outcome']['kind'], 'verdict': (run['outcome'] or {}).get('verdict'),
                         'survivors': (run['outcome'] or {}).get('survivors'),
-                        'state': (run.get('pair') or {}).get('state') or ('faulted' if run.get('reading') else None),
+                        'state': (run.get('pair') or {}).get('state') or ('faulted' if (run.get('reading') or run.get('seal')) else None),
                         'display_caption': run.get('display_caption'),
+                        'reading': ('group' if (run.get('reading') or {}).get('group') else 'one' if (run.get('reading') or {}).get('observed') else None),
                         'pair_of': pair_of})
     idx['runs'].sort(key=lambda r: r['started_utc'])
     idx_p.write_text(json.dumps(idx, ensure_ascii=False, indent=1))
@@ -818,7 +1168,7 @@ def main():
         for p in sys.argv[2:]:
             convert(p)
         return
-    if len(sys.argv) > 1 and sys.argv[1] in ('--pair', '--followup'):
+    if len(sys.argv) > 1 and sys.argv[1] in ('--pair', '--followup', '--pair-terminal', '--pair-group'):
         ap = argparse.ArgumentParser()
         ap.add_argument(sys.argv[1], dest='rec', required=True, help='pair folder (reading-assisted cohort) or follow-up record folder')
         ap.add_argument('--case', required=True)
@@ -826,10 +1176,29 @@ def main():
         ap.add_argument('--rates', required=True, help='any JSON with rates_usd_per_million')
         ap.add_argument('--photos', default=None, help='JSON {board, overlay, outline, crop, evidence}: site-relative paths of sanitized derivatives')
         ap.add_argument('--pair-of', default=None)
+        ap.add_argument('--amendment', default=None, help='JSON file describing a public design amendment made before any measurement')
+        ap.add_argument('--group', default=None, help='unordered reading supplement record (benchmate.unordered_reading_supplement.v1)')
+        ap.add_argument('--restored', default=None, help='restored continuation record (benchmate.unordered_restored_continuation.v2)')
+        ap.add_argument('--extra', default=None, help='folder with the pair files that sit too deep to stage: binding-result.json, faulted-sam-decoded.json, sam-display-manifest.json')
         a = ap.parse_args()
         cj = json.load(open(a.rates))
         rates = {'rates': cj['rates_usd_per_million'], 'source': 'https://dev.meta.ai/docs/pricing-rate-limits'}
         photos = json.load(open(a.photos)) if a.photos else {}
+        if sys.argv[1] == '--pair-group':
+            fault, restored = extract_group_pair(a.rec, a.group, a.restored, a.case, a.label, rates, photos, pathlib.Path(a.extra or a.rec))
+            fault['timeline'] = timeline_pair(fault)
+            restored['timeline'] = timeline(restored)
+            write_run(fault, a.case, a.label)
+            write_run(restored, a.case, restored['label'], fault['id'])
+            return
+        if sys.argv[1] == '--pair-terminal':
+            amend = json.load(open(a.amendment)) if a.amendment else None
+            fault, restored = extract_terminal_pair(a.rec, a.case, a.label, rates, photos, amend)
+            fault['timeline'] = timeline_pair(fault)
+            restored['timeline'] = timeline(restored)
+            write_run(fault, a.case, a.label)
+            write_run(restored, a.case, restored['label'], fault['id'])
+            return
         if sys.argv[1] == '--pair':
             run = extract_pair(a.rec, a.case, a.label, rates, photos)
             run['timeline'] = timeline_pair(run)

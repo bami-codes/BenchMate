@@ -1,0 +1,8 @@
+{
+ "board": "assets/photos/case02-board.png",
+ "faulted_sam": "assets/photos/case02-faulted-sam.png",
+ "restored_sam": "assets/photos/case02-restored-sam.png",
+ "width": 1200,
+ "height": 1600,
+ "source": "photo-faulted/prepared/input.png (metadata-free 1200x1600 SAM input) and examples/SAM-display/2026-11-04/case02-v2/*-SAM-overview.png (same pixels with native-mask contours); original DNGs private"
+}

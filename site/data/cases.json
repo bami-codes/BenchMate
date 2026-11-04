@@ -114,9 +114,9 @@
    "kept": "A filter capacitor of the wrong value, with the value printed on the part.",
    "changed": "The original was about 50× too small (100 nF to about 2 nF). Here 1 µF (marked 105) becomes 0.47 µF (marked 474), about 2×.",
    "hidden": "C1 is a 0.47 µF part marked 474, not the 1 µF part marked 105.",
-   "limits": "Measurement points at the filter capacitance, not at which capacitor. The marking on C1, read at the bench, names it.",
+   "limits": "The bench tests point at the filter capacitance; they do not say which capacitor body it is. Both capacitors were then read out of circuit and scored against bands frozen first; which body is C1 follows from those readings, not from the photo.",
    "photo_shows_fault": true,
-   "status": "pending",
+   "status": "official",
    "overlay": [
     {
      "type": "box",
@@ -197,11 +197,11 @@
     "out": "ESP32 input pin, unpowered"
    },
    "kept": "An extra path from the divider's output that the drawing doesn't show.",
-   "changed": "We play the unpowered ESP32 input with one diode off the mini board, the usual input-clamp explanation.",
-   "hidden": "A diode from OUT to REF, off the mini board.",
-   "limits": "No single part value explains this. The test is whether the model proposes a part that isn't in the drawing.",
+   "changed": "We play the unpowered ESP32 input with one diode off the mini board, the usual input-clamp explanation. R2 is the available 20 kΩ part (public amendment from 22 kΩ before any measurement).",
+   "hidden": "A diode from OUT to REF, off the mini board (a 1N4148, cathode at REF).",
+   "limits": "No single part value explains this. The test is whether the model proposes a part that is not in the drawing; one survived the held-back checks. The proposal is a bounded model, not a unique physical location.",
    "photo_shows_fault": false,
-   "status": "pending",
+   "status": "official",
    "overlay": [
     {
      "type": "dashed",

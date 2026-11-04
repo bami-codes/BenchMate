@@ -59,8 +59,8 @@
    "state": "faulted",
    "order": 3,
    "required": true,
-   "run_id": null,
-   "status": "not_started"
+   "run_id": "20261103T150223-18d6f08ac9",
+   "status": "completed"
   },
   {
    "slot_id": "04-R01",
@@ -68,8 +68,8 @@
    "state": "restored",
    "order": 4,
    "required": true,
-   "run_id": null,
-   "status": "not_started"
+   "run_id": "20261103T153249-a9b088954a",
+   "status": "completed"
   },
   {
    "slot_id": "02-F01",
@@ -77,8 +77,8 @@
    "state": "faulted",
    "order": 5,
    "required": true,
-   "run_id": null,
-   "status": "not_started"
+   "run_id": "20261103T165506-b6ad3e8cf7",
+   "status": "completed"
   },
   {
    "slot_id": "02-R01",
@@ -86,8 +86,8 @@
    "state": "restored",
    "order": 6,
    "required": true,
-   "run_id": null,
-   "status": "not_started"
+   "run_id": "20261103T182550-4ea22cc3a0",
+   "status": "completed"
   },
   {
    "slot_id": "05-F01",
@@ -143,5 +143,11 @@
    "run_id": null,
    "status": "not_started"
   }
- ]
+ ],
+ "display_rule_2026_11_04": {
+  "text": "Each case's replay is the first official attempt that reached a diagnostic verdict with the board matching the registered fault wiring. Attempts stopped before a verdict, and attempts whose wiring differed from the registration (checked by photo), stay in the repository ledger and in the attempt counts but are not used as a case replay. This display rule was written down on 4 Nov, after results.",
+  "written_down": "2026-11-04",
+  "after_results": true,
+  "source": "docs/2026-11-04-case02-attempt2-fault-result.md and docs/2026-11-04-case02-SAM-display-revision.md (case 02: attempt 1 f20340dd0b miswired and abstained; attempt 2 b6ad3e8cf7 is the replay)"
+ }
 }
