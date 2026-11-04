@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "21513292cd2ed764f0cf2b40d2ac31cedf536ea1",
-  "source_site_tree": "b6d96ad2b6a6597937851a886a11ffb723c3eee3",
-  "previous_gh_pages_commit": "5b1be099105776feeb9df6792b6fe9857e87935e",
+  "source_main_commit": "b4d9518e794feba900c96ea786525301847d1764",
+  "source_site_tree": "71e353962222d8f5a3848e8789f214f1ea040061",
+  "previous_gh_pages_commit": "b55aecc618e6ce1043d9398eadc2228831541139",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,7 +16,7 @@
     "04",
     "05"
   ],
-  "change": "Case 05 planted value corrected to the sealed 20 k\u03a9; case 04 report text without a reading stage; replay block titles 'from the engine's report'.",
+  "change": "netlistSVG sizes the REF line and viewBox to the parallel branches, so case 04's proposed diode D1 reaches REF and its label is no longer clipped.",
   "validation": {
     "browser_QA": "PASS",
     "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports",

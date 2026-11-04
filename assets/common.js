@@ -430,28 +430,39 @@ window.BM = (() => {
     const s = (t, a = {}, txt) => { const n = document.createElementNS(NS, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); if (txt != null) n.textContent = txt; return n; };
     const W = 760, TOP = 120, BOT = 300; const nodes = ['IN', 'N1', 'N2', 'OUT'];
     const used = nodes.filter(n => elements.some(e => e.a === n || e.b === n)); const xs = {}; used.forEach((n, i) => xs[n] = 90 + i * ((W - 180) / Math.max(1, used.length - 1)));
-    const svg = s('svg', { viewBox: `0 0 ${W} ${BOT + 60}`, role: 'img', 'aria-label': 'Proposed circuit' });
-    svg.append(s('rect', { width: '100%', height: '100%', fill: '#fff' }));
     const hi = new Set(highlight); const col = (e) => hi.has(e.name) ? '#d5342c' : '#000';
     const series = elements.filter(e => e.a !== 'REF' && e.b !== 'REF'), shunt = elements.filter(e => e.a === 'REF' || e.b === 'REF');
     const label = (e) => `${e.name}  ${e.kind === 'R' ? fmtR(e.value) : e.kind === 'C' ? fmtC(e.value) : e.kind === 'D' ? 'diode' : ''}`;
+    // Parallel branches to REF fan out ±120 around their node, so with two or more the outer ones (and their labels) can
+    // fall past the fixed canvas. Lay the branches out first, then size the REF line and the viewBox to what is drawn.
+    const byNode = {}; for (const e of shunt) { const n = e.a === 'REF' ? e.b : e.a; (byNode[n] = byNode[n] || []).push(e); }
+    const textW = (t) => 11 * t.length; // generous upper bound for 20 px Archivo Narrow / Arial
+    const branches = []; for (const [n, list] of Object.entries(byNode)) list.forEach((e, i) => {
+      const x = xs[n] + (i - (list.length - 1) / 2) * 120; const c = (list.length - 1) / 2;
+      const side = list.length > 1 && i < c ? 'left' : list.length > 2 && i === c ? 'below' : 'right'; const w = textW(label(e));
+      branches.push({ n, e, x, side, x0: side === 'left' ? x - 44 - w : side === 'below' ? x - w / 2 : x - 36, x1: side === 'right' ? x + 44 + w : side === 'below' ? x + w / 2 : x + 36 }); });
+    const bx = branches.map(b => b.x);
+    const refX0 = Math.min(60, ...bx.map(x => x - 30)), refX1 = Math.max(W - 60, ...bx.map(x => x + 30));
+    const vx0 = Math.min(0, refX0 - 40, ...branches.map(b => b.x0 - 12)), vx1 = Math.max(W, refX1 + 40, ...branches.map(b => b.x1 + 12));
+    const svg = s('svg', { viewBox: `${vx0} 0 ${vx1 - vx0} ${BOT + 60}`, role: 'img', 'aria-label': 'Proposed circuit' });
+    svg.append(s('rect', { x: vx0, y: 0, width: vx1 - vx0, height: BOT + 60, fill: '#fff' }));
     for (const e of series) { const x0 = Math.min(xs[e.a], xs[e.b]), x1 = Math.max(xs[e.a], xs[e.b]); const m = (x0 + x1) / 2;
       svg.append(s('line', { x1: x0, y1: TOP, x2: x1, y2: TOP, stroke: col(e), 'stroke-width': 4 }));
       if (e.kind === 'W') continue;
       svg.append(s('rect', { x: m - 60, y: TOP - 18, width: 120, height: 36, fill: '#fff', stroke: col(e), 'stroke-width': 4, 'stroke-dasharray': hi.has(e.name) ? '10 7' : 'none' }));
       svg.append(s('text', { x: m, y: TOP - 30, 'text-anchor': 'middle', 'font-size': 20, 'font-family': 'Archivo Narrow, Arial, sans-serif', fill: col(e) }, label(e))); }
-    const byNode = {}; for (const e of shunt) { const n = e.a === 'REF' ? e.b : e.a; (byNode[n] = byNode[n] || []).push(e); }
-    for (const [n, list] of Object.entries(byNode)) list.forEach((e, i) => { const x = xs[n] + (i - (list.length - 1) / 2) * 120; svg.append(s('circle', { cx: xs[n], cy: TOP, r: 5, fill: '#000' }));
+    for (const { n, e, x, side } of branches) { svg.append(s('circle', { cx: xs[n], cy: TOP, r: 5, fill: '#000' }));
       svg.append(s('line', { x1: xs[n], y1: TOP, x2: x, y2: TOP + 30, stroke: col(e), 'stroke-width': 4 })); svg.append(s('line', { x1: x, y1: TOP + 30, x2: x, y2: BOT, stroke: col(e), 'stroke-width': 4 }));
       const mid = (TOP + 30 + BOT) / 2; const dash = hi.has(e.name) ? '10 7' : 'none';
       if (e.kind === 'R') svg.append(s('rect', { x: x - 16, y: mid - 40, width: 32, height: 80, fill: '#fff', stroke: col(e), 'stroke-width': 4, 'stroke-dasharray': dash }));
       else if (e.kind === 'C') { svg.append(s('rect', { x: x - 36, y: mid - 14, width: 72, height: 28, fill: '#fff', stroke: 'none' })); svg.append(s('line', { x1: x - 32, y1: mid - 8, x2: x + 32, y2: mid - 8, stroke: col(e), 'stroke-width': 4 })); svg.append(s('line', { x1: x - 32, y1: mid + 8, x2: x + 32, y2: mid + 8, stroke: col(e), 'stroke-width': 4 })); }
       else if (e.kind === 'D') { const down = e.a !== 'REF'; svg.append(s('rect', { x: x - 26, y: mid - 26, width: 52, height: 52, fill: '#fff', stroke: 'none' })); svg.append(s('polygon', { points: down ? `${x - 22},${mid - 22} ${x + 22},${mid - 22} ${x},${mid + 18}` : `${x - 22},${mid + 22} ${x + 22},${mid + 22} ${x},${mid - 18}`, fill: '#fff', stroke: col(e), 'stroke-width': 4, 'stroke-dasharray': dash })); svg.append(s('line', { x1: x - 22, y1: down ? mid + 18 : mid - 18, x2: x + 22, y2: down ? mid + 18 : mid - 18, stroke: col(e), 'stroke-width': 4 })); }
-      const leftSide = list.length > 1 && i === 0;
-      svg.append(s('text', { x: leftSide ? x - 44 : x + 44, y: mid + 7, 'text-anchor': leftSide ? 'end' : 'start', 'font-size': 20, 'font-family': 'Archivo Narrow, Arial, sans-serif', fill: col(e) }, label(e))); });
-    svg.append(s('line', { x1: 60, y1: BOT, x2: W - 60, y2: BOT, stroke: '#000', 'stroke-width': 4 }));
+      const tx = side === 'left' ? x - 44 : side === 'right' ? x + 44 : x, ty = side === 'below' ? BOT - 14 : mid + 7, anchor = side === 'left' ? 'end' : side === 'right' ? 'start' : 'middle';
+      const halo = side === 'below' ? { 'paint-order': 'stroke', stroke: '#fff', 'stroke-width': 6, 'stroke-linejoin': 'round' } : {};
+      svg.append(s('text', { x: tx, y: ty, 'text-anchor': anchor, 'font-size': 20, 'font-family': 'Archivo Narrow, Arial, sans-serif', fill: col(e), ...halo }, label(e))); }
+    svg.append(s('line', { x1: refX0, y1: BOT, x2: refX1, y2: BOT, stroke: '#000', 'stroke-width': 4 }));
     for (const n of used) svg.append(s('text', { x: xs[n], y: TOP - 60, 'text-anchor': 'middle', 'font-size': 22, 'font-family': 'Archivo Narrow, Arial, sans-serif' }, n));
-    svg.append(s('text', { x: 60, y: BOT + 36, 'font-size': 22, 'font-family': 'Archivo Narrow, Arial, sans-serif' }, 'REF'));
+    svg.append(s('text', { x: refX0, y: BOT + 36, 'font-size': 22, 'font-family': 'Archivo Narrow, Arial, sans-serif' }, 'REF'));
     return svg;
   }
 
