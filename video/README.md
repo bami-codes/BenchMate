@@ -1,5 +1,7 @@
 # Video pipeline
 
+> **Status, 4 November 2026.** No demo film has been made. What follows describes pipeline drafts from 2 November (narrated backup cut with mock scenes) and a newer draft that records the live site (`record_site.js`, `assemble.py`); neither has produced a submitted video. The public demo is the site at https://bami-codes.github.io/BenchMate/.
+
 This pipeline builds recorded-data scenes for the three-minute demo. The final submission
 edit is still pending. A complete **2:36 backup draft** and a standalone **51-second
 physical-diagnosis highlight** are ready locally; see

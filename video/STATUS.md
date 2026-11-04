@@ -1,3 +1,5 @@
+> **Superseded.** This handoff is from 2 November; nothing in it was submitted and no demo film exists as of 4 November. Kept as a record.
+
 # Editing handoff — November 2
 
 Ready locally:
