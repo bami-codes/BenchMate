@@ -19,9 +19,9 @@ const START02 = Math.max(0, tPlay('20261103T165506-b6ad3e8cf7', 'spark_report') 
   const b = await chromium.launch();
   const ONLY = (process.env.SCENES || '').split(',').filter(Boolean); // re-record a subset; the others keep their files and cues
   const cues = fs.existsSync(path.join(RAW, 'cues.json')) ? JSON.parse(fs.readFileSync(path.join(RAW, 'cues.json'))) : {};
-  async function scene(name, fn, { w = 1920, h = 1080 } = {}) {
+  async function scene(name, fn, { w = 1440, h = 810 } = {}) { // a 1440-wide viewport scaled to 1080p: the 1240 px content column fills the frame
     if (ONLY.length && !ONLY.includes(name)) { console.log(name, 'kept'); return; }
-    const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, recordVideo: { dir: RAW, size: { width: w, height: h } }, reducedMotion: 'no-preference' });
+    const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, recordVideo: { dir: RAW, size: { width: 1920, height: 1080 } }, reducedMotion: 'no-preference' });
     const page = await ctx.newPage(); const t0 = Date.now(); const seen = {}; const log = (k, extra) => { if (seen[k] == null) { seen[k] = +((Date.now() - t0) / 1000).toFixed(2); if (extra) seen[k + ':note'] = extra; } };
     page.log = log; page.t0 = t0;
     await fn(page, log);

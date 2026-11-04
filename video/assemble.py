@@ -140,9 +140,12 @@ def main():
         if 'Verdict · compared by code' in meta['cues']:
             trim_end = min(dur, meta['cues']['Verdict · compared by code'] + 4.2)
         parts.append((s, meta['file'], trim_end))
-        for j, (st, d, text) in enumerate(sorted(caps.get(s, []), key=lambda x: x[0])):
+        ordered = sorted(caps.get(s, []), key=lambda x: x[0])
+        for j, (st, d, text) in enumerate(ordered):
             if st >= trim_end: continue
             en = min(trim_end - 0.1, st + (d or 3.5))
+            if j + 1 < len(ordered): en = min(en, ordered[j + 1][0] - 0.15)  # captions never overlap
+            if en - st < 1.2: continue
             png = CAP / f'{s}-{j}.png'; caption_png(text, png)
             inputs.append(png); filters.append((len(inputs), t_acc + st, t_acc + en))
             a, b = t_acc + st, t_acc + en
