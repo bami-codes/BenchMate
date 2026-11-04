@@ -19,7 +19,7 @@
 <section class="claim claim-top" aria-label="What this is">
   <p class="eyebrow">Five real circuits · five hidden faults · every forecast made before the measurement</p>
   <h1 class="oneline"><span class="nw">The drawing is right.</span> <span class="nw">The board is right.</span> <span class="wrong nw">The output is wrong.</span></h1>
-  <p class="sub"><span class="ln">Meta’s Muse Spark reads the schematic and chooses its own experiments on a real board.</span> <span class="ln">Every forecast comes before the measurement; every verdict is scored by code against a sealed answer.</span></p>
+  <p class="sub"><span class="ln">Meta’s Muse Spark reads the schematic and chooses its own experiments on a real board.</span> <span class="ln">Every forecast is frozen before the measurement and checked against it by code; the fault stays sealed until the verdict.</span></p>
   <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
 </section>
 
@@ -148,7 +148,7 @@
     <p class="deck">Not a circuit tester: a test of whether a model can do the basic move of experimental science on a real system.</p>
     <ul class="facts" aria-label="The basic move">
       <li><b>Say what it expects</b>before the measurement, with the forecast hashed so it cannot be changed afterwards.</li>
-      <li><b>Be held to it</b>by code, against a truth it was never told: a miss above the allowance crosses the explanation out.</li>
+      <li><b>Be held to it</b>by code: a miss above the allowance, against the measurement, crosses the explanation out. The fault stays sealed.</li>
       <li><b>Keep going</b>until one explanation is left, proposing a part the drawing lacks when none survives.</li>
     </ul>
     <p class="small muted" style="margin:-6px 0 14px">A circuit was the cheapest real system where that could be done honestly in one week.</p>
@@ -183,7 +183,7 @@
       <div><h3><span class="n">4</span>Measure and cross out</h3><p>The Arduino UNO R4 fixture measures the real circuit. Explanations that miss by more than 9 mV, on the whole step or any region of it, are ruled out. If none survive, Spark may propose a part the drawing does not show.</p></div>
       <div><h3><span class="n">5</span>Check on held-back inputs</h3><p>The final forecast is pushed to GitHub, then two reserved inputs that were never used for fitting are measured.</p></div>
       <div><h3><span class="n">6</span>One reading at the bench</h3><p>When two explanations give the same waveforms, Spark names one part to read. Its expected range under each explanation is frozen first; the operator types one value; the same rule rules out.</p></div>
-      <div><h3><span class="n">7</span>Open the seal</h3><p>The hidden fault, committed as a digest before the first measurement, is compared with the result by code. SAM 3.1 outlines the bodies in the board photo; Spark vision points at the part.</p></div>
+      <div><h3><span class="n">7</span>Open the seal</h3><p>The hidden fault, committed as a digest before the first measurement, is opened; code checks the digest against that commitment, and the verdict is printed beside it. SAM 3.1 outlines the bodies in the board photo; Spark vision points at the part.</p></div>
       <div class="verify-card" id="verify-short"></div>
     </div>
   </div>
@@ -196,7 +196,7 @@
     <div class="made" aria-label="What was built"><span>firmware</span><span>bench</span><span>fit engine</span><span>Spark tool loop</span><span>reading and seal protocol</span><span>photo stage</span><span>this site</span><span>five physical runs</span><em>The first commit is the start of the project.</em></div>
     <div class="built-grid">
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
-      <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
+      <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is checked by code against the measurement; the fault it was never told stays sealed until the verdict. The experiments did not exist until the model asked for them.</p></div>
       <div><h3>What is not claimed</h3><p class="small">Five completed cases are not an accuracy rate. Failed and abstained attempts are kept in the public ledger and named on the reports. Restored reruns show "no mismatch in the tests Spark chose", not a proof that every part is correct. The cases were known to the developers; this is not a blind test.</p></div>
       <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and the offline verifier.</p><a class="btn sm" href="https://github.com/bami-codes/BenchMate">Repository on GitHub</a></div>
     </div>
