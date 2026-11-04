@@ -46,6 +46,3 @@ video/v2/captions/
 video/v2/voice/*.wav
 video/film/out/
 video/film/frames/
-video/film/voice/*.mp3
-video/film/voice/*.wav
-video/film/voice/*.m4a

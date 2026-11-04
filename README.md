@@ -45,7 +45,7 @@ Five problems from real forum threads, each rebuilt as a small circuit on a mini
 | **05** [Volts lost on a breadboard](https://bami-codes.github.io/BenchMate/case.html?id=05) | About 0.4 V vanished across a breadboard (contact or jumper resistance; the thread never settled which). | Every value explanation failed. Spark **proposed a series resistor in place of the drawn wire W1**, fitted 19.85 kΩ, passed both held-back inputs. The engine split the one survivor into two placements (on the board's wire path / outside it); Spark chose to read the W1 path. | Spark pointed at the orange jumper in the photo as W1; the isolated path read **0 Ω** → the resistance sits off the board. Seal: 20 kΩ outside the mini board. | Attempt 1 **abstained** (counted); attempt 2, on a timing model published before it: no mismatch in the tests Spark chose |
 | **03** [Blinker stops after one cycle](https://bami-codes.github.io/BenchMate/case.html?id=03) | A 555 timing chain with a resistor far too small. | R1 and R2 are indistinguishable at the terminals (both fit ≈ 2.53 kΩ). Spark asked for R1; bands frozen; photo; SAM 3.1; Spark pointed at the upper resistor as R1. | R1 read **2.22 kΩ** → R1 changed. Seal: R1 2.2 kΩ. The pair record had stopped on a local input error before Spark's body call; the chain continued in linked records and the stop is shown. | No mismatch in the tests Spark chose |
 
-Counted from the records: **10 official runs replayed on the site (a diagnosis and a rerun for each case), 5 fault diagnoses with held-back checks passed, 2 structure proposals, 4 readings asked for, 5 seals matched, 5 restored reruns with no mismatch; 101 Muse Spark calls, 6 SAM 3.1 calls, about $1.01** at the published rates. Every other attempt is retained in the same ledger and in the call and cost totals: the stopped, abstained and miswired ones are listed under [Everything that went wrong](#everything-that-went-wrong). The full denominator, from the [attempt census](docs/2026-11-04-official-attempt-census.md): across the five cases, 13 registered workflow attempts started 15 diagnostic runs; 3 stopped before a verdict, 2 abstained, 10 returned a verdict, and those 10 are the replays. These are counts, not an accuracy rate. The model never saw the fault; the developers knew it: model-blind, not a blind trial of the whole team.
+Counted from the records: **10 official runs replayed on the site (a diagnosis and a rerun for each case), 5 fault diagnoses with held-back checks passed, 2 structure proposals, 4 readings asked for, 5 seals matched, 5 restored reruns with no mismatch; 101 Muse Spark calls, 6 SAM 3.1 calls, about $1.01** at the published rates. Every other attempt is retained in the same ledger and in the call and cost totals: the stopped, abstained and miswired ones are listed under [Everything that went wrong](#everything-that-went-wrong). The full denominator, from the [attempt census](docs/2026-11-04-official-attempt-census.md): across the five cases, 13 registered workflow attempts started 15 diagnostic runs; 3 stopped before a verdict, 2 abstained, 10 returned a verdict, and those 10 are the replays. These are counts, not an accuracy rate. The model never saw the fault; the developer knew it: model-blind, not a blind trial of the whole team.
 
 [![Case 05 at the verdict: the three value explanations crossed out, Spark's proposed resistor, and the two placements the engine split, settled by one reading; the notebook below](site/assets/readme/case05-end.jpg)](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e)
 
@@ -161,13 +161,13 @@ Kept as development records, not counted in the five cases.
 | Path | What is there |
 |---|---|
 | `site/` | The demo: static pages, the data extracted from the records, the browser checks and the deploy notes (`site/HANDOFF.md`, `site/DESIGN.md`). Published to the `gh-pages` branch. |
-| `src/benchmate/` | The engine: bench control, fit and forecast, the Spark tool loop, the reading and seal protocol, and the offline verifier. |
+| `src/benchmate/` | The engine: bench control, fit and forecast, the Spark tool loop, the reading and seal protocol, and the offline verifier. The root `benchmate/` is a two-line import shim so `python3 -S -m benchmate` works from a fresh clone. |
 | `firmware/` | Arduino UNO R4 sketches: the instrument, bring-up and loopback checks. |
-| `examples/` | The records: hash-chained event logs, frozen forecasts and metadata-free photo derivatives for every run, counted or not. |
+| `examples/` | The records: hash-chained event logs, frozen forecasts and metadata-free photo derivatives for every run, counted or not. The full-size board renders make the clone large; they are the evidence, kept as is. |
 | `docs/` | Protocols, amendments, incident records and results, dated; [`docs/evidence-index.md`](docs/evidence-index.md) is the index. |
 | `tests/` | Tests for the engine and the firmware stubs. |
 | `scripts/`, `experiments/` | Development tooling and bench QA scripts. |
-| `video/` | Drafts of a pipeline for a demo film. No film has been made yet. |
+| `video/` | The demo film's render pipeline (`video/film/`): every frame is composed from `site/data/runs/*.json` and the narration clips sit beside it; the rendered file itself is not tracked. |
 
 ## Try it
 
@@ -184,7 +184,7 @@ To rebuild the site's data from the records: `site/tools/extract_runs.py` (one m
 
 ## Limits
 
-- Five small circuits, one of them with a diode, 0–5 V, low frequency, on one bench, by one operator. The model never saw the fault; the developers knew it: model-blind, not a blind trial of the team, and nothing here is an accuracy rate.
+- Five small circuits, one of them with a diode, 0–5 V, low frequency, on one bench, by one operator. The model never saw the fault; the developer knew it: model-blind, not a blind trial of the team, and nothing here is an accuracy rate.
 - Calibration is provisional: results are incremental-response checks against a 9 mV engineering allowance, not calibrated absolute voltages or confidence intervals. The multimeter readings are operator reports with a declared engineering allowance, not calibrated measurements.
 - A restored rerun's result is "no mismatch in the tests Spark chose": nearby value-change models also fit those tests, and the reports say so.
 - The operator still moves wires and reads parts by hand; Spark only asks.

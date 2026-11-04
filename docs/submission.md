@@ -6,7 +6,7 @@
 
 **Tagline (one line):** Muse Spark chooses experiments on a real circuit; every forecast is frozen before a $40 Arduino bench measures; the sealed fault is found.
 
-**Track:** Indie Developer · **Problem statement:** Push the Frontier
+**Track:** Indie Developer · **Problem statement:** Push the Frontier · **Team:** solo (bami-codes), with Codex and Claude as coding agents
 
 **Links:** Live demo https://bami-codes.github.io/BenchMate/ · Repository https://github.com/bami-codes/BenchMate (MIT, public) · Video: (YouTube link)
 
@@ -42,4 +42,4 @@ Everything, 27 October – 4 November 2026, by one person with Codex and Claude 
 
 **Short version (if the form caps length)**
 
-BenchMate gives Muse Spark a real $40 Arduino bench. It reads the schematic and chooses experiments from a fixed menu; ngspice forecasts each one, and the forecast is hashed (and, before the held-back check, pushed to GitHub) before the bench measures. Explanations are refitted to each measurement and crossed out when their best fit still misses by more than 9 mV; the two held-back inputs at the end are scored against the frozen models, with no refitting; when none survive, Spark proposes a part the drawing lacks; when two give the same waveforms, Spark names one part to read with ranges frozen first. Five faults from real forum threads were planted and sealed as digests before measurement; Spark narrowed all five to the planted fault (two by proposing hidden parts), and each case ended with a restored rerun that reported no mismatch. 13 registered attempts started 15 diagnostic runs; 3 stopped, 2 abstained, 10 reached a verdict and are replayed on the site; 101 Spark calls, 6 SAM 3.1 calls, about $1.01. Every attempt, including the stopped and abstained ones, is in the public ledger, and one command verifies any run offline. The experiments did not exist until the model asked for them.
+BenchMate gives Muse Spark a $40 Arduino bench. It reads the schematic and chooses experiments from a fixed menu; ngspice forecasts each one; the forecast is hashed (and pushed to GitHub before the held-back check) before the bench measures. Explanations are refitted to every measurement and crossed out when their best fit still misses by more than 9 mV; the two held-back inputs are scored against the frozen models with no refitting. When none survive, Spark proposes a part the drawing lacks; when two give the same waveforms, it names one part to read, with ranges frozen first. Five faults from real forum threads were sealed as digests before measurement; all five seals matched the verdict (two by proposing hidden parts), and each restored rerun reported no mismatch in the tests Spark chose. 13 registered attempts started 15 runs: 3 stopped, 2 abstained, 10 reached a verdict and are replayed on the site. 101 Spark calls, 6 SAM 3.1 calls, ≈$1.01. One command verifies any run offline.
