@@ -104,5 +104,8 @@
   }
 
   // ---- verify box (short)
-  $('#verify-short').append(el('h3', {}, 'Verify it yourself'), el('p', { class: 'small muted' }, 'Every run is an append-only event log; each event carries its sha256 and the previous one. On any replay, click a number to see its event. In the repository, ', el('code', {}, 'python -m benchmate verify <run folder>'), ' prints PASS or FAIL and the number of events checked: the full hash chain, the frozen-forecast hashes and the forecast → measurement order, including the physical CAPTURE order. It proves the record’s internal integrity and order, not when it was written; the forecast commits on GitHub carry the time. Details: docs/2026-11-03-offline-verification.md.'));
+  $('#verify-short').append(el('h3', {}, el('span', { class: 'n' }, '✓'), 'Verify it yourself'),
+    el('p', {}, 'Every run is an append-only log; each event carries its hash and the previous one. One command re-checks any run offline and prints PASS or FAIL:'),
+    el('pre', { class: 'cmd' }, 'python -m benchmate verify <run folder>'),
+    el('p', { class: 'fine' }, 'It checks the hash chain, the frozen-forecast hashes and the forecast → measurement order. It proves integrity and order, not when it was written; the forecast commits on GitHub carry the time. ', el('a', { href: 'https://github.com/bami-codes/BenchMate/blob/main/docs/2026-11-03-offline-verification.md' }, 'Details'), '.'));
 })();
