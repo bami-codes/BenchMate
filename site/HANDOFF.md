@@ -156,14 +156,12 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
    and the docs; the failure classification Codex wrote (failures were miswiring / contact / host bugs /
    a timing-model limit; the diagnosis never returned a wrong answer; the miswired case abstained, the
    05 restored attempt 1 abstained). Link the live site.
-2. Video (≤3:00): `video/record_site.js` films the live site (Playwright recordVideo, 1920×1080) scene by scene;
-   `video/assemble.py` times the captions from the recorded cues (figures read from the run files), adds a quiet
-   synthesized bed and writes `video/out/benchmate-demo.mp4` + `.srt`. Scenes: landing → case 01 (forecast, needles,
-   held-back check, reading, seal) → case 04 (proposal) → case 05 (proposal, placements, wire-path reading, seal) →
-   case 02 (two bodies) → bench + prototype-of → verifier terminal → closing card. No generated imagery, no
-   third-party audio, English captions. Narration: optional, local Kokoro on the Mac (`video/README.md`); the
-   captions carry the story without it.
-3. Submission text: `docs/submission.md` rewritten 4 Nov evening (full and short versions; video link to fill in): theme fit (models meeting the real world),
+2. Video (2:58, done): https://www.youtube.com/watch?v=BFlJHOEapV8. `video/film/` composes every frame from `site/data`
+   (`shots.html` + `shots.js`), renders at 60 fps (`render.js`, `SCALE=1.3333333` for the 2560×1440 upload master), and
+   `audio.py` mixes a synthesized bed, sound effects and the ElevenLabs narration (`voice/s1…s7.mp3`, George; word timings in
+   `voice/timings.json` drive the shot starts via `plan_shots.py`). No burned-in captions; `narration_srt.py` writes the CC file.
+   Earlier drafts were removed from the tree on 5 Nov and remain in the history.
+3. Submission text: `docs/submission.md` (full and short versions, and the three form answers as submitted on 5 Nov, team 2828): theme fit (models meeting the real world),
    rubric (Impact 30 / Tooling 25 / Tech 20 / Demo 25), bonus "Best Agentic"; five cases; do not call it an
    education chatbot, dashboard or image analyzer.
 

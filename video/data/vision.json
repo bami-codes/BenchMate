@@ -1,1 +1,0 @@
-{"size": [1100, 650], "components": [{"name": "R1", "kind": "R", "marking": "R1 10 k\u03a9", "bbox": [0.295, 0.329, 0.553, 0.414], "a": "IN", "b": "OUT"}, {"name": "C1", "kind": "C", "marking": "C1 1 \u00b5F", "bbox": [0.61, 0.508, 0.725, 0.558], "a": "OUT", "b": "REF"}], "note": "(Recorded design-intake step, Oct 31.)"}
