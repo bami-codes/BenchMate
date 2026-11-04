@@ -1,0 +1,49 @@
+{
+  "schema": "benchmate.shared_bench_photo.v1",
+  "purpose": "Whole-bench setup photograph supplied by operator for Claude to use in presentation materials.",
+  "date_added_KST": "2026-11-04",
+  "capture_state": "No specific run/state identity assigned by this upload.",
+  "published_files": {
+    "render.png": {
+      "sha256": "5c82c1a966ce021ef3e594aa01fbb16b8d82cab7f0bd0255561c93be0914f734",
+      "bytes": 15452582,
+      "dimensions": [
+        4028,
+        5370
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    },
+    "preview.png": {
+      "sha256": "fe934e524b56beeb6fb60787f60b62d53e50f4b33b876605b9212a3035051820",
+      "bytes": 2069858,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    }
+  },
+  "conversion_file": "conversion.json",
+  "conversion_sha256": "77f2cb681505d02b72fece74684fcf3c48e49962f1c0158c2a8651303b47e156",
+  "RAW_original_published": false,
+  "unsharpened_intermediate_published": false,
+  "source_GPS_or_EXIF_copied": false,
+  "preview_transform": {
+    "method": "Whole-frame aspect-preserving thumbnail; Pillow Lanczos; fresh RGB PNG without metadata.",
+    "maximum_dimension": 1600,
+    "Pillow": "13.0.0"
+  },
+  "API_calls": 0,
+  "hardware_commands": 0,
+  "cost_USD": 0
+}
