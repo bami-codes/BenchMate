@@ -1,0 +1,303 @@
+{
+  "schema": "benchmate.posthoc_timing_diagnostic.v1",
+  "after_verdict": "abstained",
+  "official_result_changed": false,
+  "new_API_requests": 0,
+  "new_hardware_commands": 0,
+  "parameters_fitted": 0,
+  "claim": "Exploratory check using recorded analogRead completion times and piecewise linear measured IN. Not a new official verdict or independent timing calibration.",
+  "source": "diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+  "comparisons": [
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2,
+        "load_ohm": null
+      },
+      "recorded_completion_skew_us": {
+        "minimum": 51.99999999999999,
+        "median": 52.99999999999999,
+        "maximum": 52.99999999999999
+      },
+      "official_nominal_check": {
+        "RMS_mV": 3.727533077319883,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 2.2192758766818
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 9.302763045345491
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 2.3864314105580107
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 3.314174577094579
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 3.870188031314433
+          }
+        ],
+        "passed": false,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "posthoc_linear_timestamp_check": {
+        "RMS_mV": 3.4496193003962086,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 2.054699537247473
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 3.50723773338197
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 2.2779864856186784
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 3.2150190976061186
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 3.8052151070281455
+          }
+        ],
+        "passed": true,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      }
+    },
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.2,
+        "load_ohm": 9990.0
+      },
+      "recorded_completion_skew_us": {
+        "minimum": 51.99999999999999,
+        "median": 52.99999999999999,
+        "maximum": 52.99999999999999
+      },
+      "official_nominal_check": {
+        "RMS_mV": 2.854110772929112,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 1.6972844320649159
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 10.166658744056932
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 3.079484905073429
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 3.409504335424091
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 2.0867668318183656
+          }
+        ],
+        "passed": false,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "posthoc_linear_timestamp_check": {
+        "RMS_mV": 2.5163268125919687,
+        "regions": [
+          {
+            "name": "pre_step",
+            "samples": 51,
+            "RMS_mV": 1.647488003843417
+          },
+          {
+            "name": "0_to_5ms",
+            "samples": 10,
+            "RMS_mV": 6.459510372048888
+          },
+          {
+            "name": "5_to_20ms",
+            "samples": 30,
+            "RMS_mV": 2.8381590163744006
+          },
+          {
+            "name": "20_to_80ms",
+            "samples": 120,
+            "RMS_mV": 3.23818891962435
+          },
+          {
+            "name": "after_80ms",
+            "samples": 301,
+            "RMS_mV": 1.985241920637512
+          }
+        ],
+        "passed": true,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      }
+    },
+    {
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.15,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "recorded_completion_skew_us": {
+        "minimum": 51.99999999999999,
+        "median": 52.99999999999999,
+        "maximum": 53.0
+      },
+      "official_nominal_check": {
+        "RMS_mV": 4.437795464788419,
+        "regions": [
+          {
+            "name": "phase_0",
+            "samples": 77,
+            "RMS_mV": 4.115828446252617
+          },
+          {
+            "name": "phase_1",
+            "samples": 60,
+            "RMS_mV": 5.183967208244248
+          },
+          {
+            "name": "phase_2",
+            "samples": 65,
+            "RMS_mV": 2.600994411963262
+          },
+          {
+            "name": "phase_3",
+            "samples": 60,
+            "RMS_mV": 2.5640890803057257
+          },
+          {
+            "name": "phase_4",
+            "samples": 65,
+            "RMS_mV": 5.200816033619449
+          },
+          {
+            "name": "phase_5",
+            "samples": 60,
+            "RMS_mV": 5.98561222186203
+          },
+          {
+            "name": "phase_6",
+            "samples": 65,
+            "RMS_mV": 2.6342736158029667
+          },
+          {
+            "name": "phase_7",
+            "samples": 60,
+            "RMS_mV": 5.735086776952742
+          }
+        ],
+        "passed": true,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      },
+      "posthoc_linear_timestamp_check": {
+        "RMS_mV": 4.370399447543737,
+        "regions": [
+          {
+            "name": "phase_0",
+            "samples": 77,
+            "RMS_mV": 4.09301419515959
+          },
+          {
+            "name": "phase_1",
+            "samples": 60,
+            "RMS_mV": 5.175921859581518
+          },
+          {
+            "name": "phase_2",
+            "samples": 65,
+            "RMS_mV": 2.565426626889819
+          },
+          {
+            "name": "phase_3",
+            "samples": 60,
+            "RMS_mV": 2.4766916636695546
+          },
+          {
+            "name": "phase_4",
+            "samples": 65,
+            "RMS_mV": 5.093724168256083
+          },
+          {
+            "name": "phase_5",
+            "samples": 60,
+            "RMS_mV": 5.871557936349712
+          },
+          {
+            "name": "phase_6",
+            "samples": 65,
+            "RMS_mV": 2.600596736895781
+          },
+          {
+            "name": "phase_7",
+            "samples": 60,
+            "RMS_mV": 5.614847080066362
+          }
+        ],
+        "passed": true,
+        "refitted": false,
+        "baseline": "Independent REF; no scored OUT origin fit.",
+        "source": "physical",
+        "purpose": "training"
+      }
+    }
+  ],
+  "limits": [
+    "Completion timestamps are not calibrated ADC aperture times.",
+    "Linear interpolation does not establish the between-sample waveform.",
+    "No hardware-level cause is proven; channel response and connection effects remain possible.",
+    "Any runtime change needs a new prospective qualification and separate follow-up record; original verdict stays abstained."
+  ],
+  "source_events_sha256": "72bc445dfdc6614b440874a2e37ea59f7580fd44a2c8235ccc2aa3ad760a15fc",
+  "method": "np.interp(frame_time + output_delay, frame_time + input_delay, measured_IN); no offset, gain, shift or other parameter fitted"
+}

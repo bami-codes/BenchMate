@@ -1,11 +1,13 @@
 {
   "case_id": "05",
-  "phase": "awaiting_restoration_confirmation",
+  "phase": "awaiting_restored_photo",
   "schematic_intake": "schematic-intake/20261104T021414-92eccb85c1",
   "faulted_diagnosis": "diagnosis-faulted/20261104T022359-f6e37b9f05",
-  "last_boot": "52fd218a877701f9ed3ba3b904bb19a8",
+  "last_boot": "1605dd4eaec3568dd1643a85c65ba69e",
   "requested_component": "W1",
   "reading_forecast_sha256": "2746d2be2e8ffdab19391646b16693ecfb151f65f921ae1cd5e7474bd4ea3e07",
   "current_photo": "faulted",
-  "reading_outcome": "one_explanation_remains"
+  "reading_outcome": "one_explanation_remains",
+  "restored_diagnosis": "diagnosis-restored/20261104T030600-47c67ef048",
+  "restored_verdict": "abstained"
 }

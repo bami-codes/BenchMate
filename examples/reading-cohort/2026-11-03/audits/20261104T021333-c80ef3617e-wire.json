@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "events": 484,
+  "forecasts": 8,
+  "measurements": 9,
+  "order_checks": 33,
+  "prediction_files": 2,
+  "error": null,
+  "head_sha256": "8fc8fe18bd0d876471b0b44b499eaa4c22aaa477067c5dcfedd53d576c8dc25f",
+  "run_status": "run_completed"
+}

@@ -114,9 +114,12 @@
       "run_id": "20261104T021333-c80ef3617e",
       "case_id": "05",
       "attempt": 1,
-      "status": "registered",
+      "status": "completed",
       "counted": true,
-      "selected_first_attempt": true
+      "selected_first_attempt": true,
+      "reading_outcome": "one_explanation_remains",
+      "restored_verdict": "abstained",
+      "completion_method": "qualified_wire_path_reading_candidate_v3_external_repair"
     }
   ]
 }

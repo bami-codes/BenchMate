@@ -1,0 +1,17 @@
+{
+  "schema": "benchmate.wire_path_pair_result.v1",
+  "case_id": "05",
+  "source": "physical",
+  "cohort": "reading-assisted-v1",
+  "blind_test": false,
+  "faulted_diagnosis": "diagnosis-faulted/20261104T022359-f6e37b9f05",
+  "restored_diagnosis": "diagnosis-restored/20261104T030600-47c67ef048",
+  "reading_outcome": "one_explanation_remains",
+  "restored_verdict": "abstained",
+  "restored_caption": null,
+  "operator_restored_and_rerun_consistent": false,
+  "native_diagnostic_repair_claim_overwritten": false,
+  "original_fault_photo_retained": true,
+  "restored_photo_not_repeated": true,
+  "SAM_identifies_component_values": false
+}
