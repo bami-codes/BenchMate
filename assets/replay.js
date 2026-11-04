@@ -116,13 +116,20 @@
     if (pos >= END && next >= tl.length) { setPlaying(false); return; }
     raf = requestAnimationFrame(tick);
   }
+  // Every seek (scrubber, Jump-to, ?t=) rebuilds the page as a forward play to t would have left it: every derived
+  // display goes back to its initial value first (notebook, meters, scope, drawing card, seal chip, bench-state rows,
+  // counters, idle overlay, play label), then the timeline is replayed instantly up to t. `gen` invalidates work that an
+  // earlier position left pending (the async end scene, the typing animations of a reading) so it cannot land on the new state.
+  let gen = 0;
+  const later = (fn, ms) => { const g = gen; setTimeout(() => { if (g === gen) fn(); }, ms); };
   function seek(t) {
-    cancelAnimationFrame(raf); sweeps.length = 0;
+    cancelAnimationFrame(raf); sweeps.length = 0; gen++;
     book.innerHTML = ''; waitingMeters();
-    scope.set([], [], ''); state = freshState(); benchState(); railDrawing.hidden = true; intro(); if (t === 0) idle.classList.remove('off');
+    scope.set([], [], ''); scope.root.classList.remove('idle'); state = freshState(); resetDerived(); railDrawing.hidden = true; intro(); idle.classList.toggle('off', t > 0);
     pos = t; next = 0;
     while (next < tl.length && tl[next].t_play <= pos) dispatch(tl[next++], true);
     scrub.value = pos; clock();
+    if (!playing) playBtn.textContent = pos >= END ? 'Replay again' : 'Play';
     if (playing) { lastWall = performance.now(); raf = requestAnimationFrame(tick); }
   }
 
@@ -141,6 +148,8 @@
   const counters = t => { if (!t) return; $('#c-calls').textContent = t.spark_calls; $('#c-cost').textContent = fmtUSD(t.spark_cost); $('#c-exp').textContent = Object.keys(state.steps).length; };
   const setSeal = (s, text) => { const b = $('#seal'); b.className = 'seal ' + s; b.textContent = text; $('#bs-seal').textContent = text.toLowerCase(); };
   const benchState = () => { $('#bs-load').textContent = state.load ? '9.99 kΩ load connected' : 'no load'; $('#bs-last').textContent = state.last; };
+  // the displays derived from the timeline, at their values before the first event (what a fresh page shows)
+  const resetDerived = () => { $('#c-exp').textContent = '0'; $('#c-calls').textContent = '0'; $('#c-cost').textContent = '$0'; setSeal('sealed', 'Hidden fault sealed'); benchState(); };
   const num = (txt, evd, what, fields) => EV(el('span', { class: 'num' }, txt), evd, what, fields);
 
   function dispatch(e, instant) {
@@ -326,7 +335,7 @@
       const bands = state.bands || run.reading?.bands || [];
       const apply = () => { for (const id of meterOrder) { const m = meters[id]; if (m.root.classList.contains('out') || m.root.classList.contains('wait')) continue; const b = bands.find(q => q.explanation === id && q.source === e.source); if (!b) continue; m.band(b.low, b.high, b.unit, Number(e.value)); m.setReading(Number(e.value), unit, 'reading'); } };
       if (instant || REDUCED) { field.querySelector('.typed').textContent = txt; apply(); return; }
-      let i = 0; const typed = field.querySelector('.typed'); const tick = () => { typed.textContent = txt.slice(0, ++i); if (i < txt.length) setTimeout(tick, 160); else { field.classList.add('done'); setTimeout(apply, 300); } }; setTimeout(tick, 400);
+      let i = 0; const typed = field.querySelector('.typed'); const tick = () => { typed.textContent = txt.slice(0, ++i); if (i < txt.length) later(tick, 160); else { field.classList.add('done'); later(apply, 300); } }; later(tick, 400);
     },
     reading_scored(e) {
       const bands = state.bands || run.reading?.bands || []; const src = state.observed?.source;
@@ -386,7 +395,7 @@
         el('p', { class: 'small muted' }, 'Two values, by body. Which body is which part is not decided here: that is the next step, by the frozen bands.'));
       state.gobserved = e;
       if (instant || REDUCED) { for (const f of fields) { f.field.querySelector('.typed').textContent = String(f.r.value); f.field.classList.add('done'); } return; }
-      let k = 0; const typeNext = () => { const f = fields[k]; if (!f) return; const txt = String(f.r.value); let i = 0; const typed = f.field.querySelector('.typed'); const tick = () => { typed.textContent = txt.slice(0, ++i); if (i < txt.length) setTimeout(tick, 160); else { f.field.classList.add('done'); k++; setTimeout(typeNext, 350); } }; tick(); }; setTimeout(typeNext, 400);
+      let k = 0; const typeNext = () => { const f = fields[k]; if (!f) return; const txt = String(f.r.value); let i = 0; const typed = f.field.querySelector('.typed'); const tick = () => { typed.textContent = txt.slice(0, ++i); if (i < txt.length) later(tick, 160); else { f.field.classList.add('done'); k++; later(typeNext, 350); } }; tick(); }; later(typeNext, 400);
     },
     group_reading_scored(e) {
       const g = state.group || {}; const bands = state.gbands || g.bands || []; const obs = state.gobserved || {}; const vals = Object.fromEntries((obs.readings || []).map(r => [r.body, r.value]));
@@ -426,10 +435,12 @@
 
   // ---------- the end: for a pilot, the stop and the fix; for a counted run, the seal opens
   async function finale(e, kind) {
+    const g = gen;
     const wrap = el('div', { class: 'finale' });
     const inner = el('div', { class: 'inner' });
     const schemWrap = el('div', { class: 'schem-wrap' });
-    const svg = await schematic(kase.design); schemWrap.append(svg);
+    const svg = await schematic(kase.design); if (g !== gen) return; // the viewer seeked away while the drawing loaded
+    schemWrap.append(svg);
     const ovs = overlaySVG(kase.overlay, svg.getAttribute('viewBox')); const ov = el('div', { class: 'ov' }); ov.append(ovs); schemWrap.append(ov);
     const right = el('div', {});
     const headline = kind === 'verdict' ? words.report(e, run) : words.stopped();
@@ -547,9 +558,8 @@
       el('p', { class: 'small faint' }, 'What the thread found, and what we kept or changed, opens with the seal at the end.'))));
   }
   // ---------- start
-  waitingMeters(); intro();
-  setSeal('sealed', 'Hidden fault sealed'); benchState();
-  const t0 = Number(q.get('t')); if (t0) { seek(t0); idle.classList.add('off'); }
+  waitingMeters(); intro(); resetDerived();
+  const t0 = Number(q.get('t')); if (t0) seek(t0);
   if (q.get('play') === '1' && !REDUCED) setTimeout(() => { if (!playing) setPlaying(true); }, 700); // arrived by a Watch/Replay button: start without asking
   book.addEventListener('keydown', e => { if (e.key === ' ' && e.target === book) { e.preventDefault(); setPlaying(!playing); } });
   clock();

@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "8f47263765a1a0bc7336d27f62c36fe682d359ee",
-  "source_site_tree": "b6de17b4bea898588b161a5aa7f8ddef136744ca",
-  "previous_gh_pages_commit": "06589da0b92b00599990f5166cfd318190ff2b0c",
+  "source_main_commit": "b9289503b4253fa9bcb1bf884ebd7adb2a6224f0",
+  "source_site_tree": "f5533160f967e7a4cbcd6a4316c530d7541fb9fa",
+  "previous_gh_pages_commit": "93a6c35bd6fa733f19ff59d8a7f8d87b07157d5f",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Case 04 is the representative path on the landing (policy structure_spotlight), with a four-line strip read from the run file; design-04.svg is the drawing Spark read (R2 20 kΩ) and the amendment is shown as history; labels name the quantity shown (frozen command-input forecast, residual after refit, frozen model on measured IN); a single survivor is named; replay Jump-to row.",
+  "change": "Replay seek rebuilds the seal state, bench-state row and counters, so rewinding shows exactly the forward-play state (rewind_check.js added, 10/10). On phones the Case 04 play button comes before the four-line strip. Headline: 'The board looks right.'",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js: 20/20 replays to the verdict, errors none; landing at 1440 and 390 with no overflow",
+    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20, errors none; rewind_check.js 10/10; landing 1440 and 390 no overflow",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

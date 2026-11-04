@@ -40,7 +40,8 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
   follower → ADC; buffered REF ≈ 1.63 V; 512 frames at 0.5 ms; 3 mV guard; 9 mV allowance; 9.99 kΩ load).
 - `tools/verify-case0N.json`: outputs of the keyless verifiers (run on the public copies), copied into the
   report's "Verify it yourself" box as written.
-- `tools/shots_all.js` (every counted run, both viewports, landing, all reports), `tools/shots*.js`,
+- `tools/shots_all.js` (every counted run, both viewports, landing, all reports), `tools/rewind_check.js` (every counted
+  run: a seek — scrubber, Jump-to, `?t=` — must equal a forward play to that time; `_shots/rewind/errors.txt` must say "none"), `tools/shots*.js`,
   `tools/overflow.js`: Playwright checks (console errors, 390 px overflow, 16× play-through). Run after every
   change with a local `python3 -m http.server --directory site 8795`; `_shots/all/errors.txt` must say "none".
 - `tools/DEV-*.json`, `tools/make_dev_*fixture.py`, `tools/fixtures/`: development fixtures built
