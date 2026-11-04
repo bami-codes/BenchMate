@@ -1,38 +1,50 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "aa0859ef55ffde6832a4821244dc3d791a9a30c2",
-  "source_site_tree": "2c68b54490ca92e2a3689224112c141f6bf5a91a",
-  "previous_gh_pages_commit": "59c64c8b4cb57f69055d880b4c84903a8a17f211",
+  "source_main_commit": "3037b1ad4d01570763620697c26bc140fd311f24",
+  "source_site_tree": "685dbdf28d8a1f7cf8e3071e4ed0b4ae934dd68c",
+  "previous_gh_pages_commit": "025218a1d1f109df758b33384e36256208dbba4f",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
-  "new_photos": "assets/photos/; metadata-free derivatives only",
+  "new_photos": "assets/photos/; metadata-free derivatives only, one framing and one outline rule (tools/photo_derivatives.py)",
   "staging_excluded": true,
   "release_cases": [
     "01",
     "02",
-    "04"
+    "03",
+    "04",
+    "05"
   ],
-  "change": "Collapsible replay shelf, compact hypothesis chips and scroll/manual toggle state.",
+  "change": "Cases 05 and 03 ingested (new extractor modes --pair-wire, --pair-chain); case 06 (LED) removed after the operator cancelled it; one photo treatment for every case; results from the records (101 Spark, 6 SAM, ~$1.01); HANDOFF and DESIGN updated.",
   "validation": {
     "browser_QA": "PASS",
-    "replay_viewport_combinations": 8,
+    "tool": "site/tools/shots_all.js",
+    "replay_viewport_combinations": 20,
     "all_replays_reached_end": true,
     "console_errors": 0,
+    "failed_requests": 0,
     "horizontal_overflow": 0,
-    "shelf_toggle_and_scroll_states": "PASS",
-    "landing_and_report_viewport_checks": 4,
-    "photo_assets_metadata_checked": 14,
-    "working_source_matches_tested_snapshot": true,
-    "visual_screenshots_reviewed": [
-      "02-full-1440.png",
-      "02-compact-1440.png",
-      "02-compact-390.png"
+    "landing_and_report_viewport_checks": 12,
+    "keyless_verifiers_rerun_on_public_copies": [
+      "benchmate.reading_wire_stage verify (05 pair, 484 events PASS)",
+      "benchmate verify (05 fault child 241, 05 restored attempt 2 238, 03 fault child 236, 03 restored child 236: PASS)",
+      "benchmate.channel_timing_audit_v4 (05 attempt 2 PASS)",
+      "benchmate.reading_restored_after_photo_v5 verify (03 root, 583 events PASS)"
     ],
-    "known_data_followup": "05/03 ingestion and LED exclusion not in this UI snapshot; Claude request retained.",
-    "baseline_main_CI": "Existing Python pytest job failed before this site change; site browser/syntax checks passed."
+    "visual_screenshots_reviewed": [
+      "replay-05-faultrun-1440-end.png",
+      "replay-05-faultrun-1440-reading.png",
+      "replay-05-restoredrerun-1440-end.png",
+      "replay-03-faultrun-1440-end.png",
+      "replay-03-restoredrerun-1440-end.png",
+      "replay-02-faultrun-1440-end.png",
+      "replay-01-faultrun-1440-end.png",
+      "landing-1440-full.png",
+      "report-05-1440-full.png",
+      "replay-05-faultrun-390-end.png"
+    ]
   },
-  "case05_case03_and_LED_scope_update_pending_with_Claude": true,
-  "request_file": "docs/requests/2026-11-04-five-case-submission-no-led.md"
+  "request_file": "docs/requests/2026-11-04-five-case-submission-no-led.md",
+  "request_status": "applied: 05 and 03 ingested, 06 removed, five-case wording throughout"
 }

@@ -1,0 +1,11 @@
+{
+ "note": "Outputs of the keyless, network-free verifiers, run on 4 Nov 2026 on the public copies in examples/, copied as written.",
+ "fault": [
+  "# whole pair (fault diagnosis, wire-path reading, seal, restored attempt 1), PYTHONPATH=src python -S -m benchmate.reading_wire_stage verify examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e\nPASS {\"passed\": true, \"events\": 484, \"forecasts\": 8, \"measurements\": 9, \"order_checks\": 33, \"prediction_files\": 2, \"error\": null, \"head_sha256\": \"8fc8fe18bd0d876471b0b44b499eaa4c22aaa477067c5dcfedd53d576c8dc25f\", \"run_status\": \"run_completed\"} scope=internal_integrity+recorded_order creation_time=unproven",
+  "# fault diagnosis child, python -m benchmate verify\nPASS events=241 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=25b30591d5465fc5496727f6fa136f0bc010d5337f021dbd673da57d5425e631 scope=internal_integrity+recorded_order creation_time=unproven"
+ ],
+ "restored": [
+  "# restored rerun (attempt 2), python -m benchmate verify examples/channel-timing/2026-11-04/records/20261104T034748-10ab5af750\nPASS events=238 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d scope=internal_integrity+recorded_order creation_time=unproven",
+  "# the same record against the original pair and the published timing model, python -m benchmate.channel_timing_audit_v4\nPASS events=238 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d scope=internal_integrity+recorded_order creation_time=unproven prior_events_checked=484 preflight_events_checked=4 artifact_hashes_checked=4"
+ ]
+}

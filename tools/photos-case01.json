@@ -1,20 +1,40 @@
 {
  "board": "assets/photos/case01-board.png",
- "crop": "assets/photos/case01-board-crop.png",
- "crop_r1": "assets/photos/case01-board-crop-r1.png",
- "crop_box": [
-  180,
-  430,
-  1040,
-  790
- ],
  "evidence": "assets/photos/case01-reading-evidence.png",
- "highlight_note": "assets/photos/case01-highlight.json",
  "crop_full": "assets/photos/case01-board-crop-full.png",
  "crop_full_box": [
   454,
   1084,
   2621,
   1991
+ ],
+ "width": 1200,
+ "height": 1600,
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "faulted_crop": "assets/photos/case01-faulted-crop.jpg",
+ "faulted_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "faulted_sha256": "36a5ed9dcbe80f66f05d8fefc065f5e2e6e54902d26551e3233d27640def2d95",
+ "faulted_source": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/photo-faulted/prepared/input.png (1200×1600 metadata-free SAM input, sha256 36a5ed9dcbe8…)",
+ "faulted_outline": "assets/photos/case01-faulted-outline.png",
+ "faulted_outlined": [
+  {
+   "object_id": "1",
+   "part": "R1",
+   "why": "body_binding: Spark named sam-1 as R1, operator-confirmed (photo-faulted/body-binding.json)",
+   "bounds_half_open": [
+    349,
+    569,
+    537,
+    613
+   ],
+   "mask_file": "electronic component-object-1-record-1-mask.png",
+   "mask_sha256": "fd5fbe57a0198e1c0cf7c9844123ec2102e91f4159b1aff9d4b201aa29e33f67",
+   "confidence": 0.6012461185455322
+  }
  ]
 }

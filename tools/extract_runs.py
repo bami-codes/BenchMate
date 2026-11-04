@@ -1113,6 +1113,452 @@ def extract_group_pair(pair, group, restored, case, label, rates, photos, extra)
     return run, rrun
 
 
+def _band_rows(fc, meter_range, quantity):
+    """Bands from an operator-reading-v1 forecast file, per explanation and per source, for the meter range the
+    operator actually used. Resistance bands are shown in kΩ when every band sits at or above 1 kΩ, else in Ω, so a
+    near-short band (0–12.2 Ω) and a kilohm band keep their own resolution. Returns (bands, unit)."""
+    rows = []
+    for b in fc['forecasts']:
+        rule = b.get('rule') or {}
+        low, high, note = b.get('low'), b.get('high'), None
+        rng = next((x for x in rule.get('intervals_by_meter_range', []) if x['meter_range'] == meter_range), None)
+        if b['source'] == 'operator_dmm' and rng:
+            low, high = rng['low'], rng['high']
+            mr = f"{int(meter_range / 1000)} kΩ" if meter_range >= 1000 else f"{int(meter_range)} Ω"
+            rtext = f"fitted value's training envelope (every grid point whose waveforms stay within 9 mV) plus the meter's allowance on the {mr} range"
+            if rule.get('nominal_rule'):
+                rtext = f"drawn value ± 5 % part tolerance plus the meter's allowance on the {mr} range"
+            if b['explanation'].startswith('external_path'):
+                rtext = f"near-short category declared before the reading (0–10 Ω) plus the meter's allowance on the {mr} range"
+        else:
+            rtext = ('printed nominal value only; a part whose actual value changed can keep its old label, so this band is open'
+                     if rule.get('printed_value_unconstrained') else 'printed nominal value ± 5 % part tolerance')
+            if rule.get('actual_value_not_measured'):
+                note = 'A marking confirms the nominal value, not the resistance today.'
+        rows.append({'explanation': b['explanation'], 'source': b['source'], 'low': low, 'high': high, 'unit': b.get('unit'), 'observable': b.get('observable'),
+                     'rule': rtext, 'note': note, 'envelope': {'low': b.get('low'), 'high': b.get('high'), 'note': 'range-independent envelope'},
+                     'meter_range': meter_range if b['source'] == 'operator_dmm' else None,
+                     'rule_raw': {kk: vv for kk, vv in rule.items() if kk != 'electrical_interval_rule'}})
+    unit = 'Ω'
+    if quantity == 'resistance' and all(r['unit'] == 'ohm' for r in rows):
+        dmm = [r for r in rows if r['source'] == 'operator_dmm' and r['low'] is not None]
+        if dmm and all(r['low'] >= 1000 for r in dmm):
+            unit = 'kΩ'
+            for r in rows:
+                for k in ('low', 'high'):
+                    if r[k] is not None:
+                        r[k] = round(r[k] / 1000.0, 2)
+                for k in ('low', 'high'):
+                    if r['envelope'][k] is not None:
+                        r['envelope'][k] = round(r['envelope'][k] / 1000.0, 2)
+        else:
+            for r in rows:
+                for k in ('low', 'high'):
+                    if r[k] is not None:
+                        r[k] = round(r[k], 1) if r[k] < 100 else int(round(r[k]))
+        for r in rows:
+            r['unit'] = unit
+    return rows, unit
+
+
+def _observed_value(p, unit):
+    """The operator's typed value in the band unit (kohm → kΩ or Ω as the bands are shown). Raw value and unit are kept."""
+    v, u = p.get('value'), p.get('unit')
+    ohm = v * 1000.0 if u == 'kohm' else v
+    if unit == 'kΩ':
+        return round(ohm / 1000.0, 3), {'kohm': 'kΩ', 'ohm': 'Ω'}.get(u, u)
+    return round(ohm, 1), {'kohm': 'kΩ', 'ohm': 'Ω'}.get(u, u)
+
+
+def _usage_call(result_json, rates, role, e):
+    u = (result_json or {}).get('usage') or {}
+    if not u:
+        return None, None
+    c = round(cost(u, rates['rates']), 6)
+    return c, {'seconds': None, 'cost': c, 'out_tokens': u.get('output_tokens'), 'in_tokens': u.get('input_tokens'),
+               'reasoning_tokens': (u.get('output_tokens_details') or {}).get('reasoning_tokens'), 'role': role, 'ev': env(e)}
+
+
+def _native_bounds(native_dir, object_id):
+    m = json.load(open(pathlib.Path(native_dir) / 'crop-manifest.json'))
+    o = next((x for x in m['objects'] if str(x['object_id']) == str(object_id)), None)
+    return (o or {}).get('bounds_half_open'), (o or {}).get('confidence'), (o or {}).get('input_image_sha256'), len(m['objects'])
+
+
+def _followup_classification(reg, state, basis):
+    return {'pilot': False, 'counted': bool(reg.get('counted')), 'label': 'Official run · reading-assisted cohort · known to developers, not blind',
+            'public_label': 'Official run · Spark did not know the fault', 'basis': basis,
+            'cohort': {'plan': reg.get('cohort'), 'slot': reg.get('run_id'), 'ordinal': reg.get('attempt') or reg.get('attempt_ordinal'), 'state': state}}
+
+
+def _photo_block(photos, state, binding=None, sam_count=None, pairing=None, note=None, documentary=False, display=None):
+    """The photo block the pages render: a clean crop of the metadata-free SAM input and, where a record ties a native
+    mask to a part or a candidate, a transparent outline layer drawn from that mask (tools/photo_derivatives.py)."""
+    key = f'{state}_crop'
+    if not photos.get(key):
+        return None
+    ph = {'board': photos.get(f'{state}_full'), 'crop': photos.get(key), 'crop_box': photos.get(f'{state}_crop_box'),
+          'image': {'file': photos.get(key), 'width': photos.get('width', 1200), 'height': photos.get('height', 1600), 'sha256_sam_input': photos.get(f'{state}_sha256')},
+          'sam': [{'concept': 'electronic component', 'match_count': sam_count, 'displayed': 1 if binding else 0,
+                   'masks': ([{'object_id': binding.get('object_id'), 'bounds_half_open': binding.get('bounds'), 'confidence': binding.get('confidence'),
+                               'overlay_file': photos.get(f'{state}_outline'), 'source_mask_file': binding.get('mask_file'), 'resize_to_box': False}] if binding else [])}],
+          'vision': None, 'pairing': pairing, 'documentary': documentary, 'note': note, 'provenance': photos.get('provenance')}
+    if display:
+        ph['display_rule_image'] = display
+    return ph
+
+
+def extract_wire_pair(pair, case, label, rates, photos):
+    """Case 05 layout (Codex, 11/4, benchmate.wire_path_pair_result.v1): a reading-assisted pair whose fault diagnosis ended
+    in a structure proposal (a series resistor in place of the drawn wire W1), followed by the wire-path reading stage:
+    the engine splits the one surviving proposal into two bounded placements of the same series resistance (an ENGINE
+    RULE: the mini-board IN–OUT path carries it / the path is near-short and the resistance sits outside), Spark picks
+    W1's resistance as the reading, bands are frozen per placement and per source and pushed, the board is photographed,
+    SAM 3.1 segments it, Spark names the body that is W1 and the operator confirms, the operator reads the isolated path,
+    the frozen bands score it, the seal opens. The pair's own restored child (attempt 1, abstained) is recorded on the
+    run for the report; the restored rerun shown is the counted follow-up (see extract_timing_followup)."""
+    pair = pathlib.Path(pair)
+    res = json.load(open(pair / 'result.json'))
+    reg = json.load(open(pair / 'registration.json'))
+    pev = [json.loads(l) for l in open(pair / 'events.jsonl')]
+    intake = intake_from_pair(pair, rates)
+    child = pair / res['faulted_diagnosis']
+    run = extract(child, case, label, intake, rates)
+    run['pair_dir'] = pair.name; run['id'] = pair.name; run['child_id'] = child.name
+    run['registration'] = {k: reg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'selected_first_attempt', 'freeze_commit', 'blind_test', 'known_case_development')}
+    run['pilot'], run['counted'] = False, bool(reg.get('counted'))
+    run['classification'] = _followup_classification(reg, 'faulted', 'pair registration committed before the first request (registration.json)')
+    t0 = ts(run['started_utc'])
+    totals = dict(run['totals'])
+    play, last_t = run['play_length_s'], max((e['t'] for e in run['events']), default=0.0)
+
+    def add(e, kind, **kw):
+        nonlocal play, last_t
+        t = ts(e['timestamp']) - t0
+        dt = max(0.0, t - last_t)
+        gap = None
+        if dt > GAP_S:
+            gap = round(dt, 1); dt = GAP_PLAY_S
+        play += dt; last_t = t
+        item = {'t': round(t, 3), 'play': round(play, 3), 'kind': kind, 'ev': env(e), **kw}
+        if gap:
+            item['gap_real_s'] = gap
+        item['totals'] = dict(totals)
+        run['events'].append(item)
+        return item
+
+    catalog = json.load(open(pair / 'wire-reading-catalog.json'))
+    fc = json.load(open(pair / 'wire-reading-forecast.json'))
+    obs = json.load(open(pair / 'wire-reading-observation.json'))
+    sel = json.load(open(sorted((pair / 'wire-reading-selection').iterdir())[0] / 'result.json'))
+    cand = json.load(open(sorted((pair / 'photo-faulted' / 'candidates-v3').iterdir())[0] / 'result.json'))
+    proposal = json.load(open(pair / 'photo-faulted' / 'candidate-proposal.json'))
+    confirm = json.load(open(pair / 'wire-path-confirmation.json'))
+    native = pair / 'photo-faulted' / 'decoded' / 'native-SAM'
+    rd = run.setdefault('reading', {'bands': [], 'binding': None, 'observed': None, 'scored': None})
+    sealed = next((e for e in pev if e['kind'] == 'specimen_assembly_sealed' and e['payload'].get('state') == 'faulted'), None)
+    if sealed:
+        run['seal'] = {'sealed_sha256': sealed['payload']['sha256'], 'transmitted_to_model': sealed['payload'].get('transmitted_to_model'), 'sealed_ev': env(sealed)}
+    fitted = next((x for x in run['structure'] if x['id'] == 'proposal:1'), None)
+    r_fit = ((fitted or {}).get('fit') or {}).get('fitted_parameters') or {}
+    unit = 'Ω'
+    confirm_ev = next((e for e in pev if e['kind'] == 'wire_path_confirmed'), None)
+    isol_ev = next((e for e in pev if e['kind'] == 'wire_path_isolation_confirmed'), None)
+    for e in pev:
+        k, p = e['kind'], e['payload']
+        if k == 'reading_catalog_generated':
+            # two bounded placements of the same validated series path: an engine rule, never a Spark proposal
+            words = {'on_board_path:proposal:1': ('in the W1 path, on the board', 'the resistance sits in the mini-board W1 path and its contacts'),
+                     'external_path:proposal:1': ('off the board, W1 path near-short', 'the mini-board W1 path is near-short and the resistance sits outside the mini board')}
+            members = [{'id': x['id'], 'label': words.get(x['id'], (x['id'], x['id']))[0], 'words': words.get(x['id'], (x['id'], x['id']))[1], 'kind': 'R', 'a': 'IN', 'b': 'OUT', 'description': x.get('description')} for x in catalog['explanations']]
+            g = {'base_explanation': 'proposal:1', 'members': members, 'source': 'engine_rule', 'split_base': True,
+                 'reason': f"Generated by the engine from the verified terminal model (series path fitted at {fmt_ohm(r_fit.get('R2'))}): the terminal waveforms are the same wherever that resistance sits, so the measurement cannot place it. Both placements use the same model; nothing extra is fitted.",
+                 'ev': env(e), 'catalog_sha256': p.get('sha256')}
+            rd.setdefault('groups', []).append(g)
+            add(e, 'equivalence_group', **{a: b for a, b in g.items() if a != 'ev'})
+        elif k == 'reading_requested':
+            c, call = _usage_call(sel, rates, 'chose the reading', e)
+            if call:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            rd.update({'component': p['component'], 'quantity': p['quantity'], 'reason': p['reason'], 'chosen_by': p['chosen_by'], 'request_ev': env(e),
+                       'observable': 'the isolated mini-board IN–OUT path, W1 and its socket contacts left in place, all three leads lifted from the fixture'})
+            add(e, 'reading_requested', component=p['component'], quantity=p['quantity'], reason=p['reason'], chosen_by=p['chosen_by'], calls=[call] if call else [])
+        elif k == 'wire_reading_forecast_frozen':
+            bands, unit = _band_rows(fc, obs.get('meter_range'), fc['request'].get('quantity'))
+            rd['bands'] = bands
+            rd['sha_full'] = p.get('forecast_sha256'); rd['sha'] = (rd['sha_full'] or '')[:10]; rd['frozen_ev'] = env(e)
+            totals['forecasts_frozen'] += 1
+            add(e, 'reading_forecast_frozen', bands=bands, sha=rd['sha'], sha_full=rd['sha_full'])
+        elif k == 'wire_reading_forecast_publication':
+            rd.update({'published': p.get('published'), 'commit': p.get('commit'), 'url': p.get('url'), 'publish_ev': env(e)})
+            add(e, 'reading_forecast_published', commit=p.get('commit'), url=p.get('url'), sha=rd['sha'])
+        elif k == 'board_photo_received':
+            add(e, 'board_photo', sha256=p.get('sha256'), new_capture=p.get('new_capture_operator_confirmed'))
+        elif k == 'sam_localization_finished':
+            n = _native_bounds(native, proposal['sam_body'].split('-')[-1])[3]
+            totals['sam_calls'] = totals.get('sam_calls', 0) + int(p.get('requests') or 0)
+            totals['sam_cost'] = round(totals.get('sam_cost', 0.0) + 0.0025 * int(p.get('requests') or 0), 6)
+            add(e, 'sam_done', requests=p.get('requests'), masks=n, bodies=n)
+        elif k == 'body_candidates_proposed':
+            c, call = _usage_call(cand, rates, 'pointed at the body', e)
+            if call:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            bounds, conf, in_sha, n = _native_bounds(native, p['sam_body'].split('-')[-1])
+            rd['binding'] = {'sam_body': p['sam_body'], 'component': p['component'], 'chosen_by': p['chosen_by'], 'reason': p['reason'],
+                             'candidates': p.get('candidate_bodies'), 'mapping_status': p.get('mapping_status'),
+                             'operator_confirmed': bool(confirm.get('candidate_operator_confirmed')), 'operator_verbatim': confirm.get('operator_verbatim'),
+                             'confirm_ev': env(confirm_ev) if confirm_ev else None, 'localizer': 'native SAM 3.1 mask',
+                             'photo': photos.get('faulted_crop'), 'overlay_file': photos.get('faulted_outline'), 'crop_box': photos.get('faulted_crop_box'),
+                             'bounds': bounds, 'confidence': conf, 'input_image_sha256': in_sha, 'bodies': n, 'object_id': p['sam_body'].split('-')[-1],
+                             'calls': [call] if call else [], 'ev': env(e)}
+            add(e, 'body_binding', **{a: b for a, b in rd['binding'].items() if a != 'ev'})
+        elif k == 'reading_observed':
+            v, raw_unit = _observed_value(p, unit)
+            setup = (isol_ev or {}).get('payload', {}).get('setup') or {}
+            rd['observed'] = {'component': p['component'], 'value': v, 'unit': unit, 'source': p['source'], 'raw_value': p.get('value'), 'raw_unit': raw_unit,
+                              'note': 'USB off, all three leads lifted from the fixture, W1 and its contacts left in place' if setup.get('all_three_fixture_leads_disconnected') else None,
+                              'power_off': p.get('power_off_confirmed'), 'isolated': p.get('component_isolated_confirmed'), 'meter_range': p.get('meter_range'),
+                              'operator_verbatim': (isol_ev or {}).get('payload', {}).get('operator_verbatim'), 'photo': None,
+                              'evidence_link': None, 'evidence_sha256': (p.get('photo') or {}).get('sha256'), 'ev': env(e)}
+            add(e, 'reading_observed', **{a: b for a, b in rd['observed'].items() if a != 'ev'})
+        elif k == 'wire_reading_scored':
+            if not any(b['source'] == rd['observed']['source'] for b in rd['bands']):
+                sys.exit('wire_reading_scored without a frozen band for the reported source')
+            rd['scored'] = {'fits': p['fits'], 'ruled_out': p.get('ruled_out_by_reading') or [], 'outcome_raw': p.get('outcome'),
+                            'forecast_sha256': p.get('forecast_sha256'), 'observation_sha256': p.get('observation_sha256'), 'refitted': p.get('refitted'), 'ev': env(e)}
+            rd['outcome'] = {'one_explanation_remains': 'one', 'indistinguishable': 'several', 'all_explanations_rejected': 'none'}.get(p.get('outcome'), 'one' if len(p['fits']) == 1 else ('none' if not p['fits'] else 'several'))
+            add(e, 'reading_scored', fits=p['fits'], ruled_out=rd['scored']['ruled_out'], outcome=rd['outcome'])
+        elif k == 'specimen_seal_opened':
+            got = seal_from_pair(run, pev, rd['scored']['fits'])
+            if got:
+                opened, truth = got
+                add(opened, 'seal_opened', truth=truth, matches=run['seal']['matches_commitment'])
+            break
+    # the pair's own restored attempt: reached a verdict (abstained), counted, not rendered as a replay; the counted follow-up is
+    rfin = next((e for e in pev if e['kind'] == 'diagnosis_finished' and e['payload'].get('state') == 'restored'), None)
+    if rfin:
+        ar = rfin['payload'].get('agent_report') or {}
+        run['restored_attempts'] = [{'attempt': 1, 'record': res.get('restored_diagnosis'), 'verdict': ar.get('verdict'), 'text': ar.get('explanation'), 'ev': env(rfin), 'counted': True, 'caption': res.get('restored_caption')}]
+    run['totals'] = totals
+    run['play_length_s'] = round(play, 2)
+    run['photo'] = _photo_block(photos, 'faulted', binding=rd.get('binding'), sam_count=(rd.get('binding') or {}).get('bodies'),
+                                pairing='Spark pointed at sam-1 as W1; confirmed by the operator',
+                                note='Photo untouched apart from the outline: the boundary of the native SAM 3.1 mask Spark named as W1.')
+    run['verify_command'] = 'python -m benchmate.reading_wire_stage verify <pair folder>'
+    return run
+
+
+def fmt_ohm(v):
+    if v is None:
+        return 'the fitted value'
+    return f'{v / 1000:.2f} kΩ' if v >= 1000 else f'{v:.0f} Ω'
+
+
+def extract_timing_followup(rec, pair, case, rates, photos, verify_outputs=None):
+    """Case 05 restored rerun (Codex, 11/4, benchmate.frame_timing_restored_followup.v4): a counted restored attempt 2 in its
+    own record, a normal v2 run registered against the original pair, whose own restored attempt had abstained. The
+    frame-anchored timing model it runs on was published before this run (registration.qualification_file)."""
+    rec, pair = pathlib.Path(rec), pathlib.Path(pair)
+    reg = json.load(open(rec / 'registration.json'))
+    res = json.load(open(rec / 'result.json'))
+    pev = [json.loads(l) for l in open(pair / 'events.jsonl')]
+    intake = intake_from_pair(pair, rates)
+    run = extract(rec, case, 'Restored rerun', intake, rates)
+    run['pilot'], run['counted'] = False, bool(reg.get('counted'))
+    run['classification'] = _followup_classification(reg, 'restored', 'follow-up registration committed before the first request (registration.json), linked to the pair by head sha256; attempt 2 after the pair’s own restored attempt abstained')
+    run['registration'] = {k: reg.get(k) for k in ('cohort', 'attempt_ordinal', 'official', 'counted', 'selected_first_attempt', 'blind_test', 'original_pair', 'original_restored_verdict', 'qualification_file')}
+    restore_ev = next((e for e in pev if e['kind'] == 'operator_restoration_confirmed'), None)
+    nr = next((e for e in pev if e['kind'] == 'restored_photo_not_repeated'), None)
+    rfin = next((e for e in pev if e['kind'] == 'diagnosis_finished' and e['payload'].get('state') == 'restored'), None)
+    ar = ((rfin or {}).get('payload') or {}).get('agent_report') or {}
+    run['pair'] = {'of': pair.name, 'operator_restored': True, 'state': 'restored', 'attempt': reg.get('attempt_ordinal'),
+                   'restore_ev': env(restore_ev) if restore_ev else None,
+                   'restored_what': ((nr or {}).get('payload') or {}).get('operator_report', {}).get('operator_statement'),
+                   'external_only': bool(((nr or {}).get('payload') or {}).get('operator_report', {}).get('only_external_fault_removed')),
+                   'previous_attempt': {'attempt': 1, 'record': pair.name, 'verdict': ar.get('verdict'), 'text': ar.get('explanation'), 'ev': env(rfin) if rfin else None, 'counted': True,
+                                        'note': 'The pair’s own restored rerun ended abstained: the drawing’s model missed the 0–5 ms region of both steps by 9.3 and 10.2 mV. The channel-timing model used from here on was qualified and published before this attempt.'},
+                   'timing_model': res.get('timing_model_version')}
+    run['display_caption'] = res.get('display_caption') or 'No mismatch in the tests Spark chose'
+    if photos.get('faulted_crop'):
+        run['photo'] = _photo_block(photos, 'faulted', documentary=True, sam_count=_native_bounds(pair / 'photo-faulted' / 'decoded' / 'native-SAM', '1')[3],
+                                    note='The mini board was not changed by the restoration: only the 20 kΩ resistor outside it was removed, so no new photo was taken. This is the original fault-state capture, shown as recorded; nothing was identified or read from it.')
+    if verify_outputs:
+        run['verify_outputs'] = verify_outputs
+    run['verify_command'] = 'python -m benchmate verify <record folder>'
+    return run
+
+
+def extract_chain(root, case, label, rates, photos, verify_outputs=None):
+    """Case 03 layout (Codex, 11/4): one restored-only root record (benchmate.restored_after_photo_observation.v5) that
+    carries the whole chain under history/reading/: the original pair (fault diagnosis, Spark's reading request, bands frozen
+    and pushed, the photo and SAM; it then stopped on a local input error before Spark's body call), the photo-binding
+    follow-up (Spark named the body), the reading continuation (operator confirmation, the isolated reading, the score,
+    the seal), and at the root the restored diagnosis plus a documentary restored photo. Returns (fault_run, restored_run)."""
+    root = pathlib.Path(root)
+    rd_rec = root / 'history' / 'reading'
+    orig = rd_rec / 'history' / 'original'
+    bf = rd_rec / 'history' / 'body-followup'
+    rreg = json.load(open(root / 'registration.json'))
+    oreg = json.load(open(orig / 'registration.json'))
+    rdreg = json.load(open(rd_rec / 'registration.json'))
+    oev = [json.loads(l) for l in open(orig / 'events.jsonl')]
+    bev = [json.loads(l) for l in open(bf / 'events.jsonl')]
+    cev = [json.loads(l) for l in open(rd_rec / 'events.jsonl')]
+    rev = [json.loads(l) for l in open(root / 'events.jsonl')]
+    intake = intake_from_pair(orig, rates)
+    child = sorted((orig / 'diagnosis-faulted').iterdir())[0]
+    run = extract(child, case, label, intake, rates)
+    run['pair_dir'] = oreg.get('run_id') or orig.name; run['id'] = run['pair_dir']; run['child_id'] = child.name  # the copy under history/ keeps the pair's registered id
+    run['registration'] = {k: oreg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'selected_first_attempt', 'freeze_commit', 'blind_test', 'known_case_development')}
+    run['pilot'], run['counted'] = False, bool(oreg.get('counted'))
+    run['classification'] = _followup_classification(oreg, 'faulted', 'pair registration committed before the first request (registration.json); the photo-binding follow-up and the reading continuation are registered separately and linked by head sha256')
+    run['classification']['linked_records'] = {'photo_binding_followup_head_sha256': rdreg.get('body_followup_head_sha256'),
+                                               'reading_continuation': rdreg.get('run_id'), 'restored_continuation': rreg.get('run_id')}
+    t0 = ts(run['started_utc'])
+    totals = dict(run['totals'])
+    play, last_t = run['play_length_s'], max((e['t'] for e in run['events']), default=0.0)
+
+    def add(e, kind, **kw):
+        nonlocal play, last_t
+        t = ts(e['timestamp']) - t0
+        dt = max(0.0, t - last_t)
+        gap = None
+        if dt > GAP_S:
+            gap = round(dt, 1); dt = GAP_PLAY_S
+        play += dt; last_t = t
+        item = {'t': round(t, 3), 'play': round(play, 3), 'kind': kind, 'ev': env(e), **kw}
+        if gap:
+            item['gap_real_s'] = gap
+        item['totals'] = dict(totals)
+        run['events'].append(item)
+        return item
+
+    fc = json.load(open(rd_rec / 'reading-forecast.json'))
+    obs = json.load(open(rd_rec / 'reading-observation.json'))
+    sel = json.load(open(sorted((orig / 'reading-selection').iterdir())[0] / 'result.json'))
+    bres = json.load(open(sorted((bf / 'spark').iterdir())[0] / 'result.json'))
+    binding = json.load(open(rd_rec / 'body-binding.json'))
+    native = orig / 'photo-faulted' / 'decoded' / 'native-SAM'
+    rd = run.setdefault('reading', {'bands': [], 'binding': None, 'observed': None, 'scored': None})
+    sealed = next((e for e in oev if e['kind'] == 'specimen_assembly_sealed' and e['payload'].get('state') == 'faulted'), None)
+    if sealed:
+        run['seal'] = {'sealed_sha256': sealed['payload']['sha256'], 'transmitted_to_model': sealed['payload'].get('transmitted_to_model'), 'sealed_ev': env(sealed)}
+    unit = 'Ω'
+    # ---- the original pair after its diagnosis
+    for e in oev:
+        k, p = e['kind'], e['payload']
+        if k == 'reading_requested':
+            c, call = _usage_call(sel, rates, 'chose the reading', e)
+            if call:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            rd.update({'component': p['component'], 'quantity': p['quantity'], 'reason': p['reason'], 'chosen_by': p['chosen_by'], 'request_ev': env(e)})
+            add(e, 'reading_requested', component=p['component'], quantity=p['quantity'], reason=p['reason'], chosen_by=p['chosen_by'], calls=[call] if call else [])
+        elif k == 'reading_forecast_frozen':
+            bands, unit = _band_rows(fc, obs.get('meter_range'), fc['request'].get('quantity'))
+            rd['bands'] = bands
+            rd['sha_full'] = p.get('sha256'); rd['sha'] = (rd['sha_full'] or '')[:10]; rd['frozen_ev'] = env(e)
+            totals['forecasts_frozen'] += 1
+            add(e, 'reading_forecast_frozen', bands=bands, sha=rd['sha'], sha_full=rd['sha_full'])
+        elif k == 'reading_forecast_publication':
+            rd.update({'published': p.get('published'), 'commit': p.get('commit'), 'url': p.get('url'), 'publish_ev': env(e)})
+            rd['sha_full'] = rd.get('sha_full') or p.get('sha256'); rd['sha'] = (rd['sha_full'] or '')[:10]
+            add(e, 'reading_forecast_published', commit=p.get('commit'), url=p.get('url'), sha=rd['sha'])
+        elif k == 'board_photo_received':
+            add(e, 'board_photo', sha256=p.get('sha256'), new_capture=p.get('new_capture_operator_confirmed'))
+        elif k == 'sam_localization_finished':
+            n = _native_bounds(native, '1')[3]
+            totals['sam_calls'] = totals.get('sam_calls', 0) + int(p.get('requests') or 0)
+            totals['sam_cost'] = round(totals.get('sam_cost', 0.0) + 0.0025 * int(p.get('requests') or 0), 6)
+            add(e, 'sam_done', requests=p.get('requests'), masks=n, bodies=n)
+        elif k == 'run_failed':
+            run['continuation'] = {'stopped_at': p.get('stage'), 'error': p.get('error'), 'ev': env(e), 'counted_failure': True,
+                                   'line': 'The pair record stopped here on a local input error (KeyError) while preparing Spark’s body call; no model was called. The failure is counted. The chain continues in two linked records, registered first and tied to this one by head sha256.'}
+            add(e, 'binding_stopped', stage=p.get('stage'), error=p.get('error'), line=run['continuation']['line'])
+    # ---- the photo-binding follow-up: Spark names the body
+    for e in bev:
+        k, p = e['kind'], e['payload']
+        if k == 'body_candidates_proposed':
+            c, call = _usage_call(bres, rates, 'pointed at the body', e)
+            if call:
+                totals['spark_calls'] += 1; totals['spark_cost'] = round(totals['spark_cost'] + c, 6)
+            bounds, conf, in_sha, n = _native_bounds(native, p['sam_body'].split('-')[-1])
+            conf_ev = next((x for x in cev if x['kind'] == 'body_binding'), None)
+            rd['binding'] = {'sam_body': p['sam_body'], 'component': p['component'], 'chosen_by': p['chosen_by'], 'reason': p['reason'],
+                             'candidates': p.get('candidate_bodies'), 'mapping_status': p.get('mapping_status'),
+                             'operator_confirmed': bool(binding.get('operator_confirmed')), 'operator_verbatim': binding.get('operator_verbatim'),
+                             'confirm_ev': env(conf_ev) if conf_ev else None, 'localizer': 'native SAM 3.1 mask',
+                             'photo': photos.get('faulted_crop'), 'overlay_file': photos.get('faulted_outline'), 'crop_box': photos.get('faulted_crop_box'),
+                             'bounds': bounds, 'confidence': conf, 'input_image_sha256': in_sha, 'bodies': n, 'object_id': p['sam_body'].split('-')[-1],
+                             'calls': [call] if call else [], 'ev': env(e)}
+            add(e, 'body_binding', **{a: b for a, b in rd['binding'].items() if a != 'ev'})
+    # ---- the reading continuation: the operator reads, the bands score, the seal opens
+    for e in cev:
+        k, p = e['kind'], e['payload']
+        if k == 'reading_observed':
+            v, raw_unit = _observed_value(p, unit)
+            rep = next((x for x in cev if x['kind'] == 'operator_reading_reported'), None)
+            rd['observed'] = {'component': p['component'], 'value': v, 'unit': unit, 'source': p['source'], 'raw_value': p.get('value'), 'raw_unit': raw_unit,
+                              'note': 'power off, both leads lifted' if p.get('component_isolated_confirmed') else None,
+                              'power_off': p.get('power_off_confirmed'), 'isolated': p.get('component_isolated_confirmed'), 'meter_range': p.get('meter_range'),
+                              'operator_verbatim': ((rep or {}).get('payload') or {}).get('operator_verbatim'), 'photo': None,
+                              'evidence_link': None, 'evidence_sha256': (p.get('photo') or {}).get('sha256'), 'ev': env(e)}
+            add(e, 'reading_observed', **{a: b for a, b in rd['observed'].items() if a != 'ev'})
+        elif k == 'reading_scored':
+            if not any(b['source'] == rd['observed']['source'] for b in rd['bands']):
+                sys.exit('reading_scored without a frozen band for the reported source')
+            rd['scored'] = {'fits': p['fits'], 'ruled_out': p.get('ruled_out_by_reading') or [], 'outcome_raw': p.get('outcome'),
+                            'forecast_sha256': p.get('forecast_sha256'), 'observation_sha256': p.get('observation_sha256'), 'refitted': p.get('refitted'), 'ev': env(e)}
+            rd['outcome'] = {'one_explanation_remains': 'one', 'indistinguishable': 'several', 'all_explanations_rejected': 'none'}.get(p.get('outcome'), 'one' if len(p['fits']) == 1 else ('none' if not p['fits'] else 'several'))
+            add(e, 'reading_scored', fits=p['fits'], ruled_out=rd['scored']['ruled_out'], outcome=rd['outcome'])
+        elif k == 'specimen_seal_opened':
+            got = seal_from_pair(run, cev, rd['scored']['fits'])
+            if got:
+                opened, truth = got
+                add(opened, 'seal_opened', truth=truth, matches=run['seal']['matches_commitment'])
+            break
+    run['totals'] = totals
+    run['play_length_s'] = round(play, 2)
+    run['photo'] = _photo_block(photos, 'faulted', binding=rd.get('binding'), sam_count=(rd.get('binding') or {}).get('bodies'),
+                                pairing='Spark pointed at sam-1 as R1; confirmed by the operator',
+                                note='Photo untouched apart from the outline: the boundary of the native SAM 3.1 mask Spark named as R1.')
+    run['verify_command'] = 'PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify <record folder>'
+    if verify_outputs and verify_outputs.get('fault'):
+        run['verify_outputs'] = verify_outputs['fault']
+
+    # ---- the restored rerun at the root: fresh context, then a documentary restored photo
+    rchild = sorted((root / 'diagnosis-restored').iterdir())[0]
+    rrun = extract(rchild, case, 'Restored rerun', intake, rates)
+    rrun['id'] = root.name; rrun['child_id'] = rchild.name; rrun['pair_dir'] = root.name
+    rrun['pilot'], rrun['counted'] = False, bool(rreg.get('counted'))
+    rrun['classification'] = _followup_classification(rreg, 'restored', 'restored continuation registered before its first request (registration.json), linked to the reading record by head sha256')
+    rrun['registration'] = {k: rreg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'state', 'followup_of', 'original_primary_status', 'original_selection_unchanged')}
+    restore_ev = next((e for e in rev if e['kind'] == 'operator_restoration_confirmed'), None)
+    rrep = json.load(open(root / 'operator-restoration-report.json')) if (root / 'operator-restoration-report.json').exists() else {}
+    rres = json.load(open(root / 'result.json')) if (root / 'result.json').exists() else {}
+    scope = json.load(open(root / 'restored-photo-scope.json')) if (root / 'restored-photo-scope.json').exists() else {}
+    rrun['pair'] = {'of': run['id'], 'operator_restored': True, 'state': 'restored', 'restore_ev': env(restore_ev) if restore_ev else None,
+                    'restored_what': rrep.get('operator_verbatim'),
+                    'closeout': {'restored_verdict': rres.get('restored_verdict'), 'restored_photo_documentary_only': scope.get('SAM_role') == 'documentary_display_only',
+                                 'restored_binding_performed': bool(scope.get('Spark_binding_requests')), 'SAM_used_as_identification_evidence': bool(scope.get('component_identity_claimed')),
+                                 'photo_SAM_requests': 1, 'photo_Spark_requests': scope.get('Spark_binding_requests', 0)}}
+    rrun['display_caption'] = rres.get('restored_caption') or 'No mismatch in the tests Spark chose'
+    sam_ev = next((e for e in rev if e['kind'] == 'sam_localization_finished'), None)
+    rnative = root / 'photo-restored' / 'decoded' / 'native-SAM'
+    nm = len(json.load(open(rnative / 'crop-manifest.json'))['objects']) if (rnative / 'crop-manifest.json').exists() else None
+    if sam_ev:
+        rrun['totals']['sam_calls'] = rrun['totals'].get('sam_calls', 0) + int(sam_ev['payload'].get('requests') or 0)
+        rrun['totals']['sam_cost'] = round(rrun['totals'].get('sam_cost', 0.0) + 0.0025 * int(sam_ev['payload'].get('requests') or 0), 6)
+    if photos.get('restored_crop'):
+        rrun['photo'] = _photo_block(photos, 'restored', documentary=True, sam_count=nm,
+                                     note=f"Documentary photo of the restored board, untouched. SAM 3.1 returned {nm} masks; nothing was identified or read from it and no body was paired with a part.",
+                                     display={'file': photos.get('restored_documentary'), 'displayed': nm,
+                                              'note': f"Documentary: the same photo with every native SAM 3.1 mask outlined ({nm} of {nm}). Not an identification; declared display-only before the photo was taken (restored-photo-scope.json)."})
+    if verify_outputs and verify_outputs.get('restored'):
+        rrun['verify_outputs'] = verify_outputs['restored']
+    rrun['verify_command'] = 'PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify <record folder>'
+    return run, rrun
+
+
 def timeline_pair(run):
     """Timeline for a pair run: the v2 timeline plus the reading-stage events the pair extractor adds.
     The diagnosis child's report comes BEFORE the reading, so it is shown as Spark's report after the
@@ -1127,7 +1573,7 @@ def timeline_pair(run):
     seen = {(x['ev'] or {}).get('seq') for x in out if x.get('ev')}
     extra = []
     for e in run['events']:
-        if e['kind'] in ('reading_forecast_published', 'board_photo', 'sam_done', 'seal_opened', 'binding_abstained', 'body_group',
+        if e['kind'] in ('reading_forecast_published', 'board_photo', 'sam_done', 'seal_opened', 'binding_abstained', 'binding_stopped', 'body_group',
                          'group_reading_forecast', 'group_reading_observed', 'group_reading_scored') and (e['ev']['seq'], e['ev']['kind']) not in {(x['ev']['seq'], x['ev']['kind']) for x in out if x.get('ev')}:
             item = {'t_log': e['t'], 't_play': e['play'], 'kind': e['kind'], 'totals': e.get('totals'), 'ev': e.get('ev'),
                     **{a: b for a, b in e.items() if a not in ('t', 'play', 'kind', 'totals', 'ev')}}
@@ -1178,7 +1624,7 @@ def main():
         for p in sys.argv[2:]:
             convert(p)
         return
-    if len(sys.argv) > 1 and sys.argv[1] in ('--pair', '--followup', '--pair-terminal', '--pair-group'):
+    if len(sys.argv) > 1 and sys.argv[1] in ('--pair', '--followup', '--pair-terminal', '--pair-group', '--pair-wire', '--pair-chain'):
         ap = argparse.ArgumentParser()
         ap.add_argument(sys.argv[1], dest='rec', required=True, help='pair folder (reading-assisted cohort) or follow-up record folder')
         ap.add_argument('--case', required=True)
@@ -1188,12 +1634,32 @@ def main():
         ap.add_argument('--pair-of', default=None)
         ap.add_argument('--amendment', default=None, help='JSON file describing a public design amendment made before any measurement')
         ap.add_argument('--group', default=None, help='unordered reading supplement record (benchmate.unordered_reading_supplement.v1)')
-        ap.add_argument('--restored', default=None, help='restored continuation record (benchmate.unordered_restored_continuation.v2)')
+        ap.add_argument('--restored', default=None, help='restored continuation record (unordered_restored_continuation.v2, or the frame-timing follow-up record for --pair-wire)')
         ap.add_argument('--extra', default=None, help='folder with the pair files that sit too deep to stage: binding-result.json, faulted-sam-decoded.json, sam-display-manifest.json')
+        ap.add_argument('--verify', default=None, help='JSON {fault: [lines], restored: [lines]}: outputs of the keyless verifiers, run on the public copies, copied as written')
         a = ap.parse_args()
         cj = json.load(open(a.rates))
         rates = {'rates': cj['rates_usd_per_million'], 'source': 'https://dev.meta.ai/docs/pricing-rate-limits'}
         photos = json.load(open(a.photos)) if a.photos else {}
+        verify = json.load(open(a.verify)) if a.verify else {}
+        if sys.argv[1] == '--pair-wire':
+            fault = extract_wire_pair(a.rec, a.case, a.label, rates, photos)
+            if verify.get('fault'):
+                fault['verify_outputs'] = verify['fault']
+            fault['timeline'] = timeline_pair(fault)
+            write_run(fault, a.case, a.label)
+            if a.restored:
+                restored = extract_timing_followup(a.restored, a.rec, a.case, rates, photos, verify.get('restored'))
+                restored['timeline'] = timeline(restored)
+                write_run(restored, a.case, restored['label'], fault['id'])
+            return
+        if sys.argv[1] == '--pair-chain':
+            fault, restored = extract_chain(a.rec, a.case, a.label, rates, photos, verify)
+            fault['timeline'] = timeline_pair(fault)
+            restored['timeline'] = timeline(restored)
+            write_run(fault, a.case, a.label)
+            write_run(restored, a.case, restored['label'], fault['id'])
+            return
         if sys.argv[1] == '--pair-group':
             fault, restored = extract_group_pair(a.rec, a.group, a.restored, a.case, a.label, rates, photos, pathlib.Path(a.extra or a.rec))
             fault['timeline'] = timeline_pair(fault)

@@ -1,0 +1,31 @@
+{
+ "width": 1200,
+ "height": 1600,
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "faulted_crop": "assets/photos/case05-faulted-crop.jpg",
+ "faulted_crop_box": [
+  120,
+  380,
+  1080,
+  1100
+ ],
+ "faulted_sha256": "08e61dd3f569ae5329ce083281a732c92c8dd31079dfa847f8e504fd29226fbe",
+ "faulted_source": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/photo-faulted/prepared/input.png (1200×1600 metadata-free SAM input, sha256 08e61dd3f569…)",
+ "faulted_outline": "assets/photos/case05-faulted-outline.png",
+ "faulted_outlined": [
+  {
+   "object_id": "1",
+   "part": "W1",
+   "why": "body_candidates_proposed: Spark named sam-1 as W1, operator-confirmed (wire-path-confirmation.json)",
+   "bounds_half_open": [
+    315,
+    596,
+    545,
+    625
+   ],
+   "mask_file": "electronic component-object-1-record-1-mask.png",
+   "mask_sha256": "32b9b8cccd34de2c95af141450f0025d275ac35715b8633b85ea4c3481c76862",
+   "confidence": 0.7264957427978516
+  }
+ ]
+}
