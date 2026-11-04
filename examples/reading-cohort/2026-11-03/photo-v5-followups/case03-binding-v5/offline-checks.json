@@ -1,0 +1,48 @@
+{
+  "schema": "benchmate.photo_binding_input_fix_checks.v1",
+  "failed_parent": "examples/reading-cohort/2026-11-03/records/20261104T041918-d1084cbeb4",
+  "failure_stage": "bind",
+  "failure": "KeyError(native_object) on retained OpenCV fallback before provider creation",
+  "original_failure_retained_and_counted": true,
+  "offline_tests": {
+    "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_reading_photo_request_v5.py",
+    "passed": 7
+  },
+  "real_request_built_offline": true,
+  "all_retained_candidate_ids": [
+    "sam-0",
+    "sam-1",
+    "sam-2",
+    "sam-3",
+    "cv-2"
+  ],
+  "photo_stage_actual": {
+    "Spark_requests": 0,
+    "SAM_requests": 1,
+    "estimated_cost_USD": 0.0025
+  },
+  "case03_actual_to_date": {
+    "Spark_requests": 8,
+    "SAM_requests": 1,
+    "estimated_cost_USD": 0.07348025
+  },
+  "whole_cohort_including_labelled_case02_photo_reprocessing": {
+    "Spark_requests": 94,
+    "SAM_requests": 5,
+    "estimated_cost_USD": 0.94124215
+  },
+  "cost_scope": "Retained tariff estimate, not invoice; SAM $0.0025 per image.",
+  "proposed_followup": {
+    "Spark_requests_max": 1,
+    "SAM_requests_max": 0,
+    "hardware_operations": 0,
+    "estimated_cost_USD_range": [
+      0.01,
+      0.025
+    ],
+    "operator_choice_pending": true
+  },
+  "original_frozen_sources_unchanged": 107,
+  "new_paid_calls_during_fix": 0,
+  "hardware_operations_during_fix": 0
+}
