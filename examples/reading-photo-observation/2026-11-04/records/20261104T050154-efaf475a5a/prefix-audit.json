@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "events": 304,
+  "root_events": 5,
+  "run_status": "reading_continuation_state",
+  "head_sha256": "9cbd123c2242a4b5d58244a6dcb8ad9d21537ce76d2f0176e6141be1007d615d",
+  "scope": "internal_integrity+recorded_order",
+  "creation_time": "unproven",
+  "incomplete_prefix": true,
+  "operator_numeric_reading_received": false,
+  "new_API_calls": 0,
+  "new_hardware_commands": 0,
+  "offline_tests_passed": 6
+}

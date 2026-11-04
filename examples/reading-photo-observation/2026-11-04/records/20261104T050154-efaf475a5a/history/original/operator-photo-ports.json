@@ -1,0 +1,20 @@
+{
+  "schema": "benchmate.operator_photo_ports.v1",
+  "operator_confirmed": true,
+  "source": "operator_confirmed_wiring_table",
+  "ports": {
+    "IN": {
+      "wire_color": "green",
+      "mini_contact": "A3"
+    },
+    "OUT": {
+      "wire_color": "blue",
+      "mini_contact": "A13"
+    },
+    "REF": {
+      "wire_color": "white",
+      "mini_contact": "A17"
+    }
+  },
+  "component_values_or_reference_assignments_included": false
+}

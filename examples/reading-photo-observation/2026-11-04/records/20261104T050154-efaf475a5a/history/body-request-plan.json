@@ -1,0 +1,132 @@
+{
+  "schema": "benchmate.photo_binding_followup.v5",
+  "parent": "runs/reading-cohort/20261104T041918-d1084cbeb4",
+  "parent_events_sha256": "23787f37a650254da033865446261a038fb0f8da0087ed910007eb1a51e28dde",
+  "parent_head_sha256": "9e3c613741f63349b1c5ba1749d603b09d7027aa16bbbf1d5f1927ea34d9244c",
+  "parent_status": "run_failed",
+  "purpose": "continue_photo_binding_after_pre_provider_input_error",
+  "prior_failure_preserved_and_counted": true,
+  "new_terminal_diagnosis": false,
+  "same_native_masks_reused": true,
+  "blind_test": false,
+  "operator_numeric_values_supplied": false,
+  "surface_value_reading": false,
+  "Spark_requests_max": 1,
+  "SAM_requests_max": 0,
+  "hardware_operations": 0,
+  "candidate_ids_supplied": [
+    "sam-0",
+    "sam-1",
+    "sam-2",
+    "sam-3",
+    "cv-2"
+  ],
+  "inputs": {
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/body-manifest.json": "31db1270beb7459593851c329f675f0bb2076a61c258802eea398ef180171b6b",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/prepared/clean-full.png": "8677495c92c7dde7b7fe7eb144b421d8cfca5990704f508f1817202aa17c3661",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/schematic-intake/20261104T042005-5517c5bb50/input.png": "f8a9f893a572c0c96043e443bac13347a2cf9990ea860fb23a9744ef872ec577",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/prepared/input.png": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/state.json": "7e67dc4eaf77783a6a4ceb55cbef70acce00e23a42a38c894896a5308ab5ab31",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/operator-photo-ports.json": "e85425a143656f06b5f7a91fbad5c18c99dece9e4fadc3b5bd21dcdd9a2c38db",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/sam-0-baseline.png": "bc7a4d69c619ee5838942f3c4ae394177cc1b77f4b1e50eb8e6859643baf7b18",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/sam-1-baseline.png": "c22bf07c8b23da7d12ce6eadca6f3def8c96e3bb9480b8721943d873d3473116",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/sam-2-baseline.png": "c24b2f53e51a99bb2e22aa24792d22a5e2e963962b497ac914bf5ffbd6544e11",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/sam-3-baseline.png": "930d45f873efebb400a2d365d3d3f91d0f3490a2177929a0b6fd331d5cc767f4",
+    "runs/reading-cohort/20261104T041918-d1084cbeb4/photo-faulted/decoded/cv-2-baseline.png": "b08eb2d0e8da0eeff6af9d17b527eac41bcdb917d1db7b2f242d954eaae961a4"
+  },
+  "tool": {
+    "type": "function",
+    "name": "propose_body_candidates",
+    "description": "Select plausible bodies and kinds; separately resolve or abstain on the schematic reference.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "candidate_bodies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sam_body": {
+                "type": "string",
+                "enum": [
+                  "sam-0",
+                  "sam-1",
+                  "sam-2",
+                  "sam-3",
+                  "cv-2"
+                ]
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "R",
+                  "C",
+                  "L",
+                  "D",
+                  "Q",
+                  "IC",
+                  "wire",
+                  "connector",
+                  "other",
+                  "unknown"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sam_body",
+              "kind",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "mapping_status": {
+          "type": "string",
+          "enum": [
+            "unique",
+            "ambiguous",
+            "unresolved"
+          ]
+        },
+        "sam_body": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "sam-0",
+            "sam-1",
+            "sam-2",
+            "sam-3",
+            "cv-2",
+            null
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_bodies",
+        "mapping_status",
+        "sam_body",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "strict": true
+  },
+  "source_sha256": {
+    "src/benchmate/reading_photo_request_v5.py": "1c1b3a3ac225099ba64b70b3763fccb908acc4fa21f374d4252f55696ff64318",
+    "tests/test_reading_photo_request_v5.py": "03235c16c6ada476af8d9cb5d220823f10d0f13ffd3ce179eb5e5daaeeca7f97",
+    "docs/2026-11-04-photo-fallback-input-fix.md": "08a15341912b423517c94a1173fa405843fd96675a117114f094644d937b2308",
+    "src/benchmate/reading_candidates_v3.py": "fff20a87422b30416510038e62e303f24e9b02cb85a6e7b64906c32087330dba",
+    "src/benchmate/reading_photo_stage_v4.py": "c7134e8711b9def61fb21b6e45d2c75cf43a02ca72f682207aa783e8f97b8a81",
+    "src/benchmate/reading_transport.py": "3f264d6a24df80d385212af6affd5acea5983aa0fed95add3ba41d2b873b3552"
+  },
+  "request_content_sha256": "fb27a260fd9697d8de70d2f750ed408e22581b61c4897767dcc6d93df0f9f08c",
+  "public_plan": "examples/reading-cohort/2026-11-03/photo-v5-followups/case03-binding-v5/plan.json"
+}

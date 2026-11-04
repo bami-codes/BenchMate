@@ -1,0 +1,144 @@
+{
+  "concept": "electronic component",
+  "parser_version": "0.1.0",
+  "diagnostics": [],
+  "masks": [
+    {
+      "photo_component_id": "c6149b1f2f52:electronic component-object-0-record-0",
+      "concept": "electronic component",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+      "bounds_half_open": [
+        561,
+        715,
+        752,
+        755
+      ],
+      "confidence": 0.7344398498535156,
+      "raster_size": [
+        191,
+        40
+      ],
+      "source_mask_file": "electronic component-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        1341,
+        1786,
+        1968,
+        1918
+      ],
+      "crop_file": "electronic component-object-0-record-0-crop.png",
+      "crop_sha256": "70c07c86c35bdf33e141de38ac8160b8e30b7d134f0ddf43cfdfeafa8d98f12f",
+      "crop_size": [
+        627,
+        132
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    },
+    {
+      "photo_component_id": "c6149b1f2f52:electronic component-object-1-record-1",
+      "concept": "electronic component",
+      "object_id": "1",
+      "record_index": 1,
+      "input_image_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+      "bounds_half_open": [
+        339,
+        605,
+        531,
+        646
+      ],
+      "confidence": 0.7460317611694336,
+      "raster_size": [
+        192,
+        41
+      ],
+      "source_mask_file": "electronic component-object-1-record-1-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        781,
+        1509,
+        1411,
+        1644
+      ],
+      "crop_file": "electronic component-object-1-record-1-crop.png",
+      "crop_sha256": "3496aeb50c591efec63841a649bce2ba4086894ea55ec9c13bfd86f75ae7ac1b",
+      "crop_size": [
+        630,
+        135
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    },
+    {
+      "photo_component_id": "c6149b1f2f52:electronic component-object-2-record-2",
+      "concept": "electronic component",
+      "object_id": "2",
+      "record_index": 2,
+      "input_image_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+      "bounds_half_open": [
+        500,
+        0,
+        1191,
+        65
+      ],
+      "confidence": 0.5704697966575623,
+      "raster_size": [
+        691,
+        65
+      ],
+      "source_mask_file": "electronic component-object-2-record-2-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        998,
+        0,
+        3024,
+        189
+      ],
+      "crop_file": "electronic component-object-2-record-2-crop.png",
+      "crop_sha256": "3ccfd3392f601d2f6351ffedf0856b4e26cb4db6743824f1964c42c5965fc30a",
+      "crop_size": [
+        1600,
+        149
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    },
+    {
+      "photo_component_id": "c6149b1f2f52:electronic component-object-3-record-3",
+      "concept": "electronic component",
+      "object_id": "3",
+      "record_index": 3,
+      "input_image_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+      "bounds_half_open": [
+        779,
+        594,
+        921,
+        705
+      ],
+      "confidence": 0.7968254089355469,
+      "raster_size": [
+        142,
+        111
+      ],
+      "source_mask_file": "electronic component-object-3-record-3-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        1909,
+        1454,
+        2375,
+        1819
+      ],
+      "crop_file": "electronic component-object-3-record-3-crop.png",
+      "crop_sha256": "48073c53e7733fede7fec06ef1fe237adc988437faa739ba1ccf73b99fc3b631",
+      "crop_size": [
+        466,
+        365
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    }
+  ],
+  "match_count": 4
+}

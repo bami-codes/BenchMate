@@ -1,0 +1,31 @@
+{
+  "schema": "benchmate.candidate_display.v1",
+  "selected_by": "muse_spark",
+  "proposal_sha256": "59db4ef4486ed5f3ce72dc9640cc24810b3ac142034e2175061638b66395deba",
+  "component": "R1",
+  "mapping_status": "unique",
+  "operator_confirmed": false,
+  "all_candidate_body_ids": [
+    "sam-1",
+    "sam-0"
+  ],
+  "source_photo_sha256": "c6149b1f2f527dee255b87fb52ced079d3d19a356c3fdaa6faa53bef2f0e8a79",
+  "native_masks_unchanged": true,
+  "candidate_masks": [
+    {
+      "sam_body": "sam-1",
+      "kind": "R",
+      "native_mask_file": "photo-faulted/decoded/native-SAM/electronic component-object-1-record-1-mask.png",
+      "sha256": "74cb66993e5a3845c066014d46f467c1337fdfc313a83eb542cb09faffc7e56c"
+    }
+  ],
+  "method": "Each selected native mask external contour, 3px RGB(30,190,120); no body value transcription.",
+  "context_crop_input_pixels": [
+    159,
+    455,
+    781,
+    826
+  ],
+  "new_API_calls": 0,
+  "hardware_operations": 0
+}

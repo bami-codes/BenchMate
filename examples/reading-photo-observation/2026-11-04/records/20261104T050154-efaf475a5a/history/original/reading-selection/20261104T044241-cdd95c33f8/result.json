@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "arguments": {
+    "component": "R1",
+    "quantity": "resistance",
+    "reason": "Distinguishes changed:R1 vs changed:R2: first predicts R1 actual ~2-3k, second predicts R1 stays ~10k nominal. A marking can still show 10k if damaged, so isolated resistance is needed."
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 2154,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 977,
+    "output_tokens_details": {
+      "reasoning_tokens": 823
+    },
+    "total_tokens": 3131
+  },
+  "model": "muse-spark-1.3"
+}

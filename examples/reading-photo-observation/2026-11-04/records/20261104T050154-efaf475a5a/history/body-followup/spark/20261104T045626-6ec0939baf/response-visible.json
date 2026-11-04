@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6aeabb0d6e2fa1a404b4427e",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 5400,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1847,
+    "output_tokens_details": {
+      "reasoning_tokens": 1605
+    },
+    "total_tokens": 7247
+  },
+  "elapsed_s": 19.54164308309555,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_ca4e80e7-616f-4b7b-bb41-b29ba3f0ed7e",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "R1 is a resistor — I'll inventory the resistor bodies to pinpoint it.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_ec798c29-6749-4e0c-a42b-377f1411f570",
+      "call_id": "call_ec798c29-6749-4e0c-a42b-377f1411f570",
+      "name": "propose_body_candidates",
+      "arguments": "{\"candidate_bodies\":[{\"kind\":\"R\",\"reason\":\"axial cylindrical blue body with axial leads, resistor shape in board photo upper row\",\"sam_body\":\"sam-1\"},{\"kind\":\"R\",\"reason\":\"axial cylindrical blue body with axial leads, resistor shape in board photo middle row\",\"sam_body\":\"sam-0\"}],\"mapping_status\":\"unique\",\"reason\":\"Upper resistor sits in same row group as green IN connector on left, while lower resistor is central and blue box capacitor is on right near OUT, matching IN-R1-N1-R2-OUT chain so R1 is the upper body.\",\"sam_body\":\"sam-1\"}",
+      "status": "completed"
+    }
+  ]
+}
