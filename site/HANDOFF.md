@@ -11,8 +11,9 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
 - Live site: https://bami-codes.github.io/BenchMate/ (deployed from `site/` to the gh-pages root;
   the older replay site lives under `/archive/`). Deployed by Codex until the five-case release; from
   then on the GitHub session deploys itself (see §7).
-- `site/index.html` + `assets/landing.js`: landing (hero scope, Drawn / Built tiles, replays, cases,
-  how a run works, who does what, scoreboard from `data/results.json`).
+- `site/index.html` + `assets/landing.js`: landing (claim, hero scope, Drawn / Built tiles, the scoreboard strip from
+  `data/results.json`, one block per case with its fault replay and restored rerun, development records, the bench
+  section, how a run works, who does what, built during the hackathon).
 - `site/run.html` + `assets/replay.js`: the replay (instrument shelf + lab notebook). `?run=<id>`,
   `?t=<seconds>`. The shelf collapses (toggle + auto on scroll, state in localStorage).
 - `site/case.html` + `assets/report.js`: the post-run report (dossier) per run.
@@ -33,6 +34,10 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
   `tools/photos-case0N.json`. `case01-board-crop-full.png` / `case04-board-crop-full.png` are the clean
   hero/Built crops from the full-resolution renders; `case01-reading-evidence.png` is the DMM evidence image
   linked from the evidence popover only.
+- `assets/photos/bench-full.jpg` + `tools/photos-bench.json`: the whole-bench photo for "The bench" section (from
+  `examples/bench-photos/2026-11-04/full/render.png`, cropped, brightened uniformly, no metadata). The inline SVG signal-chain
+  diagram lives in `index.html`; its facts come from `docs/build-your-own.md` (DAC → LM358 follower → 1 kΩ → IN; OUT →
+  follower → ADC; buffered REF ≈ 1.63 V; 512 frames at 0.5 ms; 3 mV guard; 9 mV allowance; 9.99 kΩ load).
 - `tools/verify-case0N.json`: outputs of the keyless verifiers (run on the public copies), copied into the
   report's "Verify it yourself" box as written.
 - `tools/shots_all.js` (every counted run, both viewports, landing, all reports), `tools/shots*.js`,

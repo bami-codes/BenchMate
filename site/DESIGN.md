@@ -75,7 +75,7 @@ drawn only after the seal opens and was never part of the model input.
   restored root record carrying the original pair, the photo-binding follow-up and the reading continuation;
   the pair's local stop before Spark's body call is a notebook entry, not hidden).
 - One photo treatment for every case (`tools/photo_derivatives.py`): the same 960×720 window of the 1200×1600
-  SAM input, pixels untouched; a transparent outline layer (3 px label-tape yellow, 1 px dark edge) drawn only
+  SAM input, one uniform brightness lift, otherwise untouched; a transparent outline layer (3 px label-tape yellow, 1 px dark edge) drawn only
   from native SAM 3.1 masks that a record ties to a part or a candidate; documentary images (every native
   mask) behind a details toggle only. Case 01's yellow crop, case 02's green full-frame contours and Codex's
   green context crops for 03/05 are replaced by this one rule. Provenance per case in `tools/photos-case0N.json`.
@@ -84,3 +84,10 @@ drawn only after the seal opens and was never part of the model input.
   where nearby value-change models also fit, the "What this does not say" card names them.
 - `tools/shots_all.js`: every counted run at 1440 and 390 played at 16× to the verdict, landing and all reports;
   errors.txt must read "none".
+- Landing restructured for the judges' first minute: claim → scope → "Counted from the records" strip → one block per
+  case (fault replay + restored rerun + report, outcome line from the index) → "The bench" (the whole-bench photo,
+  `assets/photos/bench-full.jpg`, cropped and brightened uniformly from Codex's metadata-free render, provenance in
+  `tools/photos-bench.json`, plus an inline SVG of the signal chain and a Source / Recorder / Reference / Allowance /
+  Operator / Cost table) → How a run works → Who does what (Spark vision, Spark agent, SAM 3.1, engine, bench, operator)
+  → Built during the hackathon (dates, Meta models, what is new, what is not claimed, open). The separate "Watch a
+  diagnosis" list is gone: the runs sit under their case, so the numbers read 01–05 once.
