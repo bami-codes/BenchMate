@@ -91,6 +91,7 @@ p{margin:0}
 .meter.out .name span:first-child{text-decoration:line-through;text-decoration-color:var(--fault);text-decoration-thickness:2px}
 .meter.out{opacity:.72}
 .meter.dead{opacity:.5;filter:grayscale(.8)}
+.meter.split{opacity:.82}.meter.split .needle{opacity:.5}
 .meter.dead .needle{opacity:.35}
 .meter.dead .read .miss{color:#8a877d}
 .meter.wait .needle{opacity:.5}.meter.wait .read{color:#8a877d}

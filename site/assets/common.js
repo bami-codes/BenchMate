@@ -315,6 +315,9 @@ window.BM = (() => {
     // the engine's `consistent` verdict: the drawing survived the held-back checks (value-change siblings may fit too; the engine does not pick among them)
     if (v === 'consistent' || v === 'nominal_consistent' || (surv.length === 1 && surv[0] === 'nominal')) return (run && run.display_caption) ? run.display_caption + '.' : 'No mismatch in the tests Spark chose.';
     if (surv.length > 1) return `${surv.length === 2 ? 'Two' : surv.length} explanations still fit: ${surv.map(expName).join(' and ')}. One reading at the bench decides.`;
+    if (surv.length === 1 && /^\w+:proposal:\d+$/.test(surv[0])) { // a placement of a proposed part, settled by one reading
+      const pr = (run?.structure || []).find(x => x.id === surv[0].split(':').slice(1).join(':')); const a = pr?.diff?.added || [];
+      return `Found: a part the drawing doesn’t show${a.length ? ', ' + a.map(x => `${kindWord(x.kind)} between ${x.a} and ${x.b}`).join(', ') : ''}; ${names[surv[0]] || surv[0]}.`; }
     if (surv.length === 1 && names[surv[0]] && !surv[0].startsWith('proposal')) return `Found: ${names[surv[0]]}, not what the drawing says.`;
     if (surv.length === 1 && surv[0].startsWith('proposal')) { const pr = (run.structure || []).find(x => x.id === surv[0]); const a = pr?.diff?.added || []; return `Found: a part the drawing doesn’t show${a.length ? ', ' + a.map(x => `${kindWord(x.kind)} between ${x.a} and ${x.b}`).join(', ') : ''}.`; }
     if (surv.length === 1 && surv[0].startsWith('changed:')) { const m = (run.verification?.models || []).find(x => x.id === surv[0]); return `Found: ${surv[0].slice(8)} behaves like ${m ? fmtVal(m.kind, m.value) : 'a different value'}, not what the drawing says.`; }

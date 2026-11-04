@@ -44,7 +44,7 @@
     metersBox.append(m.root); return m;
   };
   const waitingMeters = () => { metersBox.innerHTML = ''; for (const k in meters) delete meters[k]; meterOrder = [];
-    for (const id of ['nominal', ...(run.design || []).map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.root.classList.add('wait'); } };
+    for (const id of ['nominal', ...(run.design || []).filter(d => d.kind !== 'W').map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.root.classList.add('wait'); } };
 
   // ---------- shelf: full / compact. Compact keeps a 110 px scope strip and one row of chips that mirror the meters,
   // so a verdict is never missed while collapsed. Auto-collapses on scroll unless the viewer toggled it by hand.
@@ -248,7 +248,9 @@
     spark_report(e) { // the engine's report after the measurements; the seal stays closed until the reading is scored
       const surv = e.survivors || [];
       block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. The seal stays closed; one reading at the bench comes next.` : words.report(e, run),
-        el('p', { class: 'small muted' }, e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. ${run.reading?.group ? 'The part itself has not been read yet; the seal stays closed until it has.' : 'Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.'}` : ''));
+        el('p', { class: 'small muted' }, e.verdict === 'indistinguishable' ? `Verdict ${e.verdict}: ${(e.components || []).join(' and ')} give the same terminal waveforms. The seal stays closed until one of them is read.`
+          : e.verdict === 'structure_supported' ? `Verdict ${e.verdict}: the proposed circuit passed the held-back checks. Terminal measurements say what the series resistance is, not where it sits, so the engine does not open the seal yet.`
+          : e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. ${run.reading?.group ? 'The part itself has not been read yet; the seal stays closed until it has.' : 'Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.'}` : ''));
     },
     seal_opened(e) { finale(e, 'verdict'); },
 
@@ -258,13 +260,19 @@
       if (state.thinking) { state.thinking.remove(); state.thinking = null; }
       const base = meters[e.base_explanation];
       for (const m of e.members || []) { BM.names[m.id] = m.label || m.words; const mm = ensureMeter(m.id, base?.name.lastChild.textContent || ''); mm.root.classList.remove('wait'); mm.name.firstChild.textContent = m.label || m.words; if (base?.val != null) { mm.setValue(base.val, undefined, true, base.readout.lastChild.textContent); } }
+      if (e.split_base && base) { base.root.classList.add('split'); base.carry('Where it sits: one reading decides'); } // the base survives as its two placements; the bands belong to them
       block(e, 'fit', 'Fit engine · electrically equivalent explanations', words.equivalence(e),
-        el('p', { class: 'small' }, el('span', { class: 'chip' }, el('i'), 'engine rule — electrically equivalent'), ' ', el('span', { class: 'muted' }, `${expName(e.base_explanation)} cannot be told from ${(e.members || []).map(m => m.words || m.label).join(' or ')} by any terminal measurement: they give the same waveforms.`)),
+        el('p', { class: 'small' }, el('span', { class: 'chip' }, el('i'), 'engine rule — electrically equivalent'), ' ', el('span', { class: 'muted' }, e.split_base ? `${expName(e.base_explanation)} passed the checks as a terminal model; it says nothing about where the resistance sits. Two placements, same waveforms: ${(e.members || []).map(m => m.words || m.label).join('; or ')}.` : `${expName(e.base_explanation)} cannot be told from ${(e.members || []).map(m => m.words || m.label).join(' or ')} by any terminal measurement: they give the same waveforms.`)),
         e.reason ? el('p', { class: 'small muted' }, e.reason) : null);
+    },
+    binding_stopped(e) { // the pair record stopped on a local error before Spark's body call; the chain continues in linked records
+      if (state.thinking) { state.thinking.remove(); state.thinking = null; }
+      block(e, 'guard', 'Record · stopped on a local input error', 'This record stops here; the chain continues in a linked record, registered first.',
+        EV(el('div', { class: 'card' }, el('p', { class: 'small' }, e.line)), e.ev, 'run_failed', { stage: e.stage, error: e.error, counted_failure: true }));
     },
     reading_requested(e) {
       if (state.thinking) { state.thinking.remove(); state.thinking = null; }
-      const live = meterOrder.filter(id => !meters[id].root.classList.contains('out') && !meters[id].root.classList.contains('wait')).length;
+      const live = meterOrder.filter(id => !meters[id].root.classList.contains('out') && !meters[id].root.classList.contains('wait') && !meters[id].root.classList.contains('split')).length;
       state.reading = { component: e.component, quantity: e.quantity, live };
       block(e, 'spark', 'Muse Spark 1.3 · asked for one reading', words.readingReq(e, live),
         el('p', { class: 'quote' }, e.reason || '(no reason logged)'),
@@ -324,8 +332,9 @@
         callLine(e.calls, `Muse Spark asked which body is ${e.component}`));
     },
     body_group(e) {
-      const ph = run.photo || {}; const cb = [0, 0, ph.image?.width || 1200, ph.image?.height || 1600];
+      const ph = run.photo || {}; const cb = e.crop_box || ph.crop_box || [0, 0, ph.image?.width || 1200, ph.image?.height || 1600];
       const box = el('div', { class: 'photo', style: 'max-width:420px' }, el('img', { src: e.photo || ph.image?.file, alt: 'Board photo with the outlines of the SAM 3.1 masks' }));
+      if (e.overlay_file) box.append(el('img', { class: 'mask', src: e.overlay_file, alt: 'SAM 3.1 outlines of the two bodies' }));
       for (const [id, bb] of Object.entries(e.boxes || {})) box.append(maskLabel(id, bb, cb, [], true));
       state.group = { bodies: e.bodies, components: e.components, boxes: e.boxes };
       block(e, 'bench', 'Bench · two capacitor bodies, which is which unknown', words.bodyGroup(e),
@@ -423,8 +432,10 @@
     }
     const sealTruth = run.seal?.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, 'Sealed before the diagnosis: ' + run.seal.truth.map(t => `${t.component.replace('external_', 'hidden ')} ${t.value_nominal_ohm != null ? BM.fmtR(t.value_nominal_ohm) : t.value_nominal_F != null ? BM.fmtC(t.value_nominal_F) : ''}${t.marking ? ' (marked ' + t.marking + ')' : ''} at ${t.location}`).join('; ') + (run.seal.matches_commitment ? '. The opened record matches the digest committed before the first measurement.' : '.')), run.seal.opened_ev, 'seal opened', { sealed_sha256: run.seal.sealed_sha256, sealed_event: run.seal.sealed_ev, matches_commitment: run.seal.matches_commitment, truth: run.seal.truth })) : (kase.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, truthText(kase.truth)) : null);
     const restored = run.pair?.state === 'restored';
+    const prev = run.pair?.previous_attempt;
     right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, restored ? 'The fault, restored before this rerun' : 'Hidden fault'), el('p', {}, restored ? `Was: ${kase.hidden}` : kase.hidden), sealTruth,
-      restored && run.pair?.restored_what ? el('p', { class: 'small muted', style: 'margin-top:4px' }, 'Restoration, in the operator’s words: ', EV(el('q', {}, run.pair.restored_what), run.pair.restore_ev, 'operator restoration confirmed', { closeout: run.pair.closeout })) : null,
+      restored && run.pair?.restored_what ? el('p', { class: 'small muted', style: 'margin-top:4px' }, 'Restoration, in the operator’s words: ', EV(el('q', {}, run.pair.restored_what), run.pair.restore_ev, 'operator restoration confirmed', { closeout: run.pair.closeout, external_only: run.pair.external_only })) : null,
+      prev ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, `Restored attempt ${prev.attempt} ended ${prev.verdict} and is counted; this is attempt ${run.pair.attempt}. `), prev.ev, 'restored attempt 1, engine report', { verdict: prev.verdict, record: prev.record, engine_report: prev.text }), prev.note) : null,
       el('p', { class: 'small muted', style: 'margin-top:4px' }, kase.limits)));
     right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'What the forum thread found'), kase.title_after_reveal ? el('p', { class: 'small muted' }, `Case ${run.case} — ${kase.title_after_reveal.toLowerCase()}`) : null, el('p', {}, kase.cause),
       el('dl', { class: 'kv small', style: 'margin-top:6px' }, el('dt', {}, 'Kept'), el('dd', {}, kase.kept), el('dt', {}, 'Changed'), el('dd', {}, kase.changed),
