@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "d5eb97509400039b9d783b3971fec0959379edff",
-  "source_site_tree": "fc808aea5ec912e125b55862005972740f8d23ef",
-  "previous_gh_pages_commit": "4e1619b121c114ab9e71f932d2662a8491fb5f9b",
+  "source_main_commit": "c83e408040866412823928eb9239d6708ae7d636",
+  "source_site_tree": "55ac6794f07fe31936f529ea8e5763085f6a0799",
+  "previous_gh_pages_commit": "f5f0cefb11eb398bf766d6faa54490f8c093f8a3",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "First-screen polish: aligned hero, explicit hero sentence, autoplay from Watch/Replay, idle null fix, diagram clipping, hover states.",
+  "change": "Top of the landing: eyebrow, one-line headline, two-line description, buttons; scope left, Drawn/Built right; trust rows under the numbers.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot checks at 1920/1440/390; shots_all.js regression started after this release",
+    "tool": "playwright spot checks at 1920/1440/1280/390; shots_all.js regression on replays and reports",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

@@ -35,11 +35,11 @@
     }
     $('#hero-schem').append(await schematic(cases.cases.find(c => c.id === run.case).design));
     const kase = cases.cases.find(c => c.id === run.case);
-    if (run.photo?.image?.file) { const ph = run.photo; $('#hero-board').append(el('div', { class: 'photo' }, el('img', { src: ph.crop_full || ph.crop || ph.image.file, alt: 'Mini board photo after the diagnosis' }))); $('#hero-board-note').textContent = 'Photo of the mini board after the diagnosis, untouched.'; }
-    else if (kase.board) { $('#hero-board').append(boardSVG(kase.board, { crop: true })); $('#hero-board-note').textContent = `Diagram from the wiring record (${kase.board.record}); photo pending.`; }
+    if (run.photo?.image?.file) { const ph = run.photo; $('#hero-board').append(el('div', { class: 'photo' }, el('img', { src: ph.crop_full || ph.crop || ph.image.file, alt: 'Mini board photo after the diagnosis' }))); $('#hero-board-note').textContent = 'the mini board, photographed after the diagnosis'; }
+    else if (kase.board) { $('#hero-board').append(boardSVG(kase.board, { crop: true })); $('#hero-board-note').textContent = 'the mini board, from the wiring record'; }
   } else {
     $('#hero-schem').append(await schematic('design-01'));
-    if (c01?.board) { $('#hero-board').append(boardSVG(c01.board, { crop: true })); $('#hero-board-note').textContent = 'Diagram from the wiring record; photo pending.'; }
+    if (c01?.board) { $('#hero-board').append(boardSVG(c01.board, { crop: true })); $('#hero-board-note').textContent = 'the mini board, from the wiring record'; }
   }
 
   // ---- scoreboard: hidden until official result files exist

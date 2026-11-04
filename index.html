@@ -13,27 +13,21 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
-  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#frontier">Why it matters</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+  <nav><a href="#cases" class="keep">Cases</a><a href="#bench">The bench</a><a href="#frontier">Why it matters</a><a href="#how" class="keep">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate" class="keep">GitHub</a></nav>
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
-  <div>
-    <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
-    <p>Muse Spark reads the schematic, chooses experiments on the real circuit, and must forecast each one before an Arduino measures it. Five faults were planted and sealed; the model found every one, and every step is a record you can check.</p>
-    <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
-  </div>
-  <ul class="glance" aria-label="At a glance">
-    <li><b>Forecast first</b><span>Every forecast is hashed before the bench moves; the final one is pushed to GitHub before the held-back check.</span></li>
-    <li><b>Sealed truth</b><span>The fault is committed as a digest before the first measurement and opened only after the verdict.</span></li>
-    <li><b>Scored by code</b><span>Verdicts are copied from the engine, never chosen by the site. One command verifies any run offline.</span></li>
-  </ul>
+  <p class="eyebrow">Muse Spark on a $40 Arduino bench · five real circuits, five sealed faults</p>
+  <h1 class="oneline"><span class="nw">The drawing is right.</span> <span class="nw">The board is right.</span> <span class="wrong nw">The output is wrong.</span></h1>
+  <p class="sub"><span>Muse Spark reads the schematic, runs its own experiments on the real board, and has to forecast every result before the bench measures it.</span><span>The hidden fault is opened only at the end and compared by code.</span></p>
+  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
 </section>
 
 <section class="hero" aria-label="The scope">
   <div class="scope-col"><div class="scope" id="hero-scope"><div class="legend"><span class="fc">– – forecast, frozen before measuring</span><span class="ms">— measured</span></div></div><p class="under" id="hero-under"></p><div class="small caption" id="hero-caption"></div></div>
   <div class="hero-side">
     <div class="tile"><h3>Drawn <small>the schematic the model read</small></h3><div class="schem" id="hero-schem"></div></div>
-    <div class="tile"><h3>Built <small>the mini board</small></h3><div class="schem" id="hero-board"></div><p class="small muted" id="hero-board-note"></p></div>
+    <div class="tile"><h3>Built <small id="hero-board-note">the mini board</small></h3><div class="schem" id="hero-board"></div></div>
   </div>
 </section>
 
@@ -42,6 +36,11 @@
     <h2>Counted from the records</h2>
     <p class="lede" id="score-note"></p>
     <div class="score" id="score-grid"></div>
+    <ul class="glance rules" aria-label="How these were counted">
+      <li><b>Forecast first</b><span>Every forecast is hashed before the bench moves; the final one is pushed to GitHub before the held-back check.</span></li>
+      <li><b>Sealed truth</b><span>The fault is committed as a digest before the first measurement and opened only after the verdict.</span></li>
+      <li><b>Scored by code</b><span>Verdicts are copied from the engine, never chosen by the site. One command verifies any run offline.</span></li>
+    </ul>
     <p class="small muted" id="score-foot" style="margin-top:10px"></p>
   </div>
 </section>

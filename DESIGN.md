@@ -91,3 +91,11 @@ drawn only after the seal opens and was never part of the model input.
   Operator / Cost table) → How a run works → Who does what (Spark vision, Spark agent, SAM 3.1, engine, bench, operator)
   → Built during the hackathon (dates, Meta models, what is new, what is not claimed, open). The separate "Watch a
   diagnosis" list is gone: the runs sit under their case, so the numbers read 01–05 once.
+- First screen, looked at coldly (4 Nov evening): the scope and the Drawn/Built tiles share a bottom edge (the Built photo
+  fills the remaining height, object-fit cover); the hero sentence names its numbers ("Spark chose 3 experiments; two
+  held-back checks passed; one multimeter reading of R1 settled it") and the run caption sits directly under it; the
+  at-a-glance rows are three light rules, not boxes, so the headline stays the loudest thing; Watch / Replay buttons
+  carry `?play=1` and the replay starts on arrival; buttons and run rows have hover and active states; the idle scope
+  no longer appends a literal "null". Copy across the landing was cut to one or two lines per element; registration and
+  display rules sit behind a details toggle.
+
