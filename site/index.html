@@ -17,9 +17,16 @@
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
-  <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
-  <p>BenchMate gives Muse Spark a real bench. It reads the schematic, chooses experiments on the real circuit, must forecast each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing, and every step is a record you can check. It is built for the moment every lab prototype, repair bench and first production board goes through: the drawing is right, the board is right, the output is wrong.</p>
-  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
+  <div>
+    <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
+    <p>Muse Spark reads the schematic, chooses experiments on the real circuit, and must forecast each one before an Arduino measures it. Five faults were planted and sealed; the model found every one, and every step is a record you can check.</p>
+    <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
+  </div>
+  <ul class="glance" aria-label="At a glance">
+    <li><b>Forecast first</b><span>Every forecast is hashed before the bench moves; the final one is pushed to GitHub before the held-back check.</span></li>
+    <li><b>Sealed truth</b><span>The fault is committed as a digest before the first measurement and opened only after the verdict.</span></li>
+    <li><b>Scored by code</b><span>Verdicts are copied from the engine, never chosen by the site. One command verifies any run offline.</span></li>
+  </ul>
 </section>
 
 <section class="hero" aria-label="The scope">
@@ -45,7 +52,7 @@
   <div class="paper">
     <h2 id="cases-h">Five cases from real forum threads</h2>
     <p class="small muted" id="cases-count"></p>
-    <p class="lede">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench: the first power-on moment, when the drawing is right and the board still misbehaves. Every case has its own circuit on the mini board and its own drawing; all use the same procedure, the same test menu and the same fixture. Each replay is a recorded run played back from its log in order: the dashed forecasts are drawn, then the measured trace sweeps over them and the needles move. Click any number for the log event behind it.</p>
+    <p class="lede">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench. Same procedure, same test menu, same fixture; only the drawing changes. A replay is the recorded run played back from its log: forecasts first, then the measurement sweeps over them. Click any number for the event behind it.</p>
     <div class="cases" id="case-list"></div>
     <div id="dev-records"></div>
     <div id="policy" class="small muted" style="margin-top:12px"></div>
@@ -55,7 +62,7 @@
 <section class="section" id="bench">
   <div class="paper">
     <h2>The bench</h2>
-    <p class="lede">One Arduino, two op-amp followers, a reference, and a mini board that holds the circuit under test. About $40 of parts. The model never touches it: it asks, the operator moves one jumper, the Arduino measures.</p>
+    <p class="lede">One Arduino, two op-amp followers, a reference, a mini board with the circuit under test. About $40. The model never touches it: it asks, the operator moves one jumper, the Arduino measures.</p>
     <div class="bench-grid">
       <figure class="bench-photo">
         <img src="assets/photos/bench-full.jpg" alt="The whole bench from above: an Arduino UNO R4 Minima at the top right, the instrument breadboard with two LM358 followers across the middle, and the mini board under test at the bottom, all on a cutting mat" loading="lazy">
@@ -103,12 +110,12 @@
           </svg>
         </div>
         <dl class="kv small bench-kv">
-          <dt>Source</dt><dd>Arduino UNO R4 Minima DAC through an LM358 follower and a 1 kΩ drive resistor. Steps of ±0.2 / ±0.5 V and sines of 1–5 Hz, from a fixed menu Spark picks from.</dd>
-          <dt>Recorder</dt><dd>14-bit ADC, 512 frames per capture at 0.5 ms, three channels: IN, buffered OUT, REF. Captures are rejected across reboots; each run starts from a fresh boot id.</dd>
-          <dt>Reference</dt><dd>A buffered divider near 1.63 V is the return for the circuit under test. A guard checks it on every capture; a drift above 3 mV stops the run and nothing is scored.</dd>
-          <dt>Allowance</dt><dd>9 mV RMS between forecast and measurement, on the whole step and on every region of it. Frozen before the first run and never changed.</dd>
-          <dt>Operator</dt><dd>Connects or removes the 9.99 kΩ load when Spark asks, USB off; takes one multimeter reading when Spark asks; never tells the model what the fault is.</dd>
-          <dt>Cost</dt><dd>About ₩56,000 ($40) of parts including spares, plus a multimeter. <a href="https://github.com/bami-codes/BenchMate/blob/main/docs/build-your-own.md">Build notes</a>.</dd>
+          <dt>Source</dt><dd>UNO R4 DAC → LM358 follower → 1 kΩ. Steps ±0.2 / ±0.5 V, sines 1–5 Hz, from a fixed menu.</dd>
+          <dt>Recorder</dt><dd>14-bit ADC, 512 frames at 0.5 ms: IN, buffered OUT, REF. Captures are bound to a boot id.</dd>
+          <dt>Reference</dt><dd>Buffered 1.63 V, not ground. Drift above 3 mV on any capture stops the run.</dd>
+          <dt>Allowance</dt><dd>9 mV RMS, whole step and every region. Frozen before the first run, never changed.</dd>
+          <dt>Operator</dt><dd>Moves the 9.99 kΩ load jumper and reads one part, only when Spark asks. Never tells the model the fault.</dd>
+          <dt>Cost</dt><dd>About ₩56,000 ($40) of parts, plus a multimeter. <a href="https://github.com/bami-codes/BenchMate/blob/main/docs/build-your-own.md">Build notes</a>.</dd>
         </dl>
       </div>
     </div>
@@ -118,35 +125,24 @@
 <section class="section" id="frontier">
   <div class="paper">
     <h2>What this is a prototype of</h2>
-    <p class="lede">The thing being tested here is not a circuit. It is whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week.</p>
-    <div class="frontier-grid">
-      <div>
-        <h3>Why a circuit first</h3>
-        <p class="small">A circuit comes with a drawing, a simulator anyone can run (ngspice), an instrument that costs $40, and faults that can be planted and sealed. Every part of the loop could be checked by a stranger with the repository and a multimeter. Nothing else we could build in a week had all four.</p>
-      </div>
-      <div>
-        <h3>What the loop needs, and nothing more</h3>
-        <ul class="small plain">
-          <li>a description of what was intended (here: a schematic image),</li>
-          <li>a space of explanations the model may propose (here: a changed value, or a part the drawing lacks),</li>
-          <li>a simulator that turns an explanation into a forecast (here: ngspice),</li>
-          <li>an instrument with a fixed menu the model chooses from (here: steps and sines, with or without a load),</li>
-          <li>a person for what the instrument cannot do (here: move one jumper, read one part),</li>
-          <li>a sealed truth to score against (here: the operator's assembly record, hashed before the first measurement).</li>
-        </ul>
-        <p class="small muted">None of these six is specific to electronics. The 9 mV allowance, the menu and the calibration are specific to this bench, and would have to be qualified again anywhere else.</p>
-      </div>
-      <div>
-        <h3>What it would take elsewhere</h3>
-        <p class="small">Not done here; stated so the scale of the step is clear.</p>
-        <dl class="kv small frontier-kv">
-          <dt>A real PCB at first power-on</dt><dd>The same loop with the schematic and layout as the description, SPICE as the simulator, and a bench supply, scope and source-measure unit as the instrument menu. The reading stage already exists: it is the probe in the operator's hand.</dd>
-          <dt>A thermal or mechanical rig</dt><dd>The description is a CAD or thermal model, the simulator a finite-element solver, the instrument thermocouples and actuators. Forecast first, held-back check, sealed fault: unchanged.</dd>
-          <dt>A lab experiment</dt><dd>Explanations are candidate models of the phenomenon; the menu is the settings the apparatus allows; the forecast is pushed before the run. The model chooses the next experiment the way it chose the loaded step in case 01.</dd>
-        </dl>
-      </div>
+    <p class="lede">Not a circuit tester. A test of whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week.</p>
+    <h3 class="sub">The loop needs six things, none of them electronic</h3>
+    <ol class="needs">
+      <li><b>A description of what was intended</b><span>here: the schematic image</span></li>
+      <li><b>Explanations the model may propose</b><span>here: a changed value, or a part the drawing lacks</span></li>
+      <li><b>A simulator that turns one into a forecast</b><span>here: ngspice</span></li>
+      <li><b>An instrument with a fixed menu</b><span>here: steps and sines, with or without a load</span></li>
+      <li><b>A person for what the instrument cannot do</b><span>here: move one jumper, read one part</span></li>
+      <li><b>A sealed truth to score against</b><span>here: the assembly record, hashed first</span></li>
+    </ol>
+    <p class="small muted">Specific to this bench, and to be qualified again anywhere else: the 9 mV allowance, the menu, the calibration.</p>
+    <h3 class="sub">What it would take elsewhere <span class="muted" style="font-weight:400">— not done here; stated so the scale of the step is clear</span></h3>
+    <div class="elsewhere">
+      <div><b>A real PCB at first power-on</b><span>Schematic and layout as the description, SPICE as the simulator, a bench supply and scope as the menu. The reading stage is the probe in the operator's hand.</span></div>
+      <div><b>A thermal or mechanical rig</b><span>A CAD or thermal model, a finite-element solver, thermocouples and actuators. Forecast first, held-back check, sealed fault: unchanged.</span></div>
+      <div><b>A lab experiment</b><span>Candidate models of the phenomenon; the settings the apparatus allows as the menu; the forecast pushed before the run.</span></div>
     </div>
-    <p class="frontier-line">The experiments on this page did not exist until the model asked for them. That is the capability being shown; the circuit is the smallest honest place to show it.</p>
+    <p class="frontier-line">The experiments on this page did not exist until the model asked for them. The circuit is the smallest honest place to show that.</p>
   </div>
 </section>
 
@@ -171,12 +167,12 @@
   <div class="paper">
     <h2>Who does what</h2>
     <dl class="who">
-      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts, values and connections, with a box per part. After the diagnosis, looks at the board photo with SAM 3.1's bodies and says which body is the part to read (cases 01, 03, 05), or that it cannot tell (case 02).</dd>
-      <dt>Muse Spark 1.3 agent</dt><dd>Chooses every experiment from the fixed menu and says why; asks for the bench to be rewired; decides when to ask for the check; proposes a part the drawing lacks when every value explanation has failed (cases 04, 05); chooses which part to read and which quantity (cases 01, 02, 03, 05).</dd>
-      <dt>SAM 3.1</dt><dd>Segments the mini board photo into bodies with one generic prompt, after the diagnosis. Its masks are shown as drawn; no part value is read from the photo, ever.</dd>
-      <dt>Fit engine, ngspice</dt><dd>Fits each explanation to the measurements and forecasts the next one. Compares forecasts with the bench by RMS miss. Freezes and publishes before every scored measurement.</dd>
-      <dt>Bench, Arduino UNO R4</dt><dd>Two LM358 buffers, a 1 kΩ drive resistor, a 1.63 V reference and the ADC channels. A reference guard stops a run when the bench itself drifts.</dd>
-      <dt>Operator</dt><dd>Builds the circuit with the sealed fault, moves one jumper when asked, reads one value when asked, and never tells the model what is wrong.</dd>
+      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts and connections. After the diagnosis, names which SAM body is the part to read (01, 03, 05), or says it cannot tell (02).</dd>
+      <dt>Muse Spark 1.3 agent</dt><dd>Chooses every experiment and says why; asks for rewiring and for the check; proposes a part the drawing lacks when every value fails (04, 05); chooses what to read.</dd>
+      <dt>SAM 3.1</dt><dd>Segments the board photo after the diagnosis. Its native masks are the only outlines shown; no value is ever read from a photo.</dd>
+      <dt>Fit engine, ngspice</dt><dd>Simulates every explanation, forecasts, scores by RMS miss, freezes and publishes before each scored measurement.</dd>
+      <dt>Bench, Arduino UNO R4</dt><dd>Drives IN, records IN, OUT and REF; a reference guard stops the run when the bench itself drifts.</dd>
+      <dt>Operator</dt><dd>Builds the sealed fault, moves one jumper and reads one part when asked, never tells the model what is wrong.</dd>
     </dl>
   </div>
 </section>
@@ -184,7 +180,7 @@
 <section class="section" id="built">
   <div class="paper">
     <h2>Built during the hackathon</h2>
-    <p class="lede">Everything on this page was made between 27 October and 4 November 2026 by one person and two coding agents: the instrument firmware, the bench, the fit engine, the Spark tool loop, the reading and seal protocol, the photo stage, this site, and the five physical runs themselves. The first commit is the start of the project.</p>
+    <p class="lede">Everything on this page was made between 27 October and 4 November 2026 by one person and two coding agents: firmware, bench, fit engine, Spark tool loop, reading and seal protocol, photo stage, this site, and the five physical runs. The first commit is the start of the project.</p>
     <div class="built-grid">
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
       <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
