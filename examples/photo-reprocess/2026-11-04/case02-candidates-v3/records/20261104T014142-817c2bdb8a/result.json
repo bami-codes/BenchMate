@@ -1,0 +1,13 @@
+{
+  "Spark_requests": 1,
+  "SAM_requests": 0,
+  "hardware_operations": 0,
+  "estimated_cost_USD": 0.01233995,
+  "rate_basis": "retained cohort tariff; not invoice",
+  "candidate_ids": [
+    "sam-2",
+    "sam-3"
+  ],
+  "mapping_status": "ambiguous",
+  "after_original_experiment": true
+}

@@ -44,7 +44,7 @@
   {
    "id": "spark_calls",
    "label": "Muse Spark calls (incl. the schematic read)",
-   "value": 64
+   "value": 65
   },
   {
    "id": "sam_calls",
@@ -54,12 +54,19 @@
   {
    "id": "cost",
    "label": "estimated API cost (USD)",
-   "value": 0.63
+   "value": 0.65
   }
  ],
  "sources": [
   "docs/2026-11-04-case02-documentary-closeout-result.md: whole reading cohort 64 Spark + 3 SAM, estimated $0.63350110 (case 02 total incl. failed attempts 28 Spark + 2 SAM, $0.32315)",
   "docs/2026-11-04-case04-completion.md: reading-cohort total after case 04, 36 Spark + 1 SAM, $0.31035110 (case 04 total incl. all failed stages and the withdrawn selection: 19 Spark, $0.15830530)",
-  "docs/2026-11-03-reading-case01-followup-result.md: 17 Spark requests and one SAM request, estimated $0.15204580 after case 01"
- ]
+  "docs/2026-11-03-reading-case01-followup-result.md: 17 Spark requests and one SAM request, estimated $0.15204580 after case 01",
+  "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a: demo photo reprocessing adds 1 Spark, 0 SAM, estimated $0.01233995; cumulative 65 Spark + 3 SAM, $0.64584105"
+ ],
+ "photo_reprocessing": {
+  "record": "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a",
+  "Spark_requests": 1,
+  "SAM_requests": 0,
+  "estimated_cost_USD": 0.01233995
+ }
 }

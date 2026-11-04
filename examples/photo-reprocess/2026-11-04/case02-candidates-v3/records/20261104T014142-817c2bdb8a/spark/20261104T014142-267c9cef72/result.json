@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "arguments": {
+    "candidate_bodies": [
+      {
+        "kind": "C",
+        "reason": "rectangular blue box body with two leads, capacitor form",
+        "sam_body": "sam-2"
+      },
+      {
+        "kind": "C",
+        "reason": "rectangular blue box body with two leads, capacitor form",
+        "sam_body": "sam-3"
+      }
+    ],
+    "mapping_status": "ambiguous",
+    "reason": "Both capacitor bodies are in parallel shunt positions between the same two breadboard nets, so layout does not distinguish C1 from C2.",
+    "sam_body": "null"
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 5259,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1386,
+    "output_tokens_details": {
+      "reasoning_tokens": 1173
+    },
+    "total_tokens": 6645
+  },
+  "model": "muse-spark-1.3"
+}

@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6aea8d633d1c0f8c99f34d92",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 5259,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1386,
+    "output_tokens_details": {
+      "reasoning_tokens": 1173
+    },
+    "total_tokens": 6645
+  },
+  "elapsed_s": 13.363987500080839,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_b93db8b0-5d1c-4540-9c7d-99c017466a01",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Both shunt capacitors match C1 by shape — retaining them to resolve the specific reference.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_51ec5f8c-b4dd-4d46-a927-1a60f9d1c613",
+      "call_id": "call_51ec5f8c-b4dd-4d46-a927-1a60f9d1c613",
+      "name": "propose_body_candidates",
+      "arguments": "{\"candidate_bodies\":[{\"kind\":\"C\",\"reason\":\"rectangular blue box body with two leads, capacitor form\",\"sam_body\":\"sam-2\"},{\"kind\":\"C\",\"reason\":\"rectangular blue box body with two leads, capacitor form\",\"sam_body\":\"sam-3\"}],\"mapping_status\":\"ambiguous\",\"reason\":\"Both capacitor bodies are in parallel shunt positions between the same two breadboard nets, so layout does not distinguish C1 from C2.\",\"sam_body\":\"null\"}",
+      "status": "completed"
+    }
+  ]
+}

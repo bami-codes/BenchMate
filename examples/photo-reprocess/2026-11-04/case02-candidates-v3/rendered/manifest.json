@@ -1,0 +1,38 @@
+{
+ "schema": "benchmate.Spark_candidate_overlay.v1",
+ "model_record": "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a",
+ "candidate_event_sha256": "f9678b8960324c3f0cb15b3f780acb5458ed701fa2bdd2189034f976f825f42f",
+ "chosen_by": "muse_spark",
+ "candidates": [
+  {
+   "kind": "C",
+   "reason": "rectangular blue box body with two leads, capacitor form",
+   "sam_body": "sam-2"
+  },
+  {
+   "kind": "C",
+   "reason": "rectangular blue box body with two leads, capacitor form",
+   "sam_body": "sam-3"
+  }
+ ],
+ "individual_mapping": "ambiguous",
+ "sam_body": null,
+ "native_masks_modified": false,
+ "photo_input": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/prepared/input.png",
+ "input_sha256": "c085b67b76aebd8861a4fec67bfd5ad8339015a4989761d517615c9fd16af3a5",
+ "masks": [
+  {
+   "id": "sam-2",
+   "file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/decoded/native-SAM/electronic component-object-2-record-2-mask.png",
+   "sha256": "3e4b8090dd23672fe3ad7976c5b9ff274bc4a13065d752522177cb72e8891f5f"
+  },
+  {
+   "id": "sam-3",
+   "file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/photo-faulted/decoded/native-SAM/electronic component-object-3-record-3-mask.png",
+   "sha256": "a50d7fdec61c5f4abfef1e914952006f9163f31f04c821a1988fdca78ec3a230"
+  }
+ ],
+ "recipe": "Only model-selected native masks, external contours separately, 3px RGB(30,190,120); no component names before readings.",
+ "overlay_sha256": "dc448515b8486216524380d95344bcb3183368cc06053ad1a040821b8ac311ba",
+ "new_API_calls": 0
+}

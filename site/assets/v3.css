@@ -381,3 +381,5 @@ footer a{color:#fff}
 .photo .masklabel.up{transform:translate(-50%,0)}.photo .masklabel.up::before{top:auto;bottom:-5px;border-bottom:0;border-top:5px solid #1b1f24}
 /* the assignment table (two bodies × two parts) stacks on phones: one block per assignment, the verdict tape last */
 @media (max-width:480px){.assign-table{display:table;width:100%}.assign-table thead{display:none}.assign-table tr{display:block;padding:6px 0;border-bottom:1px solid var(--rule)}.assign-table td{display:block;padding:2px 0;border:0}}
+/* a label beside a body, outside it: arrow points left at the outline */
+.photo .masklabel.side{transform:translate(0,-50%)}.photo .masklabel.side::before{left:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left:0;border-right-color:#1b1f24;border-bottom-color:transparent}

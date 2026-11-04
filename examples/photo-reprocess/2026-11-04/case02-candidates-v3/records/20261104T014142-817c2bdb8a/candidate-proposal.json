@@ -1,0 +1,40 @@
+{
+  "component": "C1",
+  "chosen_by": "muse_spark",
+  "operator_confirmed": false,
+  "surface_values_read": false,
+  "photo_stage_reprocessing": true,
+  "candidate_bodies": [
+    {
+      "kind": "C",
+      "reason": "rectangular blue box body with two leads, capacitor form",
+      "sam_body": "sam-2"
+    },
+    {
+      "kind": "C",
+      "reason": "rectangular blue box body with two leads, capacitor form",
+      "sam_body": "sam-3"
+    }
+  ],
+  "mapping_status": "ambiguous",
+  "reason": "Both capacitor bodies are in parallel shunt positions between the same two breadboard nets, so layout does not distinguish C1 from C2.",
+  "sam_body": null,
+  "raw_arguments": {
+    "candidate_bodies": [
+      {
+        "kind": "C",
+        "reason": "rectangular blue box body with two leads, capacitor form",
+        "sam_body": "sam-2"
+      },
+      {
+        "kind": "C",
+        "reason": "rectangular blue box body with two leads, capacitor form",
+        "sam_body": "sam-3"
+      }
+    ],
+    "mapping_status": "ambiguous",
+    "reason": "Both capacitor bodies are in parallel shunt positions between the same two breadboard nets, so layout does not distinguish C1 from C2.",
+    "sam_body": "null"
+  },
+  "normalization": "exact_string_null_to_JSON_null_abstention"
+}

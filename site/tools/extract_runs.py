@@ -884,6 +884,9 @@ def _F_to_uF(x):
     return None if x is None else float(f'{x * 1e6:.5g}')  # 5 significant figures, no coarser than the record
 
 
+PAIR_PROVENANCE = "The two capacitor bodies were picked by visual review at the operator's request (body-group.json: Codex_visual_review_requested_by_operator); Spark said the photo cannot tell which is C1 — the readings decide."
+
+
 def extract_group_pair(pair, group, restored, case, label, rates, photos, extra):
     """Case 02 layout (Codex, 11/4): a reading-assisted pair whose photo stage ended at Spark's binding call
     (no body named: the two capacitors are identical parallel shunts), an UNORDERED reading supplement
@@ -1020,7 +1023,7 @@ def extract_group_pair(pair, group, restored, case, label, rates, photos, extra)
             rd['group']['ambiguity_ev'] = env(e)
             add(e, 'body_group', bodies=sam_bodies, components=comps, chosen_by=body_group.get('candidate_group_chosen_by'), spark_chose_group=body_group.get('Spark_chose_group'),
                 spark_abstention_reason=body_group.get('Spark_abstention_reason'), topology=body_group.get('topology_conditioned'), boxes=rd['group']['body_boxes'],
-                photo=photos.get('faulted_sam'), already_received={'body': (body_group.get('already_received_report') or {}).get('body'), 'source': (body_group.get('already_received_report') or {}).get('source'), 'actual_capacitance_measured': (body_group.get('already_received_report') or {}).get('actual_capacitance_measured')})
+                photo=photos.get('faulted_pair') or photos.get('faulted_sam'), provenance=PAIR_PROVENANCE, already_received={'body': (body_group.get('already_received_report') or {}).get('body'), 'source': (body_group.get('already_received_report') or {}).get('source'), 'actual_capacitance_measured': (body_group.get('already_received_report') or {}).get('actual_capacitance_measured')})
         elif k == 'reading_forecast_frozen':
             rd['group']['sha_full'] = p.get('sha256'); rd['group']['sha'] = (p.get('sha256') or '')[:10]; rd['group']['frozen_ev'] = env(e)
             totals['forecasts_frozen'] += 1
@@ -1058,13 +1061,17 @@ def extract_group_pair(pair, group, restored, case, label, rates, photos, extra)
     run['totals'] = totals
     run['play_length_s'] = round(play, 2)
     disp = display.get('faulted') or {}
-    run['photo'] = {'board': photos.get('board'), 'image': {'file': photos.get('faulted_sam'), 'width': plan['input']['width'], 'height': plan['input']['height'], 'sha256_sam_input': plan['input']['sha256']},
-                    'sam': [{'concept': 'electronic component', 'match_count': sam_dec.get('match_count'), 'displayed': disp.get('displayed_mask_records'),
+    # replay and end scene: the SAM input with only the two read bodies outlined (overlay-provenance.json recipe); the
+    # 7-contour display-rule image is kept for the report page only, as documentary
+    run['photo'] = {'board': photos.get('board'), 'image': {'file': photos.get('faulted_pair') or photos.get('faulted_sam'), 'width': plan['input']['width'], 'height': plan['input']['height'], 'sha256_sam_input': plan['input']['sha256']},
+                    'sam': [{'concept': 'electronic component', 'match_count': sam_dec.get('match_count'), 'displayed': 2,
                              'masks': [{'object_id': m.get('object_id'), 'bounds_half_open': m.get('bounds_half_open'), 'confidence': m.get('confidence'), 'overlay_file': None, 'source_mask_file': None, 'resize_to_box': m.get('resize_to_box')} for m in sam_dec.get('masks', [])]}],
                     'vision': None, 'pairing': 'no model paired a body with a drawing part; which body is C1 followed from the readings (the engine’s assignment test)',
-                    'labels': [{'text': b, 'bounds': rd['group']['body_boxes'].get(b)} for b in sam_bodies],
-                    'contours_rule': display.get('rule'), 'contours_note': 'Contours drawn on the photo by a display-only rule chosen after the results: every native SAM 3.1 mask whose box does not contain two others. Not an identification; the masks themselves are unchanged (docs/2026-11-04-case02-SAM-display-revision.md).',
-                    'note': 'Photo untouched; the green outlines are the boundaries of the native SAM 3.1 masks (7 of 7 shown).'}
+                    'labels': [{'text': b, 'bounds': rd['group']['body_boxes'].get(b), 'side': True} for b in sam_bodies],
+                    'provenance': PAIR_PROVENANCE,
+                    'note': 'Photo untouched apart from the two green outlines: the boundaries of the sam-2 and sam-3 body masks SAM 3.1 returned, drawn by the recipe in overlay-provenance.json (annotation only, no new capture, native masks unchanged).',
+                    'display_rule_image': {'file': photos.get('faulted_sam'), 'displayed': disp.get('displayed_mask_records'), 'rule': display.get('rule'),
+                                           'note': f"Documentary: the same photo with every native SAM 3.1 mask outlined under a display-only rule chosen after the results (a mask is left out when its box contains two others; {disp.get('displayed_mask_records')} of {sam_dec.get('match_count')} shown). Not an identification (docs/2026-11-04-case02-SAM-display-revision.md)."}}
     vt = child / 'verification.txt'
     if vt.exists():
         run['verify_outputs'] = [f"# diagnosis child, python -m benchmate verify\n{vt.read_text().strip()}"]
@@ -1092,10 +1099,13 @@ def extract_group_pair(pair, group, restored, case, label, rates, photos, extra)
     if photos.get('restored_sam'):
         rrun['totals']['sam_calls'] = rrun['totals'].get('sam_calls', 0) + int(rres.get('photo_SAM_requests') or 0)
         rrun['totals']['sam_cost'] = round(rrun['totals'].get('sam_cost', 0.0) + 0.0025 * int(rres.get('photo_SAM_requests') or 0), 6)
-        rrun['photo'] = {'board': None, 'image': {'file': photos.get('restored_sam'), 'width': 1200, 'height': 1600},
-                         'sam': [{'concept': 'electronic component', 'match_count': rsam.get('match_count') or len(rsam.get('masks', [])), 'displayed': rdisp.get('displayed_mask_records'), 'masks': []}],
+        nm = rsam.get('match_count') or len(rsam.get('masks', []))
+        rrun['photo'] = {'board': None, 'image': {'file': photos.get('restored_board') or photos.get('restored_sam'), 'width': 1200, 'height': 1600},
+                         'sam': [{'concept': 'electronic component', 'match_count': nm, 'displayed': 0, 'masks': []}],
                          'vision': None, 'pairing': None, 'documentary': True,
-                         'note': f"Documentary photo of the restored board. SAM 3.1 returned {rsam.get('match_count') or len(rsam.get('masks', []))} masks; {rdisp.get('displayed_mask_records')} are outlined under the same display-only rule as the faulted photo. Nothing was identified or read from it; the native masks are unchanged."}
+                         'note': f"Documentary photo of the restored board, untouched. SAM 3.1 returned {nm} masks; nothing was identified or read from it and no body was paired with a part.",
+                         'display_rule_image': {'file': photos.get('restored_sam'), 'displayed': rdisp.get('displayed_mask_records'),
+                                                'note': f"Documentary: the same photo with the native SAM 3.1 masks outlined under the display-only rule chosen after the results ({rdisp.get('displayed_mask_records')} of {nm} shown). Not an identification (docs/2026-11-04-case02-SAM-display-revision.md)."}}
     for vt, head in ((rchild / 'verification.txt', '# diagnosis child, python -m benchmate verify'), (restored / 'verification.txt', '# whole restored continuation, python -m benchmate.reading_restored_sam_closeout verify')):
         if vt.exists():
             rrun.setdefault('verify_outputs', []).append(f"{head}\n{vt.read_text().strip()}")
