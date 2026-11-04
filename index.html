@@ -13,7 +13,7 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
-  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#frontier">What it opens</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#frontier">Why it matters</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
@@ -30,14 +30,12 @@
 </section>
 
 <section class="hero" aria-label="The scope">
-  <div class="scope-col"><div class="scope" id="hero-scope"><div class="legend"><span class="fc">– – forecast, frozen before measuring</span><span class="ms">— measured</span></div></div><p class="under" id="hero-under"></p></div>
+  <div class="scope-col"><div class="scope" id="hero-scope"><div class="legend"><span class="fc">– – forecast, frozen before measuring</span><span class="ms">— measured</span></div></div><p class="under" id="hero-under"></p><div class="small caption" id="hero-caption"></div></div>
   <div class="hero-side">
     <div class="tile"><h3>Drawn <small>the schematic the model read</small></h3><div class="schem" id="hero-schem"></div></div>
     <div class="tile"><h3>Built <small>the mini board</small></h3><div class="schem" id="hero-board"></div><p class="small muted" id="hero-board-note"></p></div>
   </div>
 </section>
-
-<section class="claim claim-under"><div class="small" id="hero-caption" style="opacity:.9"></div></section>
 
 <section class="section" id="score" hidden>
   <div class="paper">
@@ -78,9 +76,9 @@
               <rect x="196" y="18" width="150" height="54" rx="6" fill="#f0f0ea" stroke="#171b1e" stroke-width="1.5"/>
               <text x="271" y="40" text-anchor="middle" font-weight="600">Fit engine · ngspice</text><text x="271" y="58" text-anchor="middle" font-size="12" fill="#4b535a">forecast, hash, push</text>
               <rect x="378" y="18" width="150" height="54" rx="6" fill="#e3ecf7" stroke="#2b6bdc" stroke-width="1.5"/>
-              <text x="453" y="40" text-anchor="middle" font-weight="600">Arduino UNO R4</text><text x="453" y="58" text-anchor="middle" font-size="12" fill="#4b535a">DAC out · 14-bit ADC in</text>
+              <text x="453" y="40" text-anchor="middle" font-weight="600">Arduino UNO R4</text><text x="453" y="58" text-anchor="middle" font-size="12" fill="#4b535a">drives IN · records IN, OUT, REF</text>
               <rect x="560" y="18" width="186" height="54" rx="6" fill="#fff6d6" stroke="#c9a227" stroke-width="1.5"/>
-              <text x="653" y="40" text-anchor="middle" font-weight="600">Operator</text><text x="653" y="58" text-anchor="middle" font-size="12" fill="#4b535a">one jumper · one DMM reading, when asked</text>
+              <text x="653" y="40" text-anchor="middle" font-weight="600">Operator</text><text x="653" y="58" text-anchor="middle" font-size="12" fill="#4b535a">one jumper, one reading, when asked</text>
               <line x1="164" y1="45" x2="196" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
               <line x1="346" y1="45" x2="378" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
               <line x1="528" y1="45" x2="560" y2="45" stroke="#4b535a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)"/>
@@ -96,8 +94,8 @@
               <line x1="468" y1="152" x2="520" y2="152" stroke="#2b6bdc" stroke-width="3"/><circle cx="482" cy="152" r="4" fill="#2b6bdc"/><text x="482" y="140" text-anchor="middle" font-size="12" font-weight="600" fill="#2b6bdc">OUT</text>
               <polygon points="520,134 520,170 554,152" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="537" y="188" text-anchor="middle" font-size="11" fill="#4b535a">LM358</text>
               <line x1="554" y1="152" x2="580" y2="152" stroke="#171b1e" stroke-width="1.5"/>
-              <rect x="580" y="132" width="78" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="619" y="151" text-anchor="middle" font-weight="600">ADC</text><text x="619" y="165" text-anchor="middle" font-size="11" fill="#4b535a">512 frames / 0.5 ms</text>
-              <text x="705" y="148" font-size="11.5" fill="#4b535a">IN, OUT and</text><text x="705" y="162" font-size="11.5" fill="#4b535a">REF, every run</text>
+              <rect x="580" y="132" width="92" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="626" y="151" text-anchor="middle" font-weight="600">14-bit ADC</text><text x="626" y="165" text-anchor="middle" font-size="10.5" fill="#4b535a">512 frames · 0.5 ms</text>
+              <text x="626" y="188" text-anchor="middle" font-size="11" fill="#4b535a">IN, OUT, REF</text>
               <!-- REF -->
               <line x1="365" y1="186" x2="365" y2="222" stroke="#8b949b" stroke-width="3"/>
               <line x1="120" y1="222" x2="660" y2="222" stroke="#8b949b" stroke-width="3"/>

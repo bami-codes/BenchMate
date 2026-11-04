@@ -31,8 +31,8 @@
   const railSchem = await schematic(kase.design); $('#rail-schem').append(railSchem);
   const railDrawing = $('#rail-schem').closest('.rail-card'); railDrawing.hidden = true; // the drawing shows once: in the scope area until the scope has traces
   const showRailDrawing = () => { railDrawing.hidden = false; };
-  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)), el('p', {}, 'The drawing Spark read. Press Play: forecasts are drawn before each measurement.'),
-    run.design_amendment ? el('p', { class: 'small muted amend' }, run.design_amendment.text) : null);
+  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)), el('p', {}, 'The drawing Spark read. Press Play: forecasts are drawn before each measurement.'));
+  if (run.design_amendment) idle.append(el('p', { class: 'small muted amend' }, run.design_amendment.text));
   if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, run.design_amendment.text));
   const metersBox = $('#meters');
   const meters = {}; let meterOrder = [];
@@ -531,6 +531,7 @@
   waitingMeters(); intro();
   setSeal('sealed', 'Hidden fault sealed'); benchState();
   const t0 = Number(q.get('t')); if (t0) { seek(t0); idle.classList.add('off'); }
+  if (q.get('play') === '1' && !REDUCED) setTimeout(() => { if (!playing) setPlaying(true); }, 700); // arrived by a Watch/Replay button: start without asking
   book.addEventListener('keydown', e => { if (e.key === ' ' && e.target === book) { e.preventDefault(); setPlaying(!playing); } });
   clock();
 })();

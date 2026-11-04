@@ -18,7 +18,7 @@
     const st = run.steps[0];
     const traces = stepTraces(st, { measuredProgress: REDUCED ? 1 : 0 });
     scope.set(stepTime(st), traces, `Step 1 · ${st.label}`);
-    $('#cta-replay').href = `run.html?run=${run.id}`;
+    $('#cta-replay').href = `run.html?run=${run.id}&play=1`;
     const nom = (st.fit || []).find(f => f.id === 'nominal');
     const cls = run.classification?.public_label || run.classification?.label || (run.pilot ? 'Pilot run — not counted' : 'Counted run');
     $('#hero-under').append(document.createTextNode(BM.heroLine(run) + ' '));
@@ -27,7 +27,7 @@
     $('#hero-caption').append(el('p', {},
       el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls), ' · ',
       `Case ${run.case}, ${run.label} · `, ev(el('span', { class: 'num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
-      miss != null ? [' · as drawn misses by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0] } }), nom.worst_region?.[0] ? ` in its worst region (allowance ${run.allowance_mV} mV)` : ` (allowance ${run.allowance_mV} mV)`] : null));
+      miss != null ? [' · as drawn missed by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0], allowance_mV: run.allowance_mV } }), ` (allowance ${run.allowance_mV} mV)`] : null));
     if (!REDUCED) {
       const meas = traces.filter(t => t.kind !== 'fc'); let t0 = performance.now();
       const loop = (now) => { const ph = ((now - t0) / 1000) % 6.5; const p = Math.min(1, ph / 3.2); for (const t of meas) t.progress = p; scope.draw(); requestAnimationFrame(loop); };
@@ -53,10 +53,10 @@
   // ---- the cases: one row per case with its recorded runs (fault run, restored rerun), in case order
   const cl = $('#case-list');
   const counted = runs.filter(r => r.counted);
-  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${cases.cases.length} cases, ${withRuns} with official runs, ${counted.length} official runs in all.`; }
+  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${counted.length} official runs: a fault run and a restored rerun for each case.`; }
   const outcomeLine = (r) => r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one reading, bands frozen first, placed it; seal opened' : 'Spark proposed a part the drawing does not show; held-back checks passed; seal opened') : r.reading === 'group' ? 'one explanation left after the tests; two readings, bands frozen first, fixed which body; seal opened' : 'one explanation left after one reading; seal opened') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome;
   const runLine = (r) => el('div', { class: 'run-line' },
-    el('a', { class: 'btn sm' + (r.state === 'restored' ? ' ghost' : ''), href: `run.html?run=${r.id}` }, r.state === 'restored' ? 'Restored rerun' : 'Replay the diagnosis'),
+    el('a', { class: 'btn sm' + (r.state === 'restored' ? ' ghost' : ''), href: `run.html?run=${r.id}&play=1` }, r.state === 'restored' ? 'Restored rerun' : 'Replay the diagnosis'),
     el('span', { class: 'small' }, el('b', {}, r.label), ` · ${fmtDate(r.started_utc)} · ${r.steps} experiments · ${r.spark_calls} Spark calls${r.sam_calls ? ` · ${r.sam_calls} SAM` : ''} · ${fmtUSD(r.spark_cost)} est.`, el('span', { class: 'muted' }, ` — ${outcomeLine(r)}`)),
     el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'));
   for (const c of cases.cases) {
