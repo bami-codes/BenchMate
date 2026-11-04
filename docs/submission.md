@@ -64,8 +64,6 @@ The forecasts are recorded before measurement, final circuit models and reading 
 
 Built solo in nine days, BenchMate demonstrates AI-guided experiments on physical hardware: an unexplained output becomes a concrete next check.
 
-Live demo: bami-codes.github.io/BenchMate · Code and records: github.com/bami-codes/BenchMate · Film: youtube.com/watch?v=BFlJHOEapV8
-
 **Describe your use of Meta products to build the submitted project**
 
 BenchMate uses Muse Spark 1.3 through the Meta Model API as the runtime agent, with SAM 3.1 for locating physical components.
