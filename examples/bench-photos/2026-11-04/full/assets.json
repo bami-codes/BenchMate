@@ -31,6 +31,34 @@
         "IHDR"
       ],
       "metadata_present": false
+    },
+    "camera-preview.png": {
+      "sha256": "c6630e7776bcc30b1049d55dab7658f3b77e36d59aa8eb91925c5603d1899f0c",
+      "bytes": 14966012,
+      "dimensions": [
+        3024,
+        4032
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    },
+    "camera-preview-small.png": {
+      "sha256": "0e40f8fd6acf48a3ab4ac778057e7119701568ff0e2ea5e31ae845e9a68e0c1a",
+      "bytes": 3147214,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
     }
   },
   "conversion_file": "conversion.json",
@@ -45,5 +73,10 @@
   },
   "API_calls": 0,
   "hardware_commands": 0,
-  "cost_USD": 0
+  "cost_USD": 0,
+  "preferred_presentation_image": "camera-preview.png",
+  "preferred_small_presentation_image": "camera-preview-small.png",
+  "presentation_conversion_file": "camera-preview-conversion.json",
+  "fixed_RAW_render_note": "render.png and preview.png retain the earlier fixed experiment-style conversion. Prefer camera-preview variants for setup presentation.",
+  "camera_preview_resolution_note": "Native embedded preview 3024x4032; no upscaling to the 4028x5370 RAW render."
 }

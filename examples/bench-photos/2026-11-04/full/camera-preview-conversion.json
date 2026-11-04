@@ -1,0 +1,63 @@
+{
+  "schema": "benchmate.camera_embedded_preview_export.v1",
+  "purpose": "Presentation export retaining the camera-rendered embedded preview appearance.",
+  "source_DNG_sha256": "3bce6d98597e72432703d31f7b52a66219424b70f4e8a5b6e8b1bd704f2f8543",
+  "embedded_JPEG_sha256": "b3425d6bca624bf6a8c1f4bf829c427133952ce718f6adee7ebe84f436bc268b",
+  "embedded_preview_dimensions": [
+    3024,
+    4032
+  ],
+  "method": "rawpy.extract_thumb; decode embedded JPEG; apply EXIF orientation; ICC-to-sRGB conversion if profile present; encode fresh RGB PNG with pixel chunks only.",
+  "embedded_ICC_present": true,
+  "embedded_ICC_sha256": "0ff6958f98684c61f6bbdce1368ddeaf3873baf84545baba482e920d92a914c0",
+  "target_color_space": "sRGB",
+  "manual_exposure_adjustment": false,
+  "manual_tone_curve": false,
+  "additional_sharpening": false,
+  "RAW_redevelopment_performed": false,
+  "EXIF_GPS_XMP_copied": false,
+  "RAW_original_published": false,
+  "small_preview_resize": {
+    "maximum_dimension": 1600,
+    "method": "Pillow Lanczos; aspect ratio retained"
+  },
+  "libraries": {
+    "rawpy": "0.27.1",
+    "Pillow": "12.3.0"
+  },
+  "published_files": {
+    "camera-preview.png": {
+      "sha256": "c6630e7776bcc30b1049d55dab7658f3b77e36d59aa8eb91925c5603d1899f0c",
+      "bytes": 14966012,
+      "dimensions": [
+        3024,
+        4032
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    },
+    "camera-preview-small.png": {
+      "sha256": "0e40f8fd6acf48a3ab4ac778057e7119701568ff0e2ea5e31ae845e9a68e0c1a",
+      "bytes": 3147214,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "PNG_chunks": [
+        "IDAT",
+        "IEND",
+        "IHDR"
+      ],
+      "metadata_present": false
+    }
+  },
+  "fixed_conversion_render_preserved_sha256": "5c82c1a966ce021ef3e594aa01fbb16b8d82cab7f0bd0255561c93be0914f734",
+  "existing_experiment_inputs_changed": false,
+  "API_calls": 0,
+  "hardware_commands": 0,
+  "cost_USD": 0
+}
