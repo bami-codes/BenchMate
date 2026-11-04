@@ -105,4 +105,4 @@ Implemented during the event: circuit solvers, inference, tools, provider transp
 
 Dependencies/tools: NumPy, SciPy, HTTPX, pySerial, pytest, Arduino CLI/Renesas UNO R4 core, ngspice and GitHub CLI. MIT license; dependencies retain their own licenses.
 
-UI design uses [Impeccable](https://github.com/pbakaus/impeccable) guidance and the design contract in [PRODUCT.md](../PRODUCT.md)/[DESIGN.md](../DESIGN.md). IBM Plex Sans is embedded offline under its [OFL license](../src/benchmate/assets/OFL.txt). Impeccable's tool cache is local and is not a runtime dependency.
+The public demo is the static site in `site/`, published to `gh-pages`; its design notes are in [site/DESIGN.md](../site/DESIGN.md) and its rules in [site/HANDOFF.md](../site/HANDOFF.md). The earlier replay builder (`web/`) and its Impeccable design contract (`PRODUCT.md`, `DESIGN.md`) were removed on 4 Nov 2026 and remain in the git history. IBM Plex Sans is embedded offline under its [OFL license](../src/benchmate/assets/OFL.txt).
