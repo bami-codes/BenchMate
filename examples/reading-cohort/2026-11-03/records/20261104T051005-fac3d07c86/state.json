@@ -3,6 +3,8 @@
   "requested_component": "R1",
   "reading_outcome": "one_explanation_remains",
   "faulted_diagnosis": "history/reading/history/original/diagnosis-faulted/20261104T042909-7ee516eccf",
-  "last_boot": "c9c4bc80111236f68e1016f9c1630392",
-  "phase": "awaiting_restored_setup"
+  "last_boot": "587a9b5087794502aa2d4f22bf565f76",
+  "phase": "awaiting_restored_photo",
+  "restored_diagnosis": "diagnosis-restored/20261104T051133-4d80b9f294",
+  "restored_verdict": "consistent"
 }

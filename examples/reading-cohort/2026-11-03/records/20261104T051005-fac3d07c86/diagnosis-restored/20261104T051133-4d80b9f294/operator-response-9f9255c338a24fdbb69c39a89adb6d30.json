@@ -1,0 +1,12 @@
+{
+  "request_id": "9f9255c338a24fdbb69c39a89adb6d30",
+  "report": {
+    "choice": "connect_output_load",
+    "fixture": "output_load",
+    "reviewed_design_sha256": "c7b2d1077003caf5a256bff766710280b03a65d79b71ac64117e6595dc3a84f1",
+    "USB_connected": true,
+    "USB_off_wiring_confirmed": true,
+    "verbatim": "USB was off; I connected only the known 9.99 kohm OUT-to-REF load, retained the specimen and remaining wiring, removed probes, and reconnected the same USB port."
+  },
+  "operator_verbatim": "했어"
+}

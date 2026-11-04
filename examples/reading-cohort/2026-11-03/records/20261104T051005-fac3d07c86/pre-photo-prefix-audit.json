@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "events": 566,
+  "forecasts": 4,
+  "measurements": 5,
+  "order_checks": 19,
+  "prediction_files": 1,
+  "run_status": "restored_photo_scope_declared",
+  "head_sha256": "9495c2370ca5e20b787fdd712a8dc9c27c52262b39aeef340dcfce90632cd80d",
+  "error": null,
+  "incomplete_prefix": true,
+  "restored_photo_pending": true
+}

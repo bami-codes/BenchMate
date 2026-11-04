@@ -152,7 +152,9 @@
       "selected_first_attempt": false,
       "execution_scope": "restored_only_after_confirmed_photo_reading",
       "followup_of": "20261104T041918-d1084cbeb4",
-      "original_primary_status": "failed"
+      "original_primary_status": "failed",
+      "pending_stage": "restored_documentary_photo",
+      "restored_verdict": "consistent"
     }
   ]
 }

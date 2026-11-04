@@ -1,0 +1,91 @@
+{
+  "schema": "benchmate.case03_restored_diagnosis_result.v1",
+  "stage": "restored_diagnosis_completed_photo_pending",
+  "agent_report": {
+    "verdict": "consistent",
+    "components": [],
+    "explanation": "No mismatch in the tests Spark chose. Nominal and one-value R1 R2 C1 fits passed conditional checks on three training and two reserved physical captures. Training experiments are your choices; the two reserved inputs were fixed by protocol.",
+    "limits": "Conditional terminal behavior only; ambiguity remains, no proof all parts correct.",
+    "source": "physical",
+    "actor": "muse_spark",
+    "physical_repair_demonstrated": false
+  },
+  "conditional_nominal_reserved": [
+    {
+      "settings": {
+        "kind": "step",
+        "samples": 512,
+        "period_us": 500,
+        "amplitude_v": 0.35,
+        "load_ohm": null
+      },
+      "conditional": {
+        "whole_RMS_mV": 7.223292775078841,
+        "worst_region_RMS_mV": 8.211912247505174,
+        "passed": true
+      },
+      "command_forecast": {
+        "whole_RMS_mV": 8.408665545963718,
+        "worst_region_RMS_mV": 9.761720260138736,
+        "passed": false
+      }
+    },
+    {
+      "settings": {
+        "kind": "sine",
+        "samples": 512,
+        "period_us": 2000,
+        "amplitude_v": 0.65,
+        "frequency_hz": 5,
+        "load_ohm": null
+      },
+      "conditional": {
+        "whole_RMS_mV": 4.238806224882164,
+        "worst_region_RMS_mV": 5.655731475554354,
+        "passed": true
+      },
+      "command_forecast": {
+        "whole_RMS_mV": 5.31881661670278,
+        "worst_region_RMS_mV": 6.848611613705987,
+        "passed": true
+      }
+    }
+  ],
+  "all_surviving_bounded_explanations": [
+    "nominal",
+    "changed:R1",
+    "changed:R2",
+    "changed:C1"
+  ],
+  "prediction_sha256": "ec9a9d2e57477f58ea72158b04fc845a767ed02b67b27211c72924251b43c3ce",
+  "prediction_publication": [
+    {
+      "kind": "verification_publication",
+      "sha256": "ec9a9d2e57477f58ea72158b04fc845a767ed02b67b27211c72924251b43c3ce",
+      "published": true,
+      "remote": true,
+      "commit": "0253fba41f3b9dc61c6c5d69250c3127938c2878",
+      "url": "https://github.com/bami-codes/BenchMate/blob/0253fba41f3b9dc61c6c5d69250c3127938c2878/examples/reading-cohort/2026-11-03/predictions/20261104T051133-4d80b9f294/terminal.json"
+    }
+  ],
+  "Spark_requests": 6,
+  "SAM_requests": 0,
+  "estimated_cost_USD": 0.05070545,
+  "case03_actual_to_date": {
+    "Spark_requests": 15,
+    "SAM_requests": 1,
+    "estimated_cost_USD": 0.13866115
+  },
+  "whole_cohort_including_labelled_case02_reprocessing": {
+    "Spark_requests": 101,
+    "SAM_requests": 5,
+    "estimated_cost_USD": 1.00642305
+  },
+  "cost_scope": "Retained tariff estimate, not invoice. SAM future 1 image estimated $0.0025.",
+  "output_returned_to_REF": true,
+  "restored_photo_pending": true,
+  "restored_binding_Spark_requests_planned": 0,
+  "restored_operator_readings_planned": 0,
+  "native_repair_claim_overwritten": false,
+  "original_failed_pair_counted": true
+}
