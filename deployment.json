@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "12fa97496454728cfa8806dc2debee09dbd76c79",
-  "source_site_tree": "f9384034345f3f1173dcc141463a6b28543c8753",
-  "previous_gh_pages_commit": "f16165aad2c674ec24eb932d2debf238b051c341",
+  "source_main_commit": "b09303fed91305eda1e8d6013027aaaef9b574c2",
+  "source_site_tree": "b72eaa62154a8df6eec1b2934a8809ffdeb984a5",
+  "previous_gh_pages_commit": "695a6927298550181bac3e6f4c13ff8c2d46005d",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Adds the four case 03 and 05 run files that the runs/ ignore rule had kept out of every earlier deploy (public 404s on those replays and reports).",
+  "change": "Wording: forecasts checked against measurements by code, the seal's digest checked against its commitment; no automatic verdict-vs-truth claim.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py: 12 runs in index.json present and tracked; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "site/tools/check_data.py (12 runs tracked); playwright spot checks at 1440 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
