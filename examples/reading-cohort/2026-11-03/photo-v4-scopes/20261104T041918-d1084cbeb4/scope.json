@@ -1,0 +1,16 @@
+{
+  "schema": "benchmate.reading_photo_candidate_stage.v4",
+  "source_sha256": {
+    "src/benchmate/reading_photo_stage_v4.py": "c7134e8711b9def61fb21b6e45d2c75cf43a02ca72f682207aa783e8f97b8a81",
+    "src/benchmate/reading_timing_verify_v4.py": "a1dbb6194416e23df1de39ad0e8f9171c6007a34dab54d676e878554e731d58a",
+    "tests/test_reading_photo_stage_v4.py": "83fd40ed4512fe098c5c189655afa86216262e29e3f57fd0e3b1daabe947c11d",
+    "docs/2026-11-04-reading-photo-stage-v4.md": "b5d7d7b9cc8a06e3923107eb042e212cacb7ef731141c0e74e6d9f17facfdba6"
+  },
+  "candidate_version": "candidate-kind-set-v3",
+  "surface_value_reading": false,
+  "operator_port_context": "Only explicitly confirmed connector colors and coordinates, never part values/identities.",
+  "unique_binding": "Actual Spark reference proposal confirmed yes/no; ambiguous candidates require a separate group plan.",
+  "operator_numeric_evidence": "Optional meter photo; otherwise original board context explicitly not numeric authentication.",
+  "restored_consistent": "New photo and generic SAM display only; no invented component reference or repeated value request.",
+  "public_manifest": "examples/reading-cohort/2026-11-03/photo-v4-scopes/20261104T041918-d1084cbeb4/scope.json"
+}

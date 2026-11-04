@@ -1,0 +1,11 @@
+{
+  "unit_tests_passed": 11,
+  "prefix_auditor_integration_passed": true,
+  "temporary_mock_marker_events_checked": 265,
+  "actual_pair_terminal": false,
+  "actual_case_report": "indistinguishable",
+  "actual_events_changed": false,
+  "new_API_requests": 0,
+  "new_hardware_commands": 0,
+  "scope": "Auditor integration on an offline temporary clone only; not a completed or failed actual pair audit."
+}

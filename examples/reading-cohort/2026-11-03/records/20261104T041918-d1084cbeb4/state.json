@@ -1,5 +1,7 @@
 {
   "case_id": "03",
-  "phase": "awaiting_design_confirmation",
-  "schematic_intake": "schematic-intake/20261104T042005-5517c5bb50"
+  "phase": "awaiting_reading_selection",
+  "schematic_intake": "schematic-intake/20261104T042005-5517c5bb50",
+  "faulted_diagnosis": "diagnosis-faulted/20261104T042909-7ee516eccf",
+  "last_boot": "c9c4bc80111236f68e1016f9c1630392"
 }
