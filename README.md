@@ -1,4 +1,4 @@
-# BenchMate
+# BenchMate — forecast-first experiments on a real circuit
 
 **The drawing is right. The board is right. The output is wrong.**
 

@@ -1,6 +1,8 @@
 # Submission text (Cerebral Valley form) — 4 Nov 2026
 
-**Project name:** BenchMate
+**Project name:** BenchMate — forecast-first experiments on a real circuit
+
+(Two other entries in this hackathon are also called BenchMate; the subtitle is on the form, the video title card, the README and the repository description so the three stay distinct.)
 
 **Tagline (one line):** Muse Spark designs experiments on a real circuit, forecasts each one before a $40 Arduino bench measures it, and finds the sealed fault.
 
