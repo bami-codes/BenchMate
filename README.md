@@ -2,7 +2,9 @@
 
 **The drawing is right. The board looks right. The output is wrong.**
 
-That is the first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check. BenchMate gives that question to Meta's Muse Spark on a real board. It reads the schematic and chooses its own experiments; every forecast is frozen before the measurement and checked against it by code; the planted fault stays sealed until the verdict. Five faults were planted on five small circuits; the model narrowed each disagreement between board and drawing to one question, asking for one multimeter reading where the waveforms could not decide, and every step is a record you can verify offline.
+That is the first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check. BenchMate hands that question to Meta's Muse Spark, on a real board.
+
+Spark reads the schematic and picks each experiment from a fixed menu. Before every measurement, a circuit simulator writes down what each remaining explanation predicts, and that prediction is locked (hashed) so it cannot be changed afterwards. The real board is measured; explanations that miss by more than 9 mV are crossed out. When no change of part value can explain the board, Spark may propose a part the drawing does not show; when two explanations predict the same waveforms, it asks for one multimeter reading. The fault we planted stays sealed until the verdict. Five faults, five small circuits, and every step is a record you can verify offline.
 
 **[Open the live demo](https://bami-codes.github.io/BenchMate/)** · **[Watch Case 04 from the start](https://bami-codes.github.io/BenchMate/run.html?run=20261103T150223-18d6f08ac9&play=1)** · **[The five cases](https://bami-codes.github.io/BenchMate/#cases)** · [Verify a record offline](#why-you-can-trust-the-numbers) · the film link will be added when it is uploaded.
 
