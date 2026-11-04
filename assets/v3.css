@@ -535,3 +535,8 @@ footer a{color:#fff}
 .claim-top .eyebrow{max-width:none}
 .claim-top .sub span{display:block;max-width:74ch}
 .claim-top .sub span+span{margin-top:4px;opacity:.85}
+
+/* round 4f: one paragraph, one measure; a continuous red stroke under "The output is wrong." */
+.claim-top .sub{max-width:62ch;margin-top:10px;opacity:1}
+.claim-top .sub span{display:inline;max-width:none;opacity:1;margin:0}
+.claim h1 .wrong,.claim-top h1 .wrong{text-decoration-skip-ink:none;text-decoration-thickness:.09em;text-underline-offset:.12em}

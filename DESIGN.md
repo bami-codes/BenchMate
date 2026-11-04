@@ -98,4 +98,9 @@ drawn only after the seal opens and was never part of the model input.
   carry `?play=1` and the replay starts on arrival; buttons and run rows have hover and active states; the idle scope
   no longer appends a literal "null". Copy across the landing was cut to one or two lines per element; registration and
   display rules sit behind a details toggle.
+- Top of the landing, final (4 Nov evening, after 범수's review): an eyebrow in tape yellow (Muse Spark on a $40 Arduino
+  bench · five real circuits, five sealed faults), the headline on one line across the full width (sentences never break
+  mid-way; three lines on a phone), a two-line description, the two buttons, then the scope on the left and Drawn / Built
+  on the right with a shared bottom edge. Nothing sits beside the headline; the three trust rows (forecast first / sealed
+  truth / scored by code) live under the "Counted from the records" numbers. Phone nav: Cases / How it works / GitHub.
 
