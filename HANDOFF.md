@@ -143,7 +143,9 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
 
 ## 5. Remaining work (priority order)
 
-1. README (repo root): frame as "a diagnostic tool for the first power-on of real hardware";
+0. README: rewritten 4 Nov evening (five cases table, bench, Meta models, verifier outputs, the failure ledger, the
+   prototype-of framing, earlier development results). Screenshots for it live in `site/assets/readme/`.
+1. README (notes kept for reference): frame as "a diagnostic tool for the first power-on of real hardware";
    tagline "BenchMate's experiments did not exist until the model asked for them."; who does what
    among Meta models (Muse Spark vision reads the drawing and points at bodies; Muse Spark agent
    chooses experiments and proposes structure; SAM 3.1 segments the board); the five cases with one line

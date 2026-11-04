@@ -47,7 +47,7 @@
     $('#score').hidden = false;
     $('#score-note').textContent = `${results.official_runs.length} official runs on the real bench, scored by code against the sealed faults. Updated ${fmtDate(results.updated_utc)}.`;
     for (const m of results.metrics) $('#score-grid').append(el('div', { class: 'k' }, el('b', {}, m.value ?? '—'), el('span', {}, m.label)));
-    $('#score-foot').textContent = 'Counts, not a rate: every attempt is in the public ledger, including the ones that stopped, abstained or were miswired; the reports name them. Costs are estimates from recorded tokens at the published rates.';
+    $('#score-foot').textContent = 'Counts, not a rate: stopped, abstained and miswired attempts are in the public ledger and named on the reports. Costs are estimates at the published rates.';
   }
 
   // ---- the cases: one row per case with its recorded runs (fault run, restored rerun), in case order
@@ -79,7 +79,7 @@
   }
   if (policy) {
     const shown = cases.cases.map(c => c.id); const order = (policy.case_order || []).filter(id => shown.includes(id));
-    $('#policy').append(el('p', {}, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. The cases were known to the developers; this is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`));
+    $('#policy').append(el('details', { class: 'small muted' }, el('summary', {}, 'Registration and display rules'), el('p', { style: 'margin-top:6px' }, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. The cases were known to the developers; this is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`)));
   }
 
   // ---- verify box (short)

@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "e998e2be897bb492b211a3bc682e6f040011e73b",
-  "source_site_tree": "e40634daeed834debc3a9d356d376f9f8ed71de8",
-  "previous_gh_pages_commit": "cc9f1f6753b08abdcd605edf1d1f680bf92fabd6",
+  "source_main_commit": "4d534d9a37639be411ce16e8244568cef851ca2e",
+  "source_site_tree": "955aef92846614cd36bb590ef582ebabd0bf7a49",
+  "previous_gh_pages_commit": "329198122f0695dd88ff5de9db61986980b0ada0",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "'What this is a prototype of' section (Impact framing, nothing claimed beyond the records) and one audience clause in the claim.",
+  "change": "Landing copy shortened and given more shape (at-a-glance tile, six-needs grid, one-line tables, rules behind a toggle).",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot check of the landing at 1440 and 390 after the full shots_all.js run of the previous release",
+    "tool": "playwright spot check at 1440 and 390 (landing); full shots_all.js run on the previous data release",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
