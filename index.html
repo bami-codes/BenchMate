@@ -13,21 +13,21 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
-  <nav><a href="#cases" class="keep">Cases</a><a href="#bench">The bench</a><a href="#frontier">Why it matters</a><a href="#how" class="keep">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate" class="keep">GitHub</a></nav>
+  <nav><a href="#cases" class="keep">Cases</a><a href="#bench">The bench</a><a href="#frontier">Why this matters</a><a href="#how" class="keep">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate" class="keep">GitHub</a></nav>
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
-  <p class="eyebrow">Five real circuits · five sealed faults · one model that must forecast first</p>
+  <p class="eyebrow">Five real circuits · five hidden faults · every forecast made before the measurement</p>
   <h1 class="oneline"><span class="nw">The drawing is right.</span> <span class="nw">The board is right.</span> <span class="wrong nw">The output is wrong.</span></h1>
-  <p class="sub">Muse Spark reads the schematic and runs its own experiments on the real board, forecasting every result before the bench measures it.</p>
+  <p class="sub">Meta’s Muse Spark reads the schematic, chooses its own experiments on the real board, forecasts every result before the bench measures it, and is scored by code against a sealed answer.</p>
   <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
 </section>
 
 <section class="hero" aria-label="The scope">
   <div class="scope-col"><div class="scope" id="hero-scope"><div class="legend"><span class="fc">– – forecast, frozen before measuring</span><span class="ms">— measured</span></div></div><p class="under" id="hero-under"></p><div class="small caption" id="hero-caption"></div></div>
   <div class="hero-side">
-    <div class="tile"><h3>Drawn <small>the schematic the model read</small></h3><div class="schem" id="hero-schem"></div></div>
-    <div class="tile"><h3>Built <small id="hero-board-note">the mini board</small></h3><div class="schem" id="hero-board"></div></div>
+    <div class="tile"><p class="tile-h">Drawn <small>the schematic the model read</small></p><div class="schem" id="hero-schem"></div></div>
+    <div class="tile"><p class="tile-h">Built <small id="hero-board-note">the mini board</small></p><div class="schem" id="hero-board"></div></div>
   </div>
 </section>
 
@@ -198,7 +198,7 @@
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
       <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
       <div><h3>What is not claimed</h3><p class="small">Five completed cases are not an accuracy rate. Failed and abstained attempts are kept in the public ledger and named on the reports. Restored reruns show "no mismatch in the tests Spark chose", not a proof that every part is correct. The cases were known to the developers; this is not a blind test.</p></div>
-      <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and the offline verifier.</p><a class="btn sm" href="https://github.com/bami-codes/BenchMate">github.com/bami-codes/BenchMate</a></div>
+      <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and the offline verifier.</p><a class="btn sm" href="https://github.com/bami-codes/BenchMate">Repository on GitHub</a></div>
     </div>
     <h3 class="sub">Which model did what</h3>
 <dl class="who">

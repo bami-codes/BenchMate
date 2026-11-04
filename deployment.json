@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "cc9d2d908306bb5f7cc55ace51ece23f4dcce1a6",
-  "source_site_tree": "c6ff5cd2498b3990dd11aae3d17febdce3739203",
-  "previous_gh_pages_commit": "a2dfce6d4d68cd2778be0890619dd175b691546f",
+  "source_main_commit": "2f86bb933f70e9e8a44c5c85c65803f451340b0f",
+  "source_site_tree": "f22957e3b330c025e77b9812f54099d49ebfef63",
+  "previous_gh_pages_commit": "ea1982d7d2fa3b2eccd138185b61a24d1e9d38c6",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Replay before Play: meter caption with the allowance, big Play in the idle panel, plain run sentence in the notebook.",
+  "change": "Fixes from two independent reviews: report null text, table clipping, step headline wording, phone nav, rail offset; eyebrow/sub copy, 3x3 score, contrast and focus.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; idle replay checked at 1440 and 390",
+    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; pages checked at 1440/1024/390",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

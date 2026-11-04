@@ -65,7 +65,7 @@
   if (results && results.official_runs?.length) {
     $('#score').hidden = false;
     $('#score-note').append(el('span', {}, `${results.official_runs.length} official runs on the real bench, scored by code against the sealed faults.`), el('small', {}, `Updated ${fmtDate(results.updated_utc)}`));
-    for (const m of results.metrics) $('#score-grid').append(el('div', { class: 'k' }, el('b', {}, m.value ?? '—'), el('span', {}, m.label)));
+    for (const m of results.metrics) { const usd = m.label.includes('(USD)'); $('#score-grid').append(el('div', { class: 'k' }, el('b', {}, m.value == null ? '—' : usd ? '$' + m.value : m.value), el('span', {}, usd ? m.label.replace(' (USD)', '') : m.label))); }
     $('#score-foot').textContent = 'Counts, not a rate: stopped, abstained and miswired attempts are in the public ledger and named on the reports. Costs are estimates at the published rates.';
   }
 
@@ -96,11 +96,11 @@
     const box = $('#dev-records');
     box.append(el('h3', { class: 'group-head' }, 'Development records'), el('p', { class: 'small muted' }, 'Pilots that shaped the bench before the pipeline was frozen. Not counted, kept in full.'));
     for (const r of dev) { const c = cases.cases.find(x => x.id === r.case);
-      box.append(el('div', { class: 'run-line dev' }, el('a', { class: 'btn ghost sm', href: `run.html?run=${r.id}` }, 'Replay'), el('span', { class: 'small' }, el('b', {}, `Case ${r.case} · ${r.label}`), ` · ${fmtDate(r.started_utc)} · ${r.steps} experiments · ${r.spark_calls} Spark calls · ${fmtUSD(r.spark_cost)} est.`, el('span', { class: 'muted' }, ` — ${outcomeLine(r)}`)), el('span', { class: 'badge pilot' }, r.class_label || 'Pilot run — not counted'), el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'))); }
+      box.append(el('div', { class: 'run-line dev' }, el('span', { class: 'small' }, el('b', {}, `Case ${r.case} · ${r.label}`), ` · ${fmtDate(r.started_utc)} · ${r.steps} experiments · ${fmtUSD(r.spark_cost)} est. · ${outcomeLine(r)}`), el('span', { class: 'badge pilot' }, r.class_label || 'Pilot run — not counted'), el('span', { class: 'acts' }, el('a', { class: 'btn ghost sm', href: `run.html?run=${r.id}` }, 'Replay'), el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report')))); }
   }
   if (policy) {
     const shown = cases.cases.map(c => c.id); const order = (policy.case_order || []).filter(id => shown.includes(id));
-    $('#policy').append(el('details', { class: 'small muted' }, el('summary', {}, 'Registration and display rules'), el('p', { style: 'margin-top:6px' }, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. The cases were known to the developers; this is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`)));
+    $('#policy').append(el('details', { class: 'small muted' }, el('summary', {}, 'How the runs are counted and shown'), el('p', { style: 'margin-top:6px' }, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. The cases were known to the developers; this is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`)));
   }
 
   // ---- verify box (short)

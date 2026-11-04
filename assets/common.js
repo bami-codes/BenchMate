@@ -259,7 +259,13 @@ window.BM = (() => {
     fit: (e, allow) => { const out = e.results.filter(r => !r.adequate), ok = e.results.filter(r => r.adequate);
       if (e.all_inadequate) return 'No explanation fits any more. Every needle is in the red.';
       if (!out.length) return ok.length === 1 ? `${expName(ok[0].id)} still fits, within ${allow} mV.` : `${ok.map(r => expName(r.id)).join(' and ')} both still fit.`;
-      return `${out.map(r => expName(r.id)).join(' and ')} missed by too much and ${out.length === 1 ? 'is' : 'are'} crossed out. ${ok.length ? (ok.length === 1 ? `${expName(ok[0].id)} still fits.` : `${ok.map(r => expName(r.id)).join(' and ')} still fit.`) : ''}`; },
+      const already = new Set(e.already_out || []); const fresh = out.filter(r => !already.has(r.id)), stay = out.filter(r => already.has(r.id));
+      const names = (rs) => rs.map(r => expName(r.id)).join(' and ');
+      const parts = [];
+      if (fresh.length) parts.push(`${names(fresh)} missed by too much and ${fresh.length === 1 ? 'is' : 'are'} crossed out.`);
+      if (stay.length) parts.push(`${names(stay)} ${stay.length === 1 ? 'stays' : 'stay'} crossed out from ${stay.length === 1 ? 'an earlier step' : 'earlier steps'}.`);
+      if (ok.length) parts.push(ok.length === 1 ? `${expName(ok[0].id)} still fits.` : `${names(ok)} still fit.`);
+      return parts.join(' '); },
     structure: (e) => { const a = e.diff?.added || []; return a.length ? `Spark proposes a part the drawing doesn’t show: ${a.map(x => `${kindWord(x.kind)} between ${x.a} and ${x.b}`).join(', ')}.` : 'Spark proposes a different circuit.'; },
     structureFit: (e) => e.status === 'adequate' ? `The proposed circuit fits every measurement so far, within ${fmtMiss(e.miss_mV)}.` : e.status === 'fit_error' ? 'The proposed circuit could not be fitted.' : `The proposed circuit misses by ${fmtMiss(e.miss_mV)}. Crossed out.`,
     verifyReq: () => 'Spark asks for the check: two inputs it never saw will be measured.',

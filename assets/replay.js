@@ -35,8 +35,7 @@
   const railDrawing = $('#rail-schem').closest('.rail-card'); railDrawing.hidden = true; // the drawing shows once: in the scope area until the scope has traces
   const showRailDrawing = () => { railDrawing.hidden = false; };
   idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)),
-    el('p', {}, 'The drawing Spark read. Every forecast is drawn before the bench measures.'),
-    el('button', { class: 'btn bigplay', type: 'button', onclick: () => $('#play').click() }, '▶ Play the replay'));
+    el('p', {}, 'The drawing Spark read. Press Play below: every forecast is drawn before the bench measures.'));
   if (run.design_amendment) idle.append(el('p', { class: 'small muted amend' }, run.design_amendment.text));
   if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, run.design_amendment.text));
   const metersBox = $('#meters');
@@ -49,24 +48,25 @@
     metersBox.append(m.root); return m;
   };
   const waitingMeters = () => { metersBox.innerHTML = ''; for (const k in meters) delete meters[k]; meterOrder = [];
-    for (const id of ['nominal', ...(run.design || []).filter(d => d.kind !== 'W').map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.readout.lastChild.textContent = `allowance ${run.allowance_mV ?? 9} mV`; m.root.classList.add('wait'); } };
+    for (const id of ['nominal', ...(run.design || []).filter(d => d.kind !== 'W').map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.readout.lastChild.textContent = ''; m.root.classList.add('wait'); } };
 
   // ---------- shelf: full / compact. Compact keeps a 110 px scope strip and one row of chips that mirror the meters,
   // so a verdict is never missed while collapsed. Auto-collapses on scroll unless the viewer toggled it by hand.
   const shelf = $('#shelf'), chips = $('#meter-chips'), toggle = $('#shelf-toggle');
   const phone = () => matchMedia('(max-width: 900px)').matches;
+  { const shelfEl = $('#shelf'); const setH = () => document.documentElement.style.setProperty('--shelf-h', shelfEl.offsetHeight + 'px'); new ResizeObserver(setH).observe(shelfEl); setH(); } // the sticky rail sits under the shelf, whatever its height
   let pinned = false, mode = 'full';
   const chipStatus = m => m.root.classList.contains('out') || m.root.classList.contains('dead') ? 'out' : m.root.classList.contains('wait') ? 'wait' : m.root.classList.contains('bad') ? 'bad' : m.val == null ? 'wait' : 'fit';
   const renderChips = () => {
     chips.replaceChildren(...meterOrder.map(id => { const m = meters[id]; if (!m) return null;
       const st = chipStatus(m), val = m.readout.firstChild.textContent;
       return el('span', { class: 'chip-m ' + st + (m.root.classList.contains('dead') ? ' dead' : ''), title: `${m.name.firstChild.textContent}: ${val}` }, el('i'), el('span', { class: 'cn' }, m.name.firstChild.textContent), el('span', { class: 'cv' }, val)); }).filter(Boolean));
-    metersBox.classList.toggle('many', meterOrder.length > 4);
+    metersBox.classList.toggle('many', meterOrder.length > 4); metersBox.dataset.n = String(meterOrder.length);
   };
   new MutationObserver(renderChips).observe(metersBox, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class'] });
   const setMode = (m, byUser) => {
     mode = m; shelf.classList.toggle('compact', m === 'compact'); shelf.classList.toggle('full', m !== 'compact');
-    toggle.textContent = m === 'compact' ? 'Expand ▾' : 'Collapse ▴'; toggle.setAttribute('aria-expanded', String(m !== 'compact'));
+    toggle.textContent = m === 'compact' ? 'Full player ▾' : 'Compact player ▴'; toggle.setAttribute('aria-expanded', String(m !== 'compact'));
     if (byUser) { pinned = true; try { localStorage.setItem('bm.shelf', m); } catch {} }
     requestAnimationFrame(() => scope.draw());
   };
@@ -87,7 +87,7 @@
   const sweeps = [];
   const scrub = $('#scrub'); scrub.max = END.toFixed(2);
   const speedBtn = $('#speed');
-  const setSpeed = s => { speed = s; try { sessionStorage.setItem('bm.speed', s); } catch {} speedBtn.textContent = `${s}×`; };
+  const setSpeed = s => { speed = s; try { sessionStorage.setItem('bm.speed', s); } catch {} speedBtn.textContent = `${s}×`; speedBtn.setAttribute('aria-label', `Replay speed: ${s}×`); };
   speedBtn.addEventListener('click', () => setSpeed(SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length])); setSpeed(speed);
   const playBtn = $('#play');
   const clock = () => { $('#clock').textContent = `${fmtClock(Math.min(pos, END))} / ${fmtClock(END)}`; };
@@ -118,7 +118,7 @@
 
   // ---------- notebook
   const book = $('#book');
-  const freshState = () => ({ thinking: null, pending: null, steps: {}, seal: 'sealed', totals: null, dead: {}, load: false, last: '—', proposals: {}, scored: 0 });
+  const freshState = () => ({ thinking: null, pending: null, steps: {}, seal: 'sealed', totals: null, dead: {}, load: false, last: '—', proposals: {}, scored: 0, said: {} });
   let state = freshState();
   const stepOf = n => run.steps.find(s => s.n === n);
   const logT = e => fmtLog(run.started_utc, e.t_log);
@@ -145,7 +145,7 @@
         el('div', { class: 'exp-title' }, el('span', { class: 'n' }, e.step), e.label),
         el('p', { class: 'quote' }, e.reason || '(no reason logged)'),
         menuChips(run.menu, e.action),
-        el('p', { class: 'small muted' }, 'The whole fixed menu, the same for every case; the solid chip is Spark’s pick. The runner never chooses.'),
+        state.said.menu ? null : (state.said.menu = true, el('p', { class: 'small muted' }, 'The whole fixed menu, the same for every case; the solid chip is Spark’s pick. The runner never chooses.')),
         callLine(e.calls, 'Muse Spark chose the next experiment'));
     },
     forecast_frozen(e) {
@@ -193,9 +193,9 @@
         el('td', {}, num(fmtMiss(r.decided_mV ?? r.miss_mV), st.fit_ev, `miss of ${expName(r.id)} on step ${e.step}`, { explanation: r.id, step: e.step, decided_by: r.worst_region ? `worst region ${r.worst_region}` : 'whole step', decided_mV: r.decided_mV, whole_step_RMS_mV: r.miss_mV, regions: r.regions, passed: r.passed_this_step, status: r.status }), r.worst_region ? el('small', { class: 'muted' }, ` worst region: ${r.worst_region.replace(/_/g, ' ')}`) : null),
         el('td', {}, out ? el('span', { class: 'tape red' }, `Ruled out after step ${state.dead[r.id]}`) : el('span', { class: 'muted' }, 'still fits'))); });
       const fresh = e.results.filter(r => !meters[r.id]).map(r => expName(r.id));
-      block(e, 'fit', `Fit engine · ngspice, step ${e.step}`, words.fit(e, allow),
+      block(e, 'fit', `Fit engine · ngspice, step ${e.step}`, words.fit({ ...e, already_out: e.results.filter(r => state.dead[r.id] != null && state.dead[r.id] < e.step).map(r => r.id) }, allow),
         el('div', { class: 'tscroll' }, el('table', { class: 'fit-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), el('th', {}, 'Value'), el('th', {}, 'Miss'), el('th', {}, ''))), el('tbody', {}, ...rows))),
-        el('p', { class: 'small muted' }, `Miss is the RMS difference between the forecast and the measured OUT; the frozen ${allow} mV allowance applies to the whole step and to every region of it, so the number shown is the worst of those.${fresh.length ? ` New from this measurement: ${fresh.join(', ')} (fitted to it, so not forecast for it).` : ''}${e.sim_calls ? ` ${e.sim_calls} ngspice runs.` : ''}`));
+        el('p', { class: 'small muted' }, `${state.said.miss ? '' : (state.said.miss = true, `Miss is the RMS difference between the forecast and the measured OUT; the frozen ${allow} mV allowance applies to the whole step and to every region of it, so the number shown is the worst of those.`)}${fresh.length ? ` New from this measurement: ${fresh.join(', ')} (fitted to it, so not forecast for it).` : ''}${e.sim_calls ? ` ${e.sim_calls} ngspice runs.` : ''}`.trim()));
       for (const r of e.results) { const m = ensureMeter(r.id); m.root.classList.remove('wait'); if (state.dead[r.id] != null && state.dead[r.id] < e.step) { m.die(); continue; } m.setValue(r.decided_mV ?? r.miss_mV ?? 0, r.value != null ? BM.fmtFit(r.kind, r.value, r.at_bound) : 'drawn values', r.passed_this_step, `step ${e.step}`, r.worst_region); }
       state.thinking = block({ t_log: e.t_log + 0.5 }, 'spark', 'Muse Spark 1.3', null, el('span', { class: 'thinking' }, el('i'), 'Reading the results, deciding the next step…'));
     },
