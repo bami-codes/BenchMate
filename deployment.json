@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "41dba1472ec3a947144ea96b9d4544406acc0e46",
-  "source_site_tree": "6d375e5ce5ce7a8b45aa6a3a51e640aa0efcb67d",
-  "previous_gh_pages_commit": "d15e0455e76c4f71de87db865fd04fa6388f32ce",
+  "source_main_commit": "32eb8d7d5a26f25c60eecfad9dcca46cf52385e9",
+  "source_site_tree": "c70688c6516641e7145579269c243edb741c3bd6",
+  "previous_gh_pages_commit": "17cae220f84225219df7ebef10964226f2c0e587",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Verdict card shows Spark's answer over the planted fault on replay and report; hero sub breaks at clauses.",
+  "change": "Hero sub in two lines.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports",
+    "tool": "playwright spot checks at 1440, 1024 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
