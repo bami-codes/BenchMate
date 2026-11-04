@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "e960b9635dc4aa842ebe48e33ddf8d73d25aabe6",
-  "source_site_tree": "5eb877a7dc5b553ae1336c74bc6e09f905f46c66",
-  "previous_gh_pages_commit": "0a2c8a79b6abc98f9ab061c3ab929b3e4e527897",
+  "source_main_commit": "e5d90bbfee7ec1e1d28105c9b60e8cff7a2c5e39",
+  "source_site_tree": "2377fc43b7881250642eca3b8f2d6d1752708b67",
+  "previous_gh_pages_commit": "114711b194e2f861a660dd56571a5d8b2c7307fe",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Why-this-matters note no longer pre-empts a superiority claim nobody made; the synthetic benchmark stays in the README's development-results section.",
+  "change": "Home buttons gain a link to the 3-minute film (YouTube BFlJHOEapV8).",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "same site tree as 0a2c8a7 except one sentence in index.html; landing 1440 checked, no console errors",
+    "tool": "same site tree as 114711b plus one anchor in index.html; landing 1440 and 390 checked, no overflow, no console errors",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
