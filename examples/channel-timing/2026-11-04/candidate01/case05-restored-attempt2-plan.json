@@ -1,0 +1,21 @@
+{
+  "schema": "benchmate.case05_restored_attempt2_plan.v1",
+  "case_id": "05",
+  "state": "restored",
+  "next_attempt": 2,
+  "status": "not_started_model_unqualified",
+  "prior_pair": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e",
+  "prior_restored_child": "diagnosis-restored/20261104T030600-47c67ef048",
+  "prior_verdict": "abstained",
+  "prior_counted": true,
+  "prior_result_replaced": false,
+  "new_registration_created": false,
+  "new_hardware_enabled": false,
+  "requirements_before_any_execution": [
+    "A suitable general timing model must be independently qualified, committed and pushed.",
+    "New separate hardware QA must be prospectively fixed; unchanged raw A3 3mV and whole/every-region 9mV limits.",
+    "Register case05 restored attempt2 before any new diagnostic request/stimulus; retain first attempt in counts.",
+    "Do not silently substitute candidate interpolation into the frozen v1 runtime."
+  ],
+  "current_candidate_rejected_for_hardware": "Independent other-design controls and existing-run regression have adverse flips."
+}

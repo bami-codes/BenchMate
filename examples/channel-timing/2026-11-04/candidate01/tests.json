@@ -1,0 +1,6 @@
+{
+  "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_channel_timing_v3.py",
+  "passed": 9,
+  "failed": 0,
+  "interpretation": "Software contract checks, including an expected negative control; not a passed model qualification."
+}
