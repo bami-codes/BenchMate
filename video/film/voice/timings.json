@@ -2147,188 +2147,268 @@
       ]
     },
     "s7": {
-      "audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
-      "duration_seconds": 11.981497,
-      "normalized_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
+      "audio_sha256": "03f454c42f822ee6a5ff52226ad1ccdec53367b0cb6162a8b6b8cb3df0469a96",
+      "duration_seconds": 18.204444,
+      "normalized_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation. Shown on five circuits; a first step toward AI-guided experiments on physical systems.",
       "words": [
         {
           "text": "BenchMate",
           "start": 0.046,
-          "end": 0.592
+          "end": 0.58
         },
         {
           "text": "turns",
-          "start": 0.627,
-          "end": 0.952
+          "start": 0.604,
+          "end": 0.882
         },
         {
           "text": "an",
-          "start": 0.987,
-          "end": 1.045
+          "start": 0.917,
+          "end": 0.975
         },
         {
           "text": "unexplained",
-          "start": 1.115,
-          "end": 1.718
+          "start": 1.057,
+          "end": 1.672
         },
         {
           "text": "output",
-          "start": 1.788,
-          "end": 2.159
+          "start": 1.73,
+          "end": 2.171
         },
         {
           "text": "into",
-          "start": 2.218,
-          "end": 2.38
+          "start": 2.38,
+          "end": 2.589
         },
         {
           "text": "a",
-          "start": 2.461,
-          "end": 2.485
+          "start": 2.659,
+          "end": 2.682
         },
         {
           "text": "concrete",
-          "start": 2.554,
-          "end": 3.042
+          "start": 2.752,
+          "end": 3.239
         },
         {
           "text": "next",
-          "start": 3.1,
-          "end": 3.332
+          "start": 3.297,
+          "end": 3.541
         },
         {
           "text": "check.",
-          "start": 3.379,
-          "end": 3.878
+          "start": 3.587,
+          "end": 4.122
         },
         {
           "text": "Spark",
-          "start": 4.319,
-          "end": 4.737
-        },
-        {
-          "text": "chooses",
-          "start": 4.83,
+          "start": 4.818,
           "end": 5.224
         },
         {
+          "text": "chooses",
+          "start": 5.306,
+          "end": 5.7
+        },
+        {
           "text": "the",
-          "start": 5.271,
-          "end": 5.352
+          "start": 5.747,
+          "end": 5.828
         },
         {
           "text": "experiment.",
-          "start": 5.41,
-          "end": 6.165
+          "start": 5.886,
+          "end": 6.653
         },
         {
           "text": "The",
-          "start": 6.49,
-          "end": 6.618
+          "start": 6.861,
+          "end": 6.978
         },
         {
           "text": "simulator",
-          "start": 6.664,
-          "end": 7.187
+          "start": 7.036,
+          "end": 7.546
         },
         {
           "text": "predicts.",
-          "start": 7.233,
-          "end": 7.895
+          "start": 7.593,
+          "end": 8.266
         },
         {
           "text": "The",
-          "start": 8.011,
-          "end": 8.139
+          "start": 8.394,
+          "end": 8.522
         },
         {
           "text": "operator",
-          "start": 8.197,
-          "end": 8.638
+          "start": 8.58,
+          "end": 9.021
         },
         {
           "text": "acts.",
-          "start": 8.696,
-          "end": 9.276
+          "start": 9.079,
+          "end": 9.659
         },
         {
           "text": "The",
-          "start": 9.555,
-          "end": 9.683
+          "start": 9.938,
+          "end": 10.066
         },
         {
           "text": "real",
-          "start": 9.752,
-          "end": 9.973
+          "start": 10.136,
+          "end": 10.356
         },
         {
           "text": "board",
-          "start": 10.031,
-          "end": 10.31
+          "start": 10.414,
+          "end": 10.693
         },
         {
           "text": "tests",
-          "start": 10.356,
-          "end": 10.716
+          "start": 10.739,
+          "end": 11.134
         },
         {
           "text": "the",
-          "start": 10.774,
-          "end": 10.855
+          "start": 11.192,
+          "end": 11.273
         },
         {
           "text": "explanation.",
-          "start": 10.925,
-          "end": 11.738
+          "start": 11.343,
+          "end": 12.19
+        },
+        {
+          "text": "Shown",
+          "start": 12.434,
+          "end": 12.748
+        },
+        {
+          "text": "on",
+          "start": 12.806,
+          "end": 12.887
+        },
+        {
+          "text": "five",
+          "start": 12.968,
+          "end": 13.258
+        },
+        {
+          "text": "circuits;",
+          "start": 13.305,
+          "end": 13.943
+        },
+        {
+          "text": "a",
+          "start": 14.118,
+          "end": 14.187
+        },
+        {
+          "text": "first",
+          "start": 14.269,
+          "end": 14.512
+        },
+        {
+          "text": "step",
+          "start": 14.547,
+          "end": 14.791
+        },
+        {
+          "text": "toward",
+          "start": 14.849,
+          "end": 15.186
+        },
+        {
+          "text": "AI-guided",
+          "start": 15.255,
+          "end": 15.975
+        },
+        {
+          "text": "experiments",
+          "start": 16.022,
+          "end": 16.625
+        },
+        {
+          "text": "on",
+          "start": 16.695,
+          "end": 16.823
+        },
+        {
+          "text": "physical",
+          "start": 16.892,
+          "end": 17.252
+        },
+        {
+          "text": "systems.",
+          "start": 17.31,
+          "end": 17.96
         }
       ],
       "sentences": [
         {
           "text": "BenchMate turns an unexplained output into a concrete next check.",
           "start": 0.0,
-          "end": 3.878
+          "end": 4.122
         },
         {
           "text": "Spark chooses the experiment.",
-          "start": 3.878,
-          "end": 6.165
+          "start": 4.122,
+          "end": 6.653
         },
         {
           "text": "The simulator predicts.",
-          "start": 6.165,
-          "end": 7.895
+          "start": 6.653,
+          "end": 8.266
         },
         {
           "text": "The operator acts.",
-          "start": 7.895,
-          "end": 9.276
+          "start": 8.266,
+          "end": 9.659
         },
         {
           "text": "The real board tests the explanation.",
-          "start": 9.276,
-          "end": 11.738
+          "start": 9.659,
+          "end": 12.19
+        },
+        {
+          "text": "Shown on five circuits; a first step toward AI-guided experiments on physical systems.",
+          "start": 12.19,
+          "end": 17.96
         }
       ],
       "key_cues": [
         {
           "text": "Spark chooses the experiment.",
-          "start": 4.319,
-          "end": 6.165
+          "start": 4.818,
+          "end": 6.653
         },
         {
           "text": "The simulator predicts.",
-          "start": 6.49,
-          "end": 7.895
+          "start": 6.861,
+          "end": 8.266
         },
         {
           "text": "The operator acts.",
-          "start": 8.011,
-          "end": 9.276
+          "start": 8.394,
+          "end": 9.659
         },
         {
           "text": "The real board tests the explanation.",
-          "start": 9.555,
-          "end": 11.738
+          "start": 9.938,
+          "end": 12.19
+        },
+        {
+          "text": "Shown on five circuits",
+          "start": 12.434,
+          "end": 13.827
+        },
+        {
+          "text": "AI-guided experiments on physical systems",
+          "start": 15.255,
+          "end": 17.868
         }
       ]
     }

@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.film_voice_manifest.v1",
-  "source_commit": "0d4d5448169163e530ab9f820f16ce5faf85a627",
+  "source_commit": "c17ada55af5752bc769b958834eb58822fa76867",
   "source_path": "video/film/narration.txt",
-  "source_file_sha256": "76a2b0c76d2b8f6b716ab768d225fa3e56348ab789ade37deaa7d46b525d5226",
+  "source_file_sha256": "6dc14bb549879f8601de471fc2b7dfee99e88b6f71b391f56c355599c01fe1bf",
   "voice_id": "JBFqnCBsd6RMkjVDRZzb",
   "voice_name": "George",
   "model_id": "eleven_multilingual_v2",
@@ -18,7 +18,8 @@
   "normalization_notes": [
     "R1 -> R one; OUT -> out; REF -> ref; SAM -> Sam (spoken copy only).",
     "Blank lines between the final four sentences of s7.",
-    "No trimming, gain adjustment, time stretching or resampling of source MP3s."
+    "No trimming, gain adjustment, time stretching or resampling of source MP3s.",
+    "Revised s7: blank line also before Shown on five circuits; approved words unchanged."
   ],
   "created_utc": "2026-11-04T17:13:54.284193+00:00",
   "clips": [
@@ -132,21 +133,22 @@
     },
     {
       "id": "s7",
-      "source_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
-      "spoken_text": "BenchMate turns an unexplained output into a concrete next check.\n\nSpark chooses the experiment.\n\nThe simulator predicts.\n\nThe operator acts.\n\nThe real board tests the explanation.",
-      "source_characters": 176,
-      "tts_characters": 180,
-      "source_text_sha256": "960365ef6d6370fe860bf4a606076e716fae3e5e61a14d982c766971982c8fb0",
-      "spoken_text_sha256": "fa2b3a1b0c4c97f40fdb43716f08093a79a3f115d939d7d651222f68cf4986e8",
+      "source_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation. Shown on five circuits; a first step toward AI-guided experiments on physical systems.",
+      "spoken_text": "BenchMate turns an unexplained output into a concrete next check.\n\nSpark chooses the experiment.\n\nThe simulator predicts.\n\nThe operator acts.\n\nThe real board tests the explanation.\n\nShown on five circuits; a first step toward AI-guided experiments on physical systems.",
+      "source_characters": 263,
+      "tts_characters": 268,
+      "source_text_sha256": "fb261421d1896173c300ff21370007c389b5029940ba0be7fcd60fb4a52a0452",
+      "spoken_text_sha256": "198f10266f0ba79cdc0cb043d6e5dc86baf014065ad41cbe0fcc46b6e2d55e7c",
+      "audio_sha256": "03f454c42f822ee6a5ff52226ad1ccdec53367b0cb6162a8b6b8cb3df0469a96",
+      "bytes": 292196,
+      "duration_seconds": 18.204444,
+      "provider_character_cost": 107,
+      "started_utc": "2026-11-04T18:55:06.837634+00:00",
       "audio_path": "video/film/voice/s7.mp3",
-      "audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
-      "bytes": 192722,
-      "duration_seconds": 11.981497,
-      "provider_character_cost": 72,
-      "started_utc": "2026-11-04T17:09:26.663191+00:00",
       "codec": "mp3",
       "sample_rate_hz": 44100,
-      "bitrate_bps": 128000
+      "bitrate_bps": 128000,
+      "source_commit": "c17ada55af5752bc769b958834eb58822fa76867"
     }
   ],
   "usage": {
@@ -170,11 +172,258 @@
     },
     "subscription_delta_matches_response_costs": true,
     "incremental_cash_charge": 0,
-    "cash_scope": "All calls used the existing Starter allowance; subscription purchase is excluded."
+    "cash_scope": "All calls used the existing Starter allowance; subscription purchase is excluded.",
+    "scope": "Original seven-clip generation and its two original transcription checks; later revisions are listed separately."
   },
-  "total_voice_seconds": 154.64489799999998,
-  "scheduled_scene_seconds": 163.05,
+  "total_voice_seconds": 160.867845,
+  "scheduled_scene_seconds": 177.77,
   "source_narration_file_unchanged": true,
   "original_audio_postprocessing": "None: provider MP3s preserved byte-for-byte. No trim, gain adjustment, resampling or time stretch.",
-  "human_listening_review_completed": false
+  "human_listening_review_completed": false,
+  "initial_source_commit": "0d4d5448169163e530ab9f820f16ce5faf85a627",
+  "revisions": [
+    {
+      "id": "s7-scope-line-20261105",
+      "authority": "2026-11-05 explicit replacement s7 text",
+      "scene": "s7",
+      "source_commit": "c17ada55af5752bc769b958834eb58822fa76867",
+      "source_file_sha256": "6dc14bb549879f8601de471fc2b7dfee99e88b6f71b391f56c355599c01fe1bf",
+      "previous_clip": {
+        "id": "s7",
+        "source_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
+        "spoken_text": "BenchMate turns an unexplained output into a concrete next check.\n\nSpark chooses the experiment.\n\nThe simulator predicts.\n\nThe operator acts.\n\nThe real board tests the explanation.",
+        "source_characters": 176,
+        "tts_characters": 180,
+        "source_text_sha256": "960365ef6d6370fe860bf4a606076e716fae3e5e61a14d982c766971982c8fb0",
+        "spoken_text_sha256": "fa2b3a1b0c4c97f40fdb43716f08093a79a3f115d939d7d651222f68cf4986e8",
+        "audio_path": "video/film/voice/s7.mp3",
+        "audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
+        "bytes": 192722,
+        "duration_seconds": 11.981497,
+        "provider_character_cost": 72,
+        "started_utc": "2026-11-04T17:09:26.663191+00:00",
+        "codec": "mp3",
+        "sample_rate_hz": 44100,
+        "bitrate_bps": 128000
+      },
+      "previous_timing": {
+        "audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
+        "duration_seconds": 11.981497,
+        "normalized_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
+        "words": [
+          {
+            "text": "BenchMate",
+            "start": 0.046,
+            "end": 0.592
+          },
+          {
+            "text": "turns",
+            "start": 0.627,
+            "end": 0.952
+          },
+          {
+            "text": "an",
+            "start": 0.987,
+            "end": 1.045
+          },
+          {
+            "text": "unexplained",
+            "start": 1.115,
+            "end": 1.718
+          },
+          {
+            "text": "output",
+            "start": 1.788,
+            "end": 2.159
+          },
+          {
+            "text": "into",
+            "start": 2.218,
+            "end": 2.38
+          },
+          {
+            "text": "a",
+            "start": 2.461,
+            "end": 2.485
+          },
+          {
+            "text": "concrete",
+            "start": 2.554,
+            "end": 3.042
+          },
+          {
+            "text": "next",
+            "start": 3.1,
+            "end": 3.332
+          },
+          {
+            "text": "check.",
+            "start": 3.379,
+            "end": 3.878
+          },
+          {
+            "text": "Spark",
+            "start": 4.319,
+            "end": 4.737
+          },
+          {
+            "text": "chooses",
+            "start": 4.83,
+            "end": 5.224
+          },
+          {
+            "text": "the",
+            "start": 5.271,
+            "end": 5.352
+          },
+          {
+            "text": "experiment.",
+            "start": 5.41,
+            "end": 6.165
+          },
+          {
+            "text": "The",
+            "start": 6.49,
+            "end": 6.618
+          },
+          {
+            "text": "simulator",
+            "start": 6.664,
+            "end": 7.187
+          },
+          {
+            "text": "predicts.",
+            "start": 7.233,
+            "end": 7.895
+          },
+          {
+            "text": "The",
+            "start": 8.011,
+            "end": 8.139
+          },
+          {
+            "text": "operator",
+            "start": 8.197,
+            "end": 8.638
+          },
+          {
+            "text": "acts.",
+            "start": 8.696,
+            "end": 9.276
+          },
+          {
+            "text": "The",
+            "start": 9.555,
+            "end": 9.683
+          },
+          {
+            "text": "real",
+            "start": 9.752,
+            "end": 9.973
+          },
+          {
+            "text": "board",
+            "start": 10.031,
+            "end": 10.31
+          },
+          {
+            "text": "tests",
+            "start": 10.356,
+            "end": 10.716
+          },
+          {
+            "text": "the",
+            "start": 10.774,
+            "end": 10.855
+          },
+          {
+            "text": "explanation.",
+            "start": 10.925,
+            "end": 11.738
+          }
+        ],
+        "sentences": [
+          {
+            "text": "BenchMate turns an unexplained output into a concrete next check.",
+            "start": 0.0,
+            "end": 3.878
+          },
+          {
+            "text": "Spark chooses the experiment.",
+            "start": 3.878,
+            "end": 6.165
+          },
+          {
+            "text": "The simulator predicts.",
+            "start": 6.165,
+            "end": 7.895
+          },
+          {
+            "text": "The operator acts.",
+            "start": 7.895,
+            "end": 9.276
+          },
+          {
+            "text": "The real board tests the explanation.",
+            "start": 9.276,
+            "end": 11.738
+          }
+        ],
+        "key_cues": [
+          {
+            "text": "Spark chooses the experiment.",
+            "start": 4.319,
+            "end": 6.165
+          },
+          {
+            "text": "The simulator predicts.",
+            "start": 6.49,
+            "end": 7.895
+          },
+          {
+            "text": "The operator acts.",
+            "start": 8.011,
+            "end": 9.276
+          },
+          {
+            "text": "The real board tests the explanation.",
+            "start": 9.555,
+            "end": 11.738
+          }
+        ]
+      },
+      "usage": {
+        "tts_requests": 1,
+        "tts_characters": 268,
+        "tts_credits": 107,
+        "transcription_requests": 1,
+        "transcription_credits": 6,
+        "total_provider_credits": 113,
+        "before": {
+          "tier": "starter",
+          "status": "active",
+          "character_count": 1939,
+          "character_limit": 40000
+        },
+        "after": {
+          "tier": "starter",
+          "status": "active",
+          "character_count": 2052,
+          "character_limit": 40000
+        },
+        "subscription_delta_matches_response_costs": true,
+        "incremental_cash_charge": 0
+      },
+      "same_seed_and_settings": true,
+      "other_six_audio_hashes_unchanged": true,
+      "human_listening_review_completed": false
+    }
+  ],
+  "cumulative_george_usage": {
+    "tts_requests": 8,
+    "transcription_requests": 3,
+    "total_provider_credits": 1081,
+    "scope": "Original George batch plus s7 revision; Brian comparison excluded."
+  },
+  "last_updated_utc": "2026-11-04T18:57:00.424232+00:00"
 }

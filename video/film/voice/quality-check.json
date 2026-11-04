@@ -1,6 +1,6 @@
 {
   "schema": "benchmate.film_voice_quality.v1",
-  "transcription_requests": 2,
+  "transcription_requests": 3,
   "transcription_checks": [
     {
       "scenes": [
@@ -36,6 +36,37 @@
   ],
   "s7_acoustic_sentence_gaps_seconds": [
     {
+      "start": 6.506508,
+      "end": 6.909592,
+      "duration": 0.403084
+    },
+    {
+      "start": 8.133288,
+      "end": 8.43932,
+      "duration": 0.306032
+    },
+    {
+      "start": 9.518594,
+      "end": 9.982698,
+      "duration": 0.464104
+    },
+    {
+      "start": 12.082404,
+      "end": 12.422789,
+      "duration": 0.340385
+    }
+  ],
+  "silence_detection_threshold_dbfs": -35,
+  "decode_checks_passed": 7,
+  "original_audio_trimmed": false,
+  "original_audio_gain_adjusted": false,
+  "original_audio_time_stretched": false,
+  "human_listening_review_completed": false,
+  "scope": "Automated decoding, word-sequence, timing, and pause checks; not a subjective assessment of performance or pronunciation quality.",
+  "original_generation_transcription_requests": 2,
+  "initial_s7_audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
+  "original_s7_acoustic_sentence_gaps_seconds": [
+    {
       "start": 6.025692,
       "end": 6.552698,
       "duration": 0.527007
@@ -51,11 +82,18 @@
       "duration": 0.468435
     }
   ],
-  "silence_detection_threshold_dbfs": -35,
-  "decode_checks_passed": 7,
-  "original_audio_trimmed": false,
-  "original_audio_gain_adjusted": false,
-  "original_audio_time_stretched": false,
-  "human_listening_review_completed": false,
-  "scope": "Automated decoding, word-sequence, timing, and pause checks; not a subjective assessment of performance or pronunciation quality."
+  "s7_revision_checks": [
+    {
+      "audio_sha256": "03f454c42f822ee6a5ff52226ad1ccdec53367b0cb6162a8b6b8cb3df0469a96",
+      "source_commit": "c17ada55af5752bc769b958834eb58822fa76867",
+      "transcription_model": "scribe_v2",
+      "reference_text_sent_to_transcriber": false,
+      "transcript": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation, shown on five circuits, a first step toward AI-guided experiments on physical systems",
+      "word_sequence_matches": true,
+      "normalization": "Punctuation and case ignored; words otherwise exact.",
+      "tokens": 40,
+      "provider_character_cost": 6,
+      "human_listening_review_completed": false
+    }
+  ]
 }
