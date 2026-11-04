@@ -24,7 +24,7 @@ const cap = (a, b, text) => CAPS.push({ a, b, text });
 function shot(id, a, b, build, tick) { const root = el('div', { class: 'shot', id }); $('#shots').append(root); const s = { id, da: a, db: b, a, b, root, tick }; build(root, s); SHOTS.push(s); return s; }
 function schedule() { let T = 0; const SC = []; for (const [sid, ids] of Object.entries(SCENE_OF)) { const sh = SHOTS.filter(x => ids.includes(x.id)); const design = sh.reduce((n, x) => n + (x.db - x.da), 0); const want = VOICE[sid] || PLANNED[sid]; const k = want / design; const start = T; for (const x of sh) { x.a = T; x.b = T + (x.db - x.da) * k; x.k = k; T = x.b; } SC.push({ id: sid, start, seconds: T - start, planned: PLANNED[sid], design }); } window.filmTotal = () => T; window.filmScenes = () => SC.map(x => ({ ...x })); }
 const sched = (td) => { for (const x of SHOTS) if (td >= x.da && td < x.db + 1e-9) return x.a + (td - x.da) * x.k; const l = SHOTS[SHOTS.length - 1]; return l.b + (td - l.db) * l.k; };
-const XF = .5;  // crossfade seconds between consecutive shots
+const FIN = .4, FOUT = .3;  // each shot fades in from the mat and out to it; two shots are never on screen together
 
 let R1, R1R, R4, R5, CASES, INDEX, SCH = {};
 window.filmReady = (async () => {
@@ -51,7 +51,7 @@ function workspace(root) {
   root.classList.add('ws'); root.append(W.strip, W.replay, sc, W.metersEl, W.note);
   W.meter = (fid, label, value) => { const m = new Meter(fid, label, { value }); W.metersEl.append(m.root); W.meters[fid] = m; m._mode = null; return m; };
   W.phase = null;
-  W.showStep = (key, step, title, fcLabel) => { if (W.phase !== key) { W.phase = key; W.traces = stepTraces(step, { measuredProgress: 0 }); W.scope.set(stepTime(step), W.traces, title); W.strip.children[1].textContent = fcLabel || '– – forecast from the drawing'; } return W.traces; };
+  W.showStep = (key, step, title, fcLabel) => { if (W.phase !== key) { W.phase = key; W.traces = stepTraces(step, { measuredProgress: 0 }); W.scope.set(stepTime(step), W.traces, title); const ids = W.traces.filter(x => x.kind === 'fc').map(x => x.id); W.strip.children[1].textContent = fcLabel || (ids.every(i => i === 'nominal') ? '– – forecast from the drawing' : ids.length === 1 ? `– – frozen forecast · ${plain(ids[0])}` : '– – frozen forecasts · one per explanation'); } return W.traces; };
   W.showCheck = (key, obs, fc, title, fcLabel) => { if (W.phase !== key) { W.phase = key; W.traces = []; for (const [fid, v] of Object.entries(fc || {})) W.traces.push({ id: fid, label: expName(fid) + ' forecast', kind: 'fc', v, dashed: true, progress: 1 }); W.traces.push({ id: 'in', label: 'IN', kind: 'in', v: obs.in_v, progress: 0 }, { id: 'out', label: 'OUT', kind: 'out', v: obs.out_v, progress: 0 }); W.scope.set(obs.t_s, W.traces, title); W.strip.children[1].textContent = fcLabel || '– – frozen forecast'; } return W.traces; };
   W.draw = (p, fcp) => { let k = 0; for (const tr of W.traces || []) { if (tr.kind === 'fc') { tr.progress = typeof fcp === 'function' ? fcp(k++) : (fcp ?? 1); } else if (tr.kind === 'in') tr.progress = p; else tr.progress = Math.max(0, p - .02); } W.scope.draw(); };
   return W;
@@ -124,7 +124,7 @@ function buildAll() {
   { const [a, b] = span(9); shot('s07', a, b, (r, s) => {
       const W = workspace(r); s.W = W; for (const f of st4[0].fit) W.meter(f.id, expName(f.id), f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values');
       W.note.append(el('b', { id: 'n1' }, ''), ' ', el('span', { class: 'dim', id: 'n2' }, ''));
-      cap(a + .5, a + 4.4, 'Experiment 1, Spark’s pick: forecasts frozen, then the bench measures'); cap(a + 4.8, b, 'Two small steps. Every explanation in the drawing still fits.');
+      cap(a + .5, a + 4.4, 'Experiment 1, Spark’s pick: the forecast frozen, then the bench measures'); cap(a + 4.8, b, 'Two small steps. Every explanation in the drawing still fits.');
       sfx(a + .7, 'forecast'); sfx(a + 1.8, 'sweep'); sfx(a + 4.9, 'forecast'); sfx(a + 5.8, 'sweep');
     }, (r, t, s) => { const W = s.W; const st = st4;
       if (t < 4.6) { W.showStep('s1', st[0], st[0].label); W.strip.firstChild.textContent = 'Experiment 1'; W.draw(lin(t, 1.8, 3.6), (k) => ease(t, .5 + k * .12, 1.5 + k * .12)); r.querySelector('#n1').textContent = `“${q(st[0].reason)}”`; r.querySelector('#n2').textContent = `— Muse Spark, choosing ${st[0].label}`; }
@@ -188,7 +188,7 @@ function buildAll() {
       cap(a + .4, b, `Worst regions ${d.map(x => fmtMiss(x.decided_mV)).join(' and ')}, under the ${R4.allowance_mV} mV allowed`); sfx(a + .4, 'pass'); sfx(a + 1.0, 'pass');
     }, (r, t) => { [...r.querySelectorAll('#nums > .cue')].forEach((n, k) => rise(n, t, .2 + k * .45)); r.querySelectorAll('.mk').forEach((m, k) => fade(m, t, 1.5 + k * .4)); }); }
   // S14 83–91  the verdict
-  { const [a, b] = span(5.5); shot('s14', a, b, (r) => {
+  { const [a, b] = span(6.5); shot('s14', a, b, (r) => {
       r.append(el('div', { class: 'vcard cue', id: 'vc', style: 'top:170px' }, el('div', { class: 'lab' }, 'BenchMate’s diagnosis · from the engine’s report'), el('div', { class: 'big' }, verdictWords(R4.outcome, R4)),
         el('div', { class: 'cue', id: 'pl' }, el('div', { class: 'sep' }), el('div', { class: 'lab' }, 'What was planted · the seal, opened only now'), el('div', { class: 'big2' }, K4().hidden)),
         el('div', { class: 'fine cue', id: 'fn' }, 'The connection Spark wrote; the part number is the seal’s. The verdict is copied from the engine’s report; the seal’s digest is checked by code against the one committed before the first measurement. Spark never saw the lower line.')));
@@ -207,7 +207,7 @@ function buildAll() {
       const W = workspace(r); s.W = W; for (const f of st1[0].fit) W.meter(f.id, expName(f.id), f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values');
       W.note.append(el('b', {}, `“${q(st1[0].reason)}”`), ' ', el('span', { class: 'dim' }, `— Muse Spark, choosing ${st1[0].label}`));
       const m1 = missOf(st1[0].fit.find(f => f.id === 'nominal'));
-      cap(a + .5, a + 4.0, 'Experiment 1: three forecasts frozen, then the bench measures'); cap(a + 4.6, b, `${m1.toFixed(2)} mV against an allowance of ${R1.allowance_mV} mV: two explanations crossed out`);
+      cap(a + .5, a + 4.0, 'Experiment 1: the forecast frozen, then the bench measures'); cap(a + 4.6, b, `${m1.toFixed(2)} mV against an allowance of ${R1.allowance_mV} mV: two explanations crossed out`);
       sfx(a + .7, 'forecast'); sfx(a + 1.8, 'sweep'); sfx(a + 4.6, 'needle_red'); sfx(a + 4.9, 'needle_red'); sfx(a + 5.5, 'crossout');
     }, (r, t, s) => { const W = s.W; const st = st1[0]; W.showStep('s1', st, st.label); W.strip.firstChild.textContent = 'Experiment 1'; W.draw(lin(t, 1.8, 4.0), (k) => ease(t, .5 + k * .15, 1.6 + k * .15));
       for (const f of st.fit) { const out = f.status === 'inadequate'; const u = ease(t, 4.1, 5.2); setMeter(W.meters[f.id], u <= 0 ? { wait: true } : { value: missOf(f, 0) * u, bad: out && u > .55, sub: 'step 1 · worst region', tag: out && t >= 5.5 ? 'Ruled out after step 1' : null, tagIn: ease(t, 5.5, 5.95) }); }
@@ -254,7 +254,7 @@ function buildAll() {
       cap(a + .5, a + 2.8, `The operator reads ${rd1.observed.value} ${rd1.observed.unit}`); cap(a + 3.1, b, `Inside one frozen range, outside the other: one explanation left`); sfx(a + .6, 'type'); sfx(a + 1.1, 'type'); sfx(a + 2.4, 'pass'); sfx(a + 3.4, 'crossout');
     }, (r, t) => { const s = `${rd1.observed.value} ${rd1.observed.unit}`; typed(r.querySelector('#typed .v'), s, t, .6, 1.2); r.querySelector('#typed .cr').style.opacity = t < 2.2 ? ((Math.floor(t * 3) % 2) ? 1 : .2) : 0; fade(r.querySelector('#mk'), t, 2.3, .5); r.querySelector('#r1 .strike').style.transform = `scaleX(${ease(t, 3.4, 4.1)})`; r.querySelector('#r1').style.opacity = 1 - .45 * ease(t, 3.4, 4.1); }); }
   // S22 134–141  the verdict
-  { const [a, b] = span(5); shot('s22', a, b, (r) => {
+  { const [a, b] = span(6); shot('s22', a, b, (r) => {
       r.append(el('div', { class: 'vcard cue', id: 'vc', style: 'top:170px' }, el('div', { class: 'lab' }, 'BenchMate’s diagnosis · from the engine’s report'), el('div', { class: 'big' }, verdictWords(R1.outcome, R1)),
         el('div', { class: 'cue', id: 'pl' }, el('div', { class: 'sep' }), el('div', { class: 'lab' }, 'What was planted · the seal, opened only now'), el('div', { class: 'big2' }, K1().hidden)),
         el('div', { class: 'fine cue', id: 'fn' }, 'The verdict is copied from the engine’s report; the seal’s digest is checked by code against the one committed before the first measurement. Spark never saw the lower line.')));
@@ -287,10 +287,10 @@ function buildAll() {
   // S26 160–168  one command
   { const [a, b] = span(10); shot('s26', a, b, (r) => {
       const term = el('div', { id: 'term' }, el('div', { class: 'bar' }, el('b', {}, 'bash — BenchMate')), el('div', { class: 'm' }, '# a fresh clone. No packages, no API key, no network, no hardware.'), el('div', { class: 'c' }), el('div', { class: 'pass' }), el('div', { class: 'rows2' }), el('div', { class: 'foot' }, el('b', {}, 'What this proves: '), 'every event hash-chained; every forecast hash matched to the event that froze it; forecast → capture → measurement order kept. ', el('b', {}, 'What it does not: '), 'when the files were written, or the physical truth itself. The forecast commits on GitHub carry the time.'));
-      r.append(term); r._CMD = '$ python3 -S -m benchmate verify examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df'; r._OUT = 'PASS events=247 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=390f8d0c…';
+      r.append(term); r._CMD = '$ python3 -S -m benchmate verify \\\n    examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/ \\\n    diagnosis-faulted/20261103T130826-26d83af2df'; r._OUT = 'PASS events=247 forecasts=4 measurements=5 order_checks=19 prediction_files=1\n     run_status=run_completed head_sha256=390f8d0c…';
       [['case 04, the whole pair', 'benchmate.reading_terminal_pair verify … 20261103T150223-18d6f08ac9', 'events=607 · forecasts=10'], ['case 02, restored closeout', 'benchmate.reading_restored_sam_closeout verify … 20261103T182550-4ea22cc3a0', 'events=574 · forecasts=10'], ['case 05, the whole pair', 'benchmate.reading_wire_stage verify … 20261104T021333-c80ef3617e', 'events=484 · forecasts=8'], ['case 03, the whole chain', 'benchmate.reading_restored_after_photo_v5 verify … 20261104T051005-fac3d07c86', 'events=583 · forecasts=4'], ['case 05, restored attempt 2', 'benchmate.channel_timing_audit_v4 … 20261104T034748-10ab5af750', 'events=238 · forecasts=4']].forEach(([n, c2, v]) => term.querySelector('.rows2').append(el('span', { class: 'k' }, 'PASS'), el('span', { class: 'n' }, n, el('small', {}, c2)), el('span', { class: 'v' }, v)));
       cap(a + .6, b, 'One command, no packages, no key, no network: it verifies any run'); for (let k = 0; k < 10; k++) sfx(a + .4 + k * .22, 'type'); sfx(a + 3.4, 'pass');
-    }, (r, t) => { const n = Math.round(lin(t, .3, 2.9) * r._CMD.length); r.querySelector('.c').innerHTML = r._CMD.slice(0, n) + (t < 3.4 ? '<span style="display:inline-block;width:13px;height:26px;background:#dfe9e3;vertical-align:-4px"></span>' : ''); r.querySelector('.pass').textContent = t >= 3.4 ? r._OUT : ''; [...r.querySelectorAll('.rows2 > *')].forEach((e, k) => { e.style.opacity = lin(t, 4.2 + Math.floor(k / 3) * .4, 4.5 + Math.floor(k / 3) * .4); }); r.querySelector('.foot').style.opacity = lin(t, 6.4, 7.0); }); }
+    }, (r, t) => { const n = Math.round(lin(t, .3, 2.9) * r._CMD.length); r.querySelector('.c').textContent = r._CMD.slice(0, n); r.querySelector('.c').append(t < 3.4 ? el('span', { style: 'display:inline-block;width:13px;height:26px;background:#dfe9e3;vertical-align:-4px' }) : ''); r.querySelector('.pass').textContent = t >= 3.4 ? r._OUT : ''; [...r.querySelectorAll('.rows2 > *')].forEach((e, k) => { e.style.opacity = lin(t, 4.2 + Math.floor(k / 3) * .4, 4.5 + Math.floor(k / 3) * .4); }); r.querySelector('.foot').style.opacity = lin(t, 6.4, 7.0); }); }
   // S27 168–178  close
   { const [a, b] = span(13.5); shot('s27', a, b, (r) => {
       r.classList.add('close'); const rows = [el('div', { class: 'cue', style: 'font:500 40px/1.25 var(--narrow);color:rgba(255,255,255,.92);max-width:1500px' }, 'For the first power-on of a new board: what to measure next, and where to look.'),
@@ -308,9 +308,9 @@ const CAPTIONS_ON = new URLSearchParams(location.search).get('cap') === '1';  //
 function applyCap(t) { if (!CAPTIONS_ON) { $('#cap').style.opacity = 0; return; } const c = CAPS.find(c => t >= c.a && t < c.b); const s = $('#captxt'); s.textContent = c ? c.text : ''; $('#cap').style.opacity = c ? ease(t, c.a, c.a + .3) * (1 - ease(t, c.b - .3, c.b)) : 0; }
 window.frame = (t) => {
   for (const s of SHOTS) {
-    const on = t >= s.a - XF && t < s.b + XF; s.root.classList.toggle('on', on); if (!on) continue;
-    const lt = (t - s.a) / s.k; const o = (s.a === 0 ? 1 : ease(t, s.a - XF, s.a)) * (1 - ease(t, s.b, s.b + XF));
-    s.root.style.opacity = o; s.root.style.transform = `scale(${1 + .012 * (1 - ease(t, s.a - XF, s.a)) - .008 * ease(t, s.b, s.b + XF)})`;
+    const on = t >= s.a && t < s.b; s.root.classList.toggle('on', on); if (!on) continue;
+    const lt = (t - s.a) / s.k; const fin = s.a === 0 ? 1 : ease(t, s.a, s.a + FIN); const o = fin * (1 - ease(t, s.b - FOUT, s.b));
+    s.root.style.opacity = o; s.root.style.transform = `scale(${1 + .010 * (1 - fin)})`;
     s.tick(s.root, lt, s);
   }
   applyCap(t);

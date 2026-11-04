@@ -1,6 +1,6 @@
 # BenchMate — forecast-first experiments on a real circuit
 
-**The drawing is right. The board is right. The output is wrong.**
+**The drawing is right. The board looks right. The output is wrong.**
 
 That is the first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check. BenchMate gives that question to Meta's Muse Spark on a real board. It reads the schematic and chooses its own experiments; every forecast is frozen before the measurement and checked against it by code; the planted fault stays sealed until the verdict. Five faults were planted on five small circuits; the model narrowed each disagreement between board and drawing to one question, asking for one multimeter reading where the waveforms could not decide, and every step is a record you can verify offline.
 
@@ -68,9 +68,9 @@ flowchart LR
 
 1. **Read the drawing.** Muse Spark vision turns the schematic image into parts, values and connections; a person confirms. The model receives this and the shared bench description, nothing else.
 2. **Choose an experiment.** From a fixed menu (steps of ±0.2 / ±0.5 V, sines of 1–5 Hz, with or without a 9.99 kΩ load), with a reason. The runner never chooses.
-3. **Forecast first.** Every standing explanation is a circuit model. Before the capture, the model and its forecast for the commanded input are frozen and hashed. After the capture, the same frozen model is driven by the measured IN for a conditional check of OUT; the command score and the conditional score are both kept, separately.
-4. **Measure and cross out.** The Arduino measures the real circuit. A miss above 9 mV RMS, on the whole step or any region of it, rules the explanation out. If none survive, Spark may propose a new netlist.
-5. **Check on held-back inputs.** The final forecast is committed and pushed to GitHub, then two reserved inputs never used for fitting are measured.
+3. **Forecast first.** Every standing explanation is a circuit model, fitted to the measurements so far. Before the capture, each model's forecast for the commanded input is frozen and hashed; that dashed line stays in the record as it was frozen.
+4. **Measure, refit, cross out.** The Arduino measures the real circuit. The candidates are then refitted to every measurement so far, and an explanation whose best fit still misses by more than 9 mV RMS, on the whole step or any region of it, is crossed out. The meters and fit tables on the site show this residual after refitting. If none survive, Spark may propose a new netlist.
+5. **Check on held-back inputs.** The final models are frozen, committed and pushed to GitHub; then two reserved inputs never used for fitting are measured, and each frozen model is driven by the measured IN and compared with the measured OUT. Nothing is refitted here.
 6. **One reading at the bench.** When two explanations give the same terminal waveforms, Spark names the part and the quantity; its expected range under each explanation (and for each way of reading it: multimeter or marking) is frozen and pushed; the operator types one value; the same rule rules out.
 7. **Open the seal.** The assembly record, hashed before the first measurement, is opened; code checks its digest against that commitment, and the verdict stands beside it. The site prints both and does not pick a verdict.
 

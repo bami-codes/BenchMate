@@ -1,7 +1,7 @@
 BenchMate — narration. One clip per scene, saved as video/film/voice/s1.mp3 … s7.mp3 (ElevenLabs; a calm documentary voice; read the numbers as written).
 
 [s1] Cold open — about 11 s
-The drawing is right. The board is right. The output is wrong. Every engineer meets this moment.
+The drawing is right. The board looks right. The output is wrong. Every engineer meets this moment.
 
 [s2] Setup — about 18 s
 BenchMate hands that moment to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. The fault was planted by us, hashed, and sealed. Spark never sees it.
