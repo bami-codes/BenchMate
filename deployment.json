@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "b09303fed91305eda1e8d6013027aaaef9b574c2",
-  "source_site_tree": "b72eaa62154a8df6eec1b2934a8809ffdeb984a5",
-  "previous_gh_pages_commit": "695a6927298550181bac3e6f4c13ff8c2d46005d",
+  "source_main_commit": "5f6145f477175582c22a658bbe53b126295f814c",
+  "source_site_tree": "6d20d00e00f5dfd0a9cb7927de6db5a9622c44e6",
+  "previous_gh_pages_commit": "f373253545622f6ce90aa4a692188ab5fa3f0ba0",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,7 +16,7 @@
     "04",
     "05"
   ],
-  "change": "Wording: forecasts checked against measurements by code, the seal's digest checked against its commitment; no automatic verdict-vs-truth claim.",
+  "change": "Attempt census denominator on the landing (data/census.json, a view of the docs census).",
   "validation": {
     "browser_QA": "PASS",
     "tool": "site/tools/check_data.py (12 runs tracked); playwright spot checks at 1440 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
