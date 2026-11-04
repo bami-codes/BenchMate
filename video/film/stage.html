@@ -11,7 +11,7 @@
 html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--mat);background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:22px 22px;font:15px/1.5 var(--sans);color:var(--ink)}
 *,*::before,*::after{transition:none !important;animation:none !important}
 #view{position:absolute;inset:0;overflow:hidden}
-#world{position:absolute;left:0;top:0;width:15600px;height:3000px;transform-origin:0 0}
+#world{position:absolute;left:0;top:0;width:16000px;height:3000px;transform-origin:0 0}
 .ws{position:absolute}
 .cue{opacity:0}
 .grow{overflow:hidden}
@@ -133,16 +133,17 @@ html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--m
 /* ---- G. close */
 #close{width:1728px}
 #close .crow{opacity:0}
-#close .ch{font:600 64px/1.1 var(--narrow);color:#fff;margin:0 0 10px}
+#close .cfor{font:500 40px/1.25 var(--narrow);color:rgba(255,255,255,.92);margin:0 0 36px;max-width:1500px}
+#close .ch{font:600 56px/1.1 var(--narrow);color:#fff;margin:0 0 10px}
 #close .ch .w{color:#ffd1cd;text-decoration:underline;text-decoration-color:var(--fault);text-decoration-thickness:6px;text-underline-offset:9px;text-decoration-skip-ink:none}
-#close .cname{font:600 120px/1 var(--narrow);color:#fff;letter-spacing:-.01em;margin:26px 0 8px}
-#close .ctag{font:500 44px/1.2 var(--narrow);color:rgba(255,255,255,.9);margin:0 0 42px}
-#close .curl{font:600 52px/1.1 var(--mono);color:#fff;margin:0 0 30px;letter-spacing:-.01em}
+#close .cname{font:600 108px/1 var(--narrow);color:#fff;letter-spacing:-.01em;margin:22px 0 8px}
+#close .ctag{font:500 40px/1.2 var(--narrow);color:rgba(255,255,255,.9);margin:0 0 30px}
+#close .curl{font:600 46px/1.1 var(--mono);color:#fff;margin:0 0 24px;letter-spacing:-.01em}
 #close .cmeta{font-size:28px}
 #close .cmeta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font:500 28px/1.2 var(--narrow);color:rgba(255,255,255,.85)}
 #close .cmeta i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5)}
 #close .cbuilt{margin-top:26px}
-#close .cfine{margin-top:34px;font:400 22px/1.4 var(--sans);color:rgba(255,255,255,.75);max-width:1400px}
+#close .cfine{margin-top:26px;font:400 22px/1.4 var(--sans);color:rgba(255,255,255,.75);max-width:1400px}
 /* ---- screen-space layers */
 #cap{position:absolute;left:0;right:0;bottom:46px;display:flex;justify-content:center;pointer-events:none}
 #cap span{display:inline-block;background:rgba(14,19,21,.82);color:var(--paper);font:600 30px/1.3 var(--narrow);padding:12px 22px;border-radius:8px;max-width:1500px;text-align:center}

@@ -1,0 +1,22 @@
+BenchMate — narration. One clip per scene, saved as video/film/voice/s1.mp3 … s7.mp3 (ElevenLabs; a calm documentary voice; read the numbers as written).
+
+[s1] Cold open — about 10 s
+The drawing is right. The board is right. The output is wrong. Every engineer meets this moment.
+
+[s2] Setup — about 16 s
+BenchMate hands that moment to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. The fault was planted by us, hashed, and sealed. Spark never sees it.
+
+[s3] Case 04, the surprise — about 50 s
+Case four, from an Arduino forum: a battery divider that read wrong. Spark starts small: two step experiments, and every explanation in the drawing still fits. Then it asks for a large sine. Now every value fails; every needle is in the red. Spark proposes a new netlist: a diode from OUT to REF, which the drawing never had, because the positive half of the output clips and the negative does not. The engine fits it, freezes it, and pushes the forecast to GitHub. Two inputs Spark has never seen are measured against that frozen model. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a diode, in the direction Spark wrote.
+
+[s4] Case 01, the reading — about 42 s
+Case one: a filter output too small. One experiment crosses out two explanations; the drawing misses by eighty-seven millivolts. But two explanations remain that draw the same waveform, and no experiment on the menu can separate them. So Spark asks for one multimeter reading, and the range each explanation allows is frozen before anyone touches the meter. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. Repaired, a fresh Spark runs again: no mismatch.
+
+[s5] Five cases — about 16 s
+Five cases from real forum threads. In case five, Spark replaced a plain wire with a resistor, and one reading placed it off the board. Every case ended with a repaired board and a rerun that reported no mismatch.
+
+[s6] The records — about 18 s
+Every run is an append-only log; each event carries its hash and the previous one. During the experiments the candidates are refitted to each new measurement; the last two inputs test the frozen model. The ledger keeps every attempt, including the ones that stopped or abstained. One command, with nothing installed, verifies any run.
+
+[s7] Close — about 16 s
+For the first power-on of a new board, BenchMate decides what to measure next and where to look. Spark chose the experiments and committed to each forecast; the bench held it to them. Open, and verifiable.

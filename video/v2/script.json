@@ -1,7 +1,7 @@
 {
   "title": "BenchMate — forecast-first experiments on a real circuit",
-  "target_seconds": 170,
-  "words": 411,
+  "target_seconds": 168,
+  "words": 405,
   "voice": {
     "preferred": "ElevenLabs, a calm documentary narrator (e.g. 'Daniel' or 'Brian'), model eleven_multilingual_v2 or eleven_turbo_v2_5, stability 0.55, similarity 0.75, style 0.15, speed 0.98; one MP3 per scene, 44.1 kHz; file names s1.mp3 … s7.mp3",
     "fallback": "Kokoro ONNX am_michael 1.0"
@@ -16,58 +16,45 @@
     {
       "id": "s1",
       "name": "Cold open",
-      "seconds": 11,
-      "visual": "Bright full-bench photo, slow push-in with a soft vignette. At 0:05 cut to the mat-dark card; the three sentences type in on the beat, the third gets the red underline.",
-      "caption": "The drawing is right. The board is right. The output is wrong.",
-      "vo": "The drawing is right. The board is right. The output is wrong. Every engineer meets this moment. Usually, someone spends an evening settling it."
+      "seconds": 10,
+      "vo": "The drawing is right. The board is right. The output is wrong. Every engineer meets this moment."
     },
     {
       "id": "s2",
       "name": "Setup",
       "seconds": 16,
-      "visual": "The schematic frame slides in from the left; the bench photo on the right gains pins 1, 2, 3 one by one (Arduino, instrument board, mini board). Lower third: 'Meta's Muse Spark 1.3 · Meta Model API'. Last beat: a paper tag 'Push the Frontier'.",
-      "caption": "Muse Spark 1.3 chooses the experiments. A $40 Arduino bench runs them. The fault is sealed before the first measurement.",
-      "vo": "BenchMate hands that job to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. Before each measurement, its forecast is frozen. The fault was planted by us, hashed, and sealed. Spark never sees it."
+      "vo": "BenchMate hands that moment to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. The fault was planted by us, hashed, and sealed. Spark never sees it."
     },
     {
       "id": "s3",
-      "name": "One diagnosis, case 01",
-      "seconds": 58,
-      "visual": "Replay recording, cut tight: Spark's pick and its quoted reason (0:27); the dashed forecast appears with the hash chip (zoom 1.4x on the scope); the measured trace sweeps over it at 1x; 'As drawn' needle swings into red, ribbon 'Ruled out after step 1'; experiments 2 and 3 at 4x; the two tied meters; the reading request and the two frozen bands (23.2–28.0 kΩ vs 4.36–5.05 kΩ); the board photo with the yellow SAM outline and 'Spark pointed at this body as R1'; the typed 4.71 kΩ; one meter left; the verdict card with both lines; then the restored rerun's quiet card 'No mismatch in the tests Spark chose'.",
-      "caption": "command forecast frozen → measured → scored on the measured input · 86.73 mV vs allowance 9 mV · bands frozen before the reading · R1 read 4.71 kΩ · seal opened · restored rerun: no mismatch",
-      "vo": "Case one, from an Arduino forum thread: a filter output too small. Spark picks the first experiment and says why, in its own words. Every standing explanation forecasts the output; the forecast for the commanded input is frozen before the board is touched, then scored against what the bench measured. The drawing misses by eighty-seven millivolts, against an allowance of nine. Crossed out. Two experiments later, two explanations still draw the same waveform. So Spark asks for one multimeter reading, with the allowed range frozen first. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. The board is repaired, and a fresh Spark runs the procedure again: no mismatch."
+      "name": "Case 04, the surprise",
+      "seconds": 50,
+      "vo": "Case four, from an Arduino forum: a battery divider that read wrong. Spark starts small: two step experiments, and every explanation in the drawing still fits. Then it asks for a large sine. Now every value fails; every needle is in the red. Spark proposes a new netlist: a diode from OUT to REF, which the drawing never had, because the positive half of the output clips and the negative does not. The engine fits it, freezes it, and pushes the forecast to GitHub. Two inputs Spark has never seen are measured against that frozen model. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a diode, in the direction Spark wrote."
     },
     {
       "id": "s4",
-      "name": "Climax, case 04",
-      "seconds": 38,
-      "visual": "Case 04 replay: all needles in red (zoom on the meter row); Spark's netlist entry with the diode line highlighted; the forecast's GitHub commit chip; the two held-back sweeps; the scored numbers large: 'worst region 5.19 mV · 4.05 mV · allowance 9 mV'; the verdict card: 'a diode from OUT to REF' over 'a 1N4148, cathode at REF, off the board'. Then 6 s of case 05: the proposed resistor in place of W1 and the jumper outlined by SAM.",
-      "caption": "every value explanation failed · Spark wrote a new netlist: a diode, OUT → REF · held-back checks: worst regions 5.19 mV and 4.05 mV, allowance 9 · seal: 1N4148, cathode at REF",
-      "vo": "Case four surprised us. A battery divider that read wrong. Every value in the drawing fails; every needle is in the red. Spark does not guess. It writes a new netlist: a diode from OUT to REF, which the drawing never had. The forecast is pushed to GitHub; two inputs Spark has never seen are measured. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a 1N4148, cathode at REF. The connection Spark wrote. In case five it did it again, replacing a plain wire with a resistor."
+      "name": "Case 01, the reading",
+      "seconds": 42,
+      "vo": "Case one: a filter output too small. One experiment crosses out two explanations; the drawing misses by eighty-seven millivolts. But two explanations remain that draw the same waveform, and no experiment on the menu can separate them. So Spark asks for one multimeter reading, and the range each explanation allows is frozen before anyone touches the meter. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. Repaired, a fresh Spark runs again: no mismatch."
     },
     {
       "id": "s5",
-      "name": "Trust",
-      "seconds": 22,
-      "visual": "The evidence popover on a number (hash and previous hash); the GitHub commit line with its time; the 'Everything that went wrong' table scrolling slowly (3 stopped, 2 abstained highlighted); the terminal: one real command typed, its real PASS line, then the other five lines appearing; footer: 'checks the hash chain and the recorded order; not creation time or physical truth'.",
-      "caption": "append-only log · each event carries its hash and the previous one · 3 stopped, 2 abstained, kept · one command verifies a run offline",
-      "vo": "Every run is an append-only log. Each event carries its hash and the previous one; every forecast is checked against the event that froze it. One command, with no packages, no key and no network, verifies any run. The ledger keeps what went wrong: three runs stopped before a verdict, two abstained. Counts, not an accuracy rate."
+      "name": "Five cases",
+      "seconds": 16,
+      "vo": "Five cases from real forum threads. In case five, Spark replaced a plain wire with a resistor, and one reading placed it off the board. Every case ended with a repaired board and a rerun that reported no mismatch."
     },
     {
       "id": "s6",
-      "name": "Frontier",
-      "seconds": 14,
-      "visual": "The loop diagram draws itself in the site's ink: drawing → choose → forecast frozen → measure → cross out → one left. For 5 s the six labels swap to 'a PCB at first power-on', 'a thermal rig', 'a lab experiment' with the small tag 'not built here'. Then the five case rows, 'Found it.' lines, sweep past.",
-      "caption": "the loop: a description of what was intended · explanations · a simulator · an instrument with a menu · a person for what it cannot do · a sealed truth",
-      "vo": "The loop needs six things, and none of them is electronic. Spark chose what to test next, and committed to what each explanation should predict, on a real system, under rules it could not bend."
+      "name": "The records",
+      "seconds": 18,
+      "vo": "Every run is an append-only log; each event carries its hash and the previous one. During the experiments the candidates are refitted to each new measurement; the last two inputs test the frozen model. The ledger keeps every attempt, including the ones that stopped or abstained. One command, with nothing installed, verifies any run."
     },
     {
       "id": "s7",
       "name": "Close",
-      "seconds": 11,
-      "visual": "Closing card: 'BenchMate — forecast-first experiments on a real circuit', the URL, 'Muse Spark 1.3 · SAM 3.1 · Arduino UNO R4', 'built 27 Oct – 4 Nov 2026 · the first commit is the start of the project · MIT'.",
-      "caption": "bami-codes.github.io/BenchMate",
-      "vo": "BenchMate. Muse Spark 1.3 and SAM 3.1, on a real bench. Built in nine days. Open, and verifiable."
+      "seconds": 16,
+      "vo": "For the first power-on of a new board, BenchMate decides what to measure next and where to look. Spark chose the experiments and committed to each forecast; the bench held it to them. Open, and verifiable."
     }
-  ]
+  ],
+  "order_note": "Case 04 (the structure proposal) comes first, then case 01 (the reading); the loop diagram is cut; the records scene has no count-up."
 }

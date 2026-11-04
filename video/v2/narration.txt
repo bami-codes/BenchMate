@@ -1,23 +1,22 @@
-BenchMate — narration for ElevenLabs. One clip per scene, saved as video/v2/voice/s1.mp3 … s7.mp3.
-Voice: a calm documentary narrator (Daniel / Brian / Adam). Model: Eleven Multilingual v2. Stability 0.55 · Similarity 0.75 · Style 0.15 · Speaker boost on · Speed 0.98.
+BenchMate — narration. One clip per scene, saved as video/film/voice/s1.mp3 … s7.mp3 (ElevenLabs; a calm documentary voice; read the numbers as written).
 
-[s1] Cold open — about 11 s
-The drawing is right. The board is right. The output is wrong. Every engineer meets this moment. Usually, someone spends an evening settling it.
+[s1] Cold open — about 10 s
+The drawing is right. The board is right. The output is wrong. Every engineer meets this moment.
 
 [s2] Setup — about 16 s
-BenchMate hands that job to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. Before each measurement, its forecast is frozen. The fault was planted by us, hashed, and sealed. Spark never sees it.
+BenchMate hands that moment to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. The fault was planted by us, hashed, and sealed. Spark never sees it.
 
-[s3] One diagnosis, case 01 — about 58 s
-Case one, from an Arduino forum thread: a filter output too small. Spark picks the first experiment and says why, in its own words. Every standing explanation forecasts the output; the forecast for the commanded input is frozen before the board is touched, then scored against what the bench measured. The drawing misses by eighty-seven millivolts, against an allowance of nine. Crossed out. Two experiments later, two explanations still draw the same waveform. So Spark asks for one multimeter reading, with the allowed range frozen first. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. The board is repaired, and a fresh Spark runs the procedure again: no mismatch.
+[s3] Case 04, the surprise — about 50 s
+Case four, from an Arduino forum: a battery divider that read wrong. Spark starts small: two step experiments, and every explanation in the drawing still fits. Then it asks for a large sine. Now every value fails; every needle is in the red. Spark proposes a new netlist: a diode from OUT to REF, which the drawing never had, because the positive half of the output clips and the negative does not. The engine fits it, freezes it, and pushes the forecast to GitHub. Two inputs Spark has never seen are measured against that frozen model. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a diode, in the direction Spark wrote.
 
-[s4] Climax, case 04 — about 38 s
-Case four surprised us. A battery divider that read wrong. Every value in the drawing fails; every needle is in the red. Spark does not guess. It writes a new netlist: a diode from OUT to REF, which the drawing never had. The forecast is pushed to GitHub; two inputs Spark has never seen are measured. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a 1N4148, cathode at REF. The connection Spark wrote. In case five it did it again, replacing a plain wire with a resistor.
+[s4] Case 01, the reading — about 42 s
+Case one: a filter output too small. One experiment crosses out two explanations; the drawing misses by eighty-seven millivolts. But two explanations remain that draw the same waveform, and no experiment on the menu can separate them. So Spark asks for one multimeter reading, and the range each explanation allows is frozen before anyone touches the meter. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. Repaired, a fresh Spark runs again: no mismatch.
 
-[s5] Trust — about 22 s
-Every run is an append-only log. Each event carries its hash and the previous one; every forecast is checked against the event that froze it. One command, with no packages, no key and no network, verifies any run. The ledger keeps what went wrong: three runs stopped before a verdict, two abstained. Counts, not an accuracy rate.
+[s5] Five cases — about 16 s
+Five cases from real forum threads. In case five, Spark replaced a plain wire with a resistor, and one reading placed it off the board. Every case ended with a repaired board and a rerun that reported no mismatch.
 
-[s6] Frontier — about 14 s
-The loop needs six things, and none of them is electronic. Spark chose what to test next, and committed to what each explanation should predict, on a real system, under rules it could not bend.
+[s6] The records — about 18 s
+Every run is an append-only log; each event carries its hash and the previous one. During the experiments the candidates are refitted to each new measurement; the last two inputs test the frozen model. The ledger keeps every attempt, including the ones that stopped or abstained. One command, with nothing installed, verifies any run.
 
-[s7] Close — about 11 s
-BenchMate. Muse Spark 1.3 and SAM 3.1, on a real bench. Built in nine days. Open, and verifiable.
+[s7] Close — about 16 s
+For the first power-on of a new board, BenchMate decides what to measure next and where to look. Spark chose the experiments and committed to each forecast; the bench held it to them. Open, and verifiable.

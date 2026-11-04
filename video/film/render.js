@@ -22,7 +22,7 @@ async function renderChunk(browser, idx, a, b) {
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '15', '-pix_fmt', 'yuv420p', '-r', String(FPS), out]);
   const done = new Promise(res => ff.on('close', res)); const T = Date.now();
   for (let i = 0; i < n; i++) {
-    const t = a + i / FPS; await pg.evaluate(t => frame(t), t);
+    const t = a + i / FPS; await pg.evaluate(t => { frame(t); return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); }, t);
     const buf = await pg.screenshot({ type: 'jpeg', quality: 95 });
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
   }
@@ -37,7 +37,7 @@ async function renderChunk(browser, idx, a, b) {
   if (process.argv.includes('--meta')) { const { pg } = await openStage(browser); fs.writeFileSync(path.join(V, 'out', 'captions.json'), JSON.stringify(await pg.evaluate(() => filmCaptions()), null, 1)); fs.writeFileSync(path.join(V, 'out', 'scenes.json'), JSON.stringify(await pg.evaluate(() => filmScenes()), null, 1)); console.log('total', await pg.evaluate(() => filmTotal())); await browser.close(); return; }
   if (stills) {
     const { pg } = await openStage(browser);
-    for (const t of stills.split(',').map(Number)) { await pg.evaluate(t => frame(t), t); await pg.waitForTimeout(50); await pg.screenshot({ path: path.join(V, 'frames', `${name}_${t.toFixed(2).padStart(6, '0')}.png`) }); }
+    for (const t of stills.split(',').map(Number)) { await pg.evaluate(t => { frame(t); return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); }, t); await pg.waitForTimeout(120); await pg.screenshot({ path: path.join(V, 'frames', `${name}_${t.toFixed(2).padStart(6, '0')}.png`) }); }
     console.log('stills', stills); await browser.close(); return;
   }
   const span = t1 - t0, per = span / JOBS; const chunks = Array.from({ length: JOBS }, (_, i) => [i, t0 + i * per, i === JOBS - 1 ? t1 : t0 + (i + 1) * per]);
