@@ -144,7 +144,10 @@
   // outcome and the seal
   R.append(h2(run.outcome?.kind === 'stopped' ? 'Outcome: stopped' : 'Outcome'));
   const nt = notes.runs?.[run.id];
-  if (run.outcome?.kind === 'report') R.append(el('div', { class: 'verdict-card' }, el('div', { class: 'big' }, verdictWords(run.outcome, run)), run.outcome.text ? el('p', {}, run.outcome.text) : null, el('p', { class: 'small muted', style: 'margin-top:6px' }, `Engine verdict: ${run.outcome.verdict}. Copied from the report event; the site does not pick verdicts.`)));
+  if (run.outcome?.kind === 'report') { const faulted = run.pair?.state !== 'restored' && !run.pilot && run.outcome.verdict !== 'consistent';
+    R.append(el('div', { class: 'verdict-card' + (faulted ? '' : ' quiet') }, el('div', { class: 'vs' }, el('span', { class: 'lab' }, 'Spark’s answer'), el('div', { class: 'big' }, verdictWords(run.outcome, run))), run.outcome.text ? el('p', {}, run.outcome.text) : null,
+      faulted ? el('div', { class: 'vs planted' }, el('span', { class: 'lab' }, 'What was planted · opened after the verdict'), el('div', { class: 'big' }, c.hidden)) : null,
+      el('p', { class: 'small muted', style: 'margin-top:8px' }, `Engine verdict: ${run.outcome.verdict}. Copied from the report event; the site does not pick verdicts.${faulted ? ' Spark never saw the lower line.' : ''}`))); }
   else R.append(el('div', { class: run.outcome?.kind === 'stopped' ? 'card red' : 'card' }, el('p', {}, run.outcome?.reason || run.outcome?.text || ''), nt?.guard_detail ? el('p', { class: 'small', style: 'margin-top:4px' }, nt.guard_detail, ' ', el('span', { class: 'faint' }, `Source: ${nt.source}`)) : null));
   if (run.note_after) R.append(el('p', { style: 'margin-top:8px' }, run.note_after));
 
