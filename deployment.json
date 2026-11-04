@@ -1,13 +1,13 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "a7b67e48acb33da4607de43d7dd7bb5e71f642f1",
-  "source_site_tree": "0eb03cc91490d76d7adec6729ed7f8cddd15b9a2",
-  "previous_gh_pages_commit": "91e0bb5a8377a5ee1f77ab053100b74df9375ef4",
+  "source_main_commit": "cc9d2d908306bb5f7cc55ace51ece23f4dcce1a6",
+  "source_site_tree": "c6ff5cd2498b3990dd11aae3d17febdce3739203",
+  "previous_gh_pages_commit": "a2dfce6d4d68cd2778be0890619dd175b691546f",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
-  "new_photos": "assets/photos/bench-full.jpg (camera preview rendering, no edits; tools/photos-bench.json)",
+  "new_photos": "none",
   "staging_excluded": true,
   "release_cases": [
     "01",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Bench photo replaced by the camera's own preview rendering; pins re-placed.",
+  "change": "Replay before Play: meter caption with the allowance, big Play in the idle panel, plain run sentence in the notebook.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot checks at 1440 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; idle replay checked at 1440 and 390",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
