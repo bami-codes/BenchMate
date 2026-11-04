@@ -299,13 +299,11 @@
     body_group(e) {
       const ph = run.photo || {}; const cb = [0, 0, ph.image?.width || 1200, ph.image?.height || 1600];
       const box = el('div', { class: 'photo', style: 'max-width:420px' }, el('img', { src: e.photo || ph.image?.file, alt: 'Board photo with the outlines of the SAM 3.1 masks' }));
-      for (const [id, bb] of Object.entries(e.boxes || {})) box.append(maskLabel(id, bb, cb, Object.values(e.boxes || {})));
+      for (const [id, bb] of Object.entries(e.boxes || {})) box.append(maskLabel(id, bb, cb, [], true));
       state.group = { bodies: e.bodies, components: e.components, boxes: e.boxes };
       block(e, 'bench', 'Bench · two capacitor bodies, which is which unknown', words.bodyGroup(e),
-        el('div', { class: 'card' }, box, ph.contours_note ? el('p', { class: 'small faint', style: 'margin:4px 0 0' }, ph.contours_note) : null),
-        el('p', { class: 'small' }, el('span', { class: 'chip' }, el('i'), 'picked by a visual review at the operator’s request, not by a model'), ' ',
-          EV(el('span', { class: 'muted' }, `${(e.bodies || []).join(' and ')} are the two bodies to be read. ${e.topology || ''} Recorded as “${e.chosen_by}”.`), e.ev, 'body group', { bodies: e.bodies, components: e.components, chosen_by: e.chosen_by, spark_chose_group: e.spark_chose_group, boxes_in_sam_input: e.boxes, already_received: e.already_received })),
-        e.spark_abstention_reason ? el('p', { class: 'small muted' }, 'Spark, asked earlier which body is C1: ', el('q', {}, e.spark_abstention_reason)) : null,
+        el('div', { class: 'card' }, box, el('p', { class: 'small', style: 'margin:6px 0 0' }, EV(el('span', {}, e.provenance || ph.provenance || ''), e.ev, 'body group', { bodies: e.bodies, components: e.components, chosen_by: e.chosen_by, spark_chose_group: e.spark_chose_group, boxes_in_sam_input: e.boxes, already_received: e.already_received })), ph.note ? el('p', { class: 'small faint', style: 'margin:4px 0 0' }, ph.note) : null),
+        el('p', { class: 'small muted' }, `${(e.bodies || []).join(' and ')} are the two bodies to be read. ${e.topology || ''}`),
         el('p', { class: 'small muted' }, `Neither body is paired with ${(e.components || []).join(' or ')} here. Both will be read out of circuit, and every way of assigning the two bodies to the two parts will be tested against bands frozen before the readings.`));
     },
     group_reading_forecast(e) {
@@ -364,8 +362,9 @@
   };
   // a label on a photo, placed under a mask's bounding box (bounds in SAM-input pixels, relative to the crop box)
   // `others`: the other labelled boxes; when one sits just below this box, the label goes above it instead
-  function maskLabel(text, bb, cb, others = []) {
+  function maskLabel(text, bb, cb, others = [], side = false) {
     const iw = cb[2] - cb[0], ih = cb[3] - cb[1];
+    if (side) return el('span', { class: 'masklabel side', style: `left:${((bb[2] - cb[0]) / iw * 100 + 1.5).toFixed(1)}%;top:${((bb[1] + bb[3]) / 2 - cb[1]) / ih * 100}%` }, text);
     const up = others.some(o => o !== bb && o[1] >= bb[3] - 4 && o[1] < bb[3] + 0.09 * ih && o[0] < bb[2] && o[2] > bb[0]);
     const style = up ? `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;bottom:${(100 - (bb[1] - cb[1]) / ih * 100 + 1.5).toFixed(1)}%` : `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;top:${((bb[3] - cb[1]) / ih * 100 + 2).toFixed(1)}%`;
     return el('span', { class: 'masklabel' + (up ? ' up' : ''), style }, text);
@@ -475,8 +474,8 @@
     const bd = run.reading?.binding; const bb = bd?.bounds; const cb = ph.crop_box || [0, 0, ph.image?.width || 1200, ph.image?.height || 1600]; const iw = cb[2] - cb[0], ih = cb[3] - cb[1];
     if (bb && bd?.component) box.append(el('span', { class: 'masklabel', style: `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;top:${((bb[3] - cb[1]) / ih * 100 + 2).toFixed(1)}%` }, `${bd.component} — SAM 3.1 mask`));
     const greads = run.reading?.group?.observed?.readings || [];
-    for (const l of ph.labels || []) { const r = greads.find(x => x.body === l.text); box.append(maskLabel(r ? `${l.text} read ${r.value} ${r.unit}` : l.text, l.bounds, cb, (ph.labels || []).map(x => x.bounds))); }
-    const notes = [ph.contours_note, ph.note].filter(Boolean).map(t => el('p', { class: 'small faint', style: 'margin:4px 0 0' }, t));
+    for (const l of ph.labels || []) { const r = greads.find(x => x.body === l.text); box.append(maskLabel(r ? `${l.text} read ${r.value} ${r.unit}` : l.text, l.bounds, cb, (ph.labels || []).map(x => x.bounds), !!l.side)); }
+    const notes = [ph.provenance ? el('p', { class: 'small', style: 'margin:6px 0 0' }, ph.provenance) : null, ...[ph.note].filter(Boolean).map(t => el('p', { class: 'small faint', style: 'margin:4px 0 0' }, t))].filter(Boolean);
     const parts = (ph.vision?.components || []).map(c => `${c.name} ${c.kind}: ${c.reading_status === 'unreadable' ? 'unreadable' : c.marking || '—'}`).join(' · ');
     if (ph.documentary) return el('div', {}, box, ...notes);
     return el('div', {}, box, ...notes, el('p', { class: 'small muted' }, `SAM 3.1 segmented the board${ph.sam?.length ? ` (${ph.sam.map(c => `${c.concept}: ${c.match_count}`).join(', ')})` : ''}; ${parts ? 'Muse Spark vision read the parts: ' + parts + '. ' : 'no part values were read from the photo. '}${ph.pairing ? ph.pairing.charAt(0).toUpperCase() + ph.pairing.slice(1) : ''}.`));

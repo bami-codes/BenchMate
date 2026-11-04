@@ -4,5 +4,9 @@
  "restored_sam": "assets/photos/case02-restored-sam.png",
  "width": 1200,
  "height": 1600,
- "source": "photo-faulted/prepared/input.png (metadata-free 1200x1600 SAM input) and examples/SAM-display/2026-11-04/case02-v2/*-SAM-overview.png (same pixels with native-mask contours); original DNGs private"
+ "source": "photo-faulted/prepared/input.png (metadata-free 1200x1600 SAM input) and examples/SAM-display/2026-11-04/case02-v2/*-SAM-overview.png (same pixels with native-mask contours); original DNGs private; case02-faulted-pair.png = the same SAM input with only the sam-2 and sam-3 body-mask outlines, per reading-groups/2026-11-04/records/20261103T174217-008035637b/overlay-provenance.json (outline pixels identical to that record's capacitor-candidates.png; its text labels left off)",
+ "faulted_pair": "assets/photos/case02-faulted-pair.png",
+ "restored_board": "assets/photos/case02-restored-board.png",
+ "spark_candidates": "assets/photos/case02-spark-candidates.png",
+ "spark_candidate_record": "examples/photo-reprocess/2026-11-04/case02-candidates-v3/records/20261104T014142-817c2bdb8a"
 }
