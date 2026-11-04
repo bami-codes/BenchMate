@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "32eb8d7d5a26f25c60eecfad9dcca46cf52385e9",
-  "source_site_tree": "c70688c6516641e7145579269c243edb741c3bd6",
-  "previous_gh_pages_commit": "17cae220f84225219df7ebef10964226f2c0e587",
+  "source_main_commit": "89104ccf31d42266bb6c6a1820bad05db7a2e936",
+  "source_site_tree": "649c1d2c9c29b4b1071ee149fe33812df43287e2",
+  "previous_gh_pages_commit": "ace0872542bd97627f884a6a1709b55e7abf46f7",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Hero sub in two lines.",
+  "change": "Meter labels wrap inside their meters; gap between readout halves.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot checks at 1440, 1024 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "playwright check of case 05 at the verdict (no label outside its meter); shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
