@@ -182,3 +182,24 @@ Left as they were, on purpose: the second Play button in the idle scope (removed
   to a quiet moment equals a forward seek, a backward seek, `?t=` and a Jump-to button at the same position.
 - Landing below 560 px: the two buttons come before the four-line strip (a flex column with the strip ordered last), so
   "Watch Case 04 from the start" is on the first screen of a phone. At 561 px and up nothing changes.
+
+### Round 4s — after a judge review (4 Nov, night)
+- Replay: four or more meters on a desktop full player (a proposal beside the drawing's three) no longer clip at the shelf's 45 vh cap; the
+  meter column drops its max-height and the scope stretches with it (`v3.css`, `:has(.meter-row[data-n="4"])` / `.many`). The proposal
+  meter's value slot reads like the others: a lone fitted value of the added part (case 05: `19.85 kΩ`) or `fitted diode` (case 04); the
+  fitted parameters sit in the slot's tooltip, the notebook's `Fit engine · ngspice` line and the evidence popover.
+- Words: three or more survivors read `As drawn, R1 changed and R2 changed all still fit…` (`both` for two, singular for one). The hero
+  sentence for a structure proposal keeps the run's order: `Spark chose 3 experiments, proposed a part the drawing does not show, and its
+  proposal passed two checks on inputs it had never seen.` The landing's case lines and the score tile state what the record holds —
+  `the seal was opened` / `seals opened after the verdict, digest checked` — because no data file carries an answer-vs-truth agreement
+  field; the engine records the digest check only (`seal.matches_commitment`).
+- Report: the stages after the experiments (withdrawn reading, reading, held-back check) are ordered by their events' timestamps, so
+  case 01 reads check (22:15 KST) → reading (22:19–22:47 KST) as the run did.
+- Score tile labels name their denominator (`Muse Spark calls, every attempt (schematic reads and the stopped and abstained attempts
+  included)`, `estimated API cost, every attempt`): the ten replayed runs alone sum to fewer calls than the cohort total in `results.json`.
+- The bench table's Recorder row reads the steps' capture settings honestly: 512 frames per capture, sample period set per experiment
+  (0.5, 2 or 4 ms in the counted runs; the held-back inputs use 0.5 ms).
+- Case 04's classification string: the terminal-pair extractor mode had printed `not a blind test` where every other mode prints the
+  cohort's `known to developers, not blind` (both registrations carry `blind_test: false`; `known_case_development` is false for 04 and 05
+  alike). The mode now prints the cohort string; the two case 04 run files and `index.json` were re-extracted (only the label changed;
+  the photo re-pointing step `photo_derivatives.apply_to_runs` was re-applied).

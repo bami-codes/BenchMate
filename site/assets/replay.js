@@ -233,10 +233,16 @@
     structure_fit(e) {
       const m = ensureMeter(e.id); m.root.classList.remove('wait');
       if (e.status === 'fit_error') { m.readout.firstChild.textContent = 'fit error'; m.root.classList.add('bad'); }
-      else m.setValue(e.miss_mV ?? 0, e.fitted_parameters ? Object.entries(e.fitted_parameters).map(([k, v]) => BM.fmtParam(k, v)).join(', ') : '', e.passed?.every(Boolean), 'all steps');
+      const params = e.fitted_parameters ? Object.entries(e.fitted_parameters).map(([k, v]) => BM.fmtParam(k, v)).join(', ') : '';
+      // the value slot reads like the other meters' (a value, or two words): a lone fitted value of the added part prints as that value,
+      // anything else as "fitted <part>"; the fitted parameters themselves stay in the tooltip, the notebook line and the evidence popover
+      const added = (state.proposals[e.id]?.diff?.added || [])[0]; const keys = Object.keys(e.fitted_parameters || {});
+      const short = added && keys.length === 1 && keys[0] === added.name && 'RC'.includes(added.kind) ? BM.fmtFit(added.kind, e.fitted_parameters[keys[0]], e.at_bound)
+        : added ? `fitted ${({ R: 'resistor', C: 'capacitor', D: 'diode', W: 'wire' })[added.kind] || added.kind}` : params ? 'fitted' : '';
+      if (e.status !== 'fit_error') { m.setValue(e.miss_mV ?? 0, short, e.passed?.every(Boolean), 'all steps'); if (params) m.name.lastChild.title = `Fitted parameters: ${params}`; }
       if (e.status === 'inadequate') { m.ruleOut('the proposal'); m.die(); }
       block(e, 'fit', `Fit engine · ngspice, proposed circuit`, words.structureFit(e),
-        el('p', { class: 'small muted' }, [e.status ? `Status: ${e.status}` : null, e.misses?.length ? `residuals per training step, after refit: ${e.misses.map(fmtMiss).join(', ')}` : null, e.simulator_calls ? `${e.simulator_calls} ngspice runs` : null, e.error ? `error: ${e.error}` : null].filter(Boolean).join(' · ')),
+        el('p', { class: 'small muted' }, [e.status ? `Status: ${e.status}` : null, params ? `fitted: ${params}` : null, e.misses?.length ? `residuals per training step, after refit: ${e.misses.map(fmtMiss).join(', ')}` : null, e.simulator_calls ? `${e.simulator_calls} ngspice runs` : null, e.error ? `error: ${e.error}` : null].filter(Boolean).join(' · ')),
         el('p', { class: 'small muted' }, '“Fits” means fits the training measurements. The check on held-back inputs is still ahead; the site never promotes a fit to a verdict.'));
     },
     verification_requested(e) {

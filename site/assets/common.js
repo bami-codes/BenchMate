@@ -253,6 +253,7 @@ window.BM = (() => {
 
   // ---- plain headlines: one voice, one template per state, numbers from data
   const fmtMiss = (x) => x == null ? '—' : `${Number(x).toFixed(2)} mV`;
+  const listWords = (xs) => xs.length <= 2 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`; // "A, B and C"
   const words = {
     choice: (e) => `Spark chose experiment ${e.step}: ${e.label}.`,
     // one survivor is named (the drawing only when it is the drawing); the forecast is for the commanded input, frozen before the capture
@@ -263,9 +264,9 @@ window.BM = (() => {
     capture: (e) => e.verification ? 'The bench measures the first held-back input.' : `The bench measures experiment ${e.step}.`,
     fit: (e, allow) => { const out = e.results.filter(r => !r.adequate), ok = e.results.filter(r => r.adequate);
       if (e.all_inadequate) return 'No explanation fits any more. Every needle is in the red.';
-      if (!out.length) return ok.length === 1 ? `${expName(ok[0].id)} still fits after refitting to this measurement, within ${allow} mV.` : `${ok.map(r => expName(r.id)).join(' and ')} both still fit after refitting to this measurement.`;
+      if (!out.length) return ok.length === 1 ? `${expName(ok[0].id)} still fits after refitting to this measurement, within ${allow} mV.` : `${listWords(ok.map(r => expName(r.id)))} ${ok.length === 2 ? 'both' : 'all'} still fit after refitting to this measurement.`;
       const already = new Set(e.already_out || []); const fresh = out.filter(r => !already.has(r.id)), stay = out.filter(r => already.has(r.id));
-      const names = (rs) => rs.map(r => expName(r.id)).join(' and ');
+      const names = (rs) => listWords(rs.map(r => expName(r.id)));
       const parts = [];
       if (fresh.length) parts.push(`${names(fresh)} ${fresh.length === 1 ? 'misses' : 'miss'} by too much even after refitting to this measurement, and ${fresh.length === 1 ? 'is' : 'are'} crossed out.`);
       if (stay.length) parts.push(`${names(stay)} ${stay.length === 1 ? 'stays' : 'stay'} crossed out from ${stay.length === 1 ? 'an earlier step' : 'earlier steps'}.`);

@@ -118,7 +118,7 @@
               <line x1="468" y1="152" x2="520" y2="152" stroke="#2b6bdc" stroke-width="3"/><circle cx="482" cy="152" r="4" fill="#2b6bdc"/><text x="482" y="140" text-anchor="middle" font-size="12" font-weight="600" fill="#2b6bdc">OUT</text>
               <polygon points="520,134 520,170 554,152" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="537" y="188" text-anchor="middle" font-size="11" fill="#4b535a">LM358</text>
               <line x1="554" y1="152" x2="580" y2="152" stroke="#171b1e" stroke-width="1.5"/>
-              <rect x="580" y="132" width="92" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="626" y="151" text-anchor="middle" font-weight="600">14-bit ADC</text><text x="626" y="165" text-anchor="middle" font-size="10.5" fill="#4b535a">512 frames · 0.5 ms</text>
+              <rect x="580" y="132" width="92" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="626" y="151" text-anchor="middle" font-weight="600">14-bit ADC</text><text x="626" y="165" text-anchor="middle" font-size="10.5" fill="#4b535a">512 frames · 0.5–4 ms</text>
               <text x="626" y="188" text-anchor="middle" font-size="11" fill="#4b535a">IN, OUT, REF</text>
               <!-- REF -->
               <line x1="365" y1="186" x2="365" y2="222" stroke="#8b949b" stroke-width="3"/>
@@ -133,7 +133,7 @@
           </div>
           <dl class="kv small bench-kv">
           <dt>Source</dt><dd>UNO R4 DAC → LM358 follower → 1 kΩ. Steps ±0.2 / ±0.5 V, sines 1–5 Hz, from a fixed menu.</dd>
-          <dt>Recorder</dt><dd>14-bit ADC, 512 frames at 0.5 ms: IN, buffered OUT, REF. Captures are bound to a boot id.</dd>
+          <dt>Recorder</dt><dd>14-bit ADC: IN, buffered OUT, REF. 512 frames per capture; the sample period is set per experiment (0.5, 2 or 4 ms in the counted runs). Captures are bound to a boot id.</dd>
           <dt>Reference</dt><dd>Buffered 1.63 V, not ground. Drift above 3 mV on any capture stops the run.</dd>
           <dt>Allowance</dt><dd>9 mV RMS, whole step and every region. Frozen before the first run, never changed.</dd>
           <dt>Operator</dt><dd>Moves the 9.99 kΩ load jumper and reads one part, only when Spark asks. Never tells the model the fault.</dd>

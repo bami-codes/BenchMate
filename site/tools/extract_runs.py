@@ -798,9 +798,9 @@ def extract_terminal_pair(pair, case, label, rates, photos, amendment=None):
     reg = json.load(open(pair / 'registration.json'))
     pev = [json.loads(l) for l in open(pair / 'events.jsonl')]
     intake = intake_from_pair(pair, rates)
+    # one classification string for the whole cohort (the other modes print the same one; the registration's blind_test and
+    # known_case_development flags are copied below as written, and the policy file records that every case was known to the developers)
     label_full = 'Official run · reading-assisted cohort · known to developers, not blind'
-    if reg.get('blind_test') is False and not reg.get('known_case_development'):
-        label_full = 'Official run · reading-assisted cohort · not a blind test'
     public = 'Official run · Spark did not know the fault'
 
     def classify_pair(run, state):

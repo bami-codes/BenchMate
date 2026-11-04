@@ -43,8 +43,12 @@
     const kase0 = cases.cases.find(c => c.id === run.case);
     const nSteps = run.steps.length, nScored = (run.verification?.scored || []).length, rd = run.reading;
     const settled = rd?.group?.scored ? 'settled it with two multimeter readings' : rd?.scored ? 'settled it with one multimeter reading' : (run.outcome?.verdict === 'structure_supported' ? 'proposed a part the drawing does not show' : '');
-    $('#hero-under').append(el('span', { class: 'case' }, `Case ${run.case} · ${kase0.title}.`), ' ',
-      `Spark chose ${nSteps} experiment${nSteps === 1 ? '' : 's'}${nScored ? `, passed ${nScored === 2 ? 'two' : nScored} checks on inputs it had never seen` : ''}${settled ? ', and ' + settled : ''}. `,
+    const checks = nScored ? `passed ${nScored === 2 ? 'two' : nScored} checks on inputs it had never seen` : '';
+    // a structure proposal is told in the run's order: the proposal came after the experiments, the held-back checks scored the proposal
+    const story = run.outcome?.verdict === 'structure_supported'
+      ? `Spark chose ${nSteps} experiment${nSteps === 1 ? '' : 's'}, proposed a part the drawing does not show${checks ? `, and its proposal ${checks}` : ''}${rd?.scored ? '; one multimeter reading, bands frozen first, placed it' : ''}. `
+      : `Spark chose ${nSteps} experiment${nSteps === 1 ? '' : 's'}${checks ? `, ${checks}` : ''}${settled ? ', and ' + settled : ''}. `;
+    $('#hero-under').append(el('span', { class: 'case' }, `Case ${run.case} · ${kase0.title}.`), ' ', story,
       el('a', { class: 'watch', href: `run.html?run=${run.id}&play=1` }, 'Watch how →'));
     // one line of provenance under it: badge · run · when · the miss the scope shows
     const miss = nom ? (nom.decided_mV?.[si] ?? nom.miss_mV?.[si]) : null;
@@ -77,7 +81,7 @@
       const sealNodes = sealPart ? String(sealPart.nodes).replace(/\s/g, '').split(/→|->/) : null;
       const sameDir = !!(sealNodes && sealNodes.length === 2 && added && sealNodes[0] === added.a && sealNodes[1] === added.b);
       const items = [];
-      if (fails.length) items.push(el('li', {}, el('b', {}, 'Every value explanation failed.'),
+      if (fails.length) items.push(el('li', {}, el('b', {}, 'No change of part value could explain the board.'),
         el('span', {}, `After experiment ${st.n} the fit engine refitted every explanation still standing. The best each could do, in its worst region: `,
           ...fails.flatMap((f, i) => [i ? ', ' : '', `${expName(f.id)} `, ev(num(`${Number(f.decided_mV[si]).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: `residual of ${expName(f.id)} on step ${st.n}, worst region (the fit engine’s check after refitting)`, fields: { decided_by: f.worst_region?.[si] ? `worst region ${f.worst_region[si]}` : 'whole step', whole_step_RMS_mV: f.miss_mV?.[si], allowance_mV: run.allowance_mV } })]),
           `, against an allowance of ${run.allowance_mV} mV. All ${fails.length === 2 ? 'two' : fails.length === 3 ? 'three' : fails.length} were crossed out.`)));
@@ -87,13 +91,13 @@
       if (scored.length) {
         const v = run.verification;
         const misses = scored.flatMap((x, i) => [i ? ' and ' : '', ev(num(`${Number(x.c.decided_mV).toFixed(2)} mV`), x.s.ev, { run: run.id, what: `held-back input ${x.s.index} scored: the frozen model driven by the measured input, worst region`, fields: { decided_by: x.c.worst_region ? `worst region ${x.c.worst_region}` : 'whole step', whole_step_RMS_mV: x.c.RMS_mV, passed: x.c.passed, allowance_mV: run.allowance_mV, input: x.s.settings } })]);
-        items.push(el('li', {}, el('b', {}, 'Fitted, frozen, pushed, then tested.'),
+        items.push(el('li', {}, el('b', {}, 'Its model was fitted, locked and published, then tested on two new inputs.'),
           el('span', {}, 'The proposal was fitted in ngspice; its forecast was frozen and ',
             v.published && v.url ? el('a', { href: v.url, target: '_blank', rel: 'noopener' }, 'pushed to GitHub') : 'frozen',
             ` before ${scored.length === 2 ? 'two' : scored.length} held-back input${scored.length === 1 ? '' : 's'} ${scored.length === 1 ? 'was' : 'were'} measured against the frozen model: worst region${scored.length === 1 ? '' : 's'} `, ...misses, `, ${allPassed ? 'under' : 'against'} the ${run.allowance_mV} mV allowance.`)));
       }
       if (run.seal?.opened_ev && sealPart && sealNodes?.length === 2) {
-        items.push(el('li', {}, el('b', {}, 'The seal opened.'),
+        items.push(el('li', {}, el('b', {}, 'The seal opened: the fault we had hidden.'),
           el('span', {}, ev(el('span', {}, `${cap(kindWord(sealPart.kind))} from ${sealNodes[0]} to ${sealNodes[1]}`), run.seal.opened_ev, { run: run.id, what: 'seal opened', fields: { sealed_sha256: run.seal.sealed_sha256, matches_commitment: run.seal.matches_commitment, location: sealPart.location } }),
             sameDir ? ', in the direction Spark wrote.' : '.',
             run.seal.transmitted_to_model === false ? ' Spark never saw this line' : '', run.seal.matches_commitment ? '; code checked the seal’s digest against the one committed before the first measurement.' : '.')));
@@ -134,7 +138,7 @@
   const counted = runs.filter(r => r.counted);
   { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `Each case is a problem from a real forum thread, rebuilt on the bench with one sealed fault: ${counted.length} official runs replayed here${census?.counts ? `, out of ${census.counts.diagnostic_starts} diagnostic runs started` : ''}.`; }
   const cap1 = (t) => { if (!t) return t; t = t[0].toUpperCase() + t.slice(1); return /[.!?]$/.test(t) ? t : t + '.'; };
-  const outcomeLine = (r) => cap1(r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one multimeter reading, bands frozen first, placed it; the seal matched.' : 'Spark proposed a part the drawing does not show; held-back checks passed; the seal matched.') : r.reading === 'group' ? 'one explanation left after the tests; two multimeter readings, bands frozen first, fixed which body; the seal matched.' : 'one explanation left after one multimeter reading; the seal matched.') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome);
+  const outcomeLine = (r) => cap1(r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one multimeter reading, bands frozen first, placed it; the seal was opened.' : 'Spark proposed a part the drawing does not show; held-back checks passed; the seal was opened.') : r.reading === 'group' ? 'one explanation left after the tests; two multimeter readings, bands frozen first, fixed which body; the seal was opened.' : 'one explanation left after one multimeter reading; the seal was opened.') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome);
   const runLine = (r) => { const restored = r.state === 'restored'; return el('div', { class: 'run-line ' + (restored ? 'restored' : 'fault') },
     el('div', { class: 'res' }, el('b', {}, restored ? 'Fixed, then rerun.' : 'Found it.'), ' ', outcomeLine(r)),
     el('div', { class: 'act' },

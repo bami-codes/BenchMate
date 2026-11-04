@@ -37,7 +37,8 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
 - `assets/photos/bench-full.jpg` + `tools/photos-bench.json`: the whole-bench photo for "The bench" section (from
   `examples/bench-photos/2026-11-04/full/render.png`, cropped, brightened uniformly, no metadata). The inline SVG signal-chain
   diagram lives in `index.html`; its facts come from `docs/build-your-own.md` (DAC → LM358 follower → 1 kΩ → IN; OUT →
-  follower → ADC; buffered REF ≈ 1.63 V; 512 frames at 0.5 ms; 3 mV guard; 9 mV allowance; 9.99 kΩ load).
+  follower → ADC; buffered REF ≈ 1.63 V; 512 frames per capture; 3 mV guard; 9 mV allowance; 9.99 kΩ load); the Recorder row's sample
+  periods (0.5, 2 or 4 ms) are the `period_us` values in the counted runs' step settings, not a fixed 0.5 ms.
 - `tools/verify-case0N.json`: outputs of the keyless verifiers (run on the public copies), copied into the
   report's "Verify it yourself" box as written.
 - `tools/shots_all.js` (every counted run, both viewports, landing, all reports), `tools/rewind_check.js` (every counted

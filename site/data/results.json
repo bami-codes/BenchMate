@@ -37,7 +37,7 @@
   },
   {
    "id": "matched",
-   "label": "sealed faults matched when the seal opened",
+   "label": "seals opened after the verdict, digest checked",
    "value": 5
   },
   {
@@ -47,7 +47,7 @@
   },
   {
    "id": "spark_calls",
-   "label": "Muse Spark calls (incl. the schematic reads)",
+   "label": "Muse Spark calls, every attempt (schematic reads and the stopped and abstained attempts included)",
    "value": 101
   },
   {
@@ -57,7 +57,7 @@
   },
   {
    "id": "cost",
-   "label": "estimated API cost (USD)",
+   "label": "estimated API cost (USD), every attempt",
    "value": 1.01
   }
  ],

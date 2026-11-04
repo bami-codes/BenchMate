@@ -91,7 +91,7 @@
    "pilot": false,
    "counted": true,
    "class_label": "Official run · Spark did not know the fault",
-   "class_label_full": "Official run · reading-assisted cohort · not a blind test",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
    "started_utc": "2026-11-03T15:04:15.536057+00:00",
    "model": "muse-spark-1.3",
    "steps": 3,
@@ -105,8 +105,8 @@
    ],
    "state": "faulted",
    "display_caption": null,
-   "pair_of": null,
-   "reading": null
+   "reading": null,
+   "pair_of": null
   },
   {
    "id": "20261103T153249-a9b088954a",
@@ -115,7 +115,7 @@
    "pilot": false,
    "counted": true,
    "class_label": "Official run · Spark did not know the fault",
-   "class_label_full": "Official run · reading-assisted cohort · not a blind test",
+   "class_label_full": "Official run · reading-assisted cohort · known to developers, not blind",
    "started_utc": "2026-11-03T15:32:49.590982+00:00",
    "model": "muse-spark-1.3",
    "steps": 3,
@@ -131,8 +131,8 @@
    ],
    "state": "restored",
    "display_caption": "No mismatch in the tests Spark chose",
-   "pair_of": "20261103T150223-18d6f08ac9",
-   "reading": null
+   "reading": null,
+   "pair_of": "20261103T150223-18d6f08ac9"
   },
   {
    "id": "20261103T165506-b6ad3e8cf7",
