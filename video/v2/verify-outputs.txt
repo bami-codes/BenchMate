@@ -1,0 +1,24 @@
+$ python3 -S -m benchmate verify examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df
+PASS events=247 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=390f8d0cb7a495efc5368f58bf23f9dfa8ead949f3db7d909dc2d1207a90f876 scope=internal_integrity+recorded_order creation_time=unproven
+[exit 0]
+
+$ PYTHONPATH=src python3 -S -m benchmate.reading_terminal_pair verify examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9
+PASS events=607 forecasts=10 measurements=10 order_checks=45 prediction_files=3 run_status=run_completed head_sha256=d0e887cbaae82226633c15b10b11bfa5bfa1fd324cc005fe76449a3d10e90d3c scope=internal_integrity+recorded_order creation_time=unproven
+[exit 0]
+
+$ PYTHONPATH=src python3 -S -m benchmate.reading_restored_sam_closeout verify examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0
+PASS {"passed":true,"events":574,"forecasts":10,"measurements":12,"order_checks":43,"prediction_files":4,"error":null,"run_status":"run_completed","head_sha256":"ad05d5914d22d2333f9eddf8be546e0c2ec207ba094d0d81dc54ea5972a16ed8","scope":"internal_integrity+recorded_order","creation_time":"unproven","
+[exit 0]
+
+$ PYTHONPATH=src python3 -S -m benchmate.reading_wire_stage verify examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e
+PASS {"passed": true, "events": 484, "forecasts": 8, "measurements": 9, "order_checks": 33, "prediction_files": 2, "error": null, "head_sha256": "8fc8fe18bd0d876471b0b44b499eaa4c22aaa477067c5dcfedd53d576c8dc25f", "run_status": "run_completed"} scope=internal_integrity+recorded_order creation_time=un
+[exit 0]
+
+$ PYTHONPATH=src python3 -S -m benchmate.reading_restored_after_photo_v5 verify examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86
+{"passed": true, "events": 583, "forecasts": 4, "measurements": 5, "order_checks": 19, "prediction_files": 1, "run_status": "run_completed", "head_sha256": "5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2", "error": null}
+[exit 0]
+
+$ PYTHONPATH=src python3 -S -m benchmate.channel_timing_audit_v4 examples/channel-timing/2026-11-04/records/20261104T034748-10ab5af750
+PASS events=238 forecasts=4 measurements=5 order_checks=19 prediction_files=1 run_status=run_completed head_sha256=a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d scope=internal_integrity+recorded_order creation_time=unproven prior_events_checked=484 preflight_events_checked=4 artif
+[exit 0]
+

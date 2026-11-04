@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>s2 setup</title>
+<link rel="stylesheet" href="common.css">
+<style>
+/* Drawn on the left, built on the right. The three boards get their pins; the model gets its name; the fault gets its seal. */
+.frame{position:absolute;background:#fff;border:2px solid var(--ink);border-radius:10px;box-shadow:0 24px 60px -30px rgba(0,0,0,.7);overflow:hidden}
+#drawn{left:110px;top:350px;width:900px;height:374px;padding:24px 28px;opacity:0}
+#drawn img{width:100%;height:100%;object-fit:contain}
+#built{left:1090px;top:120px;width:620px;height:826px;padding:0;opacity:0}
+#built img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lab{position:absolute;z-index:3;opacity:0}
+#lab-drawn{left:128px;top:322px}
+#lab-built{left:1108px;top:92px}
+.lab .tape{font-size:24px;padding:10px 18px}
+.pin{position:absolute;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--ink);border:3px solid var(--ink);font:700 22px/38px var(--narrow);text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.5);transform:translate(-50%,-50%) scale(0);}
+.key{position:absolute;left:1090px;top:966px;display:flex;gap:26px;font:400 22px/1.25 var(--sans);color:#fff;opacity:0}
+.key i{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px solid #fff;font:700 15px/1 var(--narrow);font-style:normal;margin-right:8px;vertical-align:-6px}
+.key b{font-weight:600}
+#lower{opacity:0;width:900px;flex-wrap:wrap;row-gap:4px}
+#lower span:not(.dot){display:block;width:100%;padding-left:32px}
+#frontier{position:absolute;left:110px;top:150px;transform:rotate(-.8deg);opacity:0}
+#frontier .tape{font-size:26px}
+#seal{position:absolute;left:1500px;top:840px;width:300px;transform:rotate(-7deg) scale(0);transform-origin:center;border:3px solid var(--fault);color:var(--fault);font:700 26px/1.1 var(--narrow);padding:10px 14px;border-radius:5px;letter-spacing:.05em;background:rgba(255,255,255,.9);text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+#seal small{display:block;font:500 13px/1.25 var(--mono);letter-spacing:0;text-transform:none;color:#8a2a24;margin-top:4px}
+</style></head><body>
+<div class="mat"></div>
+<div id="frontier"><span class="tape">Meta Global AI Developer Hackathon · Push the Frontier</span></div>
+<div class="lab" id="lab-drawn"><span class="tape white">Drawn · the schematic the model read</span></div>
+<div class="lab" id="lab-built"><span class="tape white">Built · a $40 bench</span></div>
+<div class="frame" id="drawn"><img src="assets-schem01.png" alt=""></div>
+<div class="frame" id="built"><img src="../../examples/bench-photos/2026-11-04/full/camera-preview.png" alt="">
+  <span class="pin" id="p1" style="left:66%;top:31%">1</span>
+  <span class="pin" id="p2" style="left:85%;top:56.5%">2</span>
+  <span class="pin" id="p3" style="left:37%;top:89%">3</span>
+</div>
+<div class="key" id="key"><span><i>1</i><b>Arduino UNO R4</b> runs each experiment</span><span><i>2</i><b>Instrument board</b></span><span><i>3</i><b>Mini board</b> the circuit, plus one sealed fault</span></div>
+<div class="lower" id="lower"><span class="dot"></span><b>Meta’s Muse Spark 1.3</b><span>Meta Model API · reads the drawing, chooses every experiment, says why</span></div>
+<div id="seal">Sealed<small>sha256 of the assembly, committed before the first measurement</small></div>
+<script>
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (t, a, b) => { const x = clamp((t - a) / (b - a)); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const back = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const $ = (s) => document.querySelector(s);
+window.frame = (t) => {
+  const d = ease(t, .2, 1.0); $('#drawn').style.opacity = d; $('#drawn').style.transform = `translateX(${-40 * (1 - d)}px)`; $('#lab-drawn').style.opacity = ease(t, .9, 1.4);
+  const b = ease(t, .9, 1.7); $('#built').style.opacity = b; $('#built').style.transform = `translateX(${40 * (1 - b)}px)`; $('#lab-built').style.opacity = ease(t, 1.6, 2.1);
+  [['#p1', 2.4], ['#p2', 3.1], ['#p3', 3.8]].forEach(([s, t0]) => { const x = clamp((t - t0) / .45); $(s).style.transform = `translate(-50%,-50%) scale(${x <= 0 ? 0 : back(x)})`; });
+  $('#key').style.opacity = ease(t, 4.2, 4.9);
+  $('#lower').style.opacity = ease(t, 6.2, 6.9);
+  $('#frontier').style.opacity = ease(t, 9.4, 10.0);
+  const s = clamp((t - 12.6) / .4); $('#seal').style.transform = `rotate(-8deg) scale(${s <= 0 ? 0 : 0.9 + 0.1 * back(s)})`; $('#seal').style.opacity = s <= 0 ? 0 : 1;
+};
+frame(0);
+</script>
+</body></html>

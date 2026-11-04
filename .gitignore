@@ -39,3 +39,8 @@ video/audio/
 video/captions/
 video/data/*.png
 video/data/*.jpg
+video/v2/raw/
+video/v2/out/
+video/v2/frames/
+video/v2/captions/
+video/v2/voice/*.wav

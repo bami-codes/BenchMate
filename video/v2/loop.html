@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>s6 the loop</title>
+<link rel="stylesheet" href="common.css">
+<style>
+/* The loop draws itself in the site's ink on paper. Six stations, one arrow around them; the "here:" lines fade in under each.
+   For four seconds the station labels swap to what another bench would need (a PCB at first power-on), tagged 'not built here'. */
+#sheet{position:absolute;left:120px;top:92px;width:1680px;height:896px;background:var(--paper);border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 30px 70px -36px rgba(0,0,0,.7);color:var(--ink)}
+#title{position:absolute;left:56px;top:40px;font:600 40px/1.15 var(--narrow);color:var(--ink);opacity:0}
+#title small{display:block;font:400 22px/1.3 var(--sans);color:var(--ink-2);margin-top:6px}
+svg{position:absolute;left:0;top:0}
+.st{opacity:0}
+.st rect{fill:#fff;stroke:var(--ink);stroke-width:2}
+.st .n{font:600 15px var(--narrow);fill:var(--ink)}
+.st .h{font:600 24px/1 var(--narrow);fill:var(--ink)}
+.st .here{font:400 17px var(--sans);fill:var(--ink-2)}
+.st .alt{font:400 17px var(--sans);fill:#8a2a24;opacity:0}
+.arrow{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.arrow.dash{stroke:var(--fc);stroke-dasharray:9 9}
+#tag{position:absolute;left:1300px;top:44px;opacity:0;transform:rotate(1.2deg)}
+#tag .tape{font-size:22px;background:#fff;color:#8a2a24;border:2px solid #d7b4af}
+#line{position:absolute;left:56px;bottom:40px;right:56px;font:600 34px/1.25 var(--narrow);color:var(--ink);opacity:0}
+#line span{color:var(--ink-2);font-weight:400;font-size:26px;display:block;margin-top:6px;font-family:var(--sans)}
+</style></head><body>
+<div class="mat"></div>
+<div id="sheet">
+  <div id="title">The loop needs six things. None of them is electronic.<small>Spark chose what to test next, and committed to what each explanation should predict.</small></div>
+  <div id="tag"><span class="tape">another bench · not built here</span></div>
+  <svg width="1680" height="896" viewBox="0 0 1680 896">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#171b1e"/></marker></defs>
+    <!-- the ring runs 1 → 2 → 3 → 4 → 5 → 6 → 1 behind the stations -->
+    <path id="ring" class="arrow" d="M 430 300 L 840 300 L 1250 300 L 1480 300 Q 1540 300 1540 360 L 1540 580 Q 1540 640 1480 640 L 1250 640 L 840 640 L 430 640 L 200 640 Q 140 640 140 580 L 140 360 Q 140 300 200 300 L 252 300" marker-end="url(#ah)"/>
+    <g id="s1" class="st" transform="translate(430 300)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">1</text><text class="h" x="0" y="-6" text-anchor="middle">What was intended</text><text class="here" x="0" y="28" text-anchor="middle">here: the schematic image</text><text class="alt" x="0" y="28" text-anchor="middle">schematic and layout of a PCB</text></g>
+    <g id="s2" class="st" transform="translate(840 300)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">2</text><text class="h" x="0" y="-6" text-anchor="middle">Explanations to propose</text><text class="here" x="0" y="28" text-anchor="middle">a changed value, or a part the drawing lacks</text><text class="alt" x="0" y="28" text-anchor="middle">a wrong part, a short, a missing pull-up</text></g>
+    <g id="s3" class="st" transform="translate(1250 300)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">3</text><text class="h" x="0" y="-6" text-anchor="middle">A simulator</text><text class="here" x="0" y="28" text-anchor="middle">here: ngspice</text><text class="alt" x="0" y="28" text-anchor="middle">SPICE with the board's models</text></g>
+    <g id="s4" class="st" transform="translate(1250 640)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">4</text><text class="h" x="0" y="-6" text-anchor="middle">An instrument with a menu</text><text class="here" x="0" y="28" text-anchor="middle">steps and sines, with or without a load</text><text class="alt" x="0" y="28" text-anchor="middle">a bench supply and a scope</text></g>
+    <g id="s5" class="st" transform="translate(840 640)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">5</text><text class="h" x="0" y="-6" text-anchor="middle">A person for the rest</text><text class="here" x="0" y="28" text-anchor="middle">move one jumper, read one part</text><text class="alt" x="0" y="28" text-anchor="middle">the probe in the operator's hand</text></g>
+    <g id="s6" class="st" transform="translate(430 640)"><rect x="-170" y="-65" width="340" height="130" rx="8"/><text class="n" x="-154" y="-39">6</text><text class="h" x="0" y="-6" text-anchor="middle">A sealed truth</text><text class="here" x="0" y="28" text-anchor="middle">the assembly record, hashed first</text><text class="alt" x="0" y="28" text-anchor="middle">the fix that worked, sealed first</text></g>
+  </svg>
+  <div id="line">The experiments were chosen by the model, and each forecast was frozen before the bench moved.<span>A circuit was the cheapest real system where that could be done honestly in nine days.</span></div>
+</div>
+<script>
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (t, a, b) => { const x = clamp((t - a) / (b - a)); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const $ = (s) => document.querySelector(s);
+const ring = $('#ring'); const L = ring.getTotalLength(); ring.style.strokeDasharray = L; ring.style.strokeDashoffset = L;
+const order = ['#s1', '#s2', '#s3', '#s4', '#s5', '#s6'];
+window.frame = (t) => {
+  $('#title').style.opacity = ease(t, .2, .9);
+  ring.style.strokeDashoffset = L * (1 - ease(t, .6, 5.2));            // the ring draws itself over 4.6 s
+  order.forEach((s, i) => { const e = ease(t, 1.0 + i * .62, 1.5 + i * .62); const el = $(s); el.style.opacity = e; el.setAttribute('transform', el.getAttribute('transform').replace(/ scale\([^)]*\)/, '') + ` scale(${0.96 + .04 * e})`); });
+  // 7.4–11.4 s: the labels swap to another bench; the tag shows; then back
+  const sw = ease(t, 7.4, 7.9) * (1 - ease(t, 11.0, 11.5));
+  document.querySelectorAll('.st .here').forEach(e => e.style.opacity = 1 - sw); document.querySelectorAll('.st .alt').forEach(e => e.style.opacity = sw);
+  $('#tag').style.opacity = sw;
+  $('#line').style.opacity = ease(t, 11.6, 12.3);
+};
+frame(0);
+</script>
+</body></html>

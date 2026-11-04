@@ -1,0 +1,23 @@
+BenchMate — narration for ElevenLabs. One clip per scene, saved as video/v2/voice/s1.mp3 … s7.mp3.
+Voice: a calm documentary narrator (Daniel / Brian / Adam). Model: Eleven Multilingual v2. Stability 0.55 · Similarity 0.75 · Style 0.15 · Speaker boost on · Speed 0.98.
+
+[s1] Cold open — about 11 s
+The drawing is right. The board is right. The output is wrong. Every engineer meets this moment. Usually, someone spends an evening settling it.
+
+[s2] Setup — about 16 s
+BenchMate hands that job to Meta's Muse Spark, on a forty-dollar Arduino bench. Spark reads the schematic and chooses its own experiments from a fixed menu. Before each measurement, its forecast is frozen. The fault was planted by us, hashed, and sealed. Spark never sees it.
+
+[s3] One diagnosis, case 01 — about 58 s
+Case one, from an Arduino forum thread: a filter output too small. Spark picks the first experiment and says why, in its own words. Every standing explanation forecasts the output; the forecast for the commanded input is frozen before the board is touched, then scored against what the bench measured. The drawing misses by eighty-seven millivolts, against an allowance of nine. Crossed out. Two experiments later, two explanations still draw the same waveform. So Spark asks for one multimeter reading, with the allowed range frozen first. It looks at the board photo, with SAM's outlines, and points at R1. The operator reads four point seven one kilohms. One explanation left. The seal opens: two ten-kilohm resistors, hidden before R1. The board is repaired, and a fresh Spark runs the procedure again: no mismatch.
+
+[s4] Climax, case 04 — about 38 s
+Case four surprised us. A battery divider that read wrong. Every value in the drawing fails; every needle is in the red. Spark does not guess. It writes a new netlist: a diode from OUT to REF, which the drawing never had. The forecast is pushed to GitHub; two inputs Spark has never seen are measured. Worst regions: five point one nine and four point zero five millivolts, under the nine allowed. The seal opens: a 1N4148, cathode at REF. The connection Spark wrote. In case five it did it again, replacing a plain wire with a resistor.
+
+[s5] Trust — about 22 s
+Every run is an append-only log. Each event carries its hash and the previous one; every forecast is checked against the event that froze it. One command, with no packages, no key and no network, verifies any run. The ledger keeps what went wrong: three runs stopped before a verdict, two abstained. Counts, not an accuracy rate.
+
+[s6] Frontier — about 14 s
+The loop needs six things, and none of them is electronic. Spark chose what to test next, and committed to what each explanation should predict, on a real system, under rules it could not bend.
+
+[s7] Close — about 11 s
+BenchMate. Muse Spark 1.3 and SAM 3.1, on a real bench. Built in nine days. Open, and verifiable.

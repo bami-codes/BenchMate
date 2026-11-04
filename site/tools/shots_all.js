@@ -27,13 +27,13 @@ const base = process.env.BASE || 'http://127.0.0.1:8795'; const OUT = '_shots/al
       await p.waitForTimeout(500);
       const txt = await p.evaluate(() => document.body.innerText);
       if (!shotReading && /reads one value|reads both bodies/.test(txt)) { shotReading = true; await p.waitForTimeout(2500); await p.evaluate(() => { const n = [...document.querySelectorAll('h3,h4')].find(x => /reads one value|reads both bodies/.test(x.textContent)); n && n.scrollIntoView({ block: 'center' }); }); await p.waitForTimeout(300); await p.screenshot({ path: `${OUT}/replay-${tag}-reading.png` }); }
-      if (/Verdict · compared by code|End of the recording/.test(txt)) break;
+      if (/Verdict · from the engine’s report|End of the recording/.test(txt)) break;
     }
     await p.waitForTimeout(1500);
-    await p.evaluate(() => { const n = [...document.querySelectorAll('h3,h4')].find(x => /Verdict · compared by code|End of the recording/.test(x.textContent)); n && n.scrollIntoView({ block: 'start' }); }); await p.waitForTimeout(600);
+    await p.evaluate(() => { const n = [...document.querySelectorAll('h3,h4')].find(x => /Verdict · from the engine’s report|End of the recording/.test(x.textContent)); n && n.scrollIntoView({ block: 'start' }); }); await p.waitForTimeout(600);
     await p.screenshot({ path: `${OUT}/replay-${tag}-end.png` }); await p.screenshot({ path: `${OUT}/replay-${tag}-full.png`, fullPage: true });
     const txt = await p.evaluate(() => document.body.innerText); fs.writeFileSync(`${OUT}/replay-${tag}.txt`, txt);
-    const reached = /Verdict · compared by code/.test(txt);
+    const reached = /Verdict · from the engine’s report/.test(txt);
     log.push(`${tag}: ${reached ? 'reached the verdict' : 'DID NOT reach the verdict'} in ${((Date.now() - t0) / 1000).toFixed(0)} s`);
     if (!reached) errs.push(`[${w}] ${r.id} replay did not reach the verdict`);
     if (await overflow(p)) errs.push(`[${w}] ${r.id} replay overflow`); await p.close();
