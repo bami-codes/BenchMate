@@ -567,3 +567,17 @@ footer a{color:#fff}
 .hero .scope .title{top:auto;bottom:8px;right:84px;font-size:11.5px;opacity:.75;max-width:none}
 .hero .scope .sweep{opacity:.75;font-size:11.5px}
 @media (max-width:640px){.hero .scope .title{display:none}}
+
+/* round 4i: case blocks read result first; one button per run; two numbers */
+.case-block{grid-template-columns:40px 150px minmax(0,1fr)}
+.case-block .runs{gap:8px}
+.case-block .run-line{display:block;padding:11px 14px 10px}
+.run-line .res{font-size:15.5px;line-height:1.45}
+.run-line .res b{font-weight:600}
+.run-line .res::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:9px;vertical-align:0;background:var(--ok)}
+.run-line.restored .res::before{background:#fff;border:2px solid var(--ok);width:6px;height:6px;vertical-align:1px}
+.run-line .act{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:9px}
+.run-line .act .rep{margin-left:0}
+.run-line .act .meta{margin-left:auto;color:var(--ink-2);font-size:13px}
+@media (max-width:760px){.case-block{grid-template-columns:36px minmax(0,1fr)}.run-line .act .meta{margin-left:0;flex-basis:100%}}
+.lede-note{max-width:62ch;margin-top:-4px}

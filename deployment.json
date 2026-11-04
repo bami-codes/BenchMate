@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "f260dc70f41675d8c6ce22bbb7952a758af7a53f",
-  "source_site_tree": "b4b2055a1bbccae5e77486608e767db26b05366d",
-  "previous_gh_pages_commit": "ef9bbc3c8cc7250416045c876ab10e22580a1a8b",
+  "source_main_commit": "e5e271a7b41ef065fb2798644fdf444f6a25eaff",
+  "source_site_tree": "99d7b964ce3e00dc25d1dfad65bddca2619f3058",
+  "previous_gh_pages_commit": "75f28bec57b87c38cc16488e3aebac2ac4596adc",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Hero scope: plain-word key strip for the three lines, settings as a bottom-right footnote, symptom-first sentence under the scope with a Watch-how link.",
+  "change": "Case blocks read the result first; one Watch button per run; the per-case badge becomes one sentence in the lede.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot checks at 1440, 1280 and 390 (2x); shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
