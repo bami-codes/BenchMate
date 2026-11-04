@@ -1,0 +1,369 @@
+{
+  "schema": "benchmate.official_attempt_census.v1",
+  "cohort": "reading-assisted-v1",
+  "as_of_main_commit": "b09303fed91305eda1e8d6013027aaaef9b574c2",
+  "index": "examples/reading-cohort/2026-11-03/index.json",
+  "index_sha256": "98ec3c4be0576c9f9d5cb6f4b7ec832d9ed1a3a0fcb2b81a6e09ce48043cc256",
+  "scope": "Post-freeze reading-assisted-v1; five included cases. Counts are not an accuracy rate. Original registrations and verdicts are unchanged.",
+  "definitions": {
+    "registered_workflow_attempt": "One counted index entry, including a pre-diagnosis intake stop or a photo-stage failure.",
+    "diagnostic_start": "One distinct faulted/restored diagnostic record with a diagnosis_started binding, or one registered standalone restored diagnostic. Includes initial-HOLD stops; does not imply a completed measurement or verdict.",
+    "non_abstained_verdict": "Native changed, structure_supported, indistinguishable, or consistent report; not a claim of unique physical identification or first-attempt success.",
+    "excluded": "Pre-freeze development; QA and unarmed preflight; photo/reading-only continuation; inherited history copies; cancelled LED case06."
+  },
+  "counts": {
+    "included_cases": 5,
+    "registered_workflow_attempts": 13,
+    "diagnostic_starts": 15,
+    "faulted_diagnostic_starts": 7,
+    "restored_diagnostic_starts": 8,
+    "stopped_before_verdict": 3,
+    "abstained": 2,
+    "non_abstained_verdicts": 10,
+    "displayed_official_replays": 10,
+    "displayed_development_replays": 2
+  },
+  "registrations": [
+    {
+      "case_id": "01",
+      "attempt": 1,
+      "run_id": "20261103T125924-bf8f64512b",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b",
+      "root_event_head_sha256": "16c4e82b898eafabdf2c1b82df7c1e18484bb440ebda5d71066324121d88d175",
+      "diagnostic_run_ids": [
+        "20261103T130826-26d83af2df",
+        "20261103T135220-d19cb17641"
+      ]
+    },
+    {
+      "case_id": "01",
+      "attempt": 2,
+      "run_id": "20261103T142003-2b176faa91",
+      "status": "completed",
+      "record": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91",
+      "root_event_head_sha256": "cbb2c64ba42250775d91a6d0144b00fd73dbdc24a87a05f50496219c52427027",
+      "diagnostic_run_ids": [
+        "20261103T142003-2b176faa91"
+      ]
+    },
+    {
+      "case_id": "04",
+      "attempt": 1,
+      "run_id": "20261103T143624-44d6e5850c",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T143624-44d6e5850c",
+      "root_event_head_sha256": "e0c97800f698e0077afdda972a5093dc292e5fec1ea44ec26bcf5193efa9b3d4",
+      "diagnostic_run_ids": []
+    },
+    {
+      "case_id": "04",
+      "attempt": 2,
+      "run_id": "20261103T145152-e948c2e475",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T145152-e948c2e475",
+      "root_event_head_sha256": "baa7134db28cccd91ae034ac3562881913a1b9754e3faa55922070431dbfdbe9",
+      "diagnostic_run_ids": [
+        "20261103T145652-46ec15c997"
+      ]
+    },
+    {
+      "case_id": "04",
+      "attempt": 3,
+      "run_id": "20261103T150223-18d6f08ac9",
+      "status": "completed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9",
+      "root_event_head_sha256": "d0e887cbaae82226633c15b10b11bfa5bfa1fd324cc005fe76449a3d10e90d3c",
+      "diagnostic_run_ids": [
+        "20261103T150415-dad7112413",
+        "20261103T153249-a9b088954a"
+      ]
+    },
+    {
+      "case_id": "02",
+      "attempt": 1,
+      "run_id": "20261103T161130-f20340dd0b",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T161130-f20340dd0b",
+      "root_event_head_sha256": "2bc748cbbae5f8392b3ab567e3c77013058b8ac8ead7409d810dc0a068303efe",
+      "diagnostic_run_ids": [
+        "20261103T163104-8ceed214a2"
+      ]
+    },
+    {
+      "case_id": "02",
+      "attempt": 2,
+      "run_id": "20261103T165506-b6ad3e8cf7",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7",
+      "root_event_head_sha256": "0d0ec3edf91379cd43a017986d0c9ca5fd0feed67d3aea2cdbc04b771a9137f8",
+      "diagnostic_run_ids": [
+        "20261103T165737-23bd08387e"
+      ]
+    },
+    {
+      "case_id": "02",
+      "attempt": 3,
+      "run_id": "20261103T175520-a925a3910d",
+      "status": "failed",
+      "record": "examples/reading-restored-v2/2026-11-04/records/20261103T175520-a925a3910d",
+      "root_event_head_sha256": "5efae7dc9a4df5e1d004bd476e991f78b98044db4b69a338d3cd0f212c94e59e",
+      "diagnostic_run_ids": [
+        "20261103T175621-8d699cef12"
+      ]
+    },
+    {
+      "case_id": "02",
+      "attempt": 4,
+      "run_id": "20261103T182550-4ea22cc3a0",
+      "status": "completed",
+      "record": "examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0",
+      "root_event_head_sha256": "ad05d5914d22d2333f9eddf8be546e0c2ec207ba094d0d81dc54ea5972a16ed8",
+      "diagnostic_run_ids": [
+        "20261103T182908-a2c37df9e3"
+      ]
+    },
+    {
+      "case_id": "05",
+      "attempt": 1,
+      "run_id": "20261104T021333-c80ef3617e",
+      "status": "completed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e",
+      "root_event_head_sha256": "8fc8fe18bd0d876471b0b44b499eaa4c22aaa477067c5dcfedd53d576c8dc25f",
+      "diagnostic_run_ids": [
+        "20261104T022359-f6e37b9f05",
+        "20261104T030600-47c67ef048"
+      ]
+    },
+    {
+      "case_id": "05",
+      "attempt": 2,
+      "run_id": "20261104T034748-10ab5af750",
+      "status": "completed",
+      "record": "examples/channel-timing/2026-11-04/records/20261104T034748-10ab5af750",
+      "root_event_head_sha256": "a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d",
+      "diagnostic_run_ids": [
+        "20261104T034748-10ab5af750"
+      ]
+    },
+    {
+      "case_id": "03",
+      "attempt": 1,
+      "run_id": "20261104T041918-d1084cbeb4",
+      "status": "failed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T041918-d1084cbeb4",
+      "root_event_head_sha256": "9e3c613741f63349b1c5ba1749d603b09d7027aa16bbbf1d5f1927ea34d9244c",
+      "diagnostic_run_ids": [
+        "20261104T042909-7ee516eccf"
+      ]
+    },
+    {
+      "case_id": "03",
+      "attempt": 2,
+      "run_id": "20261104T051005-fac3d07c86",
+      "status": "completed",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86",
+      "root_event_head_sha256": "5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2",
+      "diagnostic_run_ids": [
+        "20261104T051133-4d80b9f294"
+      ]
+    }
+  ],
+  "diagnostic_starts": [
+    {
+      "case_id": "01",
+      "registration_run_id": "20261103T125924-bf8f64512b",
+      "state": "faulted",
+      "run_id": "20261103T130826-26d83af2df",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df",
+      "verdict": "changed",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 10,
+      "agent_report_sequence": 244,
+      "diagnostic_event_head_sha256": "390f8d0cb7a495efc5368f58bf23f9dfa8ead949f3db7d909dc2d1207a90f876"
+    },
+    {
+      "case_id": "01",
+      "registration_run_id": "20261103T125924-bf8f64512b",
+      "state": "restored",
+      "run_id": "20261103T135220-d19cb17641",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-restored/20261103T135220-d19cb17641",
+      "verdict": null,
+      "category": "stopped_before_verdict",
+      "error": "Unexpected instrument protocol",
+      "root_diagnosis_started_sequence": 46,
+      "agent_report_sequence": null,
+      "diagnostic_event_head_sha256": "337e385b909043b55475ea062256db0c41302f1395ae5cc8516addc5c7416eb3"
+    },
+    {
+      "case_id": "01",
+      "registration_run_id": "20261103T142003-2b176faa91",
+      "state": "restored",
+      "run_id": "20261103T142003-2b176faa91",
+      "record": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91",
+      "verdict": "consistent",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": null,
+      "agent_report_sequence": 237,
+      "diagnostic_event_head_sha256": "cbb2c64ba42250775d91a6d0144b00fd73dbdc24a87a05f50496219c52427027"
+    },
+    {
+      "case_id": "04",
+      "registration_run_id": "20261103T145152-e948c2e475",
+      "state": "faulted",
+      "run_id": "20261103T145652-46ec15c997",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T145152-e948c2e475/diagnosis-faulted/20261103T145652-46ec15c997",
+      "verdict": null,
+      "category": "stopped_before_verdict",
+      "error": "Primary A3 electrical/reference guard failed; no next stimulus.",
+      "root_diagnosis_started_sequence": 15,
+      "agent_report_sequence": null,
+      "diagnostic_event_head_sha256": "28f14c3b3fc342b7273837a0a16e86be312f7861cac8f73995d2671779d78b83"
+    },
+    {
+      "case_id": "04",
+      "registration_run_id": "20261103T150223-18d6f08ac9",
+      "state": "faulted",
+      "run_id": "20261103T150415-dad7112413",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/diagnosis-faulted/20261103T150415-dad7112413",
+      "verdict": "structure_supported",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 18,
+      "agent_report_sequence": 242,
+      "diagnostic_event_head_sha256": "528c359881c3b9d66cf4369819e4544f0ed63be0d0f9cacb74b72141250eac9b"
+    },
+    {
+      "case_id": "04",
+      "registration_run_id": "20261103T150223-18d6f08ac9",
+      "state": "restored",
+      "run_id": "20261103T153249-a9b088954a",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/diagnosis-restored/20261103T153249-a9b088954a",
+      "verdict": "consistent",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 37,
+      "agent_report_sequence": 232,
+      "diagnostic_event_head_sha256": "0178651d358bb326c6a41cde01cf16451f585fbac17d26bbd164139814879b0a"
+    },
+    {
+      "case_id": "02",
+      "registration_run_id": "20261103T161130-f20340dd0b",
+      "state": "faulted",
+      "run_id": "20261103T163104-8ceed214a2",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T161130-f20340dd0b/diagnosis-faulted/20261103T163104-8ceed214a2",
+      "verdict": "abstained",
+      "category": "abstained",
+      "error": null,
+      "root_diagnosis_started_sequence": 9,
+      "agent_report_sequence": 169,
+      "diagnostic_event_head_sha256": "028aa8c29ab5e3da6dad56d5ac4f6316168246bdf8a526a01f04f88b61a231a3"
+    },
+    {
+      "case_id": "02",
+      "registration_run_id": "20261103T165506-b6ad3e8cf7",
+      "state": "faulted",
+      "run_id": "20261103T165737-23bd08387e",
+      "record": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/diagnosis-faulted/20261103T165737-23bd08387e",
+      "verdict": "changed",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 11,
+      "agent_report_sequence": 232,
+      "diagnostic_event_head_sha256": "3ba0b84cdb9cb02d279969da495d30dac615144737504a6a4e8fa0c87bc732c8"
+    },
+    {
+      "case_id": "02",
+      "registration_run_id": "20261103T175520-a925a3910d",
+      "state": "restored",
+      "run_id": "20261103T175621-8d699cef12",
+      "record": "examples/reading-restored-v2/2026-11-04/records/20261103T175520-a925a3910d/diagnosis-restored/20261103T175621-8d699cef12",
+      "verdict": null,
+      "category": "stopped_before_verdict",
+      "error": "Primary A3 electrical/reference guard failed; no next stimulus.",
+      "root_diagnosis_started_sequence": 10,
+      "agent_report_sequence": null,
+      "diagnostic_event_head_sha256": "2ad7ef876a489a51dbcf6f2a2695a5da307b781d8d4211f17fda2275cd9bb8d7"
+    },
+    {
+      "case_id": "02",
+      "registration_run_id": "20261103T182550-4ea22cc3a0",
+      "state": "restored",
+      "run_id": "20261103T182908-a2c37df9e3",
+      "record": "examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0/diagnosis-restored/20261103T182908-a2c37df9e3",
+      "verdict": "consistent",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 12,
+      "agent_report_sequence": 232,
+      "diagnostic_event_head_sha256": "74f64eef2be804bdaa0ab1ed8e2df7bcb6154fc95ff22e7f7779574a98260de6"
+    },
+    {
+      "case_id": "05",
+      "registration_run_id": "20261104T021333-c80ef3617e",
+      "state": "faulted",
+      "run_id": "20261104T022359-f6e37b9f05",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-faulted/20261104T022359-f6e37b9f05",
+      "verdict": "structure_supported",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 12,
+      "agent_report_sequence": 238,
+      "diagnostic_event_head_sha256": "25b30591d5465fc5496727f6fa136f0bc010d5337f021dbd673da57d5425e631"
+    },
+    {
+      "case_id": "05",
+      "registration_run_id": "20261104T021333-c80ef3617e",
+      "state": "restored",
+      "run_id": "20261104T030600-47c67ef048",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048",
+      "verdict": "abstained",
+      "category": "abstained",
+      "error": null,
+      "root_diagnosis_started_sequence": 49,
+      "agent_report_sequence": 157,
+      "diagnostic_event_head_sha256": "868adf0eda6f4de7ffaeb98b977164a53f4ab1a24eef35cd238d8530ce7fad1b"
+    },
+    {
+      "case_id": "05",
+      "registration_run_id": "20261104T034748-10ab5af750",
+      "state": "restored",
+      "run_id": "20261104T034748-10ab5af750",
+      "record": "examples/channel-timing/2026-11-04/records/20261104T034748-10ab5af750",
+      "verdict": "consistent",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": null,
+      "agent_report_sequence": 235,
+      "diagnostic_event_head_sha256": "a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d"
+    },
+    {
+      "case_id": "03",
+      "registration_run_id": "20261104T041918-d1084cbeb4",
+      "state": "faulted",
+      "run_id": "20261104T042909-7ee516eccf",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T041918-d1084cbeb4/diagnosis-faulted/20261104T042909-7ee516eccf",
+      "verdict": "indistinguishable",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 13,
+      "agent_report_sequence": 233,
+      "diagnostic_event_head_sha256": "d56b19e6102b680a3d138298760e92d3f96d58afdd77585d703801587bfb5a98"
+    },
+    {
+      "case_id": "03",
+      "registration_run_id": "20261104T051005-fac3d07c86",
+      "state": "restored",
+      "run_id": "20261104T051133-4d80b9f294",
+      "record": "examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86/diagnosis-restored/20261104T051133-4d80b9f294",
+      "verdict": "consistent",
+      "category": "non_abstained_verdict",
+      "error": null,
+      "root_diagnosis_started_sequence": 10,
+      "agent_report_sequence": 233,
+      "diagnostic_event_head_sha256": "ad6e5a1f458a10e574f7061135c837c4402d020211cc32c155c856214a8e8643"
+    }
+  ]
+}
