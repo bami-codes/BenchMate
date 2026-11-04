@@ -1,0 +1,331 @@
+{
+  "schema": "benchmate.channel_timing_regression_inputs.v1",
+  "unstarted_diagnostics": [
+    {
+      "case": "04",
+      "attempt": 1,
+      "run": "20261103T143624-44d6e5850c",
+      "original_status": "failed",
+      "scope": "No diagnostic capture: intake or host-link failure unchanged."
+    }
+  ],
+  "records": [
+    {
+      "item": {
+        "run_id": "20261103T125924-bf8f64512b",
+        "case_id": "01",
+        "attempt": 1,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": true,
+        "failed_stage": "diagnose"
+      },
+      "original_file": "runs/reading-cohort/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df/events.jsonl",
+      "sha256": "cb3d766af9c692ea8244fe949c999b2d5b47dc23fccfbe2c57a84e2edca59b70"
+    },
+    {
+      "item": {
+        "run_id": "20261103T125924-bf8f64512b",
+        "case_id": "01",
+        "attempt": 1,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": true,
+        "failed_stage": "diagnose"
+      },
+      "original_file": "runs/reading-cohort/20261103T125924-bf8f64512b/diagnosis-restored/20261103T135220-d19cb17641/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-restored/20261103T135220-d19cb17641/events.jsonl",
+      "sha256": "784283689a0fdd49fc6929ec1cbf93575b441f51a64504fbdaf4c6528d974089"
+    },
+    {
+      "item": {
+        "run_id": "20261103T142003-2b176faa91",
+        "case_id": "01",
+        "attempt": 2,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "execution_scope": "restored_only_followup",
+        "followup_of": "20261103T125924-bf8f64512b",
+        "original_primary_status": "failed",
+        "record": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91",
+        "completion_method": "preserved_original_fault_reading_plus_restored_followup_explicit_photo_waiver",
+        "verified_head_sha256": "cbb2c64ba42250775d91a6d0144b00fd73dbdc24a87a05f50496219c52427027"
+      },
+      "original_file": "runs/reading-followup/20261103T142003-2b176faa91/events.jsonl",
+      "public_file": "examples/reading-followup/2026-11-03/records/20261103T142003-2b176faa91/events.jsonl",
+      "sha256": "fb9650039f202bcd95d3fc1d736ced0dd6697a0895a8c8ab1926a80e36ea4130"
+    },
+    {
+      "item": {
+        "run_id": "20261103T145152-e948c2e475",
+        "case_id": "04",
+        "attempt": 2,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "failed_stage": "diagnose"
+      },
+      "original_file": "runs/reading-cohort/20261103T145152-e948c2e475/diagnosis-faulted/20261103T145652-46ec15c997/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T145152-e948c2e475/diagnosis-faulted/20261103T145652-46ec15c997/events.jsonl",
+      "sha256": "01436691b7979455a6c6ea16a97b042f521a60e426f794d11a6979d00d5bbae1"
+    },
+    {
+      "item": {
+        "run_id": "20261103T150223-18d6f08ac9",
+        "case_id": "04",
+        "attempt": 3,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "reading_outcome": "not_performed_no_discriminating_numeric_reading",
+        "restored_verdict": "consistent"
+      },
+      "original_file": "runs/reading-cohort/20261103T150223-18d6f08ac9/diagnosis-faulted/20261103T150415-dad7112413/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/diagnosis-faulted/20261103T150415-dad7112413/events.jsonl",
+      "sha256": "7e6feb575dff40baf0409fa3fc0b243cdb1373a087fd3471b1ef83403acdd059"
+    },
+    {
+      "item": {
+        "run_id": "20261103T150223-18d6f08ac9",
+        "case_id": "04",
+        "attempt": 3,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "reading_outcome": "not_performed_no_discriminating_numeric_reading",
+        "restored_verdict": "consistent"
+      },
+      "original_file": "runs/reading-cohort/20261103T150223-18d6f08ac9/diagnosis-restored/20261103T153249-a9b088954a/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9/diagnosis-restored/20261103T153249-a9b088954a/events.jsonl",
+      "sha256": "752f75b172ad9d220cb97e1be827060d1c7b78e64b065a28c03c7ae3875d9bfd"
+    },
+    {
+      "item": {
+        "run_id": "20261103T161130-f20340dd0b",
+        "case_id": "02",
+        "attempt": 1,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": true,
+        "failed_stage": "diagnose",
+        "native_diagnostic_verdict": "abstained",
+        "posthoc_cause": "operator_wiring_error_474_C3_C8",
+        "posthoc_cause_evidence": "examples/reading-cohort/2026-11-03/postmortems/20261103T161130-f20340dd0b",
+        "cause_confirmed_after_diagnosis": true,
+        "original_result_unchanged": true
+      },
+      "original_file": "runs/reading-cohort/20261103T161130-f20340dd0b/diagnosis-faulted/20261103T163104-8ceed214a2/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T161130-f20340dd0b/diagnosis-faulted/20261103T163104-8ceed214a2/events.jsonl",
+      "sha256": "480f966263029cc8e97a4e769373bb532f2d27537b6df3868efc277c39bcbd80"
+    },
+    {
+      "item": {
+        "run_id": "20261103T165506-b6ad3e8cf7",
+        "case_id": "02",
+        "attempt": 2,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "followup_of": "20261103T161130-f20340dd0b",
+        "original_primary_status": "failed",
+        "reason": "operator_corrected_474_C3_C8_to_C8_C13_after_photo_review",
+        "failed_stage": "bind"
+      },
+      "original_file": "runs/reading-cohort/20261103T165506-b6ad3e8cf7/diagnosis-faulted/20261103T165737-23bd08387e/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261103T165506-b6ad3e8cf7/diagnosis-faulted/20261103T165737-23bd08387e/events.jsonl",
+      "sha256": "a96582ed317e38f561a9ef64dbe8ba76039d1cbbe9fc37237acef13a430a79f1"
+    },
+    {
+      "item": {
+        "run_id": "20261103T175520-a925a3910d",
+        "case_id": "02",
+        "attempt": 3,
+        "status": "failed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "execution_scope": "restored_only_followup_after_unordered_reading",
+        "followup_of": "20261103T165506-b6ad3e8cf7",
+        "original_primary_status": "failed",
+        "failed_stage": "run"
+      },
+      "original_file": "runs/reading-cohort/20261103T175520-a925a3910d/diagnosis-restored/20261103T175621-8d699cef12/events.jsonl",
+      "public_file": "examples/reading-restored-v2/2026-11-04/records/20261103T175520-a925a3910d/diagnosis-restored/20261103T175621-8d699cef12/events.jsonl",
+      "sha256": "9a151331f8982c5f09c20014157d37258b1478c317ea9488fd5300cd861259a8"
+    },
+    {
+      "item": {
+        "run_id": "20261103T182550-4ea22cc3a0",
+        "case_id": "02",
+        "attempt": 4,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": false,
+        "execution_scope": "restored_only_followup_after_unordered_reading",
+        "followup_of": "20261103T165506-b6ad3e8cf7",
+        "original_primary_status": "failed",
+        "qualifying_QA": "examples/reference-step-QA/2026-11-04/session01/stages/20261103T181948-1a4c8ff1d2",
+        "previous_failure_preserved": true,
+        "reason": "operator_selected_new_restored_diagnosis_after_single_unchanged_wiring_step_QA_pass",
+        "previous_restored_failure": "20261103T175520-a925a3910d",
+        "restored_verdict": "consistent",
+        "pending_stage": null,
+        "completion_method": "preserved_fault_reading_restored_rerun_plus_documentary_SAM_binding_omitted"
+      },
+      "original_file": "runs/reading-cohort/20261103T182550-4ea22cc3a0/diagnosis-restored/20261103T182908-a2c37df9e3/events.jsonl",
+      "public_file": "examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0/diagnosis-restored/20261103T182908-a2c37df9e3/events.jsonl",
+      "sha256": "296db71bd7e41cef58f1792a5d327f208dc9cc417599d8b7e3ed1ca5f3014d50"
+    },
+    {
+      "item": {
+        "run_id": "20261104T021333-c80ef3617e",
+        "case_id": "05",
+        "attempt": 1,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": true,
+        "reading_outcome": "one_explanation_remains",
+        "restored_verdict": "abstained",
+        "completion_method": "qualified_wire_path_reading_candidate_v3_external_repair"
+      },
+      "original_file": "runs/reading-cohort/20261104T021333-c80ef3617e/diagnosis-faulted/20261104T022359-f6e37b9f05/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-faulted/20261104T022359-f6e37b9f05/events.jsonl",
+      "sha256": "cacba18e497cbd702c0a7b040137e594c60eaeefd24769f5b6d3f654509d51d4"
+    },
+    {
+      "item": {
+        "run_id": "20261104T021333-c80ef3617e",
+        "case_id": "05",
+        "attempt": 1,
+        "status": "completed",
+        "counted": true,
+        "selected_first_attempt": true,
+        "reading_outcome": "one_explanation_remains",
+        "restored_verdict": "abstained",
+        "completion_method": "qualified_wire_path_reading_candidate_v3_external_repair"
+      },
+      "original_file": "runs/reading-cohort/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+      "public_file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+      "sha256": "72bc445dfdc6614b440874a2e37ea59f7580fd44a2c8235ccc2aa3ad760a15fc"
+    },
+    {
+      "item": {
+        "slot_id": "01-F01",
+        "case_id": "01",
+        "state": "faulted",
+        "order": 1,
+        "required": true,
+        "run_id": "20261103T072121-1138ccf241",
+        "status": "failed",
+        "selected_for_case_demo": true,
+        "selection": "first_started_official_attempt_for_this_case_and_state",
+        "counted": true,
+        "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T072121-1138ccf241.json",
+        "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86",
+        "error": "Electrical/reference guard failed; no next stimulus",
+        "attempt": "01-F01",
+        "reporting_group": "prior_official_protocol_now_development"
+      },
+      "original_file": "runs/official/20261103T072121-1138ccf241/events.jsonl",
+      "public_file": "examples/official-runs/2026-11-03/records/20261103T072121-1138ccf241/events.jsonl",
+      "sha256": "d9e5583adf87fbada2efe18ff790b6eecbcc4fdfdd66447e3ea2578789072f00"
+    },
+    {
+      "item": {
+        "slot_id": "01-R01",
+        "case_id": "01",
+        "state": "restored",
+        "order": 2,
+        "required": true,
+        "run_id": "20261103T113619-34ff2352b1",
+        "status": "completed",
+        "selected_for_case_demo": true,
+        "selection": "first_started_official_attempt_for_this_case_and_state",
+        "counted": true,
+        "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T113619-34ff2352b1.json",
+        "protocol_sha256": "daace662dd771ece88410cfb9378c99fc1a151ad4efa9a71cb84ca66180d00d1",
+        "verdict": "consistent",
+        "verification_completed": true,
+        "attempt": "01-R01",
+        "reporting_group": "prior_official_protocol_now_development"
+      },
+      "original_file": "runs/official/20261103T113619-34ff2352b1/events.jsonl",
+      "public_file": "examples/official-runs/2026-11-03/records/20261103T113619-34ff2352b1/events.jsonl",
+      "sha256": "721a1a5f267574593a67161eb679378d54125d6f38edf4451bd1cc0a93d39b46"
+    },
+    {
+      "item": {
+        "slot_id": "01-F02",
+        "case_id": "01",
+        "state": "faulted",
+        "order": 1,
+        "required": false,
+        "run_id": "20261103T074537-7424df4144",
+        "status": "failed",
+        "selected_for_case_demo": false,
+        "selection": "followup_never_replaces_primary",
+        "counted": true,
+        "followup_of": "01-F01",
+        "attempt_ordinal": 2,
+        "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T074537-7424df4144.json",
+        "protocol_sha256": "940d0fc97bc3ea598c1b966c5f60e660f64c621efa8c3c8007a7c7ee6f885e86",
+        "error": "Electrical/reference guard failed; no next stimulus",
+        "attempt": "01-F02",
+        "reporting_group": "prior_official_protocol_now_development"
+      },
+      "original_file": "runs/official/20261103T074537-7424df4144/events.jsonl",
+      "public_file": "examples/official-runs/2026-11-03/records/20261103T074537-7424df4144/events.jsonl",
+      "sha256": "fa9372feb17d4934c240bbfcb7c7e20a8983836fca2744d4ea5e939073bfb027"
+    },
+    {
+      "item": {
+        "slot_id": "01-F03",
+        "case_id": "01",
+        "state": "faulted",
+        "order": 1,
+        "required": false,
+        "run_id": "20261103T082308-07da0eb2ec",
+        "status": "failed",
+        "selected_for_case_demo": false,
+        "selection": "followup_never_replaces_primary",
+        "counted": true,
+        "followup_of": "01-F01",
+        "attempt_ordinal": 3,
+        "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T082308-07da0eb2ec.json",
+        "protocol_sha256": "68a543bc0ba1290afbdf916b0640a2efc7c02f5cbc2b4f24949333e6f785223e",
+        "error": "Agent payload exceeds the local bound",
+        "attempt": "01-F03",
+        "reporting_group": "prior_official_protocol_now_development"
+      },
+      "original_file": "runs/official/20261103T082308-07da0eb2ec/events.jsonl",
+      "public_file": "examples/official-runs/2026-11-03/records/20261103T082308-07da0eb2ec/events.jsonl",
+      "sha256": "dd2005fbf715a55e789f4b8dbfe5fd85dfef300565c004fc3dce9d26fd4414f6"
+    },
+    {
+      "item": {
+        "slot_id": "01-F04",
+        "case_id": "01",
+        "state": "faulted",
+        "order": 1,
+        "required": false,
+        "run_id": "20261103T083824-7be77b51da",
+        "status": "completed",
+        "selected_for_case_demo": false,
+        "selection": "followup_never_replaces_primary",
+        "counted": true,
+        "followup_of": "01-F01",
+        "attempt_ordinal": 4,
+        "registration_file": "examples/official-runs/2026-11-03/registrations/20261103T083824-7be77b51da.json",
+        "protocol_sha256": "daace662dd771ece88410cfb9378c99fc1a151ad4efa9a71cb84ca66180d00d1",
+        "verdict": "changed",
+        "verification_completed": true,
+        "attempt": "01-F04",
+        "reporting_group": "prior_official_protocol_now_development"
+      },
+      "original_file": "runs/official/20261103T083824-7be77b51da/events.jsonl",
+      "public_file": "examples/official-runs/2026-11-03/records/20261103T083824-7be77b51da/events.jsonl",
+      "sha256": "391a2766fad4f01359eb586dd5740c10a5aa2aaf97521dc9e09e5e785c574c2c"
+    }
+  ]
+}

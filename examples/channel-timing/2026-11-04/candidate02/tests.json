@@ -1,0 +1,8 @@
+{
+  "software_tests_passed": 14,
+  "software_tests_failed": 0,
+  "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_channel_timing_v4.py",
+  "mock_source_is_physical": false,
+  "API_requests": 0,
+  "hardware_commands": 0
+}

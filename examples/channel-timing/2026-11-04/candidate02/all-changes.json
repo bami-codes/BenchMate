@@ -1,0 +1,104 @@
+[
+  {
+    "case": "02",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261103T161130-f20340dd0b/diagnosis-faulted/20261103T163104-8ceed214a2/events.jsonl",
+    "mode": "training_refit",
+    "id": "proposal:1",
+    "old_status": "fit_error",
+    "new_status": "inadequate"
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "nominal",
+    "capture": 1,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "nominal",
+    "capture": 2,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "changed:R1",
+    "capture": 1,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "changed:R1",
+    "capture": 2,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "changed:C1",
+    "capture": 1,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "original_parameters",
+    "id": "changed:C1",
+    "capture": 2,
+    "purpose": "training",
+    "old_pass": false,
+    "new_pass": true
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "training_refit",
+    "id": "nominal",
+    "old_status": "inadequate",
+    "new_status": "adequate"
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "training_refit",
+    "id": "changed:R1",
+    "old_status": "inadequate",
+    "new_status": "adequate"
+  },
+  {
+    "case": "05",
+    "attempt": 1,
+    "file": "examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e/diagnosis-restored/20261104T030600-47c67ef048/events.jsonl",
+    "mode": "training_refit",
+    "id": "changed:C1",
+    "old_status": "inadequate",
+    "new_status": "adequate"
+  }
+]

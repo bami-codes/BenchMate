@@ -1,0 +1,36 @@
+{
+  "schema": "benchmate.reviewed_netlist.v1",
+  "source_kind": "intended_schematic",
+  "elements": [
+    {
+      "name": "R1",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 10000.0,
+      "model": "none"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    },
+    {
+      "name": "W1",
+      "kind": "W",
+      "a": "IN",
+      "b": "OUT",
+      "value": 0.0,
+      "model": "none"
+    }
+  ],
+  "source_sha256": "0e9384197011c98eb5c0c3105fb673c9712ae785c636ff2b18284514b078126f",
+  "confirmation": "I confirm the intended components, values, connections and ports.",
+  "reviewer_note": "Operator confirmed R1 10k and C1 1uF on OUT-REF plus direct IN-OUT connection. Actual R1 is at mini E8-E13 rather than proposed D8-D13; these are the same two breadboard nodes. USB-off wiring and same-port reconnection confirmed in response to the setup request. Visible direct IN-OUT wire W1 added by operator confirmation, not Spark component transcription.",
+  "operator_review_simulated": false,
+  "measurement_verified": false,
+  "hardware_IO": false
+}
