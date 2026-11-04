@@ -225,8 +225,10 @@ window.BM = (() => {
       this.val = mV; this.setAngle(mV);
       this.readout.firstChild.textContent = `${mV.toFixed(2)} mV${mV > FS ? ' (off scale)' : ''}`;
       const lab = stepN == null ? '' : /^(step|check|all|the)\b/.test(String(stepN)) ? String(stepN) : `step ${stepN}`;
-      this.readout.lastChild.textContent = lab + (worstRegion ? ` · worst region` : '');
-      this.readout.lastChild.title = worstRegion ? `Decided by the worst region: ${worstRegion}` : '';
+      // step n: the fit engine's residual after refitting to that measurement; check n: the frozen model driven by the measured IN, no refit
+      const how = /^check/.test(lab) ? 'frozen' : /^(step|all)/.test(lab) ? 'refit' : '';
+      this.readout.lastChild.textContent = [lab, how, worstRegion ? 'worst region' : ''].filter(Boolean).join(' · ');
+      this.readout.lastChild.title = `${how === 'frozen' ? 'Frozen model, driven by the measured IN; nothing refitted' : how === 'refit' ? (this.id === 'nominal' ? 'The drawing’s model has nothing to refit: the fit engine’s check against this measurement' : 'Residual after refitting to this measurement') : ''}${worstRegion ? `${how ? '. ' : ''}Decided by the worst region: ${worstRegion}` : ''}`;
       if (this.root.classList.contains('out')) { this.die(); return; }
       if (fitted) this.name.lastChild.textContent = fitted;
       this.root.classList.toggle('bad', passed === false);
@@ -253,25 +255,28 @@ window.BM = (() => {
   const fmtMiss = (x) => x == null ? '—' : `${Number(x).toFixed(2)} mV`;
   const words = {
     choice: (e) => `Spark chose experiment ${e.step}: ${e.label}.`,
-    forecast: (e) => e.final ? 'Before the check, the surviving explanation’s forecast is frozen and pushed to GitHub.' : (e.ids.length === 1 ? `Before measuring, the drawing’s forecast is frozen: the dashed line is what the output should do.` : `Before measuring, each standing explanation forecasts the output. ${e.ids.length} dashed lines, frozen.`),
+    // one survivor is named (the drawing only when it is the drawing); the forecast is for the commanded input, frozen before the capture
+    forecast: (e) => { const ids = e.ids || []; const one = ids.length === 1 ? (ids[0] === 'nominal' ? 'the drawing’s forecast' : `the forecast of the one explanation left, ${expName(ids[0])},`) : null;
+      if (e.final) return one ? `Before the check, ${one} is frozen for the held-back inputs and pushed to GitHub.` : `Before the check, the ${ids.length || ''} surviving explanations’ forecasts are frozen for the held-back inputs and pushed to GitHub.`;
+      return one ? `Before measuring, ${one} is frozen: the dashed line is what the output should do.` : `Before measuring, each standing explanation forecasts the output. ${ids.length} dashed lines, frozen.`; },
     bench: (e) => `The bench has to change: ${e.text}.`,
     capture: (e) => e.verification ? 'The bench measures the first held-back input.' : `The bench measures experiment ${e.step}.`,
     fit: (e, allow) => { const out = e.results.filter(r => !r.adequate), ok = e.results.filter(r => r.adequate);
       if (e.all_inadequate) return 'No explanation fits any more. Every needle is in the red.';
-      if (!out.length) return ok.length === 1 ? `${expName(ok[0].id)} still fits, within ${allow} mV.` : `${ok.map(r => expName(r.id)).join(' and ')} both still fit.`;
+      if (!out.length) return ok.length === 1 ? `${expName(ok[0].id)} still fits after refitting to this measurement, within ${allow} mV.` : `${ok.map(r => expName(r.id)).join(' and ')} both still fit after refitting to this measurement.`;
       const already = new Set(e.already_out || []); const fresh = out.filter(r => !already.has(r.id)), stay = out.filter(r => already.has(r.id));
       const names = (rs) => rs.map(r => expName(r.id)).join(' and ');
       const parts = [];
-      if (fresh.length) parts.push(`${names(fresh)} missed by too much and ${fresh.length === 1 ? 'is' : 'are'} crossed out.`);
+      if (fresh.length) parts.push(`${names(fresh)} ${fresh.length === 1 ? 'misses' : 'miss'} by too much even after refitting to this measurement, and ${fresh.length === 1 ? 'is' : 'are'} crossed out.`);
       if (stay.length) parts.push(`${names(stay)} ${stay.length === 1 ? 'stays' : 'stay'} crossed out from ${stay.length === 1 ? 'an earlier step' : 'earlier steps'}.`);
       if (ok.length) parts.push(ok.length === 1 ? `${expName(ok[0].id)} still fits.` : `${names(ok)} still fit.`);
       return parts.join(' '); },
     structure: (e) => { const a = e.diff?.added || []; return a.length ? `Spark proposes a part the drawing doesn’t show: ${a.map(x => `${kindWord(x.kind)} between ${x.a} and ${x.b}`).join(', ')}.` : 'Spark proposes a different circuit.'; },
-    structureFit: (e) => e.status === 'adequate' ? `The proposed circuit fits every measurement so far, within ${fmtMiss(e.miss_mV)}.` : e.status === 'fit_error' ? 'The proposed circuit could not be fitted.' : `The proposed circuit misses by ${fmtMiss(e.miss_mV)}. Crossed out.`,
+    structureFit: (e) => e.status === 'adequate' ? `The proposed circuit, refitted to every measurement so far, fits within ${fmtMiss(e.miss_mV)}.` : e.status === 'fit_error' ? 'The proposed circuit could not be fitted.' : `The proposed circuit, refitted to every measurement so far, still misses by ${fmtMiss(e.miss_mV)}. Crossed out.`,
     verifyReq: () => 'Spark asks for the check: two inputs it never saw will be measured.',
     heldBack: (k, n) => `The bench measures held-back input ${k} of ${n}.`,
     published: () => 'The forecast is on GitHub. From here nothing can be re-fitted.',
-    scored: (e) => { const vals = Object.values(e.conditional || {}); const ok = vals.every(v => v.passed); return `Held-back input ${e.index ?? ''}: ${ok ? 'within' : 'outside'} the frozen allowance.`; },
+    scored: (e) => { const vals = Object.values(e.conditional || {}); const ok = vals.every(v => v.passed); return `Held-back input ${e.index ?? ''}: the frozen model, driven by the measured input, is ${ok ? 'within' : 'outside'} the allowance.`; },
     // the reading stage: one operator reading, forecast per explanation before it is taken
     readingReq: (e, live) => live === 1 ? `One explanation is left. Spark asks for one reading of ${e.component || 'the part'} itself.` : `${live === 2 ? 'Two explanations' : live > 2 ? `${live} explanations` : 'The explanations'} still fit. Spark asks for one reading.`,
     readingForecast: (e) => `Before the reading, each explanation says what ${e.component || 'the part'} should read.`,

@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "b4d9518e794feba900c96ea786525301847d1764",
-  "source_site_tree": "71e353962222d8f5a3848e8789f214f1ea040061",
-  "previous_gh_pages_commit": "b55aecc618e6ce1043d9398eadc2228831541139",
+  "source_main_commit": "8f47263765a1a0bc7336d27f62c36fe682d359ee",
+  "source_site_tree": "b6de17b4bea898588b161a5aa7f8ddef136744ca",
+  "previous_gh_pages_commit": "06589da0b92b00599990f5166cfd318190ff2b0c",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "netlistSVG sizes the REF line and viewBox to the parallel branches, so case 04's proposed diode D1 reaches REF and its label is no longer clipped.",
+  "change": "Case 04 is the representative path on the landing (policy structure_spotlight), with a four-line strip read from the run file; design-04.svg is the drawing Spark read (R2 20 kΩ) and the amendment is shown as history; labels name the quantity shown (frozen command-input forecast, residual after refit, frozen model on measured IN); a single survivor is named; replay Jump-to row.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports",
+    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js: 20/20 replays to the verdict, errors none; landing at 1440 and 390 with no overflow",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

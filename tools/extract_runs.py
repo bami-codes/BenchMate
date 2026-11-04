@@ -811,7 +811,13 @@ def extract_terminal_pair(pair, case, label, rates, photos, amendment=None):
         run['pair_dir'] = pair.name
         run['registration'] = {k: reg.get(k) for k in ('cohort', 'attempt', 'official', 'counted', 'selected_first_attempt', 'freeze_commit', 'blind_test', 'known_case_development')}
         if amendment:
-            run['design_amendment'] = amendment
+            # the amendment text claims what the image Spark read in THIS run shows; check it against the intake transcription
+            comp = amendment.get('component'); want = amendment.get('image_value')
+            if comp and want:
+                read = next((c.get('marking') for c in intake['components'] if c.get('name') == comp), None)
+                if read is None or f"{comp} {read}" != want:
+                    raise SystemExit(f"amendment says the image shows {want!r} but intake {intake['run']} transcribed {comp} as {read!r}")
+            run['design_amendment'] = {**amendment, 'intake_run': intake['run']}
 
     fchild = pair / res['faulted_diagnosis']
     fault = extract(fchild, case, label, intake, rates)

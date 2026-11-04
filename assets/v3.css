@@ -109,6 +109,13 @@ p{margin:0}
 .transport .seal{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 9px;border-radius:4px;background:rgba(0,0,0,.28);border:1px dashed rgba(255,255,255,.5)}
 .transport .seal.open{border-style:solid;border-color:var(--fault);background:rgba(213,52,44,.25)}
 .transport .seal.stopped{border-color:var(--tape);background:rgba(243,210,90,.18)}
+/* key moments: one quiet row under the transport (the same block titles the notebook uses), ticks on the scrubber; kept in the compact shelf so a jump is always one click away, dropped on phones */
+.jumps{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;color:#fff;font:500 12.5px/1.3 var(--narrow);margin-top:-4px}
+.jumps .lab{opacity:.7}
+.jumps button{background:none;border:0;padding:2px 0;color:#fff;font:inherit;opacity:.88;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;border-radius:3px}
+.jumps button:hover,.jumps button:focus-visible{opacity:1;text-decoration-style:solid}
+.jumps button .num{opacity:.7;margin-left:5px}
+@media (max-width:900px){.jumps{display:none}}
 
 /* ---------- notebook ---------- */
 .book-wrap{max-width:1240px;margin:18px auto 60px;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;align-items:start}
@@ -707,3 +714,24 @@ footer a{color:#fff}
 .verdict-card .vs.planted .big{font-size:19px}
 .meter .tag{max-width:calc(100% - 8px);white-space:normal;text-align:center;line-height:1.15;right:4px;transform:rotate(-1.2deg)} /* the label never runs past its meter */
 .meter .read{gap:8px}
+
+/* round 4q: the representative path — the proposal run's record in four lines on the mat, before the buttons (landing only) */
+.claim-top .path{margin:16px 0 0;color:#fff}
+.claim-top .path-h{max-width:none;font:600 14px/1.3 var(--narrow);letter-spacing:.02em;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.claim-top .path-h small{font:400 12.5px/1.3 var(--sans);opacity:.8}
+.claim-top .path-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 22px;counter-reset:ps}
+.claim-top .path-steps li{border-top:1px solid rgba(255,255,255,.45);padding:8px 0 0 30px;position:relative;font-size:13.5px;line-height:1.42}
+.claim-top .path-steps li::before{counter-increment:ps;content:counter(ps);position:absolute;left:0;top:9px;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,.75);display:grid;place-items:center;font:600 12px/1 var(--narrow)}
+.claim-top .path-steps b{display:block;font:600 15.5px/1.25 var(--narrow);margin-bottom:3px}
+.claim-top .path-steps span{opacity:.92}
+.claim-top .path-steps q{display:block;margin-top:3px;font-style:italic}
+.claim-top .path-steps q::before{content:"In its own words: \201C"}.claim-top .path-steps q::after{content:"\201D"}
+.claim-top .path-steps a{color:#fff}
+.claim-top .path-steps .num{font-weight:600;white-space:nowrap}
+.claim-top .path .ev{text-decoration-color:rgba(255,255,255,.6)}
+.claim-top .path .ev:hover{background:rgba(255,255,255,.16)}
+.claim-top .ctas{align-items:center}
+.claim-top .ctas .jump{color:#fff;font:500 14px/1.2 var(--narrow);text-decoration:underline;text-decoration-color:rgba(255,255,255,.55);text-underline-offset:3px}
+.claim-top .ctas .jump:hover{text-decoration-color:#fff}
+@media (max-width:1000px){.claim-top .path-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.claim-top .path-steps{grid-template-columns:1fr;gap:8px}}
