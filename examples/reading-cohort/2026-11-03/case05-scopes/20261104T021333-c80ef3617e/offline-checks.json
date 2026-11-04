@@ -1,0 +1,126 @@
+{
+  "scope": "Offline shared-ngspice preparation, not physical evidence or Spark experiment selection",
+  "paid_calls": 0,
+  "hardware_commands": 0,
+  "nominal": [
+    {
+      "name": "W1",
+      "kind": "W",
+      "a": "IN",
+      "b": "OUT",
+      "value": 0.0,
+      "model": "none"
+    },
+    {
+      "name": "R1",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 10000.0,
+      "model": "none"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  ],
+  "software_fault_fixture": [
+    {
+      "name": "Rx",
+      "kind": "R",
+      "a": "IN",
+      "b": "OUT",
+      "value": 20000.0,
+      "model": "none"
+    },
+    {
+      "name": "R1",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 10000.0,
+      "model": "none"
+    },
+    {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    }
+  ],
+  "menu_checks": [
+    {
+      "action": "unloaded_step_small",
+      "fault_max_abs_OUT_V": 0.06666666666666689,
+      "nominal_max_abs_OUT_V": 0.2,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "loaded_step_small",
+      "fault_max_abs_OUT_V": 0.03998399039423676,
+      "nominal_max_abs_OUT_V": 0.2,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "unloaded_step_large",
+      "fault_max_abs_OUT_V": 0.1666666666666669,
+      "nominal_max_abs_OUT_V": 0.5,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "loaded_step_large",
+      "fault_max_abs_OUT_V": 0.09995997598559173,
+      "nominal_max_abs_OUT_V": 0.5,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "unloaded_sine_1hz_small",
+      "fault_max_abs_OUT_V": 0.06660723802085863,
+      "nominal_max_abs_OUT_V": 0.199984208841,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "unloaded_sine_1hz_large",
+      "fault_max_abs_OUT_V": 0.266428952083282,
+      "nominal_max_abs_OUT_V": 0.799936835363,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "unloaded_sine_5hz_small",
+      "fault_max_abs_OUT_V": 0.048935224216500935,
+      "nominal_max_abs_OUT_V": 0.15,
+      "parallel_value_change_max_difference_mV": 0.0
+    },
+    {
+      "action": "loaded_sine_5hz_small",
+      "fault_max_abs_OUT_V": 0.02974311352772383,
+      "nominal_max_abs_OUT_V": 0.15,
+      "parallel_value_change_max_difference_mV": 0.0
+    }
+  ],
+  "first_software_step_assessment": [
+    {
+      "id": "nominal",
+      "status": "inadequate"
+    },
+    {
+      "id": "changed:R1",
+      "status": "inadequate"
+    },
+    {
+      "id": "changed:C1",
+      "status": "inadequate"
+    }
+  ],
+  "all_value_hypotheses_inadequate": true,
+  "nominal_fault_tau_s": {
+    "unloaded": 0.006666666666666665,
+    "loaded": 0.003998399039423653
+  }
+}

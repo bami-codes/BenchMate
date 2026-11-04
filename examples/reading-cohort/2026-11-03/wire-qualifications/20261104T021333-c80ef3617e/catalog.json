@@ -1,0 +1,294 @@
+{
+  "schema": "benchmate.wire_localization_catalog.v1",
+  "components": {
+    "R1": {
+      "name": "R1",
+      "kind": "R",
+      "a": "OUT",
+      "b": "REF",
+      "value": 10000.0,
+      "model": "none"
+    },
+    "C1": {
+      "name": "C1",
+      "kind": "C",
+      "a": "OUT",
+      "b": "REF",
+      "value": 1e-06,
+      "model": "none"
+    },
+    "W1": {
+      "name": "W1",
+      "kind": "R",
+      "a": "IN",
+      "b": "OUT",
+      "value": 0.0,
+      "model": "none",
+      "physical_kind": "W",
+      "numeric_observable_adapter": "wire_path_resistance_ohm"
+    }
+  },
+  "explanations": [
+    {
+      "id": "on_board_path:proposal:1",
+      "basis_model_id": "proposal:1",
+      "description": "The isolated mini-board IN-OUT path, including W1 and its contacts, accounts for the fitted resistance.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            9500.0,
+            10500.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 10000.0
+        },
+        "C1": {
+          "electrical_interval": [
+            9.499999999999999e-07,
+            1.05e-06
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-06
+        },
+        "W1": {
+          "electrical_interval": [
+            17782.794100389227,
+            23713.737056616552
+          ],
+          "interval_rule": {
+            "kind": "training_only_bounded_grid_envelope",
+            "grid": [
+              1000.0,
+              1154.781984689458,
+              1333.521432163324,
+              1539.926526059492,
+              1778.2794100389228,
+              2053.525026457146,
+              2371.373705661655,
+              2738.4196342643613,
+              3162.2776601683795,
+              3651.741272548377,
+              4216.965034285822,
+              4869.675251658631,
+              5623.413251903491,
+              6493.816315762113,
+              7498.942093324558,
+              8659.643233600653,
+              10000.0,
+              11547.819846894581,
+              13335.21432163324,
+              15399.26526059492,
+              17782.794100389227,
+              19851.78774353608,
+              20535.25026457146,
+              23713.737056616552,
+              27384.196342643612,
+              31622.776601683792,
+              36517.41272548377,
+              42169.65034285822,
+              48696.75251658631,
+              56234.13251903491,
+              64938.16315762113,
+              74989.42093324558,
+              86596.43233600653,
+              100000.0
+            ],
+            "passed": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "whole_and_region_limit_mV": 9.0,
+            "reserved_OUT_used": 0,
+            "other_parameters_held_fixed": true,
+            "statistical_confidence_interval": false,
+            "disjoint_regions_enclosed": false,
+            "boundary_pass_uses_open_end": false
+          },
+          "printed_nominal": null
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "R",
+            "model": "none",
+            "name": "R1",
+            "value": 10000.0
+          },
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "C",
+            "model": "none",
+            "name": "C1",
+            "value": 1e-06
+          },
+          {
+            "a": "IN",
+            "b": "OUT",
+            "kind": "R",
+            "model": "none",
+            "name": "R2",
+            "value": 19851.78774353608
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      },
+      "location_hypothesis": true,
+      "equivalence": {
+        "algebra": "R_series_total = R_board_path + R_external",
+        "shared_terminal_model": true,
+        "new_parameters_fitted": 0,
+        "physical_location_not_observed": true
+      }
+    },
+    {
+      "id": "external_path:proposal:1",
+      "basis_model_id": "proposal:1",
+      "description": "The isolated mini-board IN-OUT path is near-short; the fitted resistance is external.",
+      "components": {
+        "R1": {
+          "electrical_interval": [
+            9500.0,
+            10500.0
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 10000.0
+        },
+        "C1": {
+          "electrical_interval": [
+            9.499999999999999e-07,
+            1.05e-06
+          ],
+          "interval_rule": {
+            "kind": "unchanged_design_tolerance",
+            "fraction": 0.05
+          },
+          "printed_nominal": 1e-06
+        },
+        "W1": {
+          "electrical_interval": [
+            0.0,
+            10.0
+          ],
+          "interval_rule": {
+            "kind": "declared_near_short_path_engineering_category",
+            "low_ohm": 0.0,
+            "high_ohm": 10.0,
+            "not_a_beeper_threshold": true,
+            "not_exact_zero_proof": true
+          },
+          "printed_nominal": null
+        }
+      },
+      "model": {
+        "elements": [
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "R",
+            "model": "none",
+            "name": "R1",
+            "value": 10000.0
+          },
+          {
+            "a": "OUT",
+            "b": "REF",
+            "kind": "C",
+            "model": "none",
+            "name": "C1",
+            "value": 1e-06
+          },
+          {
+            "a": "IN",
+            "b": "OUT",
+            "kind": "R",
+            "model": "none",
+            "name": "R2",
+            "value": 19851.78774353608
+          }
+        ],
+        "diode": {
+          "is_a": 1e-09,
+          "n": 1.8
+        }
+      },
+      "location_hypothesis": true,
+      "equivalence": {
+        "algebra": "R_series_total = R_board_path + R_external",
+        "shared_terminal_model": true,
+        "new_parameters_fitted": 0,
+        "physical_location_not_observed": true
+      }
+    }
+  ],
+  "training_only_intervals": true,
+  "terminal_verification_sha256": "a4c74914682f3f62de1694e9d2b5965661ae9b135e45805cbb008d136cfb8700",
+  "photograph_received": false,
+  "operator_reading_received": false,
+  "scope": "Bounded physical placements of the same validated terminal series path. W1 <=10ohm is a predeclared near-short category, not exact zero or meter calibration. The wire and external contributions may coexist outside these alternatives; a reading can reject both. A printed wire marking is unconstrained and cannot localize resistance.",
+  "parent_catalog_sha256": "f4639c00d7ae33f4afb705e535716dd338f81e69b3f81a181167601a61f1e84c",
+  "design_sha256": "5950f4638d31bc51f41c860244d92a351a5300497ce254683251f1c8a167fdea",
+  "wire": "W1",
+  "low_path_max_ohm": 10.0,
+  "observable": "isolated power-off mini-board IN-OUT path resistance with W1 and its contacts retained",
+  "wire_reading_setup": {
+    "isolation": "Disconnect all three mini-board leads from the large fixture, keep their mini-board ends installed.",
+    "DMM_terminals": "Free metal ends of the disconnected IN and OUT leads.",
+    "W1_installed": true,
+    "parallel_R_C_installed": true,
+    "REF_lead": "Disconnected from the large fixture and left floating.",
+    "no_alternate_IN_OUT_path": "IN has only W1; the parallel OUT-REF branches end at the floating REF port.",
+    "included_contacts": "Mini-board wire, sockets and IN/OUT leads retained in the measured path.",
+    "USB_off": true,
+    "discharge_wait_s": 10
+  },
+  "terminal_location_identified": false,
+  "reserved_OUT_used_for_intervals": 0
+}
