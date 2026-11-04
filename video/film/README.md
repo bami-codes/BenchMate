@@ -1,16 +1,20 @@
-# The film (v3): one stage, one camera
+# The film: twenty-seven composed shots
 
-`stage.html` + `film.js` place the site's own parts (scope, meters, notebook cards, schematic, tape) on one large sheet and
-move a virtual camera over it for about 2:50. Every waveform, number, band, verdict and seal sentence is read from
-`site/data/runs/*.json`, `cases.json` and `census.json`; `frame(t)` is a pure function of time, so frames are rendered
-one by one (60 fps) and the result is deterministic.
+`shots.html` + `shots.js` compose each 1920×1080 frame directly: the site's scope and meters are the instruments, everything
+else is set at film scale. Every waveform, number, range, label, verdict and seal sentence is read from `site/data/runs/*.json`
+and `cases.json`; `frame(t)` is a pure function of time (no one-shot state), so frames render one by one at 60 fps and a frame
+rendered cold equals the same frame reached in sequence. Shots crossfade over 0.5 s; captions have their own line at the bottom.
+
+Seven narration clips (`voice/s1.mp3 … s7.mp3`, text in `narration.txt`) drive the seven scenes: `voice_durations.py` writes
+`voice/durations.json`, and each scene's shots stretch together to its clip (PLANNED in `shots.js` and `voice_durations.py`
+must agree; today s1 11, s2 18, s3 52, s4 43, s5 15, s6 20.5, s7 13.5 = 173 s).
 
     python3 -m http.server --directory <repo root> 8796 &      # the stage reads site/data over http
-    node render.js film 0 170 --fps 60 --jobs 3                # out/film.mp4 (about 5.5 min on 4 cores)
-    node render.js film 0 170 --stills 9.5,24.5,70.5           # review stills → frames/
-    node render.js film 0 0 --meta                             # out/captions.json, out/scenes.json
-    python3 voice_durations.py                                 # voice/s1.mp3 … s7.mp3 → voice/durations.json (scene lengths follow the clips)
-    python3 mux.py                                             # out/benchmate.mp4 + out/benchmate.srt (narration + bed)
+    node render.js film 0 173 --fps 60 --jobs 3                # out/film.mp4 (about 6 min on 4 cores); t1 = filmTotal()
+    node render.js film 0 0 --meta                             # out/captions.json, out/scenes.json, out/sfx.json
+    node render.js chk 0 173 --stills 7.5,41,53                # review stills → frames/
+    python3 voice_durations.py                                 # clips → voice/durations.json (scene lengths follow the clips)
+    python3 audio.py                                           # out/benchmate.mp4 + out/benchmate.srt (bed, SFX from sfx.json, narration)
 
-After adding voice clips: run `voice_durations.py`, then render again (the timeline stretches to the clips), then `--meta` and `mux.py`.
-The narration text is `../v2/narration.txt`; the shot list is `../v2/script.json`.
+After adding voice clips: `voice_durations.py`, then `--meta` to read the new total, render again with that total, `--meta`
+again, then `audio.py`. `stage.html` + `film.js` are the earlier one-camera version, kept for reference; `mux.py` is superseded by `audio.py`.

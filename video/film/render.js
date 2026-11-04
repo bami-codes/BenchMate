@@ -2,7 +2,7 @@
 //   node render.js <name> <t0> <t1> [--fps 60] [--jobs 3] [--stills t1,t2,...]
 // Renders [t0, t1) in parallel chunks (one Chromium context each), JPEG q95 frames piped to ffmpeg, then concatenates.
 const { chromium } = require('playwright'); const fs = require('fs'); const path = require('path'); const { spawn } = require('child_process');
-const V = __dirname; const BASE = process.env.BASE || 'http://127.0.0.1:8796/video/film/stage.html';
+const V = __dirname; const BASE = process.env.BASE || 'http://127.0.0.1:8796/video/film/shots.html';
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const [name, t0s, t1s] = process.argv.slice(2); const t0 = parseFloat(t0s), t1 = parseFloat(t1s);
 const FPS = parseInt(arg('--fps', '60')), JOBS = parseInt(arg('--jobs', '3')); const stills = arg('--stills', null);
@@ -34,7 +34,7 @@ async function renderChunk(browser, idx, a, b) {
 
 (async () => {
   const browser = await chromium.launch();
-  if (process.argv.includes('--meta')) { const { pg } = await openStage(browser); fs.writeFileSync(path.join(V, 'out', 'captions.json'), JSON.stringify(await pg.evaluate(() => filmCaptions()), null, 1)); fs.writeFileSync(path.join(V, 'out', 'scenes.json'), JSON.stringify(await pg.evaluate(() => filmScenes()), null, 1)); console.log('total', await pg.evaluate(() => filmTotal())); await browser.close(); return; }
+  if (process.argv.includes('--meta')) { const { pg } = await openStage(browser); fs.writeFileSync(path.join(V, 'out', 'captions.json'), JSON.stringify(await pg.evaluate(() => filmCaptions()), null, 1)); fs.writeFileSync(path.join(V, 'out', 'scenes.json'), JSON.stringify(await pg.evaluate(() => filmScenes()), null, 1)); if (await pg.evaluate(() => !!window.filmSfx)) fs.writeFileSync(path.join(V, 'out', 'sfx.json'), JSON.stringify(await pg.evaluate(() => filmSfx()), null, 1)); console.log('total', await pg.evaluate(() => filmTotal())); await browser.close(); return; }
   if (stills) {
     const { pg } = await openStage(browser);
     for (const t of stills.split(',').map(Number)) { await pg.evaluate(t => { frame(t); return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); }, t); await pg.waitForTimeout(120); await pg.screenshot({ path: path.join(V, 'frames', `${name}_${t.toFixed(2).padStart(6, '0')}.png`) }); }

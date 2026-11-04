@@ -7,7 +7,7 @@ Each scene gets its clip length plus 1.2 s of air (0.4 before, 0.8 after), never
 """
 import json, pathlib, subprocess
 V = pathlib.Path(__file__).resolve().parent; VO = V / 'voice'
-PLANNED = {'s1': 11, 's2': 16, 's3': 58, 's4': 38, 's5': 22, 's6': 14, 's7': 11}
+PLANNED = {'s1': 11, 's2': 18, 's3': 52, 's4': 43, 's5': 15, 's6': 20.5, 's7': 13.5}  # must match PLANNED in shots.js
 out = {}
 for sid, planned in PLANNED.items():
     f = next((p for p in [VO / f'{sid}.mp3', VO / f'{sid}.wav', VO / f'{sid}.m4a'] if p.exists()), None)
