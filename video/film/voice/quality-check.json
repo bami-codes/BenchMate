@@ -1,0 +1,61 @@
+{
+  "schema": "benchmate.film_voice_quality.v1",
+  "transcription_requests": 2,
+  "transcription_checks": [
+    {
+      "scenes": [
+        "s3"
+      ],
+      "model_id": "scribe_v2",
+      "reference_text_sent_to_transcriber": false,
+      "transcript": "Case four, a voltage divider rebuilt from a forum problem. Two small step tests fit all three starting explanations. Then Spark chooses a larger sine wave. All three fail. Changing component values is no longer enough. Spark writes a new circuit model, a diode from out to ref, missing from the drawing. That would explain why only the positive half clips. The simulator fits it. The fitted model is frozen and published before two new tests with no refitting. The worst region errors are five point one nine and four point zero five millivolts, both under the nine allowed. The seal opens a hidden diode in the direction Spark proposed",
+      "normalization": "Lowercase and punctuation ignored; R one and R1 treated as the same token.",
+      "expected_tokens": 110,
+      "observed_tokens": 110,
+      "word_sequence_matches": true,
+      "provider_character_cost": 13
+    },
+    {
+      "scenes": [
+        "s1",
+        "s2",
+        "s4",
+        "s5",
+        "s6",
+        "s7"
+      ],
+      "model_id": "scribe_v2",
+      "reference_text_sent_to_transcriber": false,
+      "transcript": "The drawing is right. The board looks right. The output is wrong. What should you measure next? BenchMate gives Meta's Muse Spark a forty-dollar Arduino bench. Spark reads the schematic and chooses tests from a fixed menu. Before every measurement, the forecast is frozen. We planted the fault. Spark never sees it. Case one: a filter output too small. The drawing's model fails. After three tests, two explanations remain. R1 changed, or extra resistance before it. They produce identical waveforms. Spark asks for a measurement the menu cannot provide, the resistance of R1. The expected range under each explanation is frozen first. Sam outlines the parts. Spark points at R1. The operator reads four point seven one kilohms. R1 has the right value. The extra resistance sits before it. The seal reveals two ten-kilohm resistors between the input and R1. After repair, a fresh Spark reports no mismatch in the tests it chose. Five forum problems rebuilt as small circuits. In case five, Spark proposed resistance where the drawing showed a wire, and one physical reading placed it off the board. Every case ended with a repaired board and a rerun that reported no mismatch in the tests Spark chose. Every measurement links back to a recorded forecast. Models are refitted during exploration, then frozen for two final checks on the measured inputs. Stopped and abstained attempts stay in the ledger. One command, with nothing installed, checks any record offline. BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
+      "normalization": "Lowercase and punctuation ignored; R one and R1 treated as the same token.",
+      "expected_tokens": 268,
+      "observed_tokens": 268,
+      "word_sequence_matches": true,
+      "provider_character_cost": 35
+    }
+  ],
+  "s7_acoustic_sentence_gaps_seconds": [
+    {
+      "start": 6.025692,
+      "end": 6.552698,
+      "duration": 0.527007
+    },
+    {
+      "start": 7.756304,
+      "end": 8.057528,
+      "duration": 0.301224
+    },
+    {
+      "start": 9.138753,
+      "end": 9.607188,
+      "duration": 0.468435
+    }
+  ],
+  "silence_detection_threshold_dbfs": -35,
+  "decode_checks_passed": 7,
+  "original_audio_trimmed": false,
+  "original_audio_gain_adjusted": false,
+  "original_audio_time_stretched": false,
+  "human_listening_review_completed": false,
+  "scope": "Automated decoding, word-sequence, timing, and pause checks; not a subjective assessment of performance or pronunciation quality."
+}

@@ -1,0 +1,2336 @@
+{
+  "schema": "benchmate.film_voice_timings.v1",
+  "source": "ElevenLabs TTS normalized alignment; clip-relative seconds.",
+  "scenes": {
+    "s1": {
+      "audio_sha256": "7828c55ae635ccb5f90e411e8cb982918bd6f76d648efd4dfea6b885a7e20bd8",
+      "duration_seconds": 5.804989,
+      "normalized_text": "The drawing is right. The board looks right. The output is wrong. What should you measure next?",
+      "words": [
+        {
+          "text": "The",
+          "start": 0.07,
+          "end": 0.163
+        },
+        {
+          "text": "drawing",
+          "start": 0.209,
+          "end": 0.488
+        },
+        {
+          "text": "is",
+          "start": 0.534,
+          "end": 0.604
+        },
+        {
+          "text": "right.",
+          "start": 0.673,
+          "end": 1.138
+        },
+        {
+          "text": "The",
+          "start": 1.254,
+          "end": 1.358
+        },
+        {
+          "text": "board",
+          "start": 1.405,
+          "end": 1.637
+        },
+        {
+          "text": "looks",
+          "start": 1.683,
+          "end": 1.881
+        },
+        {
+          "text": "right.",
+          "start": 1.939,
+          "end": 2.345
+        },
+        {
+          "text": "The",
+          "start": 2.589,
+          "end": 2.717
+        },
+        {
+          "text": "output",
+          "start": 2.775,
+          "end": 3.111
+        },
+        {
+          "text": "is",
+          "start": 3.17,
+          "end": 3.251
+        },
+        {
+          "text": "wrong.",
+          "start": 3.297,
+          "end": 3.727
+        },
+        {
+          "text": "What",
+          "start": 4.005,
+          "end": 4.191
+        },
+        {
+          "text": "should",
+          "start": 4.226,
+          "end": 4.389
+        },
+        {
+          "text": "you",
+          "start": 4.423,
+          "end": 4.493
+        },
+        {
+          "text": "measure",
+          "start": 4.551,
+          "end": 4.818
+        },
+        {
+          "text": "next?",
+          "start": 4.865,
+          "end": 5.364
+        }
+      ],
+      "sentences": [
+        {
+          "text": "The drawing is right.",
+          "start": 0.0,
+          "end": 1.138
+        },
+        {
+          "text": "The board looks right.",
+          "start": 1.138,
+          "end": 2.345
+        },
+        {
+          "text": "The output is wrong.",
+          "start": 2.345,
+          "end": 3.727
+        },
+        {
+          "text": "What should you measure next?",
+          "start": 3.727,
+          "end": 5.364
+        }
+      ],
+      "key_cues": []
+    },
+    "s2": {
+      "audio_sha256": "f69e10dd7885fb11403f21cfb4ca6e6b9dd19526c9965116886227c1d090c0af",
+      "duration_seconds": 14.628571,
+      "normalized_text": "BenchMate gives Meta's Muse Spark a forty-dollar Arduino bench. Spark reads the schematic and chooses tests from a fixed menu. Before every measurement, the forecast is frozen. We planted the fault. Spark never sees it.",
+      "words": [
+        {
+          "text": "BenchMate",
+          "start": 0.023,
+          "end": 0.569
+        },
+        {
+          "text": "gives",
+          "start": 0.615,
+          "end": 0.824
+        },
+        {
+          "text": "Meta's",
+          "start": 0.906,
+          "end": 1.219
+        },
+        {
+          "text": "Muse",
+          "start": 1.3,
+          "end": 1.567
+        },
+        {
+          "text": "Spark",
+          "start": 1.591,
+          "end": 1.962
+        },
+        {
+          "text": "a",
+          "start": 2.032,
+          "end": 2.078
+        },
+        {
+          "text": "forty-dollar",
+          "start": 2.159,
+          "end": 2.694
+        },
+        {
+          "text": "Arduino",
+          "start": 2.763,
+          "end": 3.228
+        },
+        {
+          "text": "bench.",
+          "start": 3.297,
+          "end": 3.808
+        },
+        {
+          "text": "Spark",
+          "start": 4.249,
+          "end": 4.632
+        },
+        {
+          "text": "reads",
+          "start": 4.714,
+          "end": 4.981
+        },
+        {
+          "text": "the",
+          "start": 5.027,
+          "end": 5.108
+        },
+        {
+          "text": "schematic",
+          "start": 5.155,
+          "end": 5.689
+        },
+        {
+          "text": "and",
+          "start": 5.759,
+          "end": 5.886
+        },
+        {
+          "text": "chooses",
+          "start": 5.933,
+          "end": 6.293
+        },
+        {
+          "text": "tests",
+          "start": 6.351,
+          "end": 6.734
+        },
+        {
+          "text": "from",
+          "start": 6.769,
+          "end": 6.908
+        },
+        {
+          "text": "a",
+          "start": 6.954,
+          "end": 6.978
+        },
+        {
+          "text": "fixed",
+          "start": 7.047,
+          "end": 7.314
+        },
+        {
+          "text": "menu.",
+          "start": 7.372,
+          "end": 7.918
+        },
+        {
+          "text": "Before",
+          "start": 8.359,
+          "end": 8.696
+        },
+        {
+          "text": "every",
+          "start": 8.742,
+          "end": 8.998
+        },
+        {
+          "text": "measurement,",
+          "start": 9.056,
+          "end": 9.567
+        },
+        {
+          "text": "the",
+          "start": 9.613,
+          "end": 9.706
+        },
+        {
+          "text": "forecast",
+          "start": 9.764,
+          "end": 10.24
+        },
+        {
+          "text": "is",
+          "start": 10.298,
+          "end": 10.379
+        },
+        {
+          "text": "frozen.",
+          "start": 10.426,
+          "end": 11.053
+        },
+        {
+          "text": "We",
+          "start": 11.494,
+          "end": 11.645
+        },
+        {
+          "text": "planted",
+          "start": 11.703,
+          "end": 12.086
+        },
+        {
+          "text": "the",
+          "start": 12.121,
+          "end": 12.191
+        },
+        {
+          "text": "fault.",
+          "start": 12.249,
+          "end": 12.713
+        },
+        {
+          "text": "Spark",
+          "start": 12.887,
+          "end": 13.259
+        },
+        {
+          "text": "never",
+          "start": 13.328,
+          "end": 13.514
+        },
+        {
+          "text": "sees",
+          "start": 13.572,
+          "end": 13.816
+        },
+        {
+          "text": "it.",
+          "start": 13.886,
+          "end": 14.176
+        }
+      ],
+      "sentences": [
+        {
+          "text": "BenchMate gives Meta's Muse Spark a forty-dollar Arduino bench.",
+          "start": 0.0,
+          "end": 3.808
+        },
+        {
+          "text": "Spark reads the schematic and chooses tests from a fixed menu.",
+          "start": 3.808,
+          "end": 7.918
+        },
+        {
+          "text": "Before every measurement, the forecast is frozen.",
+          "start": 7.918,
+          "end": 11.053
+        },
+        {
+          "text": "We planted the fault.",
+          "start": 11.053,
+          "end": 12.713
+        },
+        {
+          "text": "Spark never sees it.",
+          "start": 12.713,
+          "end": 14.176
+        }
+      ],
+      "key_cues": [
+        {
+          "text": "Meta's Muse Spark",
+          "start": 0.906,
+          "end": 1.962
+        },
+        {
+          "text": "Before every measurement",
+          "start": 8.359,
+          "end": 9.509
+        },
+        {
+          "text": "forecast is frozen",
+          "start": 9.764,
+          "end": 10.902
+        }
+      ]
+    },
+    "s3": {
+      "audio_sha256": "b4fd0bd5fe625447c06109a7d77a7025c77760cdb367416e641d3be71c07e561",
+      "duration_seconds": 44.071474,
+      "normalized_text": "Case four: a voltage divider, rebuilt from a forum problem. Two small step tests fit all three starting explanations. Then Spark chooses a larger sine wave. All three fail. Changing component values is no longer enough. Spark writes a new circuit model: a diode from out to ref, missing from the drawing. That would explain why only the positive half clips. The simulator fits it. The fitted model is frozen and published before two new tests, with no refitting. The worst-region errors are five point one nine and four point zero five millivolts, both under the nine allowed. The seal opens: a hidden diode, in the direction Spark proposed.",
+      "words": [
+        {
+          "text": "Case",
+          "start": 0.023,
+          "end": 0.325
+        },
+        {
+          "text": "four:",
+          "start": 0.372,
+          "end": 0.813
+        },
+        {
+          "text": "a",
+          "start": 0.929,
+          "end": 0.975
+        },
+        {
+          "text": "voltage",
+          "start": 1.045,
+          "end": 1.44
+        },
+        {
+          "text": "divider,",
+          "start": 1.474,
+          "end": 2.032
+        },
+        {
+          "text": "rebuilt",
+          "start": 2.206,
+          "end": 2.624
+        },
+        {
+          "text": "from",
+          "start": 2.67,
+          "end": 2.798
+        },
+        {
+          "text": "a",
+          "start": 2.844,
+          "end": 2.868
+        },
+        {
+          "text": "forum",
+          "start": 2.937,
+          "end": 3.286
+        },
+        {
+          "text": "problem.",
+          "start": 3.344,
+          "end": 3.866
+        },
+        {
+          "text": "Two",
+          "start": 4.307,
+          "end": 4.54
+        },
+        {
+          "text": "small",
+          "start": 4.621,
+          "end": 4.923
+        },
+        {
+          "text": "step",
+          "start": 4.992,
+          "end": 5.259
+        },
+        {
+          "text": "tests",
+          "start": 5.317,
+          "end": 5.724
+        },
+        {
+          "text": "fit",
+          "start": 5.875,
+          "end": 6.095
+        },
+        {
+          "text": "all",
+          "start": 6.153,
+          "end": 6.351
+        },
+        {
+          "text": "three",
+          "start": 6.42,
+          "end": 6.676
+        },
+        {
+          "text": "starting",
+          "start": 6.722,
+          "end": 7.117
+        },
+        {
+          "text": "explanations.",
+          "start": 7.175,
+          "end": 8.139
+        },
+        {
+          "text": "Then",
+          "start": 8.58,
+          "end": 8.789
+        },
+        {
+          "text": "Spark",
+          "start": 8.87,
+          "end": 9.276
+        },
+        {
+          "text": "chooses",
+          "start": 9.346,
+          "end": 9.741
+        },
+        {
+          "text": "a",
+          "start": 9.787,
+          "end": 9.822
+        },
+        {
+          "text": "larger",
+          "start": 9.892,
+          "end": 10.217
+        },
+        {
+          "text": "sine",
+          "start": 10.286,
+          "end": 10.577
+        },
+        {
+          "text": "wave.",
+          "start": 10.612,
+          "end": 11.122
+        },
+        {
+          "text": "All",
+          "start": 11.819,
+          "end": 12.051
+        },
+        {
+          "text": "three",
+          "start": 12.121,
+          "end": 12.388
+        },
+        {
+          "text": "fail.",
+          "start": 12.446,
+          "end": 12.968
+        },
+        {
+          "text": "Changing",
+          "start": 13.142,
+          "end": 13.572
+        },
+        {
+          "text": "component",
+          "start": 13.63,
+          "end": 14.118
+        },
+        {
+          "text": "values",
+          "start": 14.188,
+          "end": 14.594
+        },
+        {
+          "text": "is",
+          "start": 14.664,
+          "end": 14.791
+        },
+        {
+          "text": "no",
+          "start": 14.861,
+          "end": 14.954
+        },
+        {
+          "text": "longer",
+          "start": 15.023,
+          "end": 15.279
+        },
+        {
+          "text": "enough.",
+          "start": 15.349,
+          "end": 15.883
+        },
+        {
+          "text": "Spark",
+          "start": 16.579,
+          "end": 16.986
+        },
+        {
+          "text": "writes",
+          "start": 17.032,
+          "end": 17.299
+        },
+        {
+          "text": "a",
+          "start": 17.334,
+          "end": 17.357
+        },
+        {
+          "text": "new",
+          "start": 17.438,
+          "end": 17.589
+        },
+        {
+          "text": "circuit",
+          "start": 17.647,
+          "end": 17.996
+        },
+        {
+          "text": "model:",
+          "start": 18.042,
+          "end": 18.518
+        },
+        {
+          "text": "a",
+          "start": 18.634,
+          "end": 18.704
+        },
+        {
+          "text": "diode",
+          "start": 18.785,
+          "end": 19.273
+        },
+        {
+          "text": "from",
+          "start": 19.296,
+          "end": 19.435
+        },
+        {
+          "text": "out",
+          "start": 19.505,
+          "end": 19.679
+        },
+        {
+          "text": "to",
+          "start": 19.714,
+          "end": 19.795
+        },
+        {
+          "text": "ref,",
+          "start": 19.876,
+          "end": 20.329
+        },
+        {
+          "text": "missing",
+          "start": 20.538,
+          "end": 20.863
+        },
+        {
+          "text": "from",
+          "start": 20.91,
+          "end": 21.037
+        },
+        {
+          "text": "the",
+          "start": 21.072,
+          "end": 21.142
+        },
+        {
+          "text": "drawing.",
+          "start": 21.188,
+          "end": 21.746
+        },
+        {
+          "text": "That",
+          "start": 22.442,
+          "end": 22.64
+        },
+        {
+          "text": "would",
+          "start": 22.674,
+          "end": 22.814
+        },
+        {
+          "text": "explain",
+          "start": 22.86,
+          "end": 23.267
+        },
+        {
+          "text": "why",
+          "start": 23.325,
+          "end": 23.476
+        },
+        {
+          "text": "only",
+          "start": 23.557,
+          "end": 23.777
+        },
+        {
+          "text": "the",
+          "start": 23.824,
+          "end": 23.893
+        },
+        {
+          "text": "positive",
+          "start": 23.952,
+          "end": 24.393
+        },
+        {
+          "text": "half",
+          "start": 24.439,
+          "end": 24.625
+        },
+        {
+          "text": "clips.",
+          "start": 24.683,
+          "end": 25.159
+        },
+        {
+          "text": "The",
+          "start": 25.403,
+          "end": 25.519
+        },
+        {
+          "text": "simulator",
+          "start": 25.577,
+          "end": 26.123
+        },
+        {
+          "text": "fits",
+          "start": 26.169,
+          "end": 26.413
+        },
+        {
+          "text": "it.",
+          "start": 26.471,
+          "end": 26.75
+        },
+        {
+          "text": "The",
+          "start": 27.191,
+          "end": 27.307
+        },
+        {
+          "text": "fitted",
+          "start": 27.365,
+          "end": 27.655
+        },
+        {
+          "text": "model",
+          "start": 27.725,
+          "end": 27.992
+        },
+        {
+          "text": "is",
+          "start": 28.061,
+          "end": 28.154
+        },
+        {
+          "text": "frozen",
+          "start": 28.212,
+          "end": 28.584
+        },
+        {
+          "text": "and",
+          "start": 28.63,
+          "end": 28.712
+        },
+        {
+          "text": "published",
+          "start": 28.781,
+          "end": 29.199
+        },
+        {
+          "text": "before",
+          "start": 29.246,
+          "end": 29.536
+        },
+        {
+          "text": "two",
+          "start": 29.582,
+          "end": 29.756
+        },
+        {
+          "text": "new",
+          "start": 29.849,
+          "end": 30.023
+        },
+        {
+          "text": "tests,",
+          "start": 30.082,
+          "end": 30.732
+        },
+        {
+          "text": "with",
+          "start": 30.778,
+          "end": 30.964
+        },
+        {
+          "text": "no",
+          "start": 31.022,
+          "end": 31.138
+        },
+        {
+          "text": "refitting.",
+          "start": 31.231,
+          "end": 31.939
+        },
+        {
+          "text": "The",
+          "start": 32.322,
+          "end": 32.438
+        },
+        {
+          "text": "worst-region",
+          "start": 32.508,
+          "end": 33.17
+        },
+        {
+          "text": "errors",
+          "start": 33.239,
+          "end": 33.541
+        },
+        {
+          "text": "are",
+          "start": 33.599,
+          "end": 33.727
+        },
+        {
+          "text": "five",
+          "start": 33.762,
+          "end": 34.029
+        },
+        {
+          "text": "point",
+          "start": 34.064,
+          "end": 34.284
+        },
+        {
+          "text": "one",
+          "start": 34.354,
+          "end": 34.54
+        },
+        {
+          "text": "nine",
+          "start": 34.598,
+          "end": 34.888
+        },
+        {
+          "text": "and",
+          "start": 34.934,
+          "end": 35.039
+        },
+        {
+          "text": "four",
+          "start": 35.109,
+          "end": 35.283
+        },
+        {
+          "text": "point",
+          "start": 35.341,
+          "end": 35.55
+        },
+        {
+          "text": "zero",
+          "start": 35.608,
+          "end": 35.945
+        },
+        {
+          "text": "five",
+          "start": 36.026,
+          "end": 36.339
+        },
+        {
+          "text": "millivolts,",
+          "start": 36.386,
+          "end": 37.187
+        },
+        {
+          "text": "both",
+          "start": 37.431,
+          "end": 37.698
+        },
+        {
+          "text": "under",
+          "start": 37.767,
+          "end": 37.93
+        },
+        {
+          "text": "the",
+          "start": 37.965,
+          "end": 38.034
+        },
+        {
+          "text": "nine",
+          "start": 38.092,
+          "end": 38.301
+        },
+        {
+          "text": "allowed.",
+          "start": 38.336,
+          "end": 38.928
+        },
+        {
+          "text": "The",
+          "start": 39.369,
+          "end": 39.486
+        },
+        {
+          "text": "seal",
+          "start": 39.555,
+          "end": 39.834
+        },
+        {
+          "text": "opens:",
+          "start": 39.915,
+          "end": 40.589
+        },
+        {
+          "text": "a",
+          "start": 40.798,
+          "end": 40.856
+        },
+        {
+          "text": "hidden",
+          "start": 40.948,
+          "end": 41.204
+        },
+        {
+          "text": "diode,",
+          "start": 41.262,
+          "end": 41.773
+        },
+        {
+          "text": "in",
+          "start": 41.796,
+          "end": 41.877
+        },
+        {
+          "text": "the",
+          "start": 41.912,
+          "end": 41.982
+        },
+        {
+          "text": "direction",
+          "start": 42.017,
+          "end": 42.435
+        },
+        {
+          "text": "Spark",
+          "start": 42.504,
+          "end": 42.818
+        },
+        {
+          "text": "proposed.",
+          "start": 42.876,
+          "end": 43.607
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Case four: a voltage divider, rebuilt from a forum problem.",
+          "start": 0.0,
+          "end": 3.866
+        },
+        {
+          "text": "Two small step tests fit all three starting explanations.",
+          "start": 3.866,
+          "end": 8.139
+        },
+        {
+          "text": "Then Spark chooses a larger sine wave.",
+          "start": 8.139,
+          "end": 11.122
+        },
+        {
+          "text": "All three fail.",
+          "start": 11.122,
+          "end": 12.968
+        },
+        {
+          "text": "Changing component values is no longer enough.",
+          "start": 12.968,
+          "end": 15.883
+        },
+        {
+          "text": "Spark writes a new circuit model: a diode from out to ref, missing from the drawing.",
+          "start": 15.883,
+          "end": 21.746
+        },
+        {
+          "text": "That would explain why only the positive half clips.",
+          "start": 21.746,
+          "end": 25.159
+        },
+        {
+          "text": "The simulator fits it.",
+          "start": 25.159,
+          "end": 26.75
+        },
+        {
+          "text": "The fitted model is frozen and published before two new tests, with no refitting.",
+          "start": 26.75,
+          "end": 31.939
+        },
+        {
+          "text": "The worst-region errors are five point one nine and four point zero five millivolts, both under the nine allowed.",
+          "start": 31.939,
+          "end": 38.928
+        },
+        {
+          "text": "The seal opens: a hidden diode, in the direction Spark proposed.",
+          "start": 38.928,
+          "end": 43.607
+        }
+      ],
+      "key_cues": [
+        {
+          "text": "All three fail",
+          "start": 11.819,
+          "end": 12.817
+        },
+        {
+          "text": "writes a new circuit model",
+          "start": 17.032,
+          "end": 18.367
+        },
+        {
+          "text": "diode from out to ref",
+          "start": 18.785,
+          "end": 20.178
+        },
+        {
+          "text": "model is frozen",
+          "start": 27.725,
+          "end": 28.584
+        },
+        {
+          "text": "no refitting",
+          "start": 31.022,
+          "end": 31.788
+        },
+        {
+          "text": "five point one nine",
+          "start": 33.762,
+          "end": 34.888
+        },
+        {
+          "text": "four point zero five",
+          "start": 35.109,
+          "end": 36.339
+        },
+        {
+          "text": "The seal opens",
+          "start": 39.369,
+          "end": 40.438
+        }
+      ]
+    },
+    "s4": {
+      "audio_sha256": "05e8d78dfa2c1d10532fe361ec21962e541caaca2ca3a27e90165db771883224",
+      "duration_seconds": 44.535873,
+      "normalized_text": "Case one: a filter output too small. The drawing's model fails. After three tests, two explanations remain: R one changed, or extra resistance before it. They produce identical waveforms. Spark asks for a measurement the menu cannot provide: the resistance of R one. The expected range under each explanation is frozen first. Sam outlines the parts; Spark points at R one. The operator reads four point seven one kilohms. R one has the right value. The extra resistance sits before it. The seal reveals two ten-kilohm resistors between the input and R one. After repair, a fresh Spark reports no mismatch in the tests it chose.",
+      "words": [
+        {
+          "text": "Case",
+          "start": 0.012,
+          "end": 0.325
+        },
+        {
+          "text": "one:",
+          "start": 0.383,
+          "end": 0.789
+        },
+        {
+          "text": "a",
+          "start": 0.94,
+          "end": 0.998
+        },
+        {
+          "text": "filter",
+          "start": 1.08,
+          "end": 1.382
+        },
+        {
+          "text": "output",
+          "start": 1.451,
+          "end": 1.846
+        },
+        {
+          "text": "too",
+          "start": 1.904,
+          "end": 2.09
+        },
+        {
+          "text": "small.",
+          "start": 2.148,
+          "end": 2.694
+        },
+        {
+          "text": "The",
+          "start": 2.868,
+          "end": 2.972
+        },
+        {
+          "text": "drawing's",
+          "start": 3.019,
+          "end": 3.413
+        },
+        {
+          "text": "model",
+          "start": 3.471,
+          "end": 3.738
+        },
+        {
+          "text": "fails.",
+          "start": 3.82,
+          "end": 4.423
+        },
+        {
+          "text": "After",
+          "start": 4.667,
+          "end": 4.957
+        },
+        {
+          "text": "three",
+          "start": 5.027,
+          "end": 5.283
+        },
+        {
+          "text": "tests,",
+          "start": 5.329,
+          "end": 5.851
+        },
+        {
+          "text": "two",
+          "start": 5.909,
+          "end": 6.095
+        },
+        {
+          "text": "explanations",
+          "start": 6.188,
+          "end": 6.85
+        },
+        {
+          "text": "remain:",
+          "start": 6.908,
+          "end": 7.488
+        },
+        {
+          "text": "R",
+          "start": 7.93,
+          "end": 8.104
+        },
+        {
+          "text": "one",
+          "start": 8.173,
+          "end": 8.348
+        },
+        {
+          "text": "changed,",
+          "start": 8.382,
+          "end": 8.986
+        },
+        {
+          "text": "or",
+          "start": 9.195,
+          "end": 9.334
+        },
+        {
+          "text": "extra",
+          "start": 9.404,
+          "end": 9.718
+        },
+        {
+          "text": "resistance",
+          "start": 9.776,
+          "end": 10.252
+        },
+        {
+          "text": "before",
+          "start": 10.298,
+          "end": 10.623
+        },
+        {
+          "text": "it.",
+          "start": 10.67,
+          "end": 10.948
+        },
+        {
+          "text": "They",
+          "start": 11.459,
+          "end": 11.622
+        },
+        {
+          "text": "produce",
+          "start": 11.668,
+          "end": 12.005
+        },
+        {
+          "text": "identical",
+          "start": 12.063,
+          "end": 12.597
+        },
+        {
+          "text": "waveforms.",
+          "start": 12.666,
+          "end": 13.491
+        },
+        {
+          "text": "Spark",
+          "start": 13.7,
+          "end": 14.118
+        },
+        {
+          "text": "asks",
+          "start": 14.199,
+          "end": 14.524
+        },
+        {
+          "text": "for",
+          "start": 14.57,
+          "end": 14.687
+        },
+        {
+          "text": "a",
+          "start": 14.721,
+          "end": 14.745
+        },
+        {
+          "text": "measurement",
+          "start": 14.791,
+          "end": 15.197
+        },
+        {
+          "text": "the",
+          "start": 15.255,
+          "end": 15.337
+        },
+        {
+          "text": "menu",
+          "start": 15.395,
+          "end": 15.65
+        },
+        {
+          "text": "cannot",
+          "start": 15.708,
+          "end": 15.952
+        },
+        {
+          "text": "provide:",
+          "start": 15.998,
+          "end": 16.625
+        },
+        {
+          "text": "the",
+          "start": 16.869,
+          "end": 16.962
+        },
+        {
+          "text": "resistance",
+          "start": 17.032,
+          "end": 17.543
+        },
+        {
+          "text": "of",
+          "start": 17.577,
+          "end": 17.635
+        },
+        {
+          "text": "R",
+          "start": 17.717,
+          "end": 17.891
+        },
+        {
+          "text": "one.",
+          "start": 18.007,
+          "end": 18.448
+        },
+        {
+          "text": "The",
+          "start": 18.831,
+          "end": 18.959
+        },
+        {
+          "text": "expected",
+          "start": 19.029,
+          "end": 19.528
+        },
+        {
+          "text": "range",
+          "start": 19.598,
+          "end": 19.911
+        },
+        {
+          "text": "under",
+          "start": 19.957,
+          "end": 20.132
+        },
+        {
+          "text": "each",
+          "start": 20.19,
+          "end": 20.387
+        },
+        {
+          "text": "explanation",
+          "start": 20.433,
+          "end": 21.049
+        },
+        {
+          "text": "is",
+          "start": 21.118,
+          "end": 21.223
+        },
+        {
+          "text": "frozen",
+          "start": 21.269,
+          "end": 21.629
+        },
+        {
+          "text": "first.",
+          "start": 21.711,
+          "end": 22.279
+        },
+        {
+          "text": "Sam",
+          "start": 22.721,
+          "end": 23.034
+        },
+        {
+          "text": "outlines",
+          "start": 23.104,
+          "end": 23.557
+        },
+        {
+          "text": "the",
+          "start": 23.603,
+          "end": 23.673
+        },
+        {
+          "text": "parts;",
+          "start": 23.719,
+          "end": 24.253
+        },
+        {
+          "text": "Spark",
+          "start": 24.462,
+          "end": 24.834
+        },
+        {
+          "text": "points",
+          "start": 24.903,
+          "end": 25.217
+        },
+        {
+          "text": "at",
+          "start": 25.252,
+          "end": 25.333
+        },
+        {
+          "text": "R",
+          "start": 25.391,
+          "end": 25.565
+        },
+        {
+          "text": "one.",
+          "start": 25.681,
+          "end": 26.111
+        },
+        {
+          "text": "The",
+          "start": 26.552,
+          "end": 26.68
+        },
+        {
+          "text": "operator",
+          "start": 26.738,
+          "end": 27.179
+        },
+        {
+          "text": "reads",
+          "start": 27.237,
+          "end": 27.492
+        },
+        {
+          "text": "four",
+          "start": 27.55,
+          "end": 27.725
+        },
+        {
+          "text": "point",
+          "start": 27.794,
+          "end": 28.003
+        },
+        {
+          "text": "seven",
+          "start": 28.061,
+          "end": 28.34
+        },
+        {
+          "text": "one",
+          "start": 28.421,
+          "end": 28.665
+        },
+        {
+          "text": "kilohms.",
+          "start": 28.711,
+          "end": 29.431
+        },
+        {
+          "text": "R",
+          "start": 29.872,
+          "end": 30.081
+        },
+        {
+          "text": "one",
+          "start": 30.163,
+          "end": 30.383
+        },
+        {
+          "text": "has",
+          "start": 30.418,
+          "end": 30.546
+        },
+        {
+          "text": "the",
+          "start": 30.604,
+          "end": 30.674
+        },
+        {
+          "text": "right",
+          "start": 30.732,
+          "end": 30.929
+        },
+        {
+          "text": "value.",
+          "start": 30.987,
+          "end": 31.509
+        },
+        {
+          "text": "The",
+          "start": 31.684,
+          "end": 31.811
+        },
+        {
+          "text": "extra",
+          "start": 31.893,
+          "end": 32.253
+        },
+        {
+          "text": "resistance",
+          "start": 32.311,
+          "end": 32.845
+        },
+        {
+          "text": "sits",
+          "start": 32.879,
+          "end": 33.1
+        },
+        {
+          "text": "before",
+          "start": 33.147,
+          "end": 33.495
+        },
+        {
+          "text": "it.",
+          "start": 33.541,
+          "end": 33.82
+        },
+        {
+          "text": "The",
+          "start": 34.331,
+          "end": 34.447
+        },
+        {
+          "text": "seal",
+          "start": 34.505,
+          "end": 34.772
+        },
+        {
+          "text": "reveals",
+          "start": 34.853,
+          "end": 35.201
+        },
+        {
+          "text": "two",
+          "start": 35.26,
+          "end": 35.445
+        },
+        {
+          "text": "ten-kilohm",
+          "start": 35.515,
+          "end": 36.084
+        },
+        {
+          "text": "resistors",
+          "start": 36.153,
+          "end": 36.711
+        },
+        {
+          "text": "between",
+          "start": 36.92,
+          "end": 37.256
+        },
+        {
+          "text": "the",
+          "start": 37.291,
+          "end": 37.361
+        },
+        {
+          "text": "input",
+          "start": 37.431,
+          "end": 37.825
+        },
+        {
+          "text": "and",
+          "start": 37.883,
+          "end": 37.999
+        },
+        {
+          "text": "R",
+          "start": 38.092,
+          "end": 38.243
+        },
+        {
+          "text": "one.",
+          "start": 38.336,
+          "end": 38.789
+        },
+        {
+          "text": "After",
+          "start": 39.393,
+          "end": 39.718
+        },
+        {
+          "text": "repair,",
+          "start": 39.776,
+          "end": 40.356
+        },
+        {
+          "text": "a",
+          "start": 40.438,
+          "end": 40.496
+        },
+        {
+          "text": "fresh",
+          "start": 40.588,
+          "end": 40.844
+        },
+        {
+          "text": "Spark",
+          "start": 40.89,
+          "end": 41.262
+        },
+        {
+          "text": "reports",
+          "start": 41.343,
+          "end": 41.715
+        },
+        {
+          "text": "no",
+          "start": 41.784,
+          "end": 41.924
+        },
+        {
+          "text": "mismatch",
+          "start": 42.005,
+          "end": 42.481
+        },
+        {
+          "text": "in",
+          "start": 42.527,
+          "end": 42.585
+        },
+        {
+          "text": "the",
+          "start": 42.632,
+          "end": 42.702
+        },
+        {
+          "text": "tests",
+          "start": 42.736,
+          "end": 43.085
+        },
+        {
+          "text": "it",
+          "start": 43.131,
+          "end": 43.212
+        },
+        {
+          "text": "chose.",
+          "start": 43.259,
+          "end": 43.839
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Case one: a filter output too small.",
+          "start": 0.0,
+          "end": 2.694
+        },
+        {
+          "text": "The drawing's model fails.",
+          "start": 2.694,
+          "end": 4.423
+        },
+        {
+          "text": "After three tests, two explanations remain: R one changed, or extra resistance before it.",
+          "start": 4.423,
+          "end": 10.948
+        },
+        {
+          "text": "They produce identical waveforms.",
+          "start": 10.948,
+          "end": 13.491
+        },
+        {
+          "text": "Spark asks for a measurement the menu cannot provide: the resistance of R one.",
+          "start": 13.491,
+          "end": 18.448
+        },
+        {
+          "text": "The expected range under each explanation is frozen first.",
+          "start": 18.448,
+          "end": 22.279
+        },
+        {
+          "text": "Sam outlines the parts; Spark points at R one.",
+          "start": 22.279,
+          "end": 26.111
+        },
+        {
+          "text": "The operator reads four point seven one kilohms.",
+          "start": 26.111,
+          "end": 29.431
+        },
+        {
+          "text": "R one has the right value.",
+          "start": 29.431,
+          "end": 31.509
+        },
+        {
+          "text": "The extra resistance sits before it.",
+          "start": 31.509,
+          "end": 33.82
+        },
+        {
+          "text": "The seal reveals two ten-kilohm resistors between the input and R one.",
+          "start": 33.82,
+          "end": 38.789
+        },
+        {
+          "text": "After repair, a fresh Spark reports no mismatch in the tests it chose.",
+          "start": 38.789,
+          "end": 43.839
+        }
+      ],
+      "key_cues": [
+        {
+          "text": "two explanations remain",
+          "start": 5.909,
+          "end": 7.338
+        },
+        {
+          "text": "R one changed",
+          "start": 7.93,
+          "end": 8.905
+        },
+        {
+          "text": "expected range",
+          "start": 19.029,
+          "end": 19.911
+        },
+        {
+          "text": "Sam outlines",
+          "start": 22.721,
+          "end": 23.557
+        },
+        {
+          "text": "four point seven one kilohms",
+          "start": 27.55,
+          "end": 29.28
+        },
+        {
+          "text": "The seal reveals",
+          "start": 34.331,
+          "end": 35.201
+        },
+        {
+          "text": "After repair",
+          "start": 39.393,
+          "end": 40.24
+        },
+        {
+          "text": "no mismatch",
+          "start": 41.784,
+          "end": 42.481
+        }
+      ]
+    },
+    "s5": {
+      "audio_sha256": "4edd4443b9d63e299a6f1c4eef7ab19df1e80d39b47971da7f0c62f43cd68926",
+      "duration_seconds": 17.275646,
+      "normalized_text": "Five forum problems, rebuilt as small circuits. In case five, Spark proposed resistance where the drawing showed a wire, and one physical reading placed it off the board. Every case ended with a repaired board and a rerun that reported no mismatch in the tests Spark chose.",
+      "words": [
+        {
+          "text": "Five",
+          "start": 0.046,
+          "end": 0.372
+        },
+        {
+          "text": "forum",
+          "start": 0.418,
+          "end": 0.743
+        },
+        {
+          "text": "problems,",
+          "start": 0.801,
+          "end": 1.393
+        },
+        {
+          "text": "rebuilt",
+          "start": 1.521,
+          "end": 1.985
+        },
+        {
+          "text": "as",
+          "start": 2.032,
+          "end": 2.101
+        },
+        {
+          "text": "small",
+          "start": 2.148,
+          "end": 2.415
+        },
+        {
+          "text": "circuits.",
+          "start": 2.485,
+          "end": 3.146
+        },
+        {
+          "text": "In",
+          "start": 3.587,
+          "end": 3.715
+        },
+        {
+          "text": "case",
+          "start": 3.773,
+          "end": 4.005
+        },
+        {
+          "text": "five,",
+          "start": 4.052,
+          "end": 4.505
+        },
+        {
+          "text": "Spark",
+          "start": 4.598,
+          "end": 4.957
+        },
+        {
+          "text": "proposed",
+          "start": 5.016,
+          "end": 5.422
+        },
+        {
+          "text": "resistance",
+          "start": 5.48,
+          "end": 6.002
+        },
+        {
+          "text": "where",
+          "start": 6.026,
+          "end": 6.2
+        },
+        {
+          "text": "the",
+          "start": 6.223,
+          "end": 6.293
+        },
+        {
+          "text": "drawing",
+          "start": 6.339,
+          "end": 6.653
+        },
+        {
+          "text": "showed",
+          "start": 6.711,
+          "end": 6.954
+        },
+        {
+          "text": "a",
+          "start": 6.989,
+          "end": 7.012
+        },
+        {
+          "text": "wire,",
+          "start": 7.07,
+          "end": 7.581
+        },
+        {
+          "text": "and",
+          "start": 7.697,
+          "end": 7.848
+        },
+        {
+          "text": "one",
+          "start": 7.941,
+          "end": 8.127
+        },
+        {
+          "text": "physical",
+          "start": 8.173,
+          "end": 8.533
+        },
+        {
+          "text": "reading",
+          "start": 8.615,
+          "end": 8.893
+        },
+        {
+          "text": "placed",
+          "start": 8.951,
+          "end": 9.23
+        },
+        {
+          "text": "it",
+          "start": 9.265,
+          "end": 9.334
+        },
+        {
+          "text": "off",
+          "start": 9.392,
+          "end": 9.578
+        },
+        {
+          "text": "the",
+          "start": 9.625,
+          "end": 9.694
+        },
+        {
+          "text": "board.",
+          "start": 9.741,
+          "end": 10.24
+        },
+        {
+          "text": "Every",
+          "start": 10.844,
+          "end": 11.111
+        },
+        {
+          "text": "case",
+          "start": 11.157,
+          "end": 11.447
+        },
+        {
+          "text": "ended",
+          "start": 11.493,
+          "end": 11.772
+        },
+        {
+          "text": "with",
+          "start": 11.807,
+          "end": 11.923
+        },
+        {
+          "text": "a",
+          "start": 11.958,
+          "end": 11.981
+        },
+        {
+          "text": "repaired",
+          "start": 12.051,
+          "end": 12.446
+        },
+        {
+          "text": "board",
+          "start": 12.504,
+          "end": 12.84
+        },
+        {
+          "text": "and",
+          "start": 12.933,
+          "end": 13.142
+        },
+        {
+          "text": "a",
+          "start": 13.2,
+          "end": 13.235
+        },
+        {
+          "text": "rerun",
+          "start": 13.305,
+          "end": 13.665
+        },
+        {
+          "text": "that",
+          "start": 13.711,
+          "end": 13.815
+        },
+        {
+          "text": "reported",
+          "start": 13.874,
+          "end": 14.291
+        },
+        {
+          "text": "no",
+          "start": 14.373,
+          "end": 14.5
+        },
+        {
+          "text": "mismatch",
+          "start": 14.582,
+          "end": 15.081
+        },
+        {
+          "text": "in",
+          "start": 15.139,
+          "end": 15.22
+        },
+        {
+          "text": "the",
+          "start": 15.267,
+          "end": 15.336
+        },
+        {
+          "text": "tests",
+          "start": 15.371,
+          "end": 15.754
+        },
+        {
+          "text": "Spark",
+          "start": 15.801,
+          "end": 16.149
+        },
+        {
+          "text": "chose.",
+          "start": 16.219,
+          "end": 16.799
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Five forum problems, rebuilt as small circuits.",
+          "start": 0.0,
+          "end": 3.146
+        },
+        {
+          "text": "In case five, Spark proposed resistance where the drawing showed a wire, and one physical reading placed it off the board.",
+          "start": 3.146,
+          "end": 10.24
+        },
+        {
+          "text": "Every case ended with a repaired board and a rerun that reported no mismatch in the tests Spark chose.",
+          "start": 10.24,
+          "end": 16.799
+        }
+      ],
+      "key_cues": []
+    },
+    "s6": {
+      "audio_sha256": "6703f0083823e855d5a2d1d80fc6f9c7beee63afeedddd35883a848600684a97",
+      "duration_seconds": 16.346848,
+      "normalized_text": "Every measurement links back to a recorded forecast. Models are refitted during exploration, then frozen for two final checks on the measured inputs. Stopped and abstained attempts stay in the ledger. One command, with nothing installed, checks any record offline.",
+      "words": [
+        {
+          "text": "Every",
+          "start": 0.012,
+          "end": 0.29
+        },
+        {
+          "text": "measurement",
+          "start": 0.348,
+          "end": 0.755
+        },
+        {
+          "text": "links",
+          "start": 0.824,
+          "end": 1.068
+        },
+        {
+          "text": "back",
+          "start": 1.115,
+          "end": 1.312
+        },
+        {
+          "text": "to",
+          "start": 1.37,
+          "end": 1.428
+        },
+        {
+          "text": "a",
+          "start": 1.498,
+          "end": 1.521
+        },
+        {
+          "text": "recorded",
+          "start": 1.591,
+          "end": 2.009
+        },
+        {
+          "text": "forecast.",
+          "start": 2.067,
+          "end": 2.844
+        },
+        {
+          "text": "Models",
+          "start": 3.541,
+          "end": 3.924
+        },
+        {
+          "text": "are",
+          "start": 3.971,
+          "end": 4.063
+        },
+        {
+          "text": "refitted",
+          "start": 4.087,
+          "end": 4.563
+        },
+        {
+          "text": "during",
+          "start": 4.609,
+          "end": 4.865
+        },
+        {
+          "text": "exploration,",
+          "start": 4.923,
+          "end": 5.735
+        },
+        {
+          "text": "then",
+          "start": 5.909,
+          "end": 6.084
+        },
+        {
+          "text": "frozen",
+          "start": 6.153,
+          "end": 6.525
+        },
+        {
+          "text": "for",
+          "start": 6.571,
+          "end": 6.676
+        },
+        {
+          "text": "two",
+          "start": 6.722,
+          "end": 6.896
+        },
+        {
+          "text": "final",
+          "start": 6.978,
+          "end": 7.303
+        },
+        {
+          "text": "checks",
+          "start": 7.361,
+          "end": 7.721
+        },
+        {
+          "text": "on",
+          "start": 7.779,
+          "end": 7.883
+        },
+        {
+          "text": "the",
+          "start": 7.918,
+          "end": 7.988
+        },
+        {
+          "text": "measured",
+          "start": 8.022,
+          "end": 8.313
+        },
+        {
+          "text": "inputs.",
+          "start": 8.371,
+          "end": 9.033
+        },
+        {
+          "text": "Stopped",
+          "start": 9.543,
+          "end": 9.927
+        },
+        {
+          "text": "and",
+          "start": 9.961,
+          "end": 10.054
+        },
+        {
+          "text": "abstained",
+          "start": 10.101,
+          "end": 10.542
+        },
+        {
+          "text": "attempts",
+          "start": 10.577,
+          "end": 11.029
+        },
+        {
+          "text": "stay",
+          "start": 11.146,
+          "end": 11.401
+        },
+        {
+          "text": "in",
+          "start": 11.447,
+          "end": 11.506
+        },
+        {
+          "text": "the",
+          "start": 11.541,
+          "end": 11.61
+        },
+        {
+          "text": "ledger.",
+          "start": 11.645,
+          "end": 12.133
+        },
+        {
+          "text": "One",
+          "start": 12.342,
+          "end": 12.551
+        },
+        {
+          "text": "command,",
+          "start": 12.597,
+          "end": 13.05
+        },
+        {
+          "text": "with",
+          "start": 13.073,
+          "end": 13.236
+        },
+        {
+          "text": "nothing",
+          "start": 13.282,
+          "end": 13.538
+        },
+        {
+          "text": "installed,",
+          "start": 13.596,
+          "end": 14.176
+        },
+        {
+          "text": "checks",
+          "start": 14.35,
+          "end": 14.664
+        },
+        {
+          "text": "any",
+          "start": 14.722,
+          "end": 14.908
+        },
+        {
+          "text": "record",
+          "start": 14.977,
+          "end": 15.326
+        },
+        {
+          "text": "offline.",
+          "start": 15.384,
+          "end": 16.022
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Every measurement links back to a recorded forecast.",
+          "start": 0.0,
+          "end": 2.844
+        },
+        {
+          "text": "Models are refitted during exploration, then frozen for two final checks on the measured inputs.",
+          "start": 2.844,
+          "end": 9.033
+        },
+        {
+          "text": "Stopped and abstained attempts stay in the ledger.",
+          "start": 9.033,
+          "end": 12.133
+        },
+        {
+          "text": "One command, with nothing installed, checks any record offline.",
+          "start": 12.133,
+          "end": 16.022
+        }
+      ],
+      "key_cues": [
+        {
+          "text": "Models are refitted",
+          "start": 3.541,
+          "end": 4.563
+        },
+        {
+          "text": "then frozen",
+          "start": 5.909,
+          "end": 6.525
+        },
+        {
+          "text": "Stopped and abstained",
+          "start": 9.543,
+          "end": 10.542
+        },
+        {
+          "text": "checks any record offline",
+          "start": 14.35,
+          "end": 15.964
+        }
+      ]
+    },
+    "s7": {
+      "audio_sha256": "90b31ade0c74c357dca1f1e2e6da32214e7a1114e7fda6c2369ab7325666e3ee",
+      "duration_seconds": 11.981497,
+      "normalized_text": "BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.",
+      "words": [
+        {
+          "text": "BenchMate",
+          "start": 0.046,
+          "end": 0.592
+        },
+        {
+          "text": "turns",
+          "start": 0.627,
+          "end": 0.952
+        },
+        {
+          "text": "an",
+          "start": 0.987,
+          "end": 1.045
+        },
+        {
+          "text": "unexplained",
+          "start": 1.115,
+          "end": 1.718
+        },
+        {
+          "text": "output",
+          "start": 1.788,
+          "end": 2.159
+        },
+        {
+          "text": "into",
+          "start": 2.218,
+          "end": 2.38
+        },
+        {
+          "text": "a",
+          "start": 2.461,
+          "end": 2.485
+        },
+        {
+          "text": "concrete",
+          "start": 2.554,
+          "end": 3.042
+        },
+        {
+          "text": "next",
+          "start": 3.1,
+          "end": 3.332
+        },
+        {
+          "text": "check.",
+          "start": 3.379,
+          "end": 3.878
+        },
+        {
+          "text": "Spark",
+          "start": 4.319,
+          "end": 4.737
+        },
+        {
+          "text": "chooses",
+          "start": 4.83,
+          "end": 5.224
+        },
+        {
+          "text": "the",
+          "start": 5.271,
+          "end": 5.352
+        },
+        {
+          "text": "experiment.",
+          "start": 5.41,
+          "end": 6.165
+        },
+        {
+          "text": "The",
+          "start": 6.49,
+          "end": 6.618
+        },
+        {
+          "text": "simulator",
+          "start": 6.664,
+          "end": 7.187
+        },
+        {
+          "text": "predicts.",
+          "start": 7.233,
+          "end": 7.895
+        },
+        {
+          "text": "The",
+          "start": 8.011,
+          "end": 8.139
+        },
+        {
+          "text": "operator",
+          "start": 8.197,
+          "end": 8.638
+        },
+        {
+          "text": "acts.",
+          "start": 8.696,
+          "end": 9.276
+        },
+        {
+          "text": "The",
+          "start": 9.555,
+          "end": 9.683
+        },
+        {
+          "text": "real",
+          "start": 9.752,
+          "end": 9.973
+        },
+        {
+          "text": "board",
+          "start": 10.031,
+          "end": 10.31
+        },
+        {
+          "text": "tests",
+          "start": 10.356,
+          "end": 10.716
+        },
+        {
+          "text": "the",
+          "start": 10.774,
+          "end": 10.855
+        },
+        {
+          "text": "explanation.",
+          "start": 10.925,
+          "end": 11.738
+        }
+      ],
+      "sentences": [
+        {
+          "text": "BenchMate turns an unexplained output into a concrete next check.",
+          "start": 0.0,
+          "end": 3.878
+        },
+        {
+          "text": "Spark chooses the experiment.",
+          "start": 3.878,
+          "end": 6.165
+        },
+        {
+          "text": "The simulator predicts.",
+          "start": 6.165,
+          "end": 7.895
+        },
+        {
+          "text": "The operator acts.",
+          "start": 7.895,
+          "end": 9.276
+        },
+        {
+          "text": "The real board tests the explanation.",
+          "start": 9.276,
+          "end": 11.738
+        }
+      ],
+      "key_cues": [
+        {
+          "text": "Spark chooses the experiment.",
+          "start": 4.319,
+          "end": 6.165
+        },
+        {
+          "text": "The simulator predicts.",
+          "start": 6.49,
+          "end": 7.895
+        },
+        {
+          "text": "The operator acts.",
+          "start": 8.011,
+          "end": 9.276
+        },
+        {
+          "text": "The real board tests the explanation.",
+          "start": 9.555,
+          "end": 11.738
+        }
+      ]
+    }
+  }
+}
