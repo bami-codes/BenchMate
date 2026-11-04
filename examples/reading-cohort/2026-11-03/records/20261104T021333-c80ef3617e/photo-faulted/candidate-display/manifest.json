@@ -1,0 +1,27 @@
+{
+  "schema": "benchmate.candidate_display.v1",
+  "selected_by": "muse_spark",
+  "proposal_sha256": "8de659b8ae5408118bffd352610318cb39a86cf68fdfff0aee6b3746abe9969f",
+  "component": "W1",
+  "mapping_status": "unique",
+  "operator_confirmed": false,
+  "source_photo_sha256": "08e61dd3f569ae5329ce083281a732c92c8dd31079dfa847f8e504fd29226fbe",
+  "native_masks_unchanged": true,
+  "candidate_masks": [
+    {
+      "sam_body": "sam-1",
+      "kind": "wire",
+      "native_mask_file": "photo-faulted/decoded/native-SAM/electronic component-object-1-record-1-mask.png",
+      "sha256": "32b9b8cccd34de2c95af141450f0025d275ac35715b8633b85ea4c3481c76862"
+    }
+  ],
+  "method": "Each selected native mask external contour, 3px RGB(30,190,120); no body value transcription.",
+  "context_crop_input_pixels": [
+    185,
+    426,
+    785,
+    825
+  ],
+  "new_API_calls": 0,
+  "hardware_operations": 0
+}

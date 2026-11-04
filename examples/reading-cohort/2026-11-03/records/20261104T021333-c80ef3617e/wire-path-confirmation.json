@@ -1,0 +1,12 @@
+{
+  "component": "W1",
+  "candidate_ids": [
+    "sam-1"
+  ],
+  "candidate_chosen_by": "muse_spark",
+  "candidate_operator_confirmed": true,
+  "path_ports_identified_by": "operator",
+  "mini_IN_OUT_ports_identified": true,
+  "operator_verbatim": "맞음 · W1과 IN/OUT 포트 확인",
+  "scope": "Candidate bodies and the isolated mini-board port pair; no numeric value or unique body identity asserted."
+}

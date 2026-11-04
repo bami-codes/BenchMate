@@ -1,9 +1,10 @@
 {
   "case_id": "05",
-  "phase": "awaiting_faulted_photo",
+  "phase": "awaiting_wire_observation",
   "schematic_intake": "schematic-intake/20261104T021414-92eccb85c1",
   "faulted_diagnosis": "diagnosis-faulted/20261104T022359-f6e37b9f05",
   "last_boot": "52fd218a877701f9ed3ba3b904bb19a8",
   "requested_component": "W1",
-  "reading_forecast_sha256": "2746d2be2e8ffdab19391646b16693ecfb151f65f921ae1cd5e7474bd4ea3e07"
+  "reading_forecast_sha256": "2746d2be2e8ffdab19391646b16693ecfb151f65f921ae1cd5e7474bd4ea3e07",
+  "current_photo": "faulted"
 }

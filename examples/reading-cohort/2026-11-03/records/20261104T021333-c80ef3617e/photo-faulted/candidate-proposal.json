@@ -1,0 +1,30 @@
+{
+  "state": "faulted",
+  "component": "W1",
+  "chosen_by": "muse_spark",
+  "operator_confirmed": false,
+  "surface_values_read": false,
+  "candidate_bodies": [
+    {
+      "kind": "wire",
+      "reason": "short orange insulated jumper with exposed ends seated in breadboard holes, wire body shape",
+      "sam_body": "sam-1"
+    }
+  ],
+  "mapping_status": "unique",
+  "reason": "orange jumper bridges the IN-side row to the OUT-side row matching intended W1 IN-OUT, other bodies are capacitor, resistor and connectors",
+  "sam_body": "sam-1",
+  "raw_arguments": {
+    "candidate_bodies": [
+      {
+        "kind": "wire",
+        "reason": "short orange insulated jumper with exposed ends seated in breadboard holes, wire body shape",
+        "sam_body": "sam-1"
+      }
+    ],
+    "mapping_status": "unique",
+    "reason": "orange jumper bridges the IN-side row to the OUT-side row matching intended W1 IN-OUT, other bodies are capacitor, resistor and connectors",
+    "sam_body": "sam-1"
+  },
+  "normalization": null
+}

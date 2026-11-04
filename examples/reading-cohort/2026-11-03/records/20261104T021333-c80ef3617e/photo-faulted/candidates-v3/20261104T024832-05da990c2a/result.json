@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "arguments": {
+    "candidate_bodies": [
+      {
+        "kind": "wire",
+        "reason": "short orange insulated jumper with exposed ends seated in breadboard holes, wire body shape",
+        "sam_body": "sam-1"
+      }
+    ],
+    "mapping_status": "unique",
+    "reason": "orange jumper bridges the IN-side row to the OUT-side row matching intended W1 IN-OUT, other bodies are capacitor, resistor and connectors",
+    "sam_body": "sam-1"
+  },
+  "requests": 1,
+  "usage": {
+    "input_tokens": 7716,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1248,
+    "output_tokens_details": {
+      "reasoning_tokens": 1054
+    },
+    "total_tokens": 8964
+  },
+  "model": "muse-spark-1.3"
+}
