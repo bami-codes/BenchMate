@@ -1,23 +1,41 @@
-# 제출 폼 초안 (Cerebral Valley)
+# Submission text (Cerebral Valley form) — 4 Nov 2026
 
 **Project name:** BenchMate
 
-**Tagline (one line):** Muse Spark chooses the experiment; a $40 Arduino bench decides whether its explanation holds.
+**Tagline (one line):** Muse Spark designs experiments on a real circuit, forecasts each one before a $40 Arduino bench measures it, and finds the sealed fault.
 
-**Track:** Indie developer · **Theme:** Push the Frontier
+**Track:** Indie Developer · **Problem statement:** Push the Frontier
 
-**Description:**
+**Links:** Live demo https://bami-codes.github.io/BenchMate/ · Repository https://github.com/bami-codes/BenchMate (MIT, public) · Video: (YouTube link)
 
-On the Arduino forum, a voltage divider connected to an ESP32 read 1.1 V instead of 1.8 V. Replies guessed resistor tolerance, the meter, bad solder. The right explanation, an unpowered ESP32 loading the divider through its input clamp, came early, but only the poster's own test confirmed it: "Real life testing was the correct way to find the issue." Students and makers hit problems like this every day with no oscilloscope and nobody to ask, and resolving competing physical explanations requires measurements.
+---
 
-BenchMate turns an Arduino UNO R4 into a signal source and recorder and gives Muse Spark the bench as tools. Spark chooses each measurement, asks the human to move a wire when that adds information, and must freeze its model before validation measurements. The engine simulates, fits training data only, and scores every explanation on the whole waveform and every region.
+**Description**
 
-On a real circuit with a fault I deliberately planted (designed τ 10 ms, measured 21.4 ms), Spark recognized that one trace cannot separate a larger R from a larger C, asked for a known load, and kept only the explanation that survived: C changed (3.0 mV RMS vs 32.5 mV for R changed). It then passed a reserved sine it had never seen (3.04 mV) and reported what it still did not know. The whole run took under six minutes with one wiring change. [Physical repair result pending; the actual-Spark mock rehearsal has passed.] On a simplified input-clamp test circuit inspired by the forum problem (simulated bench so far; Spark is not told the wiring), all five starting linear models failed, Spark proposed a structure outside them (series R plus a diode to REF), its prediction was pushed to GitHub before two unseen inputs were measured, and both matched.
+The drawing is right. The board is right. The output is wrong. That moment comes to every lab prototype, repair bench and first production board, and today a person settles it by choosing measurements, predicting what each should show, and crossing explanations out. BenchMate gives that job to Muse Spark, on a real bench, under rules that make it impossible to cheat.
 
-**How we use Meta models:** Muse Spark 1.3 runs the experiment loop through tool calls: medium effort for physical diagnosis and repair, max effort for structure discovery, where it writes literal netlists that run in ngspice. Spark vision reads a schematic image into a design candidate the user confirms. SAM 3.1 was evaluated for highlighting the faulty part in a bench photo. Measured findings: in one qualitative no-tool case, all five replies led with a timing-definition hypothesis and recommended re-measuring; at the key decision, medium chose the same experiment as max 5/5 in a third of the time.
+Spark receives one schematic image and a fixed menu of experiments (steps and sines, with or without a 9.99 kΩ load) on an Arduino UNO R4 bench that costs about $40. It chooses the next experiment and says why. Before the bench moves, every standing explanation of the circuit is simulated in ngspice with the measured input and its forecast is hashed into the run's event log. The Arduino measures; an explanation that misses by more than 9 mV RMS, on the whole step or any region of it, is crossed out. When no value explanation survives, Spark proposes a part the drawing does not show, as a netlist. When two explanations give the same waveforms, Spark names one part to read and the quantity; the expected range under each explanation is frozen and pushed to GitHub before the operator touches a multimeter. The final forecast is pushed before two held-back inputs are measured. The fault itself was planted by the operator and committed as a digest before the first measurement; it is opened only after the verdict and compared by code.
 
-**What was built during the hackathon:** BenchMate firmware, instrument protocol, engine, Spark tool loop, viewers, experiments and video (first commit Oct 27, 2026). Third-party libraries, model weights and the bundled font retain their own licenses and credits.
+Five problems from real forum threads were rebuilt as small circuits, each with one sealed fault: a pin's hidden output resistance, an unpowered chip loading a divider, a filter capacitor of the wrong value, contact resistance on a breadboard, a 555 timing resistor far too small. Spark found where each board disagreed with its drawing. It proposed the hidden diode and the hidden series resistor as parts the drawing lacked; it asked for exactly the readings that separated indistinguishable explanations; in the capacitor case it said the photo could not tell two identical parts apart and let two out-of-circuit readings and the frozen bands decide. Every restored rerun, in a fresh model context, reported no mismatch in the tests Spark chose.
 
-**Links:** [GitHub](https://github.com/bami-codes/BenchMate) · [Public interactive replay and 51-second diagnosis film](https://bami-codes.github.io/BenchMate/) · Final submission video: not uploaded. A 2:36 editing backup is ready locally.
+Counted from the records: 10 official runs, 5 fault diagnoses with held-back checks passed, 2 structure proposals, 4 readings, 5 seals matched, 5 restored reruns; 101 Muse Spark calls and 6 SAM 3.1 calls, about $1.01. These are counts from a public ledger that also keeps every stopped, abstained and miswired attempt, named on the reports. They are not an accuracy rate, and the cases were known to the developer; this is not a blind test.
 
-**Evaluation update:** On 30 synthetic Task A cases, Spark with measurement access identified 24/24 in-family cases, matching the engine and fixed plan; without measurement access it identified 8/24. Six cases changed both R and C: Spark completed five justified rejection reports, with one incomplete. Spark Open completed 21/24 in-family identifications and 1/6 rejection reports; eight runs stopped on multiple-tool responses to the single-tool adapter. All first attempts are retained. On Task B, ranking-hidden Spark completed 15/16 versus 16/16 for the engine and fixed plan. We therefore retain engine ranking in the linear workflow and make no LLM-superiority claim. [Full comparisons](../examples/overnight/2026-11-02/README.md).
+Why this is the frontier and not a circuit tester: the model is not asked to explain a measurement somebody made. It designs the measurement, commits to a forecast first, and is scored by code against a truth it was never told. The loop needs six things and nothing more — a description of what was intended, a space of explanations, a simulator, an instrument with a menu, a person for what the instrument cannot do, and a sealed truth — and none of the six is specific to electronics. A circuit was the cheapest real system where that loop could be run honestly in one week. The experiments in this demo did not exist until the model asked for them.
+
+**How Meta's models are used**
+
+Muse Spark 1.3 (Meta Model API) is the agent: it chooses every experiment with a reason, asks for rewiring, decides when to run the held-back check, proposes new netlists when every value explanation has failed, and chooses which part to read and which quantity. Muse Spark vision reads each schematic image into parts and connections before the run and, after the diagnosis, looks at the board photo with SAM 3.1's bodies and names the one that is the part to read (or says it cannot). SAM 3.1 segments the mini board photo with one generic prompt; its native masks are the only outlines shown and no part value is ever read from a photo. Muse Spark Open (Baseten) ran the earlier synthetic benchmark as a development comparison. Spark is never told the fault, the assembly, hole positions, earlier results, or the operator's reading before it is scored; every request and response is in the records.
+
+**What was built during the hackathon**
+
+Everything, 27 October – 4 November 2026, by one person with Codex and Claude as coding agents: the Arduino instrument firmware (boot-bound captures, reference guard), the bench, the fit engine (ngspice, whole-and-region scoring, forecast freezing and publication), the Spark tool loop, the reading and seal protocol, the SAM/Spark photo stage, the offline verifier, the replay site, and the five physical runs. Third-party libraries, model weights and fonts keep their own licenses.
+
+**Verify it**
+
+`PYTHONPATH=src python3 -S -m benchmate verify <run folder>` re-checks any record offline: every event hash-chained, every forecast hash matched to the event that froze it, forecast → capture → measurement order enforced. The commands and their PASS lines for all five cases are in the README; each case report on the site prints them too.
+
+---
+
+**Short version (if the form caps length)**
+
+BenchMate gives Muse Spark a real $40 Arduino bench. It reads the schematic, chooses experiments from a fixed menu, and must forecast each one (hashed, then pushed to GitHub) before the bench measures. Explanations that miss by more than 9 mV are crossed out; when none survive, Spark proposes a part the drawing lacks; when two give the same waveforms, Spark names one part to read with ranges frozen first. Five faults from real forum threads were planted and sealed as digests before measurement; Spark found all five (two by proposing hidden parts), and every restored rerun reported no mismatch. 10 official runs, 101 Spark calls, 6 SAM 3.1 calls, about $1.01; every attempt, including the stopped and abstained ones, is in the public ledger, and one command verifies any run offline. The experiments did not exist until the model asked for them.
