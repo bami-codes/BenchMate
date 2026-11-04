@@ -265,9 +265,13 @@ body.dev::after{content:"DEV FIXTURE · not a real run";position:fixed;left:50%;
 /* ---------- landing ---------- */
 .hero{max-width:1240px;margin:8px auto 0;padding:0 16px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:stretch}
 @media (max-width:900px){.hero{grid-template-columns:1fr}}
-.hero .scope{min-height:300px;max-height:400px}
+.hero .scope{min-height:300px}
 .hero .scope canvas{position:absolute;inset:0;height:100%!important}
-.hero-side{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
+.hero-side{display:flex;flex-direction:column;gap:12px}
+.hero-side .tile:last-child{flex:1;display:flex;flex-direction:column}
+.hero-side .tile:last-child .schem{flex:1;min-height:150px;max-height:300px}
+.hero-side .tile:last-child .photo,.hero-side .tile:last-child .photo img{height:100%}
+.hero-side .tile:last-child .photo img{object-fit:cover;object-position:center 38%}
 .hero-side .tile .schem svg{max-height:180px;margin:0 auto}
 .hero-side .tile:last-child .schem svg{max-height:150px;width:100%}
 .tile{background:var(--paper);border-radius:var(--radius);padding:12px 14px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 10px 30px -18px rgba(0,0,0,.6)}
@@ -472,3 +476,20 @@ footer a{color:#fff}
 .elsewhere div{border-left:3px solid var(--rule);padding-left:12px;font-size:14px;line-height:1.4}
 .elsewhere b{display:block;font:600 15px/1.25 var(--narrow);margin-bottom:2px}.elsewhere span{color:var(--ink-2);font-size:13px}
 #policy details summary{cursor:pointer;font-family:var(--narrow);font-weight:600}
+
+/* round 4c: the first screen, looked at coldly */
+.hero{align-items:stretch}
+.scope-col .caption{color:#fff;opacity:.85;margin-top:-2px}
+.scope-col .caption p{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.hero .scope .read{display:none}
+.glance li{background:transparent;border:0;border-left:3px solid var(--tape);border-radius:0;padding:4px 0 4px 14px;grid-template-columns:128px minmax(0,1fr)}
+.glance b{font-size:16px}.glance span{font-size:14px;opacity:.92}
+.btn{transition:background .15s,color .15s,border-color .15s,transform .08s}
+.btn:hover{background:#2b3238;border-color:#2b3238}
+.btn.ghost:hover{background:rgba(23,27,30,.08)}
+.btn.ghost.onmat:hover,.claim .btn.ghost:hover{background:rgba(255,255,255,.14)}
+.claim .btn:hover{background:#f0f0ea}
+.btn:active{transform:translateY(1px)}
+.run-line{transition:background .15s}.run-line:hover{background:var(--paper-3)}
+.case-row .src a:hover{text-decoration-thickness:2px}
+.score .k{transition:transform .15s}.score .k:hover{transform:translateY(-1px)}
