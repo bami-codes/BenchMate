@@ -1,7 +1,7 @@
 // Landing: the claim, the scope, the numbers, then the five cases with their recorded runs. Everything shown is read from data/.
 (async () => {
   const { $, el, expName, fmtUSD, fmtDate, schematic, boardSVG, Scope, stepTraces, stepTime, verdictWords, REDUCED, ev } = BM;
-  const [cases, index, results, policy] = await Promise.all([BM.loadCases(), BM.loadRuns(), BM.loadResults(), BM.json('data/official-run-policy.json').catch(() => null)]);
+  const [cases, index, results, policy, census] = await Promise.all([BM.loadCases(), BM.loadRuns(), BM.loadResults(), BM.json('data/official-run-policy.json').catch(() => null), BM.json('data/census.json').catch(() => null)]);
   const runs = index.runs || [];
   for (const r of runs.filter(x => x.counted && x.state === 'faulted')) { try { const rr = await BM.loadRun(r.id); for (const g of rr.reading?.groups || []) for (const m of g.members || []) BM.names[m.id] = m.label || m.words; } catch (e) { /* no run file */ } }
   // default source: the first official attempt for case 01 (counted, earliest start) per the preregistered
@@ -66,13 +66,13 @@
     $('#score').hidden = false;
     $('#score-note').append(el('span', {}, `${results.official_runs.length} official runs on the real bench: every forecast frozen before its measurement and checked by code; every fault sealed until the verdict.`), el('small', {}, `Updated ${fmtDate(results.updated_utc)}`));
     for (const m of results.metrics) { const usd = m.label.includes('(USD)'); $('#score-grid').append(el('div', { class: 'k' }, el('b', {}, m.value == null ? '—' : usd ? '$' + m.value : m.value), el('span', {}, usd ? m.label.replace(' (USD)', '') : m.label))); }
-    $('#score-foot').textContent = 'Counts, not a rate: stopped, abstained and miswired attempts are in the public ledger and named on the reports. Costs are estimates at the published rates.';
+    $('#score-foot').textContent = (census?.sentence ? census.sentence + ' ' : 'Counts, not a rate: stopped, abstained and miswired attempts are in the public ledger and named on the reports. ') + 'Costs are estimates at the published rates.';
   }
 
   // ---- the cases: one row per case with its recorded runs (fault run, restored rerun), in case order
   const cl = $('#case-list');
   const counted = runs.filter(r => r.counted);
-  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `Each case is a problem from a real forum thread, rebuilt on the bench with one sealed fault: ${counted.length} official runs in all.`; }
+  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `Each case is a problem from a real forum thread, rebuilt on the bench with one sealed fault: ${counted.length} official runs replayed here${census?.counts ? `, out of ${census.counts.diagnostic_starts} diagnostic runs started` : ''}.`; }
   const cap1 = (t) => { if (!t) return t; t = t[0].toUpperCase() + t.slice(1); return /[.!?]$/.test(t) ? t : t + '.'; };
   const outcomeLine = (r) => cap1(r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one multimeter reading, bands frozen first, placed it; the seal matched.' : 'Spark proposed a part the drawing does not show; held-back checks passed; the seal matched.') : r.reading === 'group' ? 'one explanation left after the tests; two multimeter readings, bands frozen first, fixed which body; the seal matched.' : 'one explanation left after one multimeter reading; the seal matched.') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome);
   const runLine = (r) => { const restored = r.state === 'restored'; return el('div', { class: 'run-line ' + (restored ? 'restored' : 'fault') },

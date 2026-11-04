@@ -1,0 +1,19 @@
+{
+ "schema": "benchmate.site_census_view.v1",
+ "source": "docs/2026-11-04-official-attempt-census.json",
+ "source_sha256": "e219d381121744f34da3889d17c550cb6fb90b0c2be56587defa7bf78e1731fe",
+ "as_of_main_commit": "b09303fed91305eda1e8d6013027aaaef9b574c2",
+ "counts": {
+  "included_cases": 5,
+  "registered_workflow_attempts": 13,
+  "diagnostic_starts": 15,
+  "faulted_diagnostic_starts": 7,
+  "restored_diagnostic_starts": 8,
+  "stopped_before_verdict": 3,
+  "abstained": 2,
+  "non_abstained_verdicts": 10,
+  "displayed_official_replays": 10,
+  "displayed_development_replays": 2
+ },
+ "sentence": "Across five cases, 13 registered workflow attempts started 15 diagnostic runs: 3 stopped before a verdict, 2 abstained, and 10 returned a non-abstained verdict. The site replays 10 fault and restored runs; all other attempts are retained. Counts, not an accuracy rate."
+}
