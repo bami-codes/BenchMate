@@ -1,0 +1,16 @@
+{
+  "cohort": "reading-assisted-v1",
+  "source": "physical",
+  "official": true,
+  "counted": true,
+  "case_id": "03",
+  "blind_test": false,
+  "faulted_diagnosis": "history/reading/history/original/diagnosis-faulted/20261104T042909-7ee516eccf",
+  "restored_diagnosis": "diagnosis-restored/20261104T051133-4d80b9f294",
+  "reading_outcome": "one_explanation_remains",
+  "restored_verdict": "consistent",
+  "restored_caption": "No mismatch in the tests Spark chose",
+  "operator_restored_and_rerun_consistent": true,
+  "native_diagnostic_repair_claim_overwritten": false,
+  "both_state_photos_recorded": true
+}

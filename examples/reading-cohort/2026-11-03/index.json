@@ -147,14 +147,16 @@
       "run_id": "20261104T051005-fac3d07c86",
       "case_id": "03",
       "attempt": 2,
-      "status": "registered",
+      "status": "completed",
       "counted": true,
       "selected_first_attempt": false,
       "execution_scope": "restored_only_after_confirmed_photo_reading",
       "followup_of": "20261104T041918-d1084cbeb4",
       "original_primary_status": "failed",
-      "pending_stage": "restored_documentary_photo",
-      "restored_verdict": "consistent"
+      "pending_stage": null,
+      "restored_verdict": "consistent",
+      "reading_outcome": "one_explanation_remains",
+      "completion_method": "retained_faulted_diagnosis_and_confirmed_isolated_reading_plus_restored_v4_and_documentary_SAM"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# Case03 restored diagnostic result; documentary photo pending
+# Case03 restored diagnostic result and documentary completion
 
 The isolated operator reading was **R1 = 2.22kΩ**, USB off, fully removed,
 20kΩ range. The unchanged pre-photo source/range-specific intervals retained
@@ -27,10 +27,10 @@ that every part is correct or that the explanation is unique. The caption stays
 **No mismatch in the tests Spark chose**.
 
 The numerical child passed its keyless 236-event hash/prediction/order audit.
-The incomplete compound prefix passed 566 events, including the retained failed
-original and completed reading. Its original first-attempt failure stays counted.
-The new follow-up is still active pending its documentary photo; it is not yet
-reported as a completed full photo/repair pair.
+At the diagnostic-result publication, the incomplete compound prefix passed 566
+events, including the retained failed original and completed reading. Its original
+first-attempt failure stays counted. The documentary photo was still pending at
+that publication. The final completion below adds it without changing the diagnosis.
 
 The restored photo scope was declared before photo intake: new actual restored
 photo, **1 generic SAM only**, documentary display, **0 Spark reference/value
@@ -38,12 +38,41 @@ requests and 0 operator readings**. The replacement changed the mini-board, so
 a new whole-board capture is required. No close-ups are required. Native masks
 will be preserved, without claimed restored component identity.
 
-Actual restored diagnosis: **6 Spark, $0.05070545 estimated**. Case03 so far:
-**15 Spark, 1 SAM, $0.13866115 estimated**. Remaining photo request: **1 SAM,
-$0.0025 estimated**. These are retained-tariff estimates, not invoices.
+Actual restored diagnosis: **6 Spark, $0.05070545 estimated**. At that point
+case03 had used **15 Spark, 1 SAM, $0.13866115 estimated**. The subsequently
+completed restored photo added **1 SAM, $0.0025 estimated**. These are
+retained-tariff estimates, not invoices.
+
+## Completed restored documentary photo
+
+The operator supplied a new restored whole-board DNG after the photo scope had
+been published. The fixed converter removed metadata; the DNG stays ignored and
+private. One generic `electronic component` SAM request returned **3 native mask
+records**. All 3 are displayed and all originals retained. The existing case02
+bounding-box containment rule and separate external contours were reused for
+the documentary comparison, with no new segmentation call or value inference.
+Faulted/restored documentary region counts are 4/3; these are not component
+accuracy measurements. The images are not spatially registered.
+
+No restored Spark correspondence, operator reading, physical stimulus or new
+component-identity assertion was added. The restored native result and the
+command-only step failure above remain unchanged. The counted original failed
+pair is still separate from this completed restored-only continuation.
+
+Final case03 total: **15 Spark, 2 SAM, $0.14116115 estimated**. The completed
+compound record passed **583 events**, with terminal status `run_completed`.
+Its head SHA-256 is
+`5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2`.
+
+`case03-evidence-map.json` in the completed record points to the inherited fault
+diagnosis, original reading request/forecast, raw Spark candidate/reference,
+operator confirmation, isolated free-number observation and score, original
+seal, fresh restored diagnosis, both clean photos, native masks and documentary
+overlays. `verification.txt` contains the one-line PASS output. The record is
+`examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86`.
 
 ```sh
-PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify <record> --allow-active
+PYTHONPATH=src python -S -m benchmate.reading_restored_after_photo_v5 verify <record>
 ```
 
 This checks internal integrity and recorded order, not creation time, physical

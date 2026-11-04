@@ -1,0 +1,67 @@
+{
+  "schema": "benchmate.case03_complete_evidence_map.v1",
+  "case_id": "03",
+  "complete": true,
+  "root_head_sha256": "5c667bad7772f3f38313fa8da9857931cf3930b6dea76d70a926704483d363d2",
+  "original_failure_counted": true,
+  "original_first_selection_unchanged": true,
+  "main_evidence": {
+    "faulted_diagnosis": "history/reading/history/original/diagnosis-faulted/20261104T042909-7ee516eccf",
+    "Spark_reading_request_and_frozen_forecast": "history/reading/history/original/reading-forecast.json",
+    "Spark_body_candidates_and_unique_reference": "history/reading/history/body-followup/candidate-proposal.json",
+    "operator_confirmation": "history/reading/body-binding.json",
+    "free_numeric_reading": "history/reading/reading-observation.json",
+    "source_specific_score": "history/reading/reading-score.json",
+    "faulted_photo": "history/reading/history/original/photo-faulted/prepared/input.png",
+    "faulted_R1_selected_display": "history/reading/history/body-followup/candidate-display/Spark-selected-context.png",
+    "restored_diagnosis": "diagnosis-restored/20261104T051133-4d80b9f294",
+    "restored_photo": "photo-restored/prepared/input.png",
+    "restored_native_SAM": "photo-restored/decoded/native-SAM/crop-manifest.json",
+    "restored_documentary_overlay": "documentary-display/restored-SAM-overview.png",
+    "documentary_comparison": "documentary-display/before-after-SAM.png",
+    "keyless_audit": "verification.txt"
+  },
+  "restored_caption": "No mismatch in the tests Spark chose",
+  "reading": {
+    "component": "R1",
+    "source": "operator_dmm",
+    "isolated": true,
+    "reported_value": 2.22,
+    "unit": "kohm",
+    "meter_range_ohm": 20000
+  },
+  "reading_fits": [
+    "changed:R1"
+  ],
+  "reading_rejected": [
+    "changed:R2"
+  ],
+  "replacement_nominal_ohm": 10000,
+  "restored_diagnostic_verdict": "consistent",
+  "native_physical_repair_claim": false,
+  "restored_SAM": {
+    "requests": 1,
+    "raw_regions": 3,
+    "displayed_regions": 3,
+    "scope": "documentary_display_only",
+    "Spark_binding_requests": 0,
+    "operator_value_requests": 0,
+    "component_identity_claimed": false
+  },
+  "case03_actual_total": {
+    "Spark_requests": 15,
+    "SAM_requests": 2,
+    "estimated_cost_USD": 0.14116115
+  },
+  "whole_cohort_including_labelled_case02_reprocessing": {
+    "Spark_requests": 101,
+    "SAM_requests": 6,
+    "estimated_cost_USD": 1.00892305
+  },
+  "cost_scope": "Retained tariff estimate, not invoice; SAM $0.0025 per image.",
+  "native_masks_modified": false,
+  "RAW_originals_committed": false,
+  "photo_GPS_or_EXIF_copied": false,
+  "compound_events_checked": 583,
+  "creation_time_proven": false
+}

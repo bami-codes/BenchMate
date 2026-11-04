@@ -1,0 +1,121 @@
+{
+  "schema": "benchmate.photo_parts_decoded.v1",
+  "prepared": "/Users/bami/Documents/metaai/runs/reading-cohort/20261104T051005-fac3d07c86/photo-restored/prepared",
+  "plan_sha256": "81ad5d7ed1119fed9ec49aa07150b1b86949b4418b59151c87c23ceb96892639",
+  "objects": [
+    {
+      "photo_component_id": "d99153498a5e:electronic component-object-0-record-0",
+      "concept": "electronic component",
+      "object_id": "0",
+      "record_index": 0,
+      "input_image_sha256": "d99153498a5e06505d4002a22d8c1eacf9efd090ca799bb5820ac0f1ee52dd7f",
+      "bounds_half_open": [
+        565,
+        720,
+        753,
+        761
+      ],
+      "confidence": 0.7538461089134216,
+      "raster_size": [
+        188,
+        41
+      ],
+      "source_mask_file": "electronic component-object-0-record-0-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        1352,
+        1798,
+        1969,
+        1934
+      ],
+      "crop_file": "electronic component-object-0-record-0-crop.png",
+      "crop_sha256": "917cdefee608af0751f1e74dd2451a6ff9324fffc8ef9d465b85d0a94039c9c5",
+      "crop_size": [
+        617,
+        136
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    },
+    {
+      "photo_component_id": "d99153498a5e:electronic component-object-1-record-1",
+      "concept": "electronic component",
+      "object_id": "1",
+      "record_index": 1,
+      "input_image_sha256": "d99153498a5e06505d4002a22d8c1eacf9efd090ca799bb5820ac0f1ee52dd7f",
+      "bounds_half_open": [
+        780,
+        590,
+        925,
+        700
+      ],
+      "confidence": 0.8202247023582458,
+      "raster_size": [
+        145,
+        110
+      ],
+      "source_mask_file": "electronic component-object-1-record-1-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        1910,
+        1445,
+        2386,
+        1806
+      ],
+      "crop_file": "electronic component-object-1-record-1-crop.png",
+      "crop_sha256": "a759f447f8d4eed5e0cd8d17be9fd015abe9f2a520b0f372836d28f9a30426e7",
+      "crop_size": [
+        476,
+        361
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    },
+    {
+      "photo_component_id": "d99153498a5e:electronic component-object-2-record-2",
+      "concept": "electronic component",
+      "object_id": "2",
+      "record_index": 2,
+      "input_image_sha256": "d99153498a5e06505d4002a22d8c1eacf9efd090ca799bb5820ac0f1ee52dd7f",
+      "bounds_half_open": [
+        334,
+        581,
+        530,
+        622
+      ],
+      "confidence": 0.719298243522644,
+      "raster_size": [
+        196,
+        41
+      ],
+      "source_mask_file": "electronic component-object-2-record-2-mask.png",
+      "mask_mapping_status": "exact_no_resize",
+      "full_pixel_crop_box": [
+        767,
+        1448,
+        1410,
+        1583
+      ],
+      "crop_file": "electronic component-object-2-record-2-crop.png",
+      "crop_sha256": "9653e5a78636aebb289c5a158c425b7387611d21d3d473700dbd98ce0e357171",
+      "crop_size": [
+        643,
+        135
+      ],
+      "schematic_ref": null,
+      "association_status": "unassigned"
+    }
+  ],
+  "summaries": [
+    {
+      "concept": "electronic component",
+      "status": "decoded",
+      "match_count": 3,
+      "diagnostic_count": 0
+    }
+  ],
+  "all_masks_retained": true,
+  "manual_mask_edits": false,
+  "new_API_calls": 0,
+  "Pillow_version": "12.3.0"
+}
