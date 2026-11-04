@@ -581,3 +581,44 @@ footer a{color:#fff}
 .run-line .act .meta{margin-left:auto;color:var(--ink-2);font-size:13px}
 @media (max-width:760px){.case-block{grid-template-columns:36px minmax(0,1fr)}.run-line .act .meta{margin-left:0;flex-basis:100%}}
 .lede-note{max-width:62ch;margin-top:-4px}
+
+/* round 4j: the bench — labelled photo, who does what, rules; engineering detail folded */
+.bench-grid{grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:26px;align-items:stretch}
+.bench-side{display:flex;flex-direction:column;gap:18px}
+.bench-side > details{margin-top:auto}
+.bench-side h3.sub{font-size:16px;color:var(--ink-2);font-weight:600;margin:0}
+.pinbox{position:relative}
+.pinbox img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--rule)}
+.pinbox .pin{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:#fff;color:var(--ink);border:2px solid var(--ink);font:700 14px/24px var(--narrow);text-align:center;box-shadow:0 1px 5px rgba(0,0,0,.5)}
+.pinkey{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:6px;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+.pinkey li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start}
+.pinkey i{font:700 11.5px/18px var(--narrow);font-style:normal;width:20px;height:20px;box-sizing:border-box;border-radius:50%;border:1.5px solid var(--ink);text-align:center;color:var(--ink);margin-top:1px}
+.pinkey b{color:var(--ink);font-weight:600;margin-right:3px}
+.bench-photo .note{margin-top:8px;font-size:12.5px}
+.roles{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.roles li{display:grid;grid-template-columns:128px minmax(0,1fr);gap:2px 12px;align-items:baseline;padding:11px 14px;border-radius:var(--radius);border:1.5px solid;background:#fff}
+.roles li b{font:600 16.5px/1.25 var(--narrow);color:var(--ink)}
+.roles li b small{display:block;font:500 11.5px/1.2 var(--narrow);color:var(--ink-2);margin-top:2px;letter-spacing:.02em;text-transform:uppercase}
+.roles li span{font-size:14px;line-height:1.4;color:var(--ink-2)}
+.roles .spark{border-color:#7a4fd6;background:#f4efff}
+.roles .ardu{border-color:#2b6bdc;background:#e9f0fa}
+.roles .oper{border-color:#c9a227;background:#fff8dc;border-style:dashed}
+.brules{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.brules li{padding:1px 0 1px 12px;border-left:3px solid var(--ink-3);font-size:14px;line-height:1.4;color:var(--ink-2)}
+.brules b{color:var(--ink);font-weight:600}
+.bench-eng{border-top:1px solid var(--rule);padding-top:10px}
+.bench-eng summary{cursor:pointer;font:600 14px/1.3 var(--narrow);color:var(--ink-2)}
+.bench-eng summary:hover{color:var(--ink)}
+.bench-eng .bench-diagram{margin-top:10px}
+.bench-eng .bench-kv{margin-top:10px}
+@media (max-width:900px){.bench-grid{grid-template-columns:1fr}.bench-side > details{margin-top:0}}
+@media (max-width:480px){.roles li{grid-template-columns:1fr}}
+
+.roles li .ex{grid-column:1 / -1;font-style:normal;font-size:13px;line-height:1.45;color:var(--ink-2);margin-top:6px;padding-top:7px;border-top:1px dashed rgba(0,0,0,.14)}
+.roles li .ex:empty{display:none}
+.roles li .ex b{font:600 12.5px/1.3 var(--narrow);color:var(--ink);letter-spacing:.01em}
+.roles li .ex q{display:block;margin-top:2px;font-style:italic;color:var(--ink)}
+.roles li .ex q::before{content:"In its own words: “"}.roles li .ex q::after{content:"”"}
+.bench-photo .note code{white-space:nowrap}
+@media (min-width:901px){.bench-grid{grid-template-columns:minmax(0,322px) minmax(0,1fr)}}
+.bench-side > details{margin-top:0}
