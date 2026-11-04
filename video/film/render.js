@@ -9,7 +9,7 @@ const FPS = parseInt(arg('--fps', '60')), JOBS = parseInt(arg('--jobs', '3')); c
 fs.mkdirSync(path.join(V, 'out'), { recursive: true }); fs.mkdirSync(path.join(V, 'frames'), { recursive: true });
 
 async function openStage(browser) {
-  const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+  const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: parseFloat(process.env.SCALE || '1'), reducedMotion: 'reduce' });  // SCALE=1.3333333 renders 2560×1440 from the same layout
   const pg = await ctx.newPage(); const errs = [];
   pg.on('pageerror', e => errs.push(String(e))); pg.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
   await pg.goto(BASE, { waitUntil: 'networkidle' }); await pg.evaluate(() => window.filmReady); await pg.evaluate(() => document.fonts.ready); await pg.waitForTimeout(300);
