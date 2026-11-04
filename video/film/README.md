@@ -1,4 +1,4 @@
-# The film: twenty-seven composed shots
+# The film: twenty-three composed shots
 
 `shots.html` + `shots.js` compose each 1920×1080 frame directly: the site's scope and meters are the instruments, everything
 else is set at film scale. Every waveform, number, range, label, verdict and seal sentence is read from `site/data/runs/*.json`

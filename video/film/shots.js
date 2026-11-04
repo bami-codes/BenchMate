@@ -17,7 +17,7 @@ const typed = (elm, text, t, a, d) => { const n = Math.round(lin(t, a, a + d) * 
 
 const SHOTS = []; const SFX = []; const CAPS = []; let VOICE = {};
 // Seven narration clips (voice/s1…s7). Each scene's shots stretch together to its clip; ticks run in design time.
-const SCENE_OF = { s1: ['s01','s02','s03'], s2: ['s04','s05'], s3: ['s06','s07','s08','s09','s10','s11','s12','s13','s14'], s4: ['s15','s16','s17','s18','s19','s20','s21','s22','s23'], s5: ['s24'], s6: ['s25','s26'], s7: ['s27'] };
+const SCENE_OF = { s1: ['s01','s02'], s2: ['s04','s05'], s3: ['s06','s07','s09','s10','s12','s13','s14'], s4: ['s15','s16','s18','s19','s20','s21','s22','s23'], s5: ['s24'], s6: ['s25','s26'], s7: ['s27'] };
 const PLANNED = { s1: 9, s2: 16, s3: 47, s4: 43, s5: 17, s6: 21, s7: 13 };
 const VOICE_LEAD = { s1: 2.2 };  // seconds of picture before the clip starts (the clip sits at scene start + 0.4 + lead)
 let PLAN = {};  // voice/shot_plan.json: global start of each shot, computed by plan_shots.py from the clips' word timings
@@ -88,17 +88,12 @@ function buildAll() {
         el('div', { class: 'abs', id: 'phlab', style: 'left:96px;top:940px' }, el('span', { class: 'tape2 white' }, 'The bench · a real $40 setup · 4 November 2026')));
     }, (r, t) => { const lt = t; const z = 1 + .08 * ease(lt, 0, 3); r.querySelector('#phimg').style.transform = `translate(-50%,-50%) translateY(${-120 + 40 * ease(lt, 0, 3)}px) scale(${z})`; r.querySelector('#phlab').style.opacity = ease(lt, .4, 1.0) * (1 - ease(lt, 2.3, 2.8)); }); }
   // S02 5–11  the three sentences
-  { const [a, b] = span(4.5); shot('s02', a, b, (r) => {
+  { const [a, b] = span(7); shot('s02', a, b, (r) => {
       const L = ['The drawing is right.', 'The board looks right.', 'The output is wrong.'];
       const box = el('div', { class: 'abs', style: 'left:96px;top:340px' }); L.forEach((s, i) => box.append(el('div', { class: 'h1 ln' + (i === 2 ? ' wrong' : ''), style: 'font-size:112px;line-height:1.08;height:122px;position:relative;white-space:nowrap' + (i === 2 ? ';color:var(--fault-soft)' : '') }, el('span', { class: 't' }), i === 2 ? el('span', { class: 'ul', style: 'position:absolute;left:0;bottom:-4px;height:9px;background:var(--fault);width:0;border-radius:2px' }) : null, el('span', { class: 'caret', style: 'display:inline-block;width:6px;height:96px;background:#fff;vertical-align:-10px;margin-left:8px;opacity:0' }))));
-      r.append(box);
+      r.append(box, el('div', { class: 'abs cue', id: 'ask', style: 'left:96px;top:760px;font:500 48px/1.2 var(--narrow);color:rgba(255,255,255,.9)' }, 'What do you measure next, and where do you look?'));
       r._L = L; for (let k = 0; k < 3; k++) { sfx(a + [.4, 1.5, 2.5][k], 'type'); }
-    }, (r, t) => { const L = r._L; const lns = r.querySelectorAll('.ln'); [[.4, .75], [1.5, .65], [2.5, .85]].forEach(([t0, d], i) => { const ln = lns[i]; typed(ln.querySelector('.t'), L[i], t, t0, d); const c = ln.querySelector('.caret'); const act = t >= t0 - .2 && t < t0 + d + .35; c.style.opacity = act ? ((Math.floor(t * 3) % 2) ? 1 : .25) : 0; }); lns[2].querySelector('.ul').style.width = (ease(t, 3.4, 3.9) * 100) + '%'; }); }
-  // S03 11–16  who it is for
-  { const [a, b] = span(3.5); shot('s03', a, b, (r) => {
-      r.append(el('div', { class: 'abs cue', id: 'q1', style: 'left:96px;top:300px;width:1728px' }, el('div', { class: 'eyebrow' }, 'The first power-on of a new board'), el('div', { class: 'h1', style: 'margin-top:22px' }, 'What do you measure next,', el('br'), 'and where do you look?')),
-        el('div', { class: 'abs cue', id: 'q2', style: 'left:96px;top:700px;width:1728px' }, el('div', { class: 'body dim', style: 'font-size:34px' }, 'Usually a person settles it: choosing measurements, predicting each, crossing explanations out.')));
-    }, (r, t) => { rise(r.querySelector('#q1'), t, .2); rise(r.querySelector('#q2'), t, 1.3); }); }
+    }, (r, t) => { const L = r._L; const lns = r.querySelectorAll('.ln'); [[.4, .75], [1.5, .65], [2.5, .85]].forEach(([t0, d], i) => { const ln = lns[i]; typed(ln.querySelector('.t'), L[i], t, t0, d); const c = ln.querySelector('.caret'); const act = t >= t0 - .2 && t < t0 + d + .35; c.style.opacity = act ? ((Math.floor(t * 3) % 2) ? 1 : .25) : 0; }); lns[2].querySelector('.ul').style.width = (ease(t, 3.4, 3.9) * 100) + '%'; rise(r.querySelector('#ask'), t, 4.1); }); }
   // S04 16–22  the bench: three boards
   { const [a, b] = span(9.5); shot('s04', a, b, (r) => {
       const ph = el('div', { class: 'photo2 abs', style: 'left:1070px;top:96px;width:754px;height:850px' }, el('img', { src: '../../examples/bench-photos/2026-11-04/full/camera-preview.png', style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover' }));
@@ -116,8 +111,8 @@ function buildAll() {
           el('div', { class: 'h2', style: 'margin-top:26px' }, 'Reads the schematic.', el('br'), 'Chooses its own experiments from a fixed menu.', el('br'), 'Says why.'),
           el('div', { class: 'body dim', style: 'margin-top:30px;font-size:30px' }, 'Before each measurement, its forecast is frozen and hashed. The engine scores; Spark decides what to test next.')),
         el('div', { class: 'abs', id: 'sealbox', style: 'left:1240px;top:200px;width:584px' }, el('div', { class: 'photo2' }, el('img', { src: '../../site/assets/photos/case04-faulted-crop.jpg', style: 'width:100%' })), el('div', { class: 'abs', id: 'seal', style: 'left:40px;top:240px;width:470px;transform:rotate(-7deg) scale(0);transform-origin:center;border:4px solid var(--fault);color:var(--fault);font:700 44px/1.1 var(--narrow);padding:16px 22px;border-radius:8px;letter-spacing:.06em;background:rgba(255,255,255,.92);text-transform:uppercase;box-shadow:0 8px 24px rgba(0,0,0,.35)' }, 'Sealed', el('small', { style: 'display:block;font:500 18px/1.3 var(--mono);letter-spacing:0;text-transform:none;color:#8a2a24;margin-top:6px' }, 'sha256 of the assembly, committed before the first measurement'))));
-      cap(a + 5.3, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 5.5, 'seal');
-    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 5.5) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
+      cap(a + 4.5, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 4.7, 'seal');
+    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 4.7) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
 
   // ===== Case 04 =====
   // S06 28–33  case title
@@ -137,12 +132,6 @@ function buildAll() {
       else { W.showStep('s2', st[1], st[1].label); W.strip.firstChild.textContent = 'Experiment 2'; W.draw(lin(t, 5.8, 7.4), (k) => ease(t, 4.8 + k * .12, 5.6 + k * .12)); r.querySelector('#n1').textContent = `“${q(st[1].reason)}”`; r.querySelector('#n2').textContent = `— Muse Spark, choosing ${st[1].label}`; }
       for (const f of st[0].fit) { const m = W.meters[f.id]; const k = t < 4.6 ? 0 : 1; const ff = st[k].fit.find(x => x.id === f.id); const u = t < 4.6 ? ease(t, 3.6, 4.4) : ease(t, 7.4, 8.2); const prev = k === 1 ? missOf(f, 0) : 0; const v = k === 1 ? prev + (missOf(ff, 1) - prev) * u : missOf(ff, 0) * u; setMeter(m, u <= 0 && k === 0 ? { wait: true } : { value: v, sub: `step ${k + 1} · fits`, fitted: ff.value != null ? BM.fmtFit(ff.kind, ff.value, ff.at_bound) : 'drawn values' }); }
     }); }
-  // S08 43–47  Spark picks the large sine
-  { const [a, b] = span(3.5); shot('s08', a, b, (r) => {
-      const st = st4[2]; r.append(el('div', { class: 'paper2 abs cue', id: 'pk', style: 'left:96px;top:280px;width:1728px;padding:44px 52px' }, el('div', { class: 'speaker spark' }, el('i'), 'Muse Spark 1.3 · chose the next experiment', el('span', { class: 'ts', style: 'margin-left:auto' }, kst(st.chosen_utc))),
-        el('div', { class: 'h2', style: 'margin:26px 0 22px' }, el('span', { style: 'display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;font-size:28px;margin-right:18px;vertical-align:middle' }, '3'), st.label), el('p', { class: 'quote' }, q(st.reason)), el('div', { style: 'margin-top:34px' }, menuChips(R4.menu, st.action)), el('div', { class: 'small dim', style: 'margin-top:14px' }, 'The whole fixed menu, the same for every case; the solid chip is Spark’s pick. The runner never chooses.')));
-      cap(a + .6, b, 'After two safe steps, Spark asks for a large sine: linearity.'); sfx(a + .2, 'card');
-    }, (r, t) => { rise(r.querySelector('#pk'), t, .1); }); }
   // S09 47–57  the large sine: every needle in the red
   { const [a, b] = span(8); shot('s09', a, b, (r, s) => {
       const W = workspace(r); s.W = W; for (const f of st4[2].fit) W.meter(f.id, expName(f.id), f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values');
@@ -168,15 +157,10 @@ function buildAll() {
       r._svg = svg; const hl = [...svg.querySelectorAll('[stroke="#d5342c"],[fill="#d5342c"],[stroke="var(--fault)"]')]; r._hl = hl.length ? hl : [...svg.querySelectorAll('*')].filter(e => (e.getAttribute('stroke') || '').toLowerCase().includes('d5342c') || (e.getAttribute('fill') || '').toLowerCase().includes('d5342c'));
       cap(a + .8, b, 'Spark writes a new netlist: a diode from OUT to REF, which the drawing never had'); sfx(a + .2, 'card'); sfx(a + 2.2, 'forecast');
     }, (r, t) => { rise(r.querySelector('#nl'), t, .1); rise(r.querySelector('#tx'), t, .5); rise(r.querySelector('#diff'), t, 2.6); const e = ease(t, 2.0, 2.9); for (const h of r._hl) h.style.opacity = e; }); }
-  // S11 65–69  frozen and pushed
-  { const [a, b] = span(3); shot('s11', a, b, (r) => {
-      r.append(el('div', { class: 'abs cue', id: 'fz', style: 'left:96px;top:330px;width:1728px' }, el('div', { class: 'eyebrow' }, 'Before the check'), el('div', { class: 'h1', style: 'margin-top:16px' }, 'Fitted. Frozen. Pushed to GitHub.'), el('div', { class: 'chips', style: 'margin-top:44px' }, el('span', { class: 'chip2 mono' }, 'commit ' + String(ver4.commit || '').slice(0, 7)), el('span', { class: 'chip2 mono' }, 'sha256 ' + String(ver4.sha || '')), el('span', { class: 'chip2' }, `${(ver4.published_utc || '').slice(0, 16).replace('T', ' ')} UTC`)), el('div', { class: 'body dim', style: 'margin-top:40px;font-size:32px' }, 'From here nothing can be re-fitted. Two inputs Spark has never seen come next.')));
-      sfx(a + 1.2, 'commit'); cap(a + .6, b, 'The forecast for the proposed circuit is on GitHub before the held-back inputs are measured');
-    }, (r, t) => { rise(r.querySelector('#fz'), t, .1); }); }
   // S12 69–78  the held-back checks against the frozen model
   { const [a, b] = span(8); shot('s12', a, b, (r, s) => {
       const W = workspace(r); s.W = W; const m = W.meter('proposal:1', BM.proposalName(pr4), 'frozen'); s.m = m; W.strip.children[1].textContent = '– – frozen forecast · proposed circuit';
-      W.note.append(el('b', {}, 'Frozen-model check · measured IN. '), el('span', { class: 'dim' }, 'The model is not refitted to these outputs; it is driven by the measured input and compared.'));
+      W.note.append(el('b', {}, 'Frozen-model check · measured IN. '), el('span', { class: 'dim' }, `Forecast frozen and pushed to GitHub (commit ${String(ver4.commit || '').slice(0, 7)}) before these inputs were measured; nothing is refitted, the frozen model is driven by the measured input and compared.`));
       const sc = ver4.scored; s.dec = sc.map(x => Object.values(x.conditional)[0]);
       cap(a + .4, a + 3.9, 'Held-back input 1: a step Spark never used, against the frozen forecast'); cap(a + 4.2, b, 'Held-back input 2: a sine Spark never used, against the frozen forecast');
       sfx(a + .5, 'sweep'); sfx(a + 3.2, 'pass'); sfx(a + 4.4, 'sweep'); sfx(a + 7.2, 'pass');
@@ -217,14 +201,6 @@ function buildAll() {
       sfx(a + .7, 'forecast'); sfx(a + 1.8, 'sweep'); sfx(a + 4.6, 'needle_red'); sfx(a + 4.9, 'needle_red'); sfx(a + 5.5, 'crossout');
     }, (r, t, s) => { const W = s.W; const st = st1[0]; W.showStep('s1', st, st.label); W.strip.firstChild.textContent = 'Experiment 1'; W.draw(lin(t, 1.8, 4.0), (k) => ease(t, .5 + k * .15, 1.6 + k * .15));
       for (const f of st.fit) { const out = f.status === 'inadequate'; const u = ease(t, 4.1, 5.2); setMeter(W.meters[f.id], u <= 0 ? { wait: true } : { value: missOf(f, 0) * u, bad: out && u > .55, sub: 'step 1 · worst region', tag: out && t >= 5.5 ? 'Ruled out after step 1' : null, tagIn: ease(t, 5.5, 5.95) }); }
-    }); }
-  // S17 104–108  experiments 2 and 3: R1 changed still fits
-  { const [a, b] = span(3); shot('s17', a, b, (r, s) => {
-      const W = workspace(r); s.W = W; for (const f of st1[0].fit) W.meter(f.id, expName(f.id), f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values');
-      W.note.append(el('b', {}, 'Two more experiments. '), el('span', { class: 'dim' }, `R1 changed still fits: ${fmtMiss(missOf(st1[1].fit.find(f => f.id === 'changed:R1'), 1))} and ${fmtMiss(missOf(st1[2].fit.find(f => f.id === 'changed:R1'), 2))}.`));
-      cap(a + .3, b, 'Experiments 2 and 3: R1 changed still fits'); sfx(a + .3, 'sweep'); sfx(a + 1.6, 'sweep');
-    }, (r, t, s) => { const W = s.W; const k = t < 1.5 ? 1 : 2; const st = st1[k]; W.showStep('s' + (k + 1), st, st.label); W.strip.firstChild.textContent = `Experiment ${k + 1}`; W.draw(lin(t, k === 1 ? .3 : 1.6, k === 1 ? 1.3 : 2.6), 1);
-      for (const f of st1[0].fit) { const out = f.status === 'inadequate'; const ff = st.fit.find(x => x.id === f.id); setMeter(W.meters[f.id], out ? { value: missOf(f, 0), dead: true, tag: 'Ruled out after step 1', sub: 'step 1' } : { value: missOf(ff, k), sub: `step ${k + 1} · fits`, fitted: BM.fmtFit(ff.kind, ff.value, ff.at_bound) }); }
     }); }
   // S18 108–114  two explanations, one waveform
   { const [a, b] = span(5); shot('s18', a, b, (r, s) => {

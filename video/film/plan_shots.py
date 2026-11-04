@@ -22,12 +22,12 @@ def spoken(scene, text):
     raise SystemExit(f'no sentence or cue in {scene} starts with {text!r}')
 
 ANCHORS = {
-  's01': ('s1', None, 0), 's02': ('s1', '+2.3', 0), 's03': ('s1', 'What should you measure', .3),
-  's04': ('s2', None, 0), 's05': ('s2', 'Spark reads the schematic', .3),
-  's06': ('s3', None, 0), 's07': ('s3', 'Two small step tests', .3), 's08': ('s3', 'Then Spark chooses', .3), 's09': ('s3', 'All three fail', 1.25),
-  's10': ('s3', 'Spark writes a new circuit model', .2), 's11': ('s3', 'The fitted model is frozen', .2), 's12': ('s3', 'The fitted model is frozen', -2.2),
+  's01': ('s1', None, 0), 's02': ('s1', '+2.3', 0),
+  's04': ('s2', None, 0), 's05': ('s2', 'Spark reads the schematic', -1.8),
+  's06': ('s3', None, 0), 's07': ('s3', 'Two small step tests', .3), 's09': ('s3', 'All three fail', 1.25),
+  's10': ('s3', 'Spark writes a new circuit model', .2), 's12': ('s3', 'The fitted model is frozen', .2),
   's13': ('s3', 'five point one nine', .2), 's14': ('s3', 'The seal opens', .4),
-  's15': ('s4', None, 0), 's16': ('s4', "The drawing's model fails", .2), 's17': ('s4', 'R one changed', .9), 's18': ('s4', 'They produce identical', .25),
+  's15': ('s4', None, 0), 's16': ('s4', "The drawing's model fails", .5), 's18': ('s4', 'R one changed', .4),
   's19': ('s4', 'Spark asks for a measurement', .2), 's20': ('s4', 'Sam outlines', .3), 's21': ('s4', 'The operator reads', .3), 's22': ('s4', 'The seal reveals', .3), 's23': ('s4', 'After repair', .3),
   's24': ('s5', None, 0), 's25': ('s6', None, 0), 's26': ('s6', 'Stopped and abstained', -1.5), 's27': ('s7', None, 0),
 }
