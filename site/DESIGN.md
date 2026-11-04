@@ -104,3 +104,8 @@ drawn only after the seal opens and was never part of the model input.
   on the right with a shared bottom edge. Nothing sits beside the headline; the three trust rows (forecast first / sealed
   truth / scored by code) live under the "Counted from the records" numbers. Phone nav: Cases / How it works / GitHub.
 
+
+### Round 4h — the hero scope explains itself (4 Nov)
+
+- The scope on the landing page is the first thing a judge sees, so it now says what its three lines are in plain words, in one strip across the top: `Experiment 1 · – – forecast from the drawing · — output, measured · — input, measured`. The two-item legend the replay uses is hidden in the hero; the mV/div readout sits bottom-left and the experiment settings (`Step, ±0.2 V, 9.99 kΩ load`) bottom-right as a footnote. On phones the strip wraps to two lines and the settings footnote is dropped.
+- Under the scope, one sentence from the run file, symptom first: `Case 01 · Filter output too small. Spark chose 3 experiments, passed two checks on inputs it had never seen, and settled it with one multimeter reading. Watch how →` (the link opens the replay with autoplay). The caption keeps badge · case · date on one line and the forecast-miss sentence on its own line.

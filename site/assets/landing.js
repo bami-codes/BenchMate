@@ -17,17 +17,26 @@
     const run = await BM.loadRun(first.id);
     const st = run.steps[0];
     const traces = stepTraces(st, { measuredProgress: REDUCED ? 1 : 0 });
-    scope.set(stepTime(st), traces, `Step 1 · ${st.label}`);
+    scope.set(stepTime(st), traces, st.label); // the settings only; 'Experiment 1' is said in the key strip
     $('#cta-replay').href = `run.html?run=${run.id}&play=1`;
     const nom = (st.fit || []).find(f => f.id === 'nominal');
     const cls = run.classification?.public_label || run.classification?.label || (run.pilot ? 'Pilot run — not counted' : 'Counted run');
-    $('#hero-under').append(document.createTextNode(BM.heroLine(run) + ' '));
-    // one line: state · case · when · the drawing's miss (numbers are evidence targets)
+    // the scope, in plain words: what each line is (the keys sit on the scope itself; the mV/div HUD moves to the bottom)
+    $('#hero-scope').append(el('div', { class: 'plain', 'aria-label': 'What the lines are' },
+      el('b', {}, `Experiment ${st.n}`), el('span', { class: 'k fc' }, '– – forecast from the drawing'), el('span', { class: 'k out' }, '— output, measured'), el('span', { class: 'k in' }, '— input, measured')));
+    // one plain sentence: the symptom (never the cause: the seal is still closed here), then what Spark did, from the run
+    const kase0 = cases.cases.find(c => c.id === run.case);
+    const nSteps = run.steps.length, nScored = (run.verification?.scored || []).length, rd = run.reading;
+    const settled = rd?.group?.scored ? 'settled it with two multimeter readings' : rd?.scored ? 'settled it with one multimeter reading' : (run.outcome?.verdict === 'structure_supported' ? 'proposed a part the drawing does not show' : '');
+    $('#hero-under').append(el('span', { class: 'case' }, `Case ${run.case} · ${kase0.title}.`), ' ',
+      `Spark chose ${nSteps} experiment${nSteps === 1 ? '' : 's'}${nScored ? `, passed ${nScored === 2 ? 'two' : nScored} checks on inputs it had never seen` : ''}${settled ? ', and ' + settled : ''}. `,
+      el('a', { class: 'watch', href: `run.html?run=${run.id}&play=1` }, 'Watch how →'));
+    // one line of provenance under it: badge · run · when · the miss the scope shows
     const miss = nom ? (nom.decided_mV?.[0] ?? nom.miss_mV?.[0]) : null;
     $('#hero-caption').append(el('p', {},
-      el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls), ' · ',
-      `Case ${run.case}, ${run.label} · `, ev(el('span', { class: 'num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
-      miss != null ? [' · as drawn missed by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0], allowance_mV: run.allowance_mV } }), ` (allowance ${run.allowance_mV} mV)`] : null));
+      el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls),
+      el('span', { class: 'it' }, `Case ${run.case}, ${run.label}`), ev(el('span', { class: 'it num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
+      miss != null ? el('span', { class: 'it' }, 'The drawing’s forecast missed the board by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0], allowance_mV: run.allowance_mV } }), `; the allowance is ${run.allowance_mV} mV.`) : null));
     if (!REDUCED) {
       const meas = traces.filter(t => t.kind !== 'fc'); let t0 = performance.now();
       const loop = (now) => { const ph = ((now - t0) / 1000) % 6.5; const p = Math.min(1, ph / 3.2); for (const t of meas) t.progress = p; scope.draw(); requestAnimationFrame(loop); };
