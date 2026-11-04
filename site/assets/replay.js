@@ -22,7 +22,10 @@
   $('#case-title').textContent = kase.title;
   $('#case-n').textContent = `Case ${run.case} · ${run.label}`;
   $('#shelf-title').textContent = `Case ${run.case} · ${kase.title}`;
-  $('#replay-of').textContent = `Replay of ${run.label}, recorded ${fmtDate(run.started_utc)}, ${run.model}`;
+  const modelName = String(run.model || '').replace(/^muse-spark-(\S+)$/, 'Muse Spark $1');
+  const whatRun = run.pilot ? 'Pilot run' : run.state === 'restored' || /restored/i.test(run.label || '') ? 'Rerun after the fault was repaired' : 'Diagnosis on the faulted board';
+  $('#replay-of').textContent = `${whatRun}, recorded ${fmtDate(run.started_utc)}${modelName ? ' · ' + modelName : ''}`;
+  $('#meters-head').textContent = `Explanations on trial · how far each one’s forecast misses the board; red past the ${run.allowance_mV ?? 9} mV allowance`;
   const cls = run.classification || { label: run.pilot ? 'Pilot run — not counted' : 'Counted run' };
   $('#badge').replaceWith(el('span', { class: 'badge ' + (run.counted ? 'live' : run.pilot ? 'pilot' : 'pending'), id: 'badge', title: (cls.label || '') + (cls.basis ? ' — ' + cls.basis : '') }, cls.public_label || cls.label));
   $('#report-link').href = `case.html?id=${run.case}&run=${run.id}`;
@@ -31,7 +34,9 @@
   const railSchem = await schematic(kase.design); $('#rail-schem').append(railSchem);
   const railDrawing = $('#rail-schem').closest('.rail-card'); railDrawing.hidden = true; // the drawing shows once: in the scope area until the scope has traces
   const showRailDrawing = () => { railDrawing.hidden = false; };
-  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)), el('p', {}, 'The drawing Spark read. Press Play: forecasts are drawn before each measurement.'));
+  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)),
+    el('p', {}, 'The drawing Spark read. Every forecast is drawn before the bench measures.'),
+    el('button', { class: 'btn bigplay', type: 'button', onclick: () => $('#play').click() }, '▶ Play the replay'));
   if (run.design_amendment) idle.append(el('p', { class: 'small muted amend' }, run.design_amendment.text));
   if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, run.design_amendment.text));
   const metersBox = $('#meters');
@@ -44,7 +49,7 @@
     metersBox.append(m.root); return m;
   };
   const waitingMeters = () => { metersBox.innerHTML = ''; for (const k in meters) delete meters[k]; meterOrder = [];
-    for (const id of ['nominal', ...(run.design || []).filter(d => d.kind !== 'W').map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.root.classList.add('wait'); } };
+    for (const id of ['nominal', ...(run.design || []).filter(d => d.kind !== 'W').map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.readout.lastChild.textContent = `allowance ${run.allowance_mV ?? 9} mV`; m.root.classList.add('wait'); } };
 
   // ---------- shelf: full / compact. Compact keeps a 110 px scope strip and one row of chips that mirror the meters,
   // so a verdict is never missed while collapsed. Auto-collapses on scroll unless the viewer toggled it by hand.
