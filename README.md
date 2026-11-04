@@ -1,10 +1,12 @@
 # BenchMate
 
-**A diagnostic instrument for the first power-on of real hardware. Muse Spark reads the drawing, designs experiments on the real circuit, forecasts each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing. Every step is a record you can verify offline.**
+**The drawing is right. The board is right. The output is wrong.**
+
+Meta's Muse Spark reads the schematic and chooses its own experiments on a real board. Every forecast comes before the measurement; every verdict is scored by code against a sealed answer. Five faults were planted on five small circuits and sealed; the model found where each board disagreed with its drawing, and every step is a record you can verify offline.
 
 **[Open the live demo](https://bami-codes.github.io/BenchMate/)** — five recorded diagnoses replayed from their logs, every number clickable to the event behind it. No installation, no API key.
 
-[![The landing page: the first experiment's forecast and measurement on the scope, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
+[![The landing page: the first experiment on the scope with the forecast dashed and the measured input and output drawn over it, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
 
 The experiments on that page did not exist until the model asked for them. That is the capability this project shows; a circuit on a $40 bench is the smallest honest place to show it.
 
@@ -24,7 +26,7 @@ Five problems from real forum threads, each rebuilt as a small circuit on a mini
 
 Counted from the records: **10 official runs, 5 fault diagnoses with held-back checks passed, 2 structure proposals, 4 readings asked for, 5 seals matched, 5 restored reruns with no mismatch; 101 Muse Spark calls, 6 SAM 3.1 calls, about $1.01** at the published rates. These are counts from a public ledger that also holds every stopped, abstained and miswired attempt (see [Everything that went wrong](#everything-that-went-wrong)). They are not an accuracy rate, and the cases were known to the developers: this is not a blind test.
 
-[![Case 05 end scene: the proposed series resistor placed off the board by one reading, the photo with SAM 3.1's outline of the jumper Spark named, the opened seal](site/assets/readme/case05-end.jpg)](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e)
+[![Case 05 at the verdict: the three value explanations crossed out, Spark's proposed resistor, and the two placements the engine split, settled by one reading; the notebook below](site/assets/readme/case05-end.jpg)](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e)
 
 ## How a run works
 
@@ -41,7 +43,7 @@ flowchart LR
     G --> C
     F -->|survivors| H[Forecast pushed to GitHub, two held-back inputs measured]
     H -->|same waveforms| I[Spark names one part to read; bands frozen; operator reads it]
-    H --> J[Seal opened, compared by code]
+    H --> J[Seal opened; its digest checked by code against the commitment]
     I --> J
 ```
 
@@ -51,7 +53,7 @@ flowchart LR
 4. **Measure and cross out.** The Arduino measures the real circuit. A miss above 9 mV RMS, on the whole step or any region of it, rules the explanation out. If none survive, Spark may propose a new netlist.
 5. **Check on held-back inputs.** The final forecast is committed and pushed to GitHub, then two reserved inputs never used for fitting are measured.
 6. **One reading at the bench.** When two explanations give the same terminal waveforms, Spark names the part and the quantity; its expected range under each explanation (and for each way of reading it: multimeter or marking) is frozen and pushed; the operator types one value; the same rule rules out.
-7. **Open the seal.** The assembly record, hashed before the first measurement, is compared with the result by code.
+7. **Open the seal.** The assembly record, hashed before the first measurement, is opened; code checks its digest against that commitment, and the verdict stands beside it. The site prints both and does not pick a verdict.
 
 ## The bench
 
@@ -74,7 +76,7 @@ Spark is never told the fault, the assembly, hole positions, earlier results or 
 
 - **Forecast first, every time.** Training forecasts are hashed into the event log before the capture command is sent; the final forecast is committed and pushed to GitHub before the held-back inputs are measured; reading bands are pushed before the operator reads. The commits carry the time.
 - **Tamper-evident records.** Each run is an append-only JSONL log in which every event carries its SHA-256 and the previous one. The site shows the event behind every number.
-- **Sealed truth.** The operator's assembly record is hashed before the first measurement and opened only after the reading is scored. The site's red overlay was never model input.
+- **Sealed truth.** The operator's assembly record is hashed before the first measurement and opened only after the reading is scored; the digest is checked by code when it opens. The site's red overlay was never model input.
 - **Scored by code.** Verdicts, survivors and reading scores are copied from the engine's events as written; the site never picks a verdict.
 - **Verify offline.** From a fresh clone, no packages, keys, network or hardware:
 
@@ -126,6 +128,19 @@ Kept as development records, not counted in the five cases.
 - **Structure discovery on a simulated bench:** all five starting models failed; Spark wrote a netlist with a series resistor and a diode, its prediction was pushed before two unseen inputs, both matched at 1.7 mV. [Record](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md). The physical version became case 04.
 - **Preregistered synthetic evaluation:** with bench access Spark identified 24/24 in-family cases; without measurements 8/24; engine and fixed-plan baselines also reached 24/24, so engine ranking stays in the linear workflow and no LLM-superiority claim is made. Spark Open (Baseten) 21/24 with eight transport-related incompletes. [Comparisons](examples/overnight/2026-11-02/README.md).
 - **No-tool comparison:** asked the same question without instruments, all five replies opened with "nothing is wrong with the circuit" and advised re-measuring; the bench showed the capacitor had changed. A qualitative case, not an error rate. [Replies](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md).
+
+## Repository map
+
+| Path | What is there |
+|---|---|
+| `site/` | The demo: static pages, the data extracted from the records, the browser checks and the deploy notes (`site/HANDOFF.md`, `site/DESIGN.md`). Published to the `gh-pages` branch. |
+| `src/benchmate/` | The engine: bench control, fit and forecast, the Spark tool loop, the reading and seal protocol, and the offline verifier. |
+| `firmware/` | Arduino UNO R4 sketches: the instrument, bring-up and loopback checks. |
+| `examples/` | The records: hash-chained event logs, frozen forecasts and metadata-free photo derivatives for every run, counted or not. |
+| `docs/` | Protocols, amendments, incident records and results, dated; [`docs/evidence-index.md`](docs/evidence-index.md) is the index. |
+| `tests/` | Tests for the engine and the firmware stubs. |
+| `scripts/`, `experiments/` | Development tooling and bench QA scripts. |
+| `video/` | Drafts of a pipeline for a demo film. No film has been made yet. |
 
 ## Try it
 
