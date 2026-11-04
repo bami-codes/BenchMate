@@ -120,6 +120,49 @@ p{margin:0}
 .rail-schem svg{display:block;width:100%;height:auto}
 .rail .kv{grid-template-columns:80px minmax(0,1fr);margin:0}
 .scope-wrap{position:relative;min-width:0}
+/* replay shelf: full / compact. The replay scope fills its wrap, whose height is set here, so the shelf never passes 45vh. */
+#shelf .scope-wrap{height:clamp(170px,calc((min(100vw,1240px) - 400px) * .34),calc(45vh - 86px))}
+#shelf .scope{height:100%}
+#shelf .scope canvas{height:100%}
+#shelf .meters{max-height:calc(45vh - 56px);overflow-y:auto;overscroll-behavior:contain;padding:12px 2px 2px 0;margin-top:-12px}
+@media (min-width:981px){#shelf .shelf-in:has(.meter-row.many){grid-template-columns:minmax(0,1fr) 440px}}
+#shelf .meter-row.many{grid-template-columns:repeat(3,minmax(0,1fr))}
+#shelf .meter-row.many .meter .name{font-size:12px}
+#shelf .meter-row.many .meter .tag{font-size:10.5px;padding:4px 6px;right:3px}
+#shelf .meter-row.many .meter .read{font-size:11px}
+.meter-chips{display:none;flex-wrap:wrap;gap:6px;align-content:center}
+.chip-m{display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 var(--narrow);color:#fff;padding:6px 9px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.28);max-width:100%;transition:border-color .5s,background .5s}
+.chip-m i{width:9px;height:9px;border-radius:50%;background:#8f9a97;flex:none;transition:background .5s}
+.chip-m .cv{opacity:.85;font-weight:400;white-space:nowrap}
+.chip-m .cn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.chip-m.fit i{background:#4fd38a}.chip-m.fit{border-color:rgba(79,211,138,.55)}
+.chip-m.bad i{background:#ff6b61}.chip-m.bad{border-color:rgba(255,107,97,.6)}
+.chip-m.out i{background:#ff6b61}.chip-m.out{border-color:rgba(255,107,97,.6);background:rgba(213,52,44,.18)}
+.chip-m.out .cn{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#ff6b61}
+.chip-m.dead{opacity:.6}
+.chip-m.wait i{background:#8f9a97}
+.shelf-toggle{margin-left:auto}
+#shelf.compact .scope-wrap{height:110px}
+.shelf.compact .scope .hud,.shelf.compact .scope .read,.shelf.compact .scope .sweep,.shelf.compact .scope .legend{display:none}
+.shelf.compact .scope .title{left:12px;right:auto;top:50%;transform:translateY(-50%);max-width:170px;font-size:13px;line-height:1.25;color:#dfe9e3}
+.shelf.compact .meter-row{display:none}
+.shelf.compact .meter-chips{display:flex}
+#shelf.compact .meters{max-height:110px;align-self:center;overflow:visible}
+.shelf.compact .scope-idle .frame-in{width:auto;height:calc(100% - 12px);max-height:none}
+.shelf.compact .scope-idle p{display:none}
+.shelf.compact .scope-idle{padding:6px 12px}
+#shelf .scope-wrap,#shelf .meters{transition:height .35s ease,max-height .35s ease}
+/* phones: the shelf scrolls with the page; the chips row always sits under the scope, the toggle only shows/hides the meter grid */
+@media (max-width:900px){
+  .meter-chips{display:flex;margin-top:2px}
+  #shelf.compact .scope-wrap,#shelf .scope-wrap{height:62vw;max-height:360px}
+  .shelf.compact .scope .hud,.shelf.compact .scope .read,.shelf.compact .scope .sweep{display:flex}
+  .shelf.compact .scope .title{left:auto;right:12px;top:9px;transform:none;max-width:60%;font-size:12.5px;color:#aab8b3}
+  #shelf.compact .scope-idle p{display:block}#shelf.compact .scope-idle .frame-in{width:88%;height:auto;max-height:calc(100% - 40px)}
+  #shelf.compact .scope .hud,#shelf.compact .scope .read,#shelf.compact .scope .sweep{display:flex}#shelf.compact .scope .title{left:auto;right:12px;top:9px;transform:none;max-width:60%;font-size:12.5px;color:#aab8b3}
+  #shelf.compact .meters{max-height:none;align-self:stretch}
+  .shelf-toggle{margin-left:0}
+}
 .scope-idle{position:absolute;inset:0;background:var(--scope);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 18px;color:var(--phosphor);font-family:var(--narrow);transition:opacity .5s}
 .scope-idle svg{max-height:calc(100% - 34px);width:auto;max-width:100%;background:#fff;border-radius:4px;padding:4px}
 .scope-idle p{font-size:13px;color:#aab8b3;text-align:center}
@@ -321,6 +364,8 @@ footer a{color:#fff}
 @media (max-width:480px){.meter .tk.minor{display:none}}
 @media (max-width:700px){
   .shelf{position:static}
+  #shelf .scope-wrap{height:62vw}
+  #shelf .meters{max-height:none;overflow:visible}
   .meter-row{grid-template-columns:repeat(3,minmax(0,1fr))}
   .meter{padding:6px 6px 4px}.meter .name{font-size:11.5px;flex-direction:column;gap:0}.meter .read{font-size:11px;flex-direction:column}
   .meter .tag{font-size:10.5px;padding:4px 6px;right:2px}

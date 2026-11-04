@@ -16,7 +16,7 @@
   <nav><a href="index.html#replays">Replays</a><a href="index.html#cases">Cases</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
 </header>
 
-<div class="shelf">
+<div class="shelf full" id="shelf">
   <div class="shelf-in">
     <div class="scope-wrap">
       <div class="scope" id="scope" aria-label="Oscilloscope: forecasts dashed, measured IN and OUT solid"></div>
@@ -24,6 +24,7 @@
     </div>
     <div class="meters">
       <div class="meter-row" id="meters" aria-live="polite" aria-label="Explanations and their misses"></div>
+      <div class="meter-chips" id="meter-chips" aria-hidden="true"></div>
     </div>
     <div class="transport">
       <span class="small" id="shelf-title" style="opacity:.9"></span>
@@ -33,6 +34,7 @@
       <span class="seal" id="seal">Hidden fault sealed</span>
       <div class="counters"><span><b class="num" id="c-exp">0</b> experiments</span><span><b class="num" id="c-calls">0</b> Spark calls</span><span><b class="num" id="c-cost">$0</b> est.</span></div>
       <a class="btn ghost onmat sm" id="report-link" href="#">Report</a>
+      <button class="btn ghost onmat sm shelf-toggle" id="shelf-toggle" aria-expanded="true" aria-controls="meters scope">Collapse ▴</button>
     </div>
   </div>
 </div>

@@ -26,7 +26,7 @@
   const cls = run.classification || { label: run.pilot ? 'Pilot run — not counted' : 'Counted run' };
   $('#badge').replaceWith(el('span', { class: 'badge ' + (run.counted ? 'live' : run.pilot ? 'pilot' : 'pending'), id: 'badge', title: (cls.label || '') + (cls.basis ? ' — ' + cls.basis : '') }, cls.public_label || cls.label));
   $('#report-link').href = `case.html?id=${run.case}&run=${run.id}`;
-  const scope = new Scope($('#scope'), { ratio: innerWidth < 700 ? 0.62 : 0.34 });
+  const scope = new Scope($('#scope'), { fill: true }); // the wrap's CSS height sets the scope; the shelf never passes 45vh
   const idle = $('#scope-idle');
   const railSchem = await schematic(kase.design); $('#rail-schem').append(railSchem);
   const railDrawing = $('#rail-schem').closest('.rail-card'); railDrawing.hidden = true; // the drawing shows once: in the scope area until the scope has traces
@@ -45,6 +45,33 @@
   };
   const waitingMeters = () => { metersBox.innerHTML = ''; for (const k in meters) delete meters[k]; meterOrder = [];
     for (const id of ['nominal', ...(run.design || []).map(d => 'changed:' + d.name)]) { const m = ensureMeter(id); m.readout.firstChild.textContent = 'waiting'; m.root.classList.add('wait'); } };
+
+  // ---------- shelf: full / compact. Compact keeps a 110 px scope strip and one row of chips that mirror the meters,
+  // so a verdict is never missed while collapsed. Auto-collapses on scroll unless the viewer toggled it by hand.
+  const shelf = $('#shelf'), chips = $('#meter-chips'), toggle = $('#shelf-toggle');
+  const phone = () => matchMedia('(max-width: 900px)').matches;
+  let pinned = false, mode = 'full';
+  const chipStatus = m => m.root.classList.contains('out') || m.root.classList.contains('dead') ? 'out' : m.root.classList.contains('wait') ? 'wait' : m.root.classList.contains('bad') ? 'bad' : m.val == null ? 'wait' : 'fit';
+  const renderChips = () => {
+    chips.replaceChildren(...meterOrder.map(id => { const m = meters[id]; if (!m) return null;
+      const st = chipStatus(m), val = m.readout.firstChild.textContent;
+      return el('span', { class: 'chip-m ' + st + (m.root.classList.contains('dead') ? ' dead' : ''), title: `${m.name.firstChild.textContent}: ${val}` }, el('i'), el('span', { class: 'cn' }, m.name.firstChild.textContent), el('span', { class: 'cv' }, val)); }).filter(Boolean));
+    metersBox.classList.toggle('many', meterOrder.length > 4);
+  };
+  new MutationObserver(renderChips).observe(metersBox, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class'] });
+  const setMode = (m, byUser) => {
+    mode = m; shelf.classList.toggle('compact', m === 'compact'); shelf.classList.toggle('full', m !== 'compact');
+    toggle.textContent = m === 'compact' ? 'Expand ▾' : 'Collapse ▴'; toggle.setAttribute('aria-expanded', String(m !== 'compact'));
+    if (byUser) { pinned = true; try { localStorage.setItem('bm.shelf', m); } catch {} }
+    requestAnimationFrame(() => scope.draw());
+  };
+  toggle.addEventListener('click', () => setMode(mode === 'compact' ? 'full' : 'compact', true));
+  let stored = null; try { stored = localStorage.getItem('bm.shelf'); } catch {}
+  setMode(stored === 'compact' || stored === 'full' ? stored : phone() ? 'compact' : 'full');
+  let scrollTick = 0;
+  addEventListener('scroll', () => { if (pinned || phone() || scrollTick) return; scrollTick = requestAnimationFrame(() => { scrollTick = 0;
+    const y = scrollY; if (y > 320 && mode !== 'compact') setMode('compact'); else if (y < 40 && mode !== 'full') setMode('full'); }); }, { passive: true });
+  addEventListener('resize', () => requestAnimationFrame(() => scope.draw()));
 
   // ---------- replay clock
   const tl = run.timeline;
