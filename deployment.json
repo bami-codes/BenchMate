@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "c04c042bfa2c0cbdaf80df8a6f74854e32e4f1a2",
-  "source_site_tree": "1b7fdadb33dea300c312f8cd3835e88cad367800",
-  "previous_gh_pages_commit": "85bb99587daad28bf80649ee814900aa2d9144bc",
+  "source_main_commit": "09aeb8251540f14d2f935f94ba29f4c897097cd7",
+  "source_site_tree": "d01b3186d15058a5bd7ebc9afac0188ab1de9759",
+  "previous_gh_pages_commit": "61a84a2c540f9712f615dda4ab771218e9388d2a",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Bench photo: provenance note moved from the figure caption to a Photo row in the engineers fold.",
+  "change": "Section decks and fact strips replace the grey lede paragraphs; Built lists what was made as tags.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright spot checks at 1440 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; sections checked at 1440/1024/390",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

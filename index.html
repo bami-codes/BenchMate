@@ -34,7 +34,7 @@
 <section class="section" id="score" hidden>
   <div class="paper">
     <h2>Counted from the records</h2>
-    <p class="lede" id="score-note"></p>
+    <p class="deck row" id="score-note"></p>
     <div class="score" id="score-grid"></div>
     <ul class="glance rules" aria-label="How these were counted">
       <li><b>Forecast first</b><span>Every forecast is hashed before the bench moves; the final one is pushed to GitHub before the held-back check.</span></li>
@@ -48,8 +48,13 @@
 <section class="section" id="cases">
   <div class="paper">
     <h2 id="cases-h">Five cases from real forum threads</h2>
-    <p class="lede" id="cases-count"></p>
-    <p class="small muted lede-note">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench. Same procedure, same test menu, same fixture; only the drawing changes. Every replay is the recorded run played from its log, forecasts first; click any number for the event behind it.</p>
+    <p class="deck" id="cases-count"></p>
+    <ul class="facts" aria-label="How the cases were run">
+      <li><b>Two runs per case</b>A diagnosis on the faulted board, then the same procedure again after the fault was repaired.</li>
+      <li><b>Spark was never told</b>which fault was planted. The seal was opened only after its verdict, and compared by code.</li>
+      <li><b>Same procedure every time</b>Same test menu, same fixture, same rules; only the drawing changes.</li>
+      <li><b>Replays are the logs</b>Each one is the recorded run played from its log, forecasts first. Click any number for the event behind it.</li>
+    </ul>
     <div class="cases" id="case-list"></div>
     <div id="dev-records"></div>
     <div id="policy" class="small muted" style="margin-top:12px"></div>
@@ -59,7 +64,7 @@
 <section class="section" id="bench">
   <div class="paper">
     <h2>The bench</h2>
-    <p class="lede">A $40 bench: one Arduino, a small instrument board, and the mini board that holds the circuit from the drawing plus one sealed fault. The model never touches it. It asks for an experiment; the Arduino runs it and records the answer; a person steps in only when asked, to move one jumper or read one part with a multimeter.</p>
+    <p class="deck">A $40 bench the model never touches: one Arduino, one instrument board, and the mini board with the circuit from the drawing plus one sealed fault.</p>
     <div class="bench-grid">
       <figure class="bench-photo">
         <div class="pinbox">
@@ -140,7 +145,13 @@
 <section class="section" id="frontier">
   <div class="paper">
     <h2>Why this matters</h2>
-    <p class="lede">Not a circuit tester. A test of whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week.</p>
+    <p class="deck">Not a circuit tester: a test of whether a model can do the basic move of experimental science on a real system.</p>
+    <ul class="facts" aria-label="The basic move">
+      <li><b>Say what it expects</b>before the measurement, with the forecast hashed so it cannot be changed afterwards.</li>
+      <li><b>Be held to it</b>by code, against a truth it was never told: a miss above the allowance crosses the explanation out.</li>
+      <li><b>Keep going</b>until one explanation is left, proposing a part the drawing lacks when none survives.</li>
+    </ul>
+    <p class="small muted" style="margin:-6px 0 14px">A circuit was the cheapest real system where that could be done honestly in one week.</p>
     <h3 class="sub">The loop needs six things, none of them electronic</h3>
     <ol class="needs">
       <li><b>A description of what was intended</b><span>here: the schematic image</span></li>
@@ -164,7 +175,7 @@
 <section class="section" id="how">
   <div class="paper">
     <h2>How a run works</h2>
-    <p class="lede">The same order every time. Only the drawing changes.</p>
+    <p class="deck">The same order every time. Only the drawing changes.</p>
     <div class="steps-how">
       <div><h3><span class="n">1</span>Read the drawing</h3><p>Muse Spark vision turns the schematic image into parts and connections. A person confirms the reading. The model gets this drawing and the shared bench description, nothing else.</p></div>
       <div><h3><span class="n">2</span>Choose an experiment</h3><p>Muse Spark picks from a fixed menu of steps and sines, with or without a 9.99 kΩ load, and says why. The runner never picks for it.</p></div>
@@ -181,7 +192,8 @@
 <section class="section" id="built">
   <div class="paper">
     <h2>Built during the hackathon</h2>
-    <p class="lede">Everything on this page was made between 27 October and 4 November 2026 by one person and two coding agents: firmware, bench, fit engine, Spark tool loop, reading and seal protocol, photo stage, this site, and the five physical runs. The first commit is the start of the project.</p>
+    <p class="deck">Everything here was made in nine days, 27 October to 4 November 2026, by one person and two coding agents.</p>
+    <div class="made" aria-label="What was built"><span>firmware</span><span>bench</span><span>fit engine</span><span>Spark tool loop</span><span>reading and seal protocol</span><span>photo stage</span><span>this site</span><span>five physical runs</span><em>The first commit is the start of the project.</em></div>
     <div class="built-grid">
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
       <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
