@@ -622,3 +622,25 @@ footer a{color:#fff}
 .bench-photo .note code{white-space:nowrap}
 @media (min-width:901px){.bench-grid{grid-template-columns:minmax(0,322px) minmax(0,1fr)}}
 .bench-side > details{margin-top:0}
+
+/* round 4k: one box language; speaker dots from the replay; grids without holes; verify as a card */
+.roles li{border:0;background:var(--paper-2)}
+.roles .spark,.roles .ardu{border:0;background:var(--paper-2)}
+.roles .oper{background:#fff;border:1px dashed var(--ink-3)}
+.roles li > b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ink-3);margin-right:9px;vertical-align:2px;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+.roles .spark > b::before{background:var(--fc)}
+.roles .ardu > b::before{background:var(--tape)}
+.roles li b small{margin-left:17px}
+.roles li .ex{border-top-color:var(--rule)}
+.roles .oper .ex{border-top-color:var(--rule)}
+@media (min-width:900px){.needs{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1000px){.steps-how{grid-template-columns:repeat(4,1fr)}}
+.verify-card{background:var(--paper-2);border-radius:var(--radius);padding:12px 14px 12px;margin:-4px -14px -6px}
+@media (max-width:999px){.verify-card{margin:0}}
+.verify-card h3{font-size:17px;margin-bottom:5px;display:flex;gap:9px;align-items:center}
+.verify-card h3 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px}
+.verify-card p{color:var(--ink-2);font-size:14px;margin:0}
+.verify-card .cmd{margin:8px 0;padding:8px 10px;background:var(--ink);color:#e8ecef;border-radius:4px;font:12.5px/1.4 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.verify-card .fine{font-size:12.5px;line-height:1.4}
+.built-grid .btn{margin-top:8px}
+#built h3.sub{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule)}

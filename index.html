@@ -139,7 +139,7 @@
 
 <section class="section" id="frontier">
   <div class="paper">
-    <h2>What this is a prototype of</h2>
+    <h2>Why this matters</h2>
     <p class="lede">Not a circuit tester. A test of whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week.</p>
     <h3 class="sub">The loop needs six things, none of them electronic</h3>
     <ol class="needs">
@@ -173,22 +173,8 @@
       <div><h3><span class="n">5</span>Check on held-back inputs</h3><p>The final forecast is pushed to GitHub, then two reserved inputs that were never used for fitting are measured.</p></div>
       <div><h3><span class="n">6</span>One reading at the bench</h3><p>When two explanations give the same waveforms, Spark names one part to read. Its expected range under each explanation is frozen first; the operator types one value; the same rule rules out.</p></div>
       <div><h3><span class="n">7</span>Open the seal</h3><p>The hidden fault, committed as a digest before the first measurement, is compared with the result by code. SAM 3.1 outlines the bodies in the board photo; Spark vision points at the part.</p></div>
+      <div class="verify-card" id="verify-short"></div>
     </div>
-    <div class="verify" id="verify-short"></div>
-  </div>
-</section>
-
-<section class="section" id="who">
-  <div class="paper">
-    <h2>Who does what</h2>
-    <dl class="who">
-      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts and connections. After the diagnosis, names which SAM body is the part to read (01, 03, 05), or says it cannot tell (02).</dd>
-      <dt>Muse Spark 1.3 agent</dt><dd>Chooses every experiment and says why; asks for rewiring and for the check; proposes a part the drawing lacks when every value fails (04, 05); chooses what to read.</dd>
-      <dt>SAM 3.1</dt><dd>Segments the board photo after the diagnosis. Its native masks are the only outlines shown; no value is ever read from a photo.</dd>
-      <dt>Fit engine, ngspice</dt><dd>Simulates every explanation, forecasts, scores by RMS miss, freezes and publishes before each scored measurement.</dd>
-      <dt>Bench, Arduino UNO R4</dt><dd>Drives IN, records IN, OUT and REF; a reference guard stops the run when the bench itself drifts.</dd>
-      <dt>Operator</dt><dd>Builds the sealed fault, moves one jumper and reads one part when asked, never tells the model what is wrong.</dd>
-    </dl>
   </div>
 </section>
 
@@ -200,8 +186,18 @@
       <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
       <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
       <div><h3>What is not claimed</h3><p class="small">Five completed cases are not an accuracy rate. Failed and abstained attempts are kept in the public ledger and named on the reports. Restored reruns show "no mismatch in the tests Spark chose", not a proof that every part is correct. The cases were known to the developers; this is not a blind test.</p></div>
-      <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and verifier: <a href="https://github.com/bami-codes/BenchMate">github.com/bami-codes/BenchMate</a>. <code>python -m benchmate verify &lt;run folder&gt;</code> re-checks any record offline.</p></div>
+      <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and the offline verifier.</p><a class="btn sm" href="https://github.com/bami-codes/BenchMate">github.com/bami-codes/BenchMate</a></div>
     </div>
+    <h3 class="sub">Which model did what</h3>
+<dl class="who">
+      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts and connections. After the diagnosis, names which SAM body is the part to read (01, 03, 05), or says it cannot tell (02).</dd>
+      <dt>Muse Spark 1.3 agent</dt><dd>Chooses every experiment and says why; asks for rewiring and for the check; proposes a part the drawing lacks when every value fails (04, 05); chooses what to read.</dd>
+      <dt>SAM 3.1</dt><dd>Segments the board photo after the diagnosis. Its native masks are the only outlines shown; no value is ever read from a photo.</dd>
+      <dt>Fit engine, ngspice</dt><dd>Simulates every explanation, forecasts, scores by RMS miss, freezes and publishes before each scored measurement.</dd>
+      <dt>Bench, Arduino UNO R4</dt><dd>Drives IN, records IN, OUT and REF; a reference guard stops the run when the bench itself drifts.</dd>
+      <dt>Operator</dt><dd>Builds the sealed fault, moves one jumper and reads one part when asked, never tells the model what is wrong.</dd>
+    </dl>
+
   </div>
 </section>
 
