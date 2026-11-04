@@ -1,13 +1,13 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "95f77935649f79dbf308feeceb91dd3de213d934",
-  "source_site_tree": "f9975dd7b57727328a0e7499a21cae0737670831",
-  "previous_gh_pages_commit": "30718307473dd4feef4dbe274a0dcbffbba43617",
+  "source_main_commit": "e998e2be897bb492b211a3bc682e6f040011e73b",
+  "source_site_tree": "e40634daeed834debc3a9d356d376f9f8ed71de8",
+  "previous_gh_pages_commit": "cc9f1f6753b08abdcd605edf1d1f680bf92fabd6",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
-  "new_photos": "assets/photos/bench-full.jpg (whole bench, cropped + uniform brightening, no metadata); board crops regenerated with one uniform brightness lift",
+  "new_photos": "none",
   "staging_excluded": true,
   "release_cases": [
     "01",
@@ -16,21 +16,11 @@
     "04",
     "05"
   ],
-  "change": "Landing restructured (scoreboard strip, one block per case with its runs, The bench section with photo + signal-chain diagram, Built during the hackathon); phone layout fix.",
+  "change": "'What this is a prototype of' section (Impact framing, nothing claimed beyond the records) and one audience clause in the claim.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/shots_all.js",
-    "replay_viewport_combinations": 20,
-    "all_replays_reached_end": true,
+    "tool": "playwright spot check of the landing at 1440 and 390 after the full shots_all.js run of the previous release",
     "console_errors": 0,
-    "failed_requests": 0,
-    "horizontal_overflow": 0,
-    "landing_and_report_viewport_checks": 12,
-    "visual_screenshots_reviewed": [
-      "landing-1440-full.png",
-      "landing-390 (after the case-block fix)"
-    ]
-  },
-  "request_file": "docs/requests/2026-11-04-full-bench-photo.md",
-  "request_status": "applied: bench photo used in The bench section"
+    "horizontal_overflow": 0
+  }
 }
