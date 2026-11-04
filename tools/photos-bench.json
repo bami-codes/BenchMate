@@ -1,0 +1,17 @@
+{
+ "file": "assets/photos/bench-full.jpg",
+ "source": "examples/bench-photos/2026-11-04/full/render.png (metadata-free RAW render 4028\u00d75370, sha256 5c82c1a966ce021ef3e594aa01fbb16b8d82cab7f0bd0255561c93be0914f734)",
+ "crop_box_in_render": [
+  161,
+  161,
+  3705,
+  5235
+ ],
+ "resized_to": [
+  1118,
+  1600
+ ],
+ "brightness": "uniform \u00d71.28 (Pillow ImageEnhance.Brightness), no colour or local edits",
+ "metadata": "none (JPEG without EXIF/ICC)",
+ "what_it_shows": "the whole bench: Arduino UNO R4 Minima (top right), the instrument breadboard (two LM358 followers, 1 k\u03a9 drive and channel resistors, buffered REF divider) and the mini board under test (bottom); the state of the mini board in this photo is not tied to a specific run"
+}

@@ -1,13 +1,13 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "3037b1ad4d01570763620697c26bc140fd311f24",
-  "source_site_tree": "685dbdf28d8a1f7cf8e3071e4ed0b4ae934dd68c",
-  "previous_gh_pages_commit": "025218a1d1f109df758b33384e36256208dbba4f",
+  "source_main_commit": "95f77935649f79dbf308feeceb91dd3de213d934",
+  "source_site_tree": "f9975dd7b57727328a0e7499a21cae0737670831",
+  "previous_gh_pages_commit": "30718307473dd4feef4dbe274a0dcbffbba43617",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
-  "new_photos": "assets/photos/; metadata-free derivatives only, one framing and one outline rule (tools/photo_derivatives.py)",
+  "new_photos": "assets/photos/bench-full.jpg (whole bench, cropped + uniform brightening, no metadata); board crops regenerated with one uniform brightness lift",
   "staging_excluded": true,
   "release_cases": [
     "01",
@@ -16,7 +16,7 @@
     "04",
     "05"
   ],
-  "change": "Cases 05 and 03 ingested (new extractor modes --pair-wire, --pair-chain); case 06 (LED) removed after the operator cancelled it; one photo treatment for every case; results from the records (101 Spark, 6 SAM, ~$1.01); HANDOFF and DESIGN updated.",
+  "change": "Landing restructured (scoreboard strip, one block per case with its runs, The bench section with photo + signal-chain diagram, Built during the hackathon); phone layout fix.",
   "validation": {
     "browser_QA": "PASS",
     "tool": "site/tools/shots_all.js",
@@ -26,25 +26,11 @@
     "failed_requests": 0,
     "horizontal_overflow": 0,
     "landing_and_report_viewport_checks": 12,
-    "keyless_verifiers_rerun_on_public_copies": [
-      "benchmate.reading_wire_stage verify (05 pair, 484 events PASS)",
-      "benchmate verify (05 fault child 241, 05 restored attempt 2 238, 03 fault child 236, 03 restored child 236: PASS)",
-      "benchmate.channel_timing_audit_v4 (05 attempt 2 PASS)",
-      "benchmate.reading_restored_after_photo_v5 verify (03 root, 583 events PASS)"
-    ],
     "visual_screenshots_reviewed": [
-      "replay-05-faultrun-1440-end.png",
-      "replay-05-faultrun-1440-reading.png",
-      "replay-05-restoredrerun-1440-end.png",
-      "replay-03-faultrun-1440-end.png",
-      "replay-03-restoredrerun-1440-end.png",
-      "replay-02-faultrun-1440-end.png",
-      "replay-01-faultrun-1440-end.png",
       "landing-1440-full.png",
-      "report-05-1440-full.png",
-      "replay-05-faultrun-390-end.png"
+      "landing-390 (after the case-block fix)"
     ]
   },
-  "request_file": "docs/requests/2026-11-04-five-case-submission-no-led.md",
-  "request_status": "applied: 05 and 03 ingested, 06 removed, five-case wording throughout"
+  "request_file": "docs/requests/2026-11-04-full-bench-photo.md",
+  "request_status": "applied: bench photo used in The bench section"
 }

@@ -429,3 +429,21 @@ footer a{color:#fff}
 @media (max-width:480px){.assign-table{display:table;width:100%}.assign-table thead{display:none}.assign-table tr{display:block;padding:6px 0;border-bottom:1px solid var(--rule)}.assign-table td{display:block;padding:2px 0;border:0}}
 /* a label beside a body, outside it: arrow points left at the outline */
 .photo .masklabel.side{transform:translate(0,-50%)}.photo .masklabel.side::before{left:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left:0;border-right-color:#1b1f24;border-bottom-color:transparent}
+
+/* ---------- landing round 4: one block per case with its runs; the bench; built ---------- */
+.case-block{align-items:start}
+.case-block .runs{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.run-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 8px;border-radius:var(--radius);background:var(--paper-2)}
+.run-line .btn{flex:none}
+.run-line .rep{margin-left:auto;color:var(--out)}
+.run-line.dev{margin-top:6px;background:transparent;border:1px dashed var(--rule)}
+.bench-grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:22px;align-items:start;margin-top:8px}
+@media (max-width:900px){.bench-grid{grid-template-columns:1fr}}
+.bench-photo{margin:0}.bench-photo img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--rule)}
+.bench-photo figcaption{margin-top:6px}
+.bench-diagram{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:8px}
+.bench-diagram svg{display:block;width:100%;height:auto}
+.bench-kv{margin-top:12px;grid-template-columns:96px minmax(0,1fr)}
+.built-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px 22px;margin-top:10px}
+.built-grid h3{font-size:16px;margin-bottom:4px}
+@media (max-width:760px){.case-row > :not(.n){grid-column:2}.case-row .n{grid-column:1;grid-row:1}.case-row .acts{justify-content:flex-start}}

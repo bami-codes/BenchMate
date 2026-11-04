@@ -13,13 +13,13 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""> BenchMate</a>
-  <nav><a href="#replays">Replays</a><a href="#cases">Cases</a><a href="#how" class="lng">How it works</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
+  <nav><a href="#cases">Cases</a><a href="#bench">The bench</a><a href="#how" class="lng">How it works</a><a href="#built">Built</a><a href="https://github.com/bami-codes/BenchMate">GitHub</a></nav>
 </header>
 
 <section class="claim claim-top" aria-label="What this is">
   <h1>The drawing is right. The board is right. <span class="wrong">The output is wrong.</span></h1>
-  <p>BenchMate finds where a real circuit disagrees with its schematic. Muse Spark reads the drawing and designs experiments on the real board until only one explanation is left.</p>
-  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the cases</a></div>
+  <p>BenchMate gives Muse Spark a real bench. It reads the schematic, chooses experiments on the real circuit, must forecast each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing, and every step is a record you can check.</p>
+  <div class="ctas"><a class="btn" id="cta-replay" href="run.html">Watch Spark find out why</a><a class="btn ghost" href="#cases" id="cta-cases">See the five cases</a></div>
 </section>
 
 <section class="hero" aria-label="The scope">
@@ -32,21 +32,86 @@
 
 <section class="claim claim-under"><div class="small" id="hero-caption" style="opacity:.9"></div></section>
 
-<section class="section" id="replays">
+<section class="section" id="score" hidden>
   <div class="paper">
-    <h2>Watch a diagnosis</h2>
-    <p class="lede">Recorded runs on the real bench, replayed from their logs in order. Before each measurement the dashed forecasts are drawn; then the measured trace sweeps over them and the needles move. Click any number for the log event behind it.</p>
-    <div class="cases" id="replay-list"></div>
+    <h2>Counted from the records</h2>
+    <p class="lede" id="score-note"></p>
+    <div class="score" id="score-grid"></div>
+    <p class="small muted" id="score-foot" style="margin-top:10px"></p>
   </div>
 </section>
 
 <section class="section" id="cases">
   <div class="paper">
-    <h2 id="cases-h">Cases from real forum threads</h2>
+    <h2 id="cases-h">Five cases from real forum threads</h2>
     <p class="small muted" id="cases-count"></p>
-    <p class="lede">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench: the first power-on moment, when the drawing is right and the board still misbehaves. Every case has its own circuit on the mini board and its own drawing; all use the same procedure, the same test menu and the same fixture.</p>
+    <p class="lede">Each case rebuilds a problem whose cause was settled in the thread, scaled to the bench: the first power-on moment, when the drawing is right and the board still misbehaves. Every case has its own circuit on the mini board and its own drawing; all use the same procedure, the same test menu and the same fixture. Each replay is a recorded run played back from its log in order: the dashed forecasts are drawn, then the measured trace sweeps over them and the needles move. Click any number for the log event behind it.</p>
     <div class="cases" id="case-list"></div>
+    <div id="dev-records"></div>
     <div id="policy" class="small muted" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section class="section" id="bench">
+  <div class="paper">
+    <h2>The bench</h2>
+    <p class="lede">One Arduino, two op-amp followers, a reference, and a mini board that holds the circuit under test. About $40 of parts. The model never touches it: it asks, the operator moves one jumper, the Arduino measures.</p>
+    <div class="bench-grid">
+      <figure class="bench-photo">
+        <img src="assets/photos/bench-full.jpg" alt="The whole bench from above: an Arduino UNO R4 Minima at the top right, the instrument breadboard with two LM358 followers across the middle, and the mini board under test at the bottom, all on a cutting mat" loading="lazy">
+        <figcaption class="small muted">The whole bench, photographed from above. Arduino UNO R4 Minima (top right), the instrument board (middle), the mini board under test (bottom). Brightened uniformly for the page; nothing else edited (<code>tools/photos-bench.json</code>).</figcaption>
+      </figure>
+      <div class="bench-side">
+        <div class="bench-diagram" aria-label="Signal chain of the bench">
+          <svg viewBox="0 0 760 300" role="img" aria-label="Signal chain: Muse Spark chooses; the engine forecasts; the Arduino drives IN through a follower and a 1 kΩ resistor, the mini board's OUT comes back through a follower to the ADC, REF is a buffered 1.63 V; the operator moves one jumper and takes one multimeter reading when asked.">
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#4b535a"/></marker></defs>
+            <g font-family="Archivo Narrow, Arial, sans-serif" font-size="13" fill="#171b1e">
+              <rect x="14" y="18" width="150" height="54" rx="6" fill="#efe8ff" stroke="#7a4fd6" stroke-width="1.5"/>
+              <text x="89" y="40" text-anchor="middle" font-weight="600">Muse Spark 1.3</text><text x="89" y="58" text-anchor="middle" font-size="12" fill="#4b535a">chooses the experiment</text>
+              <rect x="196" y="18" width="150" height="54" rx="6" fill="#f0f0ea" stroke="#171b1e" stroke-width="1.5"/>
+              <text x="271" y="40" text-anchor="middle" font-weight="600">Fit engine · ngspice</text><text x="271" y="58" text-anchor="middle" font-size="12" fill="#4b535a">forecast, hash, push</text>
+              <rect x="378" y="18" width="150" height="54" rx="6" fill="#e3ecf7" stroke="#2b6bdc" stroke-width="1.5"/>
+              <text x="453" y="40" text-anchor="middle" font-weight="600">Arduino UNO R4</text><text x="453" y="58" text-anchor="middle" font-size="12" fill="#4b535a">DAC out · 14-bit ADC in</text>
+              <rect x="560" y="18" width="186" height="54" rx="6" fill="#fff6d6" stroke="#c9a227" stroke-width="1.5"/>
+              <text x="653" y="40" text-anchor="middle" font-weight="600">Operator</text><text x="653" y="58" text-anchor="middle" font-size="12" fill="#4b535a">one jumper · one DMM reading, when asked</text>
+              <line x1="164" y1="45" x2="196" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
+              <line x1="346" y1="45" x2="378" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
+              <line x1="528" y1="45" x2="560" y2="45" stroke="#4b535a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+              <!-- analogue chain -->
+              <text x="14" y="118" font-size="12" fill="#4b535a" font-weight="600">Analogue chain, 0–5 V, USB power only</text>
+              <rect x="14" y="132" width="78" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="53" y="151" text-anchor="middle" font-weight="600">DAC</text><text x="53" y="165" text-anchor="middle" font-size="11" fill="#4b535a">step or sine</text>
+              <polygon points="112,134 112,170 146,152" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="129" y="188" text-anchor="middle" font-size="11" fill="#4b535a">LM358</text>
+              <rect x="166" y="144" width="54" height="16" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="193" y="137" text-anchor="middle" font-size="11.5">1 kΩ</text>
+              <line x1="92" y1="152" x2="112" y2="152" stroke="#171b1e" stroke-width="1.5"/><line x1="146" y1="152" x2="166" y2="152" stroke="#171b1e" stroke-width="1.5"/><line x1="220" y1="152" x2="262" y2="152" stroke="#1f9a52" stroke-width="3"/>
+              <circle cx="248" cy="152" r="4" fill="#1f9a52"/><text x="248" y="140" text-anchor="middle" font-size="12" font-weight="600" fill="#1f9a52">IN</text>
+              <rect x="262" y="118" width="206" height="68" rx="6" fill="#f6f7f4" stroke="#8c939a" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text x="365" y="141" text-anchor="middle" font-weight="600">mini board under test</text><text x="365" y="159" text-anchor="middle" font-size="12" fill="#4b535a">the circuit the drawing shows,</text><text x="365" y="174" text-anchor="middle" font-size="12" fill="#4b535a">plus one sealed fault</text>
+              <line x1="468" y1="152" x2="520" y2="152" stroke="#2b6bdc" stroke-width="3"/><circle cx="482" cy="152" r="4" fill="#2b6bdc"/><text x="482" y="140" text-anchor="middle" font-size="12" font-weight="600" fill="#2b6bdc">OUT</text>
+              <polygon points="520,134 520,170 554,152" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="537" y="188" text-anchor="middle" font-size="11" fill="#4b535a">LM358</text>
+              <line x1="554" y1="152" x2="580" y2="152" stroke="#171b1e" stroke-width="1.5"/>
+              <rect x="580" y="132" width="78" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="619" y="151" text-anchor="middle" font-weight="600">ADC</text><text x="619" y="165" text-anchor="middle" font-size="11" fill="#4b535a">512 frames / 0.5 ms</text>
+              <text x="705" y="148" font-size="11.5" fill="#4b535a">IN, OUT and</text><text x="705" y="162" font-size="11.5" fill="#4b535a">REF, every run</text>
+              <!-- REF -->
+              <line x1="365" y1="186" x2="365" y2="222" stroke="#8b949b" stroke-width="3"/>
+              <line x1="120" y1="222" x2="660" y2="222" stroke="#8b949b" stroke-width="3"/>
+              <circle cx="365" cy="222" r="4" fill="#8b949b"/>
+              <text x="120" y="244" font-size="12" font-weight="600" fill="#5b646b">REF · a buffered 1.63 V, not ground</text>
+              <text x="120" y="260" font-size="11.5" fill="#4b535a">the bench watches its own reference on every capture and stops the run if it drifts more than 3 mV</text>
+              <rect x="470" y="196" width="118" height="20" rx="4" fill="#fff" stroke="#8b949b" stroke-width="1.2" stroke-dasharray="4 3"/><text x="529" y="210" text-anchor="middle" font-size="11" fill="#4b535a">9.99 kΩ load, on request</text>
+              <text x="14" y="290" font-size="11.5" fill="#4b535a">Every explanation is a circuit model; the engine simulates it with the measured IN and forecasts OUT. A miss above 9 mV, whole step or any region, rules it out.</text>
+            </g>
+          </svg>
+        </div>
+        <dl class="kv small bench-kv">
+          <dt>Source</dt><dd>Arduino UNO R4 Minima DAC through an LM358 follower and a 1 kΩ drive resistor. Steps of ±0.2 / ±0.5 V and sines of 1–5 Hz, from a fixed menu Spark picks from.</dd>
+          <dt>Recorder</dt><dd>14-bit ADC, 512 frames per capture at 0.5 ms, three channels: IN, buffered OUT, REF. Captures are rejected across reboots; each run starts from a fresh boot id.</dd>
+          <dt>Reference</dt><dd>A buffered divider near 1.63 V is the return for the circuit under test. A guard checks it on every capture; a drift above 3 mV stops the run and nothing is scored.</dd>
+          <dt>Allowance</dt><dd>9 mV RMS between forecast and measurement, on the whole step and on every region of it. Frozen before the first run and never changed.</dd>
+          <dt>Operator</dt><dd>Connects or removes the 9.99 kΩ load when Spark asks, USB off; takes one multimeter reading when Spark asks; never tells the model what the fault is.</dd>
+          <dt>Cost</dt><dd>About ₩56,000 ($40) of parts including spares, plus a multimeter. <a href="https://github.com/bami-codes/BenchMate/blob/main/docs/build-your-own.md">Build notes</a>.</dd>
+        </dl>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -71,20 +136,26 @@
   <div class="paper">
     <h2>Who does what</h2>
     <dl class="who">
-      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts, values and connections, with a box per part.</dd>
-      <dt>Muse Spark 1.3</dt><dd>Chooses every experiment from the fixed menu and says why; asks for the bench to be rewired; decides when to ask for the check; may propose a part the drawing lacks.</dd>
-      <dt>Fit engine, ngspice</dt><dd>Fits each explanation to the measurements and forecasts the next one. Compares forecasts with the bench by RMS miss.</dd>
-      <dt>Bench, Arduino UNO R4</dt><dd>Two LM358 buffers, a 1 kΩ drive resistor, a 1.63 V reference and four ADC channels. A reference guard stops a run when the bench itself drifts.</dd>
-      <dt>SAM 3.1 + Muse Spark vision</dt><dd>After the diagnosis: SAM 3.1 segments the mini board photo; Spark vision is asked which body is which drawn part, and a person confirms. When it names none (case 02), the bodies are read without a pairing and the bands frozen first decide which is which. No part values are read from the photo; values come from readings at the bench, forecast first.</dd>
+      <dt>Muse Spark 1.3 vision</dt><dd>Reads the schematic into parts, values and connections, with a box per part. After the diagnosis, looks at the board photo with SAM 3.1's bodies and says which body is the part to read (cases 01, 03, 05), or that it cannot tell (case 02).</dd>
+      <dt>Muse Spark 1.3 agent</dt><dd>Chooses every experiment from the fixed menu and says why; asks for the bench to be rewired; decides when to ask for the check; proposes a part the drawing lacks when every value explanation has failed (cases 04, 05); chooses which part to read and which quantity (cases 01, 02, 03, 05).</dd>
+      <dt>SAM 3.1</dt><dd>Segments the mini board photo into bodies with one generic prompt, after the diagnosis. Its masks are shown as drawn; no part value is read from the photo, ever.</dd>
+      <dt>Fit engine, ngspice</dt><dd>Fits each explanation to the measurements and forecasts the next one. Compares forecasts with the bench by RMS miss. Freezes and publishes before every scored measurement.</dd>
+      <dt>Bench, Arduino UNO R4</dt><dd>Two LM358 buffers, a 1 kΩ drive resistor, a 1.63 V reference and the ADC channels. A reference guard stops a run when the bench itself drifts.</dd>
+      <dt>Operator</dt><dd>Builds the circuit with the sealed fault, moves one jumper when asked, reads one value when asked, and never tells the model what is wrong.</dd>
     </dl>
   </div>
 </section>
 
-<section class="section" id="score" hidden>
+<section class="section" id="built">
   <div class="paper">
-    <h2>Counted from the records</h2>
-    <p class="lede" id="score-note"></p>
-    <div class="score" id="score-grid"></div>
+    <h2>Built during the hackathon</h2>
+    <p class="lede">Everything on this page was made between 27 October and 4 November 2026 by one person and two coding agents: the instrument firmware, the bench, the fit engine, the Spark tool loop, the reading and seal protocol, the photo stage, this site, and the five physical runs themselves. The first commit is the start of the project.</p>
+    <div class="built-grid">
+      <div><h3>Meta models</h3><p class="small">Muse Spark 1.3 (agent and vision) through the Meta Model API for every experiment choice, structure proposal, schematic read and body call; SAM 3.1 for every board segmentation. 101 Spark calls and 6 SAM calls across the five cases, about $1.01.</p></div>
+      <div><h3>What is new</h3><p class="small">The model is not asked to explain a measurement someone made. It designs the measurement, commits to its forecast first, and is scored by code against a fault it was never told. The experiments did not exist until the model asked for them.</p></div>
+      <div><h3>What is not claimed</h3><p class="small">Five completed cases are not an accuracy rate. Failed and abstained attempts are kept in the public ledger and named on the reports. Restored reruns show "no mismatch in the tests Spark chose", not a proof that every part is correct. The cases were known to the developers; this is not a blind test.</p></div>
+      <div><h3>Open</h3><p class="small">MIT-licensed repository with every event log, forecast hash, Spark request and verifier: <a href="https://github.com/bami-codes/BenchMate">github.com/bami-codes/BenchMate</a>. <code>python -m benchmate verify &lt;run folder&gt;</code> re-checks any record offline.</p></div>
+    </div>
   </div>
 </section>
 
