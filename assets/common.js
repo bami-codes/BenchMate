@@ -145,7 +145,9 @@ window.BM = (() => {
       if (c.width !== W * dpr || c.height !== H * dpr) { c.width = W * dpr; c.height = H * dpr; c.style.height = H + 'px'; }
       const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
       g.fillStyle = '#0e1315'; g.fillRect(0, 0, W, H);
-      const L = 10, R = W - 10, T = 30, B = H - 26, w = R - L, h = B - T;
+      // compact strip (collapsed replay shelf): the experiment name sits at the left, the traces run in the right part
+      const compact = !!this.root.closest('.shelf.compact') && W > 420;
+      const L = compact ? 190 : 10, R = W - 10, T = compact ? 8 : 30, B = compact ? H - 8 : H - 26, w = R - L, h = B - T;
       g.strokeStyle = '#1a2528'; g.lineWidth = 1;
       for (let i = 0; i <= 10; i++) { const x = L + w * i / 10; g.beginPath(); g.moveTo(x, T); g.lineTo(x, B); g.stroke(); }
       for (let i = 0; i <= 8; i++) { const y = T + h * i / 8; g.beginPath(); g.moveTo(L, y); g.lineTo(R, y); g.stroke(); }
