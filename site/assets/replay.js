@@ -424,9 +424,12 @@
     const headline = kind === 'verdict' ? words.report(e, run) : words.stopped();
     if (kind === 'verdict') {
       const surv = e.survivors || []; const noMismatch = run.outcome?.verdict === 'consistent' || (surv.length === 1 && surv[0] === 'nominal');
-      right.append(el('div', { class: 'verdict-card' + (noMismatch ? ' quiet' : '') }, el('div', { class: 'big' }, headline),
+      const restoredHere = run.pair?.state === 'restored';
+      right.append(el('div', { class: 'verdict-card' + (noMismatch ? ' quiet' : '') },
+        el('div', { class: 'vs' }, el('span', { class: 'lab' }, 'Spark’s answer'), el('div', { class: 'big' }, headline)),
         e.text ? el('p', {}, e.text) : null,
-        el('p', { class: 'small muted', style: 'margin-top:6px' }, noMismatch ? 'This says nothing about tests Spark did not run. On a restored board it is the expected result.' : 'Compared with the sealed fault by code, not judged by a model. The verdict is copied from the engine’s report.')));
+        noMismatch ? null : el('div', { class: 'vs planted' }, el('span', { class: 'lab' }, restoredHere ? 'What had been planted, now repaired' : 'What was planted · opened only now'), el('div', { class: 'big' }, kase.hidden)),
+        el('p', { class: 'small muted', style: 'margin-top:8px' }, noMismatch ? 'This says nothing about tests Spark did not run. On a restored board it is the expected result.' : 'The verdict is copied from the engine’s report; the seal’s digest is checked by code against the one committed before the first measurement. Spark never saw the lower line.')));
       if (surv.length > 1 && !noMismatch) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'Limits of the chosen tests'), el('p', {}, 'Two explanations behave the same at the terminals. One reading at the bench, forecast before it is taken, is what separates them.')));
       if (noMismatch && surv.length > 1) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'What this does not say'), el('p', { class: 'small muted' }, `Nearby value-change models (${surv.filter(x => x !== 'nominal').map(expName).join(', ')}) also fit these tests. The verdict is that nothing disagreed with the drawing, not that every part is proven correct.`)));
       setSeal('open', 'Seal opened after the run');
@@ -438,7 +441,7 @@
     const sealTruth = run.seal?.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, 'Sealed before the diagnosis: ' + run.seal.truth.map(t => `${t.component.replace('external_', 'hidden ')} ${t.value_nominal_ohm != null ? BM.fmtR(t.value_nominal_ohm) : t.value_nominal_F != null ? BM.fmtC(t.value_nominal_F) : ''}${t.marking ? ' (marked ' + t.marking + ')' : ''} at ${t.location}`).join('; ') + (run.seal.matches_commitment ? '. The opened record matches the digest committed before the first measurement.' : '.')), run.seal.opened_ev, 'seal opened', { sealed_sha256: run.seal.sealed_sha256, sealed_event: run.seal.sealed_ev, matches_commitment: run.seal.matches_commitment, truth: run.seal.truth })) : (kase.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, truthText(kase.truth)) : null);
     const restored = run.pair?.state === 'restored';
     const prev = run.pair?.previous_attempt;
-    right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, restored ? 'The fault, restored before this rerun' : 'Hidden fault'), el('p', {}, restored ? `Was: ${kase.hidden}` : kase.hidden), sealTruth,
+    right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, restored ? 'The fault, restored before this rerun' : 'The sealed record, in detail'), restored ? el('p', {}, `Was: ${kase.hidden}`) : null, sealTruth,
       restored && run.pair?.restored_what ? el('p', { class: 'small muted', style: 'margin-top:4px' }, 'Restoration, in the operator’s words: ', EV(el('q', {}, run.pair.restored_what), run.pair.restore_ev, 'operator restoration confirmed', { closeout: run.pair.closeout, external_only: run.pair.external_only })) : null,
       prev ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, `Restored attempt ${prev.attempt} ended ${prev.verdict} and is counted; this is attempt ${run.pair.attempt}. `), prev.ev, 'restored attempt 1, engine report', { verdict: prev.verdict, record: prev.record, engine_report: prev.text }), prev.note) : null,
       el('p', { class: 'small muted', style: 'margin-top:4px' }, kase.limits)));
