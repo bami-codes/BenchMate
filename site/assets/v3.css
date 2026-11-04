@@ -644,3 +644,15 @@ footer a{color:#fff}
 .verify-card .fine{font-size:12.5px;line-height:1.4}
 .built-grid .btn{margin-top:8px}
 #built h3.sub{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule)}
+
+/* round 4l: section decks and fact strips instead of grey paragraphs */
+.section .deck{font:500 19px/1.35 var(--sans);letter-spacing:-.005em;color:var(--ink);max-width:none;margin:4px 0 14px}
+.section .deck.row{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;justify-content:space-between}
+.section .deck small{font:400 13px/1.3 var(--sans);color:var(--ink-2)}
+.facts{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 24px}
+.facts li{border-top:2px solid var(--ink);padding-top:8px;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+.facts b{display:block;font:600 15.5px/1.25 var(--narrow);color:var(--ink);margin-bottom:3px}
+.made{display:flex;flex-wrap:wrap;gap:6px 6px;align-items:center;margin:-2px 0 16px}
+.made span{border:1px solid var(--rule);border-radius:4px;padding:5px 9px;font:500 13px/1 var(--narrow);background:#fff;color:var(--ink)}
+.made em{font-style:normal;font-size:13px;color:var(--ink-2);margin-left:6px}
+@media (max-width:640px){.section .deck{font-size:17px}.made em{margin:4px 0 0;flex-basis:100%}}
