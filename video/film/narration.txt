@@ -23,4 +23,4 @@ Five forum problems, rebuilt as small circuits. In case five, Spark proposed res
 Every measurement links back to a recorded forecast. Models are refitted during exploration, then frozen for two final checks on the measured inputs. Stopped and abstained attempts stay in the ledger. One command, with nothing installed, checks any record offline.
 
 [s7] Close — about 13 s
-BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation.
+BenchMate turns an unexplained output into a concrete next check. Spark chooses the experiment. The simulator predicts. The operator acts. The real board tests the explanation. Shown on five circuits; a first step toward AI-guided experiments on physical systems.
