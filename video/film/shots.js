@@ -304,7 +304,8 @@ function buildAll() {
 }
 
 // ---------- the frame: shots crossfade over XF seconds; captions on their own line
-function applyCap(t) { const c = CAPS.find(c => t >= c.a && t < c.b); const s = $('#captxt'); s.textContent = c ? c.text : ''; $('#cap').style.opacity = c ? ease(t, c.a, c.a + .3) * (1 - ease(t, c.b - .3, c.b)) : 0; }
+const CAPTIONS_ON = new URLSearchParams(location.search).get('cap') === '1';  // burned-in captions are off by default; the SRT carries them
+function applyCap(t) { if (!CAPTIONS_ON) { $('#cap').style.opacity = 0; return; } const c = CAPS.find(c => t >= c.a && t < c.b); const s = $('#captxt'); s.textContent = c ? c.text : ''; $('#cap').style.opacity = c ? ease(t, c.a, c.a + .3) * (1 - ease(t, c.b - .3, c.b)) : 0; }
 window.frame = (t) => {
   for (const s of SHOTS) {
     const on = t >= s.a - XF && t < s.b + XF; s.root.classList.toggle('on', on); if (!on) continue;

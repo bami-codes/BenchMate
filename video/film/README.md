@@ -3,7 +3,7 @@
 `shots.html` + `shots.js` compose each 1920×1080 frame directly: the site's scope and meters are the instruments, everything
 else is set at film scale. Every waveform, number, range, label, verdict and seal sentence is read from `site/data/runs/*.json`
 and `cases.json`; `frame(t)` is a pure function of time (no one-shot state), so frames render one by one at 60 fps and a frame
-rendered cold equals the same frame reached in sequence. Shots crossfade over 0.5 s; captions have their own line at the bottom.
+rendered cold equals the same frame reached in sequence. Shots crossfade over 0.5 s. Burned-in captions are off by default (`shots.html?cap=1` turns them on, on their own line at the bottom); the caption text always goes out as `out/benchmate.srt` for closed captions.
 
 Seven narration clips (`voice/s1.mp3 … s7.mp3`, text in `narration.txt`) drive the seven scenes: `voice_durations.py` writes
 `voice/durations.json`, and each scene's shots stretch together to its clip (PLANNED in `shots.js` and `voice_durations.py`
