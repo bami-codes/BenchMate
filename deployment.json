@@ -1,13 +1,13 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "a7fa2567dbd58a56e335f8ba781ef3325bc31547",
-  "source_site_tree": "d01b3186d15058a5bd7ebc9afac0188ab1de9759",
-  "previous_gh_pages_commit": "61a84a2c540f9712f615dda4ab771218e9388d2a",
+  "source_main_commit": "a7b67e48acb33da4607de43d7dd7bb5e71f642f1",
+  "source_site_tree": "0eb03cc91490d76d7adec6729ed7f8cddd15b9a2",
+  "previous_gh_pages_commit": "91e0bb5a8377a5ee1f77ab053100b74df9375ef4",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
-  "new_photos": "none",
+  "new_photos": "assets/photos/bench-full.jpg (camera preview rendering, no edits; tools/photos-bench.json)",
   "staging_excluded": true,
   "release_cases": [
     "01",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Section decks and fact strips replace the grey lede paragraphs; Built lists what was made as tags.",
+  "change": "Bench photo replaced by the camera's own preview rendering; pins re-placed.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; sections checked at 1440/1024/390",
+    "tool": "playwright spot checks at 1440 and 390; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
