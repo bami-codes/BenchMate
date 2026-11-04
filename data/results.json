@@ -1,54 +1,65 @@
 {
- "note": "Read from the official reading-assisted cohort records (docs/2026-11-03-reading-cohort-policy.json). Development runs before the pipeline freeze never appear here.",
- "updated_utc": "2026-11-03T14:50:00+00:00",
+ "note": "Read from the official reading-assisted cohort records (docs/2026-11-03-reading-cohort-policy.json). Call and cost totals are the cohort totals from the record docs, which include failed attempts; development runs before the pipeline freeze never appear here.",
+ "updated_utc": "2026-11-04T12:00:00+00:00",
  "cohort": "reading-assisted-v1",
  "official_runs": [
   "20261103T125924-bf8f64512b",
-  "20261103T142003-2b176faa91"
+  "20261103T142003-2b176faa91",
+  "20261103T150223-18d6f08ac9",
+  "20261103T153249-a9b088954a",
+  "20261103T165506-b6ad3e8cf7",
+  "20261103T182550-4ea22cc3a0"
  ],
  "metrics": [
   {
    "id": "cases",
    "label": "forum cases run on the bench",
-   "value": 1
+   "value": 3
   },
   {
    "id": "fault_runs",
    "label": "fault diagnoses completed, held-back checks passed",
+   "value": 3
+  },
+  {
+   "id": "proposals",
+   "label": "parts proposed that the drawing does not show, held-back checks passed",
    "value": 1
   },
   {
    "id": "readings",
    "label": "readings asked for, bands frozen first",
-   "value": 1
+   "value": 2
   },
   {
    "id": "matched",
-   "label": "sealed faults matched after the reading",
-   "value": 1
+   "label": "sealed faults matched when the seal opened",
+   "value": 3
   },
   {
    "id": "restored",
    "label": "restored reruns: no mismatch in the tests Spark chose",
-   "value": 1
+   "value": 3
   },
   {
    "id": "spark_calls",
    "label": "Muse Spark calls (incl. the schematic read)",
-   "value": 17
+   "value": 64
   },
   {
    "id": "sam_calls",
    "label": "SAM 3.1 calls",
-   "value": 1
+   "value": 3
   },
   {
    "id": "cost",
    "label": "estimated API cost (USD)",
-   "value": 0.152
+   "value": 0.63
   }
  ],
  "sources": [
-  "docs/2026-11-03-reading-case01-followup-result.md: new reading-cohort cumulative usage 17 Spark requests and one SAM request, estimated $0.15204580"
+  "docs/2026-11-04-case02-documentary-closeout-result.md: whole reading cohort 64 Spark + 3 SAM, estimated $0.63350110 (case 02 total incl. failed attempts 28 Spark + 2 SAM, $0.32315)",
+  "docs/2026-11-04-case04-completion.md: reading-cohort total after case 04, 36 Spark + 1 SAM, $0.31035110 (case 04 total incl. all failed stages and the withdrawn selection: 19 Spark, $0.15830530)",
+  "docs/2026-11-03-reading-case01-followup-result.md: 17 Spark requests and one SAM request, estimated $0.15204580 after case 01"
  ]
 }

@@ -31,7 +31,9 @@
   const railSchem = await schematic(kase.design); $('#rail-schem').append(railSchem);
   const railDrawing = $('#rail-schem').closest('.rail-card'); railDrawing.hidden = true; // the drawing shows once: in the scope area until the scope has traces
   const showRailDrawing = () => { railDrawing.hidden = false; };
-  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)), el('p', {}, 'The drawing Spark read. Press Play: forecasts are drawn before each measurement.'));
+  idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)), el('p', {}, 'The drawing Spark read. Press Play: forecasts are drawn before each measurement.'),
+    run.design_amendment ? el('p', { class: 'small muted amend' }, run.design_amendment.text) : null);
+  if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, run.design_amendment.text));
   const metersBox = $('#meters');
   const meters = {}; let meterOrder = [];
   const ensureMeter = (id, value) => {
@@ -93,7 +95,7 @@
       el('div', {}, el('div', { class: 'who' }, el('i', { class: 'dot' }), who), headline ? el('p', { class: 'lead' }, headline) : null, el('div', { class: 'body' }, ...body)));
     book.append(n); if (!REDUCED) n.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); return n;
   }
-  const callLine = (calls, role) => calls?.length ? el('p', { class: 'calls small muted' }, ...calls.map((c, i) => EV(el('span', {}, `${role}${calls.length > 1 ? ' · call ' + (i + 1) : ''}: ${c.seconds} s, ${fmtUSD(c.cost)}, ${c.out_tokens} output tokens`), c.ev, role, { seconds: c.seconds, cost_usd: c.cost, output_tokens: c.out_tokens, input_tokens: c.in_tokens, reasoning_tokens: c.reasoning_tokens })).flatMap((x, i) => i ? [' · ', x] : [x])) : null;
+  const callLine = (calls, role) => calls?.length ? el('p', { class: 'calls small muted' }, ...calls.map((c, i) => EV(el('span', {}, `${role}${calls.length > 1 ? ' · call ' + (i + 1) : ''}: ${c.seconds != null ? c.seconds + ' s, ' : ''}${fmtUSD(c.cost)}, ${c.out_tokens} output tokens`), c.ev, role, { seconds: c.seconds, cost_usd: c.cost, output_tokens: c.out_tokens, input_tokens: c.in_tokens, reasoning_tokens: c.reasoning_tokens })).flatMap((x, i) => i ? [' · ', x] : [x])) : null;
   const counters = t => { if (!t) return; $('#c-calls').textContent = t.spark_calls; $('#c-cost').textContent = fmtUSD(t.spark_cost); $('#c-exp').textContent = Object.keys(state.steps).length; };
   const setSeal = (s, text) => { const b = $('#seal'); b.className = 'seal ' + s; b.textContent = text; $('#bs-seal').textContent = text.toLowerCase(); };
   const benchState = () => { $('#bs-load').textContent = state.load ? '9.99 kΩ load connected' : 'no load'; $('#bs-last').textContent = state.last; };
@@ -219,7 +221,7 @@
     spark_report(e) { // the engine's report after the measurements; the seal stays closed until the reading is scored
       const surv = e.survivors || [];
       block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. The seal stays closed; one reading at the bench comes next.` : words.report(e, run),
-        el('p', { class: 'small muted' }, e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.` : ''));
+        el('p', { class: 'small muted' }, e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. ${run.reading?.group ? 'The part itself has not been read yet; the seal stays closed until it has.' : 'Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.'}` : ''));
     },
     seal_opened(e) { finale(e, 'verdict'); },
 
@@ -284,8 +286,90 @@
       for (const id of e.fits || []) if (meters[id]) meters[id].carry(e.outcome === 'one' ? 'Fits the reading' : 'Not separated');
     },
     ruled_out_by_reading(e) { const m = meters[e.id]; if (m) { m.ruleOutByReading(); m.die(); } },
+
+    // ---------- the unordered reading stage (case 02): Spark, asked which body is C1, named none; two bodies were read out of
+    // circuit and every assignment of bodies to parts was tested against bands frozen first. No model paired a body with a part.
+    binding_abstained(e) {
+      if (state.thinking) { state.thinking.remove(); state.thinking = null; }
+      block(e, 'spark', `Muse Spark vision · asked which body is ${e.component}`, words.bindingAbstained(e),
+        EV(el('p', { class: 'quote' }, e.reason || '(no reason logged)'), e.ev, 'Spark named no body', { component: e.component, sam_bodies: e.bodies }),
+        e.bodies ? el('p', { class: 'small muted' }, `SAM 3.1 had returned ${e.bodies} bodies; none is paired with a drawing part.`) : null,
+        callLine(e.calls, `Muse Spark asked which body is ${e.component}`));
+    },
+    body_group(e) {
+      const ph = run.photo || {}; const cb = [0, 0, ph.image?.width || 1200, ph.image?.height || 1600];
+      const box = el('div', { class: 'photo', style: 'max-width:420px' }, el('img', { src: e.photo || ph.image?.file, alt: 'Board photo with the outlines of the SAM 3.1 masks' }));
+      for (const [id, bb] of Object.entries(e.boxes || {})) box.append(maskLabel(id, bb, cb, Object.values(e.boxes || {})));
+      state.group = { bodies: e.bodies, components: e.components, boxes: e.boxes };
+      block(e, 'bench', 'Bench · two capacitor bodies, which is which unknown', words.bodyGroup(e),
+        el('div', { class: 'card' }, box, ph.contours_note ? el('p', { class: 'small faint', style: 'margin:4px 0 0' }, ph.contours_note) : null),
+        el('p', { class: 'small' }, el('span', { class: 'chip' }, el('i'), 'picked by a visual review at the operator’s request, not by a model'), ' ',
+          EV(el('span', { class: 'muted' }, `${(e.bodies || []).join(' and ')} are the two bodies to be read. ${e.topology || ''} Recorded as “${e.chosen_by}”.`), e.ev, 'body group', { bodies: e.bodies, components: e.components, chosen_by: e.chosen_by, spark_chose_group: e.spark_chose_group, boxes_in_sam_input: e.boxes, already_received: e.already_received })),
+        e.spark_abstention_reason ? el('p', { class: 'small muted' }, 'Spark, asked earlier which body is C1: ', el('q', {}, e.spark_abstention_reason)) : null,
+        el('p', { class: 'small muted' }, `Neither body is paired with ${(e.components || []).join(' or ')} here. Both will be read out of circuit, and every way of assigning the two bodies to the two parts will be tested against bands frozen before the readings.`));
+    },
+    group_reading_forecast(e) {
+      const bands = e.bands || []; const comps = e.components || [...new Set(bands.map(b => b.component))]; const exps = [...new Set(bands.map(b => b.explanation))];
+      const sha = EV(el('span', { class: 'chip sha' }, ' sha256 ' + e.sha), e.ev, 'frozen group reading forecast', { sha256_full: e.sha_full, bands, meter: e.meter, matching: e.matching });
+      const cell = (x, c) => { const b = bands.find(q => q.explanation === x && q.component === c); return b ? el('td', {}, num(BM.bandText(b), e.ev, `frozen band for ${c} under ${expName(x)}`, { explanation: x, component: c, low: b.low, high: b.high, unit: b.unit, rule: b.rule }), el('small', { class: 'muted', style: 'display:block' }, b.rule)) : el('td', {}, el('span', { class: 'muted' }, '—')); };
+      const rows = exps.map(x => { const role = bands.find(b => b.explanation === x)?.role; return el('tr', { class: role === 'reference' ? 'out' : '' }, el('td', {}, expName(x), el('small', { class: 'muted', style: 'display:block' }, role === 'reference' ? 'reference: already ruled out by the bench tests' : 'the surviving explanation')), ...comps.map(c => cell(x, c))); });
+      const m = e.meter || {};
+      block(e, 'fit', 'Fit engine · reading forecast for both bodies, frozen before anyone reads', words.groupForecast(e),
+        el('div', { class: 'chips' }, sha),
+        el('div', { class: 'tscroll' }, el('table', { class: 'fit-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), ...comps.map(c => el('th', {}, `${c}, by ${BM.sourceShort(e.source)}`)))), el('tbody', {}, ...rows))),
+        el('p', { class: 'small muted' }, `Multimeter on the ${m.range_uF} µF range, ${m.resolution_uF} µF resolution; allowance ${Math.round((m.relative_allowance || 0) * 100)} % + ${m.digits_allowance} digits, an engineering acceptance, not a manufacturer accuracy${m.calibrated === false ? ' (meter not calibrated)' : ''}.${m.basis ? ' ' + m.basis : ''}`),
+        el('p', { class: 'small muted' }, `The bodies are not yet paired with ${comps.join(' and ')}. Rule, written down now: ${e.matching || 'every assignment of bodies to parts is tested against these bands; the nearest value is never used.'}`));
+      state.gbands = bands; state.group = { ...(state.group || {}), bodies: e.bodies, components: comps, bands, meter: m, source: e.source };
+      for (const x of exps) { const mt = meters[x]; const b = bands.find(q => q.explanation === x && q.component === comps[0]); if (mt && b && !mt.root.classList.contains('out')) { mt.root.classList.remove('wait'); mt.band(b.low, b.high, b.unit); } }
+    },
+    group_reading_observed(e, instant) {
+      const g = state.group || {}; const boxes = g.boxes || {}; const unit = (e.readings || [])[0]?.unit || 'µF';
+      const posWord = (body) => { const ids = Object.keys(boxes); if (ids.length !== 2 || !boxes[body]) return ''; const other = ids.find(i => i !== body); return boxes[body][1] < boxes[other][1] ? 'C-top ' : 'C-bottom '; };
+      const fields = (e.readings || []).map(r => ({ r, field: el('span', { class: 'readfield', 'aria-label': `${r.body} reading` }, el('span', { class: 'typed' }, instant ? String(r.value) : ''), el('span', { class: 'caret' })) }));
+      const line = el('b', {}, 'Readings: ');
+      fields.forEach((f, i) => { if (i) line.append(' · '); line.append(`${posWord(f.r.body)}(${f.r.body}) = `, f.field, ` ${f.r.unit || unit}`); });
+      const first = (e.readings || [])[0] || {};
+      const tape = el('div', { class: 'note-tape white' }, line, el('span', { class: 'src' }, `${BM.sourceShort(e.source)}, ${first.range_uF} µF range, each capacitor removed from the board${e.power_off ? ', USB off' : ''}${e.discharge_wait ? ', discharged first' : ''}`),
+        e.gap_real_s ? el('span', { class: 'wait' }, `At the bench · ${fmtDur(e.gap_real_s)}, shortened here.`) : null);
+      EV(line, e.ev, 'operator readings', { source: e.source, readings: e.readings, power_off: e.power_off, discharge_wait: e.discharge_wait });
+      block(e, 'bench', 'Bench · the operator reads both bodies, out of circuit', words.groupObs(e), tape,
+        el('p', { class: 'small muted' }, 'Two values, by body. Which body is which part is not decided here: that is the next step, by the frozen bands.'));
+      state.gobserved = e;
+      if (instant || REDUCED) { for (const f of fields) { f.field.querySelector('.typed').textContent = String(f.r.value); f.field.classList.add('done'); } return; }
+      let k = 0; const typeNext = () => { const f = fields[k]; if (!f) return; const txt = String(f.r.value); let i = 0; const typed = f.field.querySelector('.typed'); const tick = () => { typed.textContent = txt.slice(0, ++i); if (i < txt.length) setTimeout(tick, 160); else { f.field.classList.add('done'); k++; setTimeout(typeNext, 350); } }; tick(); }; setTimeout(typeNext, 400);
+    },
+    group_reading_scored(e) {
+      const g = state.group || {}; const bands = state.gbands || g.bands || []; const obs = state.gobserved || {}; const vals = Object.fromEntries((obs.readings || []).map(r => [r.body, r.value]));
+      const bodies = g.bodies || Object.keys(vals); const comps = g.components || [...new Set(bands.map(b => b.component))]; const unit = (obs.readings || [])[0]?.unit || 'µF';
+      const perms = (arr) => arr.length <= 1 ? [arr] : arr.flatMap((x, i) => perms([...arr.slice(0, i), ...arr.slice(i + 1)]).map(r => [x, ...r]));
+      const assigns = perms(bodies).map(order => Object.fromEntries(comps.map((c, i) => [c, order[i]])));
+      const inBand = (x, c, v) => { const b = bands.find(q => q.explanation === x && q.component === c); return b ? (b.low == null || v >= b.low) && (b.high == null || v <= b.high) : null; };
+      const exps = [...new Set(bands.map(b => b.explanation))].sort((a, b) => (bands.find(q => q.explanation === a)?.role === 'reference') - (bands.find(q => q.explanation === b)?.role === 'reference'));
+      const engineFits = (x, a) => ((e.matches || []).find(mm => mm.explanation === x)?.assignments || []).some(as => comps.every(c => as[c] === a[c]));
+      const rows = [];
+      for (const x of exps) for (const a of assigns) {
+        const cells = comps.map(c => { const v = vals[a[c]]; const ok = inBand(x, c, v); const b = bands.find(q => q.explanation === x && q.component === c); return el('td', {}, el('span', { class: 'mono' }, `${c} = ${a[c]}: ${v} ${unit}`), el('small', { class: 'muted', style: 'display:block' }, `band ${b ? BM.bandText(b) : '—'} · ${ok ? 'inside' : 'outside'}`)); });
+        const fits = engineFits(x, a); const role = bands.find(q => q.explanation === x)?.role;
+        rows.push(el('tr', { class: fits ? '' : 'out' }, el('td', {}, expName(x), role === 'reference' ? el('small', { class: 'muted', style: 'display:block' }, 'reference') : null), ...cells, el('td', {}, fits ? el('span', { class: 'tape grey' }, 'fits') : el('span', { class: 'tape read' }, 'misses'))));
+      }
+      const bind = e.binding || {};
+      block(e, 'fit', 'Fit engine · both readings scored by the frozen bands', words.groupScored(e, assigns.length),
+        el('div', { class: 'tscroll' }, el('table', { class: 'fit-table assign-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), ...comps.map((c, i) => el('th', {}, `Assignment, part ${i + 1}`)), el('th', {}, ''))), el('tbody', {}, ...rows))),
+        el('p', { class: 'small' }, EV(el('b', {}, Object.keys(bind).length ? `Assignment that fits: ${comps.map(c => `${c} = ${bind[c]}`).join(', ')}.` : 'No assignment fits.'), e.ev, 'group reading score', { fits: e.fits, ruled_out: e.ruled_out, matches: e.matches, binding: e.binding, outcome: e.outcome, body_identity_status: e.body_identity_status, nearest_value_assignment: e.nearest_value_assignment, refitted: e.refitted }),
+          ` Surviving explanation${(e.fits || []).length === 1 ? '' : 's'}: ${(e.fits || []).map(expName).join(', ') || 'none'}. Body identity: ${String(e.body_identity_status || '').replace(/_/g, ' ')}.`),
+        el('p', { class: 'small muted' }, `Scored by code against the bands frozen before the readings; ${e.nearest_value_assignment ? 'nearest-value assignment was used' : 'no nearest-value assignment'}, ${e.refitted ? 'models were re-fitted' : 'nothing was re-fitted'}. The ‘fits’/‘misses’ column is the engine’s list as written; the in/out notes beside each value are the same bands re-read in your browser.`));
+      for (const x of e.fits || []) { const mt = meters[x]; if (!mt) continue; const c0 = comps[0]; const b = bands.find(q => q.explanation === x && q.component === c0); const v = vals[bind[c0]]; if (b && v != null) { mt.band(b.low, b.high, b.unit, v); mt.setReading(v, unit, `${c0} = ${bind[c0]}`); } mt.carry(e.outcome === 'one' ? 'Fits both readings' : 'Not separated'); }
+    },
     ended() {},
   };
+  // a label on a photo, placed under a mask's bounding box (bounds in SAM-input pixels, relative to the crop box)
+  // `others`: the other labelled boxes; when one sits just below this box, the label goes above it instead
+  function maskLabel(text, bb, cb, others = []) {
+    const iw = cb[2] - cb[0], ih = cb[3] - cb[1];
+    const up = others.some(o => o !== bb && o[1] >= bb[3] - 4 && o[1] < bb[3] + 0.09 * ih && o[0] < bb[2] && o[2] > bb[0]);
+    const style = up ? `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;bottom:${(100 - (bb[1] - cb[1]) / ih * 100 + 1.5).toFixed(1)}%` : `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;top:${((bb[3] - cb[1]) / ih * 100 + 2).toFixed(1)}%`;
+    return el('span', { class: 'masklabel' + (up ? ' up' : ''), style }, text);
+  }
 
   const truthText = (t) => { const m = t.measured_ohm || {}; const parts = Object.entries(m).map(([k, v]) => `${k.replace('hidden_', 'hidden ')} ${BM.fmtR(v)}`); return `Measured on the bench: ${parts.join(', ')}${t.series_total_ohm ? `; series total ${BM.fmtR(t.series_total_ohm)}` : ''}. ${t.source || ''}`; };
 
@@ -299,29 +383,34 @@
     const right = el('div', {});
     const headline = kind === 'verdict' ? words.report(e, run) : words.stopped();
     if (kind === 'verdict') {
-      const surv = e.survivors || []; const noMismatch = surv.length === 1 && surv[0] === 'nominal';
+      const surv = e.survivors || []; const noMismatch = run.outcome?.verdict === 'consistent' || (surv.length === 1 && surv[0] === 'nominal');
       right.append(el('div', { class: 'verdict-card' + (noMismatch ? ' quiet' : '') }, el('div', { class: 'big' }, headline),
         e.text ? el('p', {}, e.text) : null,
         el('p', { class: 'small muted', style: 'margin-top:6px' }, noMismatch ? 'This says nothing about tests Spark did not run. On a restored board it is the expected result.' : 'Compared with the sealed fault by code, not judged by a model. The verdict is copied from the engine’s report.')));
-      if (surv.length > 1) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'Limits of the chosen tests'), el('p', {}, 'Two explanations behave the same at the terminals. One reading at the bench, forecast before it is taken, is what separates them.')));
+      if (surv.length > 1 && !noMismatch) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'Limits of the chosen tests'), el('p', {}, 'Two explanations behave the same at the terminals. One reading at the bench, forecast before it is taken, is what separates them.')));
+      if (noMismatch && surv.length > 1) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'What this does not say'), el('p', { class: 'small muted' }, `Nearby value-change models (${surv.filter(x => x !== 'nominal').map(expName).join(', ')}) also fit these tests. The verdict is that nothing disagreed with the drawing, not that every part is proven correct.`)));
       setSeal('open', 'Seal opened after the run');
     } else {
       right.append(el('div', { class: 'card' }, el('h4', {}, run.outcome?.kind === 'stopped' ? 'Run stopped. No verdict.' : 'Run ended'), el('p', {}, run.outcome?.reason || ''), el('p', { class: 'small muted', style: 'margin-top:6px' }, run.pilot ? 'This pilot is not counted. The seal is opened here only so you can compare.' : '')));
       if (run.note_after) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'What was wrong with the bench'), el('p', {}, run.note_after), notes.ground_fix?.source ? el('p', { class: 'small faint', style: 'margin-top:4px' }, 'Source: ' + notes.ground_fix.source) : null));
       setSeal('stopped', 'Stopped · seal opened to compare');
     }
-    const sealTruth = run.seal?.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, 'Sealed before the diagnosis: ' + run.seal.truth.map(t => `${t.component.replace('external_', 'hidden ')} ${t.value_nominal_ohm != null ? BM.fmtR(t.value_nominal_ohm) : t.value_nominal_F != null ? BM.fmtC(t.value_nominal_F) : ''} at ${t.location}`).join('; ') + (run.seal.matches_commitment ? '. The opened record matches the digest committed before the first measurement.' : '.')), run.seal.opened_ev, 'seal opened', { sealed_sha256: run.seal.sealed_sha256, sealed_event: run.seal.sealed_ev, matches_commitment: run.seal.matches_commitment, truth: run.seal.truth })) : (kase.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, truthText(kase.truth)) : null);
-    right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'Hidden fault'), el('p', {}, kase.hidden), sealTruth, el('p', { class: 'small muted', style: 'margin-top:4px' }, kase.limits)));
+    const sealTruth = run.seal?.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, EV(el('span', {}, 'Sealed before the diagnosis: ' + run.seal.truth.map(t => `${t.component.replace('external_', 'hidden ')} ${t.value_nominal_ohm != null ? BM.fmtR(t.value_nominal_ohm) : t.value_nominal_F != null ? BM.fmtC(t.value_nominal_F) : ''}${t.marking ? ' (marked ' + t.marking + ')' : ''} at ${t.location}`).join('; ') + (run.seal.matches_commitment ? '. The opened record matches the digest committed before the first measurement.' : '.')), run.seal.opened_ev, 'seal opened', { sealed_sha256: run.seal.sealed_sha256, sealed_event: run.seal.sealed_ev, matches_commitment: run.seal.matches_commitment, truth: run.seal.truth })) : (kase.truth ? el('p', { class: 'small muted', style: 'margin-top:4px' }, truthText(kase.truth)) : null);
+    const restored = run.pair?.state === 'restored';
+    right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, restored ? 'The fault, restored before this rerun' : 'Hidden fault'), el('p', {}, restored ? `Was: ${kase.hidden}` : kase.hidden), sealTruth,
+      restored && run.pair?.restored_what ? el('p', { class: 'small muted', style: 'margin-top:4px' }, 'Restoration, in the operator’s words: ', EV(el('q', {}, run.pair.restored_what), run.pair.restore_ev, 'operator restoration confirmed', { closeout: run.pair.closeout })) : null,
+      el('p', { class: 'small muted', style: 'margin-top:4px' }, kase.limits)));
     right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'What the forum thread found'), kase.title_after_reveal ? el('p', { class: 'small muted' }, `Case ${run.case} — ${kase.title_after_reveal.toLowerCase()}`) : null, el('p', {}, kase.cause),
       el('dl', { class: 'kv small', style: 'margin-top:6px' }, el('dt', {}, 'Kept'), el('dd', {}, kase.kept), el('dt', {}, 'Changed'), el('dd', {}, kase.changed),
         el('dt', {}, 'Source'), el('dd', {}, el('a', { href: kase.source.url, target: '_blank', rel: 'noopener' }, `${kase.source.site}: ${kase.source.title}`))),
       el('p', { class: 'small faint', style: 'margin-top:4px' }, 'Same principle, reproduced on our bench. We did not repair the original poster’s board.')));
     const photo = run.photo?.image?.file ? photoCard(run.photo) : null;
     const rd = run.reading;
-    if (run.seal) setSeal('open', 'Seal opened after the reading');
-    if (rd?.observed) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'The one reading'), el('p', {}, readingLine(rd)), el('p', { class: 'small muted' }, `${BM.sourceWord(rd.observed.source)}; bands frozen before it, ${rd.sha ? 'sha256 ' + rd.sha : ''}.`)));
-    inner.append(el('div', {}, schemWrap, el('p', { class: 'small muted', style: 'margin-top:6px' }, 'The drawing the model read, with the hidden fault overlaid in red. The overlay was never part of the model input.'), photo ? el('div', { style: 'margin-top:10px' }, photo) : null, rd?.binding?.photo && !photo ? el('div', { class: 'photo', style: 'margin-top:10px;max-width:420px' }, el('img', { src: rd.binding.photo, alt: 'Board photo' }), rd.binding.overlay_file ? el('img', { class: 'mask', src: rd.binding.overlay_file, alt: 'SAM 3.1 outline' }) : null) : null), right);
-    if (rd?.bands?.length) wrap.append(tryAnyValue(rd));
+    if (run.seal) setSeal('open', run.reading?.observed ? 'Seal opened after the reading' : 'Seal opened after the run');
+    if (rd?.group?.observed) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'The two readings'), el('p', {}, readingLine(rd)), el('p', { class: 'small muted' }, `${BM.sourceWord(rd.group.observed.source)}, each body out of circuit; bands for both parts frozen before the readings${rd.group.sha ? ', sha256 ' + rd.group.sha : ''}. Which body is which part followed from the readings, by the engine’s assignment test; no model paired them.`)));
+    else if (rd?.observed) right.append(el('div', { class: 'card', style: 'margin-top:10px' }, el('h4', {}, 'The one reading'), el('p', {}, readingLine(rd)), el('p', { class: 'small muted' }, `${BM.sourceWord(rd.observed.source)}; bands frozen before it, ${rd.sha ? 'sha256 ' + rd.sha : ''}.`)));
+    inner.append(el('div', {}, schemWrap, el('p', { class: 'small muted', style: 'margin-top:6px' }, run.pair?.state === 'restored' ? 'The drawing the model read, with the fault that was restored before this rerun overlaid in red. The overlay was never part of the model input.' : 'The drawing the model read, with the hidden fault overlaid in red. The overlay was never part of the model input.'), photo ? el('div', { style: 'margin-top:10px' }, photo) : null, rd?.binding?.photo && !photo ? el('div', { class: 'photo', style: 'margin-top:10px;max-width:420px' }, el('img', { src: rd.binding.photo, alt: 'Board photo' }), rd.binding.overlay_file ? el('img', { class: 'mask', src: rd.binding.overlay_file, alt: 'SAM 3.1 outline' }) : null) : null), right);
+    if (rd?.group?.bands?.length) wrap.append(tryAnyPair(rd)); else if (rd?.bands?.length) wrap.append(tryAnyValue(rd));
     wrap.append(el('span', { class: 'tape seal-tape' }, 'SEALED · hidden fault'), inner);
     block(e, 'guard', kind === 'verdict' ? 'Verdict · compared by code' : 'End of the recording', kind === 'verdict' ? null : headline, wrap,
       el('p', { style: 'margin-top:10px' }, el('a', { class: 'btn sm', href: `case.html?id=${run.case}&run=${run.id}` }, 'Open the report')));
@@ -329,6 +418,15 @@
   }
   // the end-scene line for the reading, from data: a value against the drawing, or a presence/continuity answer
   function readingLine(rd) {
+    if (rd.group?.observed) {
+      const g = rd.group; const bind = g.scored?.binding || {}; const fits = g.scored?.fits || [];
+      const reads = (g.observed.readings || []).map(r => `${r.body} read ${r.value} ${r.unit}`).join(', ');
+      const drawnOf = (c) => { const d = (run.design || []).find(x => x.name === c); return d && d.value != null ? `${c} drawn ${fmtVal(d.kind, d.value)}` : null; };
+      const drawn = Object.keys(bind).map(drawnOf).filter(Boolean).join(', ');
+      const which = Object.keys(bind).length ? `by the frozen bands ${Object.entries(bind).map(([c, b]) => `${c} is ${b}`).join(' and ')}` : 'no assignment fit the bands';
+      const verdict = fits.length === 1 && fits[0].startsWith('changed:') ? ` · ${fits[0].slice(8)} is not what the drawing says` : fits.length === 1 ? ' · the board is right' : '';
+      return `${reads}${drawn ? ' · ' + drawn : ''} · ${which}${verdict}.`;
+    }
     const o = rd.observed; const drawn = (run.design || []).find(d => d.name === o.component);
     if (rd.quantity === 'presence') return `${o.component} on the board: ${o.value}.`;
     if (rd.quantity === 'continuity') return `${o.component} continuity: ${o.value} ${o.unit || ''}.`.replace(/\s+\./, '.');
@@ -351,14 +449,37 @@
       el('div', { class: 'tryrow' }, el('span', { class: 'mono' }, `${rd.component} =`), inp, el('span', {}, unit), el('span', { class: 'muted small' }, 'by'), sel), out,
       el('p', { class: 'small faint' }, 'A what-if on the frozen bands, computed in your browser. No model, no hardware, nothing recorded.'));
   }
+  // the group version: two values, one per body; every assignment of bodies to parts against the frozen bands, in the browser
+  function tryAnyPair(rd) {
+    const g = rd.group; const bands = g.bands || []; const bodies = g.bodies || []; const comps = g.components || []; const unit = bands[0]?.unit || 'µF';
+    const perms = (arr) => arr.length <= 1 ? [arr] : arr.flatMap((x, i) => perms([...arr.slice(0, i), ...arr.slice(i + 1)]).map(r => [x, ...r]));
+    const inputs = bodies.map(b => el('input', { type: 'number', step: 'any', inputmode: 'decimal', placeholder: String((g.observed?.readings || []).find(r => r.body === b)?.value ?? ''), 'aria-label': `${b} value in ${unit}` }));
+    const out = el('p', { class: 'tryout small' }, 'Type two values to see which assignments the frozen bands would have allowed.');
+    const go = () => {
+      const vals = inputs.map(i => Number(i.value)); if (inputs.some(i => !i.value) || vals.some(v => !Number.isFinite(v))) { out.textContent = 'Type both numbers.'; return; }
+      const v = Object.fromEntries(bodies.map((b, i) => [b, vals[i]]));
+      const exps = [...new Set(bands.map(b => b.explanation))]; const lines = [];
+      for (const x of exps) { const ok = perms(bodies).filter(order => comps.every((c, i) => { const b = bands.find(q => q.explanation === x && q.component === c); const val = v[order[i]]; return b && (b.low == null || val >= b.low) && (b.high == null || val <= b.high); }));
+        const role = bands.find(b => b.explanation === x)?.role === 'reference' ? ' (reference, already ruled out by the bench tests)' : '';
+        lines.push(`${expName(x)}${role}: ${ok.length ? ok.map(order => comps.map((c, i) => `${c} = ${order[i]}`).join(', ')).join(' or ') + (ok.length > 1 ? ' — both assignments fit, so the bodies would not be told apart' : '') : 'no assignment fits'}.`); }
+      out.textContent = lines.join(' ');
+    };
+    inputs.forEach(i => i.addEventListener('input', go));
+    return el('details', { class: 'card tryit', style: 'margin-top:12px' }, el('summary', {}, 'Try any two values'), el('p', { class: 'small muted' }, `The bands for ${comps.join(' and ')} were frozen before the operator read ${bodies.join(' and ')}. Put in any two numbers: every assignment of bodies to parts is tested against the same bands.`),
+      el('div', { class: 'tryrow' }, ...bodies.flatMap((b, i) => [el('span', { class: 'mono' }, `${b} =`), inputs[i], el('span', {}, unit)])), out,
+      el('p', { class: 'small faint' }, 'A what-if on the frozen bands, computed in your browser. No model, no hardware, nothing recorded.'));
+  }
   function photoCard(ph) {
-    const box = el('div', { class: 'photo' }); const img = el('img', { src: ph.crop_r1 || ph.image.file, alt: 'Mini board after the diagnosis, R1 outlined by SAM 3.1' }); box.append(img);
+    const box = el('div', { class: 'photo' }); const img = el('img', { src: ph.crop_r1 || ph.image.file, alt: ph.documentary ? `Mini board, ${run.pair?.state || run.classification?.cohort?.state || 'faulted'} state, documentary photo` : ph.labels ? 'Mini board after the diagnosis, SAM 3.1 mask outlines' : 'Mini board after the diagnosis, R1 outlined by SAM 3.1' }); box.append(img);
     for (const c of ph.sam || []) for (const m of c.masks || []) if (m.overlay_file) box.append(el('img', { class: 'mask', src: m.overlay_file, alt: `SAM 3.1 mask, ${c.concept} object ${m.object_id}` }));
     const bd = run.reading?.binding; const bb = bd?.bounds; const cb = ph.crop_box || [0, 0, ph.image?.width || 1200, ph.image?.height || 1600]; const iw = cb[2] - cb[0], ih = cb[3] - cb[1];
     if (bb && bd?.component) box.append(el('span', { class: 'masklabel', style: `left:${((bb[0] + bb[2]) / 2 - cb[0]) / iw * 100}%;top:${((bb[3] - cb[1]) / ih * 100 + 2).toFixed(1)}%` }, `${bd.component} — SAM 3.1 mask`));
-    if (ph.note) box.append(el('p', { class: 'small faint', style: 'margin:4px 0 0' }, ph.note));
+    const greads = run.reading?.group?.observed?.readings || [];
+    for (const l of ph.labels || []) { const r = greads.find(x => x.body === l.text); box.append(maskLabel(r ? `${l.text} read ${r.value} ${r.unit}` : l.text, l.bounds, cb, (ph.labels || []).map(x => x.bounds))); }
+    const notes = [ph.contours_note, ph.note].filter(Boolean).map(t => el('p', { class: 'small faint', style: 'margin:4px 0 0' }, t));
     const parts = (ph.vision?.components || []).map(c => `${c.name} ${c.kind}: ${c.reading_status === 'unreadable' ? 'unreadable' : c.marking || '—'}`).join(' · ');
-    return el('div', {}, box, el('p', { class: 'small muted' }, `SAM 3.1 segmented the board${ph.sam?.length ? ` (${ph.sam.map(c => `${c.concept}: ${c.match_count}`).join(', ')})` : ''}; ${parts ? 'Muse Spark vision read the parts: ' + parts + '. ' : 'no part values were read from the photo. '}${ph.pairing}.`));
+    if (ph.documentary) return el('div', {}, box, ...notes);
+    return el('div', {}, box, ...notes, el('p', { class: 'small muted' }, `SAM 3.1 segmented the board${ph.sam?.length ? ` (${ph.sam.map(c => `${c.concept}: ${c.match_count}`).join(', ')})` : ''}; ${parts ? 'Muse Spark vision read the parts: ' + parts + '. ' : 'no part values were read from the photo. '}${ph.pairing ? ph.pairing.charAt(0).toUpperCase() + ph.pairing.slice(1) : ''}.`));
   }
 
   // ---------- idle notebook: why this case is here (from cases.json), nothing else before play

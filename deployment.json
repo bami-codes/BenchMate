@@ -1,11 +1,24 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "df6e78bc0f37a768a6e7817236784010b4f1dbd5",
-  "source_site_tree": "e3d1323de33ed653da4ac2fe64d47a7fdacb0425",
+  "source_main_commit": "07c922f8f2a099649621722060321254bddcb425",
+  "source_site_tree": "afc3c51eda03b2c3c7960ee27fa6ee7a7c1bdd34",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
   "legacy_archive": "/BenchMate/archive/",
   "new_photos": "assets/photos/; metadata-free derivatives only",
-  "staging_excluded": true
+  "staging_excluded": true,
+  "release_cases": [
+    "01",
+    "02",
+    "04"
+  ],
+  "validation": {
+    "JavaScript_syntax": "PASS",
+    "public_event_envelopes_matched": 361,
+    "case04_audit": "PASS events=607",
+    "case02_audit": "PASS events=574",
+    "browser_QA": "unverified: browser access host unavailable",
+    "photo_metadata": "only pixel/rendering PNG chunks retained; pixels unchanged"
+  }
 }

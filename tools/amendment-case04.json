@@ -1,0 +1,8 @@
+{
+ "kind": "public_design_amendment",
+ "text": "Intended R2 amended from 22 kΩ to the available 20 kΩ part before any measurement (public amendment); the model received the amended netlist.",
+ "detail": "The schematic image Spark read shows R2 22 kΩ. Before any physical measurement the operator supplied the actual resistor inventory, which has 20 kΩ but not 22 kΩ; the intended R2 became 20 kΩ, OUT–REF, and the amended netlist (R1 4.7 kΩ IN–OUT, R2 20 kΩ OUT–REF) was given to the diagnostic context. The original image, Spark's 22 kΩ transcription and the amendment are all retained; no voltage, guard or scoring limit changed.",
+ "doc": "docs/2026-11-03-case04-20k-design-amendment.md",
+ "image_value": "R2 22 kΩ",
+ "amended_value": "R2 20 kΩ"
+}

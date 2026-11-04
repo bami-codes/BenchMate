@@ -1,0 +1,20 @@
+{
+ "board": "assets/photos/case04-board.png",
+ "crop_full": "assets/photos/case04-board-crop-full.png",
+ "crop_full_box": [
+  440,
+  1180,
+  2620,
+  2090
+ ],
+ "board_box": [
+  440,
+  1180,
+  2620,
+  2900
+ ],
+ "width": 3024,
+ "height": 4032,
+ "sha256": "65287ee9f9a4aec2d72bc3da1b51a44c0a9bd7f3be5c111c876ab3c836c218e0",
+ "source": "documentary-photo/conversion/render.png (metadata-free fixed RAW conversion); original DNG private"
+}
