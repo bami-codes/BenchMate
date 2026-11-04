@@ -196,3 +196,12 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
 - Never commit originals (DNG), `.private/`, `_stage/`, or anything with GPS/EXIF.
 - Ask 범수 before adding any UI element not described here. He rejects features that are not
   needed, and he is right.
+
+
+## Status, 4 Nov 2026 evening (Claude)
+
+- Demo complete and deployed: landing (hero scope with plain-word key, result-first case blocks, labelled bench photo with role cards, section decks and fact strips, 3 × 3 score), replay (meter caption, plain run sentence, one Play, verdict card with Spark's answer over the planted fault), reports (same card, tables that fit, no `null` text). Design rounds 4h–4p are described in `DESIGN.md`.
+- Two independent reviews (judge with no prior knowledge; front-end designer) were run on 4 Nov; what was fixed and what was deliberately left is in `DESIGN.md` under rounds 4n–4p.
+- Site-wide rule learned the hard way: the engine checks the seal's digest, it does not compare the answer with the truth; the site prints both and never a `match` of its own.
+- The old `web/` builder and root `PRODUCT.md` / `DESIGN.md` were removed from main on 4 Nov (history keeps them). No demo film exists; `video/` holds pipeline drafts only.
+- Deploy procedure unchanged: commit on the working branch, push to `main`, rebuild the `gh-pages` root from `site/` (keep `archive/`), write `deployment.json`, push. GitHub returned transient 500s on pushes during the evening; retry with backoff worked every time.
