@@ -4,6 +4,14 @@
 
 That is the first power-on of a new board, when the output is not what the drawing says. The question at the bench is what to measure next, and which part to check. BenchMate gives that question to Meta's Muse Spark on a real board. It reads the schematic and chooses its own experiments; every forecast is frozen before the measurement and checked against it by code; the planted fault stays sealed until the verdict. Five faults were planted on five small circuits; the model narrowed each disagreement between board and drawing to one question, asking for one multimeter reading where the waveforms could not decide, and every step is a record you can verify offline.
 
+**[Open the live demo](https://bami-codes.github.io/BenchMate/)** · **[Watch Case 04 from the start](https://bami-codes.github.io/BenchMate/run.html?run=20261103T150223-18d6f08ac9&play=1)** · **[The five cases](https://bami-codes.github.io/BenchMate/#cases)** · [Verify a record offline](#why-you-can-trust-the-numbers) · the film link will be added when it is uploaded.
+
+Two results to remember. Case 04: the fault was not a component value; a diode the drawing does not show was needed, and Spark wrote it. Case 01: R1 was fine, and the extra resistance had to be found before it.
+
+[![The landing page: case 04's record in four lines (every value explanation failed; Spark proposed a diode from OUT to REF; frozen, pushed, two held-back inputs within the allowance; the seal opened), then experiment 3 on the scope with the drawing's forecast dashed and the measured input and output over it, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
+
+The experiments on that page did not exist until the model asked for them. That is the capability this project shows; a circuit on a $40 bench is the smallest honest place to show it.
+
 Where the model contributed, from the records:
 
 | Case | When the waveforms ran out | What Spark did | How it was checked | What the seal held |
@@ -22,12 +30,6 @@ Who does what:
 - **The operator** moves jumpers, reads the multimeter, and never tells the model the fault.
 
 Submitted to **Push the Frontier**: a model given a real bench, where it chooses the experiments and proposes what the drawing lacks, while a simulator forecasts, code scores, and a person moves the wires. Who it is for: the first power-on of a new board, the repair bench, the teaching lab; and, with another simulator and another instrument, anywhere a model can be made to forecast before it measures.
-
-**[Open the live demo](https://bami-codes.github.io/BenchMate/)** — five recorded diagnoses replayed from their logs, every number clickable to the event behind it. No installation, no API key.
-
-[![The landing page: case 04's record in four lines (every value explanation failed; Spark proposed a diode from OUT to REF; frozen, pushed, two held-back inputs within the allowance; the seal opened), then experiment 3 on the scope with the drawing's forecast dashed and the measured input and output over it, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
-
-The experiments on that page did not exist until the model asked for them. That is the capability this project shows; a circuit on a $40 bench is the smallest honest place to show it.
 
 Built solo for the Meta Global AI Developer Hackathon, 27 October – 4 November 2026 (Indie track, *Push the Frontier*).
 

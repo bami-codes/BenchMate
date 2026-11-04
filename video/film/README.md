@@ -7,7 +7,7 @@ rendered cold equals the same frame reached in sequence. Each shot fades in from
 
 Seven narration clips (`voice/s1.mp3 … s7.mp3`, text in `narration.txt`) drive the seven scenes: `voice_durations.py` writes
 `voice/durations.json`, and each scene's shots stretch together to its clip (PLANNED in `shots.js` and `voice_durations.py`
-must agree; today s1 11, s2 18, s3 52, s4 43, s5 15, s6 20.5, s7 13.5 = 173 s).
+must agree; today s1 9, s2 16, s3 47, s4 43, s5 17, s6 21, s7 13 = 166 s).
 
     python3 -m http.server --directory <repo root> 8796 &      # the stage reads site/data over http
     node render.js film 0 173 --fps 60 --jobs 3                # out/film.mp4 (about 6 min on 4 cores); t1 = filmTotal()
