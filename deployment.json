@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "89104ccf31d42266bb6c6a1820bad05db7a2e936",
-  "source_site_tree": "649c1d2c9c29b4b1071ee149fe33812df43287e2",
-  "previous_gh_pages_commit": "ace0872542bd97627f884a6a1709b55e7abf46f7",
+  "source_main_commit": "12fa97496454728cfa8806dc2debee09dbd76c79",
+  "source_site_tree": "f9384034345f3f1173dcc141463a6b28543c8753",
+  "previous_gh_pages_commit": "f16165aad2c674ec24eb932d2debf238b051c341",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Meter labels wrap inside their meters; gap between readout halves.",
+  "change": "Adds the four case 03 and 05 run files that the runs/ ignore rule had kept out of every earlier deploy (public 404s on those replays and reports).",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "playwright check of case 05 at the verdict (no label outside its meter); shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
+    "tool": "site/tools/check_data.py: 12 runs in index.json present and tracked; shots_all.js regression passed on the previous release (20/20 replays, 0 errors)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
