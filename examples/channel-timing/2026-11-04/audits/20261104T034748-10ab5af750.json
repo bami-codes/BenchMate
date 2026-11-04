@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "events": 238,
+  "forecasts": 4,
+  "prediction_files": 1,
+  "measurements": 5,
+  "order_checks": 19,
+  "head_sha256": "a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d",
+  "run_status": "run_completed",
+  "error": null,
+  "prior_events_checked": 484
+}

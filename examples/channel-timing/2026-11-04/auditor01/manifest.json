@@ -1,0 +1,18 @@
+{
+  "schema": "benchmate.frame_timing_additive_audit.v4",
+  "source_sha256": {
+    "src/benchmate/channel_timing_audit_v4.py": "e64b6972ea5e262fd50378f599eb87e48bf29085dc700539f20c0ff691897948",
+    "tests/test_channel_timing_audit_v4.py": "cdd025ded29080dffeda4d66f50112592419567f2a3b567ad8a1292e12bf2d73",
+    "docs/2026-11-04-case05-timing-attempt2-result.md": "84dee09493ba5897457ab213ca1f70c4e1e6db9b9a0eb1e88ddf77c67e5d0d27"
+  },
+  "added_after_diagnostic_run": true,
+  "numerical_or_runtime_sources_changed": false,
+  "official_verdict_changed": false,
+  "independent_tamper_tests_passed": 4,
+  "keyless_networkless_stdlib_verified": true,
+  "API_requests": 0,
+  "hardware_commands": 0,
+  "event_head": "a5930096a115bd2acde4ac09d4fffb53c559d9b7efe144ca1ef2ff42c76a704d",
+  "prior_events_checked": 484,
+  "preflight_events_checked": 4
+}
