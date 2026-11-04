@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "b9289503b4253fa9bcb1bf884ebd7adb2a6224f0",
-  "source_site_tree": "f5533160f967e7a4cbcd6a4316c530d7541fb9fa",
-  "previous_gh_pages_commit": "93a6c35bd6fa733f19ff59d8a7f8d87b07157d5f",
+  "source_main_commit": "0d4d5448169163e530ab9f820f16ce5faf85a627",
+  "source_site_tree": "cbc4572958bd3c4731dc3314eca0e09dff37d874",
+  "previous_gh_pages_commit": "acf6e3b5f2cd2e577b3ac3fa6a3723dac6a33816",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Replay seek rebuilds the seal state, bench-state row and counters, so rewinding shows exactly the forward-play state (rewind_check.js added, 10/10). On phones the Case 04 play button comes before the four-line strip. Headline: 'The board looks right.'",
+  "change": "Stylesheet and script links carry ?v=4r so phones pick up the CTA-before-strip layout and the seek fix without a stale cache.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20, errors none; rewind_check.js 10/10; landing 1440 and 390 no overflow",
+    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20; rewind_check.js 10/10 (same site tree as acf6e3b plus the query strings)",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
