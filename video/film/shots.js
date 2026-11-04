@@ -111,8 +111,8 @@ function buildAll() {
           el('div', { class: 'h2', style: 'margin-top:26px' }, 'Reads the schematic.', el('br'), 'Chooses its own experiments from a fixed menu.', el('br'), 'Says why.'),
           el('div', { class: 'body dim', style: 'margin-top:30px;font-size:30px' }, 'Before each measurement, its forecast is frozen and hashed. The engine scores; Spark decides what to test next.')),
         el('div', { class: 'abs', id: 'sealbox', style: 'left:1240px;top:200px;width:584px' }, el('div', { class: 'photo2' }, el('img', { src: '../../site/assets/photos/case04-faulted-crop.jpg', style: 'width:100%' })), el('div', { class: 'abs', id: 'seal', style: 'left:40px;top:240px;width:470px;transform:rotate(-7deg) scale(0);transform-origin:center;border:4px solid var(--fault);color:var(--fault);font:700 44px/1.1 var(--narrow);padding:16px 22px;border-radius:8px;letter-spacing:.06em;background:rgba(255,255,255,.92);text-transform:uppercase;box-shadow:0 8px 24px rgba(0,0,0,.35)' }, 'Sealed', el('small', { style: 'display:block;font:500 18px/1.3 var(--mono);letter-spacing:0;text-transform:none;color:#8a2a24;margin-top:6px' }, 'sha256 of the assembly, committed before the first measurement'))));
-      cap(a + 4.5, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 4.7, 'seal');
-    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 4.7) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
+      cap(a + 5.2, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 5.4, 'seal');
+    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 5.4) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
 
   // ===== Case 04 =====
   // S06 28–33  case title
