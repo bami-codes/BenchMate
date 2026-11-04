@@ -735,3 +735,5 @@ footer a{color:#fff}
 .claim-top .ctas .jump:hover{text-decoration-color:#fff}
 @media (max-width:1000px){.claim-top .path-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.claim-top .path-steps{grid-template-columns:1fr;gap:8px}}
+/* phones (stacked layout): the play button comes before the four-line strip, so it is on the first screen; ≥ 560 px is unchanged */
+@media (max-width:560px){.claim-top{display:flex;flex-direction:column;align-items:stretch;gap:0}.claim-top .path{order:1}}

@@ -173,3 +173,12 @@ Left as they were, on purpose: the second Play button in the idle scope (removed
   (all explanations failed · new structure proposed · held-back checks · seal opened). Dotted-underlined text in the
   transport's own white, no new colour; hidden on phones.
 
+### Round 4r — a seek is a forward play (4 Nov, night)
+- Replay: seeking rebuilt the notebook, meters and scope but left the seal chip, the bench-state Seal row and the three
+  counters at their last values, so a rewind to 0:00 still read "Seal opened … · 3 experiments · 8 Spark calls · $0.071".
+  `seek()` now resets every derived display to its initial value (and discards the end scene or a reading's typing animation
+  still pending from the earlier position) before replaying the timeline to t; the scrubber, the Jump-to row and `?t=` all go
+  through it. `tools/rewind_check.js` proves it on every counted run: end → 0 equals the state at load, and a forward play
+  to a quiet moment equals a forward seek, a backward seek, `?t=` and a Jump-to button at the same position.
+- Landing below 560 px: the two buttons come before the four-line strip (a flex column with the strip ordered last), so
+  "Watch Case 04 from the start" is on the first screen of a phone. At 561 px and up nothing changes.
