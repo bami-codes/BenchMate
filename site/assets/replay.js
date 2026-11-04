@@ -252,9 +252,10 @@
     probe_path(e) { block(e, 'bench', 'Bench · probe path declared', null, el('p', {}, e.text)); },
     spark_report(e) { // the engine's report after the measurements; the seal stays closed until the reading is scored
       const surv = e.survivors || [];
-      block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. The seal stays closed; one reading at the bench comes next.` : words.report(e, run),
+      const willRead = !!run.reading;
+      block(e, 'spark', 'Muse Spark 1.3 · report after the measurements', surv.length === 1 ? `Spark reports: ${expName(surv[0])}. ${willRead ? 'The seal stays closed; one reading at the bench comes next.' : 'Nothing is left to read; the seal opens next.'}` : words.report(e, run),
         el('p', { class: 'small muted' }, e.verdict === 'indistinguishable' ? `Verdict ${e.verdict}: ${(e.components || []).join(' and ')} give the same terminal waveforms. The seal stays closed until one of them is read.`
-          : e.verdict === 'structure_supported' ? `Verdict ${e.verdict}: the proposed circuit passed the held-back checks. Terminal measurements say what the series resistance is, not where it sits, so the engine does not open the seal yet.`
+          : e.verdict === 'structure_supported' ? (willRead ? `Verdict ${e.verdict}: the proposed circuit passed the held-back checks. Terminal measurements say what the series resistance is, not where it sits, so the engine does not open the seal yet.` : `Verdict ${e.verdict}: the proposed circuit passed the held-back checks on inputs it had never seen.`)
           : e.components?.length ? `Verdict ${e.verdict}: ${e.components.join(', ')}. ${run.reading?.group ? 'The part itself has not been read yet; the seal stays closed until it has.' : 'Terminal measurements alone cannot tell the visible part from an extra series path, so the engine does not open the seal yet.'}` : ''));
     },
     seal_opened(e) { finale(e, 'verdict'); },
