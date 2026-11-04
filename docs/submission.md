@@ -8,7 +8,7 @@
 
 **Track:** Indie Developer · **Problem statement:** Push the Frontier · **Team:** solo (bami-codes), with Codex and Claude as coding agents
 
-**Links:** Live demo https://bami-codes.github.io/BenchMate/ · Repository https://github.com/bami-codes/BenchMate (MIT, public) · Video: (YouTube link)
+**Links:** Live demo https://bami-codes.github.io/BenchMate/ · Repository https://github.com/bami-codes/BenchMate (MIT, public) · Video https://www.youtube.com/watch?v=BFlJHOEapV8
 
 ---
 

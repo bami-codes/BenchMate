@@ -6,7 +6,7 @@ That is the first power-on of a new board, when the output is not what the drawi
 
 Spark reads the schematic and picks each experiment from a fixed menu. Before every measurement, a circuit simulator writes down what each remaining explanation predicts, and that prediction is locked (hashed) so it cannot be changed afterwards. The real board is measured; explanations that miss by more than 9 mV are crossed out. When no change of part value can explain the board, Spark may propose a part the drawing does not show; when two explanations predict the same waveforms, it asks for one multimeter reading. The fault we planted stays sealed until the verdict. Five faults, five small circuits, and every step is a record you can verify offline.
 
-**[Open the live demo](https://bami-codes.github.io/BenchMate/)** · **[Watch Case 04 from the start](https://bami-codes.github.io/BenchMate/run.html?run=20261103T150223-18d6f08ac9&play=1)** · **[The five cases](https://bami-codes.github.io/BenchMate/#cases)** · [Verify a record offline](#why-you-can-trust-the-numbers) · the film link will be added when it is uploaded.
+**[Watch the film (3 min)](https://www.youtube.com/watch?v=BFlJHOEapV8)** · **[Open the live demo](https://bami-codes.github.io/BenchMate/)** · **[Watch Case 04 from the start](https://bami-codes.github.io/BenchMate/run.html?run=20261103T150223-18d6f08ac9&play=1)** · **[The five cases](https://bami-codes.github.io/BenchMate/#cases)** · [Verify a record offline](#why-you-can-trust-the-numbers)
 
 Two results to remember. Case 04: the fault was not a component value; a diode the drawing does not show was needed, and Spark wrote it. Case 01: R1 was fine, and the extra resistance had to be found before it.
 
@@ -169,7 +169,7 @@ Kept as development records, not counted in the five cases.
 | `docs/` | Protocols, amendments, incident records and results, dated; [`docs/evidence-index.md`](docs/evidence-index.md) is the index. |
 | `tests/` | Tests for the engine and the firmware stubs. |
 | `scripts/`, `experiments/` | Development tooling and bench QA scripts. |
-| `video/` | The demo film's render pipeline (`video/film/`): every frame is composed from `site/data/runs/*.json` and the narration clips sit beside it; the rendered file itself is not tracked. |
+| `video/` | The [demo film](https://www.youtube.com/watch?v=BFlJHOEapV8)'s render pipeline (`video/film/`): every frame is composed from `site/data/runs/*.json`, the narration clips and their word timings sit beside it; the rendered file itself is not tracked. |
 
 ## Try it
 
@@ -196,4 +196,4 @@ To rebuild the site's data from the records: `site/tools/extract_runs.py` (one m
 
 Everything in this repository was made between 27 October and 4 November 2026: the instrument firmware, the bench, the fit engine, the Spark tool loop, the reading and seal protocol, the photo stage, the site and the runs themselves. One person at the bench; Codex and Claude as coding agents; Muse Spark as the runtime agent. Third-party dependencies (NumPy, SciPy, HTTPX, pySerial, ngspice, the Arduino UNO R4 toolchain, Pillow, Playwright for the site checks) and the bundled fonts keep their own licenses. Forum cases are paraphrased with links to the original threads; no posts are quoted. Board photos are metadata-free derivatives; originals are never published. [MIT license](LICENSE).
 
-Full history: [evidence index](docs/evidence-index.md) · [site handoff and rules](site/HANDOFF.md) · [design notes](site/DESIGN.md).
+Full history: [evidence index](docs/evidence-index.md) · [site handoff and rules](site/HANDOFF.md) · [design notes](site/DESIGN.md) · [the film](https://www.youtube.com/watch?v=BFlJHOEapV8) and [how it is rendered from the records](video/film/README.md).
