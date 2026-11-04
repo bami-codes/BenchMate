@@ -22,7 +22,7 @@ Where the model contributed, from the records:
 | **05** [Volts lost on a breadboard](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e&play=1) | Every value explanation failed. | Proposed a resistor in place of the drawn wire W1. | Held-back checks passed; one extra reading of the isolated W1 path (**0 Ω**) placed the resistance off the board. | 20 kΩ off the board. |
 | **01** [Filter output too small](https://bami-codes.github.io/BenchMate/run.html?run=20261103T125924-bf8f64512b&play=1) | Two explanations gave the same waveforms (the engine's rule). | Recognised that the waveforms could not separate them and asked for one multimeter reading of R1. | Bands frozen first; R1 read **4.71 kΩ**, inside one band only. | R1 4.7 kΩ on the board, two 10 kΩ off it. |
 
-These rows show where the model contributed. They are not evidence that it beats every rule-based method: on the earlier synthetic linear benchmark, the engine with a fixed plan also reached 24/24 ([Earlier development results](#earlier-development-results-29-oct--2-nov)).
+These rows show where the model contributed; the earlier synthetic benchmark, with its baselines, is under [Earlier development results](#earlier-development-results-29-oct--2-nov).
 
 Who does what:
 
