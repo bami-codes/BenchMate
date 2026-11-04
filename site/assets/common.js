@@ -329,29 +329,29 @@ window.BM = (() => {
   const defaultRun = (runs, caseId) => { const of = runs.filter(r => r.case === caseId).sort((a, b) => a.started_utc < b.started_utc ? -1 : 1); return of.find(r => r.counted) || of[0] || runs.find(r => r.counted) || runs[0]; };
   // ---- the hero line, one template per end state, numbers from the run
   function heroLine(run) {
-    const n = run.steps.length, e = `${n} experiment${n === 1 ? '' : 's'}`;
+    const n = run.steps.length, e = `Spark chose ${n} experiment${n === 1 ? '' : 's'}`;
     const surv = run.outcome?.survivors || run.verification?.survivors || [];
     const scored = run.verification?.scored || [], need = run.reserved?.length || 0;
-    if (run.outcome?.kind === 'stopped') return `Spark narrowed it to one explanation in ${e}, then the bench’s own guard stopped the run. Watch how.`;
+    if (run.outcome?.kind === 'stopped') return `${e}; the bench’s own guard then stopped the run. Watch how.`;
     if (run.outcome?.kind === 'report' && need && scored.length >= need) {
       const passed = scored.every(s => Object.values(s.conditional || {}).every(v => v.passed));
       const rd = run.reading;
       if (rd?.group?.scored) {
         const g = rd.group; const bind = g.scored.binding || {}; const n = (g.observed?.readings || []).length || 2;
-        return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'} and Spark named ${surv.map(expName).join(', ')}. ${n === 2 ? 'Two' : n} readings of the part bodies, out of circuit, fit the frozen bands ${Object.keys(bind).length ? 'only one way' : 'no way'}. Watch how.`;
+        return `${e}; two held-back checks ${passed ? 'passed' : 'failed'}; ${n === 2 ? 'two' : n} readings of the part bodies fit the frozen bands ${Object.keys(bind).length ? 'only one way' : 'no way'}. Watch how.`;
       }
       if (rd?.scored) {
         const o = rd.outcome;
-        if (o === 'one') return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; one reading at the bench settled it. Watch how.`;
-        if (o === 'none') return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; the reading fit no explanation. Watch how.`;
-        return `In ${e}, the held-back checks ${passed ? 'passed' : 'failed'}; the reading did not separate the explanations. Watch how.`;
+        if (o === 'one') return `${e}; two held-back checks ${passed ? 'passed' : 'failed'}; one multimeter reading of ${rd.component || 'the part'} settled it. Watch how.`;
+        if (o === 'none') return `${e}; two held-back checks ${passed ? 'passed' : 'failed'}; the reading fit no explanation. Watch how.`;
+        return `${e}; two held-back checks ${passed ? 'passed' : 'failed'}; the reading did not separate the explanations. Watch how.`;
       }
-      if ((run.outcome?.verdict === 'consistent') || (surv.length === 1 && surv[0] === 'nominal')) return `In ${e}, nothing disagreed with the drawing, and the held-back checks passed. Watch how.`;
-      if (surv.length === 1) return `Spark narrowed it to one explanation in ${e}, and the held-back check ${passed ? 'passed' : 'failed'}. Watch how.`;
-      if (surv.length > 1) return `Spark narrowed it to ${surv.length} explanations in ${e}; one reading at the bench decides. Watch how.`;
+      if ((run.outcome?.verdict === 'consistent') || (surv.length === 1 && surv[0] === 'nominal')) return `${e}; nothing disagreed with the drawing; two held-back checks passed. Watch how.`;
+      if (surv.length === 1) return `${e}; one explanation was left and the held-back checks ${passed ? 'passed' : 'failed'}. Watch how.`;
+      if (surv.length > 1) return `${e}; ${surv.length} explanations were left; one reading at the bench decides. Watch how.`;
       return `After ${e}, no explanation survived the held-back check. Watch how.`;
     }
-    return `Spark ran ${e}. Watch how.`;
+    return `${e}. Watch how.`;
   }
 
   // ---- menu chips: the whole fixed menu, the chosen one solid

@@ -1,7 +1,7 @@
 {
  "width": 1200,
  "height": 1600,
- "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata",
+ "method": "tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule (3 px band just outside each native SAM 3.1 mask, label-tape yellow (255, 221, 0), 1 px dark edge) for every case; outlines only for masks a record ties to a part or a candidate; one uniform brightness lift ×1.15 on every crop, no colour or local edits; JPEG q92 without metadata",
  "faulted_crop": "assets/photos/case05-faulted-crop.jpg",
  "faulted_crop_box": [
   120,

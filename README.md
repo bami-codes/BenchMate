@@ -1,191 +1,155 @@
 # BenchMate
 
-**Muse Spark chooses the experiment. A $40 Arduino bench decides whether its explanation holds.**
+**A diagnostic instrument for the first power-on of real hardware. Muse Spark reads the drawing, designs experiments on the real circuit, forecasts each one before an Arduino measures it, and keeps crossing out explanations until one is left. Five faults were planted on five boards and sealed; the model found where each board disagreed with its drawing. Every step is a record you can verify offline.**
 
-On the Arduino forum, a voltage divider connected to an ESP32 read 1.1 V instead of 1.8 V.
-Replies guessed resistor tolerance, the meter, bad solder. The right explanation (the
-ESP32 had no power, so its input clamp loaded the divider) came early, but it took the
-poster's own test to confirm it: *"Real life testing was the correct way to find the issue."*
-([thread](https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099),
-[confirmation](https://forum.arduino.cc/t/voltage-divider-is-not-giving-correct-voltage/884099?page=3))
+**[Open the live demo](https://bami-codes.github.io/BenchMate/)** — five recorded diagnoses replayed from their logs, every number clickable to the event behind it. No installation, no API key.
 
-BenchMate gives Muse Spark a bench to run those tests. For electronics students and makers
-with no oscilloscope, no function generator and nobody to ask, it turns an Arduino UNO R4
-into a signal source and recorder, lets Spark choose the experiments, and makes every
-explanation earn its place with a measurement it has not seen yet.
+[![The landing page: the first experiment's forecast and measurement on the scope, the drawing the model read and the board photo](site/assets/readme/landing-fold.jpg)](https://bami-codes.github.io/BenchMate/)
 
-**[Open the interactive replay](https://bami-codes.github.io/BenchMate/) · [Watch the 51-second physical diagnosis](https://bami-codes.github.io/BenchMate/#watch) · No installation or API key.**
+The experiments on that page did not exist until the model asked for them. That is the capability this project shows; a circuit on a $40 bench is the smallest honest place to show it.
 
-Built solo during the Meta Global AI Developer Hackathon (first commit Oct 27, 2026).
+Built solo for the Meta Global AI Developer Hackathon, 27 October – 4 November 2026 (Indie track, *Push the Frontier*).
 
-[![Recorded D01 diagnosis: Spark requests a load, locks the models and compares the new measurement](docs/assets/d01-recorded-diagnosis.gif)](https://bami-codes.github.io/BenchMate/#watch)
+## What happened on the bench
 
-*Animation of one retained physical run, not live footage. [Static Story view](docs/assets/d01-story.png).*
+Five problems from real forum threads, each rebuilt as a small circuit on a mini breadboard with one fault planted and sealed (the operator's assembly record is hashed before the first measurement). Muse Spark gets the schematic image and a fixed menu of experiments, nothing else. The restored rerun afterwards is a fresh model context on the same drawing.
 
-## What it did on a real circuit
+| Case | Forum problem | What Spark did | How it was settled | Restored rerun |
+|---|---|---|---|---|
+| **01** [Filter output too small](https://bami-codes.github.io/BenchMate/case.html?id=01) | An RC filter driven from an Arduino pin gave a smaller output than its simulation (pin output resistance). | 3 experiments; "as drawn" missed by 86.73 mV; the series resistance had grown. The engine's rule says "R1 changed" and "an extra resistor between IN and R1" give the same waveforms, so Spark asked for one reading of R1. | Bands frozen first: R1 changed 23.2–28.0 kΩ, extra resistor 4.36–5.05 kΩ. R1 read **4.71 kΩ** → the extra resistor. Seal: R1 4.7 kΩ on the board, two 10 kΩ off it. | No mismatch in the tests Spark chose |
+| **04** [Divider reads wrong](https://bami-codes.github.io/BenchMate/case.html?id=04) | A battery divider read wrong while the unpowered ESP32 it fed loaded it. | Every value explanation failed. Spark **proposed a part the drawing does not show: a diode from OUT to REF**, fitted it in ngspice, passed both held-back inputs. | The proposal is the only survivor. Seal: a 1N4148 from OUT to REF, off the board. | No mismatch in the tests Spark chose |
+| **02** [Erratic sensor board](https://bami-codes.github.io/BenchMate/case.html?id=02) | A GY-521 with a filter capacitor of the wrong value. | "C1 changed" was the only survivor. Asked which of SAM 3.1's bodies is C1, Spark said the photo cannot tell two identical parallel capacitors apart. | Both capacitor bodies read out of circuit, **0.451 µF and 0.101 µF**; of the two ways to assign bodies to parts only one fits the bands frozen first. Seal: C1 is a 0.47 µF part marked 474. | No mismatch in the tests Spark chose |
+| **05** [Volts lost on a breadboard](https://bami-codes.github.io/BenchMate/case.html?id=05) | About 0.4 V vanished across a breadboard (contact resistance). | Every value explanation failed. Spark **proposed a series resistor in place of the drawn wire W1**, fitted 19.85 kΩ, passed both held-back inputs. The engine split the one survivor into two placements (on the board's wire path / outside it); Spark chose to read the W1 path. | Spark pointed at the orange jumper in the photo as W1; the isolated path read **0 Ω** → the resistance sits off the board. Seal: 20 kΩ outside the mini board. | Attempt 1 **abstained** (counted); attempt 2, on a timing model published before it: no mismatch in the tests Spark chose |
+| **03** [Blinker stops after one cycle](https://bami-codes.github.io/BenchMate/case.html?id=03) | A 555 timing chain with a resistor far too small. | R1 and R2 are indistinguishable at the terminals (both fit ≈ 2.53 kΩ). Spark asked for R1; bands frozen; photo; SAM 3.1; Spark pointed at the upper resistor as R1. | R1 read **2.22 kΩ** → R1 changed. Seal: R1 2.2 kΩ. The pair record had stopped on a local input error before Spark's body call; the chain continued in linked records and the stop is shown. | No mismatch in the tests Spark chose |
 
-A low-pass circuit designed for τ ≈ 10 ms (10 kΩ, 1 µF) had a fault I planted in it.
-Its measured time constant was **21.4 ms**. One trace cannot tell a larger
-resistor from a larger capacitor: both give the same curve.
+Counted from the records: **10 official runs, 5 fault diagnoses with held-back checks passed, 2 structure proposals, 4 readings asked for, 5 seals matched, 5 restored reruns with no mismatch; 101 Muse Spark calls, 6 SAM 3.1 calls, about $1.01** at the published rates. These are counts from a public ledger that also holds every stopped, abstained and miswired attempt (see [Everything that went wrong](#everything-that-went-wrong)). They are not an accuracy rate, and the cases were known to the developers: this is not a blind test.
 
-1. **Spark chose a test that separates them.** It reasoned that repeating the step
-   adds no information, and asked the operator to connect a known 9.99 kΩ output load.
-2. **Both explanations were locked before the loaded measurement.** "R changed" missed
-   by **32.5 mV RMS**; "C changed" matched at **3.0 mV**.
-3. **Spark tested the survivor on a reserved waveform** (5 Hz sine, never used for
-   fitting): **3.04 mV**, inside the 9 mV whole-and-every-region allowance.
-4. **Verdict:** capacitance ≈ **2.1× design** (assuming R = 10 kΩ). It also reported
-   what it still did not know: exact component values and calibrated confidence.
+[![Case 05 end scene: the proposed series resistor placed off the board by one reading, the photo with SAM 3.1's outline of the jumper Spark named, the opened seal](site/assets/readme/case05-end.jpg)](https://bami-codes.github.io/BenchMate/run.html?run=20261104T021333-c80ef3617e)
 
-The whole run took **5 min 49 s**: five Spark decisions, one wiring change by a human,
-7,680 recorded frames. [Run report, Spark's decisions and raw events](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md)
+## How a run works
 
-*Repair (restore the design, with the forecast pushed to GitHub before the operator
-touches the circuit) has a working runner and a full mock rehearsal. [A real Spark-controlled mock rehearsal](examples/overnight/2026-11-02/README.md) has now completed; physical repair remains pending. No mock result is counted as a physical repair.*
-
-## When no starting model fits, Spark writes a new one
-
-The test circuit is a simplified input clamp inspired by the forum problem: a series
-resistor and a hidden diode, not an ESP32. Spark is not told the wiring. On a simulated
-bench (a mock of that circuit; Spark's decisions are real API calls), all five starting linear models failed (worst training error 86–131 mV, allowance 9 mV). Spark ran an
-amplitude sweep, noticed the top half of the waveform flattening near +0.47 V, and
-proposed a structure outside the five starting models: **a series resistor and a diode from OUT to REF.**
-Its netlist went straight into ngspice, the fitted prediction was
-[pushed to GitHub](https://github.com/bami-codes/BenchMate/blob/9cff3e8c3209c68bf489b5e3b2f95e0f27a8b74c/examples/b5-unloaded-freezes/20261030T133514-4ea9a8848e/predictions.json)
-before two unseen inputs were measured, and both matched (**1.7 mV** RMS each) while
-every linear alternative failed. [All seven Spark requests and checks](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md)
-
-The same session runs against the physical fixture; the physical diode run is
-scheduled after the repair.
-
-## How it works
+The same order every time; only the drawing changes.
 
 ```mermaid
 flowchart LR
-    A[Describe the circuit] --> B[Spark chooses a test]
-    B --> C[Operator changes a wire if asked]
-    C --> D[Arduino bench measures]
-    D --> E[Engine scores every explanation]
-    E --> F[Lock the survivor's prediction]
-    F --> G[Measure a reserved input]
-    G --> H[Report: supported / still unknown / next test]
-    E -->|none fit| I[Spark proposes a new netlist]
-    I --> F
+    A[Muse Spark vision reads the schematic] --> B[Spark chooses an experiment from a fixed menu]
+    B --> C[Engine forecasts OUT for every standing explanation, hashes the forecast]
+    C --> D[Operator moves one jumper if asked, USB off]
+    D --> E[Arduino drives IN and records IN, OUT, REF]
+    E --> F[Explanations that miss by more than 9 mV are crossed out]
+    F -->|none left| G[Spark proposes a part the drawing lacks]
+    G --> C
+    F -->|survivors| H[Forecast pushed to GitHub, two held-back inputs measured]
+    H -->|same waveforms| I[Spark names one part to read; bands frozen; operator reads it]
+    H --> J[Seal opened, compared by code]
+    I --> J
 ```
 
-| Who | Does what |
-| --- | --- |
-| **Muse Spark 1.3** | Chooses each measurement, asks for wiring changes, proposes new circuit structures as netlists, requests a repair, writes the report |
-| **BenchMate engine** | Simulates (state-space RC, ngspice for nonlinear netlists), fits training data only, scores whole waveform and every region, freezes and publishes predictions |
-| **Arduino UNO R4 + LM358 buffers** | Drives the circuit (DAC), records IN/OUT/REF (14-bit ADC), rejects runs across reboots |
-| **You** | Move a wire when Spark asks, confirm it, plug the USB back in |
+1. **Read the drawing.** Muse Spark vision turns the schematic image into parts, values and connections; a person confirms. The model receives this and the shared bench description, nothing else.
+2. **Choose an experiment.** From a fixed menu (steps of ±0.2 / ±0.5 V, sines of 1–5 Hz, with or without a 9.99 kΩ load), with a reason. The runner never chooses.
+3. **Forecast first.** Every standing explanation is a circuit model; the engine simulates it with the measured IN and forecasts OUT. The forecast is hashed before the board is touched.
+4. **Measure and cross out.** The Arduino measures the real circuit. A miss above 9 mV RMS, on the whole step or any region of it, rules the explanation out. If none survive, Spark may propose a new netlist.
+5. **Check on held-back inputs.** The final forecast is committed and pushed to GitHub, then two reserved inputs never used for fitting are measured.
+6. **One reading at the bench.** When two explanations give the same terminal waveforms, Spark names the part and the quantity; its expected range under each explanation (and for each way of reading it: multimeter or marking) is frozen and pushed; the operator types one value; the same rule rules out.
+7. **Open the seal.** The assembly record, hashed before the first measurement, is compared with the result by code.
 
-## How Meta models are used
+## The bench
 
-| Model | Role | Evidence |
-| --- | --- | --- |
-| Muse Spark 1.3 · medium | Runs the physical diagnosis: picks measurements, requests the load, asks for the reserved check | [Physical D01 run](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md) |
-| Muse Spark 1.3 · max | Discovers structure outside the starting models and writes the literal netlist | [B5 run](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md) |
-| Muse Spark 1.3 · vision | Reads a schematic image into an editable design candidate the user confirms | [Known-design intake](docs/known-design.md) |
-| Muse Spark Open · Baseten | Runs the same synthetic Task A through the bench; all first attempts retained | [30-case result](examples/overnight/2026-11-02/spark-open/README.md) |
-| SAM 3.1 | Optional highlight of a component in a bench photo; one of three preregistered prompts segmented the capacitor body | [SAM probe](examples/sam-concept-probe/2026-11-01/20261101T063214-e48c4496e7/README.md) |
+![The whole bench from above: an Arduino UNO R4 Minima, the instrument breadboard with two LM358 followers, and the mini board under test](site/assets/photos/bench-full.jpg)
 
-Two measured findings about Spark from this project:
+An Arduino UNO R4 Minima is the source (DAC through an LM358 follower and a 1 kΩ drive resistor) and the recorder (14-bit ADC, 512 frames per capture at 0.5 ms, channels IN, buffered OUT and REF). REF is a buffered divider near 1.63 V, not ground; a guard checks it on every capture and stops the run if it drifts more than 3 mV. Captures are bound to a boot id and rejected across reboots. About ₩56,000 ($40) of parts including spares, plus a multimeter. [Build notes](docs/build-your-own.md).
 
-- **A measurement-error hypothesis needed testing.** Asked the D01 question with no tools,
-  all five replies opened with "nothing is wrong with the circuit", blamed the
-  measurement and advised re-measuring. That is a plausible hypothesis; the bench showed
-  the capacitor had changed. This is a qualitative case with different information access, not a 5/5 error-rate benchmark. [All five replies](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md)
-- **Both efforts selected the load in this recorded decision.** At the D01 load decision, medium
-  and max both chose the load 5/5; medium answered in 4.5 s vs 14.3 s.
-  [Ten-call comparison](examples/effort-comparison/2026-10-31/20261031T113227-558da839f7/README.md)
+## How Meta's models are used
 
-## Registered evaluation, including what did not improve
+| Model | Role in the five cases | Where to see it |
+|---|---|---|
+| **Muse Spark 1.3, agent** (Meta Model API) | Chooses every experiment and says why; asks for the bench to be rewired; decides when to ask for the held-back check; proposes a part the drawing lacks when every value explanation has failed (cases 04, 05); chooses which part to read and which quantity (01, 02, 03, 05). | Every replay: the violet notebook entries, each with its call cost |
+| **Muse Spark 1.3, vision** | Reads each schematic image into parts and connections before the run. After the diagnosis, looks at the board photo with SAM 3.1's bodies and names the body that is the part to read (01, 03, 05) or says it cannot (02). | "What the model received" on each report; "pointed at the body" in the replays |
+| **SAM 3.1** | Segments the mini board photo with one generic prompt after the diagnosis. Its native masks are the only outlines on the site; no part value is ever read from a photo. | Case photos with the yellow outlines |
+| **Muse Spark Open** (Baseten) | Ran the earlier synthetic Task A benchmark through the same bench, as a development comparison. | [Spark Open records](examples/overnight/2026-11-02/spark-open/README.md) |
 
-**What measurement access adds:** on 30 preregistered synthetic cases, Spark with the
-bench identified all **24/24 in-family cases**; without measurements it identified
-**8/24** and left 22 of the full 30 cases unresolved. The latter is appropriate
-uncertainty, not 22 wrong answers. Engine and fixed-plan baselines also reached 24/24.
-When both R and C changed, Spark submitted 5/6 justified rejection reports (one
-incomplete), versus 6/6 for both deterministic baselines.
-[Task A: every response and the different information conditions](examples/overnight/2026-11-02/task-a/README.md).
-
-Spark Open also ran all 30 cases through the same bench: **21/24** in-family,
-**1/6** completed out-of-family rejections, **8 incomplete**, no wrong IDs.
-All eight failures returned multiple tools to an adapter requiring one per turn.
-This is system performance including a transport mismatch, not a clean ranking of
-model reasoning. The first results stay unchanged; any connection fix is a separate
-development check. [Spark Open records and limitations](examples/overnight/2026-11-02/spark-open/README.md).
-
-On 16 synthetic circuit-identification cases, Spark with the engine ranking hidden
-finished **15/16**, versus **16/16** for the engine and fixed expert plan. Random
-selection completed 30/48 repeated runs. No executed arm made a wrong identification.
-Spark used 2.88 simulated mountings on average versus 1.00 for the fixed plan; this
-supports keeping engine ranking in the linear workflow, not claiming LLM superiority.
-One Spark run verified the model but exhausted its call budget before its final report.
-[All first attempts, costs and comparisons](examples/overnight/2026-11-02/README.md).
-
-Actual Spark also completed the mock repair workflow, and five preregistered repeats
-of the same B5 mock each passed their held-out checks. These are software rehearsals;
-physical repair, physical B5 and another operator's completion remain the next tests.
+Spark is never told the fault, the assembly, hole positions, earlier results or the operator's reading before it is scored. Its full requests and responses are in each record.
 
 ## Why you can trust the numbers
 
-- **Predict first, measure second.** Model parameters are frozen before each scored
-  measurement. Physical repair requires the forecast to be committed and pushed to
-  GitHub before the operator acts; the run refuses the repair request if publication
-  fails. The B5 mock above also published first. Some mock rehearsals freeze locally
-  only, and their records and replays explicitly say so.
-- **Every attempt is kept.** Failed forecasts, aborted runs and USB dropouts stay in
-  `examples/` next to the successes ([first repair forecasts that missed](examples/hardware-d01-repair/2026-10-30/README.md)).
-- **Tamper-evident records.** Each run is a hash-chained JSONL log; the viewer refuses
-  a record whose chain or sidecar does not match.
-- **Spark never sees the answer.** Assembly details, hole positions and earlier
-  specimen results are withheld from model input.
+- **Forecast first, every time.** Training forecasts are hashed into the event log before the capture command is sent; the final forecast is committed and pushed to GitHub before the held-back inputs are measured; reading bands are pushed before the operator reads. The commits carry the time.
+- **Tamper-evident records.** Each run is an append-only JSONL log in which every event carries its SHA-256 and the previous one. The site shows the event behind every number.
+- **Sealed truth.** The operator's assembly record is hashed before the first measurement and opened only after the reading is scored. The site's red overlay was never model input.
+- **Scored by code.** Verdicts, survivors and reading scores are copied from the engine's events as written; the site never picks a verdict.
+- **Verify offline.** From a fresh clone, no packages, keys, network or hardware:
 
-## Try it without hardware
+```sh
+PYTHONPATH=src python3 -S -m benchmate verify examples/reading-cohort/2026-11-03/records/20261103T125924-bf8f64512b/diagnosis-faulted/20261103T130826-26d83af2df
+PYTHONPATH=src python3 -S -m benchmate.reading_terminal_pair verify examples/reading-cohort/2026-11-03/records/20261103T150223-18d6f08ac9
+PYTHONPATH=src python3 -S -m benchmate.reading_restored_sam_closeout verify examples/reading-restored-v2/2026-11-04/records/20261103T182550-4ea22cc3a0
+PYTHONPATH=src python3 -S -m benchmate.reading_wire_stage verify examples/reading-cohort/2026-11-03/records/20261104T021333-c80ef3617e
+PYTHONPATH=src python3 -S -m benchmate.reading_restored_after_photo_v5 verify examples/reading-cohort/2026-11-03/records/20261104T051005-fac3d07c86
+```
 
-Python 3.11+ and [`uv`](https://docs.astral.sh/uv/). ngspice 47+ for nonlinear work
-([pinned build](docs/evidence-index.md)).
+Outputs on 4 Nov 2026, on the public copies (one line each; `PASS` and exit 0):
+
+```
+case 01 fault child      PASS events=247 forecasts=4  measurements=5  order_checks=19 prediction_files=1 run_status=run_completed head_sha256=390f8d0c…
+case 04 whole pair       PASS events=607 forecasts=10 measurements=10 order_checks=45 prediction_files=3 run_status=run_completed head_sha256=d0e887cb…
+case 02 restored closeout PASS events=574 forecasts=10 measurements=12 order_checks=43 prediction_files=4 run_status=run_completed head_sha256=ad05d591…
+case 05 whole pair       PASS events=484 forecasts=8  measurements=9  order_checks=33 prediction_files=2 run_status=run_completed head_sha256=8fc8fe18…
+case 03 whole chain      PASS events=583 forecasts=4  measurements=5  order_checks=19 prediction_files=1 run_status=run_completed head_sha256=5c667bad…
+```
+
+What the verifier checks, and what it cannot (it proves internal integrity and recorded order, not the time of writing): [docs/2026-11-03-offline-verification.md](docs/2026-11-03-offline-verification.md). The order of the cases and the demo selection rule were registered before any official result ([policy](docs/2026-11-03-reading-cohort-policy.json)); the display rule for the site was written down on 4 Nov, after results, and is printed on the landing page.
+
+## Everything that went wrong
+
+The ledger keeps every attempt. None of these produced a wrong identification; they stopped, abstained or were corrected, and each is linked from its case report.
+
+| When | What | Cause, as recorded |
+|---|---|---|
+| 3 Nov, case 01, attempts F01–F03 | Stopped before a verdict: a pre-stimulus HOLD guard, an A4 reference guard, then a local request-size bound. | Bench guard and host transport ([F01](docs/2026-11-03-01-F01-guard-failure.md), [F02](docs/2026-11-03-01-F02-guard-failure.md), [F03](docs/2026-11-03-01-F03-transport-failure.md)); a bad ground-return wire was found and replaced, the guard was not relaxed. |
+| 3 Nov, case 01, first restored run | Acquisition failure, preserved; the restored rerun shown is the follow-up record. | [Record](docs/2026-11-03-reading-case01-restored-failure.md) |
+| 3 Nov, case 04, first physical HOLD | The preparatory HOLD failed its path checks before any experiment. | Operator reported the wrong diode cathode row, corrected ([record](docs/2026-11-04-case04-first-HOLD-failure.md)). |
+| 4 Nov, case 02, attempt 1 | Spark **abstained**: no explanation survived. | Operator wiring error, confirmed afterwards by photo (the 474 was across R1 instead of OUT–REF); attempt 2 is the replay ([record](docs/2026-11-04-case02-first-diagnosis-abstained.md), [review](docs/2026-11-04-case02-wiring-review-and-attempt2.md)). |
+| 4 Nov, case 02, photo stage | Spark, asked which body is C1, returned the string "null"; the validator stopped the pair. | Response-format mismatch on an honest "cannot tell"; the reading continued in a linked record ([record](docs/2026-11-04-case02-photo-binding-format-stop.md)). |
+| 4 Nov, case 03, photo stage | The pair stopped on a local KeyError while preparing Spark's body call. | Host adapter bug; no model was called; linked follow-up ([record](docs/2026-11-04-case03-photo-result.md)). |
+| 4 Nov, case 05, restored attempt 1 | Spark **abstained** on the restored board: the drawing's model missed the first 5 ms of both steps by 9.3 and 10.2 mV. | A limit of the channel-timing model; a frame-anchored model was qualified and published, then attempt 2 ran ([record](docs/2026-11-04-case05-restored-result.md), [attempt 2](docs/2026-11-04-case05-timing-attempt2-result.md)). |
+
+## What this is a prototype of
+
+The thing being tested is not a circuit. It is whether a model can do the basic move of experimental science on a real system: say what it expects before the measurement, be held to it, and keep going until one explanation is left. A circuit was the cheapest real system where that could be done honestly in one week: it comes with a drawing, a simulator anyone can run, an instrument that costs $40, and faults that can be planted and sealed.
+
+The loop needs six things and nothing more: a description of what was intended; a space of explanations the model may propose; a simulator that turns an explanation into a forecast; an instrument with a fixed menu; a person for what the instrument cannot do; a sealed truth to score against. None of the six is specific to electronics. What *is* specific to this bench, and would have to be qualified again anywhere else, is the 9 mV allowance, the experiment menu and the calibration. Not done here, stated so the scale of the step is clear: the same loop on a real PCB at first power-on (schematic and layout, SPICE, a bench supply and scope as the menu), on a thermal or mechanical rig (a CAD model, a finite-element solver, thermocouples and actuators), or on a lab experiment (candidate models of a phenomenon, the settings the apparatus allows).
+
+## Earlier development results (29 Oct – 2 Nov)
+
+Kept as development records, not counted in the five cases.
+
+- **First Spark-directed physical run (30 Oct):** on a 10 kΩ / 1 µF circuit with a planted capacitor fault, Spark recognised one trace cannot separate R from C, asked for a known load, kept the explanation that survived (C changed, 3.0 mV vs 32.5 mV) and passed a reserved sine at 3.04 mV. [Record](examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/README.md).
+- **Structure discovery on a simulated bench:** all five starting models failed; Spark wrote a netlist with a series resistor and a diode, its prediction was pushed before two unseen inputs, both matched at 1.7 mV. [Record](examples/b5-unloaded-spark/2026-10-30/20261030T133514-4ea9a8848e/README.md). The physical version became case 04.
+- **Preregistered synthetic evaluation:** with bench access Spark identified 24/24 in-family cases; without measurements 8/24; engine and fixed-plan baselines also reached 24/24, so engine ranking stays in the linear workflow and no LLM-superiority claim is made. Spark Open (Baseten) 21/24 with eight transport-related incompletes. [Comparisons](examples/overnight/2026-11-02/README.md).
+- **No-tool comparison:** asked the same question without instruments, all five replies opened with "nothing is wrong with the circuit" and advised re-measuring; the bench showed the capacitor had changed. A qualitative case, not an error rate. [Replies](examples/no-tool-spark/2026-10-30/20261030T134112-a9742f1b2e/README.md).
+
+## Try it
+
+The demo needs nothing: [bami-codes.github.io/BenchMate](https://bami-codes.github.io/BenchMate/). Click any number on a replay for the log event behind it; the report page of each case has the frozen hashes, the publication commits and the verifier output.
+
+To run the software locally (Python 3.11+, [`uv`](https://docs.astral.sh/uv/); ngspice 47+ for the netlist engine):
 
 ```sh
 uv sync --extra dev
 uv run pytest -q
-uv run benchmate view examples/hardware-spark-rc/2026-10-30/20261029T174402-d3eaa8e612/execution --output runs/demo/physical-d01.html
-uv run benchmate view examples/d01-repair-rehearsal/2026-11-01/final_success/20261101T003829-400778438d --output runs/demo/repair-rehearsal.html
 ```
 
-Open the HTML files: **Story** walks through the problem, Spark's reason, the operator
-request and the result; **Evidence** shows every check and the original report.
-No network or board is needed. `uv run benchmate watch <run-dir>` shows a run live.
-
-For schematic intake: `uv sync --extra vision`, then
-`uv run python scripts/known_design.py serve --demo` (API disabled by default).
-
-[Build your own bench](docs/build-your-own.md): parts (about ₩56,000 / $40 including
-spares), wiring, firmware and the first communication check.
+To rebuild the site's data from the records: `site/tools/extract_runs.py` (one mode per record layout, documented in `site/HANDOFF.md`). To build the bench: [docs/build-your-own.md](docs/build-your-own.md).
 
 ## Limits
 
-- Supported circuits are small passive RC fixtures plus a diode case; 0–5 V, low frequency.
-- Calibration is provisional. Results are incremental-response checks against a 9 mV
-  engineering allowance, not calibrated absolute voltages or confidence intervals.
-- These are development runs on known fixtures, not a blinded accuracy benchmark.
-  Repeatability across sessions and builders is not yet established.
-- The operator still changes wires by hand; Spark only requests changes.
-- The diode discovery result above is from a simulated bench until the physical run completes.
-
-Final evaluation scope: [included and deliberately excluded work](docs/final-evaluation-scope.md).
-
-Full history: [evidence index](docs/evidence-index.md) · [protocol commitments](docs/preregistration.md)
-· [physical experiment scope](docs/physical-agent.md)
+- Five small passive circuits plus a diode case, 0–5 V, low frequency, on one bench, by one operator. The cases were known to the developers; nothing here is a blind test or an accuracy rate.
+- Calibration is provisional: results are incremental-response checks against a 9 mV engineering allowance, not calibrated absolute voltages or confidence intervals. The multimeter readings are operator reports with a declared engineering allowance, not calibrated measurements.
+- A restored rerun's result is "no mismatch in the tests Spark chose": nearby value-change models also fit those tests, and the reports say so.
+- The operator still moves wires and reads parts by hand; Spark only asks.
+- Where a terminal fit cannot place a resistance (case 05), the reading settles a bounded pair of placements, not every physical possibility.
 
 ## Built during the hackathon
 
-The BenchMate firmware, engine, agent workflow, viewers and experiment records were
-built during the event, starting Oct 27, 2026 (see the commit history). Third-party
-dependencies and the bundled font retain their own credits and licenses. Development
-used Codex and Claude as coding assistants;
-Muse Spark is the runtime agent. Core dependencies: NumPy, SciPy, HTTPX, pySerial,
-ngspice, Arduino UNO R4 toolchain; Pillow for optional vision preprocessing. UI font:
-IBM Plex Sans (OFL, included). [MIT license](LICENSE).
+Everything in this repository was made between 27 October and 4 November 2026: the instrument firmware, the bench, the fit engine, the Spark tool loop, the reading and seal protocol, the photo stage, the site and the runs themselves. One person at the bench; Codex and Claude as coding agents; Muse Spark as the runtime agent. Third-party dependencies (NumPy, SciPy, HTTPX, pySerial, ngspice, the Arduino UNO R4 toolchain, Pillow, Playwright for the site checks) and the bundled fonts keep their own licenses. Forum cases are paraphrased with links to the original threads; no posts are quoted. Board photos are metadata-free derivatives; originals are never published. [MIT license](LICENSE).
+
+Full history: [evidence index](docs/evidence-index.md) · [site handoff and rules](site/HANDOFF.md) · [design notes](site/DESIGN.md).

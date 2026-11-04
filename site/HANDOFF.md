@@ -11,8 +11,9 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
 - Live site: https://bami-codes.github.io/BenchMate/ (deployed from `site/` to the gh-pages root;
   the older replay site lives under `/archive/`). Deployed by Codex until the five-case release; from
   then on the GitHub session deploys itself (see §7).
-- `site/index.html` + `assets/landing.js`: landing (hero scope, Drawn / Built tiles, replays, cases,
-  how a run works, who does what, scoreboard from `data/results.json`).
+- `site/index.html` + `assets/landing.js`: landing (claim, hero scope, Drawn / Built tiles, the scoreboard strip from
+  `data/results.json`, one block per case with its fault replay and restored rerun, development records, the bench
+  section, how a run works, who does what, built during the hackathon).
 - `site/run.html` + `assets/replay.js`: the replay (instrument shelf + lab notebook). `?run=<id>`,
   `?t=<seconds>`. The shelf collapses (toggle + auto on scroll, state in localStorage).
 - `site/case.html` + `assets/report.js`: the post-run report (dossier) per run.
@@ -33,6 +34,10 @@ under `site/` is ours. Deadline: submission target 4 Nov 22:00 KST, hard deadlin
   `tools/photos-case0N.json`. `case01-board-crop-full.png` / `case04-board-crop-full.png` are the clean
   hero/Built crops from the full-resolution renders; `case01-reading-evidence.png` is the DMM evidence image
   linked from the evidence popover only.
+- `assets/photos/bench-full.jpg` + `tools/photos-bench.json`: the whole-bench photo for "The bench" section (from
+  `examples/bench-photos/2026-11-04/full/render.png`, cropped, brightened uniformly, no metadata). The inline SVG signal-chain
+  diagram lives in `index.html`; its facts come from `docs/build-your-own.md` (DAC → LM358 follower → 1 kΩ → IN; OUT →
+  follower → ADC; buffered REF ≈ 1.63 V; 512 frames at 0.5 ms; 3 mV guard; 9 mV allowance; 9.99 kΩ load).
 - `tools/verify-case0N.json`: outputs of the keyless verifiers (run on the public copies), copied into the
   report's "Verify it yourself" box as written.
 - `tools/shots_all.js` (every counted run, both viewports, landing, all reports), `tools/shots*.js`,
@@ -138,7 +143,9 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
 
 ## 5. Remaining work (priority order)
 
-1. README (repo root): frame as "a diagnostic tool for the first power-on of real hardware";
+0. README: rewritten 4 Nov evening (five cases table, bench, Meta models, verifier outputs, the failure ledger, the
+   prototype-of framing, earlier development results). Screenshots for it live in `site/assets/readme/`.
+1. README (notes kept for reference): frame as "a diagnostic tool for the first power-on of real hardware";
    tagline "BenchMate's experiments did not exist until the model asked for them."; who does what
    among Meta models (Muse Spark vision reads the drawing and points at bodies; Muse Spark agent
    chooses experiments and proposes structure; SAM 3.1 segments the board); the five cases with one line
@@ -147,12 +154,14 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
    and the docs; the failure classification Codex wrote (failures were miswiring / contact / host bugs /
    a timing-model limit; the diagnosis never returned a wrong answer; the miswired case abstained, the
    05 restored attempt 1 abstained). Link the live site.
-2. Video (≤3:00): record the replay itself with Playwright/CDP screencast at 1920×1080 (see MuseCell's
-   `scripts/record_video_clips.py` for the approach); scenes: landing fold → case 01 replay (forecast
-   first, needles, reading, seal) → case 04 or 05 structure proposal → case 02 two readings → case 05 wire
-   path reading or case 03 → scoreboard → verify command output. No generated imagery, no music with
-   rights issues, English captions.
-3. Submission text (`docs/submission.md` is the old draft): theme fit (models meeting the real world),
+2. Video (≤3:00): `video/record_site.js` films the live site (Playwright recordVideo, 1920×1080) scene by scene;
+   `video/assemble.py` times the captions from the recorded cues (figures read from the run files), adds a quiet
+   synthesized bed and writes `video/out/benchmate-demo.mp4` + `.srt`. Scenes: landing → case 01 (forecast, needles,
+   held-back check, reading, seal) → case 04 (proposal) → case 05 (proposal, placements, wire-path reading, seal) →
+   case 02 (two bodies) → bench + prototype-of → verifier terminal → closing card. No generated imagery, no
+   third-party audio, English captions. Narration: optional, local Kokoro on the Mac (`video/README.md`); the
+   captions carry the story without it.
+3. Submission text: `docs/submission.md` rewritten 4 Nov evening (full and short versions; video link to fill in): theme fit (models meeting the real world),
    rubric (Impact 30 / Tooling 25 / Tech 20 / Demo 25), bonus "Best Agentic"; five cases; do not call it an
    education chatbot, dashboard or image analyzer.
 

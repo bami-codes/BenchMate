@@ -12,7 +12,8 @@ For each photo this writes, into assets/photos/:
 and merges the paths, crop box and provenance (source sha256, mask files, method) into tools/photos-caseNN.json.
 
 Framing rule: every photo was taken on the same fixed rig (phone vertical on a stand, mini board centred), so one window
-of the 1200×1600 frame, FRAME = [120, 380, 1080, 1100] (960×720, 4:3), is used for every case and state. Outline rule: a 3 px band just outside the mask, label-tape yellow, with a 1 px
+of the 1200×1600 frame, FRAME = [120, 380, 1080, 1100]
+BRIGHTEN = 1.15  # one uniform brightness lift for every board crop (the bench photos are dark); no colour or local edits (960×720, 4:3), is used for every case and state. Outline rule: a 3 px band just outside the mask, label-tape yellow, with a 1 px
 dark edge on both sides so it reads on the pale board. Masks are the native rasters (exact size, no resize).
 
   python3 tools/photo_derivatives.py            # write derivatives and photos-caseNN.json
@@ -20,7 +21,7 @@ dark edge on both sides so it reads on the pale board. Masks are the native rast
 """
 import argparse, hashlib, json, pathlib
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
 REPO = SITE.parent
@@ -29,6 +30,7 @@ YELLOW = (255, 221, 0)
 EDGE = (27, 31, 36)
 BAND, EDGE_W = 3, 1
 FRAME = [120, 380, 1080, 1100]
+BRIGHTEN = 1.15  # one uniform brightness lift for every board crop (the bench photos are dark); no colour or local edits
 
 RC = 'examples/reading-cohort/2026-11-03/records'
 C03 = f'{RC}/20261104T051005-fac3d07c86'
@@ -108,7 +110,8 @@ def load_native(native, object_id):
 
 
 def write_jpeg(img, path):
-    img.convert('RGB').save(path, 'JPEG', quality=92, optimize=True, progressive=True)  # no EXIF, no ICC, no metadata
+    img = ImageEnhance.Brightness(img.convert('RGB')).enhance(BRIGHTEN)
+    img.save(path, 'JPEG', quality=92, optimize=True, progressive=True)  # no EXIF, no ICC, no metadata
 
 
 def main():
@@ -122,7 +125,7 @@ def main():
         prov['width'], prov['height'] = 1200, 1600
         prov['method'] = ('tools/photo_derivatives.py: one framing rule (the same 960×720 window of the 1200×1600 frame, FRAME) and one outline rule '
                           f'({BAND} px band just outside each native SAM 3.1 mask, label-tape yellow {YELLOW}, {EDGE_W} px dark edge) for every case; '
-                          'outlines only for masks a record ties to a part or a candidate; pixels of the photo untouched; JPEG q92 without metadata')
+                          f'outlines only for masks a record ties to a part or a candidate; one uniform brightness lift ×{BRIGHTEN} on every crop, no colour or local edits; JPEG q92 without metadata')
         for state, cfg in states.items():
             if cfg.get('input'):
                 src = REPO / cfg['input']; img = Image.open(src).convert('RGB'); src_sha = sha(src)

@@ -1,4 +1,4 @@
-// Landing: the claim, the scope, then the cases. Everything shown is read from data/.
+// Landing: the claim, the scope, the numbers, then the five cases with their recorded runs. Everything shown is read from data/.
 (async () => {
   const { $, el, expName, fmtUSD, fmtDate, schematic, boardSVG, Scope, stepTraces, stepTime, verdictWords, REDUCED, ev } = BM;
   const [cases, index, results, policy] = await Promise.all([BM.loadCases(), BM.loadRuns(), BM.loadResults(), BM.json('data/official-run-policy.json').catch(() => null)]);
@@ -17,17 +17,36 @@
     const run = await BM.loadRun(first.id);
     const st = run.steps[0];
     const traces = stepTraces(st, { measuredProgress: REDUCED ? 1 : 0 });
-    scope.set(stepTime(st), traces, `Step 1 · ${st.label}`);
-    $('#cta-replay').href = `run.html?run=${run.id}`;
+    scope.set(stepTime(st), traces, st.label); // the settings only; 'Experiment 1' is said in the key strip
+    $('#cta-replay').href = `run.html?run=${run.id}&play=1`;
     const nom = (st.fit || []).find(f => f.id === 'nominal');
     const cls = run.classification?.public_label || run.classification?.label || (run.pilot ? 'Pilot run — not counted' : 'Counted run');
-    $('#hero-under').append(document.createTextNode(BM.heroLine(run) + ' '));
-    // one line: state · case · when · the drawing's miss (numbers are evidence targets)
+    // the scope, in plain words: what each line is (the keys sit on the scope itself; the mV/div HUD moves to the bottom)
+    $('#hero-scope').append(el('div', { class: 'plain', 'aria-label': 'What the lines are' },
+      el('b', {}, `Experiment ${st.n}`), el('span', { class: 'k fc' }, '– – forecast from the drawing'), el('span', { class: 'k out' }, '— output, measured'), el('span', { class: 'k in' }, '— input, measured')));
+    // one plain sentence: the symptom (never the cause: the seal is still closed here), then what Spark did, from the run
+    const kase0 = cases.cases.find(c => c.id === run.case);
+    const nSteps = run.steps.length, nScored = (run.verification?.scored || []).length, rd = run.reading;
+    const settled = rd?.group?.scored ? 'settled it with two multimeter readings' : rd?.scored ? 'settled it with one multimeter reading' : (run.outcome?.verdict === 'structure_supported' ? 'proposed a part the drawing does not show' : '');
+    $('#hero-under').append(el('span', { class: 'case' }, `Case ${run.case} · ${kase0.title}.`), ' ',
+      `Spark chose ${nSteps} experiment${nSteps === 1 ? '' : 's'}${nScored ? `, passed ${nScored === 2 ? 'two' : nScored} checks on inputs it had never seen` : ''}${settled ? ', and ' + settled : ''}. `,
+      el('a', { class: 'watch', href: `run.html?run=${run.id}&play=1` }, 'Watch how →'));
+    // one line of provenance under it: badge · run · when · the miss the scope shows
     const miss = nom ? (nom.decided_mV?.[0] ?? nom.miss_mV?.[0]) : null;
     $('#hero-caption').append(el('p', {},
-      el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls), ' · ',
-      `Case ${run.case}, ${run.label} · `, ev(el('span', { class: 'num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
-      miss != null ? [' · as drawn misses by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0] } }), nom.worst_region?.[0] ? ` in its worst region (allowance ${run.allowance_mV} mV)` : ` (allowance ${run.allowance_mV} mV)`] : null));
+      el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls),
+      el('span', { class: 'it' }, `Case ${run.case}, ${run.label}`), ev(el('span', { class: 'it num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
+      miss != null ? el('span', { class: 'it' }, 'The drawing’s forecast missed the board by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0], allowance_mV: run.allowance_mV } }), `; the allowance is ${run.allowance_mV} mV.`) : null));
+    // the bench cards: one real line each from this same run (never the part that was read: the seal is closed on this page)
+    try {
+      const exCase = `Case ${run.case}`;
+      $('#bench-ex-spark').append(el('b', {}, `${exCase}, experiment ${st.n}: `), `${st.label}.`, st.reason ? el('q', {}, st.reason) : null);
+      const samples = st.settings?.samples, per = st.settings?.period_us;
+      $('#bench-ex-ardu').append(el('b', {}, `${exCase}, experiment ${st.n}: `), samples ? `${samples} samples${per ? ` at ${per / 1000} ms` : ''}; ` : '', miss != null ? `the drawing’s forecast missed by ${Number(miss).toFixed(2)} mV, allowance ${run.allowance_mV} mV.` : '');
+      const loads = run.steps.map(x => x.load_ohm ? 'on' : 'off'); const moves = loads.slice(1).filter((v, i) => v !== loads[i]).length;
+      const bands = run.reading?.bands?.length || 0;
+      $('#bench-ex-oper').append(el('b', {}, `${exCase}: `), moves ? `moved the load jumper ${moves === 1 ? 'once' : moves === 2 ? 'twice' : moves + ' times'} between experiments` : 'no jumper move was asked for', bands ? `; after the experiments, read one part. Its allowed range under each explanation was frozen first.` : '.');
+    } catch (e) { /* the bench cards stay general */ }
     if (!REDUCED) {
       const meas = traces.filter(t => t.kind !== 'fc'); let t0 = performance.now();
       const loop = (now) => { const ph = ((now - t0) / 1000) % 6.5; const p = Math.min(1, ph / 3.2); for (const t of meas) t.progress = p; scope.draw(); requestAnimationFrame(loop); };
@@ -35,58 +54,58 @@
     }
     $('#hero-schem').append(await schematic(cases.cases.find(c => c.id === run.case).design));
     const kase = cases.cases.find(c => c.id === run.case);
-    if (run.photo?.image?.file) { const ph = run.photo; $('#hero-board').append(el('div', { class: 'photo' }, el('img', { src: ph.crop_full || ph.crop || ph.image.file, alt: 'Mini board photo after the diagnosis' }))); $('#hero-board-note').textContent = 'Photo of the mini board after the diagnosis, untouched.'; }
-    else if (kase.board) { $('#hero-board').append(boardSVG(kase.board, { crop: true })); $('#hero-board-note').textContent = `Diagram from the wiring record (${kase.board.record}); photo pending.`; }
+    if (run.photo?.image?.file) { const ph = run.photo; $('#hero-board').append(el('div', { class: 'photo' }, el('img', { src: ph.crop_full || ph.crop || ph.image.file, alt: 'Mini board photo after the diagnosis' }))); $('#hero-board-note').textContent = 'the mini board, photographed after the diagnosis'; }
+    else if (kase.board) { $('#hero-board').append(boardSVG(kase.board, { crop: true })); $('#hero-board-note').textContent = 'the mini board, from the wiring record'; }
   } else {
     $('#hero-schem').append(await schematic('design-01'));
-    if (c01?.board) { $('#hero-board').append(boardSVG(c01.board, { crop: true })); $('#hero-board-note').textContent = 'Diagram from the wiring record; photo pending.'; }
+    if (c01?.board) { $('#hero-board').append(boardSVG(c01.board, { crop: true })); $('#hero-board-note').textContent = 'the mini board, from the wiring record'; }
   }
-
-  // ---- replays
-  const rl = $('#replay-list');
-  if (!runs.length) rl.append(el('p', { class: 'muted' }, 'No recorded runs yet.'));
-  const ordered = anyCounted ? [...runs.filter(r => r.counted), ...runs.filter(r => !r.counted)] : runs;
-  let devHead = false;
-  for (const r of ordered) {
-    if (anyCounted && !r.counted && !devHead) { devHead = true; rl.append(el('h3', { class: 'group-head' }, 'Development records'), el('p', { class: 'small muted' }, 'Pilots and QA runs that shaped the bench. Not counted, kept in full.')); }
-    const c = cases.cases.find(x => x.id === r.case);
-    const outcome = r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one reading, bands frozen first, placed it; seal opened' : 'Spark proposed a part the drawing does not show; held-back checks passed; seal opened') : r.reading === 'group' ? 'one explanation left after the tests; two readings, bands frozen first, fixed which body; seal opened' : 'one explanation left after one reading; seal opened') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome;
-    rl.append(el('div', { class: 'case-row', style: 'grid-template-columns:40px minmax(0,1fr) auto' },
-      el('div', { class: 'n' }, r.case),
-      el('div', {}, el('h3', {}, c.title, ' ', el('span', { class: 'small muted' }, `· ${r.label}, ${fmtDate(r.started_utc)}`)),
-        el('p', { class: 'small muted' }, `${r.steps} experiments · ${r.spark_calls} Spark calls · ${fmtUSD(r.spark_cost)} est. · ${outcome}`)),
-      el('div', { class: 'acts' }, el('span', { class: 'badge ' + (r.counted ? 'live' : r.pilot ? 'pilot' : 'pending') }, r.class_label || (r.pilot ? 'Pilot run — not counted' : 'Counted run')),
-        el('a', { class: 'btn sm', href: `run.html?run=${r.id}` }, 'Replay'), el('a', { class: 'btn ghost sm', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'))));
-  }
-
-  // ---- cases: one verified forum line each, the preregistered order and selection rule
-  const cl = $('#case-list');
-  { const withRuns = cases.cases.filter(c => runs.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${cases.cases.length} cases, ${withRuns} with recorded runs.`; }
-  const slotsOf = id => (policy?.ordered_slots || []).filter(s => s.case_id === id);
-  for (const c of cases.cases) {
-    const rs = runs.filter(r => r.case === c.id);
-    const thumb = el('div', { class: 'thumb' }); thumb.append(await schematic(c.design));
-    const counted = rs.filter(r => r.counted);
-    const status = counted.length ? el('span', { class: 'badge live' }, `${counted.length} counted run${counted.length > 1 ? 's' : ''}`) : rs.length ? el('span', { class: 'badge pilot' }, 'Pilot run — not counted') : el('span', { class: 'badge pending' }, 'Not run yet');
-    const slots = slotsOf(c.id);
-    cl.append(el('div', { class: 'case-row' },
-      el('div', { class: 'n' }, c.id), thumb,
-      el('div', {}, el('h3', {}, c.title), el('p', {}, c.symptom || c.problem), el('p', { class: 'src' }, 'Source: ', el('a', { href: c.source.url, target: '_blank', rel: 'noopener' }, `${c.source.site}: ${c.source.title}`), c.source.date ? `, ${c.source.date.slice(0, 7)}` : ''),
-        slots.length ? el('p', { class: 'small faint' }, `Official slots: ${slots.map(s => { const done = rs.find(r => r.counted && r.state === s.state); return `${s.slot_id} (${s.state}, ${done ? 'completed' : s.status.replace(/_/g, ' ')})`; }).join(', ')}${c.id === policy?.selection?.structure_spotlight?.priority?.[0]?.slice(0, 2) ? ' · structure-proposal spotlight, first priority' : c.id === policy?.selection?.structure_spotlight?.priority?.[1]?.slice(0, 2) ? ' · structure-proposal spotlight, second priority' : ''}`) : null),
-      el('div', { class: 'acts' }, status, rs.length ? el('a', { class: 'btn sm', href: `run.html?run=${BM.defaultRun(runs, c.id).id}` }, 'Replay') : null, el('a', { class: 'btn ghost sm', href: `case.html?id=${c.id}` }, 'Report'))));
-  }
-  if (policy) {
-    const shown = cases.cases.map(c => c.id); const order = (policy.case_order || []).filter(id => shown.includes(id));
-    $('#policy').append(el('p', {}, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. Case 01 was known to the developers and is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`));
-  }
-
-  // ---- verify box (short)
-  $('#verify-short').append(el('h3', {}, 'Verify it yourself'), el('p', { class: 'small muted' }, 'Every run is an append-only event log; each event carries its sha256 and the previous one. On any replay, click a number to see its event. In the repository, ', el('code', {}, 'python -m benchmate verify <run folder>'), ' prints PASS or FAIL and the number of events checked: the full hash chain, the frozen-forecast hashes and the forecast → measurement order, including the physical CAPTURE order. It proves the record’s internal integrity and order, not when it was written. Details: docs/2026-11-03-offline-verification.md.'));
 
   // ---- scoreboard: hidden until official result files exist
   if (results && results.official_runs?.length) {
     $('#score').hidden = false;
-    $('#score-note').textContent = `${results.official_runs.length} official runs, scored by code against the sealed faults. Updated ${fmtDate(results.updated_utc)}.`;
+    $('#score-note').textContent = `${results.official_runs.length} official runs on the real bench, scored by code against the sealed faults. Updated ${fmtDate(results.updated_utc)}.`;
     for (const m of results.metrics) $('#score-grid').append(el('div', { class: 'k' }, el('b', {}, m.value ?? '—'), el('span', {}, m.label)));
+    $('#score-foot').textContent = 'Counts, not a rate: stopped, abstained and miswired attempts are in the public ledger and named on the reports. Costs are estimates at the published rates.';
   }
+
+  // ---- the cases: one row per case with its recorded runs (fault run, restored rerun), in case order
+  const cl = $('#case-list');
+  const counted = runs.filter(r => r.counted);
+  { const withRuns = cases.cases.filter(c => counted.some(r => r.case === c.id)).length; $('#cases-count').textContent = `${counted.length} official runs: a diagnosis on each faulted board, then the same procedure again after the fault was repaired. Spark was never told which fault was planted; the seal was opened only after its verdict.`; }
+  const cap1 = (t) => { if (!t) return t; t = t[0].toUpperCase() + t.slice(1); return /[.!?]$/.test(t) ? t : t + '.'; };
+  const outcomeLine = (r) => cap1(r.outcome === 'stopped' ? 'stopped by the reference guard' : r.display_caption ? r.display_caption : r.state === 'faulted' && r.survivors?.length === 1 ? (r.verdict === 'structure_supported' ? (r.reading === 'one' ? 'Spark proposed a part the drawing does not show; held-back checks passed; one multimeter reading, bands frozen first, placed it; the seal matched.' : 'Spark proposed a part the drawing does not show; held-back checks passed; the seal matched.') : r.reading === 'group' ? 'one explanation left after the tests; two multimeter readings, bands frozen first, fixed which body; the seal matched.' : 'one explanation left after one multimeter reading; the seal matched.') : r.verdict ? verdictWords({ verdict: r.verdict, survivors: r.survivors }, {}) : r.outcome);
+  const runLine = (r) => { const restored = r.state === 'restored'; return el('div', { class: 'run-line ' + (restored ? 'restored' : 'fault') },
+    el('div', { class: 'res' }, el('b', {}, restored ? 'Fixed, then rerun.' : 'Found it.'), ' ', outcomeLine(r)),
+    el('div', { class: 'act' },
+      el('a', { class: 'btn sm' + (restored ? ' ghost' : ''), href: `run.html?run=${r.id}&play=1` }, restored ? 'Watch the rerun' : 'Watch the diagnosis'),
+      el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'),
+      el('span', { class: 'small meta' }, `${r.steps} experiments · ${fmtUSD(r.spark_cost)}`))); };
+  const monthYear = (c) => { if (c.source.date) { const d = new Date(c.source.date + 'T00:00:00Z'); return d.toLocaleString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } return (c.source.date_label || '').replace(/\s*\(.*\)\s*$/, ''); };
+  for (const c of cases.cases) {
+    const rs = counted.filter(r => r.case === c.id).sort((a, b) => a.started_utc < b.started_utc ? -1 : 1);
+    const thumb = el('div', { class: 'thumb' }); thumb.append(await schematic(c.design));
+    cl.append(el('div', { class: 'case-row case-block' },
+      el('div', { class: 'n' }, c.id), thumb,
+      el('div', {}, el('h3', {}, c.title), el('p', {}, c.symptom || c.problem), el('p', { class: 'src' }, 'Source: ', el('a', { href: c.source.url, target: '_blank', rel: 'noopener' }, `${c.source.site} · ${c.source.title}`), monthYear(c) ? ` · ${monthYear(c)}` : ''),
+        el('div', { class: 'runs' }, ...rs.map(runLine)))));
+  }
+  // development records: pilots and QA runs, not counted, kept in full
+  const dev = runs.filter(r => !r.counted);
+  if (anyCounted && dev.length) {
+    const box = $('#dev-records');
+    box.append(el('h3', { class: 'group-head' }, 'Development records'), el('p', { class: 'small muted' }, 'Pilots that shaped the bench before the pipeline was frozen. Not counted, kept in full.'));
+    for (const r of dev) { const c = cases.cases.find(x => x.id === r.case);
+      box.append(el('div', { class: 'run-line dev' }, el('a', { class: 'btn ghost sm', href: `run.html?run=${r.id}` }, 'Replay'), el('span', { class: 'small' }, el('b', {}, `Case ${r.case} · ${r.label}`), ` · ${fmtDate(r.started_utc)} · ${r.steps} experiments · ${r.spark_calls} Spark calls · ${fmtUSD(r.spark_cost)} est.`, el('span', { class: 'muted' }, ` — ${outcomeLine(r)}`)), el('span', { class: 'badge pilot' }, r.class_label || 'Pilot run — not counted'), el('a', { class: 'small rep', href: `case.html?id=${r.case}&run=${r.id}` }, 'Report'))); }
+  }
+  if (policy) {
+    const shown = cases.cases.map(c => c.id); const order = (policy.case_order || []).filter(id => shown.includes(id));
+    $('#policy').append(el('details', { class: 'small muted' }, el('summary', {}, 'Registration and display rules'), el('p', { style: 'margin-top:6px' }, `The order of the cases and the demo selection rule were registered before any official result (${policy.cohort_plan_id}, ${policy.created_local_date}); the cases ran ${order.join(' → ')}, each a fault run then a restored rerun. ${policy.display_rule_2026_11_04 ? policy.display_rule_2026_11_04.text + ' ' : `each case page shows the first started official attempt for that state, whatever its outcome. ${policy.selection_rule ? policy.selection_rule + '. ' : ''}`}Where a restored attempt reached a verdict other than consistency, the counted later attempt is shown and the earlier one is named on the report. The cases were known to the developers; this is not a blind test. Runs made while the pipeline was still being built are development records and are never counted.`)));
+  }
+
+  // ---- verify box (short)
+  $('#verify-short').append(el('h3', {}, el('span', { class: 'n' }, '✓'), 'Verify it yourself'),
+    el('p', {}, 'Every run is an append-only log; each event carries its hash and the previous one. One command re-checks any run offline and prints PASS or FAIL:'),
+    el('pre', { class: 'cmd' }, 'python -m benchmate verify <run folder>'),
+    el('p', { class: 'fine' }, 'It checks the hash chain, the frozen-forecast hashes and the forecast → measurement order. It proves integrity and order, not when it was written; the forecast commits on GitHub carry the time. ', el('a', { href: 'https://github.com/bami-codes/BenchMate/blob/main/docs/2026-11-03-offline-verification.md' }, 'Details'), '.'));
 })();

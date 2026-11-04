@@ -33,5 +33,6 @@ video/raw/
 video/out/
 video/frames/
 video/audio/
+video/captions/
 video/data/*.png
 video/data/*.jpg
