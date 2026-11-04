@@ -59,29 +59,46 @@
 <section class="section" id="bench">
   <div class="paper">
     <h2>The bench</h2>
-    <p class="lede">One Arduino, two op-amp followers, a reference, a mini board with the circuit under test. About $40. The model never touches it: it asks, the operator moves one jumper, the Arduino measures.</p>
+    <p class="lede">A $40 bench: one Arduino, a small instrument board, and the mini board that holds the circuit from the drawing plus one sealed fault. The model never touches it. It asks for an experiment; the Arduino runs it and records the answer; a person steps in only when asked, to move one jumper or read one part with a multimeter.</p>
     <div class="bench-grid">
       <figure class="bench-photo">
-        <img src="assets/photos/bench-full.jpg" alt="The whole bench from above: an Arduino UNO R4 Minima at the top right, the instrument breadboard with two LM358 followers across the middle, and the mini board under test at the bottom, all on a cutting mat" loading="lazy">
-        <figcaption class="small muted">The whole bench, photographed from above. Arduino UNO R4 Minima (top right), the instrument board (middle), the mini board under test (bottom). Brightened uniformly for the page; nothing else edited (<code>tools/photos-bench.json</code>).</figcaption>
+        <div class="pinbox">
+          <img src="assets/photos/bench-full.jpg" alt="The whole bench from above: an Arduino UNO R4 Minima at the top right, the instrument breadboard with two LM358 followers across the middle, and the mini board under test at the bottom, all on a cutting mat" loading="lazy">
+          <span class="pin" style="--x:68%;--y:30.5%" aria-hidden="true">1</span>
+          <span class="pin" style="--x:92%;--y:56%" aria-hidden="true">2</span>
+          <span class="pin" style="--x:38%;--y:91%" aria-hidden="true">3</span>
+        </div>
+        <figcaption>
+          <ol class="pinkey" aria-label="What is in the photo">
+            <li><i>1</i><span><b>Arduino UNO R4</b> runs each experiment and records the answer.</span></li>
+            <li><i>2</i><span><b>Instrument board</b> keeps the signal clean on the way in and out, and holds the one jumper the operator moves.</span></li>
+            <li><i>3</i><span><b>Mini board under test</b> the circuit the drawing shows, plus one sealed fault.</span></li>
+          </ol>
+          <p class="small muted note">Photographed from above. Brightened uniformly for the page; nothing else edited (<code>tools/photos-bench.json</code>).</p>
+        </figcaption>
       </figure>
       <div class="bench-side">
-        <div class="bench-diagram" aria-label="Signal chain of the bench">
-          <svg viewBox="0 0 760 300" role="img" aria-label="Signal chain: Muse Spark chooses; the engine forecasts; the Arduino drives IN through a follower and a 1 kΩ resistor, the mini board's OUT comes back through a follower to the ADC, REF is a buffered 1.63 V; the operator moves one jumper and takes one multimeter reading when asked.">
-            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#4b535a"/></marker></defs>
-            <g font-family="Archivo Narrow, Arial, sans-serif" font-size="13" fill="#171b1e">
-              <rect x="14" y="18" width="150" height="54" rx="6" fill="#efe8ff" stroke="#7a4fd6" stroke-width="1.5"/>
-              <text x="89" y="40" text-anchor="middle" font-weight="600">Muse Spark 1.3</text><text x="89" y="58" text-anchor="middle" font-size="12" fill="#4b535a">chooses the experiment</text>
-              <rect x="196" y="18" width="150" height="54" rx="6" fill="#f0f0ea" stroke="#171b1e" stroke-width="1.5"/>
-              <text x="271" y="40" text-anchor="middle" font-weight="600">Fit engine · ngspice</text><text x="271" y="58" text-anchor="middle" font-size="12" fill="#4b535a">forecast, hash, push</text>
-              <rect x="378" y="18" width="150" height="54" rx="6" fill="#e3ecf7" stroke="#2b6bdc" stroke-width="1.5"/>
-              <text x="453" y="40" text-anchor="middle" font-weight="600">Arduino UNO R4</text><text x="453" y="58" text-anchor="middle" font-size="12" fill="#4b535a">drives IN · records IN, OUT, REF</text>
-              <rect x="560" y="18" width="186" height="54" rx="6" fill="#fff6d6" stroke="#c9a227" stroke-width="1.5"/>
-              <text x="653" y="40" text-anchor="middle" font-weight="600">Operator</text><text x="653" y="58" text-anchor="middle" font-size="12" fill="#4b535a">one jumper, one reading, when asked</text>
-              <line x1="164" y1="45" x2="196" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
-              <line x1="346" y1="45" x2="378" y2="45" stroke="#4b535a" stroke-width="1.5" marker-end="url(#ar)"/>
-              <line x1="528" y1="45" x2="560" y2="45" stroke="#4b535a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)"/>
-              <!-- analogue chain -->
+        <div>
+          <h3 class="sub">Who does what</h3>
+          <ol class="roles">
+            <li class="spark"><b>Muse Spark</b><span>asks for the next experiment, and says why.</span><em class="ex" id="bench-ex-spark"></em></li>
+            <li class="ardu"><b>Arduino</b><span>runs it, and records the input, the output and the bench's own reference.</span><em class="ex" id="bench-ex-ardu"></em></li>
+            <li class="oper"><b>Operator <small>when asked</small></b><span>moves one jumper, or reads one part with a multimeter. Never tells the model the fault.</span><em class="ex" id="bench-ex-oper"></em></li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="sub">The bench's own rules</h3>
+          <ul class="brules">
+            <li><b>A fixed menu.</b> Steps and sines, with or without a load. Spark chooses from it; it cannot invent a new instrument.</li>
+            <li><b>Forecast before measuring.</b> Every forecast is simulated and hashed before the bench moves.</li>
+            <li><b>It checks itself.</b> The bench watches its own reference on every capture and stops the run if it drifts.</li>
+          </ul>
+        </div>
+        <details class="bench-eng">
+          <summary>For engineers: signal chain and numbers</summary>
+          <div class="bench-diagram" aria-label="Signal chain of the bench">
+            <svg viewBox="0 104 760 196" role="img" aria-label="Signal chain: the Arduino DAC drives IN through an LM358 follower and a 1 kΩ resistor; the mini board's OUT comes back through a follower to the 14-bit ADC; REF is a buffered 1.63 V; a 9.99 kΩ load is connected on request.">
+              <g font-family="Archivo Narrow, Arial, sans-serif" font-size="13" fill="#171b1e">
               <text x="14" y="118" font-size="12" fill="#4b535a" font-weight="600">Analogue chain, 0–5 V, USB power only</text>
               <rect x="14" y="132" width="78" height="40" rx="5" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="53" y="151" text-anchor="middle" font-weight="600">DAC</text><text x="53" y="165" text-anchor="middle" font-size="11" fill="#4b535a">step or sine</text>
               <polygon points="112,134 112,170 146,152" fill="#fff" stroke="#171b1e" stroke-width="1.5"/><text x="129" y="188" text-anchor="middle" font-size="11" fill="#4b535a">LM358</text>
@@ -103,10 +120,10 @@
               <text x="120" y="260" font-size="11.5" fill="#4b535a">the bench watches its own reference on every capture and stops the run if it drifts more than 3 mV</text>
               <rect x="470" y="196" width="118" height="20" rx="4" fill="#fff" stroke="#8b949b" stroke-width="1.2" stroke-dasharray="4 3"/><text x="529" y="210" text-anchor="middle" font-size="11" fill="#4b535a">9.99 kΩ load, on request</text>
               <text x="14" y="290" font-size="11.5" fill="#4b535a">Every explanation is a circuit model; the engine simulates it with the measured IN and forecasts OUT. A miss above 9 mV, whole step or any region, rules it out.</text>
-            </g>
-          </svg>
-        </div>
-        <dl class="kv small bench-kv">
+              </g>
+            </svg>
+          </div>
+          <dl class="kv small bench-kv">
           <dt>Source</dt><dd>UNO R4 DAC → LM358 follower → 1 kΩ. Steps ±0.2 / ±0.5 V, sines 1–5 Hz, from a fixed menu.</dd>
           <dt>Recorder</dt><dd>14-bit ADC, 512 frames at 0.5 ms: IN, buffered OUT, REF. Captures are bound to a boot id.</dd>
           <dt>Reference</dt><dd>Buffered 1.63 V, not ground. Drift above 3 mV on any capture stops the run.</dd>
@@ -114,6 +131,7 @@
           <dt>Operator</dt><dd>Moves the 9.99 kΩ load jumper and reads one part, only when Spark asks. Never tells the model the fault.</dd>
           <dt>Cost</dt><dd>About ₩56,000 ($40) of parts, plus a multimeter. <a href="https://github.com/bami-codes/BenchMate/blob/main/docs/build-your-own.md">Build notes</a>.</dd>
         </dl>
+        </details>
       </div>
     </div>
   </div>

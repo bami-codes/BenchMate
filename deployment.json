@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "e5e271a7b41ef065fb2798644fdf444f6a25eaff",
-  "source_site_tree": "99d7b964ce3e00dc25d1dfad65bddca2619f3058",
-  "previous_gh_pages_commit": "75f28bec57b87c38cc16488e3aebac2ac4596adc",
+  "source_main_commit": "cda2de7d93960e57dc59c096012022b4f044db16",
+  "source_site_tree": "166a89e79de746bc62ac06355373a869a15a8f43",
+  "previous_gh_pages_commit": "58ef104ba81280e5ee8a9bf952aa9717b93a47d4",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Case blocks read the result first; one Watch button per run; the per-case badge becomes one sentence in the lede.",
+  "change": "The bench: labelled photo, who-does-what cards with one real line each from the Case 01 run, the bench's rules; signal chain and numbers folded for engineers.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports",
+    "tool": "shots_all.js: 20/20 replays to the verdict at 1440 and 390, landing and reports; bench checked at 1440/1024/900/768/390",
     "console_errors": 0,
     "horizontal_overflow": 0
   }

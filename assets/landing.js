@@ -37,6 +37,16 @@
       el('span', { class: 'badge ' + (run.counted ? 'live' : 'pilot') }, cls),
       el('span', { class: 'it' }, `Case ${run.case}, ${run.label}`), ev(el('span', { class: 'it num' }, fmtDate(run.started_utc)), run.timeline?.[0]?.ev, { run: run.id, what: 'run start' }),
       miss != null ? el('span', { class: 'it' }, 'The drawing’s forecast missed the board by ', ev(el('span', { class: 'num' }, `${Number(miss).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: 'miss of As drawn on step 1', fields: { decided_by: nom.worst_region?.[0] ? `worst region ${nom.worst_region[0]}` : 'whole step', whole_step_RMS_mV: nom.miss_mV?.[0], regions: nom.regions?.[0], allowance_mV: run.allowance_mV } }), `; the allowance is ${run.allowance_mV} mV.`) : null));
+    // the bench cards: one real line each from this same run (never the part that was read: the seal is closed on this page)
+    try {
+      const exCase = `Case ${run.case}`;
+      $('#bench-ex-spark').append(el('b', {}, `${exCase}, experiment ${st.n}: `), `${st.label}.`, st.reason ? el('q', {}, st.reason) : null);
+      const samples = st.settings?.samples, per = st.settings?.period_us;
+      $('#bench-ex-ardu').append(el('b', {}, `${exCase}, experiment ${st.n}: `), samples ? `${samples} samples${per ? ` at ${per / 1000} ms` : ''}; ` : '', miss != null ? `the drawing’s forecast missed by ${Number(miss).toFixed(2)} mV, allowance ${run.allowance_mV} mV.` : '');
+      const loads = run.steps.map(x => x.load_ohm ? 'on' : 'off'); const moves = loads.slice(1).filter((v, i) => v !== loads[i]).length;
+      const bands = run.reading?.bands?.length || 0;
+      $('#bench-ex-oper').append(el('b', {}, `${exCase}: `), moves ? `moved the load jumper ${moves === 1 ? 'once' : moves === 2 ? 'twice' : moves + ' times'} between experiments` : 'no jumper move was asked for', bands ? `; after the experiments, read one part. Its allowed range under each explanation was frozen first.` : '.');
+    } catch (e) { /* the bench cards stay general */ }
     if (!REDUCED) {
       const meas = traces.filter(t => t.kind !== 'fc'); let t0 = performance.now();
       const loop = (now) => { const ph = ((now - t0) / 1000) % 6.5; const p = Math.min(1, ph / 3.2); for (const t of meas) t.progress = p; scope.draw(); requestAnimationFrame(loop); };
