@@ -168,9 +168,12 @@ counted as a success or a failure and does not appear on the site (`docs/2026-11
 ## 6. Known gaps / things not to claim
 
 - Spark call durations for some selection/binding calls are not in the parent logs (cost/tokens only).
-- Case 04's schematic image shows R2 22 kΩ; the intended R2 was publicly amended to 20 kΩ before
-  measurement (the note is on the site; the amended drawing `design-04-r2-20k` exists under
-  `examples/netlist-diagnosis/designs/2026-11-02/`).
+- Case 04: an earlier draft of the drawing said R2 22 kΩ; it was publicly amended to the available 20 kΩ part before
+  any measurement. The counted pair (`20261103T150223-18d6f08ac9`) read the amended image (intake
+  `20261103T144919-80c4654879`, transcription 20 kΩ), so `assets/schem/design-04.svg` shows 20 kΩ, the same drawing as
+  `examples/netlist-diagnosis/designs/2026-11-03-stock/design-04.svg`; the 22 kΩ draft is kept as
+  `assets/schem/design-04-draft-22k.svg` (not referenced by any run). The amendment note on the site comes from
+  `tools/amendment-case04.json`; the extractor refuses it unless the intake transcription matches its `image_value`.
 - Case 02's Spark candidate selection was a post-hoc photo-stage reprocessing (4 Nov) and is
   labelled so on the site.
 - Case 05: the restored rerun shown is attempt 2 on the frame-anchored timing model (qualified and

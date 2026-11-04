@@ -152,3 +152,24 @@ Left as they were, on purpose: the second Play button in the idle scope (removed
 - The judge reviewer had to hunt for the two facts a verdict is made of. The verdict card on the replay and the report now carries both: `SPARK'S ANSWER` (the engine's verdict in words) over `WHAT WAS PLANTED · OPENED ONLY NOW` (the case's sealed fault in words), with the honest footnote: the verdict is copied from the engine's report, the seal's digest is checked by code against the one committed before the first measurement, and Spark never saw the lower line. The site still does not print a `match` of its own: the engine records the digest check, not a comparison of the answer with the truth, and we do not claim one it did not make. The card below, formerly `Hidden fault`, is `The sealed record, in detail` and no longer repeats the sentence.
 - The hero sub is three clauses on three lines from 900 px up (`reads … and chooses its own experiments on the real board.` / `It forecasts every result before the bench measures it,` / `and it is scored by code against a sealed answer.`), free-flowing at 62 ch below that.
 - The hero sub is two lines, no pronoun chain: `Meta's Muse Spark reads the schematic and chooses its own experiments on a real board.` / `Every forecast comes before the measurement; every verdict is scored by code against a sealed answer.`
+
+### Round 4q — three numbers kept apart, the survivor named, the 20 kΩ drawing (4 Nov, late)
+
+- A reviewer (Codex) found three things said as if they were one. The dashed trace is the forecast for the commanded input,
+  frozen and hashed before the capture. The needles and the per-step tables during the experiments are the fit engine's
+  residual after the candidates were refitted to that measurement (the drawing's model has nothing to refit), worst region.
+  The held-back scores are the frozen model driven by the measured IN, no refit. Every label now says which: block titles
+  `Fit engine · step n · after refitting to this measurement`, column `Residual after refit`, table head
+  `Frozen model · measured IN`, meter readouts `step n · refit · worst region` / `check n · frozen · worst region` (tooltips
+  spell it out), the meter caption, the report's one-sentence lede before the experiments, the landing's hero caption
+  (`The fit engine checked the drawing's model against this measurement: off by …`). No number or value shown changed.
+- `BM.words.forecast` named a single surviving explanation "the drawing". It now names the survivor (`the forecast of the one
+  explanation left, R1 changed`), and says "the drawing's forecast" only when the survivor is the drawing.
+- Case 04's drawing on the site showed R2 22 kΩ while the counted run's intake image and transcription say 20 kΩ.
+  `assets/schem/design-04.svg` is now the 20 kΩ drawing (same geometry); the 22 kΩ draft is `design-04-draft-22k.svg`.
+  The amendment text (`tools/amendment-case04.json`) tells it as history and names the intake record; the extractor checks
+  the claim against the transcription before stamping it. Only `design_amendment` changed in the two case 04 run files.
+- Replay: a quiet `Jump to` row under the transport, plus ticks on the scrubber, for the moments a recording has
+  (all explanations failed · new structure proposed · held-back checks · seal opened). Dotted-underlined text in the
+  transport's own white, no new colour; hidden on phones.
+

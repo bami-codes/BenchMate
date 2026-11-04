@@ -24,19 +24,20 @@
     </div>
     <div class="meters">
       <p class="meters-head" id="meters-head"></p>
-      <div class="meter-row" id="meters" aria-live="polite" aria-label="Explanations and their misses"></div>
+      <div class="meter-row" id="meters" aria-live="polite" aria-label="Explanations on trial: the fit engine’s worst-region residual per explanation (refitted during the experiments, frozen for the held-back checks)"></div>
       <div class="meter-chips" id="meter-chips" aria-hidden="true"></div>
     </div>
     <div class="transport">
       <span class="small" id="shelf-title" style="opacity:.9"></span>
       <button class="btn sm" id="play" aria-pressed="false">Play</button>
       <button class="btn ghost onmat sm" id="speed" aria-label="Replay speed">4×</button>
-      <div class="scrub"><input type="range" id="scrub" min="0" max="1" step="0.1" value="0" aria-label="Replay position"><span class="clock num" id="clock">0:00</span></div>
+      <div class="scrub"><input type="range" id="scrub" min="0" max="1" step="0.1" value="0" aria-label="Replay position" list="jump-ticks"><datalist id="jump-ticks"></datalist><span class="clock num" id="clock">0:00</span></div>
       <span class="seal" id="seal">Hidden fault sealed</span>
       <div class="counters"><span><b class="num" id="c-exp">0</b> experiments</span><span><b class="num" id="c-calls">0</b> Spark calls</span><span><b class="num" id="c-cost">$0</b> est.</span></div>
       <a class="btn ghost onmat sm" id="report-link" href="#">Report</a>
       <button class="btn ghost onmat sm shelf-toggle" id="shelf-toggle" aria-expanded="true" aria-controls="meters scope">Compact player ▴</button>
     </div>
+    <div class="jumps" id="jumps" hidden aria-label="Key moments in this recording"></div>
   </div>
 </div>
 

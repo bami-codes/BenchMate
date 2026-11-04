@@ -25,7 +25,8 @@
   const modelName = String(run.model || '').replace(/^muse-spark-(\S+)$/, 'Muse Spark $1');
   const whatRun = run.pilot ? 'Pilot run' : run.state === 'restored' || /restored/i.test(run.label || '') ? 'Rerun after the fault was repaired' : 'Diagnosis on the faulted board';
   $('#replay-of').textContent = `${whatRun}, recorded ${fmtDate(run.started_utc)}${modelName ? ' · ' + modelName : ''}`;
-  $('#meters-head').textContent = `Explanations on trial · how far each one’s forecast misses the board; red past the ${run.allowance_mV ?? 9} mV allowance`;
+  // the needles show the fit engine's worst-region residual: during the experiments after refitting to each measurement ("refit"), in the check the frozen model driven by the measured IN ("frozen"); neither is the dashed forecast's miss
+  $('#meters-head').textContent = `Explanations on trial · each needle is the fit engine’s worst-region residual: refitted to each measurement during the experiments, frozen for the held-back checks; red past the ${run.allowance_mV ?? 9} mV allowance`;
   const cls = run.classification || { label: run.pilot ? 'Pilot run — not counted' : 'Counted run' };
   $('#badge').replaceWith(el('span', { class: 'badge ' + (run.counted ? 'live' : run.pilot ? 'pilot' : 'pending'), id: 'badge', title: (cls.label || '') + (cls.basis ? ' — ' + cls.basis : '') }, cls.public_label || cls.label));
   $('#report-link').href = `case.html?id=${run.case}&run=${run.id}`;
@@ -36,8 +37,9 @@
   const showRailDrawing = () => { railDrawing.hidden = false; };
   idle.append(el('div', { class: 'frame-in' }, await schematic(kase.design)),
     el('p', {}, 'The drawing Spark read. Press Play below: every forecast is drawn before the bench measures.'));
-  if (run.design_amendment) idle.append(el('p', { class: 'small muted amend' }, run.design_amendment.text));
-  if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, run.design_amendment.text));
+  const amendText = run.design_amendment ? `${run.design_amendment.text}${run.design_amendment.intake_run ? ` Intake record ${run.design_amendment.intake_run}.` : ''}` : '';
+  if (run.design_amendment) idle.append(el('p', { class: 'small muted amend' }, amendText));
+  if (run.design_amendment) $('#rail-schem-note').append(' ', el('span', { class: 'amend' }, amendText));
   const metersBox = $('#meters');
   const meters = {}; let meterOrder = [];
   const ensureMeter = (id, value) => {
@@ -94,6 +96,14 @@
   const setPlaying = p => { playing = p; playBtn.textContent = p ? 'Pause' : (pos >= END ? 'Replay again' : 'Play'); playBtn.setAttribute('aria-pressed', String(p)); if (p) { idle.classList.add('off'); lastWall = performance.now(); raf = requestAnimationFrame(tick); } };
   playBtn.addEventListener('click', () => { if (pos >= END) seek(0); setPlaying(!playing); });
   scrub.addEventListener('input', () => { seek(Number(scrub.value)); if (Number(scrub.value) > 0) idle.classList.add('off'); });
+  // key moments, when the recording has them: the same four turns the notebook blocks are named after; a jump seeks just before the block and plays on
+  { const firstT = (pred) => tl.find(pred)?.t_play;
+    const moments = [['All explanations failed', firstT(e => e.kind === 'fit_result' && e.all_inadequate)], ['New structure proposed', firstT(e => e.kind === 'structure_proposed')],
+      ['Held-back checks', firstT(e => (e.kind === 'capture' && e.verification) || e.kind === 'verification_observed')], ['Seal opened', firstT(e => e.kind === 'seal_opened' || e.kind === 'report')]].filter(([, t]) => t != null);
+    const row = $('#jumps'), ticks = $('#jump-ticks');
+    if (moments.length) { row.hidden = false; row.append(el('span', { class: 'lab' }, 'Jump to'));
+      for (const [name, t] of moments) { ticks.append(el('option', { value: t.toFixed(1), label: name }));
+        row.append(el('button', { type: 'button', title: `Jump to ${fmtClock(t)}: ${name}`, onclick: () => { seek(Math.max(0, t - 0.4)); idle.classList.add('off'); if (!playing) setPlaying(true); } }, name, el('span', { class: 'num' }, fmtClock(t)))); } } }
 
   function tick(now) {
     if (!playing) return;
@@ -190,12 +200,12 @@
       for (const r of e.results) if (!r.adequate && state.dead[r.id] == null) state.dead[r.id] = e.step;
       const rows = e.results.map(r => { const out = !r.adequate; const bad = r.passed_this_step === false; return el('tr', { 'data-id': r.id, class: out ? 'out' : '' },
         el('td', {}, expName(r.id)), el('td', { class: 'muted' }, r.value != null ? ['fitted so far ', num(BM.fmtFit(r.kind, r.value, r.at_bound), e.ev, `fitted value of ${expName(r.id)} on step ${e.step}`, { explanation: r.id, raw_value: r.value, kind: r.kind, parameter_at_bound: r.at_bound, fit_range: BM.FIT_BOUNDS[r.kind] })] : 'drawn values'),
-        el('td', {}, num(fmtMiss(r.decided_mV ?? r.miss_mV), st.fit_ev, `miss of ${expName(r.id)} on step ${e.step}`, { explanation: r.id, step: e.step, decided_by: r.worst_region ? `worst region ${r.worst_region}` : 'whole step', decided_mV: r.decided_mV, whole_step_RMS_mV: r.miss_mV, regions: r.regions, passed: r.passed_this_step, status: r.status }), r.worst_region ? el('small', { class: 'muted' }, ` worst region: ${r.worst_region.replace(/_/g, ' ')}`) : null),
+        el('td', {}, num(fmtMiss(r.decided_mV ?? r.miss_mV), st.fit_ev, `residual of ${expName(r.id)} after refitting to step ${e.step}`, { explanation: r.id, step: e.step, decided_by: r.worst_region ? `worst region ${r.worst_region}` : 'whole step', decided_mV: r.decided_mV, whole_step_RMS_mV: r.miss_mV, regions: r.regions, passed: r.passed_this_step, status: r.status }), r.worst_region ? el('small', { class: 'muted' }, ` worst region: ${r.worst_region.replace(/_/g, ' ')}`) : null),
         el('td', {}, out ? el('span', { class: 'tape red' }, `Ruled out after step ${state.dead[r.id]}`) : el('span', { class: 'muted' }, 'still fits'))); });
       const fresh = e.results.filter(r => !meters[r.id]).map(r => expName(r.id));
-      block(e, 'fit', `Fit engine · ngspice, step ${e.step}`, words.fit({ ...e, already_out: e.results.filter(r => state.dead[r.id] != null && state.dead[r.id] < e.step).map(r => r.id) }, allow),
-        el('div', { class: 'tscroll' }, el('table', { class: 'fit-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), el('th', {}, 'Value'), el('th', {}, 'Miss'), el('th', {}, ''))), el('tbody', {}, ...rows))),
-        el('p', { class: 'small muted' }, `${state.said.miss ? '' : (state.said.miss = true, `Miss is the RMS difference between the forecast and the measured OUT; the frozen ${allow} mV allowance applies to the whole step and to every region of it, so the number shown is the worst of those.`)}${fresh.length ? ` New from this measurement: ${fresh.join(', ')} (fitted to it, so not forecast for it).` : ''}${e.sim_calls ? ` ${e.sim_calls} ngspice runs.` : ''}`.trim()));
+      block(e, 'fit', `Fit engine · step ${e.step} · after refitting to this measurement`, words.fit({ ...e, already_out: e.results.filter(r => state.dead[r.id] != null && state.dead[r.id] < e.step).map(r => r.id) }, allow),
+        el('div', { class: 'tscroll' }, el('table', { class: 'fit-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), el('th', {}, 'Value'), el('th', {}, 'Residual after refit'), el('th', {}, ''))), el('tbody', {}, ...rows))),
+        el('p', { class: 'small muted' }, `${state.said.miss ? '' : (state.said.miss = true, `These residuals are the fit engine’s check after the candidates were refitted to this measurement (the drawing’s model has nothing to refit), not the miss of the dashed forecast, which was frozen for the commanded input before the capture. The frozen ${allow} mV allowance applies to the whole step and to every region of it, so the number shown is the worst of those. The held-back checks later score the frozen model with no refit.`)}${fresh.length ? ` New from this measurement: ${fresh.join(', ')} (fitted to it, so not forecast for it).` : ''}${e.sim_calls ? ` ${e.sim_calls} ngspice runs.` : ''}`.trim()));
       for (const r of e.results) { const m = ensureMeter(r.id); m.root.classList.remove('wait'); if (state.dead[r.id] != null && state.dead[r.id] < e.step) { m.die(); continue; } m.setValue(r.decided_mV ?? r.miss_mV ?? 0, r.value != null ? BM.fmtFit(r.kind, r.value, r.at_bound) : 'drawn values', r.passed_this_step, `step ${e.step}`, r.worst_region); }
       state.thinking = block({ t_log: e.t_log + 0.5 }, 'spark', 'Muse Spark 1.3', null, el('span', { class: 'thinking' }, el('i'), 'Reading the results, deciding the next step…'));
     },
@@ -217,7 +227,7 @@
       else m.setValue(e.miss_mV ?? 0, e.fitted_parameters ? Object.entries(e.fitted_parameters).map(([k, v]) => BM.fmtParam(k, v)).join(', ') : '', e.passed?.every(Boolean), 'all steps');
       if (e.status === 'inadequate') { m.ruleOut('the proposal'); m.die(); }
       block(e, 'fit', `Fit engine · ngspice, proposed circuit`, words.structureFit(e),
-        el('p', { class: 'small muted' }, [e.status ? `Status: ${e.status}` : null, e.misses?.length ? `misses per step: ${e.misses.map(fmtMiss).join(', ')}` : null, e.simulator_calls ? `${e.simulator_calls} ngspice runs` : null, e.error ? `error: ${e.error}` : null].filter(Boolean).join(' · ')),
+        el('p', { class: 'small muted' }, [e.status ? `Status: ${e.status}` : null, e.misses?.length ? `residuals per training step, after refit: ${e.misses.map(fmtMiss).join(', ')}` : null, e.simulator_calls ? `${e.simulator_calls} ngspice runs` : null, e.error ? `error: ${e.error}` : null].filter(Boolean).join(' · ')),
         el('p', { class: 'small muted' }, '“Fits” means fits the training measurements. The check on held-back inputs is still ahead; the site never promotes a fit to a verdict.'));
     },
     verification_requested(e) {
@@ -237,8 +247,8 @@
     },
     verification_scored(e) {
       state.scored = (state.scored || 0) + 1;
-      const rows = Object.entries(e.conditional || {}).map(([id, v]) => el('tr', {}, el('td', {}, expName(id)), el('td', {}, num(fmtMiss(v.decided_mV ?? v.RMS_mV), e.ev, `held-back input ${e.index}`, { explanation: id, decided_by: v.worst_region ? `worst region ${v.worst_region}` : 'whole input', decided_mV: v.decided_mV, whole_RMS_mV: v.RMS_mV, regions: v.regions, passed: v.passed, OUT_refitted: e.OUT_refitted }), v.worst_region ? el('small', { class: 'muted' }, ` worst region: ${v.worst_region.replace(/_/g, ' ')}`) : null), el('td', {}, v.passed ? el('span', { class: 'tape grey' }, 'within allowance') : el('span', { class: 'tape red' }, 'outside allowance'))));
-      block(e, 'fit', `Fit engine · held-back input ${e.index ?? ''} scored against the frozen forecast`, words.scored(e), el('table', { class: 'fit-table' }, el('tbody', {}, ...rows)), el('p', { class: 'small muted' }, e.dev_placeholder ? 'DEV PLACEHOLDER: numbers copied from a training fit to exercise this stage. Not a measurement.' : 'Scored against the frozen forecast with the measured input; nothing was re-fitted.'));
+      const rows = Object.entries(e.conditional || {}).map(([id, v]) => el('tr', {}, el('td', {}, expName(id)), el('td', {}, num(fmtMiss(v.decided_mV ?? v.RMS_mV), e.ev, `held-back input ${e.index} · frozen model, measured IN`, { explanation: id, decided_by: v.worst_region ? `worst region ${v.worst_region}` : 'whole input', decided_mV: v.decided_mV, whole_RMS_mV: v.RMS_mV, regions: v.regions, passed: v.passed, OUT_refitted: e.OUT_refitted }), v.worst_region ? el('small', { class: 'muted' }, ` worst region: ${v.worst_region.replace(/_/g, ' ')}`) : null), el('td', {}, v.passed ? el('span', { class: 'tape grey' }, 'within allowance') : el('span', { class: 'tape red' }, 'outside allowance'))));
+      block(e, 'fit', `Fit engine · held-back input ${e.index ?? ''} scored against the frozen forecast`, words.scored(e), el('table', { class: 'fit-table' }, el('thead', {}, el('tr', {}, el('th', {}, 'Explanation'), el('th', {}, 'Frozen model · measured IN'), el('th', {}, ''))), el('tbody', {}, ...rows)), el('p', { class: 'small muted' }, e.dev_placeholder ? 'DEV PLACEHOLDER: numbers copied from a training fit to exercise this stage. Not a measurement.' : 'Frozen model · measured IN: the model frozen before the check is driven by the input the bench actually produced and compared with the measured OUT; nothing was re-fitted. Worst of the whole input and every region, as in the experiments.'));
       for (const [id, v] of Object.entries(e.conditional || {})) if (meters[id] && (v.decided_mV ?? v.RMS_mV) != null) meters[id].setValue(v.decided_mV ?? v.RMS_mV, undefined, v.passed, `check ${e.index ?? ''}`, v.worst_region);
     },
     verification_completed(e) { block(e, 'fit', 'Fit engine · check complete', null, el('p', { class: 'small muted' }, `Survivors after the check: ${(e.survivors || []).map(expName).join(', ') || 'none'}.`)); },

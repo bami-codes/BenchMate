@@ -78,9 +78,9 @@
       const sameDir = !!(sealNodes && sealNodes.length === 2 && added && sealNodes[0] === added.a && sealNodes[1] === added.b);
       const items = [];
       if (fails.length) items.push(el('li', {}, el('b', {}, 'Every value explanation failed.'),
-        el('span', {}, `After experiment ${st.n} the fit engine refitted every explanation still standing; the best each could do was off by `,
+        el('span', {}, `After experiment ${st.n} the fit engine refitted every explanation still standing. The best each could do, in its worst region: `,
           ...fails.flatMap((f, i) => [i ? ', ' : '', `${expName(f.id)} `, ev(num(`${Number(f.decided_mV[si]).toFixed(2)} mV`), st.fit_ev, { run: run.id, what: `residual of ${expName(f.id)} on step ${st.n}, worst region (the fit engine’s check after refitting)`, fields: { decided_by: f.worst_region?.[si] ? `worst region ${f.worst_region[si]}` : 'whole step', whole_step_RMS_mV: f.miss_mV?.[si], allowance_mV: run.allowance_mV } })]),
-          `, against a ${run.allowance_mV} mV allowance. All ${fails.length === 2 ? 'two' : fails.length === 3 ? 'three' : fails.length} were crossed out.`)));
+          `, against an allowance of ${run.allowance_mV} mV. All ${fails.length === 2 ? 'two' : fails.length === 3 ? 'three' : fails.length} were crossed out.`)));
       items.push(el('li', {}, el('b', {}, 'Spark proposed a part the drawing does not show.'),
         el('span', {}, ev(el('span', {}, `${cap(partWords)}, as a netlist it wrote itself`), prop.ev, { run: run.id, what: 'structure proposed', fields: { selected_by: prop.selected_by, added: (prop.diff?.added || []).map(x => `${x.name} ${x.kind} ${x.a}–${x.b}`).join(', ') } }), '.',
           prop.rationale ? el('q', {}, prop.rationale) : null)));
