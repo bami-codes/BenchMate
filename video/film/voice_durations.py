@@ -8,11 +8,12 @@ Each scene gets its clip length plus 1.2 s of air (0.4 before, 0.8 after), never
 import json, pathlib, subprocess
 V = pathlib.Path(__file__).resolve().parent; VO = V / 'voice'
 PLANNED = {'s1': 9, 's2': 16, 's3': 47, 's4': 43, 's5': 17, 's6': 21, 's7': 13}  # must match PLANNED in shots.js
+LEAD = {'s1': 2.2}  # picture before the clip starts; shots.js VOICE_LEAD must agree
 out = {}
 for sid, planned in PLANNED.items():
     f = next((p for p in [VO / f'{sid}.mp3', VO / f'{sid}.wav', VO / f'{sid}.m4a'] if p.exists()), None)
     if not f: print(sid, 'no clip; planned', planned, 's'); continue
     d = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(f)], capture_output=True, text=True).stdout.strip())
-    out[sid] = round(max(planned * 0.6, d + 1.2), 2); print(sid, f.name, f'{d:.2f}s → scene {out[sid]}s (planned {planned})')
+    out[sid] = round(max(planned * 0.6, d + 1.2) + LEAD.get(sid, 0), 2); print(sid, f.name, f'{d:.2f}s → scene {out[sid]}s (planned {planned})')
 (VO / 'durations.json').write_text(json.dumps(out, indent=1) + '\n')
 print('total', round(sum(out.get(k, v) for k, v in PLANNED.items()), 1), 's')

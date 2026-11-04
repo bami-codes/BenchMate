@@ -136,7 +136,7 @@ def narration(scenes, n):
     for sc in scenes:
         f = next((p for p in [VO / f"{sc['id']}.mp3", VO / f"{sc['id']}.wav", VO / f"{sc['id']}.m4a"] if p.exists()), None)
         if not f: continue
-        x = level_voice(decode(f)); s0 = int(round((sc['start'] + 0.4) * SR)); s1 = min(s0 + len(x), n)
+        x = level_voice(decode(f)); s0 = int(round(sc.get('voice_at', sc['start'] + 0.4) * SR)); s1 = min(s0 + len(x), n)
         if s1 <= s0: continue
         y[s0:s1] += x[:s1 - s0]; spans.append((s0 / SR, s1 / SR)); print(f"voice {f.name} at {s0 / SR:.2f}s, {len(x) / SR:.2f}s")
     return y, spans

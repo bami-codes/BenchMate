@@ -19,10 +19,15 @@ const SHOTS = []; const SFX = []; const CAPS = []; let VOICE = {};
 // Seven narration clips (voice/s1…s7). Each scene's shots stretch together to its clip; ticks run in design time.
 const SCENE_OF = { s1: ['s01','s02','s03'], s2: ['s04','s05'], s3: ['s06','s07','s08','s09','s10','s11','s12','s13','s14'], s4: ['s15','s16','s17','s18','s19','s20','s21','s22','s23'], s5: ['s24'], s6: ['s25','s26'], s7: ['s27'] };
 const PLANNED = { s1: 9, s2: 16, s3: 47, s4: 43, s5: 17, s6: 21, s7: 13 };
+const VOICE_LEAD = { s1: 2.2 };  // seconds of picture before the clip starts (the clip sits at scene start + 0.4 + lead)
+let PLAN = {};  // voice/shot_plan.json: global start of each shot, computed by plan_shots.py from the clips' word timings
 const sfx = (t, kind) => SFX.push({ t: +t.toFixed(3), kind });
 const cap = (a, b, text) => CAPS.push({ a, b, text });
 function shot(id, a, b, build, tick) { const root = el('div', { class: 'shot', id }); $('#shots').append(root); const s = { id, da: a, db: b, a, b, root, tick }; build(root, s); SHOTS.push(s); return s; }
-function schedule() { let T = 0; const SC = []; for (const [sid, ids] of Object.entries(SCENE_OF)) { const sh = SHOTS.filter(x => ids.includes(x.id)); const design = sh.reduce((n, x) => n + (x.db - x.da), 0); const want = VOICE[sid] || PLANNED[sid]; const k = want / design; const start = T; for (const x of sh) { x.a = T; x.b = T + (x.db - x.da) * k; x.k = k; T = x.b; } SC.push({ id: sid, start, seconds: T - start, planned: PLANNED[sid], design }); } window.filmTotal = () => T; window.filmScenes = () => SC.map(x => ({ ...x })); }
+function schedule() { let T = 0; const SC = []; for (const [sid, ids] of Object.entries(SCENE_OF)) { const sh = SHOTS.filter(x => ids.includes(x.id)); const design = sh.reduce((n, x) => n + (x.db - x.da), 0); const want = VOICE[sid] || PLANNED[sid]; const start = T, end = T + want; const planned = sh.every(x => PLAN[x.id] != null);
+    if (planned) { sh.forEach((x, i) => { x.a = Math.max(start, PLAN[x.id]); x.b = i + 1 < sh.length ? Math.max(x.a + .5, PLAN[sh[i + 1].id]) : end; x.k = (x.b - x.a) / (x.db - x.da); }); T = end; }
+    else { const k = want / design; for (const x of sh) { x.a = T; x.b = T + (x.db - x.da) * k; x.k = k; T = x.b; } }
+    SC.push({ id: sid, start, seconds: T - start, voice_at: +(start + .4 + (VOICE_LEAD[sid] || 0)).toFixed(3), planned: PLANNED[sid], design }); } window.filmTotal = () => T; window.filmScenes = () => SC.map(x => ({ ...x })); }
 const sched = (td) => { for (const x of SHOTS) if (td >= x.da && td < x.db + 1e-9) return x.a + (td - x.da) * x.k; const l = SHOTS[SHOTS.length - 1]; return l.b + (td - l.db) * l.k; };
 const FIN = .4, FOUT = .3;  // each shot fades in from the mat and out to it; two shots are never on screen together
 
@@ -34,6 +39,7 @@ window.filmReady = (async () => {
   for (const pr of R4.structure || []) BM.names[pr.id] = BM.proposalName(pr); for (const pr of R5.structure || []) BM.names[pr.id] = BM.proposalName(pr);
   for (const e of R1.timeline) if (e.kind === 'equivalence_group') for (const m of e.members || []) BM.names[m.id] = m.label || m.words;
   try { VOICE = await BM.json('voice/durations.json'); } catch (e) { VOICE = {}; }
+  try { PLAN = await BM.json('voice/shot_plan.json'); } catch (e) { PLAN = {}; }
   buildAll(); schedule(); for (const c of CAPS) { c.a = sched(c.a); c.b = sched(c.b); } for (const e of SFX) e.t = +sched(e.t).toFixed(3);
 })();
 const schemSVG = (design) => { const doc = new DOMParser().parseFromString(SCH[design], 'image/svg+xml'); const svg = document.importNode(doc.documentElement, true); svg.removeAttribute('width'); svg.removeAttribute('height'); svg.querySelector('metadata')?.remove(); return svg; };
@@ -110,8 +116,8 @@ function buildAll() {
           el('div', { class: 'h2', style: 'margin-top:26px' }, 'Reads the schematic.', el('br'), 'Chooses its own experiments from a fixed menu.', el('br'), 'Says why.'),
           el('div', { class: 'body dim', style: 'margin-top:30px;font-size:30px' }, 'Before each measurement, its forecast is frozen and hashed. The engine scores; Spark decides what to test next.')),
         el('div', { class: 'abs', id: 'sealbox', style: 'left:1240px;top:200px;width:584px' }, el('div', { class: 'photo2' }, el('img', { src: '../../site/assets/photos/case04-faulted-crop.jpg', style: 'width:100%' })), el('div', { class: 'abs', id: 'seal', style: 'left:40px;top:240px;width:470px;transform:rotate(-7deg) scale(0);transform-origin:center;border:4px solid var(--fault);color:var(--fault);font:700 44px/1.1 var(--narrow);padding:16px 22px;border-radius:8px;letter-spacing:.06em;background:rgba(255,255,255,.92);text-transform:uppercase;box-shadow:0 8px 24px rgba(0,0,0,.35)' }, 'Sealed', el('small', { style: 'display:block;font:500 18px/1.3 var(--mono);letter-spacing:0;text-transform:none;color:#8a2a24;margin-top:6px' }, 'sha256 of the assembly, committed before the first measurement'))));
-      cap(a + 3.6, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 3.8, 'seal');
-    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 3.8) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
+      cap(a + 5.3, b, 'The fault was planted by us, hashed, and sealed. Spark never sees it.'); sfx(a + 5.5, 'seal');
+    }, (r, t) => { rise(r.querySelector('#sp'), t, .2); fade(r.querySelector('#sealbox'), t, 1.4); const s = clamp((t - 5.5) / .35); const se = r.querySelector('#seal'); se.style.transform = `rotate(-7deg) scale(${s <= 0 ? 0 : .9 + .1 * back(s)})`; se.style.opacity = s <= 0 ? 0 : 1; }); }
 
   // ===== Case 04 =====
   // S06 28–33  case title
@@ -138,20 +144,20 @@ function buildAll() {
       cap(a + .6, b, 'After two safe steps, Spark asks for a large sine: linearity.'); sfx(a + .2, 'card');
     }, (r, t) => { rise(r.querySelector('#pk'), t, .1); }); }
   // S09 47–57  the large sine: every needle in the red
-  { const [a, b] = span(8.5); shot('s09', a, b, (r, s) => {
+  { const [a, b] = span(8); shot('s09', a, b, (r, s) => {
       const W = workspace(r); s.W = W; for (const f of st4[2].fit) W.meter(f.id, expName(f.id), f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values');
       const big = el('div', { class: 'abs', id: 'bigwrap', style: 'inset:0;opacity:0' }, el('div', { class: 'abs', style: 'left:96px;top:130px' }, el('div', { class: 'eyebrow' }, 'Experiment 3 · scored'), el('div', { class: 'h1', id: 'bigh', style: 'margin-top:14px' }, 'All three explanations failed.')), el('div', { class: 'meters-big', id: 'mbig' }), el('div', { class: 'abs', id: 'bign', style: 'left:96px;top:840px;font:400 32px/1.35 var(--sans);color:rgba(255,255,255,.85)' }));
       r.append(big); s.big = big; s.bigMeters = {}; for (const f of st4[2].fit) { const m = new Meter(f.id + ':big', expName(f.id), { value: f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values' }); m._mode = null; big.querySelector('#mbig').append(m.root); s.bigMeters[f.id] = m; }
       big.querySelector('#bign').append(`${st4[2].fit.map(f => `${expName(f.id)} ${fmtMiss(missOf(f, 2))}`).join(' · ')} — the worst region of the sweep, against ${R4.allowance_mV} mV allowed.`);
-      cap(a + .4, a + 3.4, 'Experiment 3: the bench measures the large sine'); cap(a + 5.8, b, `${st4[2].fit.map(f => fmtMiss(missOf(f, 2))).join(' · ')} against ${R4.allowance_mV} mV: every value explanation fails`);
-      sfx(a + .4, 'sweep'); sfx(a + 4.9, 'needle_red'); sfx(a + 5.2, 'needle_red'); sfx(a + 5.5, 'needle_red'); sfx(a + 6.1, 'crossout');
+      cap(a + .3, a + 2.6, 'Experiment 3: the bench measures the large sine'); cap(a + 4.2, b, `${st4[2].fit.map(f => fmtMiss(missOf(f, 2))).join(' · ')} against ${R4.allowance_mV} mV: every value explanation fails`);
+      sfx(a + .3, 'sweep'); sfx(a + 3.4, 'needle_red'); sfx(a + 3.65, 'needle_red'); sfx(a + 3.9, 'needle_red'); sfx(a + 4.5, 'crossout');
     }, (r, t, s) => { const W = s.W; const st = st4[2];
-      W.showStep('s3', st, st.label); W.strip.firstChild.textContent = 'Experiment 3'; W.draw(lin(t, .4, 3.0), 1);
+      W.showStep('s3', st, st.label); W.strip.firstChild.textContent = 'Experiment 3'; W.draw(lin(t, .3, 2.3), 1);
       for (const f of st.fit) setMeter(W.meters[f.id], { value: missOf(f, 1), sub: 'step 2 · fits', fitted: f.value != null ? BM.fmtFit(f.kind, f.value, f.at_bound) : 'drawn values' });
       // cut to the big meters at 4.6 s: needles rise 5.0 → 6.4, tapes at 6.8
-      const on = ease(t, 3.6, 4.1); s.big.style.opacity = on; [...r.children].forEach(c => { if (c !== s.big) c.style.opacity = 1 - on; });
-      r.querySelector('#bigh').style.opacity = ease(t, 5.8, 6.3);
-      for (const f of st.fit) { const m = s.bigMeters[f.id]; const u = ease(t, 4.3, 5.6); setMeter(m, u <= 0 ? { value: missOf(f, 1), sub: 'step 2 · fits' } : { value: missOf(f, 1) + (missOf(f, 2) - missOf(f, 1)) * u, bad: u > .45, sub: 'step 3 · worst region', tag: t >= 6.0 ? 'Ruled out after step 3' : null, tagIn: ease(t, 6.0, 6.45) }); }
+      const on = ease(t, 2.5, 2.9); s.big.style.opacity = on; [...r.children].forEach(c => { if (c !== s.big) c.style.opacity = 1 - on; });
+      r.querySelector('#bigh').style.opacity = ease(t, 4.2, 4.6);
+      for (const f of st.fit) { const m = s.bigMeters[f.id]; const u = ease(t, 3.0, 4.0); setMeter(m, u <= 0 ? { value: missOf(f, 1), sub: 'step 2 · fits' } : { value: missOf(f, 1) + (missOf(f, 2) - missOf(f, 1)) * u, bad: u > .45, sub: 'step 3 · worst region', tag: t >= 4.4 ? 'Ruled out after step 3' : null, tagIn: ease(t, 4.4, 4.85) }); }
     }); }
   // S10 57–65  the proposal
   { const [a, b] = span(6.5); shot('s10', a, b, (r) => {
@@ -192,8 +198,8 @@ function buildAll() {
       r.append(el('div', { class: 'vcard cue', id: 'vc', style: 'top:170px' }, el('div', { class: 'lab' }, 'BenchMate’s diagnosis · from the engine’s report'), el('div', { class: 'big' }, verdictWords(R4.outcome, R4)),
         el('div', { class: 'cue', id: 'pl' }, el('div', { class: 'sep' }), el('div', { class: 'lab' }, 'What was planted · the seal, opened only now'), el('div', { class: 'big2' }, K4().hidden)),
         el('div', { class: 'fine cue', id: 'fn' }, 'The connection Spark wrote; the part number is the seal’s. The verdict is copied from the engine’s report; the seal’s digest is checked by code against the one committed before the first measurement. Spark never saw the lower line.')));
-      cap(a + .6, a + 2.8, 'Spark’s answer, from the record'); cap(a + 3.2, b, 'The seal opens: a diode, in the direction Spark wrote'); sfx(a + 2.8, 'seal');
-    }, (r, t) => { rise(r.querySelector('#vc'), t, .1); rise(r.querySelector('#pl'), t, 3.0); fade(r.querySelector('#fn'), t, 4.2); }); }
+      cap(a + .6, a + 1.8, 'Spark’s answer, from the record'); cap(a + 1.8, b, 'The seal opens: a diode, in the direction Spark wrote'); sfx(a + 1.5, 'seal');
+    }, (r, t) => { rise(r.querySelector('#vc'), t, .1); rise(r.querySelector('#pl'), t, 1.6); fade(r.querySelector('#fn'), t, 3.0); }); }
 
   // ===== Case 01 =====
   // S15 91–95  case title
@@ -258,8 +264,8 @@ function buildAll() {
       r.append(el('div', { class: 'vcard cue', id: 'vc', style: 'top:170px' }, el('div', { class: 'lab' }, 'BenchMate’s diagnosis · from the engine’s report'), el('div', { class: 'big' }, verdictWords(R1.outcome, R1)),
         el('div', { class: 'cue', id: 'pl' }, el('div', { class: 'sep' }), el('div', { class: 'lab' }, 'What was planted · the seal, opened only now'), el('div', { class: 'big2' }, K1().hidden)),
         el('div', { class: 'fine cue', id: 'fn' }, 'The verdict is copied from the engine’s report; the seal’s digest is checked by code against the one committed before the first measurement. Spark never saw the lower line.')));
-      cap(a + .6, a + 2.4, 'Spark’s answer, from the record'); cap(a + 2.8, b, 'The seal opens: two resistors, hidden before R1'); sfx(a + 2.6, 'seal');
-    }, (r, t) => { rise(r.querySelector('#vc'), t, .1); rise(r.querySelector('#pl'), t, 2.6); fade(r.querySelector('#fn'), t, 3.8); }); }
+      cap(a + .5, a + 1.2, 'Spark’s answer, from the record'); cap(a + 1.4, b, 'The seal opens: two resistors, hidden before R1'); sfx(a + 1.1, 'seal');
+    }, (r, t) => { rise(r.querySelector('#vc'), t, .1); rise(r.querySelector('#pl'), t, 1.2); fade(r.querySelector('#fn'), t, 2.6); }); }
   // S23 141–145  the restored rerun
   { const [a, b] = span(3); shot('s23', a, b, (r) => {
       r.append(el('div', { class: 'vcard quiet cue', id: 'vc', style: 'top:400px' }, el('div', { class: 'lab' }, 'Repaired, then run again by a fresh Spark'), el('div', { class: 'big' }, verdictWords(R1R.outcome, R1R)), el('div', { class: 'fine' }, 'This says nothing about tests Spark did not run. On a restored board it is the expected result.')));
@@ -274,16 +280,16 @@ function buildAll() {
       const list = el('div', { class: 'paper2 abs cue', id: 'list5', style: 'left:96px;top:90px;width:1060px;padding:28px 40px 12px' }, el('div', { class: 'h3', style: 'margin-bottom:10px' }, 'Five cases from real forum threads'));
       CASES.cases.forEach(c => { const f = counted.find(x => x.case === c.id && x.state === 'faulted'); list.append(el('div', { class: 'cue crow', style: 'display:grid;grid-template-columns:60px minmax(0,1fr);gap:0 20px;padding:11px 0;border-top:1px solid var(--rule)' }, el('div', { style: 'font:600 28px/1 var(--narrow);color:var(--ink-3)' }, c.id), el('div', {}, el('div', { style: 'font:600 28px/1.15 var(--narrow)' }, c.title), el('div', { class: 'small dim', style: 'margin-top:3px;font-size:21px' }, `Found it: ${found(f)}; the seal matched. ○ Fixed, then rerun: no mismatch.`)))); });
       const p5 = R5.structure[0]; r.append(list, el('div', { class: 'abs cue', id: 'm5', style: 'left:1200px;top:96px;width:624px' }, el('div', { class: 'photo2' }, el('img', { src: '../../site/' + R5.reading.binding.photo }), el('img', { class: 'mask', src: '../../site/' + R5.reading.binding.overlay_file })), el('div', { style: 'margin-top:22px' }, el('div', { class: 'h3' }, 'Case 05 · it happened twice'), el('div', { class: 'small dim', style: 'margin-top:8px' }, `Spark proposed ${BM.kindWord(p5.diff.added[0].kind)} where the drawing shows a wire; one reading of the isolated wire path placed it off the board. Sealed: ${K5().hidden}`))));
-      cap(a + .6, a + 5.6, 'Five cases, five sealed faults; each ended with a repaired board and a rerun that reported no mismatch'); cap(a + 6.2, b, 'Case 05: resistance proposed where the drawing shows a wire; one reading placed it off the board'); sfx(a + .2, 'card'); sfx(a + 6.0, 'card');
-    }, (r, t) => { rise(r.querySelector('#list5'), t, .1); r.querySelectorAll('.crow').forEach((row, k) => rise(row, t, .5 + k * .55, .5, 10)); rise(r.querySelector('#m5'), t, 6.0); }); }
+      cap(a + .6, a + 2.4, 'Five cases, five sealed faults; each ended with a repaired board and a rerun that reported no mismatch'); cap(a + 2.8, b, 'Case 05: resistance proposed where the drawing shows a wire; one reading placed it off the board'); sfx(a + .2, 'card'); sfx(a + 2.6, 'card');
+    }, (r, t) => { rise(r.querySelector('#list5'), t, .1); r.querySelectorAll('.crow').forEach((row, k) => rise(row, t, .4 + k * .45, .5, 10)); rise(r.querySelector('#m5'), t, 2.6); }); }
   // S25 153–160  the records
   { const [a, b] = span(10.5); shot('s25', a, b, (r) => {
       const evs = R1.timeline.filter(e => e.ev?.sha256).slice(0, 4);
       const chain = el('div', { class: 'abs', style: 'left:96px;top:300px;width:1728px;display:flex;gap:26px;align-items:center' }); evs.forEach((e, k) => { if (k) chain.append(el('span', { class: 'cue lk', style: 'flex:none;width:60px;height:3px;background:#fff;opacity:0;position:relative' })); chain.append(el('div', { class: 'paper2 cue ev2', style: 'flex:1;padding:22px 24px' }, el('div', { style: 'font:600 26px/1.2 var(--narrow)' }, e.ev.kind.replace(/_/g, ' ')), el('div', { class: 'mono', style: 'font-size:19px;color:var(--ink-2);margin-top:8px' }, 'sha256 ' + e.ev.sha256.slice(0, 14) + '…'), el('div', { class: 'mono', style: 'font-size:17px;color:var(--ink-3);margin-top:4px' }, 'prev ' + (e.ev.prev || '').slice(0, 14) + '…'))); });
       r.append(el('div', { class: 'abs cue', id: 'h', style: 'left:96px;top:120px;width:1728px' }, el('div', { class: 'eyebrow' }, 'The records'), el('div', { class: 'h2', style: 'margin-top:14px' }, 'An append-only log. Each event carries its own hash and the one before it.')), chain,
         el('div', { class: 'abs cue', id: 'k', style: 'left:96px;top:560px;width:1728px' }, el('div', { class: 'body', style: 'font-size:34px;font-family:var(--narrow);font-weight:600' }, 'During the experiments, the candidates are refitted to each new measurement. The last two inputs test the frozen model, with no refitting.'), el('div', { class: 'body dim', style: 'margin-top:22px;font-size:30px' }, 'The ledger keeps every attempt: the runs that stopped before a verdict, the two that abstained, the miswired board. Counts, not an accuracy rate.')));
-      cap(a + .6, a + 4.6, 'Every forecast is checked against the event that froze it'); cap(a + 5.0, b, 'Refitted during the experiments; frozen for the last two inputs; every attempt kept');
-    }, (r, t) => { rise(r.querySelector('#h'), t, .1); r.querySelectorAll('.ev2').forEach((e, k) => rise(e, t, .6 + k * .45)); r.querySelectorAll('.lk').forEach((l, k) => { l.style.opacity = ease(t, 1.0 + k * .45, 1.4 + k * .45); }); rise(r.querySelector('#k'), t, 4.6); }); }
+      cap(a + .6, a + 3.0, 'Every forecast is checked against the event that froze it'); cap(a + 3.3, b, 'Refitted during the experiments; frozen for the last two inputs; every attempt kept');
+    }, (r, t) => { rise(r.querySelector('#h'), t, .1); r.querySelectorAll('.ev2').forEach((e, k) => rise(e, t, .6 + k * .45)); r.querySelectorAll('.lk').forEach((l, k) => { l.style.opacity = ease(t, 1.0 + k * .45, 1.4 + k * .45); }); rise(r.querySelector('#k'), t, 3.2); }); }
   // S26 160–168  one command
   { const [a, b] = span(10); shot('s26', a, b, (r) => {
       const term = el('div', { id: 'term' }, el('div', { class: 'bar' }, el('b', {}, 'bash — BenchMate')), el('div', { class: 'm' }, '# a fresh clone. No packages, no API key, no network, no hardware.'), el('div', { class: 'c' }), el('div', { class: 'pass' }), el('div', { class: 'rows2' }), el('div', { class: 'foot' }, el('b', {}, 'What this proves: '), 'every event hash-chained; every forecast hash matched to the event that froze it; forecast → capture → measurement order kept. ', el('b', {}, 'What it does not: '), 'when the files were written, or the physical truth itself. The forecast commits on GitHub carry the time.'));

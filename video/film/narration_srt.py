@@ -10,6 +10,7 @@ beats that must land (all explanations failed, the diode proposal, the 4.71 kΩ 
 import json, pathlib, re, subprocess
 V = pathlib.Path(__file__).resolve().parent; OUT = V / 'out'; VO = V / 'voice'
 scenes = {s['id']: s for s in json.loads((OUT / 'scenes.json').read_text())}
+TIMED = json.loads((VO / 'timings.json').read_text())['scenes'] if (VO / 'timings.json').exists() else None
 text = (V / 'narration.txt').read_text()
 blocks = re.findall(r'^\[(s\d)\][^\n]*\n(.+?)(?=\n\s*\n|\Z)', text, flags=re.M | re.S)
 
@@ -27,7 +28,11 @@ for sid, body in blocks:
     sc = scenes.get(sid)
     if not sc: continue
     sentences = [x.strip() for x in re.split(r'(?<=[.!?])\s+', ' '.join(body.split())) if x.strip()]
-    start = sc['start'] + 0.4; length = clip_len(sid) or max(1.0, sc['seconds'] - 1.2)
+    start = sc.get('voice_at', sc['start'] + 0.4); length = clip_len(sid) or max(1.0, sc['seconds'] - 1.2)
+    timed = TIMED.get(sid, {}).get('sentences') if TIMED else None
+    if timed and len(timed) == len(sentences):   # the clips' own alignment: exact sentence times
+        for x, w in zip(sentences, timed): cues.append((start + w['start'], start + w['end'] - 0.05, x))
+        continue
     total = sum(len(x) for x in sentences) or 1; t = start
     for x in sentences:
         d = length * len(x) / total

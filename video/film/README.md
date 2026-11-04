@@ -14,8 +14,9 @@ must agree; today s1 9, s2 16, s3 47, s4 43, s5 17, s6 21, s7 13 = 166 s).
     node render.js film 0 0 --meta                             # out/captions.json, out/scenes.json, out/sfx.json
     node render.js chk 0 173 --stills 7.5,41,53                # review stills → frames/
     python3 voice_durations.py                                 # clips → voice/durations.json (scene lengths follow the clips)
+    python3 plan_shots.py                                      # clips' word timings → voice/shot_plan.json (each shot starts on its sentence)
     python3 audio.py                                           # out/benchmate.mp4 (bed, SFX from sfx.json, narration) + a shot-summary .srt
     python3 narration_srt.py                                   # overwrites out/benchmate.srt with the narration's own sentences (the CC to upload)
 
-After adding voice clips: `voice_durations.py`, then `--meta` to read the new total, render again with that total, `--meta`
-again, then `audio.py`. `stage.html` + `film.js` are the earlier one-camera version, kept for reference; `mux.py` is superseded by `audio.py`.
+After adding voice clips: `voice_durations.py`, `plan_shots.py`, then `--meta` to read the new total, render with that total, `--meta`
+again, then `audio.py` and `narration_srt.py`. Clips sit at scene start + 0.4 s (+2.2 s lead on s1); scenes.json carries `voice_at`. `stage.html` + `film.js` are the earlier one-camera version, kept for reference; `mux.py` is superseded by `audio.py`.
