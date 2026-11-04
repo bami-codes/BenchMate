@@ -130,13 +130,24 @@ def level_voice(x, target=-16):
     want = target - dbfs(np.sqrt(loud.mean())); g = float(np.clip(want, -24, 24))
     if g != want: print(f'warning: narration clip needs {want:+.0f} dB to reach {target} dBFS; gain clamped to {g:+.0f} dB (check the export level)', file=sys.stderr)
     return x * db(g)
+def trim_to_speech(x, sid):
+    """Cut a clip 0.15 s after its last aligned sentence (voice/timings.json) with a 60 ms fade, and fade the head over 20 ms:
+    the providers' tails can carry a cut breath or fricative that the levelling then amplifies."""
+    tf = VO / 'timings.json'
+    if not tf.exists(): return x
+    sc = json.loads(tf.read_text()).get('scenes', {}).get(sid)
+    if not sc or not sc.get('sentences'): return x
+    end = min(len(x), int(round((sc['sentences'][-1]['end'] + 0.15) * SR))); x = x[:end].copy()
+    f = min(len(x), int(0.06 * SR)); x[-f:] *= np.linspace(1, 0, f)[:, None] if x.ndim == 2 else np.linspace(1, 0, f)
+    h = min(len(x), int(0.02 * SR)); x[:h] *= np.linspace(0, 1, h)[:, None] if x.ndim == 2 else np.linspace(0, 1, h)
+    return x
 def narration(scenes, n):
-    """Mix of the voice clips at scene start + 0.4 (stereo (n, 2)) and the clip spans [(a, b), ...] in seconds."""
+    """Mix of the voice clips at each scene's voice_at (stereo (n, 2)) and the clip spans [(a, b), ...] in seconds."""
     y = np.zeros((n, 2)); spans = []
     for sc in scenes:
         f = next((p for p in [VO / f"{sc['id']}.mp3", VO / f"{sc['id']}.wav", VO / f"{sc['id']}.m4a"] if p.exists()), None)
         if not f: continue
-        x = level_voice(decode(f)); s0 = int(round(sc.get('voice_at', sc['start'] + 0.4) * SR)); s1 = min(s0 + len(x), n)
+        x = level_voice(trim_to_speech(decode(f), sc['id'])); s0 = int(round(sc.get('voice_at', sc['start'] + 0.4) * SR)); s1 = min(s0 + len(x), n)
         if s1 <= s0: continue
         y[s0:s1] += x[:s1 - s0]; spans.append((s0 / SR, s1 / SR)); print(f"voice {f.name} at {s0 / SR:.2f}s, {len(x) / SR:.2f}s")
     return y, spans

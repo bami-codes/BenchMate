@@ -210,7 +210,7 @@ function buildAll() {
       cap(a + .6, b, 'Two explanations draw the same waveform. No experiment on the menu separates them.'); sfx(a + .4, 'sweep');
     }, (r, t, s) => { const W = s.W; const obs = ver1.observations[1], fc = ver1.forecasts[1].changed_R1 || Object.values(ver1.forecasts[1])[0];
       if (W.phase !== 'eq') { W.phase = 'eq'; W.traces = [{ id: 'a', label: plain('changed:R1') + ' forecast', kind: 'fc', v: fc, dashed: true, progress: 1, color: '#c6a9ff' }, { id: 'b', label: plain(EXT) + ' forecast', kind: 'fc', v: fc.map(x => x), dashed: true, progress: 1, color: '#e9dcff' }, { id: 'in', label: 'IN', kind: 'in', v: obs.in_v, progress: 0 }, { id: 'out', label: 'OUT', kind: 'out', v: obs.out_v, progress: 0 }]; W.scope.set(obs.t_s, W.traces, `Held-back input 2 · sine ${ver1.reserved[1].amplitude_v} V`); W.strip.children[1].textContent = '– – two forecasts, identical'; }
-      W.strip.firstChild.textContent = 'After three experiments'; W.traces[0].progress = ease(t, .3, 1.3); W.traces[1].progress = ease(t, .9, 1.9); const p = lin(t, 2.1, 4.0); W.traces[2].progress = p; W.traces[3].progress = Math.max(0, p - .02); W.scope.draw(); rise(r.querySelector('#two'), t, 2.0);
+      W.strip.firstChild.textContent = 'After three experiments'; W.traces[0].progress = ease(t, .3, 1.3); W.traces[1].progress = ease(t, .9, 1.9); const p = lin(t, 2.1, 4.0); W.traces[2].progress = p; W.traces[3].progress = Math.max(0, p - .02); W.scope.draw(); rise(r.querySelector('#two'), t, .1);
     }); }
   // S19 114–121  Spark asks for one reading; the ranges are frozen
   { const [a, b] = span(6); shot('s19', a, b, (r) => {
