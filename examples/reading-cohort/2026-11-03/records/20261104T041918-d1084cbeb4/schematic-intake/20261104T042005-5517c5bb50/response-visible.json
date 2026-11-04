@@ -1,0 +1,41 @@
+{
+  "response_id": "resp_6aeab28155247145c7274010",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2091,
+    "input_tokens_details": {
+      "cached_tokens": 113
+    },
+    "output_tokens": 1577,
+    "output_tokens_details": {
+      "reasoning_tokens": 1181
+    },
+    "total_tokens": 3668
+  },
+  "elapsed_s": 11.974975457880646,
+  "visible_output": [
+    {
+      "type": "message",
+      "id": "rs_528a1394-8817-45d5-866b-523ad8e13be0",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "This schematic is legible \u2014 transcribing its parts and connections.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_4fbc2114-392e-4cea-bd50-b8ff70e26905",
+      "call_id": "call_4fbc2114-392e-4cea-bd50-b8ff70e26905",
+      "name": "report_design",
+      "arguments": "{\"ambiguities\":[],\"components\":[{\"bbox\":[0.13,0.33,0.305,0.42],\"evidence\":\"Rectangle labeled R1 10 k\u03a9 between IN wire and N1 wire\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R1\",\"nodes\":[\"IN\",\"N1\"],\"value_si\":10000.0},{\"bbox\":[0.33,0.33,0.6,0.42],\"evidence\":\"Rectangle labeled R2 10 k\u03a9 between N1 wire and OUT wire\",\"kind\":\"R\",\"marking\":\"10 k\u03a9\",\"name\":\"R2\",\"nodes\":[\"N1\",\"OUT\"],\"value_si\":10000.0},{\"bbox\":[0.635,0.49,0.705,0.56],\"evidence\":\"Capacitor symbol labeled C1 1 \u00b5F between OUT dot and REF wire\",\"kind\":\"C\",\"marking\":\"1 \u00b5F\",\"name\":\"C1\",\"nodes\":[\"OUT\",\"REF\"],\"value_si\":1e-06}],\"status\":\"needs_review\",\"summary\":\"R1 and R2 10k in series from IN via N1 to OUT, C1 1uF from OUT to REF.\"}",
+      "status": "completed"
+    }
+  ]
+}

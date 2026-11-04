@@ -1,0 +1,15 @@
+{
+  "schema": "benchmate.reading_timing_backend.v4",
+  "source_sha256": {
+    "scripts/reading_experiment_timing_v4.py": "4be63bf06e837378e582566ccc2904af43a8a3acef40539567d9950e58a94b16",
+    "src/benchmate/reading_catalog_timing_v4.py": "a773c128987fb7aadfc57938666b5b422826c6c8087667aaa0c42825702d068c",
+    "tests/test_reading_timing_v4.py": "965e59bd91f9db259d4283808e91497c7c7bae574f266d3cf7c170230e9c8151",
+    "docs/2026-11-04-reading-timing-v4-adapter.md": "b24f6681910d78a31d2f523d843996f3c17753dcba8b38f4aa0c536656d435e2"
+  },
+  "numerical_qualification": "examples/channel-timing/2026-11-04/candidate02/manifest.json",
+  "diagnostic_and_reading_profile_backend": "frame-anchored-channel-timing-v4",
+  "reserved_OUT_in_profiles": 0,
+  "fitted_timing_parameters": [],
+  "photo_binding_stage": "Separate v3 candidate-kind/set stage, qualified before photo correspondence.",
+  "public_manifest": "examples/reading-cohort/2026-11-03/timing-scopes/20261104T041918-d1084cbeb4/scope.json"
+}

@@ -1,0 +1,33 @@
+{
+  "scope": "Independent analytic mock; not hardware or Spark evidence.",
+  "software_tests_passed": 4,
+  "software_tests_failed": 0,
+  "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_reading_timing_v4.py",
+  "nominal_Rsum_ohm": 20000.0,
+  "fault_Rsum_ohm": 12200.0,
+  "tau_unloaded_ms": {
+    "normal": 20.0,
+    "fault": 12.2
+  },
+  "tau_loaded_ms": {
+    "normal": 6.66222074024675,
+    "fault": 5.4924740874267695
+  },
+  "terminal_R1_R2_indistinguishable": true,
+  "source_R_C_value_and_ranges_from_public_intended_design": true,
+  "reading_outcomes_checked": [
+    "changed:R1",
+    "changed:R2",
+    "all_explanations_rejected"
+  ],
+  "v4_backend_used_for_profile": true,
+  "reserved_OUT_used_for_profiles": 0,
+  "API_requests": 0,
+  "hardware_commands": 0,
+  "source_sha256": {
+    "scripts/reading_experiment_timing_v4.py": "4be63bf06e837378e582566ccc2904af43a8a3acef40539567d9950e58a94b16",
+    "src/benchmate/reading_catalog_timing_v4.py": "a773c128987fb7aadfc57938666b5b422826c6c8087667aaa0c42825702d068c",
+    "tests/test_reading_timing_v4.py": "965e59bd91f9db259d4283808e91497c7c7bae574f266d3cf7c170230e9c8151",
+    "docs/2026-11-04-reading-timing-v4-adapter.md": "b24f6681910d78a31d2f523d843996f3c17753dcba8b38f4aa0c536656d435e2"
+  }
+}
