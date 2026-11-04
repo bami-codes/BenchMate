@@ -17,8 +17,10 @@ const START02 = Math.max(0, tPlay('20261103T165506-b6ad3e8cf7', 'spark_report') 
 (async () => {
   fs.mkdirSync(RAW, { recursive: true });
   const b = await chromium.launch();
-  const cues = {};
+  const ONLY = (process.env.SCENES || '').split(',').filter(Boolean); // re-record a subset; the others keep their files and cues
+  const cues = fs.existsSync(path.join(RAW, 'cues.json')) ? JSON.parse(fs.readFileSync(path.join(RAW, 'cues.json'))) : {};
   async function scene(name, fn, { w = 1920, h = 1080 } = {}) {
+    if (ONLY.length && !ONLY.includes(name)) { console.log(name, 'kept'); return; }
     const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, recordVideo: { dir: RAW, size: { width: w, height: h } }, reducedMotion: 'no-preference' });
     const page = await ctx.newPage(); const t0 = Date.now(); const seen = {}; const log = (k, extra) => { if (seen[k] == null) { seen[k] = +((Date.now() - t0) / 1000).toFixed(2); if (extra) seen[k + ':note'] = extra; } };
     page.log = log; page.t0 = t0;
@@ -59,13 +61,13 @@ const START02 = Math.max(0, tPlay('20261103T165506-b6ad3e8cf7', 'spark_report') 
     await smoothScrollTo(p, '#score', 2400); await sleep(3200);
   });
   // 2. case 01: forecast, measurement, needles, the reading, the seal
-  await replay('s2-case01', '20261103T125924-bf8f64512b', { start: 4, idleMs: 1200, onSee: (p) => ({ 'ngspice, step 1': async () => { await sleep(2500); await setSpeed(p, 16); }, 'asked for the check': async () => { await setSpeed(p, 4); }, 'held-back input 2 of 2': async () => { await setSpeed(p, 16); }, 'asked for one reading': async () => { await setSpeed(p, 1); } }), holdMs: 4500 });
+  await replay('s2-case01', '20261103T125924-bf8f64512b', { start: 4, idleMs: 1200, onSee: (p) => ({ 'ngspice, step 1': async () => { await sleep(2500); await setSpeed(p, 16); }, 'asked for the check': async () => { await setSpeed(p, 4); }, 'held-back input 2 of 2': async () => { await setSpeed(p, 16); }, 'asked for one reading': async () => { await setSpeed(p, 4); }, 'pointed at the body': async () => { await setSpeed(p, 1); } }), holdMs: 4000 });
   // 3. case 04: every value explanation fails, Spark proposes the diode
   await replay('s3-case04', '20261103T150223-18d6f08ac9', { start: 16, idleMs: 800, onSee: (p) => ({ 'ngspice, step 3': async () => { await setSpeed(p, 4); }, 'ngspice, proposed circuit': async () => { await sleep(3000); await setSpeed(p, 16); } }), holdMs: 3500 });
   // 4. case 05: a proposal, two placements, one reading of the wire path, the seal; then the restored rerun's note
-  await replay('s4-case05', '20261104T021333-c80ef3617e', { start: 4, startAt: START05, idleMs: 1500, onSee: (p) => ({ 'ngspice, proposed circuit': async () => { await sleep(2500); await setSpeed(p, 16); }, 'electrically equivalent explanations': async () => { await setSpeed(p, 4); }, 'asked for one reading': async () => { await setSpeed(p, 1); } }), holdMs: 4500 });
+  await replay('s4-case05', '20261104T021333-c80ef3617e', { start: 4, startAt: START05, idleMs: 1500, onSee: (p) => ({ 'ngspice, proposed circuit': async () => { await sleep(2500); await setSpeed(p, 16); }, 'electrically equivalent explanations': async () => { await setSpeed(p, 4); }, 'pointed at the body': async () => { await setSpeed(p, 1); } }), holdMs: 4000 });
   // 5. case 02: Spark says the photo cannot tell the two capacitors apart; both are read; the bands decide
-  await replay('s5-case02', '20261103T165506-b6ad3e8cf7', { start: 1, startAt: START02, idleMs: 1500, onSee: (p) => ({}), holdMs: 4500 });
+  await replay('s5-case02', '20261103T165506-b6ad3e8cf7', { start: 4, startAt: START02, idleMs: 1500, onSee: (p) => ({ 'two capacitor bodies': async () => { await setSpeed(p, 1); } }), holdMs: 4000 });
   // 6. landing again: the bench and what this is a prototype of
   await scene('s6-bench', async (p, log) => {
     await p.goto(`${base}/index.html#bench`, { waitUntil: 'networkidle' }); await p.evaluate(() => document.querySelector('#bench').scrollIntoView()); await sleep(4800); log('to-frontier');

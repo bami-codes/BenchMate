@@ -136,9 +136,9 @@ def main():
     filters, inputs = [], []
     for i, s in enumerate(order):
         meta = cues[s]; dur = meta['duration']
-        trim_end = dur
-        if s.startswith('s') and 'Verdict · compared by code' in meta['cues']:
-            trim_end = min(dur, meta['cues']['Verdict · compared by code'] + 5.2)
+        trim_end = min(dur, {'s1-landing': 9.8, 's6-bench': 11.4, 's7-verify': 11.8, 's8-close': 6.2}.get(s, dur))
+        if 'Verdict · compared by code' in meta['cues']:
+            trim_end = min(dur, meta['cues']['Verdict · compared by code'] + 4.2)
         parts.append((s, meta['file'], trim_end))
         for j, (st, d, text) in enumerate(sorted(caps.get(s, []), key=lambda x: x[0])):
             if st >= trim_end: continue
