@@ -46,7 +46,7 @@ BenchMate gives Muse Spark a $40 Arduino bench. It reads the schematic and choos
 
 ---
 
-## Form answers (under 3,000 characters each)
+## Form answers (under 3,000 characters each) — submitted 5 Nov 2026, team bami-codes, team number 2828
 
 **Project Description**
 
@@ -63,8 +63,6 @@ We rebuilt five problems reported on engineering forums as small circuits with d
 The forecasts are recorded before measurement, final circuit models and reading ranges are published before their checks, and the planted fault is documented before the first measurement and revealed only after the verdict. Judges can replay the runs, click through to the underlying events, and verify record integrity offline with Python and no extra packages.
 
 Built solo in nine days, BenchMate demonstrates AI-guided experiments on physical hardware: an unexplained output becomes a concrete next check.
-
-Live demo: https://bami-codes.github.io/BenchMate/
 
 **Describe your use of Meta products to build the submitted project**
 
