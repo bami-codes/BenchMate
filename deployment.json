@@ -1,8 +1,8 @@
 {
   "schema": "benchmate.github_pages_release.v1",
-  "source_main_commit": "5fb8e7b11a1a1351aa07827a4bcc167c2572631c",
-  "source_site_tree": "bba1d48b05eb7a0e459898d02151087911b74e36",
-  "previous_gh_pages_commit": "d694ea7714d43164a5a3454e1487b4ea4205450a",
+  "source_main_commit": "e960b9635dc4aa842ebe48e33ddf8d73d25aabe6",
+  "source_site_tree": "5eb877a7dc5b553ae1336c74bc6e09f905f46c66",
+  "previous_gh_pages_commit": "0a2c8a79b6abc98f9ab061c3ab929b3e4e527897",
   "archive_source_commit": "8178e85603e3cac2a8d1998e3516229f3cc5c1c4",
   "archive_source_tree": "5f599a3be0d76b05eb742110d1ce28050712dfd5",
   "site_root": "/BenchMate/",
@@ -16,10 +16,10 @@
     "04",
     "05"
   ],
-  "change": "Judge-review fixes: the full player's meter shelf grows to its grid (no clipping at the seal) and the proposal meter prints 'fitted diode'; hero sentence in run order; 'all still fit' for three survivors; report sections in the run's order (check before reading); score-tile denominators spelled out; 'the seal was opened' instead of a match claim; recorder sample period per experiment; case 04 classification string unified; the four-line strip heads in plain words.",
+  "change": "Why-this-matters note no longer pre-empts a superiority claim nobody made; the synthetic benchmark stays in the README's development-results section.",
   "validation": {
     "browser_QA": "PASS",
-    "tool": "site/tools/check_data.py (12 runs tracked); shots_all.js 20/20, errors none; rewind_check.js 10/10; landing 1440 and 390 no overflow, no console errors",
+    "tool": "same site tree as 0a2c8a7 except one sentence in index.html; landing 1440 checked, no console errors",
     "console_errors": 0,
     "horizontal_overflow": 0
   }
